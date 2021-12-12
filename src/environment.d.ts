@@ -7,13 +7,4 @@ declare global {
   }
 }
 
-
-// Declare default language and explicit type
-import __langJSON__ from "app/assets/lang/en.json"
-type __langJSONType__ = typeof __langJSON__
-
-declare module "plugins/react-plugin-localization" {
-  interface LocalizationJSONRaw extends __langJSONType__ { }
-}
-
 export { }
