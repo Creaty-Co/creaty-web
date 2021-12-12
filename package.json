@@ -1,0 +1,24 @@
+{
+  "name": "react-template-plugin-localization",
+  "main": "src/index.ts",
+  "dependencies": {
+    "react": "^17.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.12"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codepandoradev/react-template-plugin-localization.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/codepandoradev/react-template-plugin-localization/issues"
+  },
+  "homepage": "https://github.com/codepandoradev/react-template-plugin-localization#readme"
+}
