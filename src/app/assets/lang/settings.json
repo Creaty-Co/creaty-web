@@ -1,0 +1,8 @@
+{
+  "langs": {
+    "ru": "Русский",
+    "en": "English"
+  },
+  "activeLangs": ["ru", "en"],
+  "default": "ru"
+}

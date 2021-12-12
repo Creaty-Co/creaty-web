@@ -1,1 +1,0 @@
-# react-template-plugin-localization

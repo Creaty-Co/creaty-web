@@ -1,3 +1,4 @@
+import { Localize } from "plugins/react-plugin-localization"
 import { applyMiddleware, compose, createStore } from "redux"
 import thunk from "redux-thunk"
 
@@ -11,5 +12,7 @@ declare module "redux" {
 }
 declare module "react-redux" {
   interface DefaultRootState extends ReturnType<typeof store.getState> { }
-  // function useDispatch<TDispatch = typeof store.dispatch>(): TDispatch;
 }
+
+const ll = Localize(ll => ll)
+ll.lang
