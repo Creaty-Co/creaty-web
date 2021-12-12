@@ -5,7 +5,11 @@ Includes:
 - `lodash`
 - `redux` with `redux-thunk`
 
-  Predefined:
+Plugins:
+
+- [`react-plugin-localization`](https://github.com/codepandoradev/react-plugin-localization)
+
+Predefined:
 
 - `.eslintrc`
 - `.editorconfig`
