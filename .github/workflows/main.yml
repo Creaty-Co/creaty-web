@@ -27,12 +27,12 @@ jobs:
       
       - name: Cache
         id: cache-node_modules
-        uses: actions/cache@v2.1.7
+        uses: actions/cache@v2
         with:
           # A list of files, directories, and wildcard patterns to cache and restore
           path: node_modules
           # An explicit key for restoring and saving the cache
-          key: ${{ runner.os }}-dd
+          key: ${{ runner.os }}-${{ hashFiles('package-lock.json') }}
       
       - name: Install modules
         if: steps.cache-node_modules.outputs.cache-hit != 'true'
