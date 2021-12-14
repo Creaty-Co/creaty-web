@@ -2,7 +2,7 @@
 import ENLangJSON from "app/assets/lang/en.json"
 import RULangJSON from "app/assets/lang/ru.json"
 // Controller
-import Localization from "plugins/react-plugin-localization/controller"
+import Localization from "plugins/localization/controller"
 
 // Add languages
 Localization.add("en", ENLangJSON)
@@ -12,6 +12,6 @@ Localization.setDefault("en")
 
 // Declare explicit language type
 type DefaultLang = typeof ENLangJSON
-declare module "plugins/react-plugin-localization" {
+declare module "plugins/localization" {
   interface LocalizationJSONRaw extends DefaultLang { }
 }

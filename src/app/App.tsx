@@ -1,7 +1,7 @@
 import "./localization"
 
-import Localization from "plugins/react-plugin-localization/controller"
-import useLocalization from "plugins/react-plugin-localization/hook"
+import Localization from "plugins/localization/controller"
+import useLocalization from "plugins/localization/hook"
 
 
 function App() {
