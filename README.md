@@ -7,7 +7,7 @@ Includes:
 
 Plugins:
 
-- [`react-plugin-localization`](https://github.com/codepandoradev/react-plugin-localization)
+- [`react-plugin-localization`](FrameMuse/react-plugin-localization)
 
 Predefined:
 
