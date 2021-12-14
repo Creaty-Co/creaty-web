@@ -7,7 +7,7 @@ Includes:
 
 Plugins:
 
-- [`react-plugin-localization`](FrameMuse/react-plugin-localization)
+- [`react-plugin-localization`](https://github.com/FrameMuse/react-plugin-localization)
 
 Predefined:
 
