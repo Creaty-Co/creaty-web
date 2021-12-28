@@ -57,8 +57,8 @@ export function classWithModifiers(originClass: string, ...modifiers: Array<stri
  * Creates query from given object
  * @returns `state1=6&state2=horse` without `?`
  */
-export function createQuery(queryObject: Record<string, string | number | null | undefined>): string {
-  if (!queryObject.length) return ""
+export function createQuery(queryObject?: Record<string, string | number | null | undefined> | null): string {
+  if (!queryObject?.length) return ""
 
   const queryKeys = Object.keys(queryObject)
   const queryArray = queryKeys.map(function (key) {
