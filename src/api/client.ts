@@ -28,7 +28,7 @@ export type Action<P = unknown> = BaseAction<P & APIResponseError, Partial<Actio
 
 function requestInterceptor() {
   return async (action: Action) => {
-    const endpoint = process.env.REACT_APP_BASE_URL + action.endpoint + "/"
+    const endpoint = process.env.REACT_APP_API_HOST + action.endpoint + "/"
     const query = createQuery(action.params)
 
     return {
