@@ -1,5 +1,8 @@
 # Template of Typescript React App
 
+## Adoptation
+This template was wriiten with an idea kept in mind, that it will be used along with `Django` or `Laravel`
+
 Includes:
 
 - `lodash`
