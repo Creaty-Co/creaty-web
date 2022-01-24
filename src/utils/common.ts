@@ -1,33 +1,4 @@
-// const options: HTMLReactParserOptions = {
-//   htmlparser2: {
-//     lowerCaseTags: false
-//   },
-//   replace: (domNode: any) => {
-//     if (domNode.name === "link") {
-//       return createElement(Link, domNode.attribs)
-//     }
-//   }
-// }
-// export function inter(text?: string, Vars?: Record<string, string | number | undefined>) {
-//   if (!text) {
-//     return ""
-//   }
-
-//   if (Vars) {
-//     for (const Var in Vars) {
-//       if (Object.prototype.hasOwnProperty.call(Vars, Var)) {
-//         text = text.replace(new RegExp("\\$" + Var, "g"), String(Vars[Var]))
-//       }
-//     }
-//   }
-
-//   // Search for HTML symbols
-//   if (text.search(/<.*>/)) {
-//     return HTMLParse(text, options)
-//   }
-
-//   return text
-// }
+import { DataURLBase64 } from "interfaces/common"
 
 /**
  *
@@ -71,3 +42,50 @@ export function createQuery(queryObject?: Record<string, string | number | null 
 
   return queryArray.filter(Boolean).join("&")
 }
+
+
+
+export function toBase64(file: File): Promise<DataURLBase64> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+
+    reader.readAsDataURL(file)
+    reader.onload = () => resolve(reader.result as DataURLBase64)
+    reader.onerror = reject
+  })
+}
+
+
+export async function getFileFromURL(url: string) {
+  const fileName = url.slice(url.lastIndexOf("/") + 1)
+
+  const response = await fetch(url)
+  const Uint8Array = (await response.body?.getReader()?.read())?.value
+
+  return new File(Uint8Array ? [Uint8Array] : [], fileName, { type: response.headers.get("content-type") || "image" })
+}
+
+
+
+/**
+ *
+ * @param elements
+ * @param keys
+ * @returns
+ */
+export function getFormElements<K extends string>(elements: HTMLFormControlsCollection, ...keys: K[]): Record<K, string> | null {
+  const data = Object.fromEntries(keys.map(key => [key, ""])) as Record<K, string>
+
+  for (const element of elements) {
+    if (!(element instanceof HTMLInputElement)) continue
+    if (!keys.includes(element.name as K)) continue
+    if (!element.value.length) return null
+
+    data[element.name as K] = element.value
+  }
+
+  return data
+}
+
+
+export function noop(): void { /* Do nothing */ }
