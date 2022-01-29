@@ -20,9 +20,14 @@
     "isolatedModules": true,
     "noEmit": true,
     "strictNullChecks": true,
+    "downlevelIteration": true,
     "noImplicitAny": true,
     "jsx": "react-jsx",
-    "checkJs": true
+    "checkJs": false,
+    "types": [
+      "node",
+      "webpack-env"
+    ]
   },
   "include": ["src"]
 }

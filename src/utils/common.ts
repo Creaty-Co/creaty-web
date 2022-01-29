@@ -28,21 +28,20 @@ export function classWithModifiers(originClass: string, ...modifiers: Array<stri
  * Creates query from given object
  * @returns `state1=6&state2=horse` without `?`
  */
-export function createQuery(queryObject?: Record<string, string | number | null | undefined> | null): string {
+export function createQuery(queryObject?: Record<string, unknown> | null): string {
   if (!queryObject?.length) return ""
 
   const queryKeys = Object.keys(queryObject)
-  const queryArray = queryKeys.map(function (key) {
+  const queryArray = queryKeys.map(key => {
     const value = queryObject[key]
     if (value) {
-      return encodeURIComponent(key) + "=" + encodeURIComponent(value)
+      return encodeURIComponent(key) + "=" + encodeURIComponent(String(value))
     }
     return ""
   })
 
   return queryArray.filter(Boolean).join("&")
 }
-
 
 
 export function toBase64(file: File): Promise<DataURLBase64> {

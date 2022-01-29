@@ -1,0 +1,48 @@
+@import "~app/assets/scss/_bundle.scss";
+
+.faq {
+	display: grid;
+	row-gap: 0.5em;
+}
+
+.faq__clause {
+	display: grid;
+
+	&--expanded {
+		.faq__content {
+			height: var(--height);
+		}
+	}
+}
+
+.faq__summary {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 2.5em;
+	background: color(Dark);
+	border-radius: 0.25em;
+
+	cursor: pointer;
+}
+
+.faq__title {
+	@include font(1.25em, 600);
+}
+
+.faq__content {
+	height: 0;
+	overflow: hidden;
+	transition: 200ms height;
+}
+
+.faq__inner {
+	padding: 2.5em;
+	background: #2b3541;
+	border-radius: 0 0 0.25em 0.25em;
+}
+
+.faq__text {
+	// @include font(1.25em, 600, 1.25);
+	color: white;
+}
