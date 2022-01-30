@@ -18,16 +18,15 @@ const langs = langNames.map(langName => {
   return localization.lang
 })
 
-interface LangSelectorProps { }
-
-function LangSelector(props: LangSelectorProps) {
+function LangSelector() {
   const currentLang = useLocalization(trans => trans.lang)
   const [isExpanded, setIsExpanded] = useState(false)
   return (
     <div className="lang-selector" aria-label="Language selector">
       <Button
         iconLeft={<Icon name="language" className="lang-selector__icon" />}
-        iconRight={<Icon name="drop-down-triangle" className="lang-selector__icon" />}
+        iconRight={<Icon name="drop-down-triangle" className={classWithModifiers("lang-selector__icon", isExpanded && "up")} />}
+
         onClick={() => setIsExpanded(!isExpanded)}
       >{_.capitalize(currentLang.name)}, {currentLang.currency}</Button>
       <section className={classWithModifiers("lang-selector__list", isExpanded && "expanded")} role="listbox" aria-expanded={isExpanded}>
