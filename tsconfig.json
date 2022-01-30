@@ -23,11 +23,10 @@
     "downlevelIteration": true,
     "noImplicitAny": true,
     "jsx": "react-jsx",
-    "checkJs": false,
     "types": [
       "node",
       "webpack-env"
     ]
   },
-  "include": ["src"]
+  "include": ["src/**/*"]
 }
