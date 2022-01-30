@@ -1,51 +1,58 @@
+@import "bundle";
+
 * {
-  position: relative;
-  box-sizing: border-box;
+	position: relative;
+	box-sizing: border-box;
 }
 
 body {
-  font: 1/16px "Arial", sans-serif;
+	font: 16px/1 "Google Sans", Arial, sans-serif;
+	color: $color-white;
+
+	margin: unset;
+	background: $color-black-main;
 }
 
 /* Headings */
 
 h1 {
-  font-size: 1.5rem;
-  font-weight: 700;
+	font-size: 1.5rem;
+	font-weight: 700;
 }
 
 h2 {
-  font-size: 1.25rem;
-  font-weight: 600;
+	font-size: 1.25rem;
+	font-weight: 600;
 }
 
 h3 {
-  font-size: 1.125rem;
-  font-weight: 600;
+	font-size: 1.125rem;
+	font-weight: 600;
 }
 
 h4,
 h5 {
-  font-size: 1rem;
-  font-weight: 600;
+	font-size: 1rem;
+	font-weight: 600;
 }
 
 /* Text */
 
 p {
-  line-height: 1.25;
+	line-height: 1.25;
 }
 
 /* Anchor */
 
 a {
-  text-decoration: none;
-  cursor: pointer;
+	color: $color-white;
+	text-decoration: none;
+	cursor: pointer;
 
-  &.ghost {
-    position: absolute;
-    inset: 0;
-  }
+	&.ghost {
+		position: absolute;
+		inset: 0;
+	}
 }
 
 /* UX */
@@ -53,6 +60,11 @@ a {
 input,
 button,
 textarea {
-  all: unset;
-  outline: initial;
+	all: unset;
+	cursor: initial;
+	outline: initial;
+}
+
+button {
+	cursor: pointer;
 }

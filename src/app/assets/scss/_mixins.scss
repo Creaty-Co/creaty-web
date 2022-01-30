@@ -1,3 +1,10 @@
+/* Layout */
+
+@mixin WidthLimit {
+	max-width: 1180px;
+	margin: 0 auto;
+}
+
 /* Font */
 
 @mixin Font($size: null, $weight: null, $line-height: null) {

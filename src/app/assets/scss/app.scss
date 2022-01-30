@@ -1,0 +1,41 @@
+@import "bundle";
+
+.icon {
+	$size: var(--icon-size, 1em);
+
+	display: inline-block;
+	width: $size;
+	height: $size;
+	vertical-align: middle;
+	object-fit: contain;
+}
+
+/* Header */
+
+header {
+	padding: 0.75em;
+	border-bottom: 1px solid rgba($color: $color-gray-10, $alpha: 0.1);
+}
+
+.topbar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	@include WidthLimit;
+}
+
+.topbar__logo {
+	height: 2.5em;
+}
+
+.topbar__right {
+	display: flex;
+	align-items: center;
+	gap: 1.5em;
+}
+
+.topbar-menu {
+	display: flex;
+	gap: 3em;
+}

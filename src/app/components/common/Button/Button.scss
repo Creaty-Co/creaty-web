@@ -1,0 +1,43 @@
+@import "~app/assets/scss/bundle.scss";
+
+.button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	gap: 0.5em;
+
+	padding: 0.75em;
+	background: transparent;
+	border-radius: 1.5em;
+
+	color: rgba($color-gray-10, 0.1);
+
+	&:active {
+		opacity: 0.7;
+	}
+
+
+	&--big {
+		padding: 1.25em 1.75em;
+	}
+
+	&--outline {
+		border: 2px solid currentColor;
+		transition: 200ms ease box-shadow;
+
+		&:hover,
+		&:active {
+			box-shadow: inset 0 0 0 2px currentColor;
+		}
+	}
+
+	&--green {
+		color: $color-green;
+	}
+}
+
+.button__text {
+	color: white;
+	line-height: 1.5em;
+}
