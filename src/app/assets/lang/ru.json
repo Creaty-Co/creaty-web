@@ -1,4 +1,14 @@
 {
-  "lang": "Русский",
-  "langCode": "ru"
+  "lang": {
+    "name": "Русский",
+    "code": "ru",
+    "currency": "RUB"
+  },
+  "header": {
+    "menu": {
+      "mentors": "Менторы",
+      "becomeMentor": "Стать ментором"
+    },
+    "findMentor": "Подобрать ментора"
+  }
 }

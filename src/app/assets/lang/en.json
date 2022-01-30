@@ -1,4 +1,14 @@
 {
-  "lang": "English",
-  "langCode": "en"
+  "lang": {
+    "name": "English",
+    "code": "en",
+    "currency": "USD"
+  },
+  "header": {
+    "menu": {
+      "mentors": "Mentors",
+      "becomeMentor": "Become mentor"
+    },
+    "findMentor": "Find mentor"
+  }
 }

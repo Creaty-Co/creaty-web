@@ -31,7 +31,7 @@ class Localization {
   private static defaultLanguage = "en"
 
   private static listeners: Set<Function> = new Set
-  private static storage = new Map<string, LocalizationJSON>()
+  public static storage = new Map<string, LocalizationJSON>()
 
   private static set lang(lang: string) {
     localStorage.setItem("lang", lang)
@@ -56,6 +56,10 @@ class Localization {
     return this.storage.get(this.defaultLanguage)
   }
 
+  public static getLangs(): string[] {
+    return [...this.storage.keys()]
+  }
+
   public static transit(lang: string) {
     if (!this.storage.has(lang)) {
       throw new Error("LocalizationError: this lang wasn't defined")
@@ -73,12 +77,14 @@ class Localization {
   }
 }
 
-export function Localize<Selected extends Record<string, unknown> = LocalizationJSON>(selector: (ll?: LocalizationJSON) => Selected | undefined): Partial<Selected> {
+export function Localize<Selected extends Record<string, unknown> = LocalizationJSON>(selector: (ll: LocalizationJSON) => Selected | undefined): Selected | undefined {
   try {
     const ll = Localization.get()
-    return selector(ll) || {}
+    if (!ll) return
+
+    return selector(ll)
   } catch (error) {
-    return {}
+    throw new TypeError("LocalizeError: wrong selector")
   }
 }
 
