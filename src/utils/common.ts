@@ -4,7 +4,7 @@ import { DataURLBase64 } from "interfaces/common"
  *
  * @returns `class1 class2`
  */
-export function classMerge(classNames: Array<string | null | undefined>): string {
+export function classMerge(...classNames: Array<string | null | undefined>): string {
   const space = " "
   return classNames.filter(Boolean).join(space)
 }
