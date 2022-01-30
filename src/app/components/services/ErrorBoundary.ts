@@ -1,8 +1,8 @@
-import { Component, ErrorInfo } from "react"
+import { Component, ErrorInfo, ReactNode } from "react"
 
 
 interface ErrorBoundaryProps {
-  fallback: any
+  fallback: ReactNode
 }
 interface ErrorBoundaryState {
   error: Error | null
