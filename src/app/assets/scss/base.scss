@@ -15,6 +15,15 @@ body {
 
 /* Headings */
 
+h1,
+h2,
+h3,
+h4,
+h5 {
+	margin: unset;
+	white-space: pre-line;
+}
+
 h1 {
 	font-size: 1.5rem;
 	font-weight: 700;
@@ -40,6 +49,11 @@ h5 {
 
 p {
 	line-height: 1.25;
+	white-space: pre-line;
+}
+
+em {
+	font-style: unset;
 }
 
 /* Anchor */

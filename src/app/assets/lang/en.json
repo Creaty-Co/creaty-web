@@ -7,8 +7,34 @@
   "header": {
     "menu": {
       "mentors": "Mentors",
-      "becomeMentor": "Become mentor"
+      "becomeMentor": "Become a mentor"
     },
-    "findMentor": "Find mentor"
+    "findMentor": "Find your mentor"
+  },
+  "views": {
+    "home": {
+      "primaryInfo": {
+        "title": "face to face \n with mentor",
+        "desc": "Develop and enhance your <em>creative skills</em> on individual \n interaction with professional mentor"
+      },
+      "mentorSearch": {
+        "placeholder": "Выберите категорию или направление",
+        "button": "Search for a mentor",
+        "staticTopics": {
+          "architecture": "Архитектура",
+          "design": "Дизайн",
+          "art": "Изобразительное искусство",
+          "craft-jewellery": "Крафт и ювелирное дело",
+          "games-animation": "Игры и анимация",
+          "movies-tv-photos": "Кино, ТВ и фото",
+          "clothes-design": "Дизайн одежды",
+          "music-sound": "Музыка и звук",
+          "theater-scene-art": "Театр и сценическое искусство",
+          "digital-design": "Диджитал дизайн",
+          "art-management": "Арт-менеджмент",
+          "journalism-writing": "Журналистика и письмо"
+        }
+      }
+    }
   }
 }

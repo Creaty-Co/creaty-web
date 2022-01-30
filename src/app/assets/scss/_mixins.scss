@@ -26,6 +26,32 @@
 
 @mixin Tablet {
 	@media screen and (max-width: #{$width-md}) {
-		@content
+		@content;
+	}
+}
+
+/* Scrollbar */
+
+@mixin Scrollbar($width: 1em, $thumbColor: rebeccapurple, $trackColor: white) {
+
+	/* Firefox */
+	& {
+		scrollbar-width: thin;
+		scrollbar-color: $thumbColor $trackColor;
+	}
+
+	/* Chrome, Edge, and Safari */
+	&::-webkit-scrollbar {
+		width: $width;
+	}
+
+	&::-webkit-scrollbar-track {
+		background: $trackColor;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: $thumbColor;
+		border-radius: 0.5em;
+		border: 3px solid $trackColor;
 	}
 }

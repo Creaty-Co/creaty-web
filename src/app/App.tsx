@@ -3,11 +3,13 @@ import "app/assets/scss/app.scss"
 
 import useLocalization from "modules/localization/hook"
 import { StrictMode, Suspense } from "react"
+import { Route, Routes } from "react-router"
 import { BrowserRouter, NavLink } from "react-router-dom"
 
 import Button from "./components/common/Button/Button"
 import ErrorBoundary from "./components/services/ErrorBoundary"
 import LangSelector from "./components/UI/LangSelector/LangSelector"
+import HomeView from "./views/home/HomeView"
 
 function App() {
   return (
@@ -48,7 +50,11 @@ function Header() {
 
 function Main() {
   return (
-    <main></main>
+    <main>
+      <Routes>
+        <Route path="/" element={<HomeView />} />
+      </Routes>
+    </main>
   )
 }
 
