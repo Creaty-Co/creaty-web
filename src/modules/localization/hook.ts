@@ -25,7 +25,7 @@ function useLocalization<Selected extends Record<string, unknown> = Localization
   useEffect(() => {
     return Localization.onTransition(() => updateLocalization(Localize(selector)))
   }, [])
-  if (!localization) throw new TypeError("useLocalizationError: undefined localization")
+  if (!localization) throw new TypeError("useLocalizationError: undefined localization. Try reloading the page.")
   return localization
 }
 

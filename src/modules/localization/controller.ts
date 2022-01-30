@@ -84,7 +84,7 @@ export function Localize<Selected extends Record<string, unknown> = Localization
 
     return selector(ll)
   } catch (error) {
-    throw new TypeError("LocalizeError: wrong selector")
+    throw new TypeError("LocalizeError: wrong selector => " + selector.toString().split("=>")[1].replace(/ /g, ""))
   }
 }
 
