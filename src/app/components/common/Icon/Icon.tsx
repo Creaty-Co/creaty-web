@@ -2,7 +2,7 @@ import { SVGAttributes } from "react"
 import { classMerge, classWithModifiers } from "utils/common"
 
 
-export type IconName = ("language" | "drop-down-triangle" | "chevron" | "star-union") | (string & {})
+export type IconName = ("language" | "drop-down-triangle" | "arrow" | "chevron" | "star-union") | (string & {})
 
 interface IconProps extends SVGAttributes<SVGElement> {
   name: IconName
