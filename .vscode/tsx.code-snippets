@@ -1,0 +1,40 @@
+{
+  "in use of classWithModifiers": {
+    "prefix": "modifiers",
+    "body": [
+      "const modifiers: string[] = []"
+    ],
+    "description": "in use of classWithModifiers"
+  },
+  "useLocalization": {
+    "prefix": "usell",
+    "body": [
+      "const ll = useLocalization$1(ll => ll.$key)"
+    ],
+    "description": "useLocalization"
+  },
+  "ts react function component": {
+    "prefix": "tsrfc",
+    "body": [
+      "import \"./${1:${TM_FILENAME_BASE}}.scss\"",
+      "",
+      "import { ReactNode } from \"react\"",
+      "",
+      "",
+      "interface ${1:${TM_FILENAME_BASE}}Props {",
+      "  children: ReactNode",
+      "}",
+      "",
+      "function ${1:${TM_FILENAME_BASE}}(props: ${1:${TM_FILENAME_BASE}}Props) {",
+      "  return (",
+      "    .${2:${TM_FILENAME_BASE/^([A-Z]+)([a-z]+)([A-Z]+)|([A-Z]+)/${1:/downcase}$2-${3:/downcase}${4:/downcase}/g}}",
+      "  )",
+      "}",
+      "",
+      "",
+      "export default ${1:${TM_FILENAME_BASE}}",
+      ""
+    ],
+    "description": "ts react function component"
+  }
+}
