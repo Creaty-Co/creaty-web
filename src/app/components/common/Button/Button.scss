@@ -18,7 +18,7 @@
 	}
 
 	&:hover:not(&--outline) {
-		background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1));
+		background-image: linear-gradient(0deg, rgba($color-white, 0.1), rgba($color-white, 0.1));
 	}
 
 
@@ -31,6 +31,8 @@
 	}
 
 	&--outline {
+		color: rgba($color-gray-10, 0.1);
+
 		background: unset;
 		border: 2px solid currentColor;
 		transition: 200ms ease box-shadow;
@@ -47,6 +49,19 @@
 
 	&--violet {
 		color: $color-violet;
+	}
+
+	&--white {
+		color: $color-gray-10;
+
+		&:hover {
+			color: $color-white;
+		}
+
+		.button__text {
+			color: $color-black-main;
+			font-weight: 600;
+		}
 	}
 }
 

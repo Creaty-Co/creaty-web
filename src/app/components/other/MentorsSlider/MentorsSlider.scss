@@ -1,0 +1,63 @@
+@import "~app/assets/scss/bundle.scss";
+
+.mentors-slider {
+	display: grid;
+	row-gap: 1.5em;
+}
+
+.mentors-slider__header {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+
+	width: 100%;
+	@include WidthLimit;
+}
+
+.mentors-slider__buttons {
+	display: flex;
+	gap: 0.75em;
+}
+
+.mentors-slider__button {
+	padding: 1.125em;
+	border: 2px solid rgba($color-gray-10, 0.1);
+	border-radius: 1.5em;
+	transition: 200ms ease border-color;
+
+	&:hover,
+	&:active {
+		border-color: white;
+	}
+}
+
+.mentors-slider__icon {}
+
+.mentors-slider__container {
+	width: 100%;
+	overflow: hidden;
+}
+
+.mentors-slider__inner {
+	display: flex;
+	justify-content: center;
+	flex-wrap: nowrap;
+
+	gap: 1.25em;
+
+	&>* {
+		flex-shrink: 0;
+	}
+}
+
+.mentors-slider__help {
+	display: flex;
+	align-items: center;
+	gap: 0.75em;
+
+	@include WidthLimit;
+
+	span {
+		font-size: 1.125rem;
+	}
+}

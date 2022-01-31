@@ -1,5 +1,32 @@
 @import "bundle";
 
+/* App Headings */
+
+@mixin heading($size, $weight, $emphasizeColor: $color-green) {
+	font-size: $size;
+	font-weight: $weight;
+	white-space: pre-line;
+	line-height: 1.25;
+
+	em {
+		color: $color-green;
+	}
+}
+
+h1.heading {
+	@include heading(4.5rem, 700);
+}
+
+h2.heading {
+	@include heading(2rem, 700);
+}
+
+h3.heading {
+	@include heading(1.125rem, 400, $color-gray-text);
+}
+
+/* ---- */
+
 .icon {
 	$size: var(--icon-size, 1em);
 

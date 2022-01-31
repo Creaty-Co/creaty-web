@@ -1,0 +1,116 @@
+@import "~app/assets/scss/bundle.scss";
+
+.mentor-card {
+	display: grid;
+
+	max-width: 23.75em;
+	padding: 0.5em;
+	background: $color-white;
+	border-radius: 2.5em;
+}
+
+.mentor-card__preview {
+	border-radius: inherit;
+}
+
+.mentor-card__image {
+	width: 100%;
+	height: 17em;
+	border-radius: inherit;
+	object-fit: cover;
+}
+
+.mentor-card__info {
+	display: grid;
+	row-gap: 0.5em;
+}
+
+.mentor-card__container {
+	$indent: 1.25em;
+
+	display: grid;
+	row-gap: $indent;
+
+	padding: $indent;
+}
+
+.mentor-card__name {
+	display: flex;
+	gap: 0.5em;
+
+	color: $color-black-main;
+	font-size: 1.5rem;
+	font-weight: 600;
+}
+
+.mentor-card__job {
+	color: $color-gray-50;
+	font-size: 1.125rem;
+
+	em {
+		color: $color-black-main;
+		font-weight: 600;
+	}
+}
+
+.mentor-card__tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5em;
+}
+
+/* Mentor Card Button */
+
+.mentor-card-button {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	padding: 1.5em;
+	background: $color-gray-10;
+	border-radius: inherit;
+	transition: 200ms ease background-color;
+
+	&:hover {
+		background: $color-green;
+	}
+}
+
+.mentor-card-button__text {
+	display: flex;
+	gap: 0.25em;
+
+	color: $color-black-main;
+	font-size: 1.125rem;
+	transition: 200ms ease opacity;
+
+	.mentor-card-button:hover & {
+		opacity: 0;
+	}
+
+	em {
+		font-weight: 600;
+	}
+}
+
+.mentor-card-button__icon {
+	color: $color-gray-50;
+	transition: 200ms ease color, 200ms ease transform;
+
+	.mentor-card-button:hover & {
+		color: $color-black-main;
+		transform: translateX(0.5em);
+	}
+}
+
+.mentor-card-button__hover-text {
+	position: absolute;
+	color: $color-black-main;
+	font-weight: 600;
+	transition: 200ms ease opacity;
+
+	&:not(.mentor-card-button:hover &) {
+		opacity: 0;
+		pointer-events: none;
+	}
+}

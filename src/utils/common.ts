@@ -1,3 +1,5 @@
+import "./extensions"
+
 import { DataURLBase64 } from "interfaces/common"
 
 /**

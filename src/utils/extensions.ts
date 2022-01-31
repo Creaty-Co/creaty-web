@@ -10,7 +10,7 @@ declare global {
 
 Number.prototype.toPrice = function (this: number, locale = "EN", currency = "USD"): string {
   try {
-    return this.toLocaleString(locale, { style: "currency", currency })
+    return this.toLocaleString(locale, { style: "currency", currency, minimumFractionDigits: 0 })
   } catch (error) {
     if (error instanceof Error) {
       if (error.message.includes("tag") || error.message.includes("locale")) {

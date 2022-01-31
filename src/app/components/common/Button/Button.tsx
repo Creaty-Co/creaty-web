@@ -1,21 +1,23 @@
-// SCSS
 import "./Button.scss"
 
 import { MouseEventHandler, ReactNode } from "react"
 import { classWithModifiers } from "utils/common"
 
 
-interface ButtonProps {
+export interface ButtonBaseProps {
   size?: "small" | "big"
   style?: "outline"
-  color?: "green" | "violet"
-  type?: "reset" | "submit"
+  color?: "white" | "green" | "violet"
 
   iconLeft?: ReactNode
   iconRight?: ReactNode
 
-  onClick?: MouseEventHandler<HTMLButtonElement>
   children: ReactNode
+}
+
+interface ButtonProps extends ButtonBaseProps {
+  type?: "reset" | "submit"
+  onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
 function Button(props: ButtonProps) {
@@ -27,5 +29,6 @@ function Button(props: ButtonProps) {
     </button>
   )
 }
+
 
 export default Button
