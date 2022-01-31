@@ -2,22 +2,25 @@ import "./HomeView.scss"
 
 import Button from "app/components/common/Button/Button"
 import Icon from "app/components/common/Icon/Icon"
+import BigComment from "app/components/UI/BigComment/BigComment"
 import TopicTag from "app/components/UI/Tag/TopicTag"
 import useLocalization from "modules/localization/hook"
 import { ChangeEvent, Dispatch, useState } from "react"
 import { classWithModifiers } from "utils/common"
 
 function HomeView() {
+  const ll = useLocalization(ll => ll.views.home)
   return (
     <div className="home-view">
       <DynamicPrimaryInfo />
       <MentorSearch />
+      <BigComment>{ll.bigComment}</BigComment>
     </div>
   )
 }
 
 function DynamicPrimaryInfo() {
-  const ll = useLocalization(trans => trans.views.home.primaryInfo)
+  const ll = useLocalization(ll => ll.views.home.primaryInfo)
   return (
     <div className="dynamic-primary-info">
       <h1 className="dynamic-primary-info__title">
@@ -30,7 +33,7 @@ function DynamicPrimaryInfo() {
 }
 
 function MentorSearch() {
-  const ll = useLocalization(trans => trans.views.home.mentorSearch)
+  const ll = useLocalization(ll => ll.views.home.mentorSearch)
   const [value, setValue] = useState("")
   const [picks, setPicks] = useState<string[]>([])
   function onChange(event: ChangeEvent<HTMLInputElement>) {
@@ -100,7 +103,7 @@ interface MentorSearchStaticListProps {
 }
 
 function MentorSearchStaticList(props: MentorSearchStaticListProps) {
-  const ll = useLocalization(trans => trans.views.home.mentorSearch)
+  const ll = useLocalization(ll => ll.views.home.mentorSearch)
   return (
     <div className="mentor-search-list">
       <div className="mentor-search-list__container">

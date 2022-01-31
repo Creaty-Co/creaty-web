@@ -28,7 +28,7 @@ function App() {
 }
 
 function Header() {
-  const ll = useLocalization(trans => trans.header)
+  const ll = useLocalization(ll => ll.header)
   return (
     <header>
       <div className="topbar">

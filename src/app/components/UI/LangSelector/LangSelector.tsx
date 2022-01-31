@@ -19,7 +19,7 @@ const langs = langNames.map(langName => {
 })
 
 function LangSelector() {
-  const currentLang = useLocalization(trans => trans.lang)
+  const currentLang = useLocalization(ll => ll.lang)
   const [isExpanded, setIsExpanded] = useState(false)
   return (
     <div className="lang-selector" aria-label="Language selector">
