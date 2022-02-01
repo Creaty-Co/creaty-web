@@ -1,0 +1,52 @@
+@import "~app/assets/scss/bundle.scss";
+
+.bullet-point {
+	display: flex;
+	gap: 1.5em;
+}
+
+.bullet-point__circle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	width: 2.5em;
+	height: 2.5em;
+
+	background: $color-white;
+	border-radius: 50%;
+
+	flex-shrink: 0;
+}
+
+.bullet-point__container {
+	display: grid;
+	align-content: baseline;
+
+	row-gap: 1em;
+}
+
+.bullet-point__number {
+	position: absolute;
+
+	color: $color-black-main;
+
+	font-size: 1.5rem;
+	font-weight: 700;
+}
+
+.bullet-point__title {
+	font-size: 1.5rem;
+	line-height: 1.35;
+	white-space: pre-line;
+}
+
+.bullet-point__desc {
+	color: $color-gray-50;
+	line-height: 1.5;
+	white-space: pre-line;
+
+	em {
+		color: $color-gray-10;
+	}
+}
