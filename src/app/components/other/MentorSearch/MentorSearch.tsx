@@ -21,7 +21,7 @@ function MentorSearch() {
       <div className="mentor-search__container">
         <label className={classWithModifiers("mentor-search__search", !!value.length && "filled")}>
           {picks.map(pick => (
-            <TopicTag disabled key={pick}>{pick}</TopicTag>
+            <TopicTag key={pick}>{pick}</TopicTag>
           ))}
           <input type="text" placeholder={picks.length === 0 ? ll.placeholder : undefined} className="mentor-search__input" onChange={onChange} />
           <Icon name="chevron" className="mentor-search__icon" />
