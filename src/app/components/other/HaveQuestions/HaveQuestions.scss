@@ -1,0 +1,38 @@
+@import "~app/assets/scss/bundle.scss";
+
+.have-questions {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	padding: 4em 7.5em;
+	background: $color-white;
+	border-radius: 4.25em;
+}
+
+.have-questions__info {
+	display: grid;
+	row-gap: 1.5em;
+
+	max-width: 27.25em;
+
+	em {
+		color: $color-black-main;
+		font-weight: 700;
+	}
+}
+
+.have-questions__title {
+	color: $color-black-main;
+}
+
+.have-questions__desc {
+	color: $color-gray-80;
+
+	font-size: 1.5rem;
+	line-height: 1.35;
+}
+
+.have-questions__form {
+	max-width: 22.5em;
+}
