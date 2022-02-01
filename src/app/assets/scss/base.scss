@@ -62,6 +62,7 @@ h5 {
 p {
 	line-height: 1.25;
 	white-space: pre-line;
+	margin: unset;
 }
 
 em {
@@ -93,4 +94,9 @@ textarea {
 
 button {
 	cursor: pointer;
+}
+
+ul {
+	margin: unset;
+	padding-left: 1.25em;
 }
