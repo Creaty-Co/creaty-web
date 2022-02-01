@@ -1,0 +1,51 @@
+@import "~app/assets/scss/bundle.scss";
+
+.faq {
+	display: grid;
+	row-gap: 0.5em;
+}
+
+.faq__clause {
+	display: grid;
+	background: $color-black-90;
+	border-radius: 3.125em;
+	transition: 200ms ease background-color;
+
+	&--expanded {
+		background: $color-gray-100;
+
+		.faq__content {
+			height: var(--height, 100%);
+		}
+	}
+}
+
+.faq__summary {
+	display: flex;
+	align-items: center;
+
+	padding: 3em 3.5em;
+
+	cursor: pointer;
+}
+
+.faq__title {
+	font-size: 1.5rem;
+}
+
+.faq__content {
+	height: 0;
+	overflow: hidden;
+	transition: 200ms ease height;
+}
+
+.faq__inner {
+	padding: 3em 3.5em;
+	padding-top: unset;
+}
+
+.faq__text {
+	color: $color-gray-50;
+	font-size: 1.125rem;
+	line-height: 1.25;
+}

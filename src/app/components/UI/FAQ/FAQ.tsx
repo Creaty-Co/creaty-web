@@ -1,5 +1,4 @@
-// SCSS
-import "./FAQ.style.scss"
+import "./FAQ.scss"
 
 import { ReactNode, useState } from "react"
 import { classWithModifiers } from "utils/common"
