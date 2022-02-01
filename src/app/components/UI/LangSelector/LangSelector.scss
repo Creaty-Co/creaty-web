@@ -9,38 +9,3 @@
 		transform: rotate(180deg);
 	}
 }
-
-.lang-selector__list {
-	position: absolute;
-	right: 0;
-
-	display: grid;
-
-	padding: 1em;
-	min-width: 15em;
-	background: white;
-	border-radius: 1.5em;
-	transform: translateY(0.75em);
-	transition: 200ms ease opacity, 200ms ease transform;
-
-	&:not(&--expanded) {
-		opacity: 0;
-		pointer-events: none;
-		transform: translateY(0em);
-	}
-}
-
-.lang-selector__option {
-	padding: 0.75em 1em;
-	border-radius: 1em;
-	color: $color-black-main;
-
-	&:hover {
-		background: $color-gray-30;
-	}
-
-	&--selected {
-		background: $color-gray-30;
-		font-weight: 700;
-	}
-}

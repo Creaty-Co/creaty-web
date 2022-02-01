@@ -8,6 +8,7 @@ import { classWithModifiers } from "utils/common"
 
 import Button from "../../common/Button/Button"
 import Icon from "../../common/Icon/Icon"
+import DropDown from "../DropDown/DropDown"
 
 
 
@@ -29,7 +30,12 @@ function LangSelector() {
 
         onClick={() => setIsExpanded(!isExpanded)}
       >{_.capitalize(currentLang.name)}, {currentLang.currency}</Button>
-      <section className={classWithModifiers("lang-selector__list", isExpanded && "expanded")} role="listbox" aria-expanded={isExpanded}>
+      <DropDown<string> expanded={isExpanded} default={currentLang.code} onChange={lang => Localization.transit(lang)} >
+        {langs.map((lang, index) => (
+          <option value={lang.code} key={index}>{_.capitalize(lang.name)}, {lang.currency}</option>
+        ))}
+      </DropDown>
+      {/* <section className={classWithModifiers("lang-selector__list", isExpanded && "expanded")} role="listbox" aria-expanded={isExpanded}>
         {langs.map((lang, index) => (
           <button
             className={classWithModifiers("lang-selector__option", currentLang.code === lang.code && "selected")}
@@ -38,7 +44,7 @@ function LangSelector() {
             key={index}
           >{_.capitalize(lang.name)}, {lang.currency}</button>
         ))}
-      </section>
+      </section> */}
     </div>
   )
 }
