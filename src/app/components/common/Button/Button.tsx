@@ -1,13 +1,15 @@
 import "./Button.scss"
 
 import { MouseEventHandler, ReactNode } from "react"
-import { classWithModifiers } from "utils/common"
+import { classMerge, classWithModifiers } from "utils/common"
 
 
 export interface ButtonBaseProps {
   size?: "small" | "big"
   style?: "outline"
-  color?: "white" | "green" | "violet"
+  color?: "white" | "dark" | "green" | "violet"
+
+  className?: string
 
   iconLeft?: ReactNode
   iconRight?: ReactNode
@@ -22,7 +24,7 @@ interface ButtonProps extends ButtonBaseProps {
 
 function Button(props: ButtonProps) {
   return (
-    <button className={classWithModifiers("button", props.style, props.size, props.color)} type={props.type || "button"} onClick={props.onClick}>
+    <button className={classMerge(classWithModifiers("button", props.style, props.size, props.color), props.className)} type={props.type || "button"} onClick={props.onClick}>
       <div className="button__icon">{props.iconLeft}</div>
       <div className="button__text">{props.children}</div>
       <div className="button__icon">{props.iconRight}</div>

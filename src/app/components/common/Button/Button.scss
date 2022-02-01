@@ -47,6 +47,13 @@
 		color: $color-green;
 	}
 
+	&--green:not(&--outline) {
+		.button__text {
+			color: $color-black-main;
+			font-weight: 600;
+		}
+	}
+
 	&--violet {
 		color: $color-violet;
 	}
@@ -62,6 +69,10 @@
 			color: $color-black-main;
 			font-weight: 600;
 		}
+	}
+
+	&--dark {
+		color: $color-black-main;
 	}
 }
 
