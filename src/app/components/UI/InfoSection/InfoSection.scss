@@ -1,0 +1,55 @@
+@import "~app/assets/scss/bundle.scss";
+
+.info-section {
+	padding: 3.5em 5em;
+	background: $color-white;
+	border-radius: 4.25em;
+
+	&--1 {
+		background: #151618;
+	}
+
+	&--2 {
+		background: $color-violet;
+	}
+
+	&--3 {
+		background: $color-black-90;
+		box-shadow: 0px 2px 8px rgba($color-green, 0.1), 0px 8px 30px rgba($color-green, 0.2), 0px 8px 200px rgba($color-green, 0.4);
+	}
+
+	&--flex {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		gap: 1em;
+	}
+
+	&--grid {
+		display: grid;
+		row-gap: 1em;
+	}
+}
+
+.info-section__header {
+	display: grid;
+	row-gap: 1em;
+}
+
+.info-section__title {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	@include Typography(2rem, 700);
+}
+
+.info-section__desc {
+	color: $color-gray-50;
+	@include Typography(1.5rem, 400);
+}
+
+.info-section__content {
+	flex-shrink: 0;
+}
