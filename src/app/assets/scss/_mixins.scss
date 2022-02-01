@@ -5,15 +5,37 @@
 	margin: 0 auto;
 }
 
+@mixin Link {
+	text-decoration: underline;
+
+	&:active {
+		text-decoration: none;
+	}
+}
+
 /* Font */
 
-@mixin Font($size: null, $weight: null, $line-height: null) {
+@mixin Font($size: null, $weight: null, $line-height: 1.35) {
 	font: {
 		size: $size;
 		weight: $weight;
 	}
 
 	line-height: $line-height;
+	white-space: pre-line;
+}
+
+@mixin Typography($size, $weight, $emphasizeColor: $color-green) {
+	font-size: $size;
+	font-weight: $weight;
+	white-space: pre-line;
+	line-height: 1.25;
+
+	@if $emphasizeColor !=null {
+		em {
+			color: $emphasizeColor;
+		}
+	}
 }
 
 /* Adaptive */
