@@ -1,0 +1,49 @@
+@import "~app/assets/scss/bundle.scss";
+
+.input {
+	display: flex;
+	gap: 0.5em;
+
+	padding-bottom: 0.5em;
+	border-bottom: 1px solid rgba($color-gray-90, 0.2);
+}
+
+.input__input {
+	width: 100%;
+
+	color: $color-black-main;
+	font-size: 1.5rem;
+
+	&::placeholder {
+		color: $color-gray-80;
+		transition: 200ms ease color;
+	}
+
+	&:focus::placeholder {
+		color: rgba($color-gray-90, 0.2);
+	}
+}
+
+.input-masks {}
+
+.input-masks__current {
+	display: flex;
+	align-items: center;
+	gap: 0.5em;
+
+	color: $color-violet;
+
+	font-size: 1.5rem;
+}
+
+.input-masks__icon {
+	--icon-size: 0.5em;
+
+	transition: 200ms ease transform;
+
+	&--up {
+		transform: rotateX(180deg);
+	}
+}
+
+.input-masks__list {}
