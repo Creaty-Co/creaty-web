@@ -11,7 +11,7 @@ interface TopicTagProps {
 
 function TopicTag(props: TopicTagProps) {
   return (
-    <button className={classWithModifiers("topic-tag", props.noHash && "no-hash")} {...props} type="button" />
+    <button className={classWithModifiers("topic-tag", props.noHash && "no-hash")} type="button">{props.children}</button>
   )
 }
 
