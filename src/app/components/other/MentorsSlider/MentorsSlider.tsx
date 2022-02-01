@@ -11,10 +11,10 @@ function MentorsSlider() {
   return (
     <div className="mentors-slider">
       <div className="mentors-slider__header">
-        <h2 className="heading">
+        <h3 className="heading">
           <em>Найди своего ментора</em> {"среди\n"}
           профессионалов из креативных индустрий
-        </h2>
+        </h3>
         <div className="mentors-slider__buttons">
           <button className="mentors-slider__button" onClick={() => setPosition(position - 1)}>
             <Icon className="mentors-slider__icon" name="arrow-left" />
