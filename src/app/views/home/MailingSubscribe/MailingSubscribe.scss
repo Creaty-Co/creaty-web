@@ -1,0 +1,16 @@
+@import "~app/assets/scss/bundle.scss";
+
+.mailing-subscribe {
+	display: grid;
+	row-gap: 1.5em;
+}
+
+.mailing-subscribe__arrow {
+	height: 12.5em;
+	margin: 0 auto;
+}
+
+.mailing-subscribe__form {
+	max-width: 57%;
+	margin-left: auto;
+}

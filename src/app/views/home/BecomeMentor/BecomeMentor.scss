@@ -1,0 +1,74 @@
+@import "~app/assets/scss/bundle.scss";
+
+.become-mentor {
+	padding: 4em 7.5em;
+	background: $color-green;
+	border-radius: 4.25em;
+	box-shadow: 0px 2px 8px rgba($color-green, 0.1), 0px 8px 30px rgba($color-green, 0.2), 0px 8px 200px rgba($color-green, 0.4);
+}
+
+.become-mentor__container {
+	display: grid;
+	row-gap: 3.5em;
+
+	max-width: 27.5em;
+}
+
+.become-mentor__info {
+	display: grid;
+	row-gap: 1.5em;
+}
+
+.become-mentor__title {
+	color: $color-black-main;
+}
+
+.become-mentor__desc {
+	color: $color-black-3;
+	@include Font(1.5rem);
+}
+
+.become-mentor__bottom {
+	display: grid;
+	row-gap: 1em;
+}
+
+.become-mentor__terms {
+	color: $color-gray-80;
+	@include Font(0.75rem);
+
+	a {
+		@include Link;
+	}
+}
+
+.become-mentor__images {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+
+	width: 30em;
+
+
+	&>:nth-child(1) {
+		position: absolute;
+		left: 5em;
+		width: 20em;
+	}
+
+	&>:nth-child(2) {
+		position: absolute;
+		top: 3.5em;
+		left: 0;
+
+		width: 10em;
+	}
+
+	&>:nth-child(3) {
+		position: absolute;
+		right: 0.5em;
+		bottom: 1em;
+		width: 15em;
+	}
+}

@@ -10,11 +10,50 @@
 }
 
 .home-view__comment {
+	@include WidthLimit;
 	margin-top: 15em;
 }
 
 .home-view__slider {
 	margin-top: 10em;
+}
+
+.home-view__help {
+	@include WidthLimit;
+	margin-top: 5em;
+}
+
+.home-view__how-it-works {
+	@include WidthLimit;
+	margin-top: 15em;
+}
+
+.home-view__helpful-creaty {
+	@include WidthLimit;
+	margin-top: 15em;
+}
+
+.home-view__faq {
+	display: grid;
+	row-gap: 3.25em;
+
+	@include WidthLimit;
+	margin-top: 15em;
+}
+
+.home-view__have-questions {
+	@include WidthLimit;
+	margin-top: 15em;
+}
+
+.home-view__become-mentor {
+	@include WidthLimit;
+	margin-top: 15em;
+}
+
+.home-view__mailing-subscribe {
+	@include WidthLimit;
+	margin-top: 15em;
 }
 
 /* Dynamic Primary Info */

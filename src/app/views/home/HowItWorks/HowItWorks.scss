@@ -1,0 +1,13 @@
+@import "~app/assets/scss/bundle.scss";
+
+.how-it-works {
+	display: grid;
+	row-gap: 5em;
+}
+
+.how-it-works__title {}
+
+.how-it-works__points {
+	display: flex;
+	gap: 5em;
+}
