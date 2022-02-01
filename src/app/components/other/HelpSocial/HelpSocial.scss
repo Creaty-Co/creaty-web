@@ -2,7 +2,6 @@
 
 .help-social {
 	display: flex;
-	align-items: center;
 	gap: 1em;
 }
 
@@ -17,11 +16,10 @@
 
 .help-social__splitter {
 	width: 2px;
-	height: 100%;
 	background: rgba($color-white, 0.2);
 }
 
 .help-social__icon {
-	width: 2.5em;
-	height: 2.5em;
+	width: 3.5em;
+	height: 3.5em;
 }

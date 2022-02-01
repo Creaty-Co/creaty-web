@@ -3,20 +3,22 @@ import "./HowItWorks.scss"
 import Button from "app/components/common/Button/Button"
 import BulletPoint from "app/components/UI/BulletPoint/BulletPoint"
 import InfoSection from "app/components/UI/InfoSection/InfoSection"
+import useLocalization from "modules/localization/hook"
 
 
 function HowItWorks() {
+  const ll = useLocalization(ll => ll.views.home.howItWorks)
   return (
     <div className="how-it-works">
-      <h2 className="how-it-works__title heading">Как это работает</h2>
+      <h2 className="how-it-works__title heading">{ll.title}</h2>
       <div className="how-it-works__points">
-        <BulletPoint number="1" title={"Опишите ваши цели и \n задачи"} desc={"Oставьте <Link to=\"/become-mentor\">заявку</Link>, чтобы можно было связаться и обсудить какая именно помощь вам нужна."} />
-        <BulletPoint number="2" title={"Выберите ментора, \n познакомьтесь"} desc="После выбора ментора, вы встретитесь на БЕСПЛАТНОЙ тестовой 15 минутной встрече, где сможете обсудить цели и план обучения." />
-        <BulletPoint number="3" title="Совершенствуйтесь!" desc="И пусть тяга к новым достижениям и профессиональным высотам поможет вам преодолеть лень,  голод и любые невзгоды!" />
+        {ll.points.map((point, index) => (
+          <BulletPoint number={index + 1} {...point} key={index} />
+        ))}
       </div>
       <div className="how-it-works__help">
-        <InfoSection type="1" display="flex" title="Тестовая встреча <em>бесплатно!</em>" desc={"Чтобы познакомится, понять насколько вы друг другу \n подходите и договорится о плане и графике занятий"}>
-          <Button size="big" color="green">Попробовать бесплатно</Button>
+        <InfoSection type="1" display="flex" {...ll.help}>
+          <Button size="big" color="green">{ll.button}</Button>
         </InfoSection>
       </div>
     </div >
