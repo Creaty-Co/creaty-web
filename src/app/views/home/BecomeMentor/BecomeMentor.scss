@@ -38,6 +38,7 @@
 	@include Font(0.75rem);
 
 	a {
+		color: inherit;
 		@include Link;
 	}
 }
