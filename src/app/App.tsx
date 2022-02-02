@@ -8,11 +8,11 @@ import { BrowserRouter, NavLink } from "react-router-dom"
 import { Link } from "react-router-dom"
 
 import Button from "./components/common/Button/Button"
-import Icon from "./components/common/Icon/Icon"
 import ErrorBoundary from "./components/services/ErrorBoundary"
 import OuterLink from "./components/services/OuterLink"
 import LangSelector from "./components/UI/LangSelector/LangSelector"
 import HomeView from "./views/home/HomeView"
+import MentorsView from "./views/mentors/MentorsView"
 
 function App() {
   return (
@@ -59,6 +59,7 @@ function Main() {
     <main>
       <Routes>
         <Route path="/" element={<HomeView />} />
+        <Route path="/mentors" element={<MentorsView />} />
       </Routes>
     </main>
   )
