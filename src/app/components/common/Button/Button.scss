@@ -21,6 +21,10 @@
 		background-image: linear-gradient(0deg, rgba($color-white, 0.1), rgba($color-white, 0.1));
 	}
 
+	&:disabled {
+		cursor: wait;
+	}
+
 
 	&--big {
 		padding: 1.25em 1.5em;

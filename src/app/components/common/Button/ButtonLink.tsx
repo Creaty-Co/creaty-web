@@ -1,3 +1,5 @@
+import "./Button.scss"
+
 import { MouseEventHandler } from "react"
 import { Link } from "react-router-dom"
 import { classMerge, classWithModifiers } from "utils/common"
