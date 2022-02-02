@@ -21,17 +21,20 @@ import { LocalizationJSONRaw } from "./config"
 /**
  * Loop in object deeply and make it accessible with variables of types: string | number
  */
-type ll<O extends string | number | object | undefined> = {
-  [K in keyof O]: O[K] extends object ? ll<O[K]> & { [x in string | number]: O[K][keyof O[K]] } : O[K]
+type AccessibleDeeply<O extends string | number | object | undefined> = {
+  [K in keyof O]: O[K] extends object ? AccessibleDeeply<O[K]> & { [x in string | number]: O[K][keyof O[K]] } : O[K]
 }
 
-export type LocalizationJSON = ll<LocalizationJSONRaw>
+export type llType = AccessibleDeeply<LocalizationJSONRaw>
+
+type Interceptor = (ll: llType) => llType
 
 class Localization {
   private static defaultLanguage = "en"
 
   private static listeners: Set<Function> = new Set
-  public static storage = new Map<string, LocalizationJSON>()
+  private static interceptors: Set<Interceptor> = new Set
+  public static storage = new Map<string, llType>()
 
   private static set lang(lang: string) {
     localStorage.setItem("lang", lang)
@@ -44,11 +47,14 @@ class Localization {
     this.defaultLanguage = lang
   }
 
-  public static add(lang: string, data: LocalizationJSON) {
-    this.storage.set(lang, data)
+  public static add(lang: string, data: llType) {
+    this.storage.set(
+      lang,
+      [...this.interceptors.values()].reduce((result, next) => next(result), data)
+    )
   }
 
-  public static get(): LocalizationJSON | undefined {
+  public static get(): llType | undefined {
     if (this.storage.has(this.lang)) {
       return this.storage.get(this.lang)
     }
@@ -75,9 +81,13 @@ class Localization {
       this.listeners.delete(listener)
     }
   }
+
+  public static addInterceptor(interceptor: Interceptor) {
+    this.interceptors.add(interceptor)
+  }
 }
 
-export function Localize<Selected extends Record<string, unknown> = LocalizationJSON>(selector: (ll: LocalizationJSON) => Selected | undefined): Selected | undefined {
+export function Localize<Selected extends Record<string, unknown> = llType>(selector: (ll: llType) => Selected | undefined): Selected | undefined {
   try {
     const ll = Localization.get()
     if (!ll) return

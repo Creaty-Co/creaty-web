@@ -17,10 +17,55 @@ copies or substantial portions of the Software.
 */
 
 import DefaultLangJSON from "app/assets/lang/ru.json"
+import parse, { attributesToProps, domToReact } from "html-react-parser"
+import { createElement, ReactNode } from "react"
+import { Link } from "react-router-dom"
 
 import Localization from "./controller"
 
 
+// Add interceptors
+Localization.addInterceptor(ll => {
+  // Doesn't support nesting
+  function transform(value: string): ReactNode {
+    if (/<.+>/.test(value)) {
+      return parse(value, {
+        htmlparser2: {
+          lowerCaseTags: false
+        },
+        replace: (domNode: any) => {
+          if (domNode.name === "link") {
+            return createElement(Link, domNode.attribs)
+          }
+        }
+      })
+    }
+
+    return value
+  }
+  function transformDeeply<V>(object: V) {
+    for (const key in object) {
+      switch (typeof object[key]) {
+        case "object":
+          object[key] = transformDeeply(object[key])
+          break
+
+        case "string":
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-expect-error
+          object[key] = transform(object[key])
+          break
+
+        default:
+          continue
+      }
+    }
+
+    return object
+  }
+
+  return transformDeeply(ll)
+})
 // Add languages
 const langs = require.context("app/assets/lang/", true, /\.json$/, "sync")
 langs.keys().forEach(fileName => {

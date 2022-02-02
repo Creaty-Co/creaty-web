@@ -18,9 +18,9 @@ copies or substantial portions of the Software.
 
 import { useEffect, useState } from "react"
 
-import Localization, { LocalizationJSON, Localize } from "./controller"
+import Localization, { llType, Localize } from "./controller"
 
-function useLocalization<Selected extends Record<string, unknown> = LocalizationJSON>(selector: (ll: LocalizationJSON) => Selected | undefined): Selected {
+function useLocalization<Selected extends Record<string, unknown> = llType>(selector: (ll: llType) => Selected | undefined): Selected {
   const [localization, updateLocalization] = useState(Localize(selector))
   useEffect(() => {
     return Localization.onTransition(() => updateLocalization(Localize(selector)))
