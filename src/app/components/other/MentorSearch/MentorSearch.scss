@@ -1,16 +1,12 @@
 @import "~app/assets/scss/bundle.scss";
 
-.mentor-search {
-	display: grid;
-	row-gap: 1em;
-}
+.mentor-search {}
 
 .mentor-search__container {
 	display: flex;
 	gap: 1em;
 
 	width: 100%;
-	max-width: 60em;
 	margin: 0 auto;
 	padding: 2em;
 	background: $color-black-90;
@@ -98,11 +94,10 @@
 	border-radius: 1.5em;
 
 	box-shadow: 0 0 0 3px rgba($color-green, $alpha: 0.5);
-	transform: translateY(0em);
 	transition: 200ms ease opacity, 200ms ease transform;
 	z-index: 1;
 
-	&:not(:focus ~ &, &:hover) {
+	&:not(&--active) {
 		opacity: 0;
 		pointer-events: none;
 		transform: translateY(-1em);
