@@ -48,10 +48,18 @@ class Localization {
   }
 
   public static add(lang: string, data: llType) {
-    this.storage.set(
-      lang,
-      [...this.interceptors.values()].reduce((result, next) => next(result), data)
-    )
+    try {
+      this.storage.set(
+        lang,
+        [...this.interceptors.values()].reduce((result, next) => next(result), data)
+      )
+    } catch (error) {
+      if (error instanceof Error) {
+        throw new Error("LocalizationInterceptorError: " + error.message)
+      }
+
+      throw error
+    }
   }
 
   public static get(): llType | undefined {
