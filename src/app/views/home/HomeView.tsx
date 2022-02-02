@@ -8,6 +8,7 @@ import BigComment from "app/components/UI/BigComment/BigComment"
 import { FAQ, FAQClause } from "app/components/UI/FAQ/FAQ"
 import InfoSection from "app/components/UI/InfoSection/InfoSection"
 import useLocalization from "modules/localization/hook"
+import { useEffect, useRef, useState } from "react"
 
 import BecomeMentor from "./BecomeMentor/BecomeMentor"
 import HelpfulCreaty from "./HelpfulCreaty/HelpfulCreaty"
@@ -57,12 +58,68 @@ function HomeView() {
 }
 
 
+const headings = [
+  "Fashion дизайн",
+  "UX дизайн",
+  "Иллюстрация",
+  "UX/UI",
+  "Архитектура",
+  "Ещё какой-то очень длинный тэг",
+  "BIM",
+  "Архитетура малых форм",
+  "Дизайн архитектурной среды",
+  "Дизайн интерьеров"
+]
 function DynamicPrimaryInfo() {
   const ll = useLocalization(ll => ll.views.home.primaryInfo)
+  const rejectRef = useRef<Function>()
+  const [currentHeading, setCurrentHeading] = useState(0)
+  const [dynamicHeading, setDynamicHeading] = useState(headings[currentHeading])
+  async function delay(ms: number) {
+    return new Promise<void>((resolve, reject) => {
+      rejectRef.current = reject
+      setTimeout(resolve, ms)
+    })
+  }
+  async function eraseHeading(heading: string) {
+    for (let i = 0; i <= heading.length; i++) {
+      await delay(25)
+      setDynamicHeading(heading.slice(0, heading.length - i))
+    }
+  }
+  async function writeHeading(heading: string) {
+    for (let i = 0; i <= heading.length; i++) {
+      await delay(25)
+      setDynamicHeading(heading.slice(0, i))
+    }
+  }
+  async function runCycle(heading: string) {
+    await writeHeading(heading)
+    await delay(10000)
+    await eraseHeading(heading)
+  }
+  useEffect(() => {
+    (async () => {
+      const heading = headings[currentHeading]
+      await runCycle(heading)
+
+      if ((headings.length - 1) === currentHeading) {
+        setCurrentHeading(0)
+        return
+      }
+      setCurrentHeading(currentHeading + 1)
+    })().catch(error => {
+      if (process.env.NODE_ENV === "development") {
+        console.warn(error)
+      }
+    })
+
+    return () => rejectRef.current?.("DynamicPrimaryInfo was unmounted")
+  }, [currentHeading])
   return (
     <div className="dynamic-primary-info">
       <h1 className="dynamic-primary-info__title">
-        <em>UX дизайн</em>
+        <em>{dynamicHeading}</em>
         <span>{ll.title}</span>
       </h1>
       <h2 className="dynamic-primary-info__desc">{ll.desc}</h2>
