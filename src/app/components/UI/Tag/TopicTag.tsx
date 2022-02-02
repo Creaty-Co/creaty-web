@@ -1,17 +1,18 @@
 import "./TopicTag.scss"
 
-import { ReactNode } from "react"
 import { classWithModifiers } from "utils/common"
 
 
 interface TopicTagProps {
   noHash?: boolean
-  children: ReactNode
+  children: string
 }
 
 function TopicTag(props: TopicTagProps) {
   return (
-    <button className={classWithModifiers("topic-tag", props.noHash && "no-hash")} type="button">{props.children}</button>
+    <button className={classWithModifiers("topic-tag", props.noHash && "no-hash")} type="button">
+      <span className="topic-tag__text">{props.children}</span>
+    </button>
   )
 }
 
