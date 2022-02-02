@@ -1,9 +1,9 @@
 @import "~app/assets/scss/bundle.scss";
 
 .mentor-card {
-	display: grid;
+	display: flex;
+	flex-direction: column;
 
-	max-width: 23.75em;
 	padding: 0.5em;
 	background: $color-white;
 	border-radius: 2.5em;
@@ -67,6 +67,7 @@
 	justify-content: space-between;
 
 	padding: 1.5em;
+	margin-top: auto;
 	background: $color-gray-10;
 	border-radius: inherit;
 	transition: 200ms ease background-color;

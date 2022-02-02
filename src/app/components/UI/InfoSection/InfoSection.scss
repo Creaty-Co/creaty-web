@@ -38,10 +38,6 @@
 }
 
 .info-section__title {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-
 	@include Typography(2rem, 700);
 }
 

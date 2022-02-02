@@ -3,6 +3,8 @@
 .bullet-point {
 	display: flex;
 	gap: 1.5em;
+
+	flex: 1;
 }
 
 .bullet-point__circle {

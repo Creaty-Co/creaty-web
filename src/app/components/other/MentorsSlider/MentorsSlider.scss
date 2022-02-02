@@ -39,15 +39,11 @@
 }
 
 .mentors-slider__inner {
-	display: flex;
-	justify-content: center;
-	flex-wrap: nowrap;
+	display: grid;
+	grid-auto-flow: column;
+	grid-auto-columns: 23.75em;
 
 	gap: 1.25em;
-
-	&>* {
-		flex-shrink: 0;
-	}
 }
 
 .mentors-slider__help {
