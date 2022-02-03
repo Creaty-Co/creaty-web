@@ -5,6 +5,13 @@
 	background: $color-green;
 	border-radius: 4.25em;
 	box-shadow: 0px 2px 8px rgba($color-green, 0.1), 0px 8px 30px rgba($color-green, 0.2), 0px 8px 200px rgba($color-green, 0.4);
+
+	@include Mobile {
+		display: grid;
+		// row-gap: 1em;
+
+		padding: 2em;
+	}
 }
 
 .become-mentor__container {
@@ -41,6 +48,10 @@
 		color: inherit;
 		@include Link;
 	}
+
+	@include Mobile {
+		text-align: center;
+	}
 }
 
 .become-mentor__images {
@@ -71,5 +82,16 @@
 		right: 0.5em;
 		bottom: 1em;
 		width: 15em;
+	}
+
+	@include Mobile {
+		position: relative;
+		top: -2rem;
+		left: -1rem;
+
+		grid-row: 1;
+		width: calc(100% + 2.5rem);
+		height: 33.5rem;
+		font-size: 75%;
 	}
 }

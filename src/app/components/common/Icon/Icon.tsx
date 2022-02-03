@@ -16,6 +16,7 @@ export type IconName = (
   | "whatsapp"
   | "refresh"
   | "cross"
+  | "menu"
   // Topics
   | "architecture"
   | "design"

@@ -13,11 +13,19 @@
 	line-height: 1.5;
 	text-align: right;
 	white-space: pre-line;
+
+	@include Mobile {
+		display: none;
+	}
 }
 
 .help-social__splitter {
 	width: 2px;
 	background: rgba($color-white, 0.2);
+
+	@include Mobile {
+		display: none;
+	}
 }
 
 .help-social__icon {

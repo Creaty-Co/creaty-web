@@ -40,14 +40,17 @@
 
 /* Adaptive */
 
+$mobileMaxWidth: 450px;
+$tabletMaxWidth: 1000px;
+
 @mixin Mobile {
-	@media screen and (max-width: #{$width-sm}) {
+	@media screen and (max-width: $mobileMaxWidth) {
 		@content;
 	}
 }
 
 @mixin Tablet {
-	@media screen and (max-width: #{$width-md}) {
+	@media screen and (max-width: $tabletMaxWidth) {
 		@content;
 	}
 }

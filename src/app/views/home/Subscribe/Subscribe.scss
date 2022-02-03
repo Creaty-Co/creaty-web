@@ -46,4 +46,8 @@
 	color: $color-gray-80;
 	font-size: 0.75rem;
 	line-height: 1.35;
+
+	@include Mobile {
+		text-align: center;
+	}
 }

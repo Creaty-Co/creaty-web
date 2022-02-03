@@ -3,11 +3,21 @@
 .how-it-works {
 	display: grid;
 	row-gap: 5em;
+
+	@include Mobile {
+		row-gap: 2.5em;
+	}
 }
 
 .how-it-works__title {}
 
 .how-it-works__points {
 	display: flex;
+	flex-wrap: wrap;
 	gap: 5em;
+
+	@include Mobile {
+		display: grid;
+		gap: 2.5em;
+	}
 }

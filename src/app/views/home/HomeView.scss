@@ -68,21 +68,32 @@
 	display: grid;
 	row-gap: 2.5em;
 	text-align: center;
+
+	@include Mobile {
+		text-align: left;
+	}
 }
 
 .dynamic-primary-info__title {
-	font-size: 4.5rem;
 	color: $color-white;
 	line-height: 1;
-	white-space: pre-line;
 
 	em {
 		color: $color-green;
 
 		&::after {
-			content: "| ";
+			content: "|";
 			color: rgba($color-green, $alpha: 0.3);
 			animation: 1.2s ease-out flick infinite;
+		}
+
+		@include Mobile {
+			line-clamp: 2;
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 2;
+			overflow: hidden;
+			text-overflow: ellipsis;
 		}
 	}
 }
@@ -95,5 +106,9 @@
 
 	em {
 		color: $color-green;
+	}
+
+	@include Mobile {
+		font-size: 1.5rem;
 	}
 }

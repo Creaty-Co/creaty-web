@@ -25,6 +25,20 @@
 	background: $color-black-90;
 	border-radius: 3em;
 	z-index: 1;
+
+	@include Mobile {
+		display: grid;
+		padding: 1.5em;
+
+		.button {
+			background: $color-green;
+
+			.button__text {
+				color: $color-black-main;
+				font-weight: bold;
+			}
+		}
+	}
 }
 
 .mentor-search__search {
@@ -41,6 +55,11 @@
 
 	&--focused {
 		box-shadow: 0 0 0 3px rgba($color-green, $alpha: 0.5);
+	}
+
+	@include Mobile {
+		flex-wrap: wrap;
+		min-height: 3.5em;
 	}
 }
 
@@ -130,6 +149,10 @@
 		opacity: 0;
 		pointer-events: none;
 		transform: translateY(-1em);
+	}
+
+	@include Mobile {
+		display: grid;
 	}
 }
 

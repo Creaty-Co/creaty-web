@@ -2,14 +2,16 @@ import "app/assets/scss/base.scss"
 import "app/assets/scss/app.scss"
 
 import useLocalization from "modules/localization/hook"
-import { StrictMode, Suspense } from "react"
+import { StrictMode, Suspense, useState } from "react"
 import { Provider } from "react-redux"
 import { Route, Routes } from "react-router"
 import { BrowserRouter, NavLink } from "react-router-dom"
 import { Link } from "react-router-dom"
 import store from "redux/store"
+import { classWithModifiers } from "utils/common"
 
 import Button from "./components/common/Button/Button"
+import Icon from "./components/common/Icon/Icon"
 import ErrorBoundary from "./components/services/ErrorBoundary"
 import OuterLink from "./components/services/OuterLink"
 import LangSelector from "./components/UI/LangSelector/LangSelector"
@@ -37,19 +39,22 @@ function App() {
 
 function Header() {
   const ll = useLocalization(ll => ll.header)
+  const [expanded, setExpanded] = useState(false)
   return (
     <header>
       <div className="topbar">
-        <div>
+        <div aria-label="Home">
           <img src="/static/images/logo40.png" alt="logo" className="topbar__logo" />
+          <img src="/static/icons/logo.svg" alt="logo" className="topbar__logo topbar__logo--mobile" />
           <Link className="ghost" to="/" />
         </div>
-        <div className="topbar__right">
+        <Icon className="topbar__trigger" name={expanded ? "cross" : "menu"} onClick={() => setExpanded(!expanded)} />
+        <div className={classWithModifiers("topbar__right", expanded && "expanded")}>
           <div className="topbar-menu">
             <NavLink className="topbar-menu__link" to="/mentors">{ll.menu.mentors}</NavLink>
             <NavLink className="topbar-menu__link" to="/become-mentor">{ll.menu.becomeMentor}</NavLink>
           </div>
-          <Button style="outline" size="small" color="green">{ll.findMentor}</Button>
+          <Button style="outline" size="small" color="green" className="topbar-menu__button">{ll.findMentor}</Button>
           <LangSelector />
         </div>
       </div>

@@ -8,6 +8,13 @@
 	padding: 4em 7.5em;
 	background: $color-white;
 	border-radius: 4.25em;
+
+	@include Mobile {
+		display: grid;
+		row-gap: 2.5em;
+
+		padding: 2em;
+	}
 }
 
 .have-questions__info {

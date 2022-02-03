@@ -114,7 +114,7 @@ function DynamicPrimaryInfo() {
   }, [currentHeading, topics])
   return (
     <div className="dynamic-primary-info">
-      <h1 className="dynamic-primary-info__title">
+      <h1 className="dynamic-primary-info__title heading">
         <em>{dynamicHeading}</em>
         <span>{ll.title}</span>
       </h1>
