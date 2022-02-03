@@ -25,14 +25,16 @@
 
 ```ts
 interface TopicType {
-  id: number;
-  name: string;
+  id: number
+  name: string // Навзние английском для поиска через адрессную строку
+  text: string // Текст перевода
 }
 
 interface TopicTagType {
-  id: number;
-  name: string;
-  topic: number; // Topic id к которому этот тэг принадлежит. Тэг всегда привязан к одному топику
+  id: number
+  name: string // Навзние английском для поиска через адрессную строку
+  text: string // Текст перевода
+  topic: number // Topic id к которому этот тэг принадлежит. Тэг всегда привязан к одному топику
 }
 ```
 
