@@ -64,8 +64,8 @@ function HomeView() {
 
 
 function DynamicPrimaryInfo() {
-  const staticTopics = useLocalization(ll => ll.views.home.mentorSearch.staticTopics)
-  const headings = Object.values(staticTopics)
+  const topics = useLocalization(ll => ll.other.topics)
+  const headings = Object.values(topics)
   const ll = useLocalization(ll => ll.views.home.primaryInfo)
 
   const rejectRef = useRef<Function>()
@@ -111,7 +111,7 @@ function DynamicPrimaryInfo() {
     })
 
     return () => rejectRef.current?.("DynamicPrimaryInfo was unmounted")
-  }, [currentHeading, staticTopics])
+  }, [currentHeading, topics])
   return (
     <div className="dynamic-primary-info">
       <h1 className="dynamic-primary-info__title">

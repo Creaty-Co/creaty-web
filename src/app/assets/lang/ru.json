@@ -19,21 +19,7 @@
       },
       "mentorSearch": {
         "placeholder": "Выберите категорию или направление",
-        "button": "Найти ментора",
-        "staticTopics": {
-          "architecture": "Архитектура",
-          "design": "Дизайн",
-          "art": "Изобразительное искусство",
-          "craft-jewellery": "Крафт и ювелирное дело",
-          "games-animation": "Игры и анимация",
-          "movies-tv-photos": "Кино, ТВ и фото",
-          "fashion-design": "Дизайн одежды",
-          "music-sound": "Музыка и звук",
-          "theater-scene-art": "Театр и сценическое искусство",
-          "digital-design": "Диджитал дизайн",
-          "art-management": "Арт-менеджмент",
-          "journalism-writing": "Журналистика и письмо"
-        }
+        "button": "Найти ментора"
       },
       "help": {
         "title": "Не знаете с чего начать?",
@@ -166,6 +152,25 @@
         }
       ],
       "button": "Подберите мне ментора"
+    }
+  },
+  "other": {
+    "topics": {
+      "architecture": "Архитектура",
+      "design": "Дизайн",
+      "art": "Изобразительное искусство",
+      "craft-jewellery": "Крафт и ювелирное дело",
+      "games-animation": "Игры и анимация",
+      "movies-tv-photos": "Кино, ТВ и фото",
+      "fashion-design": "Дизайн одежды",
+      "music-sound": "Музыка и звук",
+      "theater-scene-art": "Театр и сценическое искусство",
+      "digital-design": "Диджитал дизайн",
+      "art-management": "Арт-менеджмент",
+      "journalism-writing": "Журналистика и письмо"
+    },
+    "tags": {
+      "ux-design": "UX Дизайн"
     }
   }
 }

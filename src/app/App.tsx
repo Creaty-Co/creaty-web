@@ -3,9 +3,11 @@ import "app/assets/scss/app.scss"
 
 import useLocalization from "modules/localization/hook"
 import { StrictMode, Suspense } from "react"
+import { Provider } from "react-redux"
 import { Route, Routes } from "react-router"
 import { BrowserRouter, NavLink } from "react-router-dom"
 import { Link } from "react-router-dom"
+import store from "redux/store"
 
 import Button from "./components/common/Button/Button"
 import ErrorBoundary from "./components/services/ErrorBoundary"
@@ -13,18 +15,21 @@ import OuterLink from "./components/services/OuterLink"
 import LangSelector from "./components/UI/LangSelector/LangSelector"
 import HomeView from "./views/home/HomeView"
 import MentorsView from "./views/mentors/MentorsView"
+import MentorsViewTopicOrTag from "./views/mentors/MentorsView[topicOrTag]"
 
 function App() {
   return (
     <StrictMode>
       <BrowserRouter>
-        <Suspense fallback="Loading...">
-          <ErrorBoundary fallback="Error">
-            <Header />
-            <Main />
-            <Footer />
-          </ErrorBoundary>
-        </Suspense>
+        <Provider store={store}>
+          <Suspense fallback="Loading...">
+            <ErrorBoundary fallback="Error">
+              <Header />
+              <Main />
+              <Footer />
+            </ErrorBoundary>
+          </Suspense>
+        </Provider>
       </BrowserRouter>
     </StrictMode>
   )
@@ -60,6 +65,7 @@ function Main() {
       <Routes>
         <Route path="/" element={<HomeView />} />
         <Route path="/mentors" element={<MentorsView />} />
+        <Route path="/mentors/:topicOrTag" element={<MentorsViewTopicOrTag />} />
       </Routes>
     </main>
   )

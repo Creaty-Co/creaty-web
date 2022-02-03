@@ -19,21 +19,11 @@
       },
       "mentorSearch": {
         "placeholder": "Выберите категорию или направление",
-        "button": "Search for a mentor",
-        "staticTopics": {
-          "architecture": "Architecture",
-          "design": "Design",
-          "art": "Art",
-          "craft-jewellery": "Craft and Jewellery",
-          "games-animation": "Games and Animation",
-          "movies-tv-photos": "Movies, TV and Photos",
-          "fashion-design": "Fashion Design",
-          "music-sound": "Music and Sound",
-          "theater-scene-art": "Theater and Scene Art",
-          "digital-design": "Digital Design",
-          "art-management": "Art Management",
-          "journalism-writing": "Journalism and Writing"
-        }
+        "button": "Search for a mentor"
+      },
+      "help": {
+        "title": "Не знаете с чего начать?",
+        "desc": "Напишите нам: поможем с выбором ментора \n и ответим на все ваши вопросы"
       },
       "bigComment": "Мы — Creaty. <em>Помогаем искать менторов в креативных индустриях</em>, чтобы выбрать подходящую \n профессию, найти интересную работу или понять как быстрее вырасти профессионально",
       "howItWorks": {
@@ -116,6 +106,10 @@
       "mailingSubscribe": {
         "title": "Тренды в <em>креативных индустриях</em>, новости, лучшие практики \n и многое другое в рассылке Creaty"
       }
+    },
+    "mentors": {
+      "title": "Mentors",
+      "desc": "<em>200+ working professionals from the creative industries</em> are ready to help you pickng up a proper \n occupation, finding a great place or ways to speed up your professional grow."
     }
   },
   "components": {
@@ -158,6 +152,25 @@
         }
       ],
       "button": "Подберите мне ментора"
+    }
+  },
+  "other": {
+    "topics": {
+      "architecture": "Architecture",
+      "design": "Design",
+      "art": "Art",
+      "craft-jewellery": "Craft and Jewellery",
+      "games-animation": "Games and Animation",
+      "movies-tv-photos": "Movies, TV and Photos",
+      "fashion-design": "Fashion Design",
+      "music-sound": "Music and Sound",
+      "theater-scene-art": "Theater and Scene Art",
+      "digital-design": "Digital Design",
+      "art-management": "Art Management",
+      "journalism-writing": "Journalism and Writing"
+    },
+    "tags": {
+      "ux-design": "UX Дизайн"
     }
   }
 }

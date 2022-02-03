@@ -2,6 +2,19 @@
 
 .mentor-search {}
 
+.mentor-search__cover {
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.75);
+	pointer-events: none;
+	transition: 200ms ease opacity;
+	z-index: 1;
+
+	&:not(&--active) {
+		opacity: 0;
+	}
+}
+
 .mentor-search__container {
 	display: flex;
 	gap: 1em;
@@ -11,6 +24,7 @@
 	padding: 2em;
 	background: $color-black-90;
 	border-radius: 3em;
+	z-index: 1;
 }
 
 .mentor-search__search {
@@ -25,7 +39,7 @@
 	border-radius: 1.5em;
 	transition: 200ms ease box-shadow;
 
-	&--filled {
+	&--focused {
 		box-shadow: 0 0 0 3px rgba($color-green, $alpha: 0.5);
 	}
 }
@@ -44,7 +58,22 @@
 }
 
 .mentor-search__icon {
-	--icon-size: 0.75em;
+	color: $color-gray-50;
+
+	&--chevron {
+		--icon-size: 0.75em;
+		margin-left: auto;
+	}
+
+	&--cross {
+		--icon-size: 1.25em;
+
+		position: absolute;
+		left: calc((var(--chars) * 1ch) + 1.5em);
+
+		padding: 0.25em;
+		cursor: pointer;
+	}
 }
 
 .mentor-search__tags {
@@ -80,7 +109,7 @@
 /* Mentor Search List */
 
 .mentor-search-list {
-	$height: var(--height, 25em);
+	$height: calc(var(--height) * 1px);
 
 	position: absolute;
 	top: calc(100% + 0.75em);
@@ -97,7 +126,7 @@
 	transition: 200ms ease opacity, 200ms ease transform;
 	z-index: 1;
 
-	&:not(&--active) {
+	&:not(&--visible) {
 		opacity: 0;
 		pointer-events: none;
 		transform: translateY(-1em);
@@ -122,6 +151,7 @@
 .mentor-search-list__item {
 	display: flex;
 	align-items: center;
+	gap: 0.75em;
 
 	padding: 0.75em 1em;
 
@@ -130,7 +160,8 @@
 	transition: 200ms ease background-color;
 	cursor: pointer;
 
-	&:hover {
+	&:hover,
+	&--active {
 		background: $color-gray-30;
 	}
 }

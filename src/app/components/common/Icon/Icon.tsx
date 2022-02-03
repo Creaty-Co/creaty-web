@@ -15,6 +15,20 @@ export type IconName = (
   | "messenger"
   | "whatsapp"
   | "refresh"
+  | "cross"
+  // Topics
+  | "architecture"
+  | "design"
+  | "art"
+  | "craft-jewellery"
+  | "games-animation"
+  | "movies-tv-photos"
+  | "fashion-design"
+  | "music-sound"
+  | "theater-scene-art"
+  | "digital-design"
+  | "art-management"
+  | "journalism-writing"
 ) | (string & {})
 
 interface IconProps extends SVGAttributes<SVGElement> {
@@ -23,7 +37,7 @@ interface IconProps extends SVGAttributes<SVGElement> {
 
 function Icon(props: IconProps) {
   return (
-    <svg {...props} className={classMerge(classWithModifiers("icon", props.name), props.className)}>
+    <svg {...props} className={classMerge("icon", props.className && classWithModifiers(props.className, props.name))}>
       <use href={`/static/icons.svg#${props.name}`} />
     </svg>
   )

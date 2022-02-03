@@ -12,11 +12,15 @@
 	row-gap: 1em;
 }
 
-.mentors-view__title {}
+.mentors-view__title {
+	span.weak {
+		color: $color-gray-50;
+	}
+}
 
 .mentors-view__desc {
 	color: $color-gray-50;
-	@include Typography(1.125rem, 400, $color-white)
+	@include Typography(1.125rem, 400, $color-white);
 }
 
 .mentors-view__container {
