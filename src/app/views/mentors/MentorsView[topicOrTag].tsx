@@ -10,7 +10,7 @@ import { useParams } from "react-router"
 function MentorsViewTopicOrTag() {
   const params = useParams<"topicOrTag">()
   if (!params.topicOrTag) {
-    throw new Error("This component should be used in Route")
+    throw new Error("This component should be used in Route context")
   }
 
   const ll = useLocalization(ll => ll.views.mentors)

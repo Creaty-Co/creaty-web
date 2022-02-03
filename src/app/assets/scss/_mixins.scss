@@ -25,7 +25,7 @@
 	white-space: pre-line;
 }
 
-@mixin Typography($size, $weight, $emphasizeColor: $color-green) {
+@mixin Typography($size, $weight: null, $emphasizeColor: $color-green) {
 	font-size: $size;
 	font-weight: $weight;
 	white-space: pre-line;

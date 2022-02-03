@@ -170,10 +170,6 @@ footer {
 	padding-top: 5em;
 	margin-top: 15em;
 	background: $color-black-90;
-
-	@include Mobile {
-		display: none;
-	}
 }
 
 .footer-container {
@@ -186,12 +182,21 @@ footer {
 .footer-links {
 	display: flex;
 	justify-content: space-between;
+
+	@include Mobile {
+		display: grid;
+		row-gap: 2.5em;
+	}
 }
 
 .footer-links__container {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 5em;
+
+	@include Mobile {
+		gap: 2.5em;
+	}
 }
 
 .footer-links__group {
@@ -234,4 +239,5 @@ footer {
 	border-top: 1px solid rgba($color: $color-gray-10, $alpha: 0.1);
 	color: $color-gray-80;
 	font-size: 0.75rem;
+	line-height: 1.25;
 }

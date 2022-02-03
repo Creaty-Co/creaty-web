@@ -17,6 +17,9 @@ export type IconName = (
   | "refresh"
   | "cross"
   | "menu"
+  | "location"
+  | "face"
+  | "r-square"
   // Topics
   | "architecture"
   | "design"

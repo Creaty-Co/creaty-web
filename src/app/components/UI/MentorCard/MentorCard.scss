@@ -7,6 +7,10 @@
 	padding: 0.5em;
 	background: $color-white;
 	border-radius: 2.5em;
+
+	&--center {
+		text-align: center;
+	}
 }
 
 .mentor-card__preview {
@@ -35,21 +39,18 @@
 }
 
 .mentor-card__name {
-	display: flex;
-	gap: 0.5em;
-
 	color: $color-black-main;
 	font-size: 1.5rem;
-	font-weight: 600;
+	font-weight: bold;
 }
 
 .mentor-card__job {
-	color: $color-gray-50;
+	color: $color-gray-80;
 	font-size: 1.125rem;
 
 	em {
 		color: $color-black-main;
-		font-weight: 600;
+		font-weight: bold;
 	}
 }
 
@@ -57,6 +58,30 @@
 	display: flex;
 	flex-wrap: wrap;
 	gap: 0.5em;
+}
+
+.mentor-card__price {
+	color: $color-gray-80;
+	font-size: 1.5rem;
+
+	em {
+		color: $color-black-main;
+		font-weight: bold;
+	}
+}
+
+.mentor-card__discounts {
+	display: grid;
+	row-gap: 0.5em;
+}
+
+.mentor-card__discount {
+	color: $color-black-main;
+	font-size: 1.125rem;
+
+	em {
+		color: $color-violet;
+	}
 }
 
 /* Mentor Card Button */
@@ -90,7 +115,7 @@
 	}
 
 	em {
-		font-weight: 600;
+		font-weight: bold;
 	}
 }
 
@@ -107,7 +132,7 @@
 .mentor-card-button__hover-text {
 	position: absolute;
 	color: $color-black-main;
-	font-weight: 600;
+	font-weight: bold;
 	transition: 200ms ease opacity;
 
 	&:not(.mentor-card-button:hover &) {

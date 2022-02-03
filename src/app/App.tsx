@@ -18,6 +18,7 @@ import LangSelector from "./components/UI/LangSelector/LangSelector"
 import HomeView from "./views/home/HomeView"
 import MentorsView from "./views/mentors/MentorsView"
 import MentorsViewTopicOrTag from "./views/mentors/MentorsView[topicOrTag]"
+import UserUserId from "./views/user/User[userId]"
 
 function App() {
   return (
@@ -71,6 +72,7 @@ function Main() {
         <Route path="/" element={<HomeView />} />
         <Route path="/mentors" element={<MentorsView />} />
         <Route path="/mentors/:topicOrTag" element={<MentorsViewTopicOrTag />} />
+        <Route path="/user/:userId" element={<UserUserId />} />
       </Routes>
     </main>
   )
