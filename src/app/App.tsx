@@ -2,7 +2,7 @@ import "app/assets/scss/base.scss"
 import "app/assets/scss/app.scss"
 
 import useLocalization from "modules/localization/hook"
-import { StrictMode, Suspense, useState } from "react"
+import { StrictMode, Suspense, useRef, useState } from "react"
 import { Provider } from "react-redux"
 import { Route, Routes } from "react-router"
 import { BrowserRouter, NavLink } from "react-router-dom"
@@ -30,6 +30,7 @@ function App() {
               <Header />
               <Main />
               <Footer />
+              <Cookies />
             </ErrorBoundary>
           </Suspense>
         </Provider>
@@ -121,6 +122,25 @@ function Footer() {
         </div>
       </div>
     </footer>
+  )
+}
+
+
+function Cookies() {
+  const cookiesRef = useRef(localStorage.getItem("cookies"))
+  const [cookies, setCookies] = useState("")
+  function onClick() {
+    setCookies("accept")
+    localStorage.setItem("cookies", "accept")
+  }
+  if (cookiesRef.current === "accept") {
+    return null
+  }
+  return (
+    <div className={classWithModifiers("cookies", cookies === "accept" && "accept")}>
+      <p className="cookies__text">Мы сохраняем cookie <a href="#">по правилам</a>, чтобы персонализировать сервис.Вы можете запретить это изменив настройки браузера.</p>
+      <Button onClick={onClick}>Хорошо</Button>
+    </div>
   )
 }
 
