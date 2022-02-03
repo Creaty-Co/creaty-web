@@ -9,6 +9,7 @@ export interface SearchTopic {
 export interface SearchTag {
   id: number
   name: string
+  text: string
   topic: number
 }
 

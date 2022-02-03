@@ -29,7 +29,8 @@ function MentorSearch(props: MentorSearchProps) {
   const focus = () => dispatch(updateSearch({ focused: true }))
   const blur = () => dispatch(updateSearch({ focused: false }))
   const reset = () => {
-    setValue(""); focus()
+    setValue("")
+    setTimeout(() => focus())
   }
 
   useEffect(() => {
@@ -108,8 +109,8 @@ function MentorSearchListStatic(props: MentorSearchListProps) {
   const dispatch = useDispatch()
   const topics = useLocalization(ll => ll.other.topics)
 
-  const updateTopic = (topic: SearchTopic) => dispatch(updateSearch({ topic, tag: undefined }))
-  const updateTag = (tag: SearchTag) => dispatch(updateSearch({ tag }))
+  const updateTopic = (topic: SearchTopic) => setTimeout(() => dispatch(updateSearch({ topic, tag: undefined, focused: false })))
+  const updateTag = (tag: SearchTag) => setTimeout(() => dispatch(updateSearch({ tag, focused: false })))
   return (
     <div className={classWithModifiers("mentor-search-list", props.visible && "visible")}>
       <div className="mentor-search-list__container">
@@ -121,7 +122,9 @@ function MentorSearchListStatic(props: MentorSearchListProps) {
         ))}
       </div>
       <div className="mentor-search-list__tags">
-        <TopicTag onClick={() => updateTag({ id: 0, name: "design", topic: 0 })}>Дизайн интерьеров</TopicTag>
+        <Link className="topic-tag" to={`/mentors/${"design"}/`} onClick={() => updateTag({ id: 0, name: "design", text: "Дизайн интерьеров", topic: 0 })}>
+          <span className="topic-tag__text">{"Дизайн интерьеров"}</span>
+        </Link>
         <TopicTag>Дизайн архитектурной среды</TopicTag>
         <TopicTag>Архитетура малых форм</TopicTag>
         <TopicTag>BIM</TopicTag>

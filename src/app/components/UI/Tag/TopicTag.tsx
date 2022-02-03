@@ -20,7 +20,6 @@ interface TopicTagSearchTopicProps {
 }
 
 function TopicTag(props: TopicTagStringProps | TopicTagSearchTopicProps) {
-  const tags = useLocalization(ll => ll.other.tags)
   if (typeof props.children === "string") {
     return (
       <button className={classWithModifiers("topic-tag", props.noHash && "no-hash")} type="button" onClick={props.onClick}>
@@ -30,7 +29,7 @@ function TopicTag(props: TopicTagStringProps | TopicTagSearchTopicProps) {
   }
   return (
     <Link className="topic-tag" to={`/mentors/${props.children.name}/`}>
-      <span className="topic-tag__text">{tags[props.children.name] || props.children.name}</span>
+      <span className="topic-tag__text">{props.children.text}</span>
     </Link>
   )
 }
