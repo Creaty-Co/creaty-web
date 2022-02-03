@@ -36,6 +36,14 @@
 			color: $emphasizeColor;
 		}
 	}
+
+	@include Mobile() {
+		white-space: normal;
+
+		br {
+			display: none;
+		}
+	}
 }
 
 /* Adaptive */

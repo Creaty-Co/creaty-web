@@ -100,3 +100,27 @@ ul {
 	margin: unset;
 	padding-left: 1.25em;
 }
+
+/* Keyframes */
+
+@keyframes flick {
+
+	0%,
+	100% {
+		opacity: 0;
+	}
+
+	50% {
+		opacity: 1;
+	}
+}
+
+@keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
+}
