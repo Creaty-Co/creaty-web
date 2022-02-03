@@ -258,6 +258,7 @@ footer {
 	background: $color-gray-100;
 	border-radius: 2em;
 	animation: 500ms ease-out forwards cookies-show;
+	z-index: 2;
 
 	&--accept {
 		animation: unset;
