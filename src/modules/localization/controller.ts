@@ -95,15 +95,14 @@ class Localization {
   }
 }
 
-export function Localize<Selected extends Record<string, unknown> = llType>(selector: (ll: llType) => Selected | undefined): Selected | undefined {
-  try {
-    const ll = Localization.get()
-    if (!ll) return
+export function Localize<Selected extends Record<string, unknown> = llType>(selector: (ll: llType) => Selected | undefined): Selected {
+  const ll = Localization.get()
+  if (!ll) throw new TypeError("LocalizeError: no localization gotten")
 
-    return selector(ll)
-  } catch (error) {
-    throw new TypeError("LocalizeError: bad selector => " + selector.toString().split("=>")[1].replace(/ /g, ""))
-  }
+  const selection = selector(ll)
+  if (!selection) throw new TypeError("LocalizeError: bad selector => " + selector.toString().split("=>")[1].replace(/ /g, ""))
+
+  return selection
 }
 
 export default Localization
