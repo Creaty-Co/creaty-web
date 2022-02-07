@@ -28,8 +28,6 @@ export default function MentorSearchTags() {
   }
   return (
     <div className="mentor-search__tags">
-      <div className="mentor-search__shadow mentor-search__shadow--left" onPointerEnter={onLeftShadowEnter} onPointerLeave={onShadowBlur} />
-      <div className="mentor-search__shadow mentor-search__shadow--right" onPointerEnter={onRightShadowEnter} onPointerLeave={onShadowBlur} />
       <div className="mentor-search__inner-tags" ref={tagsInnerRef}>
         <TopicTag>Иллюстрация</TopicTag>
         <TopicTag>Архитектура</TopicTag>
@@ -122,6 +120,8 @@ export default function MentorSearchTags() {
         <TopicTag>Fashion дизайн</TopicTag>
         <TopicTag>UX/UI</TopicTag>
       </div>
+      <div className="mentor-search__shadow mentor-search__shadow--left" onPointerEnter={onLeftShadowEnter} onPointerLeave={onShadowBlur} />
+      <div className="mentor-search__shadow mentor-search__shadow--right" onPointerEnter={onRightShadowEnter} onPointerLeave={onShadowBlur} />
     </div>
   )
 }
