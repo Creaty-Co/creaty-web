@@ -1,9 +1,10 @@
 import "./Input.scss"
 
 import Icon from "app/components/common/Icon/Icon"
-import { ChangeEvent, DetailedHTMLProps, Dispatch, InputHTMLAttributes, useState } from "react"
+import { ChangeEvent, DetailedHTMLProps, Dispatch, InputHTMLAttributes, useRef, useState } from "react"
 import { classWithModifiers } from "utils/common"
 
+import useClickAway from "../../../../hooks/useClickAway"
 import DropDown from "../DropDown/DropDown"
 
 
@@ -39,6 +40,7 @@ interface InputMasksProps {
 }
 
 function InputMasks(props: InputMasksProps) {
+  const parentRef = useRef<HTMLDivElement>(null)
   const [isExpanded, setIsExpanded] = useState(false)
   const [currentMask, setCurrentMask] = useState<InputMaskType>(props.masks[0])
   function onChange(index: number) {
@@ -47,9 +49,10 @@ function InputMasks(props: InputMasksProps) {
     setCurrentMask(mask)
     props.onChange(mask)
   }
+  useClickAway(parentRef, () => setIsExpanded(false))
   return (
-    <div className="input-masks">
-      <button className="input-masks__current" type="button" onClick={() => setIsExpanded(!isExpanded)}>
+    <div className="input-masks" ref={parentRef}>
+      <button className="input-masks__current" type="button" onClick={() => setIsExpanded(!isExpanded)} >
         {currentMask.title}
         <Icon className={classWithModifiers("input-masks__icon", isExpanded && "up")} name="chevron" />
       </button>

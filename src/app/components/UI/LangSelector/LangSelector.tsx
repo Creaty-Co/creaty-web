@@ -1,9 +1,10 @@
 import "./LangSelector.scss"
 
+import useClickAway from "hooks/useClickAway"
 import _ from "lodash"
 import Localization from "modules/localization/controller"
 import useLocalization from "modules/localization/hook"
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { classWithModifiers } from "utils/common"
 
 import Button from "../../common/Button/Button"
@@ -20,10 +21,12 @@ const langs = langNames.map(langName => {
 })
 
 function LangSelector() {
+  const parentRef = useRef<HTMLDivElement>(null)
   const currentLang = useLocalization(ll => ll.lang)
   const [isExpanded, setIsExpanded] = useState(false)
+  useClickAway(parentRef, () => setIsExpanded(false))
   return (
-    <div className="lang-selector" aria-label="Language selector">
+    <div className="lang-selector" aria-label="Language selector" ref={parentRef}>
       <Button
         iconLeft={<Icon name="language" className="lang-selector__icon" />}
         iconRight={<Icon name="drop-down-triangle" className={classWithModifiers("lang-selector__icon", isExpanded && "up")} />}
