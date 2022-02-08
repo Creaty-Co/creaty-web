@@ -48,6 +48,8 @@ export class PopupContainer extends Component<PopupContainerProps, PopupContaine
     const lastPopup = queue[queue.length - 1]
     const { component: PopupWindowComponent, params = {}, close } = lastPopup || {}
 
+    console.log(queue, lastPopup, params)
+
     const className = this.props.className || "popup"
     return (
       <div className={classWithModifiers(className, isActive && "active")}>

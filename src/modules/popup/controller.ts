@@ -51,14 +51,23 @@ export class Popup {
   }
   private static addToQueue(popupWindow: PopupWindow<any>) {
     PopupPrivate.dispatch((state) => {
+      // Skip adding to queue if there is already the same window
       if (state.queue.length > 0) {
         if (convertToBase64(state.queue[state.queue.length - 1]) === convertToBase64(popupWindow)) {
           return { ...state, isActive: true }
         }
       }
+      // Set queue if popup was inactive and has only one window
+      // to be sure that window by the rule above won't appear again
+      if (state.isActive === false && state.queue.length === 1) {
+        return {
+          isActive: true,
+          queue: [popupWindow]
+        }
+      }
       return {
         isActive: true,
-        queue: [...state.queue, popupWindow],
+        queue: [...state.queue, popupWindow]
       }
     })
   }
