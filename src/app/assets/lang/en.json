@@ -18,32 +18,32 @@
         "desc": "Develop and enhance your <em>creative skills</em> on individual \n interaction with professional mentor"
       },
       "mentorSearch": {
-        "placeholder": "Выберите категорию или направление",
+        "placeholder": "Choose a category or a way",
         "button": "Search for a mentor"
       },
       "help": {
-        "title": "Не знаете с чего начать?",
-        "desc": "Напишите нам: поможем с выбором ментора \n и ответим на все ваши вопросы"
+        "title": "Don't know what start with?",
+        "desc": "Contact us: we'll help you to chose a mentor \n and answer all your questions"
       },
-      "bigComment": "Мы — Creaty. <em>Помогаем искать менторов в креативных индустриях</em>, чтобы выбрать подходящую \n профессию, найти интересную работу или понять как быстрее вырасти профессионально",
+      "bigComment": "We are Creaty. <em>We help with seeking mentors at the creatives industries</em> in order to pick up a suitable \n position, find an interesting job or find out ways of speeding up your professional growth",
       "howItWorks": {
-        "title": "Как это работает",
+        "title": "How it works",
         "points": [
           {
-            "title": "Опишите ваши цели и \n задачи",
-            "desc": "Oставьте <Link to=\"/become-mentor\" children=\"заявку\" />, чтобы можно было связаться и обсудить какая именно помощь вам нужна."
+            "title": "Describe your goals and \n tasks",
+            "desc": "Leave <Link to=\"/become-mentor\" children=\"an request\" />, so you can keep in touch with us if you need a help."
           },
           {
-            "title": "Выберите ментора, \n познакомьтесь",
-            "desc": "После выбора ментора, вы встретитесь на БЕСПЛАТНОЙ тестовой 15 минутной встрече, где сможете обсудить цели и план обучения."
+            "title": "Choose a mentor, \n get acquainted",
+            "desc": "After choose a mentor, you will meet up for 15 minutes for FREE, where you could discuss your goals and study plan."
           },
           {
-            "title": "Совершенствуйтесь!",
+            "title": "Improve yourself!",
             "desc": "И пусть тяга к новым достижениям и профессиональным высотам поможет вам преодолеть лень,  голод и любые невзгоды!"
           }
         ],
         "help": {
-          "title": "Тестовая встреча <em>бесплатно!</em>",
+          "title": "First meeting is <em>FREE!</em>",
           "desc": "Чтобы познакомится, понять насколько вы друг другу \n подходите и договорится о плане и графике занятий"
         },
         "button": "Попробовать бесплатно"
