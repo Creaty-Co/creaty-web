@@ -2,22 +2,31 @@ import "./ContactForm.scss"
 
 import Button from "app/components/common/Button/Button"
 import Input from "app/components/UI/Input/Input"
+import { FormType } from "interfaces/types"
+import useLocalization from "modules/localization/hook"
+import { useSelector } from "react-redux"
 
 
 interface ContactFormProps {
   submitText?: string
+  type: FormType["type"]
 }
 
 function ContactForm(props: ContactFormProps) {
+  const ll = useLocalization(ll => ll.components.contactForm)
+  const form = useSelector(state => state.forms[props.type])
+  // if (!form) throw new Error("ContactFormError: no form")
   return (
     <form className="contact-form">
       <div className="contact-form__inputs">
-        <Input placeholder="Имя" required />
-        <Input placeholder="Email" required />
-        <Input placeholder="Номер или ник в " required masks={[{ title: "Telegram", mask: "" }, { title: "WhatsApp", mask: "" }, { title: "Messanger", mask: "" }, { title: "Viber", mask: "" }]} />
+        {form?.fields.map((field, index) => (
+          <Input placeholder={ll.fields[field].placeholder} required key={index} />
+        ))}
+        {/* <Input placeholder="Email" required />
+        <Input placeholder="Номер или ник в " required masks={[]} /> */}
       </div>
-      <Button className="contact-form__submit" size="big" type="submit" color="dark">{props.submitText || "Отправить"}</Button>
-      <div className="contact-form__terms">Нажав на кнопку, я соглашаюсь на обработку персональных данных в соответсвии с политикой конфиденциальности</div>
+      <Button className="contact-form__submit" size="big" type="submit" color="dark">{props.submitText || ll.submit}</Button>
+      <div className="contact-form__terms">{ll.terms}</div>
     </form>
   )
 }

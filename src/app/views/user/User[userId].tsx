@@ -101,7 +101,7 @@ function UserUserId() {
         </UserSection>
         <UserSection type="1" title="Записаться к ментору">
           <p>Оплатить сессию можно  после согласования с менеджером времени и деталей. А пока оставьте заявку, чтобы мы могли связаться удобным для вас способом. </p>
-          <ContactForm submitText="Записаться к ментору" />
+          <ContactForm type="test_meeting" submitText="Записаться к ментору" />
         </UserSection>
       </div>
     </div >

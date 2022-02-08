@@ -14,7 +14,7 @@ function HaveQuestions() {
         </p>
       </div>
       <div className="have-questions__form">
-        <ContactForm />
+        <ContactForm type="still_questions" />
       </div>
     </div>
   )
