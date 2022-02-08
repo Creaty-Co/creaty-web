@@ -1,7 +1,9 @@
 import "./BecomeMentor.scss"
 
 import Button from "app/components/common/Button/Button"
+import PopupForm from "app/components/popups/PopupForm"
 import useLocalization from "modules/localization/hook"
+import { Popup } from "modules/popup/controller"
 
 
 function BecomeMentor() {
@@ -18,7 +20,7 @@ function BecomeMentor() {
           </ul>
         </div>
         <div className="become-mentor__bottom">
-          <Button size="big" color="dark">{ll.button}</Button>
+          <Button size="big" color="dark" onClick={() => Popup.open(PopupForm, { type: "test_meeting" })}>{ll.button}</Button>
           <div className="become-mentor__terms">{ll.terms}</div>
         </div>
       </div>

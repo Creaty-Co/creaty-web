@@ -10,7 +10,8 @@ interface PopupFormProps {
 }
 
 function PopupForm(props: PopupFormProps) {
-  const ll = useLocalization(ll => ll.popups.popupForm[props.type])
+  const forms = useLocalization(ll => ll.popups.popupForm)
+  const ll = forms[props.type]
   return (
     <PopupLayout title={ll.title} width="35em">
       <ContactForm type={props.type} />

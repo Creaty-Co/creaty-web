@@ -60,7 +60,7 @@ function Header() {
             <NavLink className="topbar-menu__link" to="/mentors">{ll.menu.mentors}</NavLink>
             <button className="topbar-menu__link" type="button" onClick={() => Popup.open(PopupForm, { type: "become_mentor" })}>{ll.menu.becomeMentor}</button>
           </div>
-          <Button style="outline" size="small" color="green" className="topbar-menu__button">{ll.findMentor}</Button>
+          <Button style="outline" size="small" color="green" className="topbar-menu__button" onClick={() => Popup.open(PopupForm, { type: "choose_mentor" })}>{ll.findMentor}</Button>
           <LangSelector />
         </div>
       </div>
