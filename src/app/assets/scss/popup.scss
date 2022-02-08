@@ -1,0 +1,59 @@
+@import "bundle";
+
+.popup {
+	position: fixed;
+	inset: 0;
+
+	cursor: pointer;
+	overscroll-behavior: contain;
+	z-index: 2;
+
+	&:not(&--active) {
+		pointer-events: none;
+	}
+}
+
+.popup__container {
+	position: absolute;
+	inset: 0;
+
+	display: grid;
+
+	// overflow: auto;
+	overscroll-behavior: contain;
+
+	transition: 250ms ease background;
+
+	.popup--active & {
+		background: rgba($color-black-main, 0.7);
+		backdrop-filter: blur(40px);
+	}
+}
+
+.popup__inner {
+	cursor: initial;
+	overscroll-behavior: contain;
+	margin: auto;
+
+	transform: translateY(200%);
+	transition: 250ms ease transform;
+
+	.popup--active & {
+		transform: translateY(0%)
+	}
+}
+
+/* Layout */
+
+.popup-layout {
+	display: grid;
+	row-gap: 1.5em;
+
+	padding: 4em;
+	background: $color-white;
+	border-radius: 2.5em;
+}
+
+.popup-layout__title {
+	color: $color-black-main;
+}

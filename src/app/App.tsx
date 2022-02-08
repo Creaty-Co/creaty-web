@@ -2,6 +2,8 @@ import "app/assets/scss/base.scss"
 import "app/assets/scss/app.scss"
 
 import useLocalization from "modules/localization/hook"
+import { PopupContainer } from "modules/popup/container"
+import { Popup } from "modules/popup/controller"
 import { StrictMode, Suspense, useRef, useState } from "react"
 import { Provider } from "react-redux"
 import { Route, Routes } from "react-router"
@@ -12,6 +14,7 @@ import { classWithModifiers } from "utils/common"
 
 import Button from "./components/common/Button/Button"
 import Icon from "./components/common/Icon/Icon"
+import PopupForm from "./components/popups/PopupForm"
 import ErrorBoundary from "./components/services/ErrorBoundary"
 import OuterLink from "./components/services/OuterLink"
 import LangSelector from "./components/UI/LangSelector/LangSelector"
@@ -31,6 +34,7 @@ function App() {
               <Main />
               <Footer />
               <Cookies />
+              <PopupContainer />
             </ErrorBoundary>
           </Suspense>
         </Provider>
@@ -54,7 +58,7 @@ function Header() {
         <div className={classWithModifiers("topbar__right", expanded && "expanded")}>
           <div className="topbar-menu">
             <NavLink className="topbar-menu__link" to="/mentors">{ll.menu.mentors}</NavLink>
-            <NavLink className="topbar-menu__link" to="/become-mentor">{ll.menu.becomeMentor}</NavLink>
+            <button className="topbar-menu__link" type="button" onClick={() => Popup.open(PopupForm, { type: "become_mentor" })}>{ll.menu.becomeMentor}</button>
           </div>
           <Button style="outline" size="small" color="green" className="topbar-menu__button">{ll.findMentor}</Button>
           <LangSelector />
