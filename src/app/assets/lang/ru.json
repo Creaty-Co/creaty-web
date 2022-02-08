@@ -152,6 +152,38 @@
         }
       ],
       "button": "Подберите мне ментора"
+    },
+    "contactForm": {
+      "fields": {
+        "telegram": {
+          "title": "Telegram"
+        },
+        "facebook": {
+          "title": "Facebook"
+        },
+        "whats_app": {
+          "title": "WhatsApp"
+        },
+        "viber": {
+          "title": "Viber"
+        }
+      },
+      "phoneOrNick": "Номер или ник в",
+      "submit": "Отправить",
+      "terms": "Нажав на кнопку, я соглашаюсь на обработку персональных данных в соответсвии с политикой конфиденциальности"
+    }
+  },
+  "popups": {
+    "popupForm": {
+      "become_mentor": {
+        "title": "Станьте ментором"
+      },
+      "choose_mentor": {
+        "title": "Получите помощь в подборе ментора"
+      },
+      "test_meeting": {
+        "title": "Запишитесь на бесплатную тестовую встречу"
+      }
     }
   },
   "other": {

@@ -11,5 +11,10 @@ export interface FormType {
   type: "become_mentor" | "choose_mentor" | "test_meeting" | "still_questions"
   description: string | null
   post_send: string
-  fields: ["name", "email", "telegram", "facebook", "whats_app", "viber", "about"]
+  fields: FormFieldType[]
+}
+
+export interface FormFieldType {
+  type: "name" | "email" | "telegram" | "facebook" | "whats_app" | "viber" | "about",
+  placeholder: string
 }
