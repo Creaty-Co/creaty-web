@@ -78,6 +78,10 @@
 	color: $color-white;
 	line-height: 1;
 
+	@include Mobile {
+		height: 5em;
+	}
+
 	em {
 		color: $color-green;
 
