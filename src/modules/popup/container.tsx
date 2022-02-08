@@ -50,8 +50,8 @@ export class PopupContainer extends Component<PopupContainerProps, PopupContaine
 
     const className = this.props.className || "popup"
     return (
-      <div className={classWithModifiers(className, isActive && "active")} onClick={close}>
-        <div className={className + "__container"} onClick={event => event.stopPropagation()}>
+      <div className={classWithModifiers(className, isActive && "active")}>
+        <div className={className + "__container"} onClick={close}>
           <div className={className + "__inner"} onClick={event => event.stopPropagation()}>
             <PopupContext.Provider value={lastPopup}>
               {PopupWindowComponent && <PopupWindowComponent {...params} />}

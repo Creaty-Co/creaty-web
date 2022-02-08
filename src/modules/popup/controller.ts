@@ -23,11 +23,13 @@ import { PopupComponent, PopupParams, PopupWindow } from "./interfaces"
 
 type AnyIfEmpty<T extends object> = keyof T extends never ? any : T;
 
+const convertToBase64 = (data: any) => Buffer.from(JSON.stringify(data)).toString("base64")
+
 export const PopupPrivate: {
   dispatch: Dispatch<SetStateAction<PopupContainerState>>;
 } = {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  dispatch: () => { },
+  dispatch: () => { throw new Error("PopupError: no containers were found") },
 }
 
 export class Popup {
@@ -48,18 +50,25 @@ export class Popup {
     })
   }
   private static addToQueue(popupWindow: PopupWindow<any>) {
-    PopupPrivate.dispatch((state) => ({
-      isActive: true,
-      queue: [...state.queue, popupWindow],
-    }))
+    PopupPrivate.dispatch((state) => {
+      if (state.queue.length > 0) {
+        if (convertToBase64(state.queue[state.queue.length - 1]) === convertToBase64(popupWindow)) {
+          return { ...state, isActive: true }
+        }
+      }
+      return {
+        isActive: true,
+        queue: [...state.queue, popupWindow],
+      }
+    })
   }
   private static removeFromQueue(popupWindow: PopupWindow<any>) {
     PopupPrivate.dispatch((state) => {
       const queue = state.queue.filter((pw) => pw !== popupWindow)
-      return {
-        isActive: queue.length > 0,
-        queue,
+      if (queue.length === 0) {
+        return { isActive: false, queue: [popupWindow] }
       }
+      return { ...state, queue }
     })
   }
   public static closeAll() {
