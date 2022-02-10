@@ -79,6 +79,10 @@ class Localization {
       throw new Error("LocalizationError: this lang wasn't defined")
     }
 
+    if (this.lang === lang) {
+      return
+    }
+
     this.lang = lang
     this.listeners.forEach(listener => listener())
   }
