@@ -5,10 +5,11 @@ import ClientAPI from "api/client"
 import useLocalization from "modules/localization/hook"
 import { PopupContainer } from "modules/popup/container"
 import { Popup } from "modules/popup/controller"
-import { StrictMode, Suspense, useRef, useState } from "react"
+import { StrictMode, Suspense, useEffect, useRef, useState } from "react"
 import { ClientContextProvider } from "react-fetching-library"
 import { Provider } from "react-redux"
 import { Route, Routes } from "react-router"
+import { useLocation } from "react-router"
 import { BrowserRouter, NavLink } from "react-router-dom"
 import { Link } from "react-router-dom"
 import store from "redux/store"
@@ -75,6 +76,8 @@ function Header() {
 
 
 function Main() {
+  const location = useLocation()
+  useEffect(() => window.scrollTo(0, 0), [location])
   return (
     <main>
       <Routes>

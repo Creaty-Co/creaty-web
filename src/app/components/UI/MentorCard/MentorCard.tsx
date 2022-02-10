@@ -11,6 +11,7 @@ import TopicTag from "../Tag/TopicTag"
 interface MentorCardProps extends MentorType { }
 
 function MentorCard(props: MentorCardProps) {
+  const ll = useLocalization(ll => ll.components.mentorCard)
   const lang = useLocalization(ll => ll.lang)
   return (
     <div className="mentor-card">
@@ -40,7 +41,7 @@ function MentorCard(props: MentorCardProps) {
           <span>/</span>
           <span>{60}min.</span>
         </div>
-        <div className="mentor-card-button__hover-text">Посмотреть профиль</div>
+        <div className="mentor-card-button__hover-text">{ll.seeProfile}</div>
         <Icon className="mentor-card-button__icon" name="arrow-right" />
       </Link>
     </div>

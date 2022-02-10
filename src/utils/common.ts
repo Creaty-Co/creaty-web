@@ -88,5 +88,23 @@ export function getFormElements<K extends string>(elements: HTMLFormControlsColl
   return data
 }
 
+/**
+ * Interpolate function for {variable} interpolations in string
+ */
+export function inter<V = unknown>(value: V, vars: Record<string, string | number>) {
+  if (!value) throw new TypeError("interError: empty value gotten")
+  const varKeys = Object.keys(vars)
+  function interpolate(value: V) {
+    if (typeof value === "string") {
+      return varKeys.reduce((result, next) => result.replace(new RegExp(`{${next}}`, "g"), String(vars[next])), value)
+    }
+    return value
+  }
+  if (value instanceof Array) {
+    return value.flatMap(a => a).map(interpolate)
+  }
+  return interpolate(value)
+}
+
 
 export function noop(): void { /* Do nothing */ }

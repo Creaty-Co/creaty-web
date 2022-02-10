@@ -133,7 +133,7 @@ function MentorSearchListStatic() {
         {(!search.topic || !!search.tag) && (
           <div className="mentor-search-list-empty">
             <Icon className="mentor-search-list-empty__icon" name="touch" />
-            <span className="mentor-search-list-empty__text">Выберите категорию</span>
+            <span className="mentor-search-list-empty__text">{ll.chooseTopic}</span>
           </div>
         )}
       </div>

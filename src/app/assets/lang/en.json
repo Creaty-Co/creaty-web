@@ -11,6 +11,23 @@
     },
     "findMentor": "Find your mentor"
   },
+  "footer": {
+    "linkGroups": {
+      "service": "Сервис",
+      "docs": "Документы",
+      "help": "Помощь"
+    },
+    "links": {
+      "mentors": "Менторы",
+      "becomeMentor": "Стать ментором",
+      "pickMentor": "Подобрать ментора",
+      "terms": "Пользовательское соглашение",
+      "privacyPolicy": "Политика конфиденциальности",
+      "cookiePolicy": "Cookie  Policy",
+      "support": "Написать в поддержку"
+    },
+    "desc": "educational platform for searching professional mentors in creative fields. Correspondence address: [address]"
+  },
   "views": {
     "home": {
       "primaryInfo": {
@@ -110,6 +127,30 @@
     "mentors": {
       "title": "Mentors",
       "desc": "<em>200+ working professionals from the creative industries</em> are ready to help you pickng up a proper \n occupation, finding a great place or ways to speed up your professional grow."
+    },
+    "mentor": {
+      "card": {
+        "discount": "Пакет из {courseCount} занятий: <em>скидка {courseDiscount}%</em>",
+        "rollIn": "Записаться",
+        "terms": "Нажав на кнопку, я соглашаюсь на обработку персональных данных в соответсвии с политикой конфиденциальности",
+        "trial": "* Тестовая 15 минутная встреча <em>бесплатно!</em>"
+      },
+      "info": {
+        "language": "Язык преподавания",
+        "teachType": "онлайн и очные сессии",
+        "whatHelp": "С чем помогу",
+        "experience": "Опыт и проекты",
+        "portfolio": "Портфолио",
+        "garantee": {
+          "title": "Ваша гарантия",
+          "desc": "Если по какой-то причине вам кажется, что вы потратили время и деньги зря, напишите нам. <br /> <em>Мы разберемся в ситуации и найдём решение.</em>"
+        },
+        "bookMentor": {
+          "title": "Записаться к ментору",
+          "desc": "Оплатить сессию можно  после согласования с менеджером времени и деталей. А пока оставьте заявку, чтобы мы могли связаться удобным для вас способом.",
+          "submit": "Записаться к ментору"
+        }
+      }
     }
   },
   "components": {
@@ -168,22 +209,57 @@
           "title": "Viber"
         }
       },
-      "phoneOrNick": "Номер или ник в",
+      "mayDiscussLater": "Можно обсудить позже :)",
       "submit": "Отправить",
       "terms": "Нажав на кнопку, я соглашаюсь на обработку персональных данных в соответсвии с политикой конфиденциальности"
+    },
+    "cookies": {
+      "byRules": "По правилам",
+      "desc": "мы сохраняем cookie чтобы персонализировать сервис. Вы можете запретить это изменив настройки браузера.",
+      "button": "Хорошо"
+    },
+    "subscribe": {
+      "placeholder": "На какой email хотите получать рассылку?",
+      "button": "Подписаться",
+      "thanks": "<em>Спасибо!</em> Мы скоро вернемся с хорошими новостями :)",
+      "terms": "Нажав на кнопку, вы соглашаетесь получать email рассылку Creaty. В любой момент вы сможете легко отписаться, внутри каждого письма есть соответствующая ссылка."
+    },
+    "mentorsSlider": {
+      "title": "<em>Найди своего ментора</em> среди \n профессионалов из креативных индустрий",
+      "seeAllMentors": "Посмотреть всех менторов",
+      "or": "или",
+      "getHelp": "Получить помощь в подборе ментора"
+    },
+    "haveQuestions": {
+      "title": "Ещё остались вопросы?",
+      "desc": "Если у вас есть вопросы о формате или вы не знаете какого ментора выбрать, просто оставьте свой номер и почту:\n<em>мы свяжемся, чтобы ответить на все ваши вопросы</em>"
+    },
+    "helpSocial": {
+      "text": "Задавайте вопросы там, \n где удобнее"
+    },
+    "mentorCard": {
+      "seeProfile": "Посмотреть профиль"
     }
   },
   "popups": {
     "popupForm": {
-      "become_mentor": {
-        "title": "Станьте ментором"
+      "forms": {
+        "become_mentor": {
+          "title": "Станьте ментором"
+        },
+        "choose_mentor": {
+          "title": "Получите помощь в подборе ментора"
+        },
+        "test_meeting": {
+          "title": "Запишитесь на бесплатную тестовую встречу"
+        }
       },
-      "choose_mentor": {
-        "title": "Получите помощь в подборе ментора"
-      },
-      "test_meeting": {
-        "title": "Запишитесь на бесплатную тестовую встречу"
-      }
+      "thanks": "Спасибо за заявку <em>:)</em>"
+    }
+  },
+  "other": {
+    "pagination": {
+      "showMore": "Покакзать ещё"
     }
   }
 }

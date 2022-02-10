@@ -3,6 +3,7 @@ import ClientAPI from "api/client"
 import { ValuesOf } from "interfaces/common"
 import { MapActions } from "interfaces/reducer"
 import { TagType, TopicType } from "interfaces/types"
+import Localization from "modules/localization/controller"
 import store from "redux/store"
 
 
@@ -45,7 +46,7 @@ export const updateUser = (payload: Partial<typeof initialState>) => ({
 
 
 /// Request
-window.addEventListener("load", async () => {
+async function requestTopics() {
   const { error, payload } = await ClientAPI.query(getTagsTopics(1, 25))
 
   if (error) throw new Error("unexpected error")
@@ -55,10 +56,8 @@ window.addEventListener("load", async () => {
     type: "TOPICS_UPDATE",
     payload: { list: payload.results }
   })
-})
-
-/// Request
-window.addEventListener("load", async () => {
+}
+async function requestTags() {
   const { error, payload } = await ClientAPI.query(getTags(1, 1000))
 
   if (error) throw new Error("unexpected error")
@@ -68,4 +67,10 @@ window.addEventListener("load", async () => {
     type: "TOPICS_UPDATE",
     payload: { tags: payload.results }
   })
+}
+window.addEventListener("load", requestTopics)
+window.addEventListener("load", requestTags)
+Localization.onTransition(() => {
+  requestTopics()
+  requestTags()
 })

@@ -13,6 +13,7 @@ import { classWithModifiers } from "utils/common"
 
 
 function MentorCardsContainer() {
+  const ll = useLocalization(ll => ll.other.pagination)
   const lang = useLocalization(ll => ll.lang)
   const search = useSelector(state => state.search)
 
@@ -42,7 +43,7 @@ function MentorCardsContainer() {
           iconLeft={<Icon name="refresh" className={classWithModifiers("mentor-cards__icon", loading && "spin")} />}
           disabled={loading}
           onClick={() => setPage(page + 1)}
-        >Покакзать ещё {pageSize}</Button>
+        >{ll.showMore} {pageSize}</Button>
       )}
     </div>
   )

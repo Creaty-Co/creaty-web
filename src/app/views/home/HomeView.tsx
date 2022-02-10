@@ -10,6 +10,7 @@ import BigComment from "app/components/UI/BigComment/BigComment"
 import { FAQ, FAQClause } from "app/components/UI/FAQ/FAQ"
 import InfoSection from "app/components/UI/InfoSection/InfoSection"
 import useLocalization from "modules/localization/hook"
+import { useEffect } from "react"
 import { useQuery } from "react-fetching-library"
 import { useParams } from "react-router"
 
@@ -23,7 +24,8 @@ import MailingSubscribe from "./MailingSubscribe/MailingSubscribe"
 function HomeView() {
   const ll = useLocalization(ll => ll.views.home)
   const params = useParams<"shortcut">()
-  const { payload } = useQuery(params.shortcut ? getPagePersonal(params.shortcut) : getPagesMain)
+  const { payload, query } = useQuery(params.shortcut ? getPagePersonal(params.shortcut) : getPagesMain)
+  useEffect(() => { query() }, [ll])
   return (
     <div className="home-view">
       <div className="home-view__header">
