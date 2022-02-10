@@ -2,8 +2,9 @@ import TopicTag from "app/components/UI/Tag/TopicTag"
 import { TagType } from "interfaces/types"
 import { useRef } from "react"
 
-import { SCROLL_INTERVAL, SCROLL_STEP } from "./MentorSearch"
 
+const SCROLL_STEP = window.innerWidth / 500
+const SCROLL_INTERVAL = 5
 
 interface MentorSearchTagsProps {
   tags: TagType[]

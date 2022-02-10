@@ -40,10 +40,6 @@
 .mentors-slider__container {
 	width: 100%;
 	overflow: hidden;
-
-	@include Mobile {
-		overflow: auto;
-	}
 }
 
 .mentors-slider__inner {
@@ -56,6 +52,7 @@
 
 	@include Mobile {
 		grid-auto-columns: 90vw;
+		overflow: auto;
 	}
 }
 

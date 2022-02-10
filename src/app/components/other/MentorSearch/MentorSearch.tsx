@@ -4,17 +4,13 @@ import Button from "app/components/common/Button/Button"
 import Icon from "app/components/common/Icon/Icon"
 import TopicTag from "app/components/UI/Tag/TopicTag"
 import useClickAway from "hooks/useClickAway"
-import { TagType, TopicType } from "interfaces/types"
 import useLocalization from "modules/localization/hook"
 import { useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import { updateSearch, updateSearchTag, updateSearchTopic } from "redux/reducers/search"
+import { updateSearch } from "redux/reducers/search"
 import { classWithModifiers } from "utils/common"
 
-
-export const SCROLL_STEP = window.innerWidth / 500
-export const SCROLL_INTERVAL = 5
 
 function MentorSearch() {
   const dispatch = useDispatch()
@@ -112,6 +108,7 @@ function MentorSearchListDynamic(props: MentorSearchListProps) {
 
 
 function MentorSearchListStatic() {
+  const ll = useLocalization(ll => ll.views.home.mentorSearch)
   const topics = useSelector(state => state.topics)
   const search = useSelector(state => state.search)
   return (

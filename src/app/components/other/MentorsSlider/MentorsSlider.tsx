@@ -57,7 +57,7 @@ function MentorsSlider(props: MentorsSliderProps) {
       </div>
       <div className="mentors-slider__container">
         <div className="mentors-slider__inner" ref={innerRef}>
-          {[...props.mentors, ...props.mentors, ...props.mentors, ...props.mentors].map(mentor => (
+          {props.mentors.map(mentor => (
             <MentorCard {...mentor} key={mentor.id} />
           ))}
         </div>
