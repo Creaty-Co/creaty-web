@@ -18,13 +18,13 @@
       "help": "Помощь"
     },
     "links": {
-      "mentors": "Менторы",
-      "becomeMentor": "Стать ментором",
-      "pickMentor": "Подобрать ментора",
-      "terms": "Пользовательское соглашение",
-      "privacyPolicy": "Политика конфиденциальности",
+      "mentors": "Mentors",
+      "becomeMentor": "Become mentor",
+      "pickMentor": "Choose mentor",
+      "terms": "Terms",
+      "privacyPolicy": "Privacy Policy",
       "cookiePolicy": "Cookie  Policy",
-      "support": "Написать в поддержку"
+      "support": "Support"
     },
     "desc": "educational platform for searching professional mentors in creative fields. Correspondence address: [address]"
   },
@@ -35,8 +35,9 @@
         "desc": "Develop and enhance your <em>creative skills</em> on individual \n interaction with professional mentor"
       },
       "mentorSearch": {
-        "placeholder": "Choose a category or a way",
-        "button": "Search for a mentor"
+        "placeholder": "Select a category or destination",
+        "button": "Find a mentor",
+        "chooseTopic": "Choose a category"
       },
       "help": {
         "title": "Don't know what start with?",
@@ -56,72 +57,72 @@
           },
           {
             "title": "Improve yourself!",
-            "desc": "И пусть тяга к новым достижениям и профессиональным высотам поможет вам преодолеть лень,  голод и любые невзгоды!"
+            "desc": "And let the craving for new achievements and professional heights help you overcome laziness, hunger and any adversity!"
           }
         ],
         "help": {
           "title": "First meeting is <em>FREE!</em>",
-          "desc": "Чтобы познакомится, понять насколько вы друг другу \n подходите и договорится о плане и графике занятий"
+          "desc": "To get to know each other, understand how you \n fit each other and agree on a plan and schedule for classes"
         },
-        "button": "Попробовать бесплатно"
+        "button": "Try for free"
       },
       "QAndA": {
-        "title": "Вопросы и ответы",
+        "title": "Questions and answers",
         "clauses": [
           {
-            "summary": "Как работает сервис Creaty?",
+            "summary": "How does the Creaty service work?",
             "points": [
-              "Хотите расширить область своих компетенций или сменить вектор развития",
-              "Хотите получить экспертную оценку своих навыков / компетенций",
-              "Нужна помощь с рабочими задачами / проектами"
+              "Do you want to expand your area of ​​competence or change the vector of development",
+              "Want to get an expert assessment of your skills / competencies",
+              "Need help with work tasks/projects"
             ]
           },
           {
-            "summary": "Как найти себе ментора?",
+            "summary": "How to find a mentor?",
             "points": [
-              "Хотите расширить область своих компетенций или сменить вектор развития",
-              "Хотите получить экспертную оценку своих навыков / компетенций",
-              "Нужна помощь с рабочими задачами / проектами"
+              "Do you want to expand your area of ​​competence or change the vector of development",
+              "Want to get an expert assessment of your skills / competencies",
+              "Need help with work tasks/projects"
             ]
           },
           {
-            "summary": "Что от меня требуется перед началом консультации?",
+            "summary": "What is required of me before starting a consultation?",
             "points": [
-              "Хотите расширить область своих компетенций или сменить вектор развития",
-              "Хотите получить экспертную оценку своих навыков / компетенций",
-              "Нужна помощь с рабочими задачами / проектами"
+              "Do you want to expand your area of ​​competence or change the vector of development",
+              "Want to get an expert assessment of your skills / competencies",
+              "Need help with work tasks/projects"
             ]
           },
           {
-            "summary": "Что если мне не понравиться ментор?",
+            "summary": "What if I don't like the mentor?",
             "points": [
-              "Хотите расширить область своих компетенций или сменить вектор развития",
-              "Хотите получить экспертную оценку своих навыков / компетенций",
-              "Нужна помощь с рабочими задачами / проектами"
+              "Do you want to expand your area of ​​competence or change the vector of development",
+              "Want to get an expert assessment of your skills / competencies",
+              "Need help with work tasks/projects"
             ]
           },
           {
-            "summary": "Могу ли я продолжить работать с ментором дальше?",
+            "summary": "Can I continue working with the mentor?",
             "points": [
-              "Хотите расширить область своих компетенций или сменить вектор развития",
-              "Хотите получить экспертную оценку своих навыков / компетенций",
-              "Нужна помощь с рабочими задачами / проектами"
+              "Do you want to expand your area of ​​competence or change the vector of development",
+              "Want to get an expert assessment of your skills / competencies",
+              "Need help with work tasks/projects"
             ]
           }
         ]
       },
       "becomeMentor": {
-        "title": "Вы тоже можете стать ментором",
+        "title": "You too can become a mentor",
         "descPoints": [
-          "Делитесь своим опытом и знаниями когда и где вам удобно",
-          "Получайте дополнительный \n доход",
-          "Развивайте профессиональные навыки вместе с учениками"
+          "Share your experience and knowledge when and where it suits you",
+          "Get extra \n income",
+          "Develop professional skills with students"
         ],
-        "button": "Попробовать свои силы",
-        "terms": "Нажав на кнопку, я соглашаюсь на обработку персональных данных в соответсвии с <Link to=\"/terms\" children=\"политикой конфиденциальности\" />"
+        "button": "Try your hand",
+        "terms": "By clicking on the button, I agree to the processing of personal data in accordance with <Link to=\"/terms\" children=\"privacy policy\" />"
       },
       "mailingSubscribe": {
-        "title": "Тренды в <em>креативных индустриях</em>, новости, лучшие практики \n и многое другое в рассылке Creaty"
+        "title": "<em>Creative Industries</em> Trends, News, Best Practices \n and More in the Creaty Newsletter"
       }
     },
     "mentors": {
@@ -130,69 +131,69 @@
     },
     "mentor": {
       "card": {
-        "discount": "Пакет из {courseCount} занятий: <em>скидка {courseDiscount}%</em>",
-        "rollIn": "Записаться",
-        "terms": "Нажав на кнопку, я соглашаюсь на обработку персональных данных в соответсвии с политикой конфиденциальности",
-        "trial": "* Тестовая 15 минутная встреча <em>бесплатно!</em>"
+        "discount": "Package of {courseCount} classes: <em>discount {courseDiscount}%</em>",
+        "rollIn": "Register",
+        "terms": "By clicking on the button, I agree to the processing of personal data in accordance with the privacy policy",
+        "trial": "* Trial 15 minute meeting <em>free!</em>"
       },
       "info": {
-        "language": "Язык преподавания",
-        "teachType": "онлайн и очные сессии",
-        "whatHelp": "С чем помогу",
-        "experience": "Опыт и проекты",
-        "portfolio": "Портфолио",
+        "language": "Teaching language",
+        "teachType": "online and face-to-face sessions",
+        "whatHelp": "What help with",
+        "experience": "Experience and projects",
+        "portfolio": "Portfolio",
         "garantee": {
-          "title": "Ваша гарантия",
-          "desc": "Если по какой-то причине вам кажется, что вы потратили время и деньги зря, напишите нам. <br /> <em>Мы разберемся в ситуации и найдём решение.</em>"
+          "title": "Your guarantee",
+          "desc": "If for some reason you feel like you've wasted your time and money, please let us know.<br /> <em>We'll look into the situation and find a solution.</em>"
         },
         "bookMentor": {
-          "title": "Записаться к ментору",
-          "desc": "Оплатить сессию можно  после согласования с менеджером времени и деталей. А пока оставьте заявку, чтобы мы могли связаться удобным для вас способом.",
-          "submit": "Записаться к ментору"
+          "title": "Sign up with a mentor",
+          "desc": "You can pay for the session after agreeing with the manager of the time and details. In the meantime, leave a request so that we can contact you in a convenient way for you.",
+          "submit": "Submit to a mentor"
         }
       }
     }
   },
   "components": {
     "helpfulCreaty": {
-      "title": "Creaty будет полезен, если:",
+      "title": "Create is usefull when:",
       "blocks": [
         {
-          "title": "В начале карьеры / выбираете свой путь",
+          "title": "At the beginning of a career / choose your path",
           "points": [
-            "Решили сменить специальность, но отсутствует понимание с чего начинать",
-            "Выбрали путь развития своей карьеры, но сомневаетесь в его правильности",
-            "Хотите поговорить с человеком «в профессии», чтобы оценить ваши возможности и ожидания"
+            "We decided to change our specialty, but there is no understanding of where to start",
+            "You have chosen the path of your career development, but you doubt its correctness",
+            "Do you want to talk to a person \"in the profession\" to assess your capabilities and expectations"
           ]
         },
         {
-          "title": "У вас уже есть опыт работы более 2 лет",
+          "title": "You already have more than 2 years of experience",
           "points": [
-            "Хотите расширить область своих компетенций или сменить вектор развития",
-            "Хотите получить экспертную оценку своих навыков / компетенций",
-            "Нужна помощь с рабочими задачами / проектами"
+            "Do you want to expand your area of ​​competence or change the vector of development",
+            "Want to get an expert assessment of your skills / competencies",
+            "Need help with work tasks/projects"
           ]
         },
         {
-          "title": "Вы учитесь / окончили учёбу",
+          "title": "You are studying / graduated",
           "points": [
-            "Нужна помощь с проектом / портфолио",
-            "Нужен экспертный взгляд / оценка  со стороны",
-            "Прошли обучение, но для работы нужен опыт",
-            "Хотите составить план развития в карьере"
+            "Need help with a project/portfolio",
+            "We need an expert view / assessment from the outside",
+            "We have been trained, but experience is needed for work",
+            "Want to make a career development plan"
           ]
         },
         {
-          "title": "Вы только начали работать / получили стажировку",
+          "title": "You have just started working / got an internship",
           "points": [
-            "Нужна помощь со сложными задачами",
-            "Классная работа, но сложно втянуться",
-            "Нужен совет опытного ментора про коллег / процессы  / задачи",
-            "Хотите понять как можно расти профессионально быстрее и эффективнее"
+            "Need help with difficult tasks",
+            "Great job but hard to get into",
+            "I need advice from an experienced mentor about colleagues / processes / tasks",
+            "Want to understand how you can grow professionally faster and more efficiently"
           ]
         }
       ],
-      "button": "Подберите мне ментора"
+      "button": "Pick me a mentor"
     },
     "contactForm": {
       "fields": {
@@ -203,63 +204,63 @@
           "title": "Facebook"
         },
         "whats_app": {
-          "title": "WhatsApp"
+          "title": "whatsapp"
         },
         "viber": {
           "title": "Viber"
         }
       },
-      "mayDiscussLater": "Можно обсудить позже :)",
-      "submit": "Отправить",
-      "terms": "Нажав на кнопку, я соглашаюсь на обработку персональных данных в соответсвии с политикой конфиденциальности"
+      "mayDiscussLater": "May DiscussLater :)",
+      "submit": "Submit",
+      "terms": "By clicking on the button, I agree to the processing of personal data in accordance with the privacy policy"
     },
     "cookies": {
-      "byRules": "По правилам",
-      "desc": "мы сохраняем cookie чтобы персонализировать сервис. Вы можете запретить это изменив настройки браузера.",
-      "button": "Хорошо"
+      "byRules": "According to the rules",
+      "desc": "we store cookies to personalize the service. You can prevent this by changing your browser settings.",
+      "button": "Good"
     },
     "subscribe": {
-      "placeholder": "На какой email хотите получать рассылку?",
-      "button": "Подписаться",
-      "thanks": "<em>Спасибо!</em> Мы скоро вернемся с хорошими новостями :)",
-      "terms": "Нажав на кнопку, вы соглашаетесь получать email рассылку Creaty. В любой момент вы сможете легко отписаться, внутри каждого письма есть соответствующая ссылка."
+      "placeholder": "Which email do you want to receive the newsletter?",
+      "button": "Subscribe",
+      "thanks": "<em>Thank you!</em> We'll be back soon with good news :)",
+      "terms": "By clicking on the button, you agree to receive Creaty email newsletters. You can easily unsubscribe at any time, there is a corresponding link inside each email."
     },
     "mentorsSlider": {
-      "title": "<em>Найди своего ментора</em> среди \n профессионалов из креативных индустрий",
-      "seeAllMentors": "Посмотреть всех менторов",
-      "or": "или",
-      "getHelp": "Получить помощь в подборе ментора"
+      "title": "<em>Find your mentor</em> among \n creative industry professionals",
+      "seeAllMentors": "See All Mentors",
+      "or": "or",
+      "getHelp": "Get help finding a mentor"
     },
     "haveQuestions": {
-      "title": "Ещё остались вопросы?",
-      "desc": "Если у вас есть вопросы о формате или вы не знаете какого ментора выбрать, просто оставьте свой номер и почту:\n<em>мы свяжемся, чтобы ответить на все ваши вопросы</em>"
+      "title": "Still have questions?",
+      "desc": "If you have questions about the format or don't know which mentor to choose, just leave your number and email:\n<em>we'll be in touch to answer all your questions</em>"
     },
     "helpSocial": {
-      "text": "Задавайте вопросы там, \n где удобнее"
+      "text": "Ask questions where \n is more convenient"
     },
     "mentorCard": {
-      "seeProfile": "Посмотреть профиль"
+      "seeProfile": "View Profile"
     }
   },
   "popups": {
     "popupForm": {
       "forms": {
         "become_mentor": {
-          "title": "Станьте ментором"
+          "title": "Become a mentor"
         },
         "choose_mentor": {
-          "title": "Получите помощь в подборе ментора"
+          "title": "Get bypower in the selection of a mentor"
         },
         "test_meeting": {
-          "title": "Запишитесь на бесплатную тестовую встречу"
+          "title": "Sign up for a free test meeting"
         }
       },
-      "thanks": "Спасибо за заявку <em>:)</em>"
+      "thanks": "Thanks for submitting <em>:)</em>"
     }
   },
   "other": {
     "pagination": {
-      "showMore": "Покакзать ещё"
+      "showMore": "Show More"
     }
   }
 }
