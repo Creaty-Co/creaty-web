@@ -20,6 +20,7 @@ export type IconName = (
   | "location"
   | "face"
   | "r-square"
+  | "touch"
   // Topics
   | "architecture"
   | "design"
@@ -28,7 +29,7 @@ export type IconName = (
   | "games-animation"
   | "movies-tv-photos"
   | "fashion-design"
-  | "music-sound"
+  | "music-and-sound"
   | "theater-scene-art"
   | "digital-design"
   | "art-management"

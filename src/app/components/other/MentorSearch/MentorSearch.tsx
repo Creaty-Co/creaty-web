@@ -3,59 +3,46 @@ import "./MentorSearch.scss"
 import Button from "app/components/common/Button/Button"
 import Icon from "app/components/common/Icon/Icon"
 import TopicTag from "app/components/UI/Tag/TopicTag"
+import useClickAway from "hooks/useClickAway"
+import { TagType, TopicType } from "interfaces/types"
 import useLocalization from "modules/localization/hook"
-import { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import { SearchTag, SearchTopic, updateSearch } from "redux/reducers/search"
+import { updateSearch, updateSearchTag, updateSearchTopic } from "redux/reducers/search"
 import { classWithModifiers } from "utils/common"
 
 
 export const SCROLL_STEP = window.innerWidth / 500
 export const SCROLL_INTERVAL = 5
 
-interface MentorSearchProps {
-  defaultValue?: string
-}
-
-function MentorSearch(props: MentorSearchProps) {
+function MentorSearch() {
   const dispatch = useDispatch()
+  const topics = useSelector(state => state.topics)
   const search = useSelector(state => state.search)
 
-  const ll = useLocalization(ll => ll.views.home.mentorSearch)
-  const [value, setValue] = useState(props.defaultValue || "")
+  const isNoTopics = topics.list.length === 0
 
-  const searchRef = useRef<HTMLDivElement | null>(null)
+  const ll = useLocalization(ll => ll.views.home.mentorSearch)
+  const [value, setValue] = useState("")
+
+  const searchRef = useRef<HTMLButtonElement | null>(null)
   const focus = () => dispatch(updateSearch({ focused: true }))
   const blur = () => dispatch(updateSearch({ focused: false }))
-  const reset = () => {
-    setValue("")
-    setTimeout(() => focus())
-  }
+  const reset = () => setValue("")
 
-  useEffect(() => {
-    function listener(event: MouseEvent) {
-      if (!(event.target instanceof Element)) return
-      if (!searchRef.current) return
-      if (searchRef.current.contains(event.target)) return
-
-      blur()
-    }
-
-    document.addEventListener("click", listener)
-    return () => document.removeEventListener("click", listener)
-  }, [])
+  useClickAway(searchRef, () => blur())
 
   const isInputVisible = !(search.topic || search.tag)
   return (
     <div className="mentor-search">
       <div className={classWithModifiers("mentor-search__cover", search.focused && "active")} />
       <div className="mentor-search__container">
-        <div className={classWithModifiers("mentor-search__search", search.focused && "focused")} onClick={focus} ref={searchRef}>
+        <button className={classWithModifiers("mentor-search__search", search.focused && "focused")} disabled={isNoTopics} onClick={focus} ref={searchRef}>
           {search.topic && (
             <div className="mentor-search-list__item mentor-search-list__item--active">
-              <Icon name={search.topic.name} />
-              <span>{search.topic.name}</span>
+              <Icon name={search.topic.shortcut} />
+              <span>{search.topic.title}</span>
             </div>
           )}
           {search.tag && (
@@ -70,7 +57,7 @@ function MentorSearch(props: MentorSearchProps) {
           )}
           <MentorSearchList value={search.topic || search.tag ? null : value} visible={search.focused} />
           <Icon name="chevron" className="mentor-search__icon" />
-        </div>
+        </button>
         <Button color="violet" size="big">{ll.button}</Button>
       </div>
     </div>
@@ -87,48 +74,68 @@ function MentorSearchList(props: MentorSearchListProps) {
   if (props.value && props.value.length > 0) {
     return <MentorSearchListDynamic {...props} />
   }
-  return <MentorSearchListStatic {...props} />
+  return <MentorSearchListStatic />
 }
 
 
 function MentorSearchListDynamic(props: MentorSearchListProps) {
-  const [height, setHeight] = useState<number>()
+  const topics = useSelector(state => state.topics)
   return (
-    <div className={classWithModifiers("mentor-search-list", props.visible && "visible")} style={{ "--height": height }} ref={element => setHeight(element?.offsetHeight)}>
+    <div className={classWithModifiers("mentor-search-list", props.visible && "visible")}>
       <div className="mentor-search-list__container">
-        <div className="mentor-search-list__item">Архитектура</div>
-        <div className="mentor-search-list__item">Дизайн</div>
-        <div className="mentor-search-list__item">Изобразительное искусство</div>
+        {topics.tags.map(tag => {
+          if (props.value == null) {
+            return (
+              <Link className="mentor-search-list__item" to={"/mentors/" + tag.shortcut} key={tag.id}>
+                {tag.title}
+              </Link>
+            )
+          }
+
+          const searchIndex = tag.title.toLowerCase().search(props.value.toLowerCase())
+          if (searchIndex < 0) return null
+
+          return (
+            <Link className="mentor-search-list__item" to={"/mentors/" + tag.shortcut} key={tag.id}>
+              <span>
+                {tag.title.slice(0, searchIndex)}
+                <em>{tag.title.slice(searchIndex, searchIndex + props.value.length)}</em>
+                {tag.title.slice(searchIndex + props.value.length)}
+              </span>
+            </Link>
+          )
+        })}
       </div>
     </div>
   )
 }
 
 
-function MentorSearchListStatic(props: MentorSearchListProps) {
-  const dispatch = useDispatch()
-  const topics = useLocalization(ll => ll.other.topics)
-
-  const updateTopic = (topic: SearchTopic) => setTimeout(() => dispatch(updateSearch({ topic, tag: undefined, focused: false })))
-  const updateTag = (tag: SearchTag) => setTimeout(() => dispatch(updateSearch({ tag, focused: false })))
+function MentorSearchListStatic() {
+  const topics = useSelector(state => state.topics)
+  const search = useSelector(state => state.search)
   return (
-    <div className={classWithModifiers("mentor-search-list", props.visible && "visible")}>
+    <div className={classWithModifiers("mentor-search-list", search.focused && "visible")}>
       <div className="mentor-search-list__container">
-        {Object.keys(topics).map((topic, index) => (
-          <Link className="mentor-search-list__item" to={"/mentors/" + topic} key={index} onClick={() => updateTopic({ id: 0, name: topic })}>
-            <Icon name={topic} />
-            <span>{topics[topic]}</span>
+        {topics.list.map((topic, index) => (
+          <Link className="mentor-search-list__item" to={"/mentors/" + topic.shortcut} key={index}>
+            <Icon name={topic.shortcut} />
+            <span>{topic.title}</span>
           </Link>
         ))}
       </div>
       <div className="mentor-search-list__tags">
-        <Link className="topic-tag" to={`/mentors/${"design"}/`} onClick={() => updateTag({ id: 0, name: "design", text: "Дизайн интерьеров", topic: 0 })}>
-          <span className="topic-tag__text">{"Дизайн интерьеров"}</span>
-        </Link>
-        <TopicTag>Дизайн архитектурной среды</TopicTag>
-        <TopicTag>Архитетура малых форм</TopicTag>
-        <TopicTag>BIM</TopicTag>
-        <TopicTag>Ещё какой-то очень длинный тэг</TopicTag>
+        {!search.tag && search.topic?.tags.map(tag => (
+          <Link className="topic-tag" to={`/mentors/${tag.shortcut}/`} key={tag.id}>
+            <span className="topic-tag__text">{tag.title}</span>
+          </Link>
+        ))}
+        {(!search.topic || !!search.tag) && (
+          <div className="mentor-search-list-empty">
+            <Icon className="mentor-search-list-empty__icon" name="touch" />
+            <span className="mentor-search-list-empty__text">Выберите категорию</span>
+          </div>
+        )}
       </div>
     </div>
   )

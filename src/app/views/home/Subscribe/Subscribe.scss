@@ -26,6 +26,10 @@
 	&--dark {
 		border-color: rgba($color-gray-10, 0.1);
 	}
+
+	em {
+		color: $color-green;
+	}
 }
 
 .subscribe__input {

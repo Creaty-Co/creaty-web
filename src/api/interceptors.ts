@@ -1,3 +1,4 @@
+import Localization from "modules/localization/controller"
 import { QueryResponse } from "react-fetching-library"
 import { toast } from "react-toastify"
 import { createQuery } from "utils/common"
@@ -16,7 +17,8 @@ export function requestInterceptor() {
       ...action,
       endpoint: endpoint + (query && "?" + query),
       headers: {
-        Authorization: !action.config?.skipAuth && localStorage.getItem("token") || ""
+        Authorization: !action.config?.skipAuth && localStorage.getItem("token") || "",
+        "Accept-Language": Localization.lang
       }
     }
   }

@@ -13,7 +13,7 @@
 | games-animation    | Игры и анимация               |
 | movies-tv-photos   | Кино, ТВ и фото               |
 | fashion-design     | Дизайн одежды                 |
-| music-sound        | Музыка и звук                 |
+| music-and-sound    | Музыка и звук                 |
 | theater-scene-art  | Театр и сценическое искусство |
 | digital-design     | Диджитал дизайн               |
 | art-management     | Арт-менеджмент                |
@@ -25,16 +25,16 @@
 
 ```ts
 interface TopicType {
-  id: number
-  name: string // Навзние английском для поиска через адрессную строку
-  text: string // Текст перевода
+  id: number;
+  name: string; // Навзние английском для поиска через адрессную строку
+  text: string; // Текст перевода
 }
 
 interface TopicTagType {
-  id: number
-  name: string // Навзние английском для поиска через адрессную строку
-  text: string // Текст перевода
-  topic: number // Topic id к которому этот тэг принадлежит. Тэг всегда привязан к одному топику
+  id: number;
+  name: string; // Навзние английском для поиска через адрессную строку
+  text: string; // Текст перевода
+  topic: number; // Topic id к которому этот тэг принадлежит. Тэг всегда привязан к одному топику
 }
 ```
 

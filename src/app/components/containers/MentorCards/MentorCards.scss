@@ -8,7 +8,6 @@
 .mentor-cards__container {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(min(100%, 23.75em), 1fr));
-	justify-items: center;
 	gap: 1.25em;
 }
 

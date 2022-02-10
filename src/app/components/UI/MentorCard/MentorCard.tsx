@@ -1,48 +1,55 @@
 import "./MentorCard.scss"
 
 import Icon from "app/components/common/Icon/Icon"
+import { MentorType } from "interfaces/types"
 import useLocalization from "modules/localization/hook"
+import { Link } from "react-router-dom"
 
 import TopicTag from "../Tag/TopicTag"
-import mock from "./mock.png"
 
 
-interface MentorCardProps { }
+interface MentorCardProps extends MentorType { }
 
 function MentorCard(props: MentorCardProps) {
   const lang = useLocalization(ll => ll.lang)
   return (
     <div className="mentor-card">
       <div className="mentor-card__preview">
-        <img src={mock} alt="mentor's face" className="mentor-card__image" />
+        <img src={props.avatar} alt="mentor's face" className="mentor-card__image" />
       </div>
       <div className="mentor-card__container">
         <div className="mentor-card__info">
           <div className="mentor-card__name">
-            <span>Игнат Всеподдубский</span>
-            <Icon name="flag-ru" />
+            <span>{props.first_name} {props.last_name}</span>
+            <img src={getEmojiPNG(props.country_flag)} alt="flag" className="mentor-card__flag" />
           </div>
-          <div className="mentor-card__job"><em>Product designer・</em>Yandex</div>
+          <div className="mentor-card__job"><em>{props.profession}・</em>{props.company}</div>
         </div>
         <div className="mentor-card__tags">
-          <TopicTag>UX/UI</TopicTag>
-          <TopicTag>Графический дизайн</TopicTag>
-          <TopicTag>Product design</TopicTag>
-          <TopicTag noHash>...</TopicTag>
+          {props.tags.slice(0, 2).map(tag => (
+            <TopicTag key={tag.id}>{tag}</TopicTag>
+          ))}
+          {props.tags.length > 3 && (
+            <TopicTag noHash>...</TopicTag>
+          )}
         </div>
       </div>
-      <button className="mentor-card-button">
+      <Link className="mentor-card-button" to={"/user/" + props.id}>
         <div className="mentor-card-button__text">
-          <em>{(10000).toPrice(lang.code, lang.currency)}</em>
+          <em>{Number(props.price).toPrice(lang.code, props.price_currency)}</em>
           <span>/</span>
           <span>{60}min.</span>
         </div>
         <div className="mentor-card-button__hover-text">Посмотреть профиль</div>
         <Icon className="mentor-card-button__icon" name="arrow-right" />
-      </button>
+      </Link>
     </div>
   )
 }
 
 
 export default MentorCard
+
+export function getEmojiPNG(hex: string) {
+  return `https://emojio.ru/images/apple-b/${hex}.png`
+}

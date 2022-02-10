@@ -17,7 +17,7 @@ copies or substantial portions of the Software.
 */
 
 import DefaultLangJSON from "app/assets/lang/ru.json"
-import parse, { attributesToProps, domToReact } from "html-react-parser"
+import parse from "html-react-parser"
 import { createElement, ReactNode } from "react"
 import { Link } from "react-router-dom"
 
@@ -79,7 +79,7 @@ langs.keys().forEach(fileName => {
   Localization.add(lang, langFile)
 })
 // Set default language
-Localization.setDefault("ru")
+// Localization.setDefault("ru")
 
 // Declare explicit language type
 type DefaultLang = typeof DefaultLangJSON

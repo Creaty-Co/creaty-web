@@ -11,6 +11,23 @@
     },
     "findMentor": "Подобрать ментора"
   },
+  "footer": {
+    "linkGroups": {
+      "service": "Сервис",
+      "docs": "Документы",
+      "help": "Помощь"
+    },
+    "links": {
+      "mentors": "Менторы",
+      "becomeMentor": "Стать ментором",
+      "pickMentor": "Подобрать ментора",
+      "terms": "Пользовательское соглашение",
+      "privacyPolicy": "Политика конфиденциальности",
+      "cookiePolicy": "Cookie  Policy",
+      "support": "Написать в поддержку"
+    },
+    "desc": "educational platform for searching professional mentors in creative fields. Correspondence address: [address]"
+  },
   "views": {
     "home": {
       "primaryInfo": {
@@ -168,41 +185,42 @@
           "title": "Viber"
         }
       },
-      "phoneOrNick": "Номер или ник в",
+      "mayDiscussLater": "Можно обсудить позже :)",
       "submit": "Отправить",
       "terms": "Нажав на кнопку, я соглашаюсь на обработку персональных данных в соответсвии с политикой конфиденциальности"
+    },
+    "cookies": {
+      "byRules": "По правилам",
+      "desc": "мы сохраняем cookie чтобы персонализировать сервис. Вы можете запретить это изменив настройки браузера.",
+      "button": "Хорошо"
+    },
+    "subscribe": {
+      "placeholder": "На какой email хотите получать рассылку?",
+      "button": "Подписаться",
+      "thanks": "<em>Спасибо!</em> Мы скоро вернемся с хорошими новостями :)",
+      "terms": "Нажав на кнопку, вы соглашаетесь получать email рассылку Creaty. В любой момент вы сможете легко отписаться, внутри каждого письма есть соответствующая ссылка."
+    },
+    "mentorsSlider": {
+      "title": "<em>Найди своего ментора</em> среди \n профессионалов из креативных индустрий",
+      "seeAllMentors": "Посмотреть всех менторов",
+      "or": "или",
+      "getHelp": "Получить помощь в подборе ментора"
     }
   },
   "popups": {
     "popupForm": {
-      "become_mentor": {
-        "title": "Станьте ментором"
+      "forms": {
+        "become_mentor": {
+          "title": "Станьте ментором"
+        },
+        "choose_mentor": {
+          "title": "Получите помощь в подборе ментора"
+        },
+        "test_meeting": {
+          "title": "Запишитесь на бесплатную тестовую встречу"
+        }
       },
-      "choose_mentor": {
-        "title": "Получите помощь в подборе ментора"
-      },
-      "test_meeting": {
-        "title": "Запишитесь на бесплатную тестовую встречу"
-      }
-    }
-  },
-  "other": {
-    "topics": {
-      "architecture": "Архитектура",
-      "design": "Дизайн",
-      "art": "Изобразительное искусство",
-      "craft-jewellery": "Крафт и ювелирное дело",
-      "games-animation": "Игры и анимация",
-      "movies-tv-photos": "Кино, ТВ и фото",
-      "fashion-design": "Дизайн одежды",
-      "music-sound": "Музыка и звук",
-      "theater-scene-art": "Театр и сценическое искусство",
-      "digital-design": "Диджитал дизайн",
-      "art-management": "Арт-менеджмент",
-      "journalism-writing": "Журналистика и письмо"
-    },
-    "tags": {
-      "ux-design": "UX Дизайн"
+      "thanks": "Спасибо за заявку <em>:)</em>"
     }
   }
 }

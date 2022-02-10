@@ -1,49 +1,88 @@
 import "./ContactForm.scss"
 
+import { postFormsIdApplications } from "api/actions/form"
+import ClientAPI from "api/client"
 import Button from "app/components/common/Button/Button"
 import Input, { InputStrainType } from "app/components/UI/Input/Input"
+import { FormElements } from "interfaces/common"
 import { FormFieldType, FormType } from "interfaces/types"
-import _ from "lodash"
 import useLocalization from "modules/localization/hook"
-import { ChangeEvent } from "react"
+import { ChangeEvent, FormEvent, useState } from "react"
 import { useSelector } from "react-redux"
 
 
 interface ContactFormProps {
-  submitText?: string
   type: FormType["type"]
+
+  submitText?: string
+  onSubmit?(): void
 }
 
 function ContactForm(props: ContactFormProps) {
   const ll = useLocalization(ll => ll.components.contactForm)
   const form = useSelector(state => state.forms[props.type])
-  function onPhoneOrNickChange(event: ChangeEvent<HTMLInputElement>, strain?: InputStrainType<string>) {
+  const [submitted, setSubmitted] = useState(false)
+  const [socialStrain, setSocialStrain] = useState<InputStrainType<string>>()
+
+  if (submitted) {
+    return (
+      <div className="contact-form">
+        <p className="contact-form__text">{form?.post_send}</p>
+      </div>
+    )
+  }
+
+  function onPhoneOrNickChange(event: ChangeEvent<HTMLInputElement>, strain?: InputStrainType<FormFieldType["type"]>) {
     if (!strain) return
+    setSocialStrain(strain)
+
     if (["whats_app", "viber"].includes(strain.value)) {
       const target = event.currentTarget
-      const maskedValue = target.value.replace(/(?:(\d+))(\d{3}?)(\d{3}?)(\d{2}?)(\d{2})$/gm, "+$1 ($2) $3 $4-$5")
+      const maskedValue = target.value.replace(/(?:(\d+))(\d{3})(\d{3})(\d{2})(\d{2})$/gm, "+$1 ($2) $3 $4-$5")
 
       target.value = maskedValue
     }
   }
 
-  const includesSocial = (field: FormFieldType) => ["telegram", "facebook", "whats_app", "viber"].includes(field.type)
+  function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    if (form?.id == null) return
 
+    const target = event.currentTarget
+    const elements = target.elements as FormElements<FormFieldType["type"]>
+    const inputValues = [...elements].reduce<Record<string, string>>((result, next) => {
+      if (next instanceof HTMLInputElement) {
+        return { ...result, [next.name]: next.value }
+      }
+      return result
+    }, {})
+
+    ClientAPI
+      .query(postFormsIdApplications(form.id, inputValues))
+      .then(({ error }) => {
+        if (error) return
+
+        setSubmitted(true)
+        props.onSubmit?.()
+      })
+  }
+
+  const includesSocial = (field: FormFieldType) => ["telegram", "facebook", "whats_app", "viber"].includes(field.type)
   const name = form?.fields.find(field => field.type === "name")
   const email = form?.fields.find(field => field.type === "email")
   const social = form?.fields.find(includesSocial)
   const about = form?.fields.find(field => field.type === "about")
   return (
-    <form className="contact-form">
+    <form className="contact-form" onSubmit={onSubmit}>
       <div className="contact-form__inputs">
         {name && (
-          <Input placeholder={name.placeholder} type="text" required />
+          <Input placeholder={name.placeholder} type="text" name="name" required />
         )}
         {email && (
-          <Input placeholder={email.placeholder} type="email" required />
+          <Input placeholder={email.placeholder} type="email" name="email" required />
         )}
         {social && (
-          <Input placeholder={social.placeholder} required strains={form?.fields.filter(includesSocial).map(field => {
+          <Input placeholder={social.placeholder} name={socialStrain?.value} required strains={form?.fields.filter(includesSocial).map(field => {
             return {
               title: ll.fields[field.type].title,
               value: field.type
@@ -51,7 +90,9 @@ function ContactForm(props: ContactFormProps) {
           })} onChange={onPhoneOrNickChange} />
         )}
         {about && (
-          <textarea placeholder={about.placeholder}></textarea>
+          <div className="input">
+            <textarea className="input__input" name="about" placeholder={about.placeholder + "\n" + ll.mayDiscussLater}></textarea>
+          </div>
         )}
       </div>
       <Button className="contact-form__submit" size="big" type="submit" color="dark">{props.submitText || ll.submit}</Button>

@@ -1,21 +1,39 @@
 import "./Subscribe.scss"
 
+import { postMailingsSubscribe } from "api/actions/mailings"
+import ClientAPI from "api/client"
 import Button from "app/components/common/Button/Button"
+import useLocalization from "modules/localization/hook"
 import { ChangeEvent, useState } from "react"
 import { classWithModifiers } from "utils/common"
 
 
 function Subscribe() {
+  const ll = useLocalization(ll => ll.components.subscribe)
   const { value, isValueValid, onChange } = useInputValidation(/^\w+@[a-zA-Z]+\.\w{2,}$/m)
+  const [subscribed, setSubscribed] = useState(false)
+  function onSubscribe() {
+    ClientAPI
+      .query(postMailingsSubscribe(value))
+      .then(({ error }) => {
+        if (error) return
+        setSubscribed(true)
+      })
+  }
   return (
     <div className="subscribe">
       <div className="subscribe__header">
-        <div className={classWithModifiers("subscribe__field", !isValueValid && "red")}>
-          <input className="subscribe__input" type="text" placeholder="На какой email хотите получать рассылку?" onChange={onChange} />
+        <div className={classWithModifiers("subscribe__field", !isValueValid && "red", subscribed && "dark")}>
+          {!subscribed && (
+            <input className="subscribe__input" type="text" placeholder={ll.placeholder} onChange={onChange} />
+          )}
+          {subscribed && (
+            <span>{ll.thanks}</span>
+          )}
         </div>
-        <Button style="outline" size="small" color="green">Подписаться</Button>
+        <Button style="outline" size="small" color="green" onClick={onSubscribe}>{ll.button}</Button>
       </div>
-      <p className="subscribe__text">Нажав на кнопку, вы соглашаетесь получать email рассылку Creaty. В любой момент вы сможете легко отписаться, внутри каждого письма есть соответствующая ссылка.</p>
+      <p className="subscribe__text">{ll.terms}</p>
     </div>
   )
 }

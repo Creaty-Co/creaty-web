@@ -30,16 +30,16 @@ export type llType = AccessibleDeeply<LocalizationJSONRaw>
 type Interceptor = (ll: llType) => llType
 
 class Localization {
-  private static defaultLanguage = "en"
+  private static defaultLanguage = navigator.language.split("-")[0]
 
   private static listeners: Set<Function> = new Set
   private static interceptors: Set<Interceptor> = new Set
   public static storage = new Map<string, llType>()
 
-  private static set lang(lang: string) {
+  public static set lang(lang: string) {
     localStorage.setItem("lang", lang)
   }
-  private static get lang() {
+  public static get lang() {
     return localStorage.getItem("lang") || this.defaultLanguage
   }
 

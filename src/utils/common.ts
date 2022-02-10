@@ -31,7 +31,7 @@ export function classWithModifiers(originClass: string, ...modifiers: Array<stri
  * @returns `state1=6&state2=horse` without `?`
  */
 export function createQuery(queryObject?: Record<string, unknown> | null): string {
-  if (!queryObject?.length) return ""
+  if (!queryObject || !Object.keys(queryObject).length) return ""
 
   const queryKeys = Object.keys(queryObject)
   const queryArray = queryKeys.map(key => {

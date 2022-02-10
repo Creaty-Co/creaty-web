@@ -140,6 +140,7 @@
 	box-shadow: 0 0 0 3px rgba($color-green, $alpha: 0.5);
 	transition: 200ms ease opacity, 200ms ease transform;
 	z-index: 1;
+	cursor: initial;
 
 	&:not(&--visible) {
 		opacity: 0;
@@ -183,6 +184,10 @@
 	&--active {
 		background: $color-gray-30;
 	}
+
+	em {
+		font-weight: bold;
+	}
 }
 
 .mentor-search-list__tags {
@@ -198,4 +203,26 @@
 	overflow: auto;
 
 	@include Scrollbar(0.75em, rgba($color-gray-90, 0.2));
+}
+
+/* List Empty */
+
+.mentor-search-list-empty {
+	position: absolute;
+	inset: 0;
+
+	display: grid;
+	align-content: center;
+	justify-items: center;
+	row-gap: 0.5em;
+
+	color: $color-gray-80;
+}
+
+.mentor-search-list-empty__icon {
+	--icon-size: 1.5em;
+}
+
+.mentor-search-list-empty__text {
+	font-size: 1.125rem;
 }

@@ -93,19 +93,19 @@
 
 .user-section__content {
 
-	p,
-	ul {
+	p {
 		margin: 1em 0;
 		@include Typography(1.125rem, null, null);
 
 		em {
 			font-weight: bold;
 		}
+
+		a {
+			color: $color-violet;
+		}
 	}
 
-	a {
-		color: $color-violet;
-	}
 }
 
 .user-section__tags {

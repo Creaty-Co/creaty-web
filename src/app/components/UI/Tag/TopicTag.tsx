@@ -1,9 +1,8 @@
 import "./TopicTag.scss"
 
-import useLocalization from "modules/localization/hook"
+import { TagType } from "interfaces/types"
 import { MouseEventHandler } from "react"
 import { Link } from "react-router-dom"
-import { SearchTag } from "redux/reducers/search"
 import { classWithModifiers } from "utils/common"
 
 
@@ -15,7 +14,7 @@ interface TopicTagStringProps {
 
 interface TopicTagSearchTopicProps {
   noHash?: undefined
-  children: SearchTag
+  children: TagType
   onClick?: undefined
 }
 
@@ -28,8 +27,8 @@ function TopicTag(props: TopicTagStringProps | TopicTagSearchTopicProps) {
     )
   }
   return (
-    <Link className="topic-tag" to={`/mentors/${props.children.name}/`}>
-      <span className="topic-tag__text">{props.children.text}</span>
+    <Link className="topic-tag" to={`/mentors/${props.children.shortcut}/`}>
+      <span className="topic-tag__text">{props.children.title}</span>
     </Link>
   )
 }

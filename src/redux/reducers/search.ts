@@ -1,21 +1,11 @@
 import { ValuesOf } from "interfaces/common"
 import { MapActions } from "interfaces/reducer"
+import { TagType, TopicType } from "interfaces/types"
 
-export interface SearchTopic {
-  id: number
-  name: string
-}
-
-export interface SearchTag {
-  id: number
-  name: string
-  text: string
-  topic: number
-}
 
 export interface SearchState {
-  topic?: SearchTopic
-  tag?: SearchTag
+  topic?: TopicType
+  tag?: TagType
   focused: boolean
 }
 
@@ -44,4 +34,22 @@ export default (state = initialState, action: Action): typeof initialState => {
 export const updateSearch = (payload: Partial<SearchState>) => ({
   type: "SEARCH_UPDATE",
   payload
+})
+
+
+export const updateSearchTopic = (topic: Partial<SearchState["topic"]>) => ({
+  type: "SEARCH_UPDATE",
+  payload: {
+    topic,
+    tag: undefined,
+    focused: true
+  }
+})
+
+export const updateSearchTag = (tag: Partial<SearchState["topic"]>) => ({
+  type: "SEARCH_UPDATE",
+  payload: {
+    tag,
+    focused: false
+  }
 })

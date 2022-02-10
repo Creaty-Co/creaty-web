@@ -14,7 +14,7 @@
   "views": {
     "home": {
       "primaryInfo": {
-        "title": "face to face \n with mentor",
+        "title": "1 on 1 along \n with mentor",
         "desc": "Develop and enhance your <em>creative skills</em> on individual \n interaction with professional mentor"
       },
       "mentorSearch": {
@@ -152,25 +152,38 @@
         }
       ],
       "button": "Подберите мне ментора"
+    },
+    "contactForm": {
+      "fields": {
+        "telegram": {
+          "title": "Telegram"
+        },
+        "facebook": {
+          "title": "Facebook"
+        },
+        "whats_app": {
+          "title": "WhatsApp"
+        },
+        "viber": {
+          "title": "Viber"
+        }
+      },
+      "phoneOrNick": "Номер или ник в",
+      "submit": "Отправить",
+      "terms": "Нажав на кнопку, я соглашаюсь на обработку персональных данных в соответсвии с политикой конфиденциальности"
     }
   },
-  "other": {
-    "topics": {
-      "architecture": "Architecture",
-      "design": "Design",
-      "art": "Art",
-      "craft-jewellery": "Craft and Jewellery",
-      "games-animation": "Games and Animation",
-      "movies-tv-photos": "Movies, TV and Photos",
-      "fashion-design": "Fashion Design",
-      "music-sound": "Music and Sound",
-      "theater-scene-art": "Theater and Scene Art",
-      "digital-design": "Digital Design",
-      "art-management": "Art Management",
-      "journalism-writing": "Journalism and Writing"
-    },
-    "tags": {
-      "ux-design": "UX Дизайн"
+  "popups": {
+    "popupForm": {
+      "become_mentor": {
+        "title": "Станьте ментором"
+      },
+      "choose_mentor": {
+        "title": "Получите помощь в подборе ментора"
+      },
+      "test_meeting": {
+        "title": "Запишитесь на бесплатную тестовую встречу"
+      }
     }
   }
 }

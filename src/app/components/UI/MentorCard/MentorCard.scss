@@ -39,9 +39,18 @@
 }
 
 .mentor-card__name {
+	display: flex;
+
 	color: $color-black-main;
 	font-size: 1.5rem;
 	font-weight: bold;
+}
+
+.mentor-card__flag {
+	width: 1em;
+	height: 1em;
+
+	margin-left: 0.25em;
 }
 
 .mentor-card__job {

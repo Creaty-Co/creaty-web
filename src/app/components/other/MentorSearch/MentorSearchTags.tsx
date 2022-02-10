@@ -1,10 +1,15 @@
 import TopicTag from "app/components/UI/Tag/TopicTag"
+import { TagType } from "interfaces/types"
 import { useRef } from "react"
 
 import { SCROLL_INTERVAL, SCROLL_STEP } from "./MentorSearch"
 
 
-export default function MentorSearchTags() {
+interface MentorSearchTagsProps {
+  tags: TagType[]
+}
+
+export default function MentorSearchTags(props: MentorSearchTagsProps) {
   const intervalRef = useRef<NodeJS.Timer>()
   const tagsInnerRef = useRef<HTMLDivElement | null>(null)
   function onLeftShadowEnter() {
@@ -29,96 +34,9 @@ export default function MentorSearchTags() {
   return (
     <div className="mentor-search__tags">
       <div className="mentor-search__inner-tags" ref={tagsInnerRef}>
-        <TopicTag>Иллюстрация</TopicTag>
-        <TopicTag>Архитектура</TopicTag>
-        <TopicTag>Графический дизайн</TopicTag>
-        <TopicTag>Fashion дизайн</TopicTag>
-        <TopicTag>UX/UI</TopicTag>
-        <TopicTag>Иллюстрация</TopicTag>
-        <TopicTag>Архитектура</TopicTag>
-        <TopicTag>Графический дизайн</TopicTag>
-        <TopicTag>Fashion дизайн</TopicTag>
-        <TopicTag>UX/UI</TopicTag>
-        <TopicTag>Иллюстрация</TopicTag>
-        <TopicTag>Архитектура</TopicTag>
-        <TopicTag>Графический дизайн</TopicTag>
-        <TopicTag>Fashion дизайн</TopicTag>
-        <TopicTag>UX/UI</TopicTag>
-        <TopicTag>Иллюстрация</TopicTag>
-        <TopicTag>Архитектура</TopicTag>
-        <TopicTag>Графический дизайн</TopicTag>
-        <TopicTag>Fashion дизайн</TopicTag>
-        <TopicTag>UX/UI</TopicTag>
-        <TopicTag>Иллюстрация</TopicTag>
-        <TopicTag>Архитектура</TopicTag>
-        <TopicTag>Графический дизайн</TopicTag>
-        <TopicTag>Fashion дизайн</TopicTag>
-        <TopicTag>UX/UI</TopicTag>
-        <TopicTag>Иллюстрация</TopicTag>
-        <TopicTag>Архитектура</TopicTag>
-        <TopicTag>Графический дизайн</TopicTag>
-        <TopicTag>Fashion дизайн</TopicTag>
-        <TopicTag>UX/UI</TopicTag>
-        <TopicTag>Иллюстрация</TopicTag>
-        <TopicTag>Архитектура</TopicTag>
-        <TopicTag>Графический дизайн</TopicTag>
-        <TopicTag>Fashion дизайн</TopicTag>
-        <TopicTag>UX/UI</TopicTag>
-        <TopicTag>Иллюстрация</TopicTag>
-        <TopicTag>Архитектура</TopicTag>
-        <TopicTag>Графический дизайн</TopicTag>
-        <TopicTag>Fashion дизайн</TopicTag>
-        <TopicTag>UX/UI</TopicTag>
-        <TopicTag>Иллюстрация</TopicTag>
-        <TopicTag>Архитектура</TopicTag>
-        <TopicTag>Графический дизайн</TopicTag>
-        <TopicTag>Fashion дизайн</TopicTag>
-        <TopicTag>UX/UI</TopicTag>
-        <TopicTag>Иллюстрация</TopicTag>
-        <TopicTag>Архитектура</TopicTag>
-        <TopicTag>Графический дизайн</TopicTag>
-        <TopicTag>Fashion дизайн</TopicTag>
-        <TopicTag>UX/UI</TopicTag>
-        <TopicTag>Иллюстрация</TopicTag>
-        <TopicTag>Архитектура</TopicTag>
-        <TopicTag>Графический дизайн</TopicTag>
-        <TopicTag>Fashion дизайн</TopicTag>
-        <TopicTag>UX/UI</TopicTag>
-        <TopicTag>Иллюстрация</TopicTag>
-        <TopicTag>Архитектура</TopicTag>
-        <TopicTag>Графический дизайн</TopicTag>
-        <TopicTag>Fashion дизайн</TopicTag>
-        <TopicTag>UX/UI</TopicTag>
-        <TopicTag>Иллюстрация</TopicTag>
-        <TopicTag>Архитектура</TopicTag>
-        <TopicTag>Графический дизайн</TopicTag>
-        <TopicTag>Fashion дизайн</TopicTag>
-        <TopicTag>UX/UI</TopicTag>
-        <TopicTag>Иллюстрация</TopicTag>
-        <TopicTag>Архитектура</TopicTag>
-        <TopicTag>Графический дизайн</TopicTag>
-        <TopicTag>Fashion дизайн</TopicTag>
-        <TopicTag>UX/UI</TopicTag>
-        <TopicTag>Иллюстрация</TopicTag>
-        <TopicTag>Архитектура</TopicTag>
-        <TopicTag>Графический дизайн</TopicTag>
-        <TopicTag>Fashion дизайн</TopicTag>
-        <TopicTag>UX/UI</TopicTag>
-        <TopicTag>Иллюстрация</TopicTag>
-        <TopicTag>Архитектура</TopicTag>
-        <TopicTag>Графический дизайн</TopicTag>
-        <TopicTag>Fashion дизайн</TopicTag>
-        <TopicTag>UX/UI</TopicTag>
-        <TopicTag>Иллюстрация</TopicTag>
-        <TopicTag>Архитектура</TopicTag>
-        <TopicTag>Графический дизайн</TopicTag>
-        <TopicTag>Fashion дизайн</TopicTag>
-        <TopicTag>UX/UI</TopicTag>
-        <TopicTag>Иллюстрация</TopicTag>
-        <TopicTag>Архитектура</TopicTag>
-        <TopicTag>Графический дизайн</TopicTag>
-        <TopicTag>Fashion дизайн</TopicTag>
-        <TopicTag>UX/UI</TopicTag>
+        {props.tags.map(tag => (
+          <TopicTag key={tag.id}>{tag}</TopicTag>
+        ))}
       </div>
       <div className="mentor-search__shadow mentor-search__shadow--left" onPointerEnter={onLeftShadowEnter} onPointerLeave={onShadowBlur} />
       <div className="mentor-search__shadow mentor-search__shadow--right" onPointerEnter={onRightShadowEnter} onPointerLeave={onShadowBlur} />
