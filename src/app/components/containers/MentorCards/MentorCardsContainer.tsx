@@ -14,20 +14,22 @@ import { classWithModifiers } from "utils/common"
 
 function MentorCardsContainer() {
   const ll = useLocalization(ll => ll.other.pagination)
-  const lang = useLocalization(ll => ll.lang)
   const search = useSelector(state => state.search)
+
 
   const [page, setPage] = useState(1)
   const [pageSize] = useState(15)
   const [results, setResults] = useState<MentorType[]>([])
-  const { error, loading, payload, query } = useQuery(getMentors(page, pageSize, search.topic?.tags.map(tag => tag.id) || [search.tag?.id]))
+  const { error, loading, payload, query } = useQuery(getMentors(page, pageSize, search.tag ? [search.tag.id] : search.topic?.tags.map(tag => tag.id) || []))
   if (error) throw new Error("unexpected api error")
-  useEffect(() => { !loading && setResults([]) }, [search.tag, search.topic, lang, loading])
-  useEffect(() => { query() }, [lang])
+  useEffect(() => { !loading && payload && setResults(payload.results) }, [search.tag, search.topic, ll])
+  useEffect(() => { query() }, [ll])
   useEffect(() => {
     if (!payload || loading) return
-    setResults(results => [...results, ...payload.results])
-  }, [payload, loading])
+    setResults(results => [...new Set([...results, ...payload.results])])
+  }, [payload?.results])
+
+
   return (
     <div className="mentor-cards">
       <div className="mentor-cards__container">

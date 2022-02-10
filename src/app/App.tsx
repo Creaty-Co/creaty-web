@@ -76,8 +76,14 @@ function Header() {
 
 
 function Main() {
+  const prevPathRef = useRef("")
   const location = useLocation()
-  useEffect(() => window.scrollTo(0, 0), [location])
+  useEffect(() => {
+    if (prevPathRef.current !== location.pathname) {
+      window.scrollTo(0, 0)
+    }
+    prevPathRef.current = location.pathname
+  }, [location])
   return (
     <main>
       <Routes>

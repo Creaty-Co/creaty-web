@@ -13,7 +13,7 @@ function useClickAway(ref: MutableRefObject<HTMLElement | null | undefined>, cal
 
     document.addEventListener("click", listener)
     return () => document.removeEventListener("click", listener)
-  }, [callback])
+  }, [])
 }
 
 
