@@ -47,10 +47,13 @@ function UserUserId() {
             <div className="mentor-card__price">
               <em>{Number(payload.price).toPrice(lang.code, payload.price_currency)}</em> / 60min.
             </div>
-            <div className="mentor-card__discounts">
-              <div className="mentor-card__discount">{inter(ll.card.discount, { courseCount: 5, courseDiscount: 7 })}</div>
-              <div className="mentor-card__discount">{inter(ll.card.discount, { courseCount: 10, courseDiscount: 12 })}</div>
-            </div>
+            {payload.packages.length > 0 && (
+              <div className="mentor-card__discounts">
+                {payload.packages.map(pack => (
+                  <div className="mentor-card__discount" key={pack.id}>{inter(ll.card.discount, { courseCount: pack.lessons_count, courseDiscount: pack.discount })}</div>
+                ))}
+              </div>
+            )}
           </div>
           <Button size="big" color="green" className="user-card__button">{ll.card.rollIn}</Button>
         </div>

@@ -1,6 +1,7 @@
 import "./extensions"
 
 import { DataURLBase64 } from "interfaces/common"
+import React from "react"
 
 /**
  *
@@ -94,7 +95,12 @@ export function getFormElements<K extends string>(elements: HTMLFormControlsColl
 export function inter<V = unknown>(value: V, vars: Record<string, string | number>) {
   if (!value) throw new TypeError("interError: empty value gotten")
   const varKeys = Object.keys(vars)
-  function interpolate(value: V) {
+  function interpolate(value: V): V | string {
+    // ------------------------------------------------
+    if ((value as any)?.props?.children) {
+      return interpolate((value as any).props.children)
+    }
+    // ------------------------------------------------
     if (typeof value === "string") {
       return varKeys.reduce((result, next) => result.replace(new RegExp(`{${next}}`, "g"), String(vars[next])), value)
     }

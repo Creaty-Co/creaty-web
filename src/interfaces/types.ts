@@ -50,6 +50,13 @@ export interface MentorType {
     flag_unicode: string
   }
   tags: TagType[]
+  packages: MentorPackageType[]
+}
+
+export interface MentorPackageType {
+  id: number
+  lessons_count: number
+  discount: number
 }
 
 export interface MentorDetailedLanguages {
