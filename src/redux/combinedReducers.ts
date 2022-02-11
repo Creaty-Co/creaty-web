@@ -12,5 +12,8 @@ const reducers = {
   user
 }
 
+type RS = typeof reducers
+export type ReducersType = { [key in keyof RS]: ReturnType<RS[key]> }
+
 const combinedReducers = combineReducers(reducers)
 export default combinedReducers

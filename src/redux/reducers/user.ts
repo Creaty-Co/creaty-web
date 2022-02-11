@@ -8,12 +8,12 @@ const initialState: User = {
 }
 
 interface Actions {
-  USER_UPDATE: typeof initialState
+  USER_UPDATE: User
 }
 
 type Action = ValuesOf<MapActions<Actions>>
 
-export default (state = initialState, action: Action): typeof initialState => {
+export default (state = initialState, action: Action): User => {
   switch (action.type) {
 
     case "USER_UPDATE":
@@ -25,7 +25,7 @@ export default (state = initialState, action: Action): typeof initialState => {
 }
 
 
-export const updateUser = (payload: Partial<typeof initialState>) => ({
+export const updateUser = (payload: Partial<User>) => ({
   type: "USER_UPDATE",
   payload
 })

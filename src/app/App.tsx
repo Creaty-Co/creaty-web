@@ -2,6 +2,7 @@ import "app/assets/scss/base.scss"
 import "app/assets/scss/app.scss"
 
 import ClientAPI from "api/client"
+import useDirectLogin from "hooks/useDirectLogin"
 import useLocalization from "modules/localization/hook"
 import { PopupContainer } from "modules/popup/container"
 import { Popup } from "modules/popup/controller"
@@ -76,6 +77,7 @@ function Header() {
 
 
 function Main() {
+  useDirectLogin()
   return (
     <main>
       <Routes>
