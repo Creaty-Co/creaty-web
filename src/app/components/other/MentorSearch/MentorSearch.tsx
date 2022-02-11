@@ -1,5 +1,6 @@
 import "./MentorSearch.scss"
 
+import AdminInterface from "app/components/admin/AdminInterface"
 import Button from "app/components/common/Button/Button"
 import Icon from "app/components/common/Icon/Icon"
 import TopicTag from "app/components/UI/Tag/TopicTag"
@@ -120,6 +121,9 @@ function MentorSearchListStatic() {
             <span>{topic.title}</span>
           </Link>
         ))}
+        <AdminInterface>
+          <button className="mentor-search-list__item">Добавить новую категорию</button>
+        </AdminInterface>
       </div>
       <div className="mentor-search-list__tags">
         {!search.tag && search.topic?.tags.map(tag => (

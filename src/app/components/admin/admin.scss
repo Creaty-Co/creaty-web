@@ -1,0 +1,23 @@
+@import "~app/assets/scss/bundle.scss";
+
+.admin-topbar {
+	display: flex;
+	align-items: center;
+
+	padding: 0.5em;
+	@include WidthLimit;
+	margin-bottom: 1em;
+	background: $color-black-90;
+	border-radius: 2.5em;
+}
+
+.admin-topbar {
+	// background: ;
+}
+
+.admin-topbar__menu {
+	display: flex;
+	gap: 1em;
+
+	margin-left: auto;
+}

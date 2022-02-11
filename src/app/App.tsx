@@ -16,6 +16,7 @@ import { Link } from "react-router-dom"
 import store from "redux/store"
 import { classWithModifiers } from "utils/common"
 
+import AdminTopbar from "./components/admin/AdminTopbar"
 import Button from "./components/common/Button/Button"
 import Icon from "./components/common/Icon/Icon"
 import PopupForm from "./components/popups/PopupForm"
@@ -54,6 +55,7 @@ function Header() {
   const [expanded, setExpanded] = useState(false)
   return (
     <header>
+      <AdminTopbar />
       <div className="topbar">
         <div aria-label="Home">
           <img src="/static/images/logo40.png" alt="logo" className="topbar__logo" />
