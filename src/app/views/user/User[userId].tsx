@@ -58,7 +58,9 @@ function UserUserId() {
           <Button size="big" color="green" className="user-card__button">{ll.card.rollIn}</Button>
         </div>
         <div className="user-card__text">{ll.card.terms}</div>
-        <div className="user-card__notice">{ll.card.trial}</div>
+        {payload.info.trial_meeting && (
+          <div className="user-card__notice">{ll.card.trial}</div>
+        )}
       </div>
       <div className="user__sections">
         <UserSection type="3" title={payload.info.resume}>
