@@ -3,10 +3,12 @@ import "./MentorsView.scss"
 import MentorCardsContainer from "app/components/containers/MentorCards/MentorCardsContainer"
 import HaveQuestions from "app/components/other/HaveQuestions/HaveQuestions"
 import MentorSearch from "app/components/other/MentorSearch/MentorSearch"
+import useScrollToTop from "hooks/useScrollToTop"
 import useLocalization from "modules/localization/hook"
 
 
 function MentorsView() {
+  useScrollToTop()
   const ll = useLocalization(ll => ll.views.mentors)
   return (
     <div className="mentors-view">

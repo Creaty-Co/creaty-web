@@ -5,9 +5,9 @@ import { getMentorsId } from "api/actions/mentors"
 import Button from "app/components/common/Button/Button"
 import Icon, { IconName } from "app/components/common/Icon/Icon"
 import ContactForm from "app/components/other/ContactForm/ContactForm"
-import OuterLink from "app/components/services/OuterLink"
 import { getEmojiPNG } from "app/components/UI/MentorCard/MentorCard"
 import TopicTag from "app/components/UI/Tag/TopicTag"
+import useScrollToTop from "hooks/useScrollToTop"
 import useLocalization from "modules/localization/hook"
 import { ReactNode } from "react"
 import { useQuery } from "react-fetching-library"
@@ -15,6 +15,8 @@ import { useParams } from "react-router"
 import { classWithModifiers, inter } from "utils/common"
 
 function UserUserId() {
+  useScrollToTop()
+
   const ll = useLocalization(ll => ll.views.mentor)
   const lang = useLocalization(ll => ll.lang)
 

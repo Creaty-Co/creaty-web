@@ -15,24 +15,31 @@ import { classWithModifiers } from "utils/common"
 function MentorCardsContainer() {
   const ll = useLocalization(ll => ll.other.pagination)
   const search = useSelector(state => state.search)
+  const tagSet = search.tag ? [search.tag.id] : search.topic?.tags.map(tag => tag.id) || []
 
 
   const [page, setPage] = useState(1)
   const [pageSize] = useState(15)
   const [results, setResults] = useState<MentorType[]>([])
-  const { error, loading, payload, query } = useQuery(getMentors(page, pageSize, search.tag ? [search.tag.id] : search.topic?.tags.map(tag => tag.id) || []))
+
+  const { error, loading, payload } = useQuery(getMentors(page, pageSize, tagSet))
   if (error) throw new Error("unexpected api error")
-  useEffect(() => { !loading && payload && setResults(payload.results) }, [search.tag, search.topic, ll])
-  useEffect(() => { query() }, [ll])
+
   useEffect(() => {
-    if (!payload || loading) return
-    setResults(results => [...new Set([...results, ...payload.results])])
-  }, [payload?.results])
-
-
+    setPage(1)
+    setResults(payload?.results || [])
+  }, [search.topic, search.tag])
+  useEffect(() => {
+    if (loading || !payload) return
+    if (page > 1) {
+      setResults(results => [...new Set([...results, ...payload.results])])
+      return
+    }
+    setResults(payload.results)
+  }, [page, loading, payload])
   return (
     <div className="mentor-cards">
-      <div className="mentor-cards__container">
+      <div className={classWithModifiers("mentor-cards__container", loading && "loading")}>
         {results.map(mentor => (
           <MentorCard {...mentor} key={mentor.id} />
         ))}
@@ -47,7 +54,7 @@ function MentorCardsContainer() {
           onClick={() => setPage(page + 1)}
         >{ll.showMore} {pageSize}</Button>
       )}
-    </div>
+    </div >
   )
 }
 

@@ -9,6 +9,7 @@ import MentorsSlider from "app/components/other/MentorsSlider/MentorsSlider"
 import BigComment from "app/components/UI/BigComment/BigComment"
 import { FAQ, FAQClause } from "app/components/UI/FAQ/FAQ"
 import InfoSection from "app/components/UI/InfoSection/InfoSection"
+import useScrollToTop from "hooks/useScrollToTop"
 import useLocalization from "modules/localization/hook"
 import { useEffect } from "react"
 import { useQuery } from "react-fetching-library"
@@ -22,6 +23,7 @@ import MailingSubscribe from "./MailingSubscribe/MailingSubscribe"
 
 
 function HomeView() {
+  useScrollToTop()
   const ll = useLocalization(ll => ll.views.home)
   const params = useParams<"shortcut">()
   const { payload, query } = useQuery(params.shortcut ? getPagePersonal(params.shortcut) : getPagesMain)

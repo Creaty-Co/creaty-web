@@ -8,7 +8,7 @@ const CYCLE_INTERVAL = 5000
 const PERSONAL_PAGE_TIMEOUT = 12000
 
 interface DynamicPrimaryInfoProps {
-  firstHeadingShortcut?: string | null
+  firstHeadingShortcut?: string
 }
 
 function DynamicPrimaryInfo(props: DynamicPrimaryInfoProps) {
@@ -57,11 +57,13 @@ function DynamicPrimaryInfo(props: DynamicPrimaryInfoProps) {
       if (props.firstHeadingShortcut) {
         const topic = topics.list.find(topic => topic.shortcut === props.firstHeadingShortcut)
         const tag = topics.tags.find(tag => tag.shortcut === props.firstHeadingShortcut)
-        const heading = topic?.title || tag?.title || "..."
+        const heading = topic?.title || tag?.title
 
-        await writeHeading(heading)
-        await delay(PERSONAL_PAGE_TIMEOUT)
-        await eraseHeading(heading)
+        if (heading) {
+          await writeHeading(heading)
+          await delay(PERSONAL_PAGE_TIMEOUT)
+          await eraseHeading(heading)
+        }
       }
       await runHeadingCycle()
     })().catch(error => {

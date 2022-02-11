@@ -47,7 +47,7 @@ export const updateUser = (payload: Partial<typeof initialState>) => ({
 
 /// Request
 async function requestTopics() {
-  const { error, payload } = await ClientAPI.query(getTagsTopics(1, 25))
+  const { error, payload } = await ClientAPI.query(getTagsTopics(1, 25), true)
 
   if (error) throw new Error("unexpected error")
   if (!payload) throw new Error("no payload")
@@ -58,7 +58,7 @@ async function requestTopics() {
   })
 }
 async function requestTags() {
-  const { error, payload } = await ClientAPI.query(getTags(1, 1000))
+  const { error, payload } = await ClientAPI.query(getTags(1, 1000), true)
 
   if (error) throw new Error("unexpected error")
   if (!payload) throw new Error("no payload")
