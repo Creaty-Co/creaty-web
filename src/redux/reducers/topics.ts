@@ -33,7 +33,7 @@ export default (state = initialState, action: Action): typeof initialState => {
 }
 
 
-export const updateUser = (payload: Partial<typeof initialState>) => ({
+export const updateTopics = (payload: Partial<typeof initialState>) => ({
   type: "TOPICS_UPDATE",
   payload
 })
