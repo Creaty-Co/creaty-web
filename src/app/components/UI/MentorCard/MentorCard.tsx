@@ -22,7 +22,7 @@ function MentorCard(props: MentorCardProps) {
         <div className="mentor-card__info">
           <div className="mentor-card__name">
             <span>{props.first_name} {props.last_name}</span>
-            <img src={getEmojiPNG(props.country_flag)} alt="flag" className="mentor-card__flag" />
+            <img src={getEmojiPNG(props.country.flag_unicode)} alt="flag" className="mentor-card__flag" />
           </div>
           <div className="mentor-card__job"><em>{props.profession}・</em>{props.company}</div>
         </div>

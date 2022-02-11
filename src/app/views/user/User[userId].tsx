@@ -40,7 +40,7 @@ function UserUserId() {
             <div className="mentor-card__info">
               <div className="mentor-card__name">
                 <span>{payload.first_name} {payload.last_name}</span>
-                <img src={getEmojiPNG(payload.country_flag)} alt="flag" className="mentor-card__flag" />
+                <img src={getEmojiPNG(payload.country.flag_unicode)} alt="flag" className="mentor-card__flag" />
               </div>
               <div className="mentor-card__job"><em>{payload.profession}・</em>{payload.company}</div>
             </div>

@@ -45,7 +45,10 @@ export interface MentorType {
   last_name: string
   price: string
   price_currency: string
-  country_flag: string
+  country: {
+    id: number
+    flag_unicode: string
+  }
   tags: TagType[]
 }
 
