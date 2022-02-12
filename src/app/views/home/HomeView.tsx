@@ -1,18 +1,24 @@
 import "./HomeView.scss"
 
-import { getPagePersonal, getPagesMain } from "api/actions/pages"
+import { getPagePersonal, getPagesFAQs, getPagesMain } from "api/actions/pages"
+import AdminInterface from "app/components/admin/AdminInterface"
+import Button from "app/components/common/Button/Button"
 import HaveQuestions from "app/components/other/HaveQuestions/HaveQuestions"
 import HelpSocial from "app/components/other/HelpSocial/HelpSocial"
 import MentorSearch from "app/components/other/MentorSearch/MentorSearch"
 import MentorSearchTags from "app/components/other/MentorSearch/MentorSearchTags"
 import MentorsSlider from "app/components/other/MentorsSlider/MentorsSlider"
+import { PopupAdminEditFAQ, PopupAdminNewFAQ } from "app/components/popups/PopupAdmin/PopupAdminFAQ"
 import BigComment from "app/components/UI/BigComment/BigComment"
 import { FAQ, FAQClause } from "app/components/UI/FAQ/FAQ"
 import InfoSection from "app/components/UI/InfoSection/InfoSection"
 import useScrollToTop from "hooks/useScrollToTop"
 import useLocalization from "modules/localization/hook"
+import { Popup } from "modules/popup/controller"
 import { useEffect } from "react"
 import { useQuery } from "react-fetching-library"
+import ReactMarkdown from "react-markdown"
+import { useSelector } from "react-redux"
 import { useParams } from "react-router"
 
 import BecomeMentor from "./BecomeMentor/BecomeMentor"
@@ -30,7 +36,7 @@ function HomeView() {
   useEffect(() => { query() }, [ll])
   return (
     <div className="home-view">
-      <div className="home-view__header">
+      {/* <div className="home-view__header">
         <DynamicPrimaryInfo firstHeadingShortcut={params.shortcut} />
         <div className="home-view__search">
           <MentorSearch />
@@ -57,7 +63,7 @@ function HomeView() {
       </div>
       <div className="home-view__helpful-creaty">
         <HelpfulCreaty />
-      </div>
+      </div> */}
       <div className="home-view__faq">
         <h2 className="heading">{ll.QAndA.title}</h2>
         <QAndA />
@@ -77,18 +83,23 @@ function HomeView() {
 
 
 function QAndA() {
-  const ll = useLocalization(ll => ll.views.home.QAndA)
+  const { error, loading, payload } = useQuery(getPagesFAQs)
+  if (error) throw new Error("useQuery error")
+  if (loading) return <>loading...</>
+  if (!payload) return <>no content</>
   return (
     <FAQ>
-      {ll.clauses.map((clause, index) => (
-        <FAQClause summary={clause.summary} key={index}>
-          <ul>
-            {clause.points.map((point, index) => (
-              <li key={index}>{point}</li>
-            ))}
-          </ul>
+      {payload.results.map((faq) => (
+        <FAQClause summary={faq.question} key={faq.id}>
+          <ReactMarkdown>{faq.answer}</ReactMarkdown>
+          <AdminInterface>
+            <Button color="white" onClick={() => Popup.open(PopupAdminEditFAQ, { faq })}>Редактировать вопрос</Button>
+          </AdminInterface>
         </FAQClause>
       ))}
+      <AdminInterface>
+        <Button color="white" onClick={() => Popup.open(PopupAdminNewFAQ)}>Добавить вопрос</Button>
+      </AdminInterface>
     </FAQ>
   )
 }

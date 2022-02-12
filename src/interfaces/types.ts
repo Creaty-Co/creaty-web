@@ -114,3 +114,9 @@ export interface PageLinkType {
   type: "facebook" | "instagram" | "help" | "user_agreement" | "privacy_policy" | "cookie_policy"
   url: string
 }
+
+export interface PageFAQType {
+  id: number
+  question: string
+  answer: string
+}

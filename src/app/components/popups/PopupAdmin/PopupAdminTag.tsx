@@ -54,7 +54,6 @@ interface PopupAdminEditTagProps {
 export function PopupAdminEditTag(props: PopupAdminEditTagProps) {
   const { close } = usePopupContext()
   function deleteTag() {
-    if (!props.tag) return
     ClientAPI
       .query(deleteTags(props.tag.id))
       .then(({ error }) => {

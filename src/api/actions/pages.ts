@@ -1,6 +1,6 @@
 import { Action } from "api/client"
 import { PaginationType } from "interfaces/Django"
-import { PageLinkType, PageType, TagType } from "interfaces/types"
+import { PageFAQType, PageLinkType, PageType, TagType } from "interfaces/types"
 
 
 
@@ -41,7 +41,7 @@ export const patchPagePersonal = (shortcut: string, body: {
 })
 
 
-// General
+// Links
 
 export const getPagesLinksDocuments: Action<PaginationType<PageLinkType>> = {
   method: "GET",
@@ -52,4 +52,34 @@ export const patchPagesLinksDocuments = (id: number, url: string): Action<{ id: 
   method: "PATCH",
   endpoint: `/pages/links/documents/${id}`,
   body: { url }
+})
+
+// FAQs
+
+export const getPagesFAQs: Action<PaginationType<PageFAQType>> = {
+  method: "GET",
+  endpoint: "/pages/faqs"
+}
+
+export const postPagesFAQs = (body: {
+  question: string
+  answer: string
+}): Action<{ id: number }> => ({
+  method: "POST",
+  endpoint: `/pages/faqs`,
+  body
+})
+
+export const patchPagesFAQs = (id: number, body: {
+  question: string
+  answer: string
+}): Action<{ id: number }> => ({
+  method: "PATCH",
+  endpoint: `/pages/faqs/${id}`,
+  body
+})
+
+export const deletePagesFAQs = (id: number): Action => ({
+  method: "DELETE",
+  endpoint: `/pages/faqs/${id}`
 })
