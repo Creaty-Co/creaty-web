@@ -21,15 +21,14 @@ import { Dispatch, SetStateAction } from "react"
 import { PopupContainerState } from "./container"
 import { PopupComponent, PopupParams, PopupWindow } from "./interfaces"
 
-type AnyIfEmpty<T extends object> = keyof T extends never ? any : T;
+type AnyIfEmpty<T extends object> = keyof T extends never ? any : T
 
 const convertToBase64 = (data: any) => Buffer.from(JSON.stringify(data)).toString("base64")
 
 export const PopupPrivate: {
-  dispatch: Dispatch<SetStateAction<PopupContainerState>>;
+  dispatch: Dispatch<SetStateAction<PopupContainerState>>
 } = {
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  dispatch: () => { throw new Error("PopupError: no containers were found") },
+  dispatch: () => { throw new Error("PopupError: no containers were found") }
 }
 
 export class Popup {
@@ -50,7 +49,7 @@ export class Popup {
     })
   }
   private static addToQueue(popupWindow: PopupWindow<any>) {
-    PopupPrivate.dispatch((state) => {
+    PopupPrivate.dispatch(state => {
       // Skip adding to queue if there is already the same window
       if (state.queue.length > 0) {
         if (convertToBase64(state.queue[state.queue.length - 1]) === convertToBase64(popupWindow)) {
@@ -60,6 +59,7 @@ export class Popup {
       // Set queue if popup was inactive and has only one window
       // to be sure that window by the rule above won't appear again
       if (state.isActive === false && state.queue.length === 1) {
+        console.log(popupWindow)
         return {
           isActive: true,
           queue: [popupWindow]
@@ -72,8 +72,9 @@ export class Popup {
     })
   }
   private static removeFromQueue(popupWindow: PopupWindow<any>) {
-    PopupPrivate.dispatch((state) => {
-      const queue = state.queue.filter((pw) => pw !== popupWindow)
+    PopupPrivate.dispatch(state => {
+      console.log(1, state.queue.includes(popupWindow))
+      const queue = state.queue.filter(pw => pw !== popupWindow)
       if (queue.length === 0) {
         return { isActive: false, queue: [popupWindow] }
       }
@@ -81,11 +82,11 @@ export class Popup {
     })
   }
   public static closeAll() {
-    PopupPrivate.dispatch((state) => {
-      state.queue.forEach((popup) => popup.close())
+    PopupPrivate.dispatch(state => {
+      state.queue.forEach(popup => popup.close())
       return {
         isActive: false,
-        queue: [],
+        queue: []
       }
     })
   }

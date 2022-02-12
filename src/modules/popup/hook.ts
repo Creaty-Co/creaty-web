@@ -16,16 +16,15 @@ copies or substantial portions of the Software.
 
 */
 
-import { useContext, useRef } from "react"
+import { useContext } from "react"
 
 import { PopupContext } from "./context"
 import { PopupWindow } from "./interfaces"
 
 export function usePopupContext() {
-  const context = useRef(useContext(PopupContext))
-
+  const context = useContext(PopupContext)
   return {
-    ...context.current,
+    ...context,
     component: undefined
   } as Omit<PopupWindow, "component">
 }

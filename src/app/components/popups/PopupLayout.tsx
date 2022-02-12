@@ -16,7 +16,7 @@ function PopupLayout(props: PopupLayoutProps) {
   const { close } = usePopupContext()
   return (
     <div className="popup-layout" style={{ width: props.width }}>
-      <button className="popup-layout__close" onClick={close}><Icon name="cross" /></button>
+      <button className="popup-layout__close" type="button" onClick={close}><Icon name="cross" /></button>
       <h3 className="popup-layout__title heading">{props.title}</h3>
       <div className="popup-layout__container">{props.children}</div>
     </div>
