@@ -37,13 +37,13 @@ export type IconName = (
 ) | (string & {})
 
 interface IconProps extends SVGAttributes<SVGElement> {
-  name: IconName
+  name?: IconName
 }
 
 function Icon(props: IconProps) {
   return (
     <svg {...props} className={classMerge("icon", props.className && classWithModifiers(props.className, props.name))}>
-      <use href={`/static/icons.svg#${props.name}`} />
+      <use href={props.name ? `/static/icons.svg#${props.name}` : props.href} />
     </svg>
   )
 }

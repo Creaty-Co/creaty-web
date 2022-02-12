@@ -1,4 +1,5 @@
 import { Action } from "api/client"
+import { DataURLBase64 } from "interfaces/common"
 import { PaginationType } from "interfaces/Django"
 import { TagType, TopicType } from "interfaces/types"
 
@@ -9,15 +10,30 @@ export const getTags = (page: number, page_size: number): Action<PaginationType<
   params: { page, page_size }
 })
 
-export const postTags = (tagId: number, body: {
+export const postTags = (topicId: number, body: {
   shortcut: string
   title_ru: string
   title_en: string
 }): Action<{ id: number }> => ({
   method: "POST",
-  endpoint: `/tags/categories/${tagId}/tags/`,
+  endpoint: `/tags/categories/${topicId}/tags`,
   body
 })
+
+export const deleteTags = (id: number): Action => ({
+  method: "DELETE",
+  endpoint: `/tags/${id}`
+})
+
+export const patchTags = (id: number, body: {
+  shortcut: string
+  title: string
+}): Action<{ id: number }> => ({
+  method: "PATCH",
+  endpoint: `/tags/${id}`,
+  body
+})
+
 
 export const getTagsTopics = (page: number, page_size: number): Action<PaginationType<TopicType>> => ({
   method: "GET",
@@ -25,12 +41,23 @@ export const getTagsTopics = (page: number, page_size: number): Action<Paginatio
   params: { page, page_size }
 })
 
-export const postTagsTopics = (categoryId: number, body: {
+export const postTagsTopics = (body: {
   shortcut: string
   title_ru: string
   title_en: string
+  icon: DataURLBase64 | string
 }): Action<{ id: number }> => ({
   method: "POST",
-  endpoint: `/tags/categories/${categoryId}/tags/`,
+  endpoint: `/tags/categories`,
+  body
+})
+
+export const patchTagsTopics = (id: number, body: {
+  shortcut: string
+  title: string
+  icon: DataURLBase64 | string
+}): Action<{ id: number }> => ({
+  method: "PATCH",
+  endpoint: `/tags/${id}`,
   body
 })

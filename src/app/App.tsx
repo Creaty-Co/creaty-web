@@ -6,11 +6,10 @@ import useDirectLogin from "hooks/useDirectLogin"
 import useLocalization from "modules/localization/hook"
 import { PopupContainer } from "modules/popup/container"
 import { Popup } from "modules/popup/controller"
-import { StrictMode, Suspense, useEffect, useRef, useState } from "react"
+import { StrictMode, Suspense, useRef, useState } from "react"
 import { ClientContextProvider } from "react-fetching-library"
 import { Provider } from "react-redux"
 import { Route, Routes } from "react-router"
-import { useLocation } from "react-router"
 import { BrowserRouter, NavLink } from "react-router-dom"
 import { Link } from "react-router-dom"
 import store from "redux/store"
@@ -26,6 +25,7 @@ import LangSelector from "./components/UI/LangSelector/LangSelector"
 import AdminMentorsView from "./views/admin/AdminMentorsView/AdminMentorsView"
 import AdminEditMentorView from "./views/admin/AdminMentorView/AdminEditMentorView"
 import AdminNewMentorView from "./views/admin/AdminMentorView/AdminNewMentorView"
+import AdminTopicsTagsView from "./views/admin/AdminTopicsView/AdminTopicsTagsView"
 import HomeView from "./views/home/HomeView"
 import MentorsView from "./views/mentors/MentorsView"
 import MentorsViewTopicOrTag from "./views/mentors/MentorsView[topicOrTag]"
@@ -91,10 +91,14 @@ function Main() {
         <Route path="/mentors" element={<MentorsView />} />
         <Route path="/mentors/:topicOrTag" element={<MentorsViewTopicOrTag />} />
         <Route path="/user/:userId" element={<UserUserId />} />
-        {/* Admin */}
+        {/* --- Admin --- */}
+        {/* Mentors */}
         <Route path="/admin/mentors" element={<AdminMentorsView />} />
         <Route path="/admin/new-mentor" element={<AdminNewMentorView />} />
         <Route path="/admin/edit-mentor/:mentorId" element={<AdminEditMentorView />} />
+        {/* Topics & Tags */}
+        <Route path="/admin/topics-tags" element={<AdminTopicsTagsView />} />
+        {/* --- Admin --- */}
       </Routes>
     </main>
   )

@@ -31,6 +31,7 @@ export interface TopicType {
   id: number
   shortcut: string
   title: string
+  icon: string
   tags: TagType[]
 }
 
