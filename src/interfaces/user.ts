@@ -7,6 +7,7 @@ export interface UserSigned {
 
 export interface UserAnonymous {
   auth: false
+  type: UserType
 }
 
 export enum UserType {

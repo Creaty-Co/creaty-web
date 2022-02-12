@@ -99,8 +99,9 @@ button {
 }
 
 textarea {
-	white-space: pre;
+	white-space: pre-wrap;
 	line-height: 1.25;
+	overflow-wrap: break-word;
 }
 
 ul {

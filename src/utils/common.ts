@@ -1,6 +1,6 @@
 import "./extensions"
 
-import { DataURLBase64 } from "interfaces/common"
+import { DataURLBase64, FormElements } from "interfaces/common"
 import React from "react"
 
 /**
@@ -110,6 +110,17 @@ export function inter<V = unknown>(value: V, vars: Record<string, string | numbe
     return value.flatMap(a => a).map(interpolate)
   }
   return interpolate(value)
+}
+
+
+
+export function getFormInputs<U extends string = string>(elements: FormElements<U> | HTMLFormControlsCollection) {
+  return [...elements].reduce<Record<U | (string & {}), string | number>>((result, next) => {
+    if (next instanceof HTMLInputElement) {
+      return { ...result, [next.name]: next.value }
+    }
+    return result
+  }, {} as any)
 }
 
 

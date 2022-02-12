@@ -1,0 +1,13 @@
+@import "~app/assets/scss/bundle.scss";
+
+.selector {
+	padding: 0.5em 1em;
+
+	border: 2px solid $color-violet;
+	border-radius: 1.5em;
+}
+
+.selector__current {
+	cursor: pointer;
+	color: $color-black-main;
+}

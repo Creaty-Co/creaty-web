@@ -3,6 +3,7 @@ import ClientAPI from "api/client"
 import { ValuesOf } from "interfaces/common"
 import { MapActions } from "interfaces/reducer"
 import { FormType } from "interfaces/types"
+import Localization from "modules/localization/controller"
 import store from "redux/store"
 
 
@@ -38,7 +39,7 @@ export const updateForms = (payload: Partial<typeof initialState>) => ({
 
 
 /// Request
-window.addEventListener("load", async () => {
+async function requestForms() {
   const { error, payload } = await ClientAPI.query(getForms)
 
   if (error) throw new Error("formsReducerError: unexpected error")
@@ -50,4 +51,6 @@ window.addEventListener("load", async () => {
     type: "FORMS_UPDATE",
     payload: result
   })
-})
+}
+window.addEventListener("load", requestForms)
+Localization.onTransition(() => requestForms())

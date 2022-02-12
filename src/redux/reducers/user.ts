@@ -1,10 +1,11 @@
 import { ValuesOf } from "interfaces/common"
 import { MapActions } from "interfaces/reducer"
-import { User } from "interfaces/user"
+import { User, UserType } from "interfaces/user"
 
 
 const initialState: User = {
-  auth: false
+  auth: !!localStorage.getItem("token"),
+  type: UserType.admin
 }
 
 interface Actions {

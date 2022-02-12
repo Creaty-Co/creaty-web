@@ -9,7 +9,8 @@ interface DropDownProps<V> {
   expanded: boolean
   default?: V
 
-  onChange: Dispatch<V>
+  name?: string
+  onChange(value: V, children: unknown): void
   children: ReactElement<ComponentProps<"option">>[]
 }
 
@@ -22,10 +23,13 @@ function DropDown<V = string | undefined>(props: DropDownProps<V>) {
       {options.map((option, index) => (
         <option
           className={classWithModifiers("drop-down__option", choice === index && "selected")}
-          onClick={() => (Choose(index), props.onChange(option.value as unknown as V))}
+          onClick={() => (Choose(index), props.onChange(option.value as unknown as V, option.children))}
           key={index}
         >{option.children}</option>
       ))}
+      {props.name && (
+        <input type="hidden" name={props.name} value={options[choice].value} />
+      )}
     </section>
   )
 }

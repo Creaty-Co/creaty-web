@@ -1,8 +1,11 @@
 import "./user.scss"
 import "app/components/UI/MentorCard/MentorCard.scss"
 
-import { getMentorsId } from "api/actions/mentors"
+import { deleteMentorsId, getMentorsId } from "api/actions/mentors"
+import ClientAPI from "api/client"
+import AdminInterface from "app/components/admin/AdminInterface"
 import Button from "app/components/common/Button/Button"
+import ButtonLink from "app/components/common/Button/ButtonLink"
 import Icon, { IconName } from "app/components/common/Icon/Icon"
 import ContactForm from "app/components/other/ContactForm/ContactForm"
 import { getEmojiPNG } from "app/components/UI/MentorCard/MentorCard"
@@ -11,11 +14,12 @@ import useScrollToTop from "hooks/useScrollToTop"
 import useLocalization from "modules/localization/hook"
 import { ReactNode } from "react"
 import { useQuery } from "react-fetching-library"
-import { useParams } from "react-router"
+import { useNavigate, useParams } from "react-router"
 import { classWithModifiers, inter } from "utils/common"
 
 function UserUserId() {
   useScrollToTop()
+  const navigate = useNavigate()
 
   const ll = useLocalization(ll => ll.views.mentor)
   const lang = useLocalization(ll => ll.lang)
@@ -55,7 +59,7 @@ function UserUserId() {
               </div>
             )}
           </div>
-          <Button size="big" color="green" className="user-card__button">{ll.card.rollIn}</Button>
+          <ButtonLink size="big" color="green" className="user-card__button" to="#book">{ll.card.rollIn}</ButtonLink>
         </div>
         <div className="user-card__text">{ll.card.terms}</div>
         {payload.info.trial_meeting && (
@@ -63,6 +67,10 @@ function UserUserId() {
         )}
       </div>
       <div className="user__sections">
+        <AdminInterface>
+          <Button onClick={() => ClientAPI.query(deleteMentorsId(payload.id)).then(() => navigate("/admin/mentors"))}>Удалить ментора</Button>
+          <Button onClick={() => navigate("/admin/edit-mentor/" + payload.id)}>Редактировать ментора</Button>
+        </AdminInterface>
         <UserSection type="3" title={payload.info.resume}>
           <div className="user-section__entry">
             <Icon name="location" />
@@ -97,6 +105,7 @@ function UserUserId() {
           <p>{ll.info.garantee.desc}</p>
         </UserSection>
         <UserSection type="1" title={ll.info.bookMentor.title}>
+          <a href="#book"></a>
           <p>{ll.info.bookMentor.desc}</p>
           <ContactForm type="test_meeting" submitText={ll.info.bookMentor.submit} />
         </UserSection>
@@ -128,6 +137,8 @@ function UserSection(props: UserSectionProps) {
     </div>
   )
 }
+
+
 
 
 export default UserUserId

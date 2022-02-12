@@ -23,6 +23,9 @@ import PopupForm from "./components/popups/PopupForm"
 import ErrorBoundary from "./components/services/ErrorBoundary"
 import OuterLink from "./components/services/OuterLink"
 import LangSelector from "./components/UI/LangSelector/LangSelector"
+import AdminMentorsView from "./views/admin/AdminMentorsView/AdminMentorsView"
+import AdminEditMentorView from "./views/admin/AdminMentorView/AdminEditMentorView"
+import AdminNewMentorView from "./views/admin/AdminMentorView/AdminNewMentorView"
 import HomeView from "./views/home/HomeView"
 import MentorsView from "./views/mentors/MentorsView"
 import MentorsViewTopicOrTag from "./views/mentors/MentorsView[topicOrTag]"
@@ -88,6 +91,10 @@ function Main() {
         <Route path="/mentors" element={<MentorsView />} />
         <Route path="/mentors/:topicOrTag" element={<MentorsViewTopicOrTag />} />
         <Route path="/user/:userId" element={<UserUserId />} />
+        {/* Admin */}
+        <Route path="/admin/mentors" element={<AdminMentorsView />} />
+        <Route path="/admin/new-mentor" element={<AdminNewMentorView />} />
+        <Route path="/admin/edit-mentor/:mentorId" element={<AdminEditMentorView />} />
       </Routes>
     </main>
   )

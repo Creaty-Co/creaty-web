@@ -77,6 +77,29 @@ export interface MentorDetailedType extends MentorType {
   }
 }
 
+export interface MentorPatchType {
+  info: {
+    trial_meeting: number | null
+    resume: string
+    what_help: string
+    experience: string
+    portfolio: string
+    languages: number[]
+    city_ru: string
+    city_en: string
+  }
+  avatar: string
+  company: string
+  profession: string
+  first_name: string
+  last_name: string
+  price: string
+  price_currency: string
+  tag_set: number[]
+  country: number
+  packages: MentorPackageType[]
+}
+
 /* Pages */
 
 export interface PageType {

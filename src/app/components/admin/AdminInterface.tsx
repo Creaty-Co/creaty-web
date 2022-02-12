@@ -11,7 +11,7 @@ function AdminInterface(props: AdminInterfaceProps) {
   const admin = useSelector(state => state.admin)
   const user = useSelector(state => state.user)
 
-  if (!admin.editing) return null
+  // if (!admin.editing) return null
   if (!user.auth || user.type < UserType.admin) return null
 
   return <>{props.children}</>

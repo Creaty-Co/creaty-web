@@ -21,3 +21,31 @@
 
 	margin-left: auto;
 }
+
+
+
+.admin-view {
+	@include WidthLimit;
+	padding: 1em;
+	background: $color-white;
+	border-radius: 1.5em;
+
+	color: $color-black-main;
+
+	input[type="checkbox"] {
+		all: revert;
+	}
+}
+
+.admin-view__entries {
+	gap: 1em;
+
+	&--flex {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	&--grid {
+		display: grid;
+	}
+}
