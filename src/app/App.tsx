@@ -1,13 +1,15 @@
 import "app/assets/scss/base.scss"
 import "app/assets/scss/app.scss"
 
+import { getPagesLinksDocuments } from "api/actions/pages"
 import ClientAPI from "api/client"
 import useDirectLogin from "hooks/useDirectLogin"
+import { PageLinkType } from "interfaces/types"
 import useLocalization from "modules/localization/hook"
 import { PopupContainer } from "modules/popup/container"
 import { Popup } from "modules/popup/controller"
 import { StrictMode, Suspense, useRef, useState } from "react"
-import { ClientContextProvider } from "react-fetching-library"
+import { ClientContextProvider, useQuery } from "react-fetching-library"
 import { Provider } from "react-redux"
 import { Route, Routes } from "react-router"
 import { BrowserRouter, NavLink } from "react-router-dom"
@@ -15,6 +17,7 @@ import { Link } from "react-router-dom"
 import store from "redux/store"
 import { classWithModifiers } from "utils/common"
 
+import AdminEditableValue from "./components/admin/AdminEditableValue"
 import AdminTopbar from "./components/admin/AdminTopbar"
 import Button from "./components/common/Button/Button"
 import Icon from "./components/common/Icon/Icon"
@@ -106,6 +109,9 @@ function Main() {
 
 function Footer() {
   const ll = useLocalization(ll => ll.footer)
+  const { payload } = useQuery(getPagesLinksDocuments)
+  if (!payload) return null
+  const links = payload.results.reduce<Record<PageLinkType["type"], PageLinkType>>((result, next) => ({ ...result, [next.type]: next }), {} as any)
   return (
     <footer>
       <div className="footer-container">
@@ -123,24 +129,36 @@ function Footer() {
             </div>
             <div className="footer-links__group">
               <div className="footer-links__title">{ll.linkGroups.docs}</div>
-              <OuterLink className="footer-links__link" to="//mentors">{ll.links.terms}</OuterLink>
-              <OuterLink className="footer-links__link" to="//become-mentor">{ll.links.privacyPolicy}</OuterLink>
-              <OuterLink className="footer-links__link" to="//mentor-search">{ll.links.cookiePolicy}</OuterLink>
+              <AdminEditableValue editingArea="links" id={links.user_agreement.id}>
+                <OuterLink className="footer-links__link" to={links.user_agreement.url}>{ll.links.terms}</OuterLink>
+              </AdminEditableValue>
+              <AdminEditableValue editingArea="links" id={links.privacy_policy.id}>
+                <OuterLink className="footer-links__link" to={links.privacy_policy.url}>{ll.links.privacyPolicy}</OuterLink>
+              </AdminEditableValue>
+              <AdminEditableValue editingArea="links" id={links.cookie_policy.id}>
+                <OuterLink className="footer-links__link" to={links.cookie_policy.url}>{ll.links.cookiePolicy}</OuterLink>
+              </AdminEditableValue>
             </div>
             <div className="footer-links__group">
               <div className="footer-links__title">{ll.linkGroups.help}</div>
-              <OuterLink className="footer-links__link" to="mailto:@become-mentor">{ll.links.support}</OuterLink>
+              <AdminEditableValue editingArea="links" id={links.help.id}>
+                <OuterLink className="footer-links__link" to={links.help.url}>{ll.links.support}</OuterLink>
+              </AdminEditableValue>
             </div>
           </div>
           <div className="footer-links__social">
-            <div>
-              <img src="/static/icons/facebook.svg" alt="facebook" />
-              <OuterLink to="//facebook.com" className="ghost" />
-            </div>
-            <div>
-              <img src="/static/icons/instagram.svg" alt="instagram" />
-              <OuterLink to="//instagram.com" className="ghost" />
-            </div>
+            <AdminEditableValue editingArea="links" id={links.facebook.id}>
+              <div>
+                <img src="/static/icons/facebook.svg" alt="facebook" />
+                <OuterLink to={links.facebook.url} className="ghost" />
+              </div>
+            </AdminEditableValue>
+            <AdminEditableValue editingArea="links" id={links.instagram.id}>
+              <div>
+                <img src="/static/icons/instagram.svg" alt="instagram" />
+                <OuterLink to={links.instagram.url} className="ghost" />
+              </div>
+            </AdminEditableValue>
           </div>
         </div>
         <div className="footer-copyright">

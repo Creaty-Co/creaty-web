@@ -108,3 +108,9 @@ export interface PageType {
   tags: TagType[]
   mentors: MentorType[]
 }
+
+export interface PageLinkType {
+  id: number
+  type: "facebook" | "instagram" | "help" | "user_agreement" | "privacy_policy" | "cookie_policy"
+  url: string
+}

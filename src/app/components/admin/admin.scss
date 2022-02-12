@@ -49,3 +49,38 @@
 		display: grid;
 	}
 }
+
+/* Editable Value */
+
+.admin-editable-value {
+	cursor: pointer;
+}
+
+.admin-editable-value__child {
+	pointer-events: none;
+}
+
+.admin-editable-value__form {
+	position: absolute;
+	top: 1em;
+
+	display: flex;
+	gap: 1em;
+
+	padding: 0.5em 1em;
+	background: $color-gray-100;
+	border: 2px solid $color-gray-80;
+	border-radius: 2.5em;
+	transition: 250ms ease opacity, 250ms ease transform;
+	z-index: 2;
+
+	&:not(&--expanded) {
+		opacity: 0;
+		transform: translateY(1em);
+		pointer-events: none;
+	}
+}
+
+.admin-editable-value__input {
+	color: $color-white;
+}
