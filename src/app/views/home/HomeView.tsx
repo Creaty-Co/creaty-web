@@ -36,7 +36,7 @@ function HomeView() {
   useEffect(() => { query() }, [ll])
   return (
     <div className="home-view">
-      {/* <div className="home-view__header">
+      <div className="home-view__header">
         <DynamicPrimaryInfo firstHeadingShortcut={params.shortcut} />
         <div className="home-view__search">
           <MentorSearch />
@@ -63,7 +63,7 @@ function HomeView() {
       </div>
       <div className="home-view__helpful-creaty">
         <HelpfulCreaty />
-      </div> */}
+      </div>
       <div className="home-view__faq">
         <h2 className="heading">{ll.QAndA.title}</h2>
         <QAndA />

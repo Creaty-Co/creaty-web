@@ -1,11 +1,9 @@
 import { deletePagesFAQs, patchPagesFAQs, postPagesFAQs } from "api/actions/pages"
-import { patchTagsTopics, postTagsTopics } from "api/actions/tags"
 import ClientAPI from "api/client"
 import { FormElements } from "interfaces/common"
-import { PageFAQType, TopicType } from "interfaces/types"
+import { PageFAQType } from "interfaces/types"
 import { usePopupContext } from "modules/popup/hook"
 import { FormEvent } from "react"
-import { toBase64 } from "utils/common"
 
 import Button from "../../common/Button/Button"
 import Input from "../../UI/Input/Input"
