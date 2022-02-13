@@ -2,7 +2,7 @@ import { patchTagsTopics, postTagsTopics } from "api/actions/tags"
 import ClientAPI from "api/client"
 import { FormElements } from "interfaces/common"
 import { TopicType } from "interfaces/types"
-import { usePopupContext } from "modules/popup/hook"
+import { usePopup } from "modules/popup/hook"
 import { FormEvent } from "react"
 import { FileToURLDataBase64 } from "utils/common"
 
@@ -12,7 +12,7 @@ import PopupLayout from "../PopupLayout"
 
 
 export function PopupAdminNewTopic() {
-  const { close } = usePopupContext()
+  const { close } = usePopup()
   async function submitTopic(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
@@ -54,7 +54,7 @@ interface PopupAdminEditTopicProps {
 }
 
 export function PopupAdminEditTopic(props: PopupAdminEditTopicProps) {
-  const { close } = usePopupContext()
+  const { close } = usePopup()
   async function submitTopic(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 

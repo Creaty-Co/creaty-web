@@ -2,7 +2,7 @@ import { deleteTags, patchTags, postTags } from "api/actions/tags"
 import ClientAPI from "api/client"
 import { FormElements } from "interfaces/common"
 import { TagType } from "interfaces/types"
-import { usePopupContext } from "modules/popup/hook"
+import { usePopup } from "modules/popup/hook"
 import { FormEvent } from "react"
 
 import Button from "../../common/Button/Button"
@@ -15,7 +15,7 @@ interface PopupAdminNewTagProps {
 }
 
 export function PopupAdminNewTag(props: PopupAdminNewTagProps) {
-  const { close } = usePopupContext()
+  const { close } = usePopup()
   function submitTag(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
@@ -52,7 +52,7 @@ interface PopupAdminEditTagProps {
 }
 
 export function PopupAdminEditTag(props: PopupAdminEditTagProps) {
-  const { close } = usePopupContext()
+  const { close } = usePopup()
   function deleteTag() {
     ClientAPI
       .query(deleteTags(props.tag.id))

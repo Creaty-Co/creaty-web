@@ -96,7 +96,7 @@ export interface MentorPatchType {
   last_name: string
   price: string
   price_currency: string
-  tag_set: number[]
+  tag_set__in: number[]
   country: number
   packages: MentorPackageType[]
 }

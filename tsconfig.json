@@ -31,5 +31,5 @@
     ]
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.json"],
-  "exclude": ["node_modules", "build", "config", "docs", "env", "public", "scripts", ".vscode", ".github", "design"]
+  "exclude": ["node_modules/**/*", "build", "config", "docs", "env", "public", "scripts", ".vscode", ".github", "design"]
 }

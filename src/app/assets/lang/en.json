@@ -244,23 +244,23 @@
   },
   "popups": {
     "popupForm": {
-      "forms": {
-        "become_mentor": {
-          "title": "Become a mentor"
-        },
-        "choose_mentor": {
-          "title": "Get bypower in the selection of a mentor"
-        },
-        "test_meeting": {
-          "title": "Sign up for a free test meeting"
-        }
-      },
       "thanks": "Thanks for submitting <em>:)</em>"
     }
   },
   "other": {
     "pagination": {
       "showMore": "Show More"
+    },
+    "forms": {
+      "become_mentor": {
+        "title": "Become a mentor"
+      },
+      "choose_mentor": {
+        "title": "Get bypower in the selection of a mentor"
+      },
+      "test_meeting": {
+        "title": "Sign up for a free test meeting"
+      }
     }
   }
 }

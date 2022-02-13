@@ -244,23 +244,23 @@
   },
   "popups": {
     "popupForm": {
-      "forms": {
-        "become_mentor": {
-          "title": "Станьте ментором"
-        },
-        "choose_mentor": {
-          "title": "Получите помощь в подборе ментора"
-        },
-        "test_meeting": {
-          "title": "Запишитесь на бесплатную тестовую встречу"
-        }
-      },
       "thanks": "Спасибо за заявку <em>:)</em>"
     }
   },
   "other": {
     "pagination": {
       "showMore": "Покакзать ещё"
+    },
+    "forms": {
+      "become_mentor": {
+        "title": "Станьте ментором"
+      },
+      "choose_mentor": {
+        "title": "Получите помощь в подборе ментора"
+      },
+      "test_meeting": {
+        "title": "Запишитесь на бесплатную тестовую встречу"
+      }
     }
   }
 }

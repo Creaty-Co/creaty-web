@@ -97,8 +97,6 @@ function UserUserId() {
         <UserSection type="1" title={ll.info.portfolio}>
           <div className="user-section__rows">
             <p>{payload.info.portfolio}</p>
-            {/* <OuterLink to="//webflow.com/yakov.petrunin">webflow.com/yakov.petrunin</OuterLink>
-            <OuterLink to="//webflow.com/yakov.petrunin">webflow.com/yakov.petrunin</OuterLink> */}
           </div>
         </UserSection>
         <UserSection type="2" title={ll.info.garantee.title} iconName="r-square">
