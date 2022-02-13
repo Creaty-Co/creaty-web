@@ -33,10 +33,9 @@ export const getMailing = (id: number): Action<MailingType> => ({
   endpoint: `/mailings/${id}`
 })
 
-export const postMailingSend = (id: number, body: Omit<MailingType, "id">): Action<{ id: number }> => ({
+export const postMailingSend = (id: number): Action<{ id: number }> => ({
   method: "POST",
-  endpoint: `/mailings/${id}/send`,
-  body
+  endpoint: `/mailings/${id}/send`
 })
 
 /* Subscribers */

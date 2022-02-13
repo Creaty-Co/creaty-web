@@ -126,7 +126,7 @@ export interface PageFAQType {
 export interface MailingPreviewType {
   id: number
   subject: string
-  is_done: true
+  is_done: boolean | null
 }
 
 export interface MailingType {
