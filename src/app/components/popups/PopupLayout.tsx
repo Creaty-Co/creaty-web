@@ -1,7 +1,6 @@
 import "app/assets/scss/popup.scss"
 
-import { usePopupContext } from "modules/popup/hook"
-import { ReactNode } from "react"
+import { ReactNode, useEffect } from "react"
 
 import Icon from "../common/Icon/Icon"
 

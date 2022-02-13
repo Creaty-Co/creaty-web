@@ -55,7 +55,7 @@ function MentorSearch() {
           <MentorSearchList value={search.topic || search.tag ? null : value} visible={search.focused} />
           <Icon name="chevron" className="mentor-search__icon" />
         </button>
-        <Button color="violet" size="big">{ll.button}</Button>
+        <Button color="violet" size="big" eventLabel="Search Form">{ll.button}</Button>
       </div>
     </div>
   )

@@ -60,6 +60,8 @@ function App() {
 function Header() {
   const ll = useLocalization(ll => ll.header)
   const [expanded, setExpanded] = useState(false)
+  const location = useLocation()
+  useEffect(() => ReactGA.pageview(location.pathname + location.search + location.hash), [location])
   return (
     <header>
       <AdminTopbar />

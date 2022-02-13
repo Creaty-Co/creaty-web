@@ -95,7 +95,7 @@ function ContactForm(props: ContactFormProps) {
           </div>
         )}
       </div>
-      <Button className="contact-form__submit" size="big" type="submit" color="dark">{props.submitText || ll.submit}</Button>
+      <Button className="contact-form__submit" size="big" type="submit" color="dark" eventLabel="Contact Form">{props.submitText || ll.submit}</Button>
       <div className="contact-form__terms">{ll.terms}</div>
     </form>
   )
