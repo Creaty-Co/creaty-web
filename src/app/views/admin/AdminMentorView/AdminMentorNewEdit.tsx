@@ -6,7 +6,7 @@ import { MentorDetailedType } from "interfaces/types"
 import { FormEvent } from "react"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router"
-import { toBase64 } from "utils/common"
+import { FileToURLDataBase64 } from "utils/common"
 
 import countries from "../countries.json"
 import langs from "../langs.json"
@@ -71,7 +71,7 @@ function AdminMentorNewEdit(props: AdminNewMentorViewProps | AdminEditMentorView
       packages: [],
       tag_set: getCheckedValues(elements.tag_set).map(Number),
       // -------------------------------------------
-      avatar: elements.avatar.files?.[0] ? await toBase64(elements.avatar.files[0]) : (props.data?.avatar || ""),
+      avatar: elements.avatar.files?.[0] ? await FileToURLDataBase64(elements.avatar.files[0]) : (props.data?.avatar || ""),
       company: elements.company.value,
       profession: elements.profession.value,
       first_name: elements.first_name.value,

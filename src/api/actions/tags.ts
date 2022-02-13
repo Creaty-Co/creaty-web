@@ -1,5 +1,5 @@
 import { Action } from "api/client"
-import { DataURLBase64 } from "interfaces/common"
+import { URLDataBase64 } from "interfaces/common"
 import { PaginationType } from "interfaces/Django"
 import { TagType, TopicType } from "interfaces/types"
 
@@ -45,7 +45,7 @@ export const postTagsTopics = (body: {
   shortcut: string
   title_ru: string
   title_en: string
-  icon: DataURLBase64 | string
+  icon: URLDataBase64 | string
 }): Action<{ id: number }> => ({
   method: "POST",
   endpoint: `/tags/categories`,
@@ -55,7 +55,7 @@ export const postTagsTopics = (body: {
 export const patchTagsTopics = (id: number, body: {
   shortcut: string
   title: string
-  icon: DataURLBase64 | string
+  icon: URLDataBase64 | string
 }): Action<{ id: number }> => ({
   method: "PATCH",
   endpoint: `/tags/${id}`,

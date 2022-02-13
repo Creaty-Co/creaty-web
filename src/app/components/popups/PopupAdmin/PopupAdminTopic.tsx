@@ -4,7 +4,7 @@ import { FormElements } from "interfaces/common"
 import { TopicType } from "interfaces/types"
 import { usePopupContext } from "modules/popup/hook"
 import { FormEvent } from "react"
-import { toBase64 } from "utils/common"
+import { FileToURLDataBase64 } from "utils/common"
 
 import Button from "../../common/Button/Button"
 import Input from "../../UI/Input/Input"
@@ -24,7 +24,7 @@ export function PopupAdminNewTopic() {
         shortcut: elements.shortcut.value,
         title_ru: elements.title_ru.value,
         title_en: elements.title_en.value,
-        icon: elements.icon.files?.[0] ? await toBase64(elements.icon.files?.[0]) : ""
+        icon: elements.icon.files?.[0] ? await FileToURLDataBase64(elements.icon.files?.[0]) : ""
       }))
       .then(({ error }) => {
         if (error) return
@@ -65,7 +65,7 @@ export function PopupAdminEditTopic(props: PopupAdminEditTopicProps) {
       .query(patchTagsTopics(props.topic.id, {
         shortcut: elements.shortcut.value,
         title: elements.title.value,
-        icon: elements.icon.files?.[0] ? await toBase64(elements.icon.files?.[0]) : (props.topic?.icon || "")
+        icon: elements.icon.files?.[0] ? await FileToURLDataBase64(elements.icon.files?.[0]) : (props.topic?.icon || "")
       }))
       .then(({ error }) => {
         if (error) return

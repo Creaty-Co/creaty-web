@@ -1,7 +1,6 @@
 import "./extensions"
 
-import { DataURLBase64, FormElements } from "interfaces/common"
-import React from "react"
+import { FormElements, URLDataBase64 } from "interfaces/common"
 
 /**
  *
@@ -46,13 +45,16 @@ export function createQuery(queryObject?: Record<string, unknown> | null): strin
   return queryArray.filter(Boolean).join("&")
 }
 
+export function toBase64(value: unknown) {
+  return Buffer.from(JSON.stringify(value)).toString("base64")
+}
 
-export function toBase64(file: File): Promise<DataURLBase64> {
+export function FileToURLDataBase64(file: File): Promise<URLDataBase64> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader()
 
     reader.readAsDataURL(file)
-    reader.onload = () => resolve(reader.result as DataURLBase64)
+    reader.onload = () => resolve(reader.result as URLDataBase64)
     reader.onerror = reject
   })
 }
