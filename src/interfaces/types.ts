@@ -120,3 +120,17 @@ export interface PageFAQType {
   question: string
   answer: string
 }
+
+/* Mailings */
+
+export interface MailingPreviewType {
+  id: number
+  subject: string
+  is_done: true
+}
+
+export interface MailingType {
+  id: number
+  subject: string
+  content: string
+}
