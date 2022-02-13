@@ -7,6 +7,7 @@ import DropDown from "../DropDown/DropDown"
 
 interface SelectorProps<V> {
   name?: string
+  defaultValue?: string
   onChange?: Dispatch<V>
   children: ReactElement<ComponentProps<"option">>[]
 }

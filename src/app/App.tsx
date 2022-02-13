@@ -8,10 +8,12 @@ import { PageLinkType } from "interfaces/types"
 import useLocalization from "modules/localization/hook"
 import { PopupContainer } from "modules/popup/container"
 import { Popup } from "modules/popup/controller"
-import { StrictMode, Suspense, useRef, useState } from "react"
+import { StrictMode, Suspense, useEffect, useRef, useState } from "react"
 import { ClientContextProvider, useQuery } from "react-fetching-library"
+import ReactGA from "react-ga"
 import { Provider } from "react-redux"
 import { Route, Routes } from "react-router"
+import { useLocation } from "react-router"
 import { BrowserRouter, NavLink } from "react-router-dom"
 import { Link } from "react-router-dom"
 import store from "redux/store"
@@ -25,6 +27,7 @@ import PopupForm from "./components/popups/PopupForm"
 import ErrorBoundary from "./components/services/ErrorBoundary"
 import OuterLink from "./components/services/OuterLink"
 import LangSelector from "./components/UI/LangSelector/LangSelector"
+import AdminFormsView from "./views/admin/AdminFormsView/AdminFormsView"
 import AdminMailings from "./views/admin/AdminMailings/AdminMailings"
 import AdminMentorsView from "./views/admin/AdminMentorsView/AdminMentorsView"
 import AdminEditMentorView from "./views/admin/AdminMentorView/AdminEditMentorView"
@@ -34,6 +37,9 @@ import HomeView from "./views/home/HomeView"
 import MentorsView from "./views/mentors/MentorsView"
 import MentorsViewTopicOrTag from "./views/mentors/MentorsView[topicOrTag]"
 import UserUserId from "./views/user/User[userId]"
+
+
+ReactGA.initialize(process.env.REACT_APP_API_GA_UA)
 
 function App() {
   return (
@@ -106,6 +112,8 @@ function Main() {
         <Route path="/admin/topics-tags" element={<AdminTopicsTagsView />} />
         {/* Mailings */}
         <Route path="/admin/mailings" element={<AdminMailings />} />
+        {/* Forms */}
+        <Route path="/admin/forms" element={<AdminFormsView />} />
         {/* --- Admin --- */}
       </Routes>
     </main>
@@ -135,19 +143,19 @@ function Footer() {
             <div className="footer-links__group">
               <div className="footer-links__title">{ll.linkGroups.docs}</div>
               <AdminEditableValue editingArea="links" id={links.user_agreement.id}>
-                <OuterLink className="footer-links__link" to={links.user_agreement.url}>{ll.links.terms}</OuterLink>
+                <OuterLink className="footer-links__link" to={links.user_agreement.url} eventLabel="terms">{ll.links.terms}</OuterLink>
               </AdminEditableValue>
               <AdminEditableValue editingArea="links" id={links.privacy_policy.id}>
-                <OuterLink className="footer-links__link" to={links.privacy_policy.url}>{ll.links.privacyPolicy}</OuterLink>
+                <OuterLink className="footer-links__link" to={links.privacy_policy.url} eventLabel="privacyPolicy">{ll.links.privacyPolicy}</OuterLink>
               </AdminEditableValue>
               <AdminEditableValue editingArea="links" id={links.cookie_policy.id}>
-                <OuterLink className="footer-links__link" to={links.cookie_policy.url}>{ll.links.cookiePolicy}</OuterLink>
+                <OuterLink className="footer-links__link" to={links.cookie_policy.url} eventLabel="cookiePolicy">{ll.links.cookiePolicy}</OuterLink>
               </AdminEditableValue>
             </div>
             <div className="footer-links__group">
               <div className="footer-links__title">{ll.linkGroups.help}</div>
               <AdminEditableValue editingArea="links" id={links.help.id}>
-                <OuterLink className="footer-links__link" to={links.help.url}>{ll.links.support}</OuterLink>
+                <OuterLink className="footer-links__link" to={links.help.url} eventLabel="help">{ll.links.support}</OuterLink>
               </AdminEditableValue>
             </div>
           </div>
@@ -155,13 +163,13 @@ function Footer() {
             <AdminEditableValue editingArea="links" id={links.facebook.id}>
               <div>
                 <img src="/static/icons/facebook.svg" alt="facebook" />
-                <OuterLink to={links.facebook.url} className="ghost" />
+                <OuterLink to={links.facebook.url} className="ghost" eventLabel="facebook" />
               </div>
             </AdminEditableValue>
             <AdminEditableValue editingArea="links" id={links.instagram.id}>
               <div>
                 <img src="/static/icons/instagram.svg" alt="instagram" />
-                <OuterLink to={links.instagram.url} className="ghost" />
+                <OuterLink to={links.instagram.url} className="ghost" eventLabel="instagram" />
               </div>
             </AdminEditableValue>
           </div>
@@ -187,10 +195,18 @@ function Cookies() {
   if (cookiesRef.current === "accept") {
     return null
   }
+
+  const { payload } = useQuery(getPagesLinksDocuments)
+  if (!payload) return null
+
+  const cookiePolicy = payload.results.find(l => l.type === "cookie_policy")
+  if (!cookiePolicy) return null
   return (
     <div className={classWithModifiers("cookies", cookies === "accept" && "accept")}>
       <p className="cookies__text">
-        <OuterLink to="#">{ll.byRules}</OuterLink>
+        <AdminEditableValue editingArea="links" id={cookiePolicy.id}>
+          <OuterLink to={cookiePolicy.url} eventLabel="cookiePolicy">{ll.byRules}</OuterLink>
+        </AdminEditableValue>
         {", "}
         {ll.desc}
       </p>

@@ -8,6 +8,7 @@ import { FormElements } from "interfaces/common"
 import { FormFieldType, FormType } from "interfaces/types"
 import useLocalization from "modules/localization/hook"
 import { ChangeEvent, FormEvent, useState } from "react"
+import ReactMarkdown from "react-markdown"
 import { useSelector } from "react-redux"
 
 
@@ -74,6 +75,11 @@ function ContactForm(props: ContactFormProps) {
   const about = form?.fields.find(field => field.type === "about")
   return (
     <form className="contact-form" onSubmit={onSubmit}>
+      {!!form?.description?.length && (
+        <p className="contact-form__text">
+          <ReactMarkdown>{form.description}</ReactMarkdown>
+        </p>
+      )}
       <div className="contact-form__inputs">
         {name && (
           <Input placeholder={name.placeholder} type="text" name="name" required />
@@ -91,7 +97,7 @@ function ContactForm(props: ContactFormProps) {
         )}
         {about && (
           <div className="input">
-            <textarea className="input__input" name="about" placeholder={about.placeholder + "\n" + ll.mayDiscussLater}></textarea>
+            <textarea className="input__input" name="about" placeholder={about.placeholder}></textarea>
           </div>
         )}
       </div>
