@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "composite": true,
+    // "composite": true,
     "target": "ES5",
     "lib": [
       "DOM",

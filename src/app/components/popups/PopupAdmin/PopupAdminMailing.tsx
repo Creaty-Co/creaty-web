@@ -1,5 +1,6 @@
-import { getMailing, postMailings, postMailingSend } from "api/actions/mailings"
+import { getMailing, getMailingsSubscribersXLSX, postMailings, postMailingSend, putMailingsSubscribersXLSX } from "api/actions/mailings"
 import ClientAPI from "api/client"
+import { APIOuterLink } from "api/helpers"
 import Button from "app/components/common/Button/Button"
 import Input from "app/components/UI/Input/Input"
 import { FormElements } from "interfaces/common"
@@ -7,6 +8,7 @@ import { MailingPreviewType } from "interfaces/types"
 import { usePopupContext } from "modules/popup/hook"
 import { FormEvent } from "react"
 import { useQuery } from "react-fetching-library"
+import { FileToURLDataBase64 } from "utils/common"
 
 import PopupLayout from "../PopupLayout"
 
@@ -90,6 +92,37 @@ export function PopupAdminEditMailing(props: PopupAdminEditMailingsProps) {
         </div>
         <Button color="dark" type="submit">Сохранить</Button> */}
         <Button color="violet" onClick={sendMailing}>Разослать</Button>
+      </form>
+    </PopupLayout>
+  )
+}
+
+
+export function PopupAdminXlSXMailing() {
+  const { close } = usePopupContext()
+  async function submitXLSX(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+
+    const target = event.currentTarget
+    const elements = target.elements as FormElements<"xlsx">
+    if (!elements.xlsx?.files?.[0]) return
+
+    ClientAPI
+      .query(putMailingsSubscribersXLSX(await FileToURLDataBase64(elements.xlsx.files[0])))
+      .then(({ error }) => {
+        if (error) return
+        close()
+        window.location.reload()
+      })
+  }
+  return (
+    <PopupLayout title="Таблица подписчиков" width="80em">
+      <form onSubmit={submitXLSX}>
+        <Input name="xlsx" type="file" />
+        <Button color="dark" type="submit">Загрузить</Button>
+        <APIOuterLink action={getMailingsSubscribersXLSX} className="button button--dark">
+          <div className="button__text">Скачать</div>
+        </APIOuterLink>
       </form>
     </PopupLayout>
   )

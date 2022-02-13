@@ -1,6 +1,7 @@
 import { HTMLAttributes } from "react"
 
 import { Action } from "./client"
+import { endpointTransform } from "./interceptors"
 
 
 interface APIOuterLinkProps extends Omit<HTMLAttributes<HTMLAnchorElement>, "href"> {
@@ -8,7 +9,7 @@ interface APIOuterLinkProps extends Omit<HTMLAttributes<HTMLAnchorElement>, "hre
 }
 
 export function APIOuterLink(props: APIOuterLinkProps) {
-  const href = process.env.REACT_APP_BASE_URL + props.action.endpoint + "/"
+  const href = endpointTransform(props.action)
   return (
     <a {...{ ...props, action: undefined }} href={href} />
   )

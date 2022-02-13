@@ -1,6 +1,6 @@
 import { getMailings } from "api/actions/mailings"
 import Button from "app/components/common/Button/Button"
-import { PopupAdminEditMailing, PopupAdminNewMailing } from "app/components/popups/PopupAdmin/PopupAdminMailing"
+import { PopupAdminEditMailing, PopupAdminNewMailing, PopupAdminXlSXMailing } from "app/components/popups/PopupAdmin/PopupAdminMailing"
 import { Popup } from "modules/popup/controller"
 import { useState } from "react"
 import { useQuery } from "react-fetching-library"
@@ -17,6 +17,7 @@ function AdminMailings() {
     <div className="admin-view">
       <h2 className="admin-view__title">Рассылки</h2>
       <Button color="dark" onClick={() => Popup.open(PopupAdminNewMailing)}>Создать</Button>
+      <Button color="dark" onClick={() => Popup.open(PopupAdminXlSXMailing)}>Подписчики</Button>
       <div className="admin-view__entries admin-view__entries--grid" style={{ cursor: "pointer" }}>
         {payload.results.map(mailing => (
           <div className="admin-view__entries admin-view__entries--flex" onClick={() => Popup.open(PopupAdminEditMailing, { mailing })} key={mailing.id}>
