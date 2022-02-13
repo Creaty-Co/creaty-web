@@ -7,7 +7,7 @@ import { MailingPreviewType, MailingType } from "interfaces/types"
 
 export const getMailings = (page: number, page_size: number): Action<PaginationType<MailingPreviewType>> => ({
   method: "GET",
-  endpoint: "/mailings/",
+  endpoint: "/mailings",
   params: { page, page_size }
 })
 
@@ -16,7 +16,7 @@ export const postMailings = (body: {
   content: string
 }): Action<{ id: number }> => ({
   method: "POST",
-  endpoint: "/mailings/",
+  endpoint: "/mailings",
   body
 })
 
@@ -43,7 +43,7 @@ export const postMailingSend = (id: number, body: Omit<MailingType, "id">): Acti
 
 export const getMailingsSubscribers: Action = {
   method: "GET",
-  endpoint: `/mailings/subscribers/xlsx/` // Gives headers for downloading
+  endpoint: `/mailings/subscribers/xlsx` // Gives headers for downloading
 }
 
 export const postMailingsSubscribers = (xlsx: URLDataBase64): Action => ({
