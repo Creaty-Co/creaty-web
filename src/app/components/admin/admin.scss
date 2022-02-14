@@ -31,6 +31,8 @@
 	border-radius: 1.5em;
 
 	color: $color-black-main;
+
+	overflow: auto;
 }
 
 .admin-view__entries {
@@ -79,4 +81,31 @@
 
 .admin-editable-value__input {
 	color: $color-white;
+}
+
+table.admin-view__table {
+	overflow: auto;
+
+	img {
+		width: 3.5em;
+		height: 3.5em;
+		object-fit: cover;
+		border-radius: 50%;
+	}
+
+	input {
+		min-width: 5em;
+	}
+
+	section {
+		display: flex;
+		align-items: center;
+		gap: 0.25em
+	}
+
+	th,
+	td {
+		min-width: 3.5em;
+		white-space: nowrap;
+	}
 }

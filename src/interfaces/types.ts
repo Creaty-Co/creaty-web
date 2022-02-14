@@ -67,7 +67,7 @@ export interface MentorDetailedLanguages {
 
 export interface MentorDetailedType extends MentorType {
   info: {
-    trial_meeting: number
+    trial_meeting: number | null
     resume: string
     what_help: string
     experience: string

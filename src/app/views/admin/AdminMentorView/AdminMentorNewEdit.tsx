@@ -9,6 +9,7 @@ import { useNavigate } from "react-router"
 import { FileToURLDataBase64, getCheckedValues } from "utils/common"
 
 import countries from "../countries.json"
+import { AdminCountriesSelect, AdminLangsCheckboxes } from "../helpers"
 import langs from "../langs.json"
 
 
@@ -115,20 +116,11 @@ function AdminMentorNewEdit(props: AdminNewMentorViewProps | AdminEditMentorView
           </label>
         ))}
         Страна
-        <select name="country" defaultValue={props.data?.country.id}>
-          {countries.results.map(country => (
-            <option value={country.id} key={country.id}>{country.name}</option>
-          ))}
-        </select>
+        <AdminCountriesSelect defaultValue={props.data?.country.id} />
         <Input name="city_ru" placeholder="Город на русском" defaultValue={props.data?.info.city_ru} />
         <Input name="city_en" placeholder="Город на английском" defaultValue={props.data?.info.city_en} />
         Языки
-        {langs.results.map(lang => (
-          <label key={lang.id}>
-            {lang.name_native}
-            <input name="languages" type="checkbox" defaultChecked={!!(props.data?.info.languages.find(langg => langg.id === lang.id))} value={lang.id} />
-          </label>
-        ))}
+        <AdminLangsCheckboxes defaultChecked={props.data?.info.languages.map(lang => lang.id)} />
 
         Аватарка
         <img src={props.data?.avatar} />

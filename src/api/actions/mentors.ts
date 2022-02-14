@@ -14,7 +14,7 @@ export const postMentors = (body: MentorPatchType): Action<{ id: number }> => ({
   body
 })
 
-export const patchMentorsId = (id: number, body: MentorPatchType): Action<{ id: number }> => ({
+export const patchMentorsId = (id: number, body: Partial<Omit<MentorPatchType, "info">> & { info?: Partial<MentorPatchType["info"]> }): Action<{ id: number }> => ({
   method: "PATCH",
   endpoint: `/mentors/${id}`,
   body

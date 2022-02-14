@@ -16,6 +16,7 @@ import { Route, Routes } from "react-router"
 import { useLocation } from "react-router"
 import { BrowserRouter, NavLink } from "react-router-dom"
 import { Link } from "react-router-dom"
+import { ToastContainer } from "react-toastify"
 import store from "redux/store"
 import { classWithModifiers } from "utils/common"
 
@@ -54,6 +55,7 @@ function App() {
                 <Footer />
                 <Cookies />
                 <PopupContainer />
+                <ToastContainer />
               </ErrorBoundary>
             </Suspense>
           </ClientContextProvider>
