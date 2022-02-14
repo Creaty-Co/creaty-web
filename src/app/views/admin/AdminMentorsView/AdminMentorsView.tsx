@@ -7,6 +7,7 @@ import Button from "app/components/common/Button/Button"
 import ButtonLink from "app/components/common/Button/ButtonLink"
 import Input from "app/components/UI/Input/Input"
 import { MentorPatchType } from "interfaces/types"
+import { Popup } from "modules/popup/controller"
 import { Children, cloneElement, DetailedHTMLProps, FocusEvent, HTMLAttributes, InputHTMLAttributes, KeyboardEvent, ReactElement, useRef, useState } from "react"
 import { useQuery } from "react-fetching-library"
 import { Link } from "react-router-dom"
@@ -67,6 +68,7 @@ function AdminMentorsView() {
               <td><PartialEditMentorInput id={mentor.id} name="trial_meeting" defaultChecked={!!mentor.info.trial_meeting} type="checkbox" /></td>
               <td><PartialEditMentorInput id={mentor.id} name="city_ru" defaultValue={mentor.info.city_ru} /></td>
               <td><PartialEditMentorInput id={mentor.id} name="city_en" defaultValue={mentor.info.city_en} /></td>
+              <td><Button color="dark" onClick={() => Popup}>Ред. перс. страницу</Button></td>
             </tr>
           ))}
         </tbody>

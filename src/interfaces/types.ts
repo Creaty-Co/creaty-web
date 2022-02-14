@@ -98,7 +98,7 @@ export interface MentorPatchType {
   price_currency: string
   tag_set__in: number[]
   country: number
-  packages: MentorPackageType[]
+  packages: Omit<MentorPackageType, "id">[]
 }
 
 /* Pages */

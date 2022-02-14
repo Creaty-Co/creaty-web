@@ -1,6 +1,7 @@
 import "./extensions"
 
 import { FormElements, URLDataBase64 } from "interfaces/common"
+import { cloneElement } from "react"
 
 /**
  *
@@ -98,9 +99,10 @@ export function inter<V = unknown>(value: V, vars: Record<string, string | numbe
   if (!value) throw new TypeError("interError: empty value gotten")
   const varKeys = Object.keys(vars)
   function interpolate(value: V): V | string {
-    // ------------------------------------------------
-    if ((value as any)?.props?.children) {
-      return interpolate((value as any).props.children)
+    // ------------------------------------------------ Hardcoded :(
+    const elementProps = (value as any)?.props
+    if (elementProps?.children) {
+      return cloneElement(value as any, elementProps, interpolate(elementProps.children)) as any
     }
     // ------------------------------------------------
     if (typeof value === "string") {

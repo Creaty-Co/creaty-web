@@ -2,11 +2,12 @@ import { patchMentorsId, postMentors } from "api/actions/mentors"
 import ClientAPI from "api/client"
 import Button from "app/components/common/Button/Button"
 import Input from "app/components/UI/Input/Input"
-import { MentorDetailedType } from "interfaces/types"
-import { FormEvent } from "react"
+import { FormElements } from "interfaces/common"
+import { MentorDetailedType, MentorPackageType } from "interfaces/types"
+import { ChangeEvent, Dispatch, FormEvent, useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router"
-import { FileToURLDataBase64, getCheckedValues } from "utils/common"
+import { FileToURLDataBase64, getCheckedValues, toBase64 } from "utils/common"
 
 import countries from "../countries.json"
 import { AdminCountriesSelect, AdminLangsCheckboxes } from "../helpers"
@@ -28,6 +29,7 @@ interface AdminEditMentorViewProps {
 function AdminMentorNewEdit(props: AdminNewMentorViewProps | AdminEditMentorViewProps) {
   const navigate = useNavigate()
   const topics = useSelector(state => state.topics)
+  const [packages, setPackages] = useState<Omit<MentorPackageType, "id">[]>(props.data?.packages || [])
   async function submitCreateMentor(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
@@ -69,7 +71,7 @@ function AdminMentorNewEdit(props: AdminNewMentorViewProps | AdminEditMentorView
         city_ru: elements.city_ru.value,
         city_en: elements.city_en.value
       },
-      packages: [],
+      packages,
       tag_set__in: getCheckedValues(elements.tag_set__in).map(Number),
       // -------------------------------------------
       avatar: elements.avatar.files?.[0] ? await FileToURLDataBase64(elements.avatar.files[0]) : (props.data?.avatar || ""),
@@ -139,6 +141,7 @@ function AdminMentorNewEdit(props: AdminNewMentorViewProps | AdminEditMentorView
           <textarea name="resume" placeholder="Резюме" className="input__input" defaultValue={props.data?.info.resume} />
         </div>
 
+        <PackagesEdit defaultValues={props.data?.packages} onChange={setPackages} />
 
         <label>
           15 минут бесплатной встречи
@@ -149,6 +152,45 @@ function AdminMentorNewEdit(props: AdminNewMentorViewProps | AdminEditMentorView
       <br />
       <Button color="violet" type="submit">Сделать</Button>
     </form>
+  )
+}
+
+
+function PackagesEdit(props: { defaultValues?: Omit<MentorPackageType, "id">[]; onChange: Dispatch<Omit<MentorPackageType, "id">[]> }) {
+  const [packages, setPackages] = useState<Omit<MentorPackageType, "id">[]>(props.defaultValues || [])
+  function editPackage(pack: Omit<MentorPackageType, "id">) {
+    return (event: ChangeEvent<HTMLInputElement>) => {
+      const target = event.currentTarget
+
+      packages[packages.indexOf(pack)][target.name as Exclude<keyof MentorPackageType, "id">] = +target.value
+      setPackages([...packages])
+    }
+  }
+  useEffect(() => props.onChange?.(packages), [packages])
+  return (
+    <>
+      <br />
+      <br />
+      {packages.map((pack, index) => (
+        <div key={toBase64(pack)}>
+          <br />
+          <h3>Пакет номер {index + 1}</h3>
+          <Button color="violet" onClick={() => setPackages([...packages.filter(packg => packg !== pack)])}>Удалить</Button>
+          <br />
+          <label>
+            кол-во
+            <Input onChange={editPackage(pack)} placeholder="Введите кол-во" name="lessons_count" defaultValue={pack.lessons_count} />
+          </label>
+          <label>
+            скидку
+            <Input onChange={editPackage(pack)} placeholder="Введите скидку" name="discount" defaultValue={pack.discount} />
+          </label>
+        </div>
+      ))}
+      <Button color="dark" onClick={() => setPackages([...packages, { discount: 0, lessons_count: 0 }])}>Добавить пакет</Button>
+      <br />
+      <br />
+    </>
   )
 }
 
