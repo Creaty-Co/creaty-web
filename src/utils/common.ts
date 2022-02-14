@@ -125,5 +125,8 @@ export function getFormInputs<U extends string = string>(elements: FormElements<
   }, {} as any)
 }
 
+export function getCheckedValues(inputs: RadioNodeList & HTMLInputElement[]) {
+  return [...inputs].filter(input => input.checked).map(input => input.value)
+}
 
 export function noop(): void { /* Do nothing */ }

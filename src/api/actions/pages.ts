@@ -11,10 +11,10 @@ export const getPagesMain: Action<PageType> = {
   endpoint: "/pages/main"
 }
 
-export const patchPagesMain = (body: {
+export const patchPagesMain = (body: Partial<{
   tags: number[]
   mentors: number[]
-}): Action<{ id: number }> => ({
+}>): Action<{ id: number }> => ({
   method: "PATCH",
   endpoint: "/pages/main",
   body
@@ -30,11 +30,10 @@ export const getPagePersonal = (shortcut: string): Action<{
   endpoint: `/pages/personal/${shortcut}`
 })
 
-export const patchPagePersonal = (shortcut: string, body: {
-  id: number
+export const patchPagePersonal = (shortcut: string, body: Partial<{
   tags: number[]
   mentors: number[]
-}): Action<{ id: number }> => ({
+}>): Action<{ id: number }> => ({
   method: "PATCH",
   endpoint: `/pages/personal/${shortcut}`,
   body

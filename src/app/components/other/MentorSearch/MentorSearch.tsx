@@ -121,9 +121,6 @@ function MentorSearchListStatic() {
             <span>{topic.title}</span>
           </Link>
         ))}
-        <AdminInterface>
-          <button className="mentor-search-list__item">Добавить новую категорию</button>
-        </AdminInterface>
       </div>
       <div className="mentor-search-list__tags">
         {!search.tag && search.topic?.tags.map(tag => (

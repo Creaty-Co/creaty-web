@@ -94,6 +94,10 @@ textarea {
 	outline: initial;
 }
 
+input[type="checkbox"] {
+	all: revert;
+}
+
 button {
 	cursor: pointer;
 }

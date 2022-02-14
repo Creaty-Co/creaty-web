@@ -9,6 +9,7 @@ import MentorSearch from "app/components/other/MentorSearch/MentorSearch"
 import MentorSearchTags from "app/components/other/MentorSearch/MentorSearchTags"
 import MentorsSlider from "app/components/other/MentorsSlider/MentorsSlider"
 import { PopupAdminEditFAQ, PopupAdminNewFAQ } from "app/components/popups/PopupAdmin/PopupAdminFAQ"
+import { PopupAdminTags } from "app/components/popups/PopupAdmin/PopupAdminTags"
 import BigComment from "app/components/UI/BigComment/BigComment"
 import { FAQ, FAQClause } from "app/components/UI/FAQ/FAQ"
 import InfoSection from "app/components/UI/InfoSection/InfoSection"
@@ -18,7 +19,6 @@ import { Popup } from "modules/popup/controller"
 import { useEffect } from "react"
 import { useQuery } from "react-fetching-library"
 import ReactMarkdown from "react-markdown"
-import { useSelector } from "react-redux"
 import { useParams } from "react-router"
 
 import BecomeMentor from "./BecomeMentor/BecomeMentor"
@@ -44,6 +44,9 @@ function HomeView() {
         {payload?.tags && (
           <MentorSearchTags tags={payload.tags} />
         )}
+        <AdminInterface>
+          <Button color="white" onClick={() => Popup.open(PopupAdminTags, { shortcut: params.shortcut, tags: payload?.tags || [] })}>Изменить тэги</Button>
+        </AdminInterface>
       </div>
       <div className="home-view__comment">
         <BigComment>{ll.bigComment}</BigComment>

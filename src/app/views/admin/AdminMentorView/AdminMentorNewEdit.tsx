@@ -6,7 +6,7 @@ import { MentorDetailedType } from "interfaces/types"
 import { FormEvent } from "react"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router"
-import { FileToURLDataBase64 } from "utils/common"
+import { FileToURLDataBase64, getCheckedValues } from "utils/common"
 
 import countries from "../countries.json"
 import langs from "../langs.json"
@@ -162,7 +162,3 @@ function AdminMentorNewEdit(props: AdminNewMentorViewProps | AdminEditMentorView
 
 
 export default AdminMentorNewEdit
-
-function getCheckedValues(inputs: RadioNodeList & HTMLInputElement[]) {
-  return [...inputs].filter(input => input.checked).map(input => input.value)
-}

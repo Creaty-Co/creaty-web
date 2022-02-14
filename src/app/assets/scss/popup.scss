@@ -35,7 +35,7 @@
 	overscroll-behavior: contain;
 	margin: auto;
 
-	transform: translateY(200%);
+	transform: translateY(100vh);
 	transition: 250ms ease transform;
 
 	.popup--active & {
