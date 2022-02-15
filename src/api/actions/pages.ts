@@ -20,6 +20,16 @@ export const patchPagesMain = (body: Partial<{
   body
 })
 
+export const patchPagesMainMentor = (mentorId: number): Action<{ id: number }> => ({
+  method: "PATCH",
+  endpoint: `/pages/main/mentors/${mentorId}`
+})
+
+export const deletePagesMainMentor = (mentorId: number): Action<{ id: number }> => ({
+  method: "DELETE",
+  endpoint: `/pages/main/mentors/${mentorId}`
+})
+
 export const getPagePersonal = (shortcut: string): Action<{
   id: number
   title: string | null
@@ -37,6 +47,16 @@ export const patchPagePersonal = (shortcut: string, body: Partial<{
   method: "PATCH",
   endpoint: `/pages/personal/${shortcut}`,
   body
+})
+
+export const patchPagePersonalMentor = (shortcut: string, mentorId: number): Action<{ id: number }> => ({
+  method: "PATCH",
+  endpoint: `/pages/personal/${shortcut}/mentors/${mentorId}`
+})
+
+export const deletePagePersonalMentor = (shortcut: string, mentorId: number): Action<{ id: number }> => ({
+  method: "DELETE",
+  endpoint: `/pages/personal/${shortcut}/mentors/${mentorId}`
 })
 
 

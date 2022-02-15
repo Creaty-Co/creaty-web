@@ -5,6 +5,7 @@ import { patchMentorsId } from "api/actions/mentors"
 import ClientAPI from "api/client"
 import Button from "app/components/common/Button/Button"
 import ButtonLink from "app/components/common/Button/ButtonLink"
+import { PopupAdminPersonalMentors } from "app/components/popups/PopupAdmin/PopupAdminPersonalPage"
 import Input from "app/components/UI/Input/Input"
 import { MentorPatchType } from "interfaces/types"
 import { Popup } from "modules/popup/controller"
@@ -68,7 +69,7 @@ function AdminMentorsView() {
               <td><PartialEditMentorInput id={mentor.id} name="trial_meeting" defaultChecked={!!mentor.info.trial_meeting} type="checkbox" /></td>
               <td><PartialEditMentorInput id={mentor.id} name="city_ru" defaultValue={mentor.info.city_ru} /></td>
               <td><PartialEditMentorInput id={mentor.id} name="city_en" defaultValue={mentor.info.city_en} /></td>
-              <td><Button color="dark" onClick={() => Popup}>Ред. перс. страницу</Button></td>
+              <td><Button color="dark" onClick={() => Popup.open(PopupAdminPersonalMentors, { mentor })}>Ред. перс. страницу</Button></td>
             </tr>
           ))}
         </tbody>
