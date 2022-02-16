@@ -24,8 +24,8 @@ function MentorsViewTopicOrTag() {
   const tag = topics.tags.find(tag => tag.shortcut === params.topicOrTag)
 
   useEffect(() => {
-    if (topic) setTimeout(() => dispatch(updateSearchTopic(topic)))
-    if (tag) setTimeout(() => dispatch(updateSearchTag(tag)))
+    if (topic) dispatch(updateSearchTopic(topic))
+    if (tag) dispatch(updateSearchTag(tag))
   }, [topic, tag])
 
   return (

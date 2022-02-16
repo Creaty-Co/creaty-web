@@ -4,6 +4,7 @@ import Button from "app/components/common/Button/Button"
 import Icon from "app/components/common/Icon/Icon"
 import TopicTag from "app/components/UI/Tag/TopicTag"
 import useClickAway from "hooks/useClickAway"
+import { TopicType } from "interfaces/types"
 import useLocalization from "modules/localization/hook"
 import { useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
@@ -106,11 +107,14 @@ function MentorSearchListStatic() {
   const ll = useLocalization(ll => ll.views.home.mentorSearch)
   const topics = useSelector(state => state.topics)
   const search = useSelector(state => state.search)
+
+  const dispatch = useDispatch()
+  const onTopicHover = (topic: TopicType) => dispatch(updateSearch({ topic }))
   return (
     <div className={classWithModifiers("mentor-search-list", search.focused && "visible")}>
       <div className="mentor-search-list__container">
-        {topics.list.map((topic, index) => (
-          <Link className="mentor-search-list__item" to={"/mentors/" + topic.shortcut} key={index}>
+        {topics.list.map(topic => (
+          <Link className="mentor-search-list__item" to={"/mentors/" + topic.shortcut} key={topic.id} onPointerEnter={() => onTopicHover(topic)}>
             <Icon name={topic.shortcut} />
             <span>{topic.title}</span>
           </Link>
