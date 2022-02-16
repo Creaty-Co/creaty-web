@@ -7,7 +7,7 @@
 
 	gap: 0.5em;
 
-	padding: 1em 0.75em;
+	padding: 0.75em;
 	background: currentColor;
 	border: 2px solid transparent;
 	border-radius: 1.5em;
@@ -26,6 +26,9 @@
 		cursor: wait;
 	}
 
+	&--small {
+		padding: 0.875em 0.75em;
+	}
 
 	&--big {
 		padding: 1.125em 1.5em;

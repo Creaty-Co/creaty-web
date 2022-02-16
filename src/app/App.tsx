@@ -24,6 +24,7 @@ import { classWithModifiers } from "utils/common"
 import AdminEditableValue from "./components/admin/AdminEditableValue"
 import AdminTopbar from "./components/admin/AdminTopbar"
 import Button from "./components/common/Button/Button"
+import ButtonLink from "./components/common/Button/ButtonLink"
 import Icon from "./components/common/Icon/Icon"
 import PopupForm from "./components/popups/PopupForm"
 import ErrorBoundary from "./components/services/ErrorBoundary"
@@ -83,8 +84,8 @@ function Header() {
         <Icon className="topbar__trigger" name={expanded ? "cross" : "menu"} onClick={() => setExpanded(!expanded)} />
         <div className={classWithModifiers("topbar__right", expanded && "expanded")}>
           <div className="topbar-menu">
-            <NavLink className="topbar-menu__link" to="/mentors">{ll.menu.mentors}</NavLink>
-            <button className="topbar-menu__link" type="button" onClick={() => Popup.open(PopupForm, { type: "become_mentor" })}>{ll.menu.becomeMentor}</button>
+            <ButtonLink to="/mentors">{ll.menu.mentors}</ButtonLink>
+            <Button onClick={() => Popup.open(PopupForm, { type: "become_mentor" })}>{ll.menu.becomeMentor}</Button>
           </div>
           <Button style="outline" size="small" color="green" className="topbar-menu__button" onClick={() => Popup.open(PopupForm, { type: "choose_mentor" })}>{ll.findMentor}</Button>
           <LangSelector />

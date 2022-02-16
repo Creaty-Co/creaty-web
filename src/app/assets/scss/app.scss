@@ -48,7 +48,7 @@ header {
 	position: sticky;
 	top: 0;
 
-	padding: 0.5em;
+	padding: 0.596em;
 	background: rgba($color-black-main, 0.8);
 	border-bottom: 1px solid rgba($color: $color-gray-10, $alpha: 0.1);
 	z-index: 2;
@@ -127,7 +127,6 @@ header {
 
 .topbar-menu {
 	display: flex;
-	gap: 3em;
 
 	@include Tablet {
 		padding: 1em;
@@ -139,14 +138,6 @@ header {
 .topbar-menu__button {
 	@include Tablet {
 		grid-row: 3;
-	}
-}
-
-.topbar-menu__link {
-	@include Tablet {
-		padding: 1em;
-		background: rgba(255, 255, 255, 0.1);
-		border-radius: 1.5em;
 	}
 }
 
