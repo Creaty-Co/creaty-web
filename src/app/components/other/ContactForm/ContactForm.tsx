@@ -52,7 +52,7 @@ function ContactForm(props: ContactFormProps) {
     const target = event.currentTarget
     const elements = target.elements as FormElements<FormFieldType["type"]>
     const inputValues = [...elements].reduce<Record<string, string>>((result, next) => {
-      if (next instanceof HTMLInputElement) {
+      if (next instanceof HTMLInputElement || next instanceof HTMLTextAreaElement) {
         return { ...result, [next.name]: next.value }
       }
       return result
