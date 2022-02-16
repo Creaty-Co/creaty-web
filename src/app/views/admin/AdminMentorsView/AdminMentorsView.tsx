@@ -25,55 +25,57 @@ function AdminMentorsView() {
   return (
     <div className="admin-view">
       <ButtonLink color="dark" to="/admin/new-mentor">Добавить ментора</ButtonLink>
-      <table className="admin-view__table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Аватар</th>
-            <th>Имя</th>
-            <th>Фамилия</th>
-            <th>Страна</th>
-            <th>Профессия</th>
-            <th>Компания</th>
-            <th>Оплата</th>
-            <th>Валюта Оплаты</th>
-            <th>Пробная встреча?</th>
-            <th>Город на русском</th>
-            <th>Город на английском</th>
-          </tr>
-        </thead>
-        <tbody>
-          {payload.results.map(mentor => (
-            <tr key={mentor.id}>
-              <td>{mentor.id}</td>
-              <td>
-                <section>
-                  <div>
-                    <img src={mentor.avatar} />
-                    <Link className="ghost" to={"/user/" + mentor.id} />
-                  </div>
-                  <PartialEditMentorInput id={mentor.id} name="avatar" defaultValue={mentor.avatar} />
-                </section>
-              </td>
-              <td><PartialEditMentorInput id={mentor.id} name="first_name" defaultValue={mentor.first_name} /></td>
-              <td><PartialEditMentorInput id={mentor.id} name="last_name" defaultValue={mentor.last_name} /></td>
-              <td>
-                <PartialEditMentorInput id={mentor.id} name="country" defaultValue={mentor.country.id}>
-                  <AdminCountriesSelect defaultValue={mentor.country.id} />
-                </PartialEditMentorInput>
-              </td>
-              <td><PartialEditMentorInput id={mentor.id} name="profession" defaultValue={mentor.profession} /></td>
-              <td><PartialEditMentorInput id={mentor.id} name="company" defaultValue={mentor.company} /></td>
-              <td><PartialEditMentorInput id={mentor.id} name="price" defaultValue={mentor.price} /></td>
-              <td><PartialEditMentorInput id={mentor.id} name="price_currency" defaultValue={mentor.price_currency} /></td>
-              <td><PartialEditMentorInput id={mentor.id} name="trial_meeting" defaultChecked={!!mentor.info.trial_meeting} type="checkbox" /></td>
-              <td><PartialEditMentorInput id={mentor.id} name="city_ru" defaultValue={mentor.info.city_ru} /></td>
-              <td><PartialEditMentorInput id={mentor.id} name="city_en" defaultValue={mentor.info.city_en} /></td>
-              <td><Button color="dark" onClick={() => Popup.open(PopupAdminPersonalMentors, { mentor })}>Ред. перс. страницу</Button></td>
+      <div className="admin-view__container">
+        <table className="admin-view__table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Аватар</th>
+              <th>Имя</th>
+              <th>Фамилия</th>
+              <th>Страна</th>
+              <th>Профессия</th>
+              <th>Компания</th>
+              <th>Оплата</th>
+              <th>Валюта Оплаты</th>
+              <th>Пробная встреча?</th>
+              <th>Город на русском</th>
+              <th>Город на английском</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {payload.results.map(mentor => (
+              <tr key={mentor.id}>
+                <td>{mentor.id}</td>
+                <td>
+                  <section>
+                    <div>
+                      <img src={mentor.avatar} />
+                      <Link className="ghost" to={"/user/" + mentor.id} />
+                    </div>
+                    <PartialEditMentorInput id={mentor.id} name="avatar" defaultValue={mentor.avatar} />
+                  </section>
+                </td>
+                <td><PartialEditMentorInput id={mentor.id} name="first_name" defaultValue={mentor.first_name} /></td>
+                <td><PartialEditMentorInput id={mentor.id} name="last_name" defaultValue={mentor.last_name} /></td>
+                <td>
+                  <PartialEditMentorInput id={mentor.id} name="country" defaultValue={mentor.country.id}>
+                    <AdminCountriesSelect defaultValue={mentor.country.id} />
+                  </PartialEditMentorInput>
+                </td>
+                <td><PartialEditMentorInput id={mentor.id} name="profession" defaultValue={mentor.profession} /></td>
+                <td><PartialEditMentorInput id={mentor.id} name="company" defaultValue={mentor.company} /></td>
+                <td><PartialEditMentorInput id={mentor.id} name="price" defaultValue={mentor.price} /></td>
+                <td><PartialEditMentorInput id={mentor.id} name="price_currency" defaultValue={mentor.price_currency} /></td>
+                <td><PartialEditMentorInput id={mentor.id} name="trial_meeting" defaultChecked={!!mentor.info.trial_meeting} type="checkbox" /></td>
+                <td><PartialEditMentorInput id={mentor.id} name="city_ru" defaultValue={mentor.info.city_ru} /></td>
+                <td><PartialEditMentorInput id={mentor.id} name="city_en" defaultValue={mentor.info.city_en} /></td>
+                <td><Button color="dark" onClick={() => Popup.open(PopupAdminPersonalMentors, { mentor })}>Ред. перс. страницу</Button></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <Button color="dark" onClick={() => setPage(page - 1)}>Сюда</Button>
       <Button color="dark" onClick={() => setPage(page + 1)}>Туда</Button>
     </div>
