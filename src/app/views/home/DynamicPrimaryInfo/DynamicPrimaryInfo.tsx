@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react"
 import { useSelector } from "react-redux"
 
 
-const ENTER_INTERVAL = 25
+const ENTER_INTERVAL = 100
 const CYCLE_INTERVAL = 5000
 const PERSONAL_PAGE_TIMEOUT = 12000
 
