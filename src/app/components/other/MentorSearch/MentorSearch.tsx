@@ -46,7 +46,7 @@ function MentorSearch() {
             <input type="text" placeholder={ll.placeholder} className="mentor-search__input" value={value} onChange={event => setValue(event.currentTarget.value)} />
           )}
           {isInputVisible && value.length > 0 && (
-            <Icon name="cross" className="mentor-search__icon" style={{ "--chars": value.length }} onClick={reset} />
+            <Icon name="cross" className="mentor-search__icon" onClick={reset} />
           )}
           <MentorSearchList value={search.topic || search.tag ? null : value} visible={search.focused} />
           <Icon name="chevron" className="mentor-search__icon" modifiers={[search.focused && "up"]} />
@@ -65,39 +65,37 @@ interface MentorSearchListProps {
 
 function MentorSearchList(props: MentorSearchListProps) {
   if (props.value && props.value.length > 0) {
-    return <MentorSearchListDynamic {...props} />
+    return <MentorSearchListDynamic {...props} value={props.value} />
   }
   return <MentorSearchListStatic />
 }
 
 
-function MentorSearchListDynamic(props: MentorSearchListProps) {
+function MentorSearchListDynamic(props: MentorSearchListProps & { value: string }) {
   const topics = useSelector(state => state.topics)
+
+  const searchLowerCaseValue = props.value.toLowerCase()
+  const findSearchValueEntry = (value: string) => value.toLowerCase().search(searchLowerCaseValue)
+
+  const searchEntries =
+    topics.tags
+      .map(tag => ({ tag, index: findSearchValueEntry(tag.title) }))
+      .filter(occur => occur.index >= 0)
   return (
     <div className={classWithModifiers("mentor-search-list", props.visible && "visible")}>
       <div className="mentor-search-list__container">
-        {topics.tags.map(tag => {
-          if (props.value == null) {
-            return (
-              <Link className="mentor-search-list__item" to={"/mentors/" + tag.shortcut} key={tag.id}>
-                {tag.title}
-              </Link>
-            )
-          }
-
-          const searchIndex = tag.title.toLowerCase().search(props.value.toLowerCase())
-          if (searchIndex < 0) return null
-
-          return (
-            <Link className="mentor-search-list__item" to={"/mentors/" + tag.shortcut} key={tag.id}>
-              <span>
-                {tag.title.slice(0, searchIndex)}
-                <em>{tag.title.slice(searchIndex, searchIndex + props.value.length)}</em>
-                {tag.title.slice(searchIndex + props.value.length)}
-              </span>
-            </Link>
-          )
-        })}
+        {searchEntries.map(occur => (
+          <Link className="mentor-search-list__item" to={"/mentors/" + occur.tag.shortcut} key={occur.tag.id}>
+            <span>
+              {occur.tag.title.slice(0, occur.index)}
+              <em>{occur.tag.title.slice(occur.index, occur.index + props.value.length)}</em>
+              {occur.tag.title.slice(occur.index + props.value.length)}
+            </span>
+          </Link>
+        ))}
+        {searchEntries.length === 0 && (
+          <div className="mentor-search-list__item">По вашему запросу ничего не найдено.</div>
+        )}
       </div>
     </div>
   )

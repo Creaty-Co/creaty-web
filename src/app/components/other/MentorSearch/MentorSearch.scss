@@ -44,11 +44,11 @@
 .mentor-search__search {
 	display: flex;
 	align-items: center;
-	gap: 0.5em;
 
 	flex: 1;
 
-	padding: 0.75em 1em;
+	padding: 0.5em;
+	padding-right: 1em;
 	background: white;
 	border-radius: 1.5em;
 	transition: 200ms ease box-shadow;
@@ -79,14 +79,14 @@
 	}
 
 	&:first-child {
-		padding-left: 0.5em;
+		padding-left: 1em;
 	}
 }
 
 .mentor-search__icon {
-	--icon-size: 1.25em;
+	--icon-size: 2.5em;
 
-	padding: 0.25em;
+	padding: 0.825em;
 	margin-left: auto;
 	color: $color-gray-50;
 
