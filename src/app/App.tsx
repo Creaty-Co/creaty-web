@@ -5,13 +5,14 @@ import { getPagesLinksDocuments } from "api/actions/pages"
 import ClientAPI from "api/client"
 import useDirectLogin from "hooks/useDirectLogin"
 import { PageLinkType } from "interfaces/types"
+import { UserType } from "interfaces/user"
 import useLocalization from "modules/localization/hook"
 import { PopupContainer } from "modules/popup/container"
 import { Popup } from "modules/popup/controller"
 import { StrictMode, Suspense, useEffect, useRef, useState } from "react"
 import { ClientContextProvider, useQuery } from "react-fetching-library"
 import ReactGA from "react-ga"
-import { Provider } from "react-redux"
+import { Provider, useSelector } from "react-redux"
 import { Route, Routes } from "react-router"
 import { useLocation } from "react-router"
 import { BrowserRouter, NavLink } from "react-router-dom"
@@ -105,20 +106,28 @@ function Main() {
         <Route path="/mentors" element={<MentorsView />} />
         <Route path="/mentors/:topicOrTag" element={<MentorsViewTopicOrTag />} />
         <Route path="/user/:userId" element={<UserUserId />} />
-        {/* --- Admin --- */}
-        {/* Mentors */}
-        <Route path="/admin/mentors" element={<AdminMentorsView />} />
-        <Route path="/admin/new-mentor" element={<AdminNewMentorView />} />
-        <Route path="/admin/edit-mentor/:mentorId" element={<AdminEditMentorView />} />
-        {/* Topics & Tags */}
-        <Route path="/admin/topics-tags" element={<AdminTopicsTagsView />} />
-        {/* Mailings */}
-        <Route path="/admin/mailings" element={<AdminMailings />} />
-        {/* Forms */}
-        <Route path="/admin/forms" element={<AdminFormsView />} />
-        {/* --- Admin --- */}
+        <Route path="/admin/*" element={<AdminViews />} />
       </Routes>
     </main>
+  )
+}
+
+function AdminViews() {
+  const user = useSelector(state => state.user)
+  if (!user.auth || user.type < UserType.admin) return null
+  return (
+    <Routes>
+      {/* Mentors */}
+      <Route path="/mentors" element={<AdminMentorsView />} />
+      <Route path="/new-mentor" element={<AdminNewMentorView />} />
+      <Route path="/edit-mentor/:mentorId" element={<AdminEditMentorView />} />
+      {/* Topics & Tags */}
+      <Route path="/topics-tags" element={<AdminTopicsTagsView />} />
+      {/* Mailings */}
+      <Route path="/mailings" element={<AdminMailings />} />
+      {/* Forms */}
+      <Route path="/forms" element={<AdminFormsView />} />
+    </Routes>
   )
 }
 

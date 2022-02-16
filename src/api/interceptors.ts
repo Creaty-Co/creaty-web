@@ -1,6 +1,8 @@
 import Localization from "modules/localization/controller"
 import { QueryResponse } from "react-fetching-library"
 import { toast } from "react-toastify"
+import { updateUser } from "redux/reducers/user"
+import store from "redux/store"
 import { createQuery } from "utils/common"
 
 import { Action, APIResponseError } from "./client"
@@ -45,6 +47,14 @@ export function responseInterceptor() {
 }
 
 function responseErrorHandling(response: Response) {
+  if (response.status === 401) {
+    localStorage.removeItem("token")
+    toast.error("Что-то не так с авторизацией")
+    toast.info("Токен был сброшен, авторизуйтесь ещё раз")
+    store.dispatch(updateUser({ auth: false }))
+    return { ...response, error: true }
+  }
+
   if (response.payload == null) {
     return { ...response, error: true }
   }

@@ -9,7 +9,7 @@ const initialState: User = {
 }
 
 interface Actions {
-  USER_UPDATE: User
+  USER_UPDATE: Partial<User>
 }
 
 type Action = ValuesOf<MapActions<Actions>>
@@ -29,4 +29,4 @@ export default (state = initialState, action: Action): User => {
 export const updateUser = (payload: Partial<User>) => ({
   type: "USER_UPDATE",
   payload
-})
+}) as const
