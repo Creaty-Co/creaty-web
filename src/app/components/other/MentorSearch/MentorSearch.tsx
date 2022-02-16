@@ -1,6 +1,5 @@
 import "./MentorSearch.scss"
 
-import AdminInterface from "app/components/admin/AdminInterface"
 import Button from "app/components/common/Button/Button"
 import Icon from "app/components/common/Icon/Icon"
 import TopicTag from "app/components/UI/Tag/TopicTag"
@@ -15,15 +14,12 @@ import { classWithModifiers } from "utils/common"
 
 function MentorSearch() {
   const dispatch = useDispatch()
-  const topics = useSelector(state => state.topics)
   const search = useSelector(state => state.search)
-
-  const isNoTopics = topics.list.length === 0
 
   const ll = useLocalization(ll => ll.views.home.mentorSearch)
   const [value, setValue] = useState("")
 
-  const searchRef = useRef<HTMLButtonElement | null>(null)
+  const searchRef = useRef<HTMLLabelElement>(null)
   const focus = () => dispatch(updateSearch({ focused: true }))
   const blur = () => dispatch(updateSearch({ focused: false }))
   const reset = () => setValue("")
@@ -35,7 +31,7 @@ function MentorSearch() {
     <div className="mentor-search">
       <div className={classWithModifiers("mentor-search__cover", search.focused && "active")} />
       <div className="mentor-search__container">
-        <button className={classWithModifiers("mentor-search__search", search.focused && "focused")} disabled={isNoTopics} onClick={focus} ref={searchRef}>
+        <label className={classWithModifiers("mentor-search__search", search.focused && "focused")} onClick={focus} ref={searchRef}>
           {search.topic && (
             <div className="mentor-search-list__item mentor-search-list__item--active">
               <Icon name={search.topic.shortcut} />
@@ -53,8 +49,8 @@ function MentorSearch() {
             <Icon name="cross" className="mentor-search__icon" style={{ "--chars": value.length }} onClick={reset} />
           )}
           <MentorSearchList value={search.topic || search.tag ? null : value} visible={search.focused} />
-          <Icon name="chevron" className="mentor-search__icon" />
-        </button>
+          <Icon name="chevron" className="mentor-search__icon" modifiers={[search.focused && "up"]} />
+        </label>
         <Button color="violet" size="big" eventLabel="Search Form">{ll.button}</Button>
       </div>
     </div>

@@ -38,11 +38,20 @@ export type IconName = (
 
 interface IconProps extends SVGAttributes<SVGElement> {
   name?: IconName
+  modifiers?: Array<string | number | false | null | undefined>
 }
 
+/**
+ *
+ * @prop Modifiers - only work when className given
+ * @returns
+ */
+
 function Icon(props: IconProps) {
+  if (props.name === "chevron")
+    console.log(classWithModifiers(props.className || "test", props.name))
   return (
-    <svg {...props} className={classMerge("icon", props.className && classWithModifiers(props.className, props.name))}>
+    <svg {...props} className={classMerge("icon", props.className && classWithModifiers(classWithModifiers(props.className, props.name), ...props.modifiers || []))}>
       <use href={props.name ? `/static/icons.svg#${props.name}` : props.href} />
     </svg>
   )

@@ -52,6 +52,7 @@
 	background: white;
 	border-radius: 1.5em;
 	transition: 200ms ease box-shadow;
+	cursor: text;
 
 	&:hover,
 	&--focused {
@@ -70,6 +71,11 @@
 
 	&::placeholder {
 		color: $color-gray-80;
+		transition: 200ms ease color;
+	}
+
+	&:focus::placeholder {
+		color: rgba($color-gray-90, 0.2);
 	}
 
 	&:first-child {
@@ -78,18 +84,22 @@
 }
 
 .mentor-search__icon {
+	--icon-size: 1.25em;
+
+	padding: 0.25em;
 	margin-left: auto;
 	color: $color-gray-50;
 
-	&--chevron {
-		--icon-size: 0.75em;
+	&--cross {
+		cursor: pointer;
 	}
 
-	&--cross {
-		--icon-size: 1.25em;
+	&--chevron {
+		transition: 250ms ease transform;
 
-		padding: 0.25em;
-		cursor: pointer;
+		&--up {
+			transform: rotateX(180deg);
+		}
 	}
 }
 
