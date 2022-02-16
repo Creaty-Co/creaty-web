@@ -77,7 +77,7 @@ function Header() {
       <AdminTopbar />
       <div className="topbar">
         <div aria-label="Home">
-          <img src="/static/images/logo40.png" alt="logo" className="topbar__logo" />
+          <img src="/static/images/logo.svg" alt="logo" className="topbar__logo" />
           <img src="/static/icons/logo.svg" alt="logo" className="topbar__logo topbar__logo--mobile" />
           <Link className="ghost" to="/" />
         </div>
