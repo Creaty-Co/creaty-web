@@ -43,8 +43,12 @@ interface IconProps extends SVGAttributes<SVGElement> {
 
 /**
  *
- * @prop Modifiers - only work when className given
- * @returns
+ * @prop `modifiers` only work when className given.
+ * @prop `className` is a root class, which is modified by `name`,
+ * that will be modified by `modifiers` including `name` modifications.
+ *
+ * Example: `"icon mentor-search__icon mentor-search__icon--chevron mentor-search__icon mentor-search__icon--chevron--up"`
+ *
  */
 
 function Icon(props: IconProps) {
