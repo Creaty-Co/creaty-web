@@ -35,7 +35,7 @@ function AdminMentorNewEdit(props: AdminNewMentorViewProps | AdminEditMentorView
 
     interface FormElements extends HTMLFormControlsCollection {
       // ---------- INFO --------------------------
-      tag_set__in: RadioNodeList & HTMLInputElement[]
+      tag_set: RadioNodeList & HTMLInputElement[]
       languages: RadioNodeList & HTMLInputElement[]
 
       city_ru: HTMLInputElement
@@ -72,7 +72,7 @@ function AdminMentorNewEdit(props: AdminNewMentorViewProps | AdminEditMentorView
         city_en: elements.city_en.value
       },
       packages,
-      tag_set__in: getCheckedValues(elements.tag_set__in).map(Number),
+      tag_set: getCheckedValues(elements.tag_set).map(Number),
       // -------------------------------------------
       avatar: elements.avatar.files?.[0] ? await FileToURLDataBase64(elements.avatar.files[0]) : (props.data?.avatar || ""),
       company: elements.company.value,
@@ -114,7 +114,7 @@ function AdminMentorNewEdit(props: AdminNewMentorViewProps | AdminEditMentorView
         {topics.tags.map(tag => (
           <label key={tag.id}>
             {tag.title}
-            <input name="tag_set__in" type="checkbox" defaultChecked={!!(props.data?.tags.find(tagg => tagg.id === tag.id))} value={tag.id} />
+            <input name="tag_set" type="checkbox" defaultChecked={!!(props.data?.tags.find(tagg => tagg.id === tag.id))} value={tag.id} />
           </label>
         ))}
         Страна
