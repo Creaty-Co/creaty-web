@@ -37,7 +37,7 @@ function MentorsViewTopicOrTag() {
           </h1>
         </div>
         <MentorSearch />
-        <MentorCardsContainer />
+        <MentorCardsContainer topic={topic} tag={tag} />
       </div>
       <HaveQuestions />
     </div>

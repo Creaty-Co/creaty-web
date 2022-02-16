@@ -4,7 +4,7 @@ import Button from "app/components/common/Button/Button"
 import Icon from "app/components/common/Icon/Icon"
 import TopicTag from "app/components/UI/Tag/TopicTag"
 import useClickAway from "hooks/useClickAway"
-import { TopicType } from "interfaces/types"
+import { TagType, TopicType } from "interfaces/types"
 import useLocalization from "modules/localization/hook"
 import { useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
@@ -32,7 +32,7 @@ function MentorSearch() {
     <div className="mentor-search">
       <div className={classWithModifiers("mentor-search__cover", search.focused && "active")} />
       <div className="mentor-search__container">
-        <label className={classWithModifiers("mentor-search__search", search.focused && "focused")} onClick={focus} ref={searchRef}>
+        <label className={classWithModifiers("mentor-search__search", search.focused && "focused", !!(search.tag || search.topic) && "filled")} onClick={focus} ref={searchRef}>
           {search.topic && (
             <div className="mentor-search-list__item mentor-search-list__item--active">
               <Icon name={search.topic.shortcut} />
@@ -109,12 +109,13 @@ function MentorSearchListStatic() {
   const search = useSelector(state => state.search)
 
   const dispatch = useDispatch()
-  const onTopicHover = (topic: TopicType) => dispatch(updateSearch({ topic }))
+  const updateTopic = (topic: TopicType) => dispatch(updateSearch({ topic, tag: undefined }))
+  const updateTag = (tag: TagType) => dispatch(updateSearch({ tag }))
   return (
     <div className={classWithModifiers("mentor-search-list", search.focused && "visible")}>
       <div className="mentor-search-list__container">
         {topics.list.map(topic => (
-          <Link className="mentor-search-list__item" to={"/mentors/" + topic.shortcut} key={topic.id} onPointerEnter={() => onTopicHover(topic)}>
+          <Link className="mentor-search-list__item" to={"/mentors/" + topic.shortcut} key={topic.id} onPointerEnter={() => updateTopic(topic)}>
             <Icon name={topic.shortcut} />
             <span>{topic.title}</span>
           </Link>
@@ -122,7 +123,7 @@ function MentorSearchListStatic() {
       </div>
       <div className="mentor-search-list__tags">
         {!search.tag && search.topic?.tags.map(tag => (
-          <Link className="topic-tag" to={`/mentors/${tag.shortcut}/`} key={tag.id}>
+          <Link className="topic-tag" to={`/mentors/${tag.shortcut}/`} onClick={() => updateTag(tag)} key={tag.id}>
             <span className="topic-tag__text">{tag.title}</span>
           </Link>
         ))}

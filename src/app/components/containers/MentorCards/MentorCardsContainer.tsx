@@ -4,19 +4,21 @@ import { getMentors } from "api/actions/mentors"
 import Button from "app/components/common/Button/Button"
 import Icon from "app/components/common/Icon/Icon"
 import MentorCard from "app/components/UI/MentorCard/MentorCard"
-import { MentorType } from "interfaces/types"
+import { MentorType, TagType, TopicType } from "interfaces/types"
 import useLocalization from "modules/localization/hook"
 import { useEffect, useState } from "react"
 import { useQuery } from "react-fetching-library"
-import { useSelector } from "react-redux"
 import { classWithModifiers } from "utils/common"
 
 
-function MentorCardsContainer() {
-  const ll = useLocalization(ll => ll.other.pagination)
-  const search = useSelector(state => state.search)
-  const tagSet = search.tag ? [search.tag.id] : search.topic?.tags.map(tag => tag.id) || []
+interface MentorCardsContainerProps {
+  topic?: TopicType
+  tag?: TagType
+}
 
+function MentorCardsContainer(props: MentorCardsContainerProps) {
+  const ll = useLocalization(ll => ll.other.pagination)
+  const tagSet = props.tag ? [props.tag.id] : props.topic?.tags.map(tag => tag.id) || []
 
   const [page, setPage] = useState(1)
   const [pageSize] = useState(15)
@@ -28,7 +30,7 @@ function MentorCardsContainer() {
   useEffect(() => {
     setPage(1)
     setResults(payload?.results || [])
-  }, [search.topic, search.tag])
+  }, [props.topic, props.tag])
   useEffect(() => {
     if (loading || !payload) return
     if (page > 1) {

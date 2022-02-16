@@ -59,6 +59,14 @@
 		box-shadow: 0 0 0 3px rgba($color-green, $alpha: 0.5);
 	}
 
+	&--filled#{&}--focused {
+
+		>.mentor-search-list__item,
+		>.topic-tag {
+			opacity: 0.5;
+		}
+	}
+
 	@include Mobile {
 		flex-wrap: wrap;
 		min-height: 3.5em;
