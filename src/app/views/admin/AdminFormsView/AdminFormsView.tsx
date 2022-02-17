@@ -58,9 +58,9 @@ function AdminFormsView() {
         <h2 className="admin-view__title">Заявки</h2>
         <Input type="file" name="xlsx" />
         <Button color="dark">Загрузить</Button>
-        <div className="button button--violet">
-          <APIOuterLink className="button__text" action={getFormsApplicationsXLSX}>Скачать</APIOuterLink>
-        </div>
+        <APIOuterLink action={getFormsApplicationsXLSX} className="button button--violet">
+          <div className="button__text" >Скачать</div>
+        </APIOuterLink>
       </form>
       {formsKeys.map(key => (
         <div className="admin-view" key={key}>
