@@ -1,7 +1,7 @@
 name: API Resulting Changes
 
 on:
-  create:
+  issues:
     types: [ labeled ]
 
 jobs:
