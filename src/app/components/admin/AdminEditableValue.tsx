@@ -7,7 +7,6 @@ import { useSelector } from "react-redux"
 import { classWithModifiers } from "utils/common"
 
 import Button from "../common/Button/Button"
-import AdminInterface from "./AdminInterface"
 
 
 const acceptedAPIActions = {

@@ -1,6 +1,6 @@
 import { Action } from "api/client"
 import { PaginationType } from "interfaces/Django"
-import { PageFAQType, PageLinkType, PageType, TagType } from "interfaces/types"
+import { PageFAQType, PageLinkSocialType, PageLinkType, PageType, TagType } from "interfaces/types"
 
 
 
@@ -71,6 +71,28 @@ export const patchPagesLinksDocuments = (id: number, url: string): Action<{ id: 
   method: "PATCH",
   endpoint: `/pages/links/documents/${id}`,
   body: { url }
+})
+
+export const getPagesLinksSocials: Action<PaginationType<PageLinkSocialType>> = {
+  method: "GET",
+  endpoint: "/pages/links/socials"
+}
+
+export const postPagesLinksSocials = (body: Omit<PageLinkSocialType, "id">): Action<{ id: number }> => ({
+  method: "POST",
+  endpoint: `/pages/links/socials`,
+  body
+})
+
+export const patchPagesLinksSocials = (id: number, body: Partial<Omit<PageLinkSocialType, "id">>): Action<{ id: number }> => ({
+  method: "PATCH",
+  endpoint: `/pages/links/socials/${id}`,
+  body
+})
+
+export const deletePagesLinksSocials = (id: number): Action => ({
+  method: "DELETE",
+  endpoint: `/pages/links/socials/${id}`
 })
 
 // FAQs

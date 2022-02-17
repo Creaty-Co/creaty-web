@@ -4,6 +4,8 @@
 
 */
 
+import { URLDataBase64 } from "./common"
+
 /* Form */
 
 export interface FormType {
@@ -112,6 +114,12 @@ export interface PageType {
 export interface PageLinkType {
   id: number
   type: "facebook" | "instagram" | "help" | "user_agreement" | "privacy_policy" | "cookie_policy"
+  url: string
+}
+
+export interface PageLinkSocialType {
+  id: number
+  icon: URLDataBase64
   url: string
 }
 
