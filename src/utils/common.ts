@@ -1,5 +1,6 @@
 import "./extensions"
 
+import { Buffer } from "buffer"
 import { FormElements, URLDataBase64 } from "interfaces/common"
 import { cloneElement } from "react"
 

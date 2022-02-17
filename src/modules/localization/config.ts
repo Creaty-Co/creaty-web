@@ -47,17 +47,19 @@ Localization.addInterceptor(ll => {
     for (const key in object) {
       switch (typeof object[key]) {
         case "object":
+          if (Object.isFrozen(object[key])) break
           object[key] = transformDeeply(object[key])
           break
 
         case "string":
+          console.log(object)
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-expect-error
           object[key] = transform(object[key])
           break
 
         default:
-          continue
+          break
       }
     }
 
