@@ -52,7 +52,6 @@ Localization.addInterceptor(ll => {
           break
 
         case "string":
-          console.log(object)
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-expect-error
           object[key] = transform(object[key])
@@ -69,7 +68,7 @@ Localization.addInterceptor(ll => {
   return transformDeeply(ll)
 })
 // Add languages
-const langs = require.context("app/assets/lang/", true, /\.json$/, "sync")
+const langs = require.context("app/assets/lang/", false, /^.\/.*\.json$/)
 langs.keys().forEach(fileName => {
   const lang = fileName.replace(/\.\/|\.json/g, "")
   const langFile = langs(fileName)
