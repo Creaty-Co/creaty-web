@@ -109,5 +109,8 @@ table.admin-view__table {
 	td {
 		min-width: 3.5em;
 		white-space: nowrap;
+		text-align: center;
+
+		border: 2px dotted #999;
 	}
 }
