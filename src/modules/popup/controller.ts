@@ -59,7 +59,6 @@ export class Popup {
       // Set queue if popup was inactive and has only one window
       // to be sure that window by the rule above won't appear again
       if (state.isActive === false && state.queue.length === 1) {
-        console.log(popupWindow)
         return {
           isActive: true,
           queue: [popupWindow]
@@ -73,7 +72,6 @@ export class Popup {
   }
   private static removeFromQueue(popupWindow: PopupWindow<any>) {
     PopupPrivate.dispatch(state => {
-      console.log(1, state.queue.includes(popupWindow))
       const queue = state.queue.filter(pw => pw !== popupWindow)
       if (queue.length === 0) {
         return { isActive: false, queue: [popupWindow] }

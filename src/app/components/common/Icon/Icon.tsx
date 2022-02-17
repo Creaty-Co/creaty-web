@@ -52,8 +52,6 @@ interface IconProps extends SVGAttributes<SVGElement> {
  */
 
 function Icon(props: IconProps) {
-  if (props.name === "chevron")
-    console.log(classWithModifiers(props.className || "test", props.name))
   return (
     <svg {...props} className={classMerge("icon", props.className && classWithModifiers(classWithModifiers(props.className, props.name), ...props.modifiers || []))}>
       <use href={props.name ? `/static/icons.svg#${props.name}` : props.href} />

@@ -39,8 +39,6 @@ function MentorsSlider(props: MentorsSliderProps) {
       behavior: "smooth",
       left: scrollInterval * by
     })
-
-    console.log(scrollInterval * by)
   }
   return (
     <div className="mentors-slider">
