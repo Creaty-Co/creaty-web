@@ -1,7 +1,7 @@
 name: API Resulting Changes
 
 on:
-  pull_request:
+  create:
     types: [ labeled ]
 
 jobs:
