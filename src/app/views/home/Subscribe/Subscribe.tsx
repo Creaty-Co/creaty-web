@@ -10,7 +10,7 @@ import { classWithModifiers } from "utils/common"
 
 function Subscribe() {
   const ll = useLocalization(ll => ll.components.subscribe)
-  const { value, isValueValid, onChange } = useInputValidation(/^\w+@[a-zA-Z]+\.\w{2,}$/m)
+  const { value, isValueValid, onChange } = useInputValidation(/^\s*\w+@[a-zA-Z]+\.\w{2,}\s*$/m)
   const [subscribed, setSubscribed] = useState(false)
   function onSubscribe() {
     ClientAPI
