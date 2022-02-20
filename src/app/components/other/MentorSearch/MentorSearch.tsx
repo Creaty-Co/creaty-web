@@ -42,14 +42,11 @@ function MentorSearch() {
           {search.tag && (
             <TopicTag>{search.tag}</TopicTag>
           )}
-
-          {isInputVisible && (
-            <input type="text" placeholder={ll.placeholder} className="mentor-search__input" value={value} onChange={event => setValue(event.currentTarget.value)} />
-          )}
+          <input type="text" placeholder={isInputVisible ? ll.placeholder : undefined} className="mentor-search__input" value={value} onChange={event => setValue(event.currentTarget.value)} />
           {isInputVisible && value.length > 0 && (
             <Icon name="cross" className="mentor-search__icon" onClick={reset} />
           )}
-          <MentorSearchList value={search.topic || search.tag ? null : value} visible={search.focused} />
+          <MentorSearchList value={value} visible={search.focused} />
           <Icon name="chevron" className="mentor-search__icon" modifiers={[search.focused && "up"]} />
         </label>
         <Button color="violet" size="big" eventLabel="Search Form">{ll.button}</Button>
