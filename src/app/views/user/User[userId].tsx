@@ -59,7 +59,7 @@ function UserUserId() {
               </div>
             )}
           </div>
-          <ButtonLink size="big" color="green" className="user-card__button" to="#book">{ll.card.rollIn}</ButtonLink>
+          <Button size="big" color="green" className="user-card__button" onClick={() => document.getElementById("book")?.scrollIntoView({ behavior: "smooth" })}>{ll.card.rollIn}</Button>
         </div>
         <div className="user-card__text">{ll.card.terms}</div>
         {payload.info.trial_meeting && (
@@ -102,8 +102,8 @@ function UserUserId() {
         <UserSection type="2" title={ll.info.garantee.title} iconName="r-square">
           <p>{ll.info.garantee.desc}</p>
         </UserSection>
-        <UserSection type="1" title={ll.info.bookMentor.title}>
-          <a href="#book"></a>
+        <a id="book" style={{ scrollMargin: "3em" }} />
+        <UserSection type="1" title={ll.info.bookMentor.title} >
           <p>{ll.info.bookMentor.desc}</p>
           <ContactForm type="test_meeting" submitText={ll.info.bookMentor.submit} />
         </UserSection>
