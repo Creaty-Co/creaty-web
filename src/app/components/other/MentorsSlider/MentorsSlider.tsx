@@ -40,6 +40,10 @@ function MentorsSlider(props: MentorsSliderProps) {
       left: scrollInterval * by
     })
   }
+  useEffect(() => {
+    if (!innerRef.current) return
+    innerRef.current.scrollTo(innerRef.current.scrollWidth / 2, 0)
+  }, [])
   return (
     <div className="mentors-slider">
       <div className="mentors-slider__header">
