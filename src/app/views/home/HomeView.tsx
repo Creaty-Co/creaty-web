@@ -86,9 +86,11 @@ function HomeView() {
 
 
 function QAndA() {
-  const { error, loading, payload } = useQuery(getPagesFAQs)
+  const ll = useLocalization(ll => ll.lang)
+  const { error, loading, payload, query } = useQuery(getPagesFAQs)
+  useEffect(() => { query() }, [ll])
   if (error) throw new Error("useQuery error")
-  if (loading) return <>loading...</>
+  // if (loading) return <>loading...</>
   if (!payload) return <>no content</>
   return (
     <FAQ>
