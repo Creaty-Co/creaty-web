@@ -42,7 +42,7 @@ function MentorsSlider(props: MentorsSliderProps) {
   }
   useEffect(() => {
     if (!innerRef.current) return
-    innerRef.current.scrollTo(innerRef.current.scrollWidth / 2, 0)
+    innerRef.current.scrollTo(innerRef.current.scrollWidth / 2 - innerRef.current.offsetWidth / 2, 0)
   }, [])
   return (
     <div className="mentors-slider">
