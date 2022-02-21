@@ -15,9 +15,14 @@
 	flex: 1;
 
 	padding-bottom: 1em;
-	border-bottom: 1px solid $color-gray-10;
+	border-bottom: 1px solid rgba($color-gray-10, 0.1);
 	border-radius: 1px;
 	transition: 200ms ease border-color;
+
+	&:hover:not(&--red, &--dark),
+	&:focus:not(&--red, &--dark) {
+		border-color: $color-gray-10;
+	}
 
 	&--red {
 		border-color: $color-red;
