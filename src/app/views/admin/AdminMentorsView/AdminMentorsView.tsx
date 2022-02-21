@@ -29,6 +29,7 @@ function AdminMentorsView() {
         <table className="admin-view__table">
           <thead>
             <tr>
+              <th></th>
               <th>ID</th>
               <th>Аватар</th>
               <th>Имя</th>
@@ -46,6 +47,7 @@ function AdminMentorsView() {
           <tbody>
             {payload.results.map(mentor => (
               <tr key={mentor.id}>
+                <td><Button color="dark" onClick={() => Popup.open(PopupAdminPersonalMentors, { mentor })}>Ред. перс. страницу</Button></td>
                 <td>{mentor.id}</td>
                 <td>
                   <section>
@@ -70,7 +72,6 @@ function AdminMentorsView() {
                 <td><PartialEditMentorInput id={mentor.id} name="trial_meeting" defaultChecked={!!mentor.info.trial_meeting} type="checkbox" /></td>
                 <td><PartialEditMentorInput id={mentor.id} name="city_ru" defaultValue={mentor.info.city_ru} /></td>
                 <td><PartialEditMentorInput id={mentor.id} name="city_en" defaultValue={mentor.info.city_en} /></td>
-                <td><Button color="dark" onClick={() => Popup.open(PopupAdminPersonalMentors, { mentor })}>Ред. перс. страницу</Button></td>
               </tr>
             ))}
           </tbody>
