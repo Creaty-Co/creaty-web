@@ -82,7 +82,7 @@ export function PopupAdminEditFAQ(props: PopupAdminEditFAQProps) {
         <div className="input">
           <textarea className="input__input" rows={10} name="answer" placeholder="Ответ на выбраном языке" defaultValue={props.faq.answer} key={props.faq.answer} />
         </div>
-        <Button color="dark" type="submit">Сохнарить</Button>
+        <Button color="dark" type="submit">Сохранить</Button>
         <Button color="violet" onClick={deleteFAQ}>Удалить</Button>
       </form>
     </PopupLayout>

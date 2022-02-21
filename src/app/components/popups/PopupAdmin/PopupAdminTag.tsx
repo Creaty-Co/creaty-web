@@ -84,7 +84,7 @@ export function PopupAdminEditTag(props: PopupAdminEditTagProps) {
       <form onSubmit={submitTag}>
         <Input name="title" placeholder="Название на выбраном языке" defaultValue={props.tag?.title} key={props.tag?.title} />
         <Input name="shortcut" placeholder="Ярлык" defaultValue={props.tag?.shortcut} key={props.tag.shortcut} />
-        <Button color="dark" type="submit">Сохнарить</Button>
+        <Button color="dark" type="submit">Сохранить</Button>
         <Button color="violet" onClick={deleteTag}>Удалить</Button>
       </form>
     </PopupLayout>

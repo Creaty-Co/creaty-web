@@ -82,7 +82,7 @@ export function PopupAdminEditTopic(props: PopupAdminEditTopicProps) {
           Иконка в .svg
           <Input name="icon" type="file" />
         </label>
-        <Button color="dark" type="submit">Сохнарить</Button>
+        <Button color="dark" type="submit">Сохранить</Button>
       </form>
     </PopupLayout>
   )

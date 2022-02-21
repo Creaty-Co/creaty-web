@@ -85,7 +85,7 @@ export function PopupAdminEditSocial(props: PopupAdminEditSocialProps) {
       <form onSubmit={submitSocial}>
         <Input name="url" placeholder="Внешняя ссылка" defaultValue={props.img.url} key={props.img.url} />
         <Input name="icon" type="file" />
-        <Button color="dark" type="submit">Сохнарить</Button>
+        <Button color="dark" type="submit">Сохранить</Button>
         <Button color="violet" onClick={deleteSocial}>Удалить</Button>
       </form>
     </PopupLayout>

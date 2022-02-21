@@ -134,8 +134,8 @@ function AdminViews() {
 
 function Footer() {
   const ll = useLocalization(ll => ll.footer)
-  const { payload } = useQuery(getPagesLinksDocuments)
-  if (!payload) return null
+  const { error, payload } = useQuery(getPagesLinksDocuments)
+  if (error || !payload) return null
   const links = payload.results.reduce<Record<PageLinkType["type"], PageLinkType>>((result, next) => ({ ...result, [next.type]: next }), {} as any)
   return (
     <footer>
