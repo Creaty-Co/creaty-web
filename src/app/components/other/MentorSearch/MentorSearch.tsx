@@ -35,7 +35,7 @@ function MentorSearch() {
         <label className={classWithModifiers("mentor-search__search", search.focused && "focused", !!(search.tag || search.topic) && "filled")} onClick={focus} ref={searchRef}>
           {search.topic && (
             <div className="mentor-search-list__item mentor-search-list__item--active">
-              <Icon name={search.topic.shortcut} />
+              <Icon href={search.topic.icon} />
               <span>{search.topic.title}</span>
             </div>
           )}
