@@ -2,8 +2,8 @@ import { SVGAttributes } from "react"
 import { classMerge, classWithModifiers } from "utils/common"
 
 
-export type IconName = (
-  "language"
+export type IconName =
+  | "language"
   | "drop-down-triangle"
   | "arrow-left"
   | "arrow-right"
@@ -34,7 +34,7 @@ export type IconName = (
   | "digital-design"
   | "art-management"
   | "journalism-writing"
-) | (string & {})
+  | (string & {})
 
 interface IconProps extends SVGAttributes<SVGElement> {
   name?: IconName
@@ -52,9 +52,15 @@ interface IconProps extends SVGAttributes<SVGElement> {
  */
 
 function Icon(props: IconProps) {
+  if (props.href) {
+    return (
+      <img className={classMerge("icon", props.className && classWithModifiers(props.className, ...props.modifiers || []))} />
+    )
+  }
+
   return (
     <svg {...props} className={classMerge("icon", props.className && classWithModifiers(classWithModifiers(props.className, props.name), ...props.modifiers || []))}>
-      <use href={props.name ? `/static/icons.svg#${props.name}` : props.href} />
+      <use href={`/static/icons.svg#${props.name}`} />
     </svg>
   )
 }
