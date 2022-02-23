@@ -5,14 +5,13 @@ import { deleteMentorsId, getMentorsId } from "api/actions/mentors"
 import ClientAPI from "api/client"
 import AdminInterface from "app/components/admin/AdminInterface"
 import Button from "app/components/common/Button/Button"
-import ButtonLink from "app/components/common/Button/ButtonLink"
 import Icon, { IconName } from "app/components/common/Icon/Icon"
 import ContactForm from "app/components/other/ContactForm/ContactForm"
 import { getEmojiPNG } from "app/components/UI/MentorCard/MentorCard"
 import TopicTag from "app/components/UI/Tag/TopicTag"
 import useScrollToTop from "hooks/useScrollToTop"
 import useLocalization from "modules/localization/hook"
-import { ReactNode } from "react"
+import { ReactNode, useEffect } from "react"
 import { useQuery } from "react-fetching-library"
 import { useNavigate, useParams } from "react-router"
 import { classWithModifiers, inter } from "utils/common"
@@ -27,7 +26,8 @@ function UserUserId() {
   const params = useParams<"userId">()
   if (!params.userId) throw new Error("This component should be used in Route context")
 
-  const { error, loading, payload } = useQuery(getMentorsId(+params.userId))
+  const { error, loading, payload, query } = useQuery(getMentorsId(+params.userId))
+  useEffect(() => { query() }, [ll])
 
   if (error) throw new Error("unexpected api error")
   if (loading) return <>loading...</>
@@ -74,7 +74,7 @@ function UserUserId() {
         <UserSection type="3" title={payload.info.resume}>
           <div className="user-section__entry">
             <Icon name="location" />
-            <span>{(payload.info as any)["city_" + lang.code]}, <em>{ll.info.teachType}</em></span>
+            <span>{(payload.info as never)["city_" + lang.code]}, <em>{ll.info.teachType}</em></span>
           </div>
           <div className="user-section__entry">
             <Icon name="face" />

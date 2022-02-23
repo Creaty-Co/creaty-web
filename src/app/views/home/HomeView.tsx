@@ -19,7 +19,9 @@ import { Popup } from "modules/popup/controller"
 import { useEffect } from "react"
 import { useQuery } from "react-fetching-library"
 import ReactMarkdown from "react-markdown"
+import { useDispatch } from "react-redux"
 import { useParams } from "react-router"
+import { updateSearch } from "redux/reducers/search"
 
 import BecomeMentor from "./BecomeMentor/BecomeMentor"
 import DynamicPrimaryInfo from "./DynamicPrimaryInfo/DynamicPrimaryInfo"
@@ -30,10 +32,17 @@ import MailingSubscribe from "./MailingSubscribe/MailingSubscribe"
 
 function HomeView() {
   useScrollToTop()
+  const dispatch = useDispatch()
   const ll = useLocalization(ll => ll.views.home)
   const params = useParams<"shortcut">()
   const { payload, query } = useQuery(params.shortcut ? getPagePersonal(params.shortcut) : getPagesMain)
   useEffect(() => { query() }, [ll])
+  useEffect(() => {
+    dispatch(updateSearch({
+      tag: undefined,
+      topic: undefined
+    }))
+  }, [])
   return (
     <div className="home-view">
       <div className="home-view__header">
