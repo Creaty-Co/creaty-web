@@ -69,16 +69,24 @@ Localization.addInterceptor(ll => {
 })
 // Add languages
 const langs = require.context("app/assets/lang/", false, /^.\/.*\.json$/)
+console.log("LangFiles => ", langs)
+console.group("LangFileKeys")
 langs.keys().forEach(fileName => {
+  console.log("FileName => ", fileName)
   const lang = fileName.replace(/\.\/|\.json/g, "")
+  console.log("Lang => ", lang)
   const langFile = langs(fileName)
+  console.log("LangFile => ", langFile)
 
   if (typeof langFile !== "object") {
     throw new TypeError("Wrong lang file content: " + typeof langFile)
   }
 
+  console.log("FileName => ", "PASSED")
+
   Localization.add(lang, langFile)
 })
+console.groupEnd()
 // Set default language
 // Localization.setDefault("ru")
 
