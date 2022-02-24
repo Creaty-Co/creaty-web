@@ -21,11 +21,11 @@ function DropDown<V = string | undefined>(props: DropDownProps<V>) {
   return (
     <section className={classWithModifiers("drop-down", props.expanded && "expanded")} role="listbox" aria-expanded={props.expanded}>
       {options.map((option, index) => (
-        <option
+        <div
           className={classWithModifiers("drop-down__option", choice === index && "selected")}
           onClick={() => (Choose(index), props.onChange(option.value as unknown as V, option.children))}
           key={index}
-        >{option.children}</option>
+        >{option.children}</div>
       ))}
       {props.name && (
         <input type="hidden" name={props.name} value={options[choice].value} />
