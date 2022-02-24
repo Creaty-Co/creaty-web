@@ -28,7 +28,7 @@ type AccessibleDeeply<O extends string | number | object | undefined> = {
 export type llType = AccessibleDeeply<LocalizationJSONRaw>
 
 type Interceptor = (ll: llType) => llType
-console.log("navigator => ", navigator.language.split("-")[0])
+
 class Localization {
   private static defaultLanguage = navigator.language.split("-")[0]
 
@@ -48,13 +48,11 @@ class Localization {
   }
 
   public static add(lang: string, data: llType) {
-    console.log("LocalizationAdding => ", lang, data)
     try {
       this.storage.set(
         lang,
         [...this.interceptors.values()].reduce((result, next) => next(result), data)
       )
-      console.log("LocalizationAdding => ", "PASSED", this.storage)
     } catch (error) {
       if (error instanceof Error) {
         throw new Error("LocalizationInterceptorError: " + error.message)
@@ -65,7 +63,11 @@ class Localization {
   }
 
   public static get(): llType | undefined {
-    return this.storage.get(this.lang)
+    if (this.storage.has(this.lang)) {
+      return this.storage.get(this.lang)
+    }
+
+    return this.storage.get(this.defaultLanguage)
   }
 
   public static getLangs(): string[] {
@@ -96,7 +98,6 @@ class Localization {
     this.interceptors.add(interceptor)
   }
 }
-console.log("Localization => ", Localization)
 
 export function Localize<Selected extends Record<string, unknown> = llType>(selector: (ll: llType) => Selected | undefined): Selected {
   const ll = Localization.get()

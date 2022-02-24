@@ -14,20 +14,17 @@ import DropDown from "../DropDown/DropDown"
 
 
 const langNames = Localization.getLangs()
-console.log("LangKeys => ", langNames)
 const langs = langNames.map(langName => {
   const localization = Localization.storage.get(langName)
   if (!localization) throw new Error("LocalizationError: unexpected error")
   return localization.lang
 })
-console.log("MappedLangs => ", langs)
 
 function LangSelector() {
   const parentRef = useRef<HTMLDivElement>(null)
   const currentLang = useLocalization(ll => ll.lang)
   const [isExpanded, setIsExpanded] = useState(false)
   useClickAway(parentRef, () => setIsExpanded(false))
-  console.log("CurrentLang => ", currentLang)
   return (
     <div className="lang-selector" aria-label="Language selector" ref={parentRef}>
       <Button
