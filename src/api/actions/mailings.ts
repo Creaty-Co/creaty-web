@@ -40,9 +40,9 @@ export const postMailingSend = (id: number): Action<{ id: number }> => ({
 
 /* Subscribers */
 
-export const getMailingsSubscribersXLSX: Action = {
-  method: "GET",
-  endpoint: `/mailings/subscribers/xlsx` // Gives headers for downloading
+export const postMailingsSubscribersXLSX: Action<{ link: string }> = {
+  method: "POST",
+  endpoint: `/mailings/subscribers/xlsx`
 }
 
 export const putMailingsSubscribersXLSX = (xlsx: URLDataBase64): Action => ({

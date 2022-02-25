@@ -1,6 +1,6 @@
-import { getFormsApplicationsXLSX, patchForm, putFormsApplicationsXLSX } from "api/actions/form"
+import { patchForm, postFormsApplicationsXLSX, putFormsApplicationsXLSX } from "api/actions/form"
 import ClientAPI from "api/client"
-import { APIOuterLink } from "api/helpers"
+import { APIDynamicOuterLink } from "api/helpers"
 import Button from "app/components/common/Button/Button"
 import Input from "app/components/UI/Input/Input"
 import { FormElements } from "interfaces/common"
@@ -58,9 +58,9 @@ function AdminFormsView() {
         <h2 className="admin-view__title">Заявки</h2>
         <Input type="file" name="xlsx" />
         <Button color="dark">Загрузить</Button>
-        <APIOuterLink action={getFormsApplicationsXLSX} className="button button--violet">
-          <div className="button__text" >Скачать</div>
-        </APIOuterLink>
+        <APIDynamicOuterLink action={postFormsApplicationsXLSX} className="button button--violet">
+          <div className="button__text">Скачать</div>
+        </APIDynamicOuterLink>
       </form>
       {formsKeys.map(key => (
         <div className="admin-view" key={key}>

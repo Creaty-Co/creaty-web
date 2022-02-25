@@ -1,6 +1,6 @@
-import { getMailing, getMailingsSubscribersXLSX, postMailings, postMailingSend, putMailingsSubscribersXLSX } from "api/actions/mailings"
+import { getMailing, postMailings, postMailingSend, postMailingsSubscribersXLSX, putMailingsSubscribersXLSX } from "api/actions/mailings"
 import ClientAPI from "api/client"
-import { APIOuterLink } from "api/helpers"
+import { APIDynamicOuterLink } from "api/helpers"
 import Button from "app/components/common/Button/Button"
 import Input from "app/components/UI/Input/Input"
 import { FormElements } from "interfaces/common"
@@ -120,9 +120,9 @@ export function PopupAdminXlSXMailing() {
       <form onSubmit={submitXLSX}>
         <Input name="xlsx" type="file" />
         <Button color="dark" type="submit">Загрузить</Button>
-        <APIOuterLink action={getMailingsSubscribersXLSX} className="button button--dark">
+        <APIDynamicOuterLink action={postMailingsSubscribersXLSX} className="button button--dark">
           <div className="button__text">Скачать</div>
-        </APIOuterLink>
+        </APIDynamicOuterLink>
       </form>
     </PopupLayout>
   )

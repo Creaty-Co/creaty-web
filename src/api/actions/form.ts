@@ -26,9 +26,9 @@ export const patchForm = (id: string | number, body: {
 
 /* Applications XLSX */
 
-export const getFormsApplicationsXLSX: Action = {
-  method: "GET",
-  endpoint: `/forms/applications/xlsx` // Gives headers for downloading
+export const postFormsApplicationsXLSX: Action<{ link: string }> = {
+  method: "POST",
+  endpoint: `/forms/applications/xlsx`
 }
 
 export const putFormsApplicationsXLSX = (xlsx: URLDataBase64): Action => ({
