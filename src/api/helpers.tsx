@@ -28,7 +28,7 @@ export function APIDynamicOuterLink(props: APIDynamicOuterLinkProps) {
   if (!init) {
     return (
       <a {...{ ...props, action: undefined, href: undefined }} onClick={() => (setInit(true), query())}>
-        Get link
+        <div className="button__text">Get link</div>
       </a>
     )
   }
