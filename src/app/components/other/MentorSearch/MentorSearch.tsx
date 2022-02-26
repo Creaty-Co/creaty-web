@@ -113,7 +113,7 @@ function MentorSearchListStatic() {
       <div className="mentor-search-list__container">
         {topics.list.map(topic => (
           <Link className={classWithModifiers("mentor-search-list__item", !search.tag && topic.id === search.topic?.id && "active")} to={"/mentors/" + topic.shortcut} key={topic.id} onPointerEnter={() => updateTopic(topic)}>
-            <Icon href={topic.shortcut} />
+            <Icon href={topic.icon} />
             <span>{topic.title}</span>
           </Link>
         ))}
