@@ -1,6 +1,6 @@
 import TopicTag from "app/components/UI/Tag/TopicTag"
 import { TagType } from "interfaces/types"
-import { useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 
 interface MentorSearchTagsProps {
   tags: TagType[]
@@ -8,8 +8,10 @@ interface MentorSearchTagsProps {
 
 function MentorSearchTags(props: MentorSearchTagsProps) {
   const innerRef = useRef<HTMLDivElement>(null)
+  const [width, setWidth] = useState<number>()
+  useEffect(() => setWidth(innerRef.current?.scrollWidth), [props.tags])
   return (
-    <div className="mentor-search__tags" style={{ "--inner-width": innerRef.current?.scrollWidth }}>
+    <div className="mentor-search__tags" style={{ "--inner-width": width }}>
       <div className="mentor-search__inner-tags" ref={innerRef}>
         {[...props.tags, ...props.tags].map(tag => (
           <TopicTag key={tag.id}>{tag}</TopicTag>
