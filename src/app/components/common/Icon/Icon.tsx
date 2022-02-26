@@ -54,7 +54,7 @@ interface IconProps extends SVGAttributes<SVGElement> {
 function Icon(props: IconProps) {
   if (props.href) {
     return (
-      <img className={classMerge("icon", props.className && classWithModifiers(props.className, ...props.modifiers || []))} />
+      <img src={props.href} className={classMerge("icon", props.className && classWithModifiers(props.className, ...props.modifiers || []))} />
     )
   }
 

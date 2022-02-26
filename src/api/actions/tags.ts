@@ -55,7 +55,7 @@ export const postTagsTopics = (body: {
 export const patchTagsTopics = (id: number, body: {
   shortcut: string
   title: string
-  icon: URLDataBase64 | string
+  icon?: URLDataBase64
 }): Action<{ id: number }> => ({
   method: "PATCH",
   endpoint: `/tags/${id}`,

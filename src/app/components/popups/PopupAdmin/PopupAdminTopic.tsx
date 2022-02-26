@@ -65,12 +65,12 @@ export function PopupAdminEditTopic(props: PopupAdminEditTopicProps) {
       .query(patchTagsTopics(props.topic.id, {
         shortcut: elements.shortcut.value,
         title: elements.title.value,
-        icon: elements.icon.files?.[0] ? await FileToURLDataBase64(elements.icon.files?.[0]) : (props.topic?.icon || "")
+        icon: elements.icon.files?.[0] ? await FileToURLDataBase64(elements.icon.files?.[0]) : undefined
       }))
       .then(({ error }) => {
         if (error) return
         close()
-        window.location.reload()
+        // window.location.reload()
       })
   }
   return (
