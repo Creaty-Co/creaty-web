@@ -58,6 +58,6 @@ export const patchTagsTopics = (id: number, body: {
   icon?: URLDataBase64
 }): Action<{ id: number }> => ({
   method: "PATCH",
-  endpoint: `/tags/${id}`,
+  endpoint: `/tags/categories/${id}`,
   body
 })
