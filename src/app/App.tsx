@@ -6,6 +6,7 @@ import ClientAPI from "api/client"
 import useDirectLogin from "hooks/useDirectLogin"
 import { PageLinkType } from "interfaces/types"
 import { UserType } from "interfaces/user"
+import Localization from "modules/localization/controller"
 import useLocalization from "modules/localization/hook"
 import { PopupContainer } from "modules/popup/container"
 import { Popup } from "modules/popup/controller"
@@ -15,7 +16,7 @@ import ReactGA from "react-ga"
 import { Provider, useSelector } from "react-redux"
 import { Route, Routes } from "react-router"
 import { useLocation } from "react-router"
-import { BrowserRouter, NavLink } from "react-router-dom"
+import { BrowserRouter } from "react-router-dom"
 import { Link } from "react-router-dom"
 import { ToastContainer } from "react-toastify"
 import store from "redux/store"
@@ -134,9 +135,16 @@ function AdminViews() {
 
 function Footer() {
   const ll = useLocalization(ll => ll.footer)
-  const { error, payload } = useQuery(getPagesLinksDocuments)
+  const { error, payload, headers } = useQuery(getPagesLinksDocuments)
   if (error || !payload) return null
   const links = payload.results.reduce<Record<PageLinkType["type"], PageLinkType>>((result, next) => ({ ...result, [next.type]: next }), {} as any)
+  useEffect(() => {
+    if (!headers) return
+    const lang = headers.get("Language")
+
+    if (lang === null) return
+    Localization.transit(lang.split("-")[0])
+  }, [headers])
   return (
     <footer>
       <div className="footer-container">
