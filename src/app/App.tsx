@@ -136,8 +136,7 @@ function AdminViews() {
 function Footer() {
   const ll = useLocalization(ll => ll.footer)
   const { error, payload, headers } = useQuery(getPagesLinksDocuments)
-  if (error || !payload) return null
-  const links = payload.results.reduce<Record<PageLinkType["type"], PageLinkType>>((result, next) => ({ ...result, [next.type]: next }), {} as never)
+
   useEffect(() => {
     if (!headers) return
     const lang = headers.get("Language")
@@ -145,6 +144,9 @@ function Footer() {
     if (lang === null) return
     Localization.transit(lang.split("-")[0])
   }, [headers])
+
+  if (error || !payload) return null
+  const links = payload.results.reduce<Record<PageLinkType["type"], PageLinkType>>((result, next) => ({ ...result, [next.type]: next }), {} as never)
   return (
     <footer>
       <div className="footer-container">
