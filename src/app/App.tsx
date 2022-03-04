@@ -137,7 +137,7 @@ function Footer() {
   const ll = useLocalization(ll => ll.footer)
   const { error, payload, headers } = useQuery(getPagesLinksDocuments)
   if (error || !payload) return null
-  const links = payload.results.reduce<Record<PageLinkType["type"], PageLinkType>>((result, next) => ({ ...result, [next.type]: next }), {} as any)
+  const links = payload.results.reduce<Record<PageLinkType["type"], PageLinkType>>((result, next) => ({ ...result, [next.type]: next }), {} as never)
   useEffect(() => {
     if (!headers) return
     const lang = headers.get("Language")
@@ -157,8 +157,8 @@ function Footer() {
             <div className="footer-links__group">
               <div className="footer-links__title">{ll.linkGroups.service}</div>
               <Link className="footer-links__link" to="/mentors">{ll.links.mentors}</Link>
-              <Link className="footer-links__link" to="/become-mentor">{ll.links.becomeMentor}</Link>
-              <Link className="footer-links__link" to="/mentor-search">{ll.links.pickMentor}</Link>
+              <button className="footer-links__link" type="button" onClick={() => Popup.open(PopupForm, { type: "become_mentor" })}>{ll.links.becomeMentor}</button>
+              <button className="footer-links__link" type="button" onClick={() => Popup.open(PopupForm, { type: "choose_mentor" })}>{ll.links.pickMentor}</button>
             </div>
             <div className="footer-links__group">
               <div className="footer-links__title">{ll.linkGroups.docs}</div>
