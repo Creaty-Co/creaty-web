@@ -52,7 +52,8 @@ export class Popup {
     PopupPrivate.dispatch(state => {
       // Skip adding to queue if there is already the same window
       if (state.queue.length > 0) {
-        if (convertToBase64(state.queue[state.queue.length - 1]) === convertToBase64(popupWindow)) {
+        const lastWindow = state.queue[state.queue.length - 1]
+        if ((convertToBase64(lastWindow.params || {}) === convertToBase64(popupWindow.params || {})) && lastWindow.component === popupWindow.component) {
           return { ...state, isActive: true }
         }
       }
@@ -73,6 +74,7 @@ export class Popup {
   private static removeFromQueue(popupWindow: PopupWindow<any>) {
     PopupPrivate.dispatch(state => {
       const queue = state.queue.filter(pw => pw !== popupWindow)
+      // Hide modal without removing if it's the last window
       if (queue.length === 0) {
         return { isActive: false, queue: [popupWindow] }
       }
