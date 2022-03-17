@@ -24,9 +24,10 @@ function MentorCardsContainer(props: MentorCardsContainerProps) {
   const [pageSize] = useState(15)
   const [results, setResults] = useState<MentorType[]>([])
 
-  const { error, loading, payload } = useQuery(getMentors(page, pageSize, tagSet))
+  const { error, loading, payload, query } = useQuery(getMentors(page, pageSize, tagSet))
   if (error) throw new Error("unexpected api error")
 
+  useEffect(() => { query() }, [ll])
   useEffect(() => {
     setPage(1)
     setResults(payload?.results || [])
