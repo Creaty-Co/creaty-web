@@ -105,26 +105,36 @@ function MentorSearchListStatic() {
   const topics = useSelector(state => state.topics)
   const search = useSelector(state => state.search)
 
+  const [cursorTopic, setCursorTopic] = useState(search.topic)
+
   const dispatch = useDispatch()
   const updateTopic = (topic: TopicType) => dispatch(updateSearch({ topic, tag: undefined }))
   const updateTag = (tag: TagType) => dispatch(updateSearch({ tag }))
+
+  const topic = cursorTopic || search.topic
   return (
-    <div className={classWithModifiers("mentor-search-list", search.focused && "visible")}>
+    <div className={classWithModifiers("mentor-search-list", search.focused && "visible")} onPointerLeave={() => setCursorTopic(search.topic)}>
       <div className="mentor-search-list__container">
         {topics.list.map(topic => (
-          <Link className={classWithModifiers("mentor-search-list__item", !search.tag && topic.id === search.topic?.id && "active")} to={"/mentors/" + topic.shortcut} key={topic.id} onPointerEnter={() => updateTopic(topic)}>
+          <Link
+            className={classWithModifiers("mentor-search-list__item", !search.tag && topic.id === search.topic?.id && "active")}
+            to={"/mentors/" + topic.shortcut}
+            onClick={() => updateTopic(topic)}
+            onPointerEnter={() => setCursorTopic(topic)}
+            key={topic.id}
+          >
             <Icon href={topic.icon} />
             <span>{topic.title}</span>
           </Link>
         ))}
       </div>
       <div className="mentor-search-list__tags">
-        {!search.tag && search.topic?.tags.map(tag => (
+        {topic?.tags.map(tag => (
           <Link className="topic-tag" to={`/mentors/${tag.shortcut}/`} onClick={() => updateTag(tag)} key={tag.id}>
             <span className="topic-tag__text">{tag.title}</span>
           </Link>
         ))}
-        {(!search.topic || !!search.tag) && (
+        {topic == null && (
           <div className="mentor-search-list-empty">
             <Icon className="mentor-search-list-empty__icon" name="touch" />
             <span className="mentor-search-list-empty__text">{ll.chooseTopic}</span>
