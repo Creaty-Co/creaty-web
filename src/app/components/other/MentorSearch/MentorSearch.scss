@@ -239,6 +239,12 @@
 	overflow: auto;
 
 	@include Scrollbar(0.75em, rgba($color-gray-90, 0.2));
+
+	&>.topic-tag {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		max-width: 100%;
+	}
 }
 
 /* List Empty */

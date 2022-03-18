@@ -10,10 +10,6 @@
 	transition: 200ms ease background-color;
 	cursor: pointer;
 
-	overflow: hidden;
-	text-overflow: ellipsis;
-	max-width: 100%;
-
 	&:hover {
 		background: $color-gray-90;
 	}
