@@ -138,11 +138,7 @@ function Footer() {
   const { error, payload, headers } = useQuery(getPagesLinksDocuments)
 
   useEffect(() => {
-    if (!headers) return
-    const lang = headers.get("Language")
-
-    if (lang === null) return
-    Localization.transit(lang.split("-")[0])
+    Localization.transit(location.hostname.split(".")[0])
   }, [headers])
 
   if (error || !payload) return null
