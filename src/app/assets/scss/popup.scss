@@ -68,7 +68,10 @@
 
 .popup-layout__close {
 	margin-left: auto;
-	color: $color-black-main;
+	color: #595F69;
+	border: 2px solid #EEF2F7;
+	padding: 21px;
+	border-radius: 1.5em;
 }
 
 .popup-layout__title {

@@ -6,68 +6,68 @@
   },
   "header": {
     "menu": {
-      "mentors": "Mentors",
+      "mentors": "Browse all mentors",
       "becomeMentor": "Become a mentor"
     },
-    "findMentor": "Find your mentor"
+    "findMentor": "Get help to find a mentor"
   },
   "footer": {
     "linkGroups": {
-      "service": "Сервис",
-      "docs": "Документы",
-      "help": "Помощь"
+      "service": "Service",
+      "docs": "Documents",
+      "help": "Support"
     },
     "links": {
-      "mentors": "Mentors",
-      "becomeMentor": "Become mentor",
-      "pickMentor": "Choose mentor",
-      "terms": "Terms",
+      "mentors": "Browse all mentors",
+      "becomeMentor": "Become a mentor",
+      "pickMentor": "Get help to find a mentor",
+      "terms": "Terms of Service",
       "privacyPolicy": "Privacy Policy",
       "cookiePolicy": "Cookie  Policy",
-      "support": "Support"
+      "support": "Get help"
     },
     "desc": "educational platform for searching professional mentors in creative fields. Correspondence address: [address]"
   },
   "views": {
     "home": {
       "primaryInfo": {
-        "title": "1 on 1 along \n with mentor",
-        "desc": "Develop and enhance your <em>creative skills</em> on individual \n interaction with professional mentor"
+        "title": "1-on-1 with \n dedicated mentor",
+        "desc": "Improve effectively your <em>creative skills</em> in individual sessions with professional \n mentors on your side"
       },
       "mentorSearch": {
-        "placeholder": "Select a category or destination",
+        "placeholder": "Choose industry or specific skill",
         "button": "Find a mentor",
         "chooseTopic": "Choose a category"
       },
       "help": {
-        "title": "Don't know what start with?",
-        "desc": "Contact us: we'll help you to chose a mentor \n and answer all your questions"
+        "title": "Don’t know where to start?",
+        "desc": "Just write to us, we will help you choose a mentor \n and answer all your questions"
       },
-      "bigComment": "We are Creaty. <em>We help with seeking mentors at the creatives industries</em> in order to pick up a suitable \n position, find an interesting job or find out ways of speeding up your professional growth",
+      "bigComment": "We are Creaty. <em>We help find mentors in the creative industries</em> to choose your career path, find an interesting job \n or understand how to grow as a pro faster",
       "howItWorks": {
         "title": "How it works",
         "points": [
           {
-            "title": "Describe your goals and \n tasks",
-            "desc": "Leave <Link to=\"/become-mentor\" children=\"an request\" />, so you can keep in touch with us if you need a help."
+            "title": "Describe your goals",
+            "desc": "Leave <Link to=\"/become-mentor\" children=\"a request\" />, so that we can \n contact you and understand what kind \n of help you need"
           },
           {
-            "title": "Choose a mentor, \n get acquainted",
-            "desc": "After choose a mentor, you will meet up for 15 minutes for FREE, where you could discuss your goals and study plan."
+            "title": "Choose a mentor",
+            "desc": "After choosing a mentor, you will have \n a FREE 15-minute trial session where \n you can discuss in details your goals \n and learing plan"
           },
           {
-            "title": "Improve yourself!",
-            "desc": "And let the craving for new achievements and professional heights help you overcome laziness, hunger and any adversity!"
+            "title": "Grow professionally!",
+            "desc": "And let your inner passion lead you to \n great new career achievements with \n dedicated mentors on your side"
           }
         ],
         "help": {
-          "title": "First meeting is <em>FREE!</em>",
-          "desc": "To get to know each other, understand how you \n fit each other and agree on a plan and schedule for classes"
+          "title": "First trial session is <em>FREE!</em>",
+          "desc": "To understand how you fit each other, agree on a learning plan \n and class schedule"
         },
-        "button": "Try for free"
+        "button": "I'm in! Let me try"
       },
       "QAndA": {
-        "title": "Questions and answers",
+        "title": "Frequently asked questions",
         "clauses": [
           {
             "summary": "How does the Creaty service work?",
@@ -112,88 +112,88 @@
         ]
       },
       "becomeMentor": {
-        "title": "You too can become a mentor",
+        "title": "You too can become mentor",
         "descPoints": [
-          "Share your experience and knowledge when and where it suits you",
-          "Get extra \n income",
-          "Develop professional skills with students"
+          "Share your experience and knowledge when and where it suits you most",
+          "Keep evolving your professional skills during sessions with students",
+          "Get extra income"
         ],
-        "button": "Try your hand",
+        "button": "Give me a shot",
         "terms": "By clicking on the button, I agree to the processing of personal data in accordance with <Link to=\"/terms\" children=\"privacy policy\" />"
       },
       "mailingSubscribe": {
-        "title": "<em>Creative Industries</em> Trends, News, Best Practices \n and More in the Creaty Newsletter"
+        "title": "Trends in <em>creative industries</em> news, best practices \n and much more in the Creaty newsletter"
       }
     },
     "mentors": {
       "title": "Mentors",
-      "desc": "<em>200+ working professionals from the creative industries</em> are ready to help you pickng up a proper \n occupation, finding a great place or ways to speed up your professional grow."
+      "desc": "<em>Professionals from the creative industries</em> are ready to help you choose the right career path, find an interesting job or \n understand how to grow professionally faster."
     },
     "mentor": {
       "card": {
-        "discount": "Package of {courseCount} classes: <em>discount {courseDiscount}%</em>",
-        "rollIn": "Register",
-        "terms": "By clicking on the button, I agree to the processing of personal data in accordance with the privacy policy",
+        "discount": "Pack of {courseCount} lessons: <em>discount {courseDiscount}%</em>",
+        "rollIn": "Request a session",
+        "terms": "By clicking on the button, I consent to the processing of my personal data in accordance with privacy policy",
         "trial": "* Trial 15 minute meeting <em>free!</em>"
       },
       "info": {
         "language": "Teaching language",
         "teachType": "online and face-to-face sessions",
-        "whatHelp": "What help with",
+        "whatHelp": "How can I help",
         "experience": "Experience and projects",
         "portfolio": "Portfolio",
         "garantee": {
           "title": "Your guarantee",
-          "desc": "If for some reason you feel like you've wasted your time and money, please let us know.<br /> <em>We'll look into the situation and find a solution.</em>"
+          "desc": "If for some reason you think that you have wasted your money and time uselessly, write to us.\n We will investigate the situation and find a solution."
         },
         "bookMentor": {
-          "title": "Sign up with a mentor",
-          "desc": "You can pay for the session after agreeing with the manager of the time and details. In the meantime, leave a request so that we can contact you in a convenient way for you.",
-          "submit": "Submit to a mentor"
+          "title": "Request a session with mentor",
+          "desc": "You can pay for the session only after agreeing with a manager about the time and details. In the meantime, send request so that we can contact you in a convenient way. ",
+          "submit": "Request a session"
         }
       }
     }
   },
   "components": {
     "helpfulCreaty": {
-      "title": "Create is usefull when:",
+      "title": "Creaty will be \n useful if",
       "blocks": [
         {
-          "title": "At the beginning of a career / choose your path",
+          "title": "You are on start or \n choosing career path",
           "points": [
-            "We decided to change our specialty, but there is no understanding of where to start",
-            "You have chosen the path of your career development, but you doubt its correctness",
-            "Do you want to talk to a person \"in the profession\" to assess your capabilities and expectations"
+            "You decided to change your occupation, but there is \n no clear understanding of where to start",
+            "You have chosen the path of your creative career, \n but doubt that this is the best way",
+            "You want to talk with an industry professional to \n assess different options and your expectations"
           ]
         },
         {
-          "title": "You already have more than 2 years of experience",
+          "title": "You have more than \n 2 years of experience",
           "points": [
-            "Do you want to expand your area of ​​competence or change the vector of development",
-            "Want to get an expert assessment of your skills / competencies",
-            "Need help with work tasks/projects"
+            "You want to expand the area of expertise or change \n your career path",
+            "You want to get professional assessment of your \n skills and competencies",
+            "You need help with you project or work tasks"
           ]
         },
         {
-          "title": "You are studying / graduated",
+          "title": "You are student or \n recently graduated",
           "points": [
-            "Need help with a project/portfolio",
-            "We need an expert view / assessment from the outside",
-            "We have been trained, but experience is needed for work",
-            "Want to make a career development plan"
+            "You need help with your student project or portfolio",
+            "Need an expert opinion or professional assessment",
+            "You have completed your study but need job advice",
+            "You want to create a career development plan"
           ]
         },
         {
-          "title": "You have just started working / got an internship",
+          "title": "You just got a new \n job or started an \n internship",
           "points": [
-            "Need help with difficult tasks",
-            "Great job but hard to get into",
-            "I need advice from an experienced mentor about colleagues / processes / tasks",
-            "Want to understand how you can grow professionally faster and more efficiently"
+            "You need help with complex tasks",
+            "You got a good job but it is hard to get into details",
+            "You need advice about job processes, professional \n ethics and work tasks",
+            "You want to understand how you can grow \n professionally faster and more efficiently"
           ]
         }
       ],
-      "button": "Pick me a mentor"
+      "button": "Great! Find me a mentor"
     },
     "contactForm": {
       "fields": {
@@ -204,14 +204,14 @@
           "title": "Facebook"
         },
         "whats_app": {
-          "title": "whatsapp"
+          "title": "WhatsApp"
         },
         "viber": {
           "title": "Viber"
         }
       },
       "mayDiscussLater": "May DiscussLater :)",
-      "submit": "Submit",
+      "submit": "Get answers",
       "terms": "By clicking on the button, I agree to the processing of personal data in accordance with the privacy policy"
     },
     "cookies": {
@@ -220,23 +220,23 @@
       "button": "Good"
     },
     "subscribe": {
-      "placeholder": "Which email do you want to receive the newsletter?",
+      "placeholder": "Enter your email address",
       "button": "Subscribe",
       "thanks": "<em>Thank you!</em> We'll be back soon with good news :)",
-      "terms": "By clicking on the button, you agree to receive Creaty email newsletters. You can easily unsubscribe at any time, there is a corresponding link inside each email."
+      "terms": "By clicking «subscibe» you'll receive occasional emails from Creaty. You always have the choice to unsubscribe within every email you receive. "
     },
     "mentorsSlider": {
-      "title": "<em>Find your mentor</em> among \n creative industry professionals",
-      "seeAllMentors": "See All Mentors",
+      "title": "<em>Find your perfect mentor</em> among creative \n industry professionals",
+      "seeAllMentors": "Browse all mentors",
       "or": "or",
-      "getHelp": "Get help finding a mentor"
+      "getHelp": "Get help to find a mentor"
     },
     "haveQuestions": {
       "title": "Still have questions?",
-      "desc": "If you have questions about the format or don't know which mentor to choose, just leave your number and email:\n<em>we'll be in touch to answer all your questions</em>"
+      "desc": "If you have any questions about the learning format or you don't know what mentor to choose, just fill in the form and send it to us:\n<em>we will contact you to answer all your questions</em>"
     },
     "helpSocial": {
-      "text": "Ask questions where \n is more convenient"
+      "text": "Ask questions where it's \n most convenient"
     },
     "mentorCard": {
       "seeProfile": "View Profile"

@@ -148,10 +148,14 @@ header {
 main {
 	margin-top: 10em;
 
+}
+main:not(.home-view__slider){
+
 	@include Mobile {
-		padding: 5.559vw;
+		padding: 5vw;
 		margin: 2.5em 0;
 	}
+
 }
 
 /* Footer */
