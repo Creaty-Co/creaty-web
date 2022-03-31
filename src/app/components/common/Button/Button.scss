@@ -14,12 +14,30 @@
 
 	color: transparent;
 
-	&:active {
+	&:active:not(&--green):not(&--white){
 		opacity: 0.7;
 	}
 
-	&:hover:not(&--outline) {
-		background-image: linear-gradient(0deg, rgba($color-white, 0.1), rgba($color-white, 0.1));
+	&--green:active:not(&--outline) {
+		background: linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), #4DF971;
+		opacity: 0.7;
+	}
+
+	&--white:active{
+		background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #FFFFFF;
+		opacity: 0.7;
+	}
+
+	&:hover:not(&--outline):not(&--green):not(&--white){
+		background-image: linear-gradient(0deg,hsla(0,0%,100%,.1),hsla(0,0%,100%,.1));
+	}
+
+	&--green:hover:not(&--outline) {
+		background: linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), #4DF971;
+	}
+
+	&--white:hover{
+		background: linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), #FFFFFF;
 	}
 
 	&:disabled {
@@ -71,6 +89,7 @@
 
 		&:hover {
 			color: $color-white;
+			background: linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), #FFFFFF;
 		}
 
 		.button__text {
