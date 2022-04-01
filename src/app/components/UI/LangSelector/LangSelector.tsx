@@ -26,17 +26,17 @@ function LangSelector() {
   const [isExpanded, setIsExpanded] = useState(false)
   useClickAway(parentRef, () => setIsExpanded(false))
   return (
-    <div className="lang-selector" aria-label="Language selector" ref={parentRef}>
+    <div className="lang-selector" aria-label="Language selector" ref={parentRef} onMouseEnter={() => setIsExpanded(true)}>
       <Button
         iconLeft={<Icon name="language" className="lang-selector__icon" />}
         iconRight={<Icon name="drop-down-triangle" className={classWithModifiers("lang-selector__icon", isExpanded && "up")} />}
-
         onClick={() => setIsExpanded(!isExpanded)}
       >{_.capitalize(currentLang.name)}, {currentLang.currency}</Button>
-      <DropDown<string> expanded={isExpanded} default={currentLang.code} onChange={lang => Localization.transit(lang)} >
+      <DropDown<string> expanded={isExpanded} default={currentLang.code} onChange={lang => Localization.transit(lang)}>
         {langs.map((lang, index) => (
           <option value={lang.code} key={index}>{_.capitalize(lang.name)}, {lang.currency}</option>
         ))}
+
       </DropDown>
       {/* <section className={classWithModifiers("lang-selector__list", isExpanded && "expanded")} role="listbox" aria-expanded={isExpanded}>
         {langs.map((lang, index) => (

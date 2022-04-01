@@ -41,6 +41,10 @@
 	width: 100%;
 	padding: 1.25em 0;
 	overflow: hidden;
+
+	@include Mobile {
+		margin: -5vw;
+	}
 }
 
 .mentors-slider__inner {
