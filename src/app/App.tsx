@@ -74,7 +74,7 @@ function Header() {
   const location = useLocation()
   useEffect(() => ReactGA.send({
     hitType: "pageview",
-    page: location.pathname + location.search + location.hash
+    view: location.pathname + location.search + location.hash
   }), [location])
   return (
     <header>
