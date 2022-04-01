@@ -9,6 +9,7 @@
 	padding: 1em;
 	min-width: 15em;
 	background: white;
+	box-shadow: 0 4px 40px rgba(7, 7, 7, 0.2);
 	border-radius: 1.5em;
 	transform: translateY(0.75em);
 	transition: 200ms ease opacity, 200ms ease transform;
@@ -33,7 +34,6 @@
 	}
 
 	&--selected {
-		background: $color-gray-30;
 		font-weight: 700;
 	}
 }

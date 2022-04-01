@@ -49,7 +49,6 @@
     "no-multi-spaces": "error",
     "simple-import-sort/imports": "error",
     "semi": ["error", "never"],
-    "linebreak-style": ["error", "unix"],
 
     "indent": [
       "error",

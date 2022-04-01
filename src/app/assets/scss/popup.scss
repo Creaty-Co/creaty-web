@@ -57,7 +57,7 @@
 .popup-layout {
 	display: grid;
 	row-gap: 1.5em;
-
+	position: relative;
 	max-width: 100vw;
 	max-height: 100vh;
 	padding: 4em;
@@ -68,7 +68,13 @@
 
 .popup-layout__close {
 	margin-left: auto;
-	color: $color-black-main;
+	position: absolute;
+	top: 1.5em;
+	right: 1.5em;
+	color: #595F69;
+	border: 2px solid #EEF2F7;
+	padding: 21px;
+	border-radius: 1.5em;
 }
 
 .popup-layout__title {
