@@ -24,9 +24,20 @@ function LangSelector() {
   const parentRef = useRef<HTMLDivElement>(null)
   const currentLang = useLocalization(ll => ll.lang)
   const [isExpanded, setIsExpanded] = useState(false)
-  useClickAway(parentRef, () => setIsExpanded(false))
+  const mouseEnterRef = useRef<NodeJS.Timeout | undefined>(undefined)
+  function onMouseEnter() {
+    setIsExpanded(true)
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    clearTimeout(mouseEnterRef.current)
+  }
+  function onMouseLeave() {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    mouseEnterRef.current = setTimeout(() => setIsExpanded(false), 250)
+  }
   return (
-    <div className="lang-selector" aria-label="Language selector" ref={parentRef} onMouseEnter={() => setIsExpanded(true)}>
+    <div className="lang-selector" aria-label="Language selector" ref={parentRef} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
       <Button
         iconLeft={<Icon name="language" className="lang-selector__icon" />}
         iconRight={<Icon name="drop-down-triangle" className={classWithModifiers("lang-selector__icon", isExpanded && "up")} />}
