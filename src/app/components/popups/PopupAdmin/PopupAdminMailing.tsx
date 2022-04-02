@@ -118,8 +118,6 @@ export function PopupAdminXlSXMailing() {
   return (
     <PopupLayout title="Таблица подписчиков" width="80em">
       <form onSubmit={submitXLSX}>
-        <Input name="xlsx" type="file" />
-        <Button color="dark" type="submit">Загрузить</Button>
         <APIDynamicOuterLink action={postMailingsSubscribersXLSX} className="button button--dark">
           <div className="button__text">Скачать</div>
         </APIDynamicOuterLink>

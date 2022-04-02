@@ -56,8 +56,6 @@ function AdminFormsView() {
     <>
       <form className="admin-view" onSubmit={submitXLSX}>
         <h2 className="admin-view__title">Заявки</h2>
-        <Input type="file" name="xlsx" />
-        <Button color="dark">Загрузить</Button>
         <APIDynamicOuterLink action={postFormsApplicationsXLSX} className="button button--violet">
           <div className="button__text">Скачать</div>
         </APIDynamicOuterLink>

@@ -12,7 +12,7 @@ import { PopupContainer } from "modules/popup/container"
 import { Popup } from "modules/popup/controller"
 import { StrictMode, Suspense, useEffect, useRef, useState } from "react"
 import { ClientContextProvider, useQuery } from "react-fetching-library"
-import ReactGA from "react-ga"
+import ReactGA from "react-ga4"
 import { Provider, useSelector } from "react-redux"
 import { Route, Routes } from "react-router"
 import { useLocation } from "react-router"
@@ -43,7 +43,7 @@ import MentorsViewTopicOrTag from "./views/mentors/MentorsView[topicOrTag]"
 import UserUserId from "./views/user/User[userId]"
 
 
-ReactGA.initialize(process.env.REACT_APP_API_GA_UA)
+ReactGA.initialize(process.env.REACT_APP_API_GA)
 
 function App() {
   return (
@@ -72,7 +72,10 @@ function Header() {
   const ll = useLocalization(ll => ll.header)
   const [expanded, setExpanded] = useState(false)
   const location = useLocation()
-  useEffect(() => ReactGA.pageview(location.pathname + location.search + location.hash), [location])
+  useEffect(() => ReactGA.send({
+    hitType: "pageview",
+    view: location.pathname + location.search + location.hash
+  }), [location])
   return (
     <header>
       <AdminTopbar />

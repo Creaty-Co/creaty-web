@@ -135,18 +135,22 @@
 }
 
 .mentor-search__inner-tags {
+	--sliding-interval: 3.3ms;
+	--sliding-duration: calc(var(--inner-width) * var(--sliding-interval));
+
 	display: flex;
 	flex-wrap: nowrap;
 	gap: 0.5em;
 	// overflow: hidden;
 
-	animation: 10s asd linear infinite;
+	animation: sliding linear infinite;
+	animation-duration: var(--sliding-duration, 10s);
 
 	&:hover {
 		animation-play-state: paused;
 	}
 
-	@keyframes asd {
+	@keyframes sliding {
 		from {
 			margin-left: 0;
 		}
