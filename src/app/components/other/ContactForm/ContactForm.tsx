@@ -59,7 +59,7 @@ function ContactForm(props: ContactFormProps) {
     }, {})
 
     ClientAPI
-      .query(postFormsIdApplications(form.id, inputValues))
+      .query(postFormsIdApplications(form.id, location.pathname, inputValues))
       .then(({ error }) => {
         if (error) return
 
