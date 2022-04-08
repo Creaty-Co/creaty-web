@@ -37,6 +37,7 @@ import AdminMentorsView from "./views/admin/AdminMentorsView/AdminMentorsView"
 import AdminEditMentorView from "./views/admin/AdminMentorView/AdminEditMentorView"
 import AdminNewMentorView from "./views/admin/AdminMentorView/AdminNewMentorView"
 import AdminTopicsTagsView from "./views/admin/AdminTopicsView/AdminTopicsTagsView"
+import ErrorView from "./views/error/ErrorView"
 import HomeView from "./views/home/HomeView"
 import MentorsView from "./views/mentors/MentorsView"
 import MentorsViewTopicOrTag from "./views/mentors/MentorsView[topicOrTag]"
@@ -106,12 +107,15 @@ function Main() {
   return (
     <main>
       <Routes>
-        <Route path="/" element={<HomeView />} />
-        <Route path="/:shortcut" element={<HomeView />} />
-        <Route path="/mentors" element={<MentorsView />} />
-        <Route path="/mentors/:topicOrTag" element={<MentorsViewTopicOrTag />} />
-        <Route path="/user/:userId" element={<UserUserId />} />
-        <Route path="/admin/*" element={<AdminViews />} />
+        <Route path="/">
+          <Route index element={<HomeView />} />
+          <Route path=":shortcut" element={<HomeView />} />
+          <Route path="mentors" element={<MentorsView />} />
+          <Route path="mentors/:topicOrTag" element={<MentorsViewTopicOrTag />} />
+          <Route path="user/:userId" element={<UserUserId />} />
+          <Route path="admin/*" element={<AdminViews />} />
+        </Route>
+        <Route path="/*" element={<ErrorView />} />
       </Routes>
     </main>
   )
