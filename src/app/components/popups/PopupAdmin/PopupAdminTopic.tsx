@@ -1,4 +1,4 @@
-import { patchTagsTopics, postTagsTopics } from "api/actions/tags"
+import { deleteTagsTopic, patchTagsTopics, postTagsTopics } from "api/actions/tags"
 import ClientAPI from "api/client"
 import { FormElements } from "interfaces/common"
 import { TopicType } from "interfaces/types"
@@ -73,6 +73,20 @@ export function PopupAdminEditTopic(props: PopupAdminEditTopicProps) {
         // window.location.reload()
       })
   }
+  async function removeTopic() {
+    if (props.topic.tags.length > 0) {
+      const canDelete = await window.confirm("Категория имеет теги, всё равно удалить?")
+      if (!canDelete) return
+    }
+
+    ClientAPI
+      .query(deleteTagsTopic(props.topic.id))
+      .then(({ error }) => {
+        if (error) return
+        close()
+        window.location.reload()
+      })
+  }
   return (
     <PopupLayout title="Редактировать категорию">
       <form onSubmit={submitTopic}>
@@ -83,6 +97,7 @@ export function PopupAdminEditTopic(props: PopupAdminEditTopicProps) {
           <Input name="icon" type="file" />
         </label>
         <Button color="dark" type="submit">Сохранить</Button>
+        <Button color="violet" onClick={removeTopic}>Удалить</Button>
       </form>
     </PopupLayout>
   )

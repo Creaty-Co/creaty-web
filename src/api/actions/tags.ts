@@ -61,3 +61,8 @@ export const patchTagsTopics = (id: number, body: {
   endpoint: `/tags/categories/${id}`,
   body
 })
+
+export const deleteTagsTopic = (id: number): Action => ({
+  method: "DELETE",
+  endpoint: `/tags/categories/${id}`
+})
