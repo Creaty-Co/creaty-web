@@ -3,11 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b42c9b7f-d6c5-480d-8999-f6ce578eb894" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/assets/lang/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/assets/lang/en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/assets/lang/ru.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/assets/lang/ru.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/assets/scss/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/assets/scss/app.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/assets/scss/popup.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/assets/scss/popup.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/other/MentorsSlider/MentorsSlider.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/other/MentorsSlider/MentorsSlider.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/UI/LangSelector/LangSelector.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/UI/LangSelector/LangSelector.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +45,11 @@
       <updated>1648661664705</updated>
       <workItem from="1648661666153" duration="5784000" />
       <workItem from="1648739121133" duration="872000" />
-      <workItem from="1648739994601" duration="13486000" />
+      <workItem from="1648739994601" duration="14797000" />
+      <workItem from="1648814459945" duration="802000" />
+      <workItem from="1648842265566" duration="2601000" />
+      <workItem from="1648904273392" duration="51000" />
+      <workItem from="1648905406152" duration="751000" />
     </task>
     <servers />
   </component>
@@ -57,10 +57,10 @@
     <option name="version" value="2" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1648739992424">
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1648904323657">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1648739992424" />
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1648904323657" />
     <state x="461" y="165" key="SettingsEditor" timestamp="1648671347199">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

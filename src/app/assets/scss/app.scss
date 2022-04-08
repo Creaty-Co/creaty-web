@@ -87,7 +87,7 @@ header {
 .topbar__right {
 	display: flex;
 	align-items: center;
-	gap: 1.5em;
+	gap: 0.5em;
 
 	@include Tablet {
 		position: absolute;
