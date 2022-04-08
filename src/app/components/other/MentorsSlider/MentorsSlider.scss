@@ -43,6 +43,7 @@
 	overflow: hidden;
 
 	@include Mobile {
+		width: 100vw;
 		margin: -5vw;
 	}
 }
@@ -56,7 +57,7 @@
 	overflow: hidden;
 
 	@include Mobile {
-		grid-auto-columns: 90vw;
+		grid-auto-columns: 80vw;
 		overflow: auto;
 	}
 }
