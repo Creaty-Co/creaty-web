@@ -6,7 +6,7 @@ import { PopupAdminNewTag } from "app/components/popups/PopupAdmin/PopupAdminTag
 import { PopupAdminNewTopic } from "app/components/popups/PopupAdmin/PopupAdminTopic"
 import CheckTree from "app/components/UI/CheckTree/CheckTree"
 import Input from "app/components/UI/Input/Input"
-import { FormElements } from "interfaces/common"
+import PackagesEdit from "app/components/UI/PackagesEdit/PackagesEdit"
 import { MentorDetailedType, MentorPackageType } from "interfaces/types"
 import { Popup } from "modules/popup/controller"
 import { ChangeEvent, Dispatch, FormEvent, useEffect, useState } from "react"
@@ -168,45 +168,6 @@ function AdminMentorNewEdit(props: AdminNewMentorViewProps | AdminEditMentorView
       <br />
       <Button color="violet" type="submit">Сделать</Button>
     </form>
-  )
-}
-
-
-function PackagesEdit(props: { defaultValues?: Omit<MentorPackageType, "id">[]; onChange: Dispatch<Omit<MentorPackageType, "id">[]> }) {
-  const [packages, setPackages] = useState<Omit<MentorPackageType, "id">[]>(props.defaultValues || [])
-  function editPackage(pack: Omit<MentorPackageType, "id">) {
-    return (event: ChangeEvent<HTMLInputElement>) => {
-      const target = event.currentTarget
-
-      packages[packages.indexOf(pack)][target.name as Exclude<keyof MentorPackageType, "id">] = +target.value
-      setPackages([...packages])
-    }
-  }
-  useEffect(() => props.onChange?.(packages), [packages])
-  return (
-    <>
-      <br />
-      <br />
-      {packages.map((pack, index) => (
-        <div key={toBase64(pack)}>
-          <br />
-          <h3>Пакет номер {index + 1}</h3>
-          <Button color="violet" onClick={() => setPackages([...packages.filter(packg => packg !== pack)])}>Удалить</Button>
-          <br />
-          <label>
-            кол-во
-            <Input onChange={editPackage(pack)} placeholder="Введите кол-во" name="lessons_count" defaultValue={pack.lessons_count} />
-          </label>
-          <label>
-            скидку
-            <Input onChange={editPackage(pack)} placeholder="Введите скидку" name="discount" defaultValue={pack.discount} />
-          </label>
-        </div>
-      ))}
-      <Button color="dark" onClick={() => setPackages([...packages, { discount: 0, lessons_count: 0 }])}>Добавить пакет</Button>
-      <br />
-      <br />
-    </>
   )
 }
 
