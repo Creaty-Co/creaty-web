@@ -103,7 +103,7 @@ export function inter<V = unknown>(value: V, vars: Record<string, string | numbe
     // ------------------------------------------------ Hardcoded :(
     const elementProps = (value as any)?.props
     if (elementProps?.children) {
-      return cloneElement(value as any, elementProps, interpolate(elementProps.children)) as any
+      return cloneElement(value as any, elementProps, interpolate(elementProps.children) as any) as any
     }
     // ------------------------------------------------
     if (typeof value === "string") {

@@ -2,6 +2,7 @@ import { Component, ErrorInfo, ReactNode } from "react"
 import ReactGA from "react-ga4"
 
 interface ErrorBoundaryProps {
+  children: ReactNode
   fallback: ReactNode
 }
 interface ErrorBoundaryState {

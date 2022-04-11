@@ -1,8 +1,16 @@
 import App from "app/App"
 import { createElement } from "react"
-import ReactDOM from "react-dom"
+import { createRoot } from "react-dom/client"
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 window.Buffer = require("buffer").Buffer
 
-ReactDOM.render(createElement(App), document.getElementById("root"))
+function init() {
+  const rootElement = document.getElementById("root")
+  if (rootElement === null) return
+
+  const root = createRoot(rootElement)
+  root.render(createElement(App))
+}
+
+init()
