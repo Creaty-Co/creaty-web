@@ -88,19 +88,19 @@ export function PopupAdminPersonalMentors(props: PopupAdminPersonalMentorsProps)
     <PopupLayout title="Изменить менторов" width="35em">
       <div style={{ display: "grid", rowGap: "1em", color: "black" }}>
         Тэги
-        <label>
+        <div>
           Главная
           <Button color="green" onClick={() => addOrRemoveMentor(true, "main")}>Добавить</Button>
           <Button color="violet" onClick={() => addOrRemoveMentor(false, "main")}>Удалить</Button>
           {/* <input name="main" type="checkbox" onChange={onChange} /> */}
-        </label>
+        </div>
         {topics.tags.map(tag => (
-          <label key={tag.id}>
+          <div key={tag.id}>
             {tag.title}
             <Button color="green" onClick={() => addOrRemoveMentor(true, tag.shortcut)}>Добавить</Button>
             <Button color="violet" onClick={() => addOrRemoveMentor(false, tag.shortcut)}>Удалить</Button>
             {/* <input name={tag.shortcut} type="checkbox" onChange={onChange} /> */}
-          </label>
+          </div>
         ))}
       </div>
     </PopupLayout>
