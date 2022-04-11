@@ -2,6 +2,8 @@
 
 [![API Resulting Changes](https://github.com/codepandoradev/creaty-frontend/actions/workflows/api-resulting-changes.yml/badge.svg?branch=main)](https://github.com/codepandoradev/creaty-frontend/actions/workflows/api-resulting-changes.yml)
 
+[Backend](https://github.com/codepandoradev/creaty-backend)
+
 ## Adoptation
 This template was wriiten with an idea kept in mind, that it will be used along with `Django` or `Laravel`
 
