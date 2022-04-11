@@ -1,3 +1,4 @@
+import _ from "lodash"
 import { HTMLAttributes } from "react"
 
 interface OuterLinkProps extends Omit<HTMLAttributes<HTMLAnchorElement>, "href" | "rel" | "target"> {
@@ -6,7 +7,7 @@ interface OuterLinkProps extends Omit<HTMLAttributes<HTMLAnchorElement>, "href" 
 }
 
 function OuterLink(props: OuterLinkProps) {
-  return <a {...props} rel="noopener noreferrer" target="_blank" href={props.to} />
+  return <a {..._.omit(props, "eventLabel")} rel="noopener noreferrer" target="_blank" href={props.to} />
 }
 
 
