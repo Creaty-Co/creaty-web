@@ -3,7 +3,7 @@ import "./Input.scss"
 import Icon from "app/components/common/Icon/Icon"
 import useClickAway from "hooks/useClickAway"
 import { ChangeEvent, DetailedHTMLProps, Dispatch, InputHTMLAttributes, useRef, useState } from "react"
-import { classWithModifiers } from "utils/common"
+import { classMerge, classWithModifiers } from "utils/common"
 
 import DropDown from "../DropDown/DropDown"
 
@@ -25,8 +25,8 @@ function Input<V>(props: InputProps<V>) {
     props.onChange?.(event, currentStrain)
   }
   return (
-    <label className="input">
-      <input className="input__input" {...{ ...props, strains: undefined }} placeholder={props.placeholder + ((props.required && !props.strains?.length) ? "*" : "")} onChange={onChange} />
+    <label className={classMerge("input", props.className)}>
+      <input {...{ ...props, strains: undefined }} className="input__input" placeholder={props.placeholder + ((props.required && !props.strains?.length) ? "*" : "")} onChange={onChange} />
       {props.strains && (
         <InputStrains strains={props.strains} onChange={setCurrentStrain} />
       )}

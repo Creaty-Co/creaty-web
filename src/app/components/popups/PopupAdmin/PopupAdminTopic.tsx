@@ -32,11 +32,12 @@ export function PopupAdminNewTopic() {
         window.location.reload()
       })
   }
+
   return (
     <PopupLayout title="Добавить категорию">
       <form onSubmit={submitTopic}>
-        <Input name="title_ru" placeholder="Название на русском" />
-        <Input name="title_en" placeholder="Название на английском" />
+        <Input className="admin-header-input-markers" name="title_ru" placeholder="Название на русском" />
+        <Input className="admin-header-input-markers" name="title_en" placeholder="Название на английском" />
         <Input name="shortcut" placeholder="Ярлык" />
         <label>
           Иконка в .svg
@@ -90,7 +91,7 @@ export function PopupAdminEditTopic(props: PopupAdminEditTopicProps) {
   return (
     <PopupLayout title="Редактировать категорию">
       <form onSubmit={submitTopic}>
-        <Input name="title" placeholder="Название на выбраном языке" defaultValue={props.topic.title} key={props.topic.title} />
+        <Input className="admin-header-input-markers" name="title" placeholder="Название на выбраном языке" defaultValue={props.topic.title} key={props.topic.title} />
         <Input name="shortcut" placeholder="Ярлык" defaultValue={props.topic.shortcut} key={props.topic.shortcut} />
         <label>
           Иконка в .svg

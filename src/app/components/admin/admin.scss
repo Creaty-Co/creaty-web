@@ -114,3 +114,33 @@ table.admin-view__table {
 		border: 2px dotted #999;
 	}
 }
+
+/* Rest */
+
+.admin-header-input-markers {
+	$header-weight: 700;
+	$input-font-size-multiplier: 1.5;
+	$actual-area-width: #{10.75rem * $input-font-size-multiplier};
+
+	font-weight: $header-weight;
+
+	&::before,
+	&::after {
+		content: "";
+		position: absolute;
+		height: 100%;
+		pointer-events: none;
+	}
+
+	&::before {
+		right: 0;
+		width: calc(100% - $actual-area-width);
+		background: rgba(250, 100, 100, 0.56);
+	}
+
+	&::after {
+		left: 0;
+		width: $actual-area-width;
+		background: rgba(100, 250, 140, 0.56);
+	}
+}
