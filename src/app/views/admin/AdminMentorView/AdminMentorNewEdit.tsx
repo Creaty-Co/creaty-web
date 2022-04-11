@@ -1,9 +1,14 @@
 import { patchMentorsId, postMentors } from "api/actions/mentors"
 import ClientAPI from "api/client"
 import Button from "app/components/common/Button/Button"
+import Icon from "app/components/common/Icon/Icon"
+import { PopupAdminNewTag } from "app/components/popups/PopupAdmin/PopupAdminTag"
+import { PopupAdminNewTopic } from "app/components/popups/PopupAdmin/PopupAdminTopic"
+import CheckTree from "app/components/UI/CheckTree/CheckTree"
 import Input from "app/components/UI/Input/Input"
 import { FormElements } from "interfaces/common"
 import { MentorDetailedType, MentorPackageType } from "interfaces/types"
+import { Popup } from "modules/popup/controller"
 import { ChangeEvent, Dispatch, FormEvent, useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router"
@@ -111,12 +116,23 @@ function AdminMentorNewEdit(props: AdminNewMentorViewProps | AdminEditMentorView
         </select>
 
         Тэги
-        {topics.tags.map(tag => (
+        {/* {topics.tags.map(tag => (
           <label key={tag.id}>
             {tag.title}
             <input name="tag_set" type="checkbox" defaultChecked={!!(props.data?.tags.find(tagg => tagg.id === tag.id))} value={tag.id} />
           </label>
-        ))}
+        ))} */}
+        <CheckTree name="tag_set" defaultChecks={props.data?.tags.map(tag => tag.id)}>
+          <Button iconLeft={<Icon name="touch" />} color="white" onClick={() => Popup.open(PopupAdminNewTopic)}>Добавить категорию</Button>
+          {topics.list.map(topic => (
+            <option title={topic.title} key={topic.id}>
+              <Button iconLeft={<Icon name="touch" />} color="white" onClick={() => Popup.open(PopupAdminNewTag, { topicId: topic.id })}>Добавить тэг</Button>
+              {topic.tags.map(tag => (
+                <option title={tag.title} value={tag.id} key={tag.id} />
+              ))}
+            </option>
+          ))}
+        </CheckTree>
         Страна
         <AdminCountriesSelect defaultValue={props.data?.country.id} />
         <Input name="city_ru" placeholder="Город на русском" defaultValue={props.data?.info.city_ru} />
@@ -125,7 +141,7 @@ function AdminMentorNewEdit(props: AdminNewMentorViewProps | AdminEditMentorView
         <AdminLangsCheckboxes defaultChecked={props.data?.info.languages.map(lang => lang.id)} />
 
         Аватарка
-        <img src={props.data?.avatar} />
+        <img src={props.data?.avatar} width="20%" />
         <Input type="file" name="avatar" />
 
         <div className="input">

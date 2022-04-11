@@ -1,0 +1,60 @@
+@import "~app/assets/scss/bundle.scss";
+
+.check-tree {
+	padding: 1.25em;
+	background: $color-white;
+	border: 1px solid $color-gray-40;
+	border-radius: 0.35em;
+}
+
+.check-tree__list {
+	display: flex;
+	gap: 1em;
+}
+
+.check-tree__column {
+	display: grid;
+	align-content: flex-start;
+
+	border: 1px solid $color-gray-40;
+	border-radius: 0.35em;
+
+	max-height: 50vh;
+	overflow: auto;
+}
+
+/* Row */
+
+.check-tree-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 2em;
+
+	padding: 1em;
+	// border-radius: 0.35em;
+	cursor: pointer;
+
+
+	&:hover {
+		background: rgba($color-gray-50, 0.2);
+	}
+
+	&--active {
+		background: linear-gradient(to right, rgba($color-gray-50, 0.1), rgba($color-gray-50, 0.25));
+	}
+
+	input {
+		margin: unset;
+	}
+}
+
+.check-tree-row__title {
+	display: flex;
+	gap: 0.5em;
+}
+
+.check-tree-row__icon {
+	color: $color-black-main;
+	transform: rotate(-90deg);
+}

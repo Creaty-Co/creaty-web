@@ -46,7 +46,7 @@ export const updateTopics = (payload: Partial<typeof initialState>) => ({
 
 
 /// Request
-async function requestTopics() {
+export async function requestTopics() {
   const { error, payload } = await ClientAPI.query(getTagsTopics(1, 25), true)
 
   if (error) throw new Error("unexpected error")
@@ -57,7 +57,7 @@ async function requestTopics() {
     payload: { list: payload.results }
   })
 }
-async function requestTags() {
+export async function requestTags() {
   const { error, payload } = await ClientAPI.query(getTags(1, 1000), true)
 
   if (error) throw new Error("unexpected error")
