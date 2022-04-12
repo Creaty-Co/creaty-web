@@ -1,0 +1,26 @@
+@import "~app/assets/scss/bundle.scss";
+
+.admin-view-layout {
+	display: grid;
+	gap: 1em;
+
+	@include WidthLimit;
+}
+
+.admin-view-layout__title {}
+
+.admin-view-layout__container {
+	display: grid;
+	gap: 1.5em;
+
+	padding: 2em;
+
+	background: $color-white;
+	border-radius: 1.5em;
+
+	color: $color-black-main;
+
+	.heading {
+		margin: 0.5em 0;
+	}
+}
