@@ -1,0 +1,56 @@
+@import "~app/assets/scss/bundle.scss";
+
+.checkbox {
+	display: flex;
+	align-items: center;
+	gap: 0.75em;
+
+	cursor: inherit;
+}
+
+.checkbox__input {
+	display: none;
+}
+
+.checkbox__appearance {
+	display: flex;
+	padding: 0.25em;
+	border: 2px solid;
+	border-radius: 0.25em;
+	color: $color-gray-30;
+	transition: 150ms ease border-color, 150ms ease color;
+	cursor: pointer;
+
+	:checked+& {
+		color: $color-blue;
+
+		.checkbox__icon {
+			opacity: 1;
+		}
+	}
+}
+
+.checkbox__icon {
+	--icon-size: 1em;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	opacity: 0;
+	transition: 250ms ease opacity;
+
+	span {
+		transition: 250ms ease transform;
+		font-size: 1.25rem;
+	}
+
+	:not(:checked)+.checkbox__appearance &>span {
+		transform: rotate(180deg);
+	}
+}
+
+.checkbox__label {
+	font-size: 1em;
+	line-height: 1.35;
+}
