@@ -1,10 +1,13 @@
 @import "~app/assets/scss/bundle.scss";
 
 .check-tree {
+	display: grid;
+	gap: 1em;
+
 	padding: 1.25em;
 	background: $color-white;
 	border: 1px solid $color-gray-40;
-	border-radius: 0.35em;
+	border-radius: 1.5em;
 }
 
 .check-tree__list {
@@ -17,7 +20,7 @@
 	align-content: flex-start;
 
 	border: 1px solid $color-gray-40;
-	border-radius: 0.35em;
+	border-radius: 1em;
 
 	max-height: 50vh;
 	overflow: auto;
@@ -58,3 +61,18 @@
 	color: $color-black-main;
 	transform: rotate(-90deg);
 }
+
+/* Show */
+
+.check-tree-show {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5em;
+
+	padding: 1em 1.25em;
+	background: $color-white;
+	border: 1px solid $color-gray-40;
+	border-radius: 1.5em;
+}
+
+.check-tree-show__check {}

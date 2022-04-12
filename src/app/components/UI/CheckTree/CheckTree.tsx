@@ -1,77 +1,89 @@
 import "./CheckTree.scss"
 
 import Icon from "app/components/common/Icon/Icon"
-import { ReactElement, ReactNode, useState } from "react"
+import { ReactNode, useState } from "react"
 import { classWithModifiers } from "utils/common"
 
-type CheckTreeOption<V = unknown> = ReactElement<{
-  title: ReactNode
-  value?: V
-  children?: CheckTreeOptionChildren
-}>
-type CheckTreeOptionChildren = CheckTreeOption | CheckTreeOption[]
+import Checkbox from "../Checkbox/Checkbox"
+import TopicTag from "../Tag/TopicTag"
+import { CheckTreeOption, CheckTreeOptionChildren, CheckTreeState } from "./CheckTree.types"
+
 
 interface CheckTreeProps<V> {
   name?: string
   defaultChecks?: V[]
-  children: any
+  children: CheckTreeOptionChildren<V>
 }
 
 function CheckTree<V>(props: CheckTreeProps<V>) {
-  const [checks, setChecks] = useState<unknown[]>(props.defaultChecks || [])
-  const [cursor, setCursor] = useState<number[]>([])
-  function onCheck(value: unknown) {
+  const [checks, setChecks] = useState<CheckTreeState<V>>(props.defaultChecks || [])
+  const [cursor, setCursor] = useState<number[]>([0])
+  function onCheck(value: V) {
     if (checks.includes(value)) {
       return uncheck(value)
     }
     check(value)
   }
-  function check(value: unknown) {
+  function check(value: V) {
+    if (value == null) return
     setChecks(state => [...state, value])
   }
-  function uncheck(value: unknown) {
+  function uncheck(value: V) {
+    if (checks.length === 1) return
     setChecks(state => state.filter(comparedValue => comparedValue !== value))
   }
-
-  const children = toArrayDeeply(props.children)
-
-  const childrenOptions = children.filter(child => child.type === "option") as CheckTreeOption<V>[]
-  const childrenRest = children.filter(child => child.type !== "option")
-
+  const children = toArrayDeeply<CheckTreeOption<V> | ReactNode>(props.children)
   return (
     <div className="check-tree">
+      <div className="check-tree-show">
+        {checks.map((check, index) => (
+          <div className="check-tree-show__check" key={index}>
+            {/* --- Trash Code --- */}
+            <TopicTag noHash onClick={() => uncheck(check)}>{String((children as any).flatMap((d: any) => (d?.props?.children && d?.type === "option") ? [d, ...toArrayDeeply(d.props.children)] : d).find((option: any) => option?.props?.value === check)?.props?.title)}</TopicTag>
+            {/* --- Trash Code --- */}
+          </div>
+        ))}
+      </div>
       <div className="check-tree__list">
         <CheckTreeColumn>
-          {childrenRest}
-          {childrenOptions.map((child, index) => (
-            <CheckTreeRow active={cursor[0] === index} onClick={child.props.children ? (() => (setCursor([index]))) : undefined} key={index}>
+
+          {children.map(selectOptionPredicate((child, index) => (
+            <CheckTreeRow active={cursor[0] === index} expanded={!!child.props.children} onClick={() => ((child.props.children ? setCursor([index]) : undefined), onCheck(child.props.value as V))} key={index}>
               {child.props.value == null && (
                 child.props.title
               )}
-              {child.props.value && (
-                <CheckTreeCheckBox {...child.props} value={child.props.value} checked={checks.includes(child.props.value)} />
+              {!!child.props.value && (
+                <Checkbox name={props.name} value={child.props.value} checked={checks.includes(child.props.value as V)} onClick={event => event.stopPropagation()}>
+                  {child.props.title}
+                </Checkbox>
               )}
             </CheckTreeRow>
-          ))}
+          )))}
         </CheckTreeColumn>
         {cursor.map(columnIndex => (
           <CheckTreeColumn key={columnIndex}>
-            {toArrayDeeply(childrenOptions[columnIndex].props.children).map((child, index) => (
-              child.type === "option"
-                ? (
-                  <CheckTreeRow active={cursor[columnIndex + 1] === index} expanded={!!child.props.children} onClick={() => ((child.props.children ? setCursor([...cursor.slice(0, columnIndex), index]) : undefined), onCheck(child.props.value))} key={index}>
-                    <CheckTreeCheckBox {...child.props} name={props.name} checked={checks.includes(child.props.value)} />
-                  </CheckTreeRow>
-                )
-                : (
-                  child
-                )
-            ))}
+            {toArrayDeeply((children[columnIndex] as CheckTreeOption<V>).props.children).map(selectOptionPredicate((child, index) => (
+              <CheckTreeRow active={cursor[columnIndex + 1] === index} expanded={!!child.props.children} onClick={() => ((child.props.children ? setCursor([...cursor.slice(0, columnIndex + 1), index]) : undefined), onCheck(child.props.value as V))} key={index}>
+                <Checkbox name={props.name} value={child.props.value} checked={checks.includes(child.props.value as V)} onClick={event => event.stopPropagation()}>
+                  {child.props.title}
+                </Checkbox>
+              </CheckTreeRow>
+            )))}
           </CheckTreeColumn>
         ))}
       </div>
     </div >
   )
+}
+
+function selectOptionPredicate<V, T extends CheckTreeOption<V> | ReactNode, U>(predicate: (value: CheckTreeOption<V>, index: number, array: T[]) => U) {
+  return (value: T, index: number, array: T[]): U | ReactNode => {
+    if (!(value instanceof Object)) return value
+    if (!("type" in value)) return value
+    if (value.type !== "option") return value
+
+    return predicate(value, index, array)
+  }
 }
 
 function toArrayDeeply<T>(obj?: T | T[]): T[] {
@@ -81,47 +93,8 @@ function toArrayDeeply<T>(obj?: T | T[]): T[] {
 
 
 
-interface CheckTreeCheckBoxProps<V> {
-  name?: string
-  title: ReactNode
-  value?: V
-  checked: boolean
-}
-
-function CheckTreeCheckBox<V>(props: CheckTreeCheckBoxProps<V>) {
-  return (
-    <>
-      <input name={props.name} type="checkbox" checked={props.checked} value={props.value && String(props.value)} />
-      <span>{props.title}</span>
-    </>
-  )
-}
-
-
-
-// function parseOptionData(children: CheckTreeOptionChildren): {
-//   title: ReactNode
-//   value: unknown
-// }[] {
-//   const childrenArray = children instanceof Array ? children : [children]
-//   const result: unknown[] = []
-
-//   for (const child of childrenArray) {
-//     result.push(child.props.value)
-
-//     if (child.props.children) {
-//       result.push(...parseOptionData(child.props.children))
-//     }
-//   }
-
-//   return result
-// }
-
-
-
-
 interface CheckTreeColumnProps {
-  children: ReactNode
+  children: ReactNode | ReactNode[]
 }
 
 function CheckTreeColumn(props: CheckTreeColumnProps) {
@@ -138,13 +111,13 @@ function CheckTreeColumn(props: CheckTreeColumnProps) {
 interface CheckTreeRowProps {
   active?: boolean
   expanded?: boolean
-  children?: ReactNode
+  children?: ReactNode | ReactNode[]
   onClick?(): void
 }
 
 function CheckTreeRow(props: CheckTreeRowProps) {
   return (
-    <div className={classWithModifiers("check-tree-row", props.active && "active")} role="option" onClick={props.onClick}>
+    <div className={classWithModifiers("check-tree-row", props.active && "active")} role={props.expanded ? "option" : undefined} onClick={props.onClick}>
       <div className="check-tree-row__title">{props.children}</div>
       {props.expanded && (
         <Icon className="check-tree-row__icon" name="chevron" />
