@@ -51,6 +51,7 @@
 .input-masks__icon {
 	--icon-size: 0.5em;
 
+	color: $color-gray-50;
 	transition: 200ms ease transform;
 
 	&--up {
