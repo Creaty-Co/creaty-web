@@ -1,5 +1,6 @@
 import { deleteTagsTopic, patchTagsTopics, postTagsTopics } from "api/actions/tags"
 import ClientAPI from "api/client"
+import AdminInputsLayout from "app/layouts/AdminInputsLayout"
 import { FormElements } from "interfaces/common"
 import { TopicType } from "interfaces/types"
 import { usePopup } from "modules/popup/hook"
@@ -40,13 +41,16 @@ export function PopupAdminNewTopic() {
   return (
     <PopupLayout title="Добавить категорию">
       <form onSubmit={submitTopic}>
-        <Input className="admin-header-input-markers" name="title_ru" placeholder="Название на русском" />
-        <Input className="admin-header-input-markers" name="title_en" placeholder="Название на английском" />
-        <Input name="shortcut" placeholder="Ярлык" />
-        <label>
-          Иконка в .svg
-          <Input name="icon" type="file" />
-        </label>
+        <AdminInputsLayout>
+          <Input className="admin-header-input-markers" name="title_ru" placeholder="Название на русском" />
+          <Input className="admin-header-input-markers" name="title_en" placeholder="Название на английском" />
+          <Input name="shortcut" placeholder="Ярлык" />
+          <label>
+            Иконка в .svg
+            <Input name="icon" type="file" />
+          </label>
+        </AdminInputsLayout>
+        <br />
         <Button color="dark" type="submit" pending={pending}>Добавить</Button>
       </form>
     </PopupLayout>
@@ -100,12 +104,15 @@ export function PopupAdminEditTopic(props: PopupAdminEditTopicProps) {
   return (
     <PopupLayout title="Редактировать категорию">
       <form onSubmit={submitTopic}>
-        <Input className="admin-header-input-markers" name="title" placeholder="Название на выбраном языке" defaultValue={props.topic.title} key={props.topic.title} />
-        <Input name="shortcut" placeholder="Ярлык" defaultValue={props.topic.shortcut} key={props.topic.shortcut} />
-        <label>
-          Иконка в .svg
-          <Input name="icon" type="file" />
-        </label>
+        <AdminInputsLayout>
+          <Input className="admin-header-input-markers" name="title" placeholder="Название на выбраном языке" defaultValue={props.topic.title} key={props.topic.title} />
+          <Input name="shortcut" placeholder="Ярлык" defaultValue={props.topic.shortcut} key={props.topic.shortcut} />
+          <label>
+            Иконка в .svg
+            <Input name="icon" type="file" />
+          </label>
+        </AdminInputsLayout>
+        <br />
         <Button color="dark" type="submit" pending={pending}>Сохранить</Button>
         <Button color="violet" await onClick={removeTopic}>Удалить</Button>
       </form>

@@ -1,5 +1,6 @@
 import { deleteTags, patchTags, postTags } from "api/actions/tags"
 import ClientAPI from "api/client"
+import AdminInputsLayout from "app/layouts/AdminInputsLayout"
 import { FormElements } from "interfaces/common"
 import { TagType } from "interfaces/types"
 import { usePopup } from "modules/popup/hook"
@@ -41,9 +42,12 @@ export function PopupAdminNewTag(props: PopupAdminNewTagProps) {
   return (
     <PopupLayout title="Добавить тэг">
       <form onSubmit={submitTag}>
-        <Input name="title_ru" placeholder="Название на русском" />
-        <Input name="title_en" placeholder="Название на английском" />
-        <Input name="shortcut" placeholder="Ярлык" />
+        <AdminInputsLayout>
+          <Input name="title_ru" placeholder="Название на русском" />
+          <Input name="title_en" placeholder="Название на английском" />
+          <Input name="shortcut" placeholder="Ярлык" />
+        </AdminInputsLayout>
+        <br />
         <Button color="dark" type="submit" pending={pending}>Добавить</Button>
       </form>
     </PopupLayout>
@@ -89,8 +93,11 @@ export function PopupAdminEditTag(props: PopupAdminEditTagProps) {
   return (
     <PopupLayout title="Редактироть тэг">
       <form onSubmit={submitTag}>
-        <Input name="title" placeholder="Название на выбраном языке" defaultValue={props.tag?.title} key={props.tag?.title} />
-        <Input name="shortcut" placeholder="Ярлык" defaultValue={props.tag?.shortcut} key={props.tag.shortcut} />
+        <AdminInputsLayout>
+          <Input name="title" placeholder="Название на выбраном языке" defaultValue={props.tag?.title} key={props.tag?.title} />
+          <Input name="shortcut" placeholder="Ярлык" defaultValue={props.tag?.shortcut} key={props.tag.shortcut} />
+        </AdminInputsLayout>
+        <br />
         <Button color="dark" type="submit" pending={pending}>Сохранить</Button>
         <Button color="violet" await onClick={deleteTag}>Удалить</Button>
       </form>
