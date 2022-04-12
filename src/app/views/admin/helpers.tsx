@@ -1,3 +1,4 @@
+import CheckTree from "app/components/UI/CheckTree/CheckTree"
 import { HTMLAttributes } from "react"
 
 import countries from "./countries.json"
@@ -10,7 +11,7 @@ interface AdminCountriesSelectProps extends HTMLAttributes<HTMLSelectElement> {
 
 export function AdminCountriesSelect(props: AdminCountriesSelectProps) {
   return (
-    <select name="country" {...props}>
+    <select name="country" {...props} required>
       {countries.results.map(country => (
         <option value={country.id} key={country.id}>{country.name}</option>
       ))}
@@ -20,13 +21,10 @@ export function AdminCountriesSelect(props: AdminCountriesSelectProps) {
 
 export function AdminLangsCheckboxes(props: { defaultChecked?: number[] }) {
   return (
-    <>
+    <CheckTree name="languages" defaultChecks={props.defaultChecked}>
       {langs.results.map(lang => (
-        <label key={lang.id}>
-          {lang.name_native}
-          <input name="languages" type="checkbox" defaultChecked={props.defaultChecked?.includes(lang.id)} value={lang.id} />
-        </label>
+        <option title={lang.name_native} value={lang.id} key={lang.id} />
       ))}
-    </>
+    </CheckTree>
   )
 }

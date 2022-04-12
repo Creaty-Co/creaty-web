@@ -42,7 +42,8 @@ function AdminTopbarMenu() {
     <div className="admin-topbar__menu">
       <ButtonLink to="/admin/forms">Формы</ButtonLink>
       <ButtonLink to="/admin/mailings">Рассылки</ButtonLink>
-      <ButtonLink to="/admin/topics-tags">Тэги</ButtonLink>
+      <ButtonLink to="/admin/topics">Категории</ButtonLink>
+      <ButtonLink to="/admin/tags">Тэги</ButtonLink>
       <ButtonLink to="/admin/mentors">Менторы</ButtonLink>
       <Button color="violet" onClick={exit}>Выйти</Button>
     </div>

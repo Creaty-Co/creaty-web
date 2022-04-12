@@ -36,7 +36,8 @@ import AdminMailings from "./views/admin/AdminMailings/AdminMailings"
 import AdminMentorsView from "./views/admin/AdminMentorsView/AdminMentorsView"
 import AdminEditMentorView from "./views/admin/AdminMentorView/AdminEditMentorView"
 import AdminNewMentorView from "./views/admin/AdminMentorView/AdminNewMentorView"
-import AdminTopicsTagsView from "./views/admin/AdminTopicsView/AdminTopicsTagsView"
+import AdminTagsView from "./views/admin/AdminTopicsView/AdminTagsView"
+import AdminTopicsView from "./views/admin/AdminTopicsView/AdminTopicsView"
 import ErrorView from "./views/error/ErrorView"
 import HomeView from "./views/home/HomeView"
 import MentorsView from "./views/mentors/MentorsView"
@@ -131,7 +132,8 @@ function AdminViews() {
       <Route path="/new-mentor" element={<AdminNewMentorView />} />
       <Route path="/edit-mentor/:mentorId" element={<AdminEditMentorView />} />
       {/* Topics & Tags */}
-      <Route path="/topics-tags" element={<AdminTopicsTagsView />} />
+      <Route path="/topics" element={<AdminTopicsView />} />
+      <Route path="/tags" element={<AdminTagsView />} />
       {/* Mailings */}
       <Route path="/mailings" element={<AdminMailings />} />
       {/* Forms */}

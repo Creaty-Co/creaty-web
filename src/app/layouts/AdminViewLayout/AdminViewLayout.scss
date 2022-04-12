@@ -4,7 +4,12 @@
 	display: grid;
 	gap: 1em;
 
-	@include WidthLimit;
+	max-width: var(--admin-view-maxWidth, 1180px);
+	margin: 0 auto;
+
+	@include Tablet {
+		max-width: 90vw;
+	}
 }
 
 .admin-view-layout__title {}

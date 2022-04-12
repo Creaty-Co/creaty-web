@@ -65,19 +65,13 @@ interface PopupAdminPersonalMentorsProps {
 
 export function PopupAdminPersonalMentors(props: PopupAdminPersonalMentorsProps) {
   const topics = useSelector(state => state.topics)
-  function onChange(event: ChangeEvent<HTMLInputElement>) {
-    const target = event.currentTarget
-    const shortcut = target.name
-
-    addOrRemoveMentor(target.checked, shortcut)
-  }
   function addOrRemoveMentor(isAdding: boolean, shortcut: string) {
     const APIAction =
       isAdding
         ? shortcut === "main" ? patchPagesMainMentor(props.mentor.id) : patchPagePersonalMentor(shortcut, props.mentor.id)
         : shortcut === "main" ? deletePagesMainMentor(props.mentor.id) : deletePagePersonalMentor(shortcut, props.mentor.id)
 
-    ClientAPI
+    return ClientAPI
       .query(APIAction)
       .then(({ error }) => {
         if (error) return
@@ -90,15 +84,15 @@ export function PopupAdminPersonalMentors(props: PopupAdminPersonalMentorsProps)
         Тэги
         <div>
           Главная
-          <Button color="green" onClick={() => addOrRemoveMentor(true, "main")}>Добавить</Button>
-          <Button color="violet" onClick={() => addOrRemoveMentor(false, "main")}>Удалить</Button>
+          <Button color="green" await onClick={async () => await addOrRemoveMentor(true, "main")}>Добавить</Button>
+          <Button color="violet" await onClick={async () => await addOrRemoveMentor(false, "main")}>Удалить</Button>
           {/* <input name="main" type="checkbox" onChange={onChange} /> */}
         </div>
         {topics.tags.map(tag => (
           <div key={tag.id}>
             {tag.title}
-            <Button color="green" onClick={() => addOrRemoveMentor(true, tag.shortcut)}>Добавить</Button>
-            <Button color="violet" onClick={() => addOrRemoveMentor(false, tag.shortcut)}>Удалить</Button>
+            <Button color="green" await onClick={async () => await addOrRemoveMentor(true, tag.shortcut)}>Добавить</Button>
+            <Button color="violet" await onClick={async () => await addOrRemoveMentor(false, tag.shortcut)}>Удалить</Button>
             {/* <input name={tag.shortcut} type="checkbox" onChange={onChange} /> */}
           </div>
         ))}

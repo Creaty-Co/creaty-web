@@ -6,8 +6,12 @@ import ClientAPI from "api/client"
 import Button from "app/components/common/Button/Button"
 import ButtonLink from "app/components/common/Button/ButtonLink"
 import { PopupAdminPersonalMentors } from "app/components/popups/PopupAdmin/PopupAdminPersonalPage"
+import Checkbox from "app/components/UI/Checkbox/Checkbox"
 import Input from "app/components/UI/Input/Input"
+import AdminGroupLayout from "app/layouts/AdminGroupLayout/AdminGroupLayout"
+import AdminViewLayout from "app/layouts/AdminViewLayout/AdminViewLayout"
 import { MentorPatchType } from "interfaces/types"
+import _ from "lodash"
 import { Popup } from "modules/popup/controller"
 import { Children, cloneElement, DetailedHTMLProps, FocusEvent, HTMLAttributes, InputHTMLAttributes, KeyboardEvent, ReactElement, useRef, useState } from "react"
 import { useQuery } from "react-fetching-library"
@@ -16,70 +20,83 @@ import { toast } from "react-toastify"
 
 import { AdminCountriesSelect } from "../helpers"
 
+const DEFAULT_PAGE_SIZE = 20
 
 function AdminMentorsView() {
   const [page, setPage] = useState(1)
-  const [pageSize] = useState(20)
-  const { payload } = useQuery(getAdminMentors(page, pageSize))
-  if (!payload) return null
+  const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE)
+  const { payload, loading } = useQuery(getAdminMentors(page, pageSize))
   return (
-    <div className="admin-view">
-      <ButtonLink color="dark" to="/admin/new-mentor">Добавить ментора</ButtonLink>
-      <div className="admin-view__container">
-        <table className="admin-view__table">
-          <thead>
-            <tr>
-              <th></th>
-              <th>ID</th>
-              <th>Аватар</th>
-              <th>Имя</th>
-              <th>Фамилия</th>
-              <th>Страна</th>
-              <th>Профессия</th>
-              <th>Компания</th>
-              <th>Оплата</th>
-              <th>Валюта Оплаты</th>
-              <th>Пробная встреча?</th>
-              <th>Город на русском</th>
-              <th>Город на английском</th>
-            </tr>
-          </thead>
-          <tbody>
-            {payload.results.map(mentor => (
-              <tr key={mentor.id}>
-                <td><Button color="dark" onClick={() => Popup.open(PopupAdminPersonalMentors, { mentor })}>Ред. перс. страницу</Button></td>
-                <td>{mentor.id}</td>
-                <td>
-                  <section>
-                    <div>
-                      <img src={mentor.avatar} />
-                      <Link className="ghost" to={"/user/" + mentor.id} />
-                    </div>
-                    <PartialEditMentorInput id={mentor.id} name="avatar" defaultValue={mentor.avatar} />
-                  </section>
-                </td>
-                <td><PartialEditMentorInput id={mentor.id} name="first_name" defaultValue={mentor.first_name} /></td>
-                <td><PartialEditMentorInput id={mentor.id} name="last_name" defaultValue={mentor.last_name} /></td>
-                <td>
-                  <PartialEditMentorInput id={mentor.id} name="country" defaultValue={mentor.country.id}>
-                    <AdminCountriesSelect defaultValue={mentor.country.id} />
-                  </PartialEditMentorInput>
-                </td>
-                <td><PartialEditMentorInput id={mentor.id} name="profession" defaultValue={mentor.profession} /></td>
-                <td><PartialEditMentorInput id={mentor.id} name="company" defaultValue={mentor.company} /></td>
-                <td><PartialEditMentorInput id={mentor.id} name="price" defaultValue={mentor.price} /></td>
-                <td><PartialEditMentorInput id={mentor.id} name="price_currency" defaultValue={mentor.price_currency} /></td>
-                <td><PartialEditMentorInput id={mentor.id} name="trial_meeting" defaultChecked={!!mentor.info.trial_meeting} type="checkbox" /></td>
-                <td><PartialEditMentorInput id={mentor.id} name="city_ru" defaultValue={mentor.info.city_ru} /></td>
-                <td><PartialEditMentorInput id={mentor.id} name="city_en" defaultValue={mentor.info.city_en} /></td>
+    <AdminViewLayout maxWidth="75vw">
+      <AdminGroupLayout title="Добавить Ментора">
+        <ButtonLink color="dark" to="/admin/new-mentor">Добавить</ButtonLink>
+      </AdminGroupLayout>
+      <AdminGroupLayout title="Таблица Менторов">
+        <div className="admin-view__container">
+          <Input placeholder={`Кол-во менторов на страницу (обычно ${DEFAULT_PAGE_SIZE})`} onChange={event => setPageSize(Number(event.currentTarget.value) || DEFAULT_PAGE_SIZE)} />
+          <br />
+          <table className="admin-view__table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>ID</th>
+                <th>Аватар</th>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Страна</th>
+                <th>Профессия</th>
+                <th>Компания</th>
+                <th>Оплата</th>
+                <th>Валюта Оплаты</th>
+                <th>Пробная встреча?</th>
+                <th>Город на русском</th>
+                <th>Город на английском</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <Button color="dark" onClick={() => setPage(page - 1)}>Сюда</Button>
-      <Button color="dark" onClick={() => setPage(page + 1)}>Туда</Button>
-    </div>
+            </thead>
+            <tbody>
+              {payload?.results.map(mentor => (
+                <tr key={mentor.id}>
+                  <td><Button color="dark" onClick={() => Popup.open(PopupAdminPersonalMentors, { mentor })}>Ред. перс. страницу</Button></td>
+                  <td>{mentor.id}</td>
+                  <td>
+                    <section>
+                      <div>
+                        <img src={mentor.avatar} />
+                        <Link className="ghost" to={"/user/" + mentor.id} />
+                      </div>
+                      <PartialEditMentorInput id={mentor.id} name="avatar" defaultValue={mentor.avatar} />
+                    </section>
+                  </td>
+                  <td><PartialEditMentorInput id={mentor.id} name="first_name" defaultValue={mentor.first_name} /></td>
+                  <td><PartialEditMentorInput id={mentor.id} name="last_name" defaultValue={mentor.last_name} /></td>
+                  <td>
+                    <PartialEditMentorInput id={mentor.id} name="country" defaultValue={mentor.country.id}>
+                      <AdminCountriesSelect defaultValue={mentor.country.id} />
+                    </PartialEditMentorInput>
+                  </td>
+                  <td><PartialEditMentorInput id={mentor.id} name="profession" defaultValue={mentor.profession} /></td>
+                  <td><PartialEditMentorInput id={mentor.id} name="company" defaultValue={mentor.company} /></td>
+                  <td><PartialEditMentorInput id={mentor.id} name="price" defaultValue={mentor.price} /></td>
+                  <td><PartialEditMentorInput id={mentor.id} name="price_currency" defaultValue={mentor.price_currency} /></td>
+                  <td><PartialEditMentorInput id={mentor.id} name="trial_meeting" defaultChecked={!!mentor.info.trial_meeting} type="checkbox" /></td>
+                  <td><PartialEditMentorInput id={mentor.id} name="city_ru" defaultValue={mentor.info.city_ru} /></td>
+                  <td><PartialEditMentorInput id={mentor.id} name="city_en" defaultValue={mentor.info.city_en} /></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          {page > 1 && (
+            <Button color="dark" onClick={() => setPage(page - 1)} pending={loading}>Назад</Button>
+          )}
+          .
+          {(page * pageSize) < (payload?.count || 0) && (
+            <Button color="dark" onClick={() => setPage(page + 1)} pending={loading}>Вперёд</Button>
+          )}
+        </div>
+      </AdminGroupLayout>
+    </AdminViewLayout>
   )
 }
 
@@ -89,6 +106,7 @@ interface PartialEditMentorInputProps extends Omit<DetailedHTMLProps<InputHTMLAt
   name: Exclude<keyof MentorPatchType, "info"> | Exclude<keyof MentorPatchType["info"], "languages">
   defaultValue?: string | number
 
+  width?: string
   children?: ReactElement<HTMLAttributes<HTMLElement>>
 }
 
@@ -107,6 +125,7 @@ function PartialEditMentorInput(props: PartialEditMentorInputProps) {
     const target = event.currentTarget
     const targetValue = props.defaultChecked !== undefined ? (+target.checked || null) : (target.valueAsNumber || target.value)
 
+    if (targetValue?.toString().length === 0) return
     if (prevValueRef.current === targetValue) return
 
     ClientAPI
@@ -137,8 +156,14 @@ function PartialEditMentorInput(props: PartialEditMentorInputProps) {
     return cloneElement(Children.only(props.children), { ...props.children.props, onBlur, onKeyDown })
   }
 
+  if (props.type === "checkbox") {
+    return (
+      <Checkbox {..._.omit(props, "id", "name")}>На 15 минут</Checkbox>
+    )
+  }
+
   return (
-    <Input {...props} id={undefined} name={undefined} onBlur={onBlur} onKeyDown={onKeyDown} />
+    <Input {..._.omit(props, "id", "name")} placeholder="Пусто" onBlur={onBlur} onKeyDown={onKeyDown} />
   )
 }
 

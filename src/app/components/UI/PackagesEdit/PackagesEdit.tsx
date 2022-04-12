@@ -57,11 +57,11 @@ function PackagesEditPack(props: PackagesEditPackProps) {
       </div>
       <label className="packages-edit__label">
         <span>Кол-во</span>
-        <Input onChange={props.onChange} placeholder="Введите кол-во" name="lessons_count" defaultValue={props.lessons_count} />
+        <Input onChange={props.onChange} type="number" placeholder="Введите кол-во" name="lessons_count" defaultValue={props.lessons_count} />
       </label>
       <label className="packages-edit__label">
         <span>Скидку</span>
-        <Input onChange={props.onChange} placeholder="Введите скидку" name="discount" defaultValue={props.discount} />
+        <Input onChange={props.onChange} type="number" placeholder="Введите скидку" name="discount" defaultValue={props.discount} />
       </label>
     </div>
   )
