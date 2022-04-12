@@ -1,0 +1,10 @@
+@import "~app/assets/scss/bundle.scss";
+
+.admin-inputs-layout {
+	display: grid;
+	gap: 1em;
+
+	padding-left: 1.5em;
+	margin-left: 0.5em;
+	border-left: 2px solid $color-blue;
+}
