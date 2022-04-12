@@ -1,0 +1,40 @@
+@import "~app/assets/scss/bundle.scss";
+
+.admin-group-layout {
+	display: grid;
+	gap: 1.5em;
+	transition: 250ms ease opacity;
+
+	&:not(:hover) {
+		// opacity: 0.25;
+	}
+}
+
+.admin-group-layout__header {
+	display: flex;
+	align-items: center;
+	gap: 0.75em;
+
+	// For more specificity to override
+	.admin-group-layout__title.heading {
+		margin: unset;
+	}
+}
+
+.admin-group-layout__title {}
+
+.admin-group-layout__icon {
+	--icon-size: 1.25em;
+
+	color: $color-blue;
+	transform: rotate(-90deg);
+}
+
+.admin-group-layout__container {
+	display: grid;
+	gap: 1.5em;
+
+	padding-left: 1.5em;
+	margin-left: 0.5em;
+	border-left: 2px solid $color-blue;
+}
