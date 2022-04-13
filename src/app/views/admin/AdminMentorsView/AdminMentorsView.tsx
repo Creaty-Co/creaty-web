@@ -158,7 +158,7 @@ function PartialEditMentorInput(props: PartialEditMentorInputProps) {
 
   if (props.type === "checkbox") {
     return (
-      <Checkbox {..._.omit(props, "id", "name")}>На 15 минут</Checkbox>
+      <Checkbox {..._.omit(props, "id", "name")} onChange={onBlur}>На 15 минут</Checkbox>
     )
   }
 
