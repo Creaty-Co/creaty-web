@@ -2,18 +2,18 @@
 
 .packages-edit {
 	display: grid;
-	gap: 2em;
+	@include gap(2em);
 }
 
 .packages-edit__pack {
 	display: grid;
-	gap: 1em;
+	@include gap(1em);
 }
 
 .packages-edit__header {
 	display: flex;
 	align-items: center;
-	gap: 1em;
+	@include gap(1em);
 }
 
 .packages-edit__title {
@@ -23,5 +23,5 @@
 .packages-edit__label {
 	display: flex;
 	align-items: center;
-	gap: 1em;
+	@include gap(1em);
 }

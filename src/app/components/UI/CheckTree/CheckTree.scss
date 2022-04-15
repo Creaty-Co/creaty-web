@@ -2,7 +2,7 @@
 
 .check-tree {
 	display: grid;
-	gap: 1em;
+	@include gap(1em);
 
 	padding: 1.25em;
 	background: $color-white;
@@ -12,7 +12,7 @@
 
 .check-tree__list {
 	display: flex;
-	gap: 1em;
+	@include gap(1em);
 }
 
 .check-tree__column {
@@ -32,7 +32,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	gap: 2em;
+	@include gap(2em);
 
 	padding: 1em;
 	// border-radius: 0.35em;
@@ -54,7 +54,7 @@
 
 .check-tree-row__title {
 	display: flex;
-	gap: 0.5em;
+	@include gap(0.5em);
 }
 
 .check-tree-row__icon {
@@ -67,7 +67,7 @@
 .check-tree-show {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 0.5em;
+	@include gap(0.5em);
 
 	padding: 1em 1.25em;
 	background: $color-white;

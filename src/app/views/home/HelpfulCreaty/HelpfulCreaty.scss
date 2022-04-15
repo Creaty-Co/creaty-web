@@ -4,7 +4,7 @@ $indent: 1.5em;
 
 .helpful-creaty {
 	display: flex;
-	gap: $indent;
+	@include gap($indent);
 
 	&>* {
 		flex: 1;
@@ -31,7 +31,7 @@ $indent: 1.5em;
 .helpful-creaty__group {
 	display: flex;
 	flex-direction: column;
-	gap: $indent;
+	@include gap($indent);
 }
 
 /* Block */
@@ -39,7 +39,7 @@ $indent: 1.5em;
 .helpful-creaty-block {
 	display: grid;
 	align-content: baseline;
-	row-gap: 1em;
+	@include row-gap(1em);
 
 	padding: 4em;
 	background: $color-white;
@@ -55,7 +55,7 @@ $indent: 1.5em;
 	align-items: center;
 	justify-content: space-between;
 
-	gap: 1em;
+	@include gap(1em);
 
 	@include Mobile {
 		flex-direction: column-reverse;

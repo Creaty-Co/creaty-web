@@ -2,7 +2,7 @@
 
 .mentors-slider {
 	display: grid;
-	row-gap: 2.5em;
+	@include row-gap(2.5em);
 }
 
 .mentors-slider__header {
@@ -16,7 +16,7 @@
 
 .mentors-slider__buttons {
 	display: flex;
-	gap: 0.75em;
+	@include gap(0.75em);
 
 	@include Mobile {
 		display: none;
@@ -52,7 +52,7 @@
 	display: grid;
 	grid-auto-flow: column;
 	grid-auto-columns: 23.75em;
-	gap: 1.25em;
+	@include gap(1.25em);
 
 	overflow: hidden;
 
@@ -65,7 +65,7 @@
 .mentors-slider__help {
 	display: flex;
 	align-items: center;
-	gap: 0.75em;
+	@include gap(0.75em);
 
 	@include WidthLimit;
 

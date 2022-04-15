@@ -2,14 +2,14 @@
 
 .mentors-view {
 	display: grid;
-	row-gap: 15em;
+	@include row-gap(15em);
 
 	@include WidthLimit;
 }
 
 .mentors-view__header {
 	display: grid;
-	row-gap: 1em;
+	@include row-gap(1em);
 }
 
 .mentors-view__title {
@@ -25,5 +25,5 @@
 
 .mentors-view__container {
 	display: grid;
-	row-gap: 2.5em;
+	@include row-gap(2.5em);
 }

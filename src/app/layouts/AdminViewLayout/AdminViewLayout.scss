@@ -2,7 +2,7 @@
 
 .admin-view-layout {
 	display: grid;
-	gap: 1em;
+	@include gap(1em);
 
 	max-width: var(--admin-view-maxWidth, 1180px);
 	margin: 0 auto;
@@ -16,7 +16,7 @@
 
 .admin-view-layout__container {
 	display: grid;
-	gap: 1.5em;
+	@include gap(1.5em);
 
 	padding: 2em;
 

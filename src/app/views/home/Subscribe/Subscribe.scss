@@ -2,13 +2,13 @@
 
 .subscribe {
 	display: grid;
-	row-gap: 0.5em;
+	@include row-gap(0.5em);
 }
 
 .subscribe__header {
 	display: flex;
 	align-items: flex-end;
-	gap: 1em;
+	@include gap(1em);
 }
 
 .subscribe__field {

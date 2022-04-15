@@ -87,7 +87,7 @@ header {
 .topbar__right {
 	display: flex;
 	align-items: center;
-	gap: 0.5em;
+	@include gap(0.5em);
 
 	@include Tablet {
 		position: absolute;
@@ -96,7 +96,7 @@ header {
 
 		display: grid;
 		justify-items: center;
-		gap: 1em;
+		@include gap(1em);
 
 		background: $color-black-90;
 		border: 2px solid $color-gray-100;
@@ -132,7 +132,7 @@ header {
 	@include Tablet {
 		padding: 1em;
 		display: grid;
-		gap: 0.5em;
+		@include gap(0.5em);
 	}
 }
 
@@ -149,7 +149,8 @@ main {
 	margin-top: 10em;
 
 }
-main:not(.home-view__slider){
+
+main:not(.home-view__slider) {
 
 	@include Mobile {
 		padding: 5vw;
@@ -169,7 +170,7 @@ footer {
 
 .footer-container {
 	display: grid;
-	row-gap: 2.5em;
+	@include row-gap(2.5em);
 
 	@include WidthLimit;
 }
@@ -180,24 +181,24 @@ footer {
 
 	@include Mobile {
 		display: grid;
-		row-gap: 2.5em;
+		@include row-gap(2.5em);
 	}
 }
 
 .footer-links__container {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 5em;
+	@include gap(5em);
 
 	@include Mobile {
-		gap: 2.5em;
+		@include gap(2.5em);
 	}
 }
 
 .footer-links__group {
 	display: grid;
 	align-content: baseline;
-	row-gap: 0.5em;
+	@include row-gap(0.5em);
 }
 
 .footer-links__title {
@@ -221,7 +222,7 @@ footer {
 	align-self: center;
 
 	display: flex;
-	gap: 0.5em;
+	@include gap(0.5em);
 
 	img {
 		width: 2em;
@@ -246,7 +247,7 @@ footer {
 
 	display: flex;
 	align-items: center;
-	gap: 3.5em;
+	@include gap(3.5em);
 
 	max-width: 44em;
 	padding: 1em 2em;
@@ -294,7 +295,7 @@ footer {
 		bottom: 2.5vh;
 
 		display: grid;
-		gap: 1em;
+		@include gap(1em);
 
 		padding: 1em;
 	}

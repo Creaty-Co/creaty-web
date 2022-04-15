@@ -2,7 +2,7 @@
 
 .input {
 	display: flex;
-	gap: 0.5em;
+	@include gap(0.5em);
 
 	padding-bottom: 0.5em;
 	border-bottom: 1px solid rgba($color-gray-90, 0.2);
@@ -41,7 +41,7 @@
 .input-masks__current {
 	display: flex;
 	align-items: center;
-	gap: 0.5em;
+	@include gap(0.5em);
 
 	color: $color-violet;
 

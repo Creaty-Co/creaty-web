@@ -3,7 +3,7 @@
 .big-comment {
 	display: grid;
 	justify-items: center;
-	row-gap: 1.25em;
+	@include row-gap(1.25em);
 
 	padding: 5em 7.5em 3.5em;
 	background: $color-black-90;
@@ -20,7 +20,7 @@
 	line-height: 1.5;
 	text-align: center;
 
-	& span{
+	& span {
 		font-weight: 700;
 	}
 

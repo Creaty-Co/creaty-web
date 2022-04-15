@@ -8,7 +8,7 @@
 
 	@include Mobile {
 		display: grid;
-		// row-gap: 1em;
+		// @include row-gap(1em);
 
 		padding: 2em;
 	}
@@ -16,14 +16,14 @@
 
 .become-mentor__container {
 	display: grid;
-	row-gap: 3.5em;
+	@include row-gap(3.5em);
 
 	max-width: 27.5em;
 }
 
 .become-mentor__info {
 	display: grid;
-	row-gap: 1.5em;
+	@include row-gap(1.5em);
 }
 
 .become-mentor__title {
@@ -37,7 +37,7 @@
 
 .become-mentor__bottom {
 	display: grid;
-	row-gap: 1em;
+	@include row-gap(1em);
 }
 
 .become-mentor__terms {

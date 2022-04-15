@@ -23,12 +23,12 @@
 		align-items: center;
 		justify-content: space-between;
 
-		gap: 1em;
+		@include gap(1em);
 	}
 
 	&--grid {
 		display: grid;
-		row-gap: 1em;
+		@include row-gap(1em);
 	}
 
 	@include Mobile {
@@ -39,7 +39,7 @@
 
 .info-section__header {
 	display: grid;
-	row-gap: 1em;
+	@include row-gap(1em);
 }
 
 .info-section__title {

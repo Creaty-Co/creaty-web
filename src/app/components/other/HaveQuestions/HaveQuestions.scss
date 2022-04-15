@@ -11,7 +11,7 @@
 
 	@include Mobile {
 		display: grid;
-		row-gap: 2.5em;
+		@include row-gap(2.5em);
 
 		padding: 2em;
 	}
@@ -19,7 +19,7 @@
 
 .have-questions__info {
 	display: grid;
-	row-gap: 1.5em;
+	@include row-gap(1.5em);
 
 	max-width: 27.25em;
 

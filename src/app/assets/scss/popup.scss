@@ -56,7 +56,7 @@
 
 .popup-layout {
 	display: grid;
-	row-gap: 1.5em;
+	@include row-gap(1.5em);
 	position: relative;
 	max-width: 100vw;
 	max-height: 100vh;

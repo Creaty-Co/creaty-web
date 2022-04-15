@@ -2,7 +2,7 @@
 
 .faq {
 	display: grid;
-	row-gap: 0.5em;
+	@include row-gap(0.5em);
 }
 
 .faq__clause {

@@ -6,7 +6,7 @@
 
 .contact-form__inputs {
 	display: grid;
-	row-gap: 1.25em;
+	@include row-gap(1.25em);
 }
 
 .contact-form__submit {

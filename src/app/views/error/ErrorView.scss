@@ -16,7 +16,7 @@
 .error-view__info {
 	display: grid;
 	justify-items: baseline;
-	gap: 3.5em;
+	@include gap(3.5em);
 
 }
 

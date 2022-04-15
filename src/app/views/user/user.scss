@@ -2,7 +2,7 @@
 
 .user {
 	display: flex;
-	gap: 1.25em;
+	@include gap(1.25em);
 
 	@include WidthLimit;
 
@@ -14,7 +14,7 @@
 .user__sections {
 	display: grid;
 	align-content: baseline;
-	row-gap: 1.5em;
+	@include row-gap(1.5em);
 	flex: 1;
 }
 
@@ -23,7 +23,7 @@
 .user-card {
 	display: grid;
 	align-content: baseline;
-	row-gap: 2em;
+	@include row-gap(2em);
 
 	width: min(100%, 23.75em);
 }
@@ -50,7 +50,7 @@
 
 .user-section {
 	display: flex;
-	gap: 2.5em;
+	@include gap(2.5em);
 
 	padding: 2.5em 4em;
 	background: white;
@@ -80,7 +80,7 @@
 	}
 
 	@include Mobile {
-		gap: 1em;
+		@include gap(1em);
 		padding: 2em;
 	}
 }
@@ -111,19 +111,19 @@
 .user-section__tags {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 0.5em;
+	@include gap(0.5em);
 }
 
 .user-section__rows {
 	display: grid;
-	row-gap: 0.75em;
+	@include row-gap(0.75em);
 	margin-top: 1.5em;
 }
 
 .user-section__entry {
 	display: flex;
 	align-items: center;
-	gap: 0.5em;
+	@include gap(0.5em);
 
 	margin: 0.5em 0;
 	color: $color-gray-50;

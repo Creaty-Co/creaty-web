@@ -2,7 +2,7 @@
 
 .mailing-subscribe {
 	display: grid;
-	row-gap: 1.5em;
+	@include row-gap(1.5em);
 }
 
 .mailing-subscribe__arrow {

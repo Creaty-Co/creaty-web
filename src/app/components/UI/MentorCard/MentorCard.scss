@@ -26,14 +26,14 @@
 
 .mentor-card__info {
 	display: grid;
-	row-gap: 0.5em;
+	@include row-gap(0.5em);
 }
 
 .mentor-card__container {
 	$indent: 1.25em;
 
 	display: grid;
-	row-gap: $indent;
+	@include row-gap($indent);
 
 	padding: $indent;
 }
@@ -65,7 +65,7 @@
 .mentor-card__tags {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 0.5em;
+	@include gap(0.5em);
 }
 
 .mentor-card__price {
@@ -80,7 +80,7 @@
 
 .mentor-card__discounts {
 	display: grid;
-	row-gap: 0.5em;
+	@include row-gap(0.5em);
 }
 
 .mentor-card__discount {
@@ -112,7 +112,7 @@
 
 .mentor-card-button__text {
 	display: flex;
-	gap: 0.25em;
+	@include gap(0.25em);
 
 	color: $color-black-main;
 	font-size: 1.125rem;

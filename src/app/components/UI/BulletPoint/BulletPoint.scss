@@ -2,7 +2,7 @@
 
 .bullet-point {
 	display: flex;
-	gap: 1.5em;
+	@include gap(1.5em);
 
 	flex: 1;
 }
@@ -25,7 +25,7 @@
 	display: grid;
 	align-content: baseline;
 
-	row-gap: 1em;
+	@include row-gap(1em);
 }
 
 .bullet-point__number {

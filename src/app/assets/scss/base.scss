@@ -106,7 +106,7 @@ textarea {
 
 ul {
 	display: grid;
-	row-gap: 0.5em;
+	@include row-gap(0.5em);
 	margin: unset;
 	padding-left: 1.25em;
 }
