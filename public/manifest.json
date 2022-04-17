@@ -1,7 +1,11 @@
 {
-  "short_name": "Creaty",
-  "name": "Creaty",
-  "description": "Creaty",
+  "short_name": "FindPark",
+  "name": "Find Nearby Car Parks",
+  "start_url": "/search",
+  "theme_color": "#206886",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "favicon.ico",
@@ -14,10 +18,5 @@
       "type": "image\/png",
       "density": "1.0"
     }
-  ],
-  "start_url": ".",
-  "display": "standalone",
-  "orientation": "portrait",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  ]
 }
