@@ -164,7 +164,7 @@
 /* Mentor Search List */
 
 .mentor-search-list {
-	$height: calc(var(--height) * 1px);
+	$height: calc(2.5em * 12);
 
 	position: absolute;
 	top: calc(100% + 0.75em);
