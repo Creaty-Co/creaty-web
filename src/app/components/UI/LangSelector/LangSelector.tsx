@@ -24,16 +24,12 @@ function LangSelector() {
   const parentRef = useRef<HTMLDivElement>(null)
   const currentLang = useLocalization(ll => ll.lang)
   const [isExpanded, setIsExpanded] = useState(false)
-  const mouseEnterRef = useRef<NodeJS.Timeout | undefined>(undefined)
+  const mouseEnterRef = useRef<NodeJS.Timeout | null>(null)
   function onMouseEnter() {
     setIsExpanded(true)
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    clearTimeout(mouseEnterRef.current)
+    mouseEnterRef.current && clearTimeout(mouseEnterRef.current)
   }
   function onMouseLeave() {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     mouseEnterRef.current = setTimeout(() => setIsExpanded(false), 250)
   }
   return (
