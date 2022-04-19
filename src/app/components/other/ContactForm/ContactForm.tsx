@@ -3,7 +3,7 @@ import "./ContactForm.scss"
 import { postFormsIdApplications } from "api/actions/form"
 import ClientAPI from "api/client"
 import Button from "app/components/common/Button/Button"
-import Input, { InputStrainType } from "app/components/UI/Input/Input"
+import Input, { InputStrainType as InputMaskType } from "app/components/UI/Input/Input"
 import { FormElements } from "interfaces/common"
 import { FormFieldType, FormType } from "interfaces/types"
 import useLocalization from "modules/localization/hook"
@@ -23,7 +23,7 @@ function ContactForm(props: ContactFormProps) {
   const ll = useLocalization(ll => ll.components.contactForm)
   const form = useSelector(state => state.forms[props.type])
   const [submitted, setSubmitted] = useState(false)
-  const [socialStrain, setSocialStrain] = useState<InputStrainType<string>>()
+  const [socialMask, setSocialMask] = useState<InputMaskType<string>>()
 
   if (submitted) {
     return (
@@ -33,11 +33,9 @@ function ContactForm(props: ContactFormProps) {
     )
   }
 
-  function onPhoneOrNickChange(event: ChangeEvent<HTMLInputElement>, strain?: InputStrainType<FormFieldType["type"]>) {
-    if (!strain) return
-    setSocialStrain(strain)
-
-    if (["whats_app", "viber"].includes(strain.value)) {
+  function onPhoneOrNickChange(event: ChangeEvent<HTMLInputElement>, mask?: InputMaskType<FormFieldType["type"]>) {
+    if (!mask) return
+    if (["whats_app", "viber"].includes(mask.value)) {
       const target = event.currentTarget
       const maskedValue = target.value.replace(/(?:(\d+))(\d{3})(\d{3})(\d{2})(\d{2})$/gm, "+$1 ($2) $3 $4-$5")
 
@@ -71,8 +69,19 @@ function ContactForm(props: ContactFormProps) {
   const includesSocial = (field: FormFieldType) => ["telegram", "facebook", "whats_app", "viber"].includes(field.type)
   const name = form?.fields.find(field => field.type === "name")
   const email = form?.fields.find(field => field.type === "email")
-  const social = form?.fields.find(includesSocial)
+  const social = form?.fields.find(field => socialMask?.value ? (field.type === socialMask?.value) : includesSocial(field))
   const about = form?.fields.find(field => field.type === "about")
+
+  function mapInputMasks() {
+    if (form == null) return []
+    return form.fields.filter(includesSocial).map(field => {
+      return {
+        title: ll.fields[field.type].title,
+        value: field.type
+      }
+    })
+  }
+  console.log(social)
   return (
     <form className="contact-form" onSubmit={onSubmit}>
       {!!form?.description?.length && (
@@ -88,12 +97,7 @@ function ContactForm(props: ContactFormProps) {
           <Input placeholder={email.placeholder} type="email" name="email" required />
         )}
         {social && (
-          <Input placeholder={social.placeholder} name={socialStrain?.value} required masks={form?.fields.filter(includesSocial).map(field => {
-            return {
-              title: ll.fields[field.type].title,
-              value: field.type
-            }
-          })} onChange={onPhoneOrNickChange} />
+          <Input placeholder={social.placeholder} name={socialMask?.value} required masks={mapInputMasks()} onChange={onPhoneOrNickChange} onMaskSelect={setSocialMask} />
         )}
         {about && (
           <div className="input">
@@ -106,6 +110,5 @@ function ContactForm(props: ContactFormProps) {
     </form>
   )
 }
-
 
 export default ContactForm

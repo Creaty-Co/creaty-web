@@ -9,7 +9,6 @@ import { classMerge, classWithModifiers } from "utils/common"
 import DropDown from "../DropDown/DropDown"
 
 
-
 export interface InputStrainType<V> {
   title: string
   value: V
@@ -17,19 +16,24 @@ export interface InputStrainType<V> {
 
 interface InputProps<V> extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
   masks?: InputStrainType<V>[]
+  onMaskSelect?: Dispatch<InputStrainType<V>>
   onChange?: (event: ChangeEvent<HTMLInputElement>, strain?: InputStrainType<V>) => void
 }
 
 function Input<V>(props: InputProps<V>) {
-  const [currentStrain, setCurrentStrain] = useState(props.masks?.[0])
+  const [currentMask, setCurrentMask] = useState(props.masks?.[0])
   function onChange(event: ChangeEvent<HTMLInputElement>) {
-    props.onChange?.(event, currentStrain)
+    props.onChange?.(event, currentMask)
+  }
+  function onMaskSelect(mask: InputStrainType<V>) {
+    props.onMaskSelect?.(mask)
+    setCurrentMask(mask)
   }
   return (
     <label className={classMerge("input", props.className)}>
       <input {..._.omit(props, "masks")} className="input__input" placeholder={props.placeholder + ((props.required && !props.masks?.length) ? "*" : "")} onChange={onChange} />
       {props.masks && (
-        <InputMasks masks={props.masks} onChange={setCurrentStrain} />
+        <InputMasks masks={props.masks} onSelect={onMaskSelect} />
       )}
     </label>
   )
@@ -38,7 +42,7 @@ function Input<V>(props: InputProps<V>) {
 
 interface InputMasksProps<V> {
   masks: InputStrainType<V>[]
-  onChange: Dispatch<InputStrainType<V>>
+  onSelect: Dispatch<InputStrainType<V>>
 }
 
 function InputMasks<V>(props: InputMasksProps<V>) {
@@ -49,7 +53,7 @@ function InputMasks<V>(props: InputMasksProps<V>) {
     const strain = props.masks[index]
 
     setCurrentStrain(strain)
-    props.onChange(strain)
+    props.onSelect(strain)
 
     setIsExpanded(false)
   }
