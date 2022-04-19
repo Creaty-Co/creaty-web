@@ -15,10 +15,11 @@ interface PopupLayoutProps {
 
 function PopupLayout(props: PopupLayoutProps) {
   const { close, component } = usePopup()
-  useEffect(() => ReactGA.send({
-    hitType: "modalview",
-    view: component.toString()
-  }), [component])
+  // useEffect(() => ReactGA.event({
+  //   action: "Modal View",
+  //   category: "as",
+  //   label: component.toString()
+  // }), [component])
   return (
     <div className="popup-layout" style={{ width: props.width }}>
       <button className="popup-layout__close" type="button" onClick={close}><Icon name="cross" /></button>

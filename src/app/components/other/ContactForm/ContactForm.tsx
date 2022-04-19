@@ -88,7 +88,7 @@ function ContactForm(props: ContactFormProps) {
           <Input placeholder={email.placeholder} type="email" name="email" required />
         )}
         {social && (
-          <Input placeholder={social.placeholder} name={socialStrain?.value} required strains={form?.fields.filter(includesSocial).map(field => {
+          <Input placeholder={social.placeholder} name={socialStrain?.value} required masks={form?.fields.filter(includesSocial).map(field => {
             return {
               title: ll.fields[field.type].title,
               value: field.type

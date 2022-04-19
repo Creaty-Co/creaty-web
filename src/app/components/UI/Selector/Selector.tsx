@@ -23,7 +23,7 @@ function Selector<V = string | undefined>(props: SelectorProps<V>) {
   return (
     <div className="selector">
       <div className="selector__current" onClick={() => setExpanded(!expanded)}>{current}</div>
-      <DropDown name={props.name} expanded={expanded} onChange={onChange}>{props.children}</DropDown>
+      <DropDown name={props.name} expanded={expanded} onSelect={onChange}>{props.children}</DropDown>
     </div>
   )
 }

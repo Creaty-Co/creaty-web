@@ -2,6 +2,7 @@ import "./Input.scss"
 
 import Icon from "app/components/common/Icon/Icon"
 import useClickAway from "hooks/useClickAway"
+import _ from "lodash"
 import { ChangeEvent, DetailedHTMLProps, Dispatch, InputHTMLAttributes, useRef, useState } from "react"
 import { classMerge, classWithModifiers } from "utils/common"
 
@@ -15,20 +16,20 @@ export interface InputStrainType<V> {
 }
 
 interface InputProps<V> extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
-  strains?: InputStrainType<V>[]
+  masks?: InputStrainType<V>[]
   onChange?: (event: ChangeEvent<HTMLInputElement>, strain?: InputStrainType<V>) => void
 }
 
 function Input<V>(props: InputProps<V>) {
-  const [currentStrain, setCurrentStrain] = useState(props.strains?.[0])
+  const [currentStrain, setCurrentStrain] = useState(props.masks?.[0])
   function onChange(event: ChangeEvent<HTMLInputElement>) {
     props.onChange?.(event, currentStrain)
   }
   return (
     <label className={classMerge("input", props.className)}>
-      <input {...{ ...props, strains: undefined }} className="input__input" placeholder={props.placeholder + ((props.required && !props.strains?.length) ? "*" : "")} onChange={onChange} />
-      {props.strains && (
-        <InputStrains strains={props.strains} onChange={setCurrentStrain} />
+      <input {..._.omit(props, "masks")} className="input__input" placeholder={props.placeholder + ((props.required && !props.masks?.length) ? "*" : "")} onChange={onChange} />
+      {props.masks && (
+        <InputMasks masks={props.masks} onChange={setCurrentStrain} />
       )}
     </label>
   )
@@ -36,19 +37,21 @@ function Input<V>(props: InputProps<V>) {
 
 
 interface InputMasksProps<V> {
-  strains: InputStrainType<V>[]
+  masks: InputStrainType<V>[]
   onChange: Dispatch<InputStrainType<V>>
 }
 
-function InputStrains<V>(props: InputMasksProps<V>) {
+function InputMasks<V>(props: InputMasksProps<V>) {
   const parentRef = useRef<HTMLDivElement>(null)
   const [isExpanded, setIsExpanded] = useState(false)
-  const [currentStrain, setCurrentStrain] = useState(props.strains[0])
-  function onChange(index: number) {
-    const strain = props.strains[index]
+  const [currentStrain, setCurrentStrain] = useState(props.masks[0])
+  function onSelect(index: number) {
+    const strain = props.masks[index]
 
     setCurrentStrain(strain)
     props.onChange(strain)
+
+    setIsExpanded(false)
   }
   useClickAway(parentRef, () => setIsExpanded(false))
   return (
@@ -58,8 +61,8 @@ function InputStrains<V>(props: InputMasksProps<V>) {
         <Icon className={classWithModifiers("input-masks__icon", isExpanded && "up")} name="chevron" />
       </button>
       <div className="input-masks__list">
-        <DropDown<number> expanded={isExpanded} onChange={onChange}>
-          {props.strains.map((mask, index) => (
+        <DropDown<number> expanded={isExpanded} onSelect={onSelect}>
+          {props.masks.map((mask, index) => (
             <option value={index} key={index}>{mask.title}</option>
           ))}
         </DropDown>

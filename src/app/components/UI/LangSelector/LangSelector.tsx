@@ -39,7 +39,7 @@ function LangSelector() {
         iconRight={<Icon name="drop-down-triangle" className={classWithModifiers("lang-selector__icon", isExpanded && "up")} />}
         onClick={() => setIsExpanded(!isExpanded)}
       >{_.capitalize(currentLang.name)}, {currentLang.currency}</Button>
-      <DropDown<string> expanded={isExpanded} default={currentLang.code} onChange={lang => Localization.transit(lang)}>
+      <DropDown<string> expanded={isExpanded} default={currentLang.code} onSelect={lang => Localization.transit(lang)}>
         {langs.map((lang, index) => (
           <option value={lang.code} key={index}>{_.capitalize(lang.name)}, {lang.currency}</option>
         ))}

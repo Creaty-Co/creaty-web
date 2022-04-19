@@ -6,7 +6,7 @@ function AdminPersonalPageMentorCard() {
     <div className="admin-mentor-card">
       <Button>-</Button>
       <Button>+</Button>
-      <DropDown expanded onChange={() => { 1 }}>
+      <DropDown expanded onSelect={() => { 1 }}>
         <option>1</option>
         <option>2</option>
       </DropDown>
