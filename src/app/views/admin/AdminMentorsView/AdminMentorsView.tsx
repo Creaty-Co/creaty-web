@@ -12,7 +12,7 @@ import AdminGroupLayout from "app/layouts/AdminGroupLayout/AdminGroupLayout"
 import AdminViewLayout from "app/layouts/AdminViewLayout/AdminViewLayout"
 import { MentorPatchType } from "interfaces/types"
 import _ from "lodash"
-import { Popup } from "modules/popup/controller"
+import { Modal } from "modules/modal/controller"
 import { Children, cloneElement, DetailedHTMLProps, FocusEvent, HTMLAttributes, InputHTMLAttributes, KeyboardEvent, ReactElement, useRef, useState } from "react"
 import { useQuery } from "react-fetching-library"
 import { Link } from "react-router-dom"
@@ -56,7 +56,7 @@ function AdminMentorsView() {
             <tbody>
               {payload?.results.map(mentor => (
                 <tr key={mentor.id}>
-                  <td><Button color="dark" onClick={() => Popup.open(PopupAdminPersonalMentors, { mentor })}>Ред. перс. страницу</Button></td>
+                  <td><Button color="dark" onClick={() => Modal.open(PopupAdminPersonalMentors, { mentor })}>Ред. перс. страницу</Button></td>
                   <td>{mentor.id}</td>
                   <td>
                     <section>

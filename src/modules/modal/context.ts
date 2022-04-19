@@ -16,12 +16,8 @@ copies or substantial portions of the Software.
 
 */
 
-import { useContext } from "react"
+import { createContext } from "react"
 
-import { PopupContext } from "./context"
+import { ModalWindow } from "./types"
 
-export function usePopup() {
-  const context = useContext(PopupContext)
-  if (!context) throw new Error("PopupError: Out of popup context")
-  return context
-}
+export const modalContext = createContext<ModalWindow | null>(null)

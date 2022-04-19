@@ -12,7 +12,7 @@ import PackagesEdit from "app/components/UI/PackagesEdit/PackagesEdit"
 import AdminGroupLayout from "app/layouts/AdminGroupLayout/AdminGroupLayout"
 import AdminViewLayout from "app/layouts/AdminViewLayout/AdminViewLayout"
 import { MentorDetailedType, MentorPackageType } from "interfaces/types"
-import { Popup } from "modules/popup/controller"
+import { Modal } from "modules/modal/controller"
 import { FormEvent, useState } from "react"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router"
@@ -119,10 +119,10 @@ function AdminMentorNewEdit(props: AdminNewMentorViewProps | AdminEditMentorView
         </AdminGroupLayout>
         <AdminGroupLayout title="Тэги">
           <CheckTree name="tag_set" defaultChecks={props.data?.tags.map(tag => tag.id) || [2, 3]}>
-            <Button iconLeft={<Icon name="touch" />} color="white" onClick={() => Popup.open(PopupAdminNewTopic)}>Добавить категорию</Button>
+            <Button iconLeft={<Icon name="touch" />} color="white" onClick={() => Modal.open(PopupAdminNewTopic)}>Добавить категорию</Button>
             {topics.list.map(topic => (
               <option title={topic.title} key={topic.id}>
-                <Button iconLeft={<Icon name="touch" />} color="white" onClick={() => Popup.open(PopupAdminNewTag, { topicId: topic.id })}>Добавить тэг</Button>
+                <Button iconLeft={<Icon name="touch" />} color="white" onClick={() => Modal.open(PopupAdminNewTag, { topicId: topic.id })}>Добавить тэг</Button>
                 {topic.tags.map(tag => (
                   <option title={tag.title} value={tag.id} key={tag.id} />
                 ))}

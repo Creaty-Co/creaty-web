@@ -2,7 +2,7 @@ import { deletePagePersonalMentor, deletePagesMainMentor, getPagePersonal, patch
 import ClientAPI from "api/client"
 import Button from "app/components/common/Button/Button"
 import { MentorType, TagType } from "interfaces/types"
-import { usePopup } from "modules/popup/hook"
+import { useModal } from "modules/modal/hook"
 import { ChangeEvent, FormEvent } from "react"
 import { useSelector } from "react-redux"
 import { toast } from "react-toastify"
@@ -17,7 +17,7 @@ interface PopupAdminPersonalTagsProps {
 }
 
 export function PopupAdminPersonalTags(props: PopupAdminPersonalTagsProps) {
-  const { close } = usePopup()
+  const { close } = useModal()
   const topics = useSelector(state => state.topics)
   async function submitTags(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()

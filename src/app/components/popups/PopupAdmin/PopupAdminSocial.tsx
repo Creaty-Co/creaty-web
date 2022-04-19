@@ -2,7 +2,7 @@ import { deletePagesLinksSocials, patchPagesLinksSocials, postPagesLinksSocials 
 import ClientAPI from "api/client"
 import { FormElements } from "interfaces/common"
 import { PageLinkSocialType } from "interfaces/types"
-import { usePopup } from "modules/popup/hook"
+import { useModal } from "modules/modal/hook"
 import { FormEvent } from "react"
 import { FileToURLDataBase64 } from "utils/common"
 
@@ -12,7 +12,7 @@ import PopupLayout from "../PopupLayout"
 
 
 export function PopupAdminNewSocial() {
-  const { close } = usePopup()
+  const { close } = useModal()
   async function submitSocial(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
@@ -50,7 +50,7 @@ interface PopupAdminEditSocialProps {
 }
 
 export function PopupAdminEditSocial(props: PopupAdminEditSocialProps) {
-  const { close } = usePopup()
+  const { close } = useModal()
   function deleteSocial() {
     ClientAPI
       .query(deletePagesLinksSocials(props.img.id))

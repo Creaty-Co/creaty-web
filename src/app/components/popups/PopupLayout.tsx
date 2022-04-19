@@ -1,6 +1,6 @@
-import "app/assets/scss/popup.scss"
+import "./PopupLayout.scss"
 
-import { usePopup } from "modules/popup/hook"
+import { useModal } from "modules/modal/hook"
 import { ReactNode, useEffect } from "react"
 import ReactGA from "react-ga4"
 
@@ -14,7 +14,7 @@ interface PopupLayoutProps {
 }
 
 function PopupLayout(props: PopupLayoutProps) {
-  const { close, component } = usePopup()
+  const { close, component } = useModal()
   // useEffect(() => ReactGA.event({
   //   action: "Modal View",
   //   category: "as",

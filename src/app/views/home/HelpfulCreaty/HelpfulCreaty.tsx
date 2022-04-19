@@ -3,7 +3,7 @@ import "./HelpfulCreaty.scss"
 import Button from "app/components/common/Button/Button"
 import PopupForm from "app/components/popups/PopupForm"
 import useLocalization from "modules/localization/hook"
-import { Popup } from "modules/popup/controller"
+import { Modal } from "modules/modal/controller"
 
 
 function HelpfulCreaty() {
@@ -19,7 +19,7 @@ function HelpfulCreaty() {
       <div className="helpful-creaty__group">
         <HelpfulCreatyBlock {...ll.blocks[2]} flag="orange" />
         <HelpfulCreatyBlock {...ll.blocks[3]} flag="blue" />
-        <Button className="helpful-creaty__button" style="outline" color="green" onClick={() => Popup.open(PopupForm, { type: "choose_mentor" })}>{ll.button}</Button>
+        <Button className="helpful-creaty__button" style="outline" color="green" onClick={() => Modal.open(PopupForm, { type: "choose_mentor" })}>{ll.button}</Button>
       </div>
     </div>
   )

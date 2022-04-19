@@ -3,7 +3,7 @@ import ClientAPI from "api/client"
 import AdminInputsLayout from "app/layouts/AdminInputsLayout"
 import { FormElements } from "interfaces/common"
 import { TagType } from "interfaces/types"
-import { usePopup } from "modules/popup/hook"
+import { useModal } from "modules/modal/hook"
 import { FormEvent, useState } from "react"
 import { requestTags, requestTopics } from "redux/reducers/topics"
 
@@ -17,7 +17,7 @@ interface PopupAdminNewTagProps {
 }
 
 export function PopupAdminNewTag(props: PopupAdminNewTagProps) {
-  const { close } = usePopup()
+  const { close } = useModal()
   const [pending, setPending] = useState(false)
   async function submitTag(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -60,7 +60,7 @@ interface PopupAdminEditTagProps {
 }
 
 export function PopupAdminEditTag(props: PopupAdminEditTagProps) {
-  const { close } = usePopup()
+  const { close } = useModal()
   const [pending, setPending] = useState(false)
   async function deleteTag() {
     const { error } = await ClientAPI.query(deleteTags(props.tag.id))

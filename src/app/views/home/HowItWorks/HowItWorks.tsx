@@ -5,7 +5,7 @@ import PopupForm from "app/components/popups/PopupForm"
 import BulletPoint from "app/components/UI/BulletPoint/BulletPoint"
 import InfoSection from "app/components/UI/InfoSection/InfoSection"
 import useLocalization from "modules/localization/hook"
-import { Popup } from "modules/popup/controller"
+import { Modal } from "modules/modal/controller"
 
 
 function HowItWorks() {
@@ -20,7 +20,7 @@ function HowItWorks() {
       </div>
       <div className="how-it-works__help">
         <InfoSection type="1" display="flex" {...ll.help}>
-          <Button size="big" color="green" onClick={() => Popup.open(PopupForm, { type: "test_meeting" })}>{ll.button}</Button>
+          <Button size="big" color="green" onClick={() => Modal.open(PopupForm, { type: "test_meeting" })}>{ll.button}</Button>
         </InfoSection>
       </div>
     </div >

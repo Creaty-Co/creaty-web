@@ -7,8 +7,8 @@ import PopupForm from "app/components/popups/PopupForm"
 import MentorCard from "app/components/UI/MentorCard/MentorCard"
 import { MentorType } from "interfaces/types"
 import useLocalization from "modules/localization/hook"
-import { Popup } from "modules/popup/controller"
-import { useEffect, useRef, useState } from "react"
+import { Modal } from "modules/modal/controller"
+import { useEffect, useRef } from "react"
 
 
 interface MentorsSliderProps {
@@ -67,7 +67,7 @@ function MentorsSlider(props: MentorsSliderProps) {
       <div className="mentors-slider__help">
         <ButtonLink size="big" color="white" to="/mentors">{ll.seeAllMentors}</ButtonLink>
         <span>{ll.or}</span>
-        <Button size="big" style="outline" onClick={() => Popup.open(PopupForm, { type: "choose_mentor" })}>{ll.getHelp}</Button>
+        <Button size="big" style="outline" onClick={() => Modal.open(PopupForm, { type: "choose_mentor" })}>{ll.getHelp}</Button>
       </div>
     </div>
   )

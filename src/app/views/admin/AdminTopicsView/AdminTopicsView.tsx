@@ -5,7 +5,7 @@ import TopicTag from "app/components/UI/Tag/TopicTag"
 import AdminGroupLayout from "app/layouts/AdminGroupLayout/AdminGroupLayout"
 import AdminViewLayout from "app/layouts/AdminViewLayout/AdminViewLayout"
 import { TopicType } from "interfaces/types"
-import { Popup } from "modules/popup/controller"
+import { Modal } from "modules/modal/controller"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { classWithModifiers } from "utils/common"
@@ -28,21 +28,21 @@ function AdminTopicsView() {
                 <span>{topic.title}</span>
               </button>
             ))}
-            <button className="mentor-search-list__item" onClick={() => Popup.open(PopupAdminNewTopic)}>Добавить новую категорию</button>
+            <button className="mentor-search-list__item" onClick={() => Modal.open(PopupAdminNewTopic)}>Добавить новую категорию</button>
           </div>
           <div className="mentor-search-list__tags">
             {currentTopic && (
-              <button className="mentor-search-list__item" type="button" onClick={() => Popup.open(PopupAdminEditTopic, { topic: currentTopic })}>
+              <button className="mentor-search-list__item" type="button" onClick={() => Modal.open(PopupAdminEditTopic, { topic: currentTopic })}>
                 Редактировать категорию
               </button>
             )}
             {currentTopic?.tags.map(tag => (
-              <button className="topic-tag" type="button" onClick={() => Popup.open(PopupAdminEditTag, { tag })} key={tag.id}>
+              <button className="topic-tag" type="button" onClick={() => Modal.open(PopupAdminEditTag, { tag })} key={tag.id}>
                 <span className="topic-tag__text">{tag.title}</span>
               </button>
             ))}
             {currentTopic && (
-              <TopicTag noHash onClick={() => Popup.open(PopupAdminNewTag, { topicId: currentTopic.id })}>+</TopicTag>
+              <TopicTag noHash onClick={() => Modal.open(PopupAdminNewTag, { topicId: currentTopic.id })}>+</TopicTag>
             )}
             {!currentTopic && (
               <div className="mentor-search-list-empty">

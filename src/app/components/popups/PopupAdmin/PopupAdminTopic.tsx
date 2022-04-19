@@ -3,7 +3,7 @@ import ClientAPI from "api/client"
 import AdminInputsLayout from "app/layouts/AdminInputsLayout"
 import { FormElements } from "interfaces/common"
 import { TopicType } from "interfaces/types"
-import { usePopup } from "modules/popup/hook"
+import { useModal } from "modules/modal/hook"
 import { FormEvent, useState } from "react"
 import { requestTags, requestTopics } from "redux/reducers/topics"
 import { FileToURLDataBase64 } from "utils/common"
@@ -14,7 +14,7 @@ import PopupLayout from "../PopupLayout"
 
 
 export function PopupAdminNewTopic() {
-  const { close } = usePopup()
+  const { close } = useModal()
   const [pending, setPending] = useState(false)
   async function submitTopic(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -63,7 +63,7 @@ interface PopupAdminEditTopicProps {
 }
 
 export function PopupAdminEditTopic(props: PopupAdminEditTopicProps) {
-  const { close } = usePopup()
+  const { close } = useModal()
   const [pending, setPending] = useState(false)
   async function submitTopic(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()

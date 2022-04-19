@@ -5,7 +5,7 @@ import Button from "app/components/common/Button/Button"
 import Input from "app/components/UI/Input/Input"
 import { FormElements } from "interfaces/common"
 import { MailingPreviewType } from "interfaces/types"
-import { usePopup } from "modules/popup/hook"
+import { useModal } from "modules/modal/hook"
 import { FormEvent } from "react"
 import { useQuery } from "react-fetching-library"
 import { FileToURLDataBase64 } from "utils/common"
@@ -14,7 +14,7 @@ import PopupLayout from "../PopupLayout"
 
 
 export function PopupAdminNewMailing() {
-  const { close } = usePopup()
+  const { close } = useModal()
   async function submitMailing(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
@@ -52,7 +52,7 @@ interface PopupAdminEditMailingsProps {
 }
 
 export function PopupAdminEditMailing(props: PopupAdminEditMailingsProps) {
-  const { close } = usePopup()
+  const { close } = useModal()
   const { error, loading, payload } = useQuery(getMailing(props.mailing.id))
   if (error) throw new Error("useQuery error")
   if (loading) return <>loading...</>
@@ -99,7 +99,7 @@ export function PopupAdminEditMailing(props: PopupAdminEditMailingsProps) {
 
 
 export function PopupAdminXlSXMailing() {
-  const { close } = usePopup()
+  const { close } = useModal()
   async function submitXLSX(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 

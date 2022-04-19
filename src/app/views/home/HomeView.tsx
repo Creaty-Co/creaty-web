@@ -15,7 +15,7 @@ import { FAQ, FAQClause } from "app/components/UI/FAQ/FAQ"
 import InfoSection from "app/components/UI/InfoSection/InfoSection"
 import useScrollToTop from "hooks/useScrollToTop"
 import useLocalization from "modules/localization/hook"
-import { Popup } from "modules/popup/controller"
+import { Modal } from "modules/modal/controller"
 import { useEffect } from "react"
 import { useQuery } from "react-fetching-library"
 import ReactMarkdown from "react-markdown"
@@ -54,7 +54,7 @@ function HomeView() {
           <MentorSearchTags tags={payload.tags} />
         )}
         <AdminInterface>
-          <Button color="white" onClick={() => Popup.open(PopupAdminPersonalTags, { shortcut: params.shortcut, tags: payload?.tags || [] })}>Изменить тэги</Button>
+          <Button color="white" onClick={() => Modal.open(PopupAdminPersonalTags, { shortcut: params.shortcut, tags: payload?.tags || [] })}>Изменить тэги</Button>
         </AdminInterface>
       </div>
       <div className="home-view__comment">
@@ -107,12 +107,12 @@ function QAndA() {
         <FAQClause summary={faq.question} key={faq.id}>
           <ReactMarkdown>{faq.answer}</ReactMarkdown>
           <AdminInterface>
-            <Button color="white" onClick={() => Popup.open(PopupAdminEditFAQ, { faq })}>Редактировать вопрос</Button>
+            <Button color="white" onClick={() => Modal.open(PopupAdminEditFAQ, { faq })}>Редактировать вопрос</Button>
           </AdminInterface>
         </FAQClause>
       ))}
       <AdminInterface>
-        <Button color="white" onClick={() => Popup.open(PopupAdminNewFAQ)}>Добавить вопрос</Button>
+        <Button color="white" onClick={() => Modal.open(PopupAdminNewFAQ)}>Добавить вопрос</Button>
       </AdminInterface>
     </FAQ>
   )

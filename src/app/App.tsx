@@ -8,8 +8,8 @@ import { PageLinkType } from "interfaces/types"
 import { UserType } from "interfaces/user"
 import Localization from "modules/localization/controller"
 import useLocalization from "modules/localization/hook"
-import { PopupContainer } from "modules/popup/container"
-import { Popup } from "modules/popup/controller"
+import { ModalContainer } from "modules/modal/container"
+import { Modal } from "modules/modal/controller"
 import { StrictMode, Suspense, useEffect, useRef, useState } from "react"
 import { ClientContextProvider, useQuery } from "react-fetching-library"
 import ReactGA from "react-ga4"
@@ -59,7 +59,7 @@ function App() {
                 <Main />
                 <Footer />
                 <Cookies />
-                <PopupContainer />
+                <ModalContainer />
                 <ToastContainer />
               </ErrorBoundary>
             </Suspense>
@@ -91,9 +91,9 @@ function Header() {
         <div className={classWithModifiers("topbar__right", expanded && "expanded")}>
           <div className="topbar-menu">
             <ButtonLink to="/mentors">{ll.menu.mentors}</ButtonLink>
-            <Button onClick={() => Popup.open(PopupForm, { type: "become_mentor" })}>{ll.menu.becomeMentor}</Button>
+            <Button onClick={() => Modal.open(PopupForm, { type: "become_mentor" })}>{ll.menu.becomeMentor}</Button>
           </div>
-          <Button style="outline" size="small" color="green" className="topbar-menu__button" onClick={() => Popup.open(PopupForm, { type: "choose_mentor" })}>{ll.findMentor}</Button>
+          <Button style="outline" size="small" color="green" className="topbar-menu__button" onClick={() => Modal.open(PopupForm, { type: "choose_mentor" })}>{ll.findMentor}</Button>
           <LangSelector />
         </div>
       </div>
@@ -168,8 +168,8 @@ function Footer() {
             <div className="footer-links__group">
               <div className="footer-links__title">{ll.linkGroups.service}</div>
               <Link className="footer-links__link" to="/mentors">{ll.links.mentors}</Link>
-              <button className="footer-links__link" type="button" onClick={() => Popup.open(PopupForm, { type: "become_mentor" })}>{ll.links.becomeMentor}</button>
-              <button className="footer-links__link" type="button" onClick={() => Popup.open(PopupForm, { type: "choose_mentor" })}>{ll.links.pickMentor}</button>
+              <button className="footer-links__link" type="button" onClick={() => Modal.open(PopupForm, { type: "become_mentor" })}>{ll.links.becomeMentor}</button>
+              <button className="footer-links__link" type="button" onClick={() => Modal.open(PopupForm, { type: "choose_mentor" })}>{ll.links.pickMentor}</button>
             </div>
             <div className="footer-links__group">
               <div className="footer-links__title">{ll.linkGroups.docs}</div>

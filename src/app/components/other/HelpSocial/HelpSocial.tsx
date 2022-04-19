@@ -6,7 +6,7 @@ import Button from "app/components/common/Button/Button"
 import { PopupAdminEditSocial, PopupAdminNewSocial } from "app/components/popups/PopupAdmin/PopupAdminSocial"
 import OuterLink from "app/components/services/OuterLink"
 import useLocalization from "modules/localization/hook"
-import { Popup } from "modules/popup/controller"
+import { Modal } from "modules/modal/controller"
 import { useQuery } from "react-fetching-library"
 
 
@@ -26,12 +26,12 @@ function HelpSocial() {
             <img src={img.icon} alt="social network" className="help-social__icon" />
           </OuterLink>
           <AdminInterface>
-            <Button onClick={() => Popup.open(PopupAdminEditSocial, { img })}>Ред.</Button>
+            <Button onClick={() => Modal.open(PopupAdminEditSocial, { img })}>Ред.</Button>
           </AdminInterface>
         </div>
       ))}
       <AdminInterface>
-        <Button onClick={() => Popup.open(PopupAdminNewSocial)}>Добавить ссылку</Button>
+        <Button onClick={() => Modal.open(PopupAdminNewSocial)}>Добавить ссылку</Button>
       </AdminInterface>
       {/* <OuterLink>
         <img src="/static/icons/messenger.svg" alt="telegram" className="help-social__icon" />

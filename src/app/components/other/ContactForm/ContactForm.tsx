@@ -81,7 +81,6 @@ function ContactForm(props: ContactFormProps) {
       }
     })
   }
-  console.log(social)
   return (
     <form className="contact-form" onSubmit={onSubmit}>
       {!!form?.description?.length && (

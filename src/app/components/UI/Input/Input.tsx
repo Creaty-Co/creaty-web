@@ -31,7 +31,7 @@ function Input<V>(props: InputProps<V>) {
   }
   return (
     <label className={classMerge("input", props.className)}>
-      <input {..._.omit(props, "masks")} className="input__input" placeholder={props.placeholder + ((props.required && !props.masks?.length) ? "*" : "")} onChange={onChange} />
+      <input {..._.omit(props, "masks", "onMaskSelect")} className="input__input" placeholder={props.placeholder + ((props.required && !props.masks?.length) ? "*" : "")} onChange={onChange} />
       {props.masks && (
         <InputMasks masks={props.masks} onSelect={onMaskSelect} />
       )}

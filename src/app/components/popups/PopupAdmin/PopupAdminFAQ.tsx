@@ -2,7 +2,7 @@ import { deletePagesFAQs, patchPagesFAQs, postPagesFAQs } from "api/actions/page
 import ClientAPI from "api/client"
 import { FormElements } from "interfaces/common"
 import { PageFAQType } from "interfaces/types"
-import { usePopup } from "modules/popup/hook"
+import { useModal } from "modules/modal/hook"
 import { FormEvent } from "react"
 
 import Button from "../../common/Button/Button"
@@ -11,7 +11,7 @@ import PopupLayout from "../PopupLayout"
 
 
 export function PopupAdminNewFAQ() {
-  const { close } = usePopup()
+  const { close } = useModal()
   async function submitFAQ(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
@@ -48,7 +48,7 @@ interface PopupAdminEditFAQProps {
 }
 
 export function PopupAdminEditFAQ(props: PopupAdminEditFAQProps) {
-  const { close } = usePopup()
+  const { close } = useModal()
   function deleteFAQ() {
     ClientAPI
       .query(deletePagesFAQs(props.faq.id))
