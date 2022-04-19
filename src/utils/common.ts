@@ -1,8 +1,8 @@
 import "./extensions"
 
 import { Buffer } from "buffer"
-import { FormElements, URLDataBase64 } from "interfaces/common"
-import { cloneElement } from "react"
+import { URLDataBase64 } from "interfaces/common"
+import { cloneElement, SyntheticEvent } from "react"
 
 /**
  *
@@ -71,28 +71,6 @@ export async function getFileFromURL(url: string) {
   return new File(Uint8Array ? [Uint8Array] : [], fileName, { type: response.headers.get("content-type") || "image" })
 }
 
-
-
-/**
- *
- * @param elements
- * @param keys
- * @returns
- */
-export function getFormElements<K extends string>(elements: HTMLFormControlsCollection, ...keys: K[]): Record<K, string> | null {
-  const data = Object.fromEntries(keys.map(key => [key, ""])) as Record<K, string>
-
-  for (const element of elements) {
-    if (!(element instanceof HTMLInputElement)) continue
-    if (!keys.includes(element.name as K)) continue
-    if (!element.value.length) return null
-
-    data[element.name as K] = element.value
-  }
-
-  return data
-}
-
 /**
  * Interpolate function for {variable} interpolations in string
  */
@@ -117,19 +95,21 @@ export function inter<V = unknown>(value: V, vars: Record<string, string | numbe
   return interpolate(value)
 }
 
-
-
-export function getFormInputs<U extends string = string>(elements: FormElements<U> | HTMLFormControlsCollection) {
-  return [...elements].reduce<Record<U | (string & {}), string | number>>((result, next) => {
-    if (next instanceof HTMLInputElement) {
-      return { ...result, [next.name]: next.value }
-    }
-    return result
-  }, {} as any)
-}
-
 export function getCheckedValues(inputs: RadioNodeList & HTMLInputElement[]) {
   return [...inputs].filter(input => input.checked).map(input => input.value)
 }
 
-export function noop(): void { /* Do nothing */ }
+/**
+ * Stops propagation from container
+ * @param callback any function
+ * @returns mouse event handler
+ */
+export function stopPropagation(callback?: Function | null) {
+  return ({ target, currentTarget }: Event | SyntheticEvent) => {
+    if (target instanceof Element && currentTarget instanceof Element) {
+      if (target !== currentTarget) return
+    }
+
+    callback?.()
+  }
+}

@@ -17,7 +17,7 @@ copies or substantial portions of the Software.
 */
 
 import { Component } from "react"
-import { classWithModifiers } from "utils/common"
+import { classWithModifiers, stopPropagation } from "utils/common"
 
 import { PopupContext } from "./context"
 import { PopupPrivate } from "./controller"
@@ -37,7 +37,7 @@ export class PopupContainer extends Component<PopupContainerProps, PopupContaine
     queue: []
   }
 
-  constructor(props: any) {
+  constructor(props: PopupContainerProps) {
     super(props)
     // Set Popup dispatcher
     PopupPrivate.dispatch = this.setState.bind(this)
@@ -51,8 +51,8 @@ export class PopupContainer extends Component<PopupContainerProps, PopupContaine
     const className = this.props.className || "popup"
     return (
       <div className={classWithModifiers(className, isActive && "active")}>
-        <div className={className + "__container"} onClick={close}>
-          <div className={className + "__inner"} onClick={event => event.stopPropagation()}>
+        <div className={className + "__container"} onClick={stopPropagation(close)}>
+          <div className={className + "__inner"}>
             <PopupContext.Provider value={lastPopup || null}>
               {PopupWindowComponent && <PopupWindowComponent {...params} />}
             </PopupContext.Provider>
