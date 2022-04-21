@@ -16,6 +16,7 @@ export interface InputStrainType<V> {
 
 interface InputProps<V> extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
   masks?: InputStrainType<V>[]
+  masksName?: string
   onMaskSelect?: Dispatch<InputStrainType<V>>
   onChange?: (event: ChangeEvent<HTMLInputElement>, strain?: InputStrainType<V>) => void
 }
@@ -31,9 +32,9 @@ function Input<V>(props: InputProps<V>) {
   }
   return (
     <label className={classMerge("input", props.className)}>
-      <input {..._.omit(props, "masks", "onMaskSelect")} className="input__input" placeholder={props.placeholder + ((props.required && !props.masks?.length) ? "*" : "")} onChange={onChange} />
+      <input {..._.omit(props, "masks", "onMaskSelect", "masksName")} className="input__input" placeholder={props.placeholder + ((props.required && !props.masks?.length) ? "*" : "")} onChange={onChange} />
       {props.masks && (
-        <InputMasks masks={props.masks} onSelect={onMaskSelect} />
+        <InputMasks masks={props.masks} masksName={props.masksName} onSelect={onMaskSelect} />
       )}
     </label>
   )
@@ -42,6 +43,7 @@ function Input<V>(props: InputProps<V>) {
 
 interface InputMasksProps<V> {
   masks: InputStrainType<V>[]
+  masksName?: string
   onSelect: Dispatch<InputStrainType<V>>
 }
 
@@ -49,7 +51,7 @@ function InputMasks<V>(props: InputMasksProps<V>) {
   const parentRef = useRef<HTMLDivElement>(null)
   const [isExpanded, setIsExpanded] = useState(false)
   const [currentStrain, setCurrentStrain] = useState(props.masks[0])
-  function onSelect(index: number) {
+  function onSelect(value: V, children: unknown, index: number) {
     const strain = props.masks[index]
 
     setCurrentStrain(strain)
@@ -65,9 +67,9 @@ function InputMasks<V>(props: InputMasksProps<V>) {
         <Icon className={classWithModifiers("input-masks__icon", isExpanded && "up")} name="chevron" />
       </button>
       <div className="input-masks__list">
-        <DropDown<number> expanded={isExpanded} onSelect={onSelect}>
+        <DropDown<V> name={props.masksName} expanded={isExpanded} onSelect={onSelect}>
           {props.masks.map((mask, index) => (
-            <option value={index} key={index}>{mask.title}</option>
+            <option value={String(mask.value)} key={index}>{mask.title}</option>
           ))}
         </DropDown>
       </div>

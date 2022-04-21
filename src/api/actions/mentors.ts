@@ -1,6 +1,7 @@
 import { Action } from "api/client"
 import { PaginationType } from "interfaces/Django"
 import { MentorDetailedType, MentorPatchType, MentorType } from "interfaces/types"
+import { DeepPartial } from "redux"
 
 export const getMentors = (page: number, page_size: number, tag_set__in: (number | undefined)[]): Action<PaginationType<MentorType>> => ({
   method: "GET",
@@ -14,7 +15,7 @@ export const postMentors = (body: MentorPatchType): Action<{ id: number }> => ({
   body
 })
 
-export const patchMentorsId = (id: number, body: Partial<Omit<MentorPatchType, "info">> & { info?: Partial<MentorPatchType["info"]> }): Action<{ id: number }> => ({
+export const patchMentorsId = (id: number, body: DeepPartial<MentorPatchType>): Action<{ id: number }> => ({
   method: "PATCH",
   endpoint: `/mentors/${id}`,
   body

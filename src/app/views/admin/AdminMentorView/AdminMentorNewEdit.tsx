@@ -7,19 +7,50 @@ import { PopupAdminNewTopic } from "app/components/popups/PopupAdmin/PopupAdminT
 import Checkbox from "app/components/UI/Checkbox/Checkbox"
 import CheckTree from "app/components/UI/CheckTree/CheckTree"
 import EditAvatar from "app/components/UI/EditAvatar/EditAvatar"
+import Form, { FormState } from "app/components/UI/Form/Form"
 import Input from "app/components/UI/Input/Input"
 import PackagesEdit from "app/components/UI/PackagesEdit/PackagesEdit"
 import AdminGroupLayout from "app/layouts/AdminGroupLayout/AdminGroupLayout"
 import AdminViewLayout from "app/layouts/AdminViewLayout/AdminViewLayout"
-import { MentorDetailedType, MentorPackageType } from "interfaces/types"
+import { ValuesOf } from "interfaces/common"
+import { MentorDetailedType, MentorPatchType } from "interfaces/types"
+import _ from "lodash"
 import { Modal } from "modules/modal/controller"
 import { FormEvent, useState } from "react"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router"
-import { FileToURLDataBase64, getCheckedValues } from "utils/common"
 
 import { AdminCountriesSelect, AdminLangsCheckboxes } from "../helpers"
 
+enum FormInputs {
+  // ---------- INFO --------------------------
+  languages = "languages",
+
+  cityRU = "city_ru",
+  cityEN = "city_en",
+
+  portfolio = "portfolio",
+  experience = "experience",
+  whatHelp = "what_help",
+  resume = "resume",
+
+  trialMeeting = "trial_meeting",
+  // ----------------------------
+  avatar = "avatar",
+  company = "company",
+  profession = "profession",
+  firstName = "first_name",
+  lastName = "last_name",
+  price = "price",
+  priceCurrency = "price_currency",
+  country = "country",
+  tags = "tag_set"
+}
+
+type FormKeys = ValuesOf<typeof FormInputs>
+type FormValues = Pick<Omit<MentorPatchType, "info" | "packages"> & MentorPatchType["info"], FormKeys>
+
+const formInfoKeys = ["languages", "portfolio", "experience", "resume", "trial_meeting", "what_help", "city_ru", "city_en"] as const
 
 interface AdminNewMentorViewProps {
   new: true
@@ -37,59 +68,16 @@ function AdminMentorNewEdit(props: AdminNewMentorViewProps | AdminEditMentorView
   const navigate = useNavigate()
   const [pending, setPending] = useState(false)
   const topics = useSelector(state => state.topics)
-  const [packages, setPackages] = useState<Omit<MentorPackageType, "id">[]>(props.data?.packages || [])
-  async function submitCreateMentor(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
+  const [packages, setPackages] = useState<MentorPatchType["packages"]>(props.data?.packages || [])
 
-    interface FormElements extends HTMLFormControlsCollection {
-      // ---------- INFO --------------------------
-      tag_set: RadioNodeList & HTMLInputElement[]
-      languages: RadioNodeList & HTMLInputElement[]
-
-      city_ru: HTMLInputElement
-      city_en: HTMLInputElement
-
-      portfolio: HTMLInputElement
-      experience: HTMLInputElement
-      what_help: HTMLInputElement
-      resume: HTMLInputElement
-
-      trial_meeting: HTMLInputElement
-      // ----------------------------
-      avatar: HTMLInputElement
-      company: HTMLInputElement
-      profession: HTMLInputElement
-      first_name: HTMLInputElement
-      last_name: HTMLInputElement
-      price: HTMLInputElement
-      price_currency: HTMLInputElement
-      country: HTMLInputElement
-    }
-
-    const target = event.currentTarget
-    const elements = target.elements as FormElements
-    const APIPayload = {
+  async function submitCreateMentor(_event: FormEvent<HTMLFormElement>, state: FormState<FormValues>) {
+    const APIPayload: MentorPatchType = {
       info: {
-        trial_meeting: +elements.trial_meeting.checked || null,
-        resume: elements.resume.value,
-        what_help: elements.what_help.value,
-        experience: elements.experience.value,
-        portfolio: elements.portfolio.value,
-        languages: getCheckedValues(elements.languages).map(Number),
-        city_ru: elements.city_ru.value,
-        city_en: elements.city_en.value
+        ..._.pick(state.values, formInfoKeys) as MentorPatchType["info"],
+        trial_meeting: state.values.trial_meeting ? 15 : null
       },
       packages,
-      tag_set: getCheckedValues(elements.tag_set).map(Number),
-      // -------------------------------------------
-      avatar: elements.avatar.files?.[0] ? await FileToURLDataBase64(elements.avatar.files[0]) : (props.data?.avatar || ""),
-      company: elements.company.value,
-      profession: elements.profession.value,
-      first_name: elements.first_name.value,
-      last_name: elements.last_name.value,
-      price: elements.price.value,
-      price_currency: elements.price_currency.value,
-      country: +elements.country.value,
+      ..._.omit(state.values, ...formInfoKeys)
     }
     const APIAction = props.new ? postMentors(APIPayload) : patchMentorsId(props.id, APIPayload)
 
@@ -100,25 +88,29 @@ function AdminMentorNewEdit(props: AdminNewMentorViewProps | AdminEditMentorView
 
     navigate("/user/" + payload.id)
   }
+
   return (
-    <form onSubmit={submitCreateMentor}>
+    <Form onSubmit={submitCreateMentor}>
       <AdminViewLayout>
         <AdminGroupLayout title="Общая информация">
-          <Input name="first_name" placeholder="Имя" defaultValue={props.data?.first_name} required />
-          <Input name="last_name" placeholder="Фамилия" defaultValue={props.data?.last_name} required />
+          <Input name={FormInputs.firstName} placeholder="Имя" defaultValue={props.data?.first_name} required />
+          <Input name={FormInputs.lastName} placeholder="Фамилия" defaultValue={props.data?.last_name} required />
 
-          <Input name="profession" placeholder="Профессия" defaultValue={props.data?.profession} required />
-          <Input name="company" placeholder="Компания" defaultValue={props.data?.company} required />
+          <Input name={FormInputs.profession} placeholder="Профессия" defaultValue={props.data?.profession} required />
+          <Input name={FormInputs.company} placeholder="Компания" defaultValue={props.data?.company} required />
         </AdminGroupLayout>
         <AdminGroupLayout title="Оплата">
-          <Input name="price" type="number" placeholder="Оплата за час" defaultValue={props.data?.price} required />
-          <select name="price_currency" defaultValue={props.data?.price_currency} required>
+          <Input name={FormInputs.price} type="number" placeholder="Оплата за час" defaultValue={props.data?.price} required masks={[
+            { title: "Рубль", value: "RUB" },
+            { title: "Доллар", value: "USD" }
+          ]} masksName={FormInputs.priceCurrency} />
+          {/* <select name="price_currency" defaultValue={props.data?.price_currency} required>
             <option value="RUB">Рубль</option>
             <option value="USD">Доллар</option>
-          </select>
+          </select> */}
         </AdminGroupLayout>
         <AdminGroupLayout title="Тэги">
-          <CheckTree name="tag_set" defaultChecks={props.data?.tags.map(tag => tag.id) || [2, 3]}>
+          <CheckTree name={FormInputs.tags} defaultChecks={props.data?.tags.map(tag => tag.id) || [2, 3]}>
             <Button iconLeft={<Icon name="touch" />} color="white" onClick={() => Modal.open(PopupAdminNewTopic)}>Добавить категорию</Button>
             {topics.list.map(topic => (
               <option title={topic.title} key={topic.id}>
@@ -133,40 +125,40 @@ function AdminMentorNewEdit(props: AdminNewMentorViewProps | AdminEditMentorView
         <AdminGroupLayout title="Местоположение">
           <div>
             <h4 className="heading">Страна</h4>
-            <AdminCountriesSelect defaultValue={props.data?.country.id} />
+            <AdminCountriesSelect name={FormInputs.country} defaultValue={props.data?.country.id} />
           </div>
-          <Input name="city_ru" placeholder="Город на русском" defaultValue={props.data?.info.city_ru} required />
-          <Input name="city_en" placeholder="Город на английском" defaultValue={props.data?.info.city_en} required />
+          <Input name={FormInputs.cityRU} placeholder="Город на русском" defaultValue={props.data?.info.city_ru} required />
+          <Input name={FormInputs.cityEN} placeholder="Город на английском" defaultValue={props.data?.info.city_en} required />
         </AdminGroupLayout>
         <AdminGroupLayout title="Языки">
-          <AdminLangsCheckboxes defaultChecked={props.data?.info.languages.map(lang => lang.id) || [9, 4]} />
+          <AdminLangsCheckboxes name={FormInputs.languages} defaultChecked={props.data?.info.languages.map(lang => lang.id) || [9, 4]} />
         </AdminGroupLayout>
         <AdminGroupLayout title="Аватарка">
-          <EditAvatar image={props.data?.avatar || ""} name="avatar" />
+          <EditAvatar image={props.data?.avatar || ""} name={FormInputs.avatar} />
         </AdminGroupLayout>
         <AdminGroupLayout title="Наполнение профиля">
           <div className="input">
-            <textarea name="portfolio" placeholder="Портфолио" className="input__input" defaultValue={props.data?.info.portfolio} required />
+            <textarea name={FormInputs.portfolio} placeholder="Портфолио" className="input__input" defaultValue={props.data?.info.portfolio} required />
           </div>
           <div className="input">
-            <textarea name="experience" placeholder="Опыт" className="input__input" defaultValue={props.data?.info.experience} required />
+            <textarea name={FormInputs.experience} placeholder="Опыт" className="input__input" defaultValue={props.data?.info.experience} required />
           </div>
           <div className="input">
-            <textarea name="what_help" placeholder="С чем помогу" className="input__input" defaultValue={props.data?.info.what_help} required />
+            <textarea name={FormInputs.whatHelp} placeholder="С чем помогу" className="input__input" defaultValue={props.data?.info.what_help} required />
           </div>
           <div className="input">
-            <textarea name="resume" placeholder="Резюме" className="input__input" defaultValue={props.data?.info.resume} required />
+            <textarea name={FormInputs.resume} placeholder="Резюме" className="input__input" defaultValue={props.data?.info.resume} required />
           </div>
         </AdminGroupLayout>
         <AdminGroupLayout title="Пакеты">
           <PackagesEdit defaultValues={props.data?.packages} onChange={setPackages} />
         </AdminGroupLayout>
         <AdminGroupLayout title="Доп. Настройки">
-          <Checkbox name="trial_meeting" defaultChecked={!!props.data?.info.trial_meeting}>15 минут бесплатной встречи</Checkbox>
+          <Checkbox name={FormInputs.trialMeeting} defaultChecked={!!props.data?.info.trial_meeting}>15 минут бесплатной встречи</Checkbox>
         </AdminGroupLayout>
         <Button size="big" color="violet" type="submit" pending={pending}>{props.new ? "Добавить ментора" : "Сохранить изменения"}</Button>
       </AdminViewLayout>
-    </form>
+    </Form>
   )
 }
 

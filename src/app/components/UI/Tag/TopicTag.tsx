@@ -9,13 +9,13 @@ import { classWithModifiers } from "utils/common"
 interface TopicTagStringProps {
   noHash?: boolean
   children: string
-  onClick?: MouseEventHandler<HTMLButtonElement>
+  onClick?: MouseEventHandler<HTMLElement>
 }
 
 interface TopicTagSearchTopicProps {
   noHash?: undefined
   children: TagType
-  onClick?: undefined
+  onClick?: MouseEventHandler<HTMLElement>
 }
 
 function TopicTag(props: TopicTagStringProps | TopicTagSearchTopicProps) {
@@ -27,7 +27,7 @@ function TopicTag(props: TopicTagStringProps | TopicTagSearchTopicProps) {
     )
   }
   return (
-    <Link className="topic-tag" to={`/mentors/${props.children.shortcut}/`}>
+    <Link className="topic-tag" to={`/mentors/${props.children.shortcut}/`} onClick={props.onClick}>
       <span className="topic-tag__text">{props.children.title}</span>
     </Link>
   )
