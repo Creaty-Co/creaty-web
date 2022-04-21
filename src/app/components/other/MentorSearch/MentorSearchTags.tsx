@@ -3,6 +3,7 @@ import "./MentorSearch.scss"
 import TopicTag from "app/components/UI/Tag/TopicTag"
 import { TagType } from "interfaces/types"
 import { useEffect, useRef, useState } from "react"
+import { minFill } from "utils/common"
 
 interface MentorSearchTagsProps {
   tags: TagType[]
@@ -24,7 +25,7 @@ function MentorSearchTags(props: MentorSearchTagsProps) {
   return (
     <div className="mentor-search__tags" style={{ "--inner-width": width }}>
       <div className="mentor-search__inner-tags" ref={innerRef}>
-        {[...props.tags, ...props.tags].map((tag, index) => (
+        {minFill(props.tags, 20).map((tag, index) => (
           <TopicTag key={index}>{tag}</TopicTag>
         ))}
       </div>

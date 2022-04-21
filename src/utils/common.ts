@@ -113,3 +113,19 @@ export function stopPropagation(callback?: Function | null) {
     callback?.()
   }
 }
+
+/**
+ * Propagates the array, creating minimum fill level of the array by duplicating its items
+ * @returns new array
+ */
+export function minFill<T>(array: T[], minLevel?: number): T[] {
+  if (minLevel == null || array.length >= minLevel) {
+    return array
+  }
+
+  const newArray: T[] = []
+  while (newArray.length < minLevel) {
+    newArray.push(...array)
+  }
+  return newArray
+}
