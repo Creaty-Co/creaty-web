@@ -1,12 +1,13 @@
-import { deletePagePersonalMentor, deletePagesMainMentor, getPagePersonal, patchPagePersonal, patchPagePersonalMentor, patchPagesMain, patchPagesMainMentor } from "api/actions/pages"
+import { deletePagePersonalMentor, deletePagesMainMentor, patchPagePersonal, patchPagePersonalMentor, patchPagesMain, patchPagesMainMentor } from "api/actions/pages"
 import ClientAPI from "api/client"
 import Button from "app/components/common/Button/Button"
+import Form, { FormState } from "app/components/UI/Form/Form"
 import { MentorType, TagType } from "interfaces/types"
 import { useModal } from "modules/modal/hook"
-import { ChangeEvent, FormEvent } from "react"
-import { useSelector } from "react-redux"
+import { FormEvent } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { toast } from "react-toastify"
-import { getCheckedValues } from "utils/common"
+import { formsFetch } from "redux/reducers/forms"
 
 import PopupLayout from "../PopupLayout"
 
@@ -18,33 +19,21 @@ interface PopupAdminPersonalTagsProps {
 
 export function PopupAdminPersonalTags(props: PopupAdminPersonalTagsProps) {
   const { close } = useModal()
+  const dispatch = useDispatch()
   const topics = useSelector(state => state.topics)
-  async function submitTags(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-
-    interface FormElements extends HTMLFormControlsCollection {
-      tags: RadioNodeList & HTMLInputElement[]
-    }
-
-    const target = event.currentTarget
-    const elements = target.elements as FormElements
-
-    const APIPayload = {
-      tags: getCheckedValues(elements.tags).map(Number)
-    }
+  async function onSubmitTags(_event: FormEvent<HTMLFormElement>, state: FormState<{ tags: number[] }>) {
+    const APIPayload = state.values
     const APIAction = props.shortcut ? patchPagePersonal(props.shortcut, APIPayload) : patchPagesMain(APIPayload)
 
-    ClientAPI
-      .query(APIAction)
-      .then(({ error }) => {
-        if (error) return
-        close()
-        window.location.reload()
-      })
+    const { error } = await ClientAPI.query(APIAction)
+    if (error) return
+
+    close()
+    dispatch(formsFetch)
   }
   return (
     <PopupLayout title="Изменить тэги" width="35em">
-      <form onSubmit={submitTags} style={{ display: "grid", rowGap: "1em", color: "black" }}>
+      <Form onSubmit={onSubmitTags} style={{ display: "grid", rowGap: "1em", color: "black" }}>
         Тэги
         {topics.tags.map(tag => (
           <label key={tag.id}>
@@ -53,7 +42,7 @@ export function PopupAdminPersonalTags(props: PopupAdminPersonalTagsProps) {
           </label>
         ))}
         <Button color="dark" type="submit">Сохранить</Button>
-      </form>
+      </Form>
     </PopupLayout>
   )
 }
@@ -65,18 +54,16 @@ interface PopupAdminPersonalMentorsProps {
 
 export function PopupAdminPersonalMentors(props: PopupAdminPersonalMentorsProps) {
   const topics = useSelector(state => state.topics)
-  function addOrRemoveMentor(isAdding: boolean, shortcut: string) {
+  async function addOrRemoveMentor(isAdding: boolean, shortcut: string) {
     const APIAction =
       isAdding
         ? shortcut === "main" ? patchPagesMainMentor(props.mentor.id) : patchPagePersonalMentor(shortcut, props.mentor.id)
         : shortcut === "main" ? deletePagesMainMentor(props.mentor.id) : deletePagePersonalMentor(shortcut, props.mentor.id)
 
-    return ClientAPI
-      .query(APIAction)
-      .then(({ error }) => {
-        if (error) return
-        toast.info((isAdding ? "Ментор был добавлен в " : "Ментор был убран из ") + shortcut)
-      })
+    const { error } = await ClientAPI.query(APIAction)
+    if (error) return
+
+    toast.info((isAdding ? "Ментор был добавлен в " : "Ментор был убран из ") + shortcut)
   }
   return (
     <PopupLayout title="Изменить менторов" width="35em">

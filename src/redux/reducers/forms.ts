@@ -3,8 +3,7 @@ import ClientAPI from "api/client"
 import { ValuesOf } from "interfaces/common"
 import { MapActions } from "interfaces/reducer"
 import { FormType } from "interfaces/types"
-import Localization from "modules/localization/controller"
-import store from "redux/store"
+import { Dispatch } from "redux"
 
 
 const initialState: Partial<Record<FormType["type"], FormType>> = {}
@@ -26,20 +25,16 @@ export default (state = initialState, action: Action): typeof initialState => {
   }
 }
 
+/* Plain Redux Actions */
 
-export const updateForms = (payload: Partial<typeof initialState>) => ({
+export const formsUpdate = (payload: Partial<typeof initialState>) => ({
   type: "FORMS_UPDATE",
   payload
 })
 
+/* Thunk Actions */
 
-
-
-
-
-
-/// Request
-async function requestForms() {
+export async function formsFetch(dispatch: Dispatch) {
   const { error, payload } = await ClientAPI.query(getForms)
 
   if (error) throw new Error("formsReducerError: unexpected error")
@@ -47,10 +42,5 @@ async function requestForms() {
 
   const result = payload.results.reduce<typeof initialState>((result, next) => ({ ...result, [next.type]: next }), {})
 
-  store.dispatch({
-    type: "FORMS_UPDATE",
-    payload: result
-  })
+  dispatch(formsUpdate(result))
 }
-window.addEventListener("load", requestForms)
-Localization.onTransition(() => requestForms())
