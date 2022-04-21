@@ -30,6 +30,12 @@ export const ClientAPI = createClient({
   responseInterceptors: [responseInterceptor],
   cacheProvider,
   fetch: (input, init) => {
+    // ENV check
+    if (!process.env.REACT_APP_API_HOST) {
+      const message = ".env variable `REACT_APP_API_HOST` is empty, the request will be canceled."
+      alert(message)
+      throw new Error(message)
+    }
     const response = fetch(input, init)
     // Error displaying
     if (process.env.NODE_ENV === "development") {

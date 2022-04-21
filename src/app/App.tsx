@@ -45,7 +45,14 @@ import MentorsViewTopicOrTag from "./views/mentors/MentorsView[topicOrTag]"
 import UserUserId from "./views/user/User[userId]"
 
 
-ReactGA.initialize(process.env.REACT_APP_API_GA)
+if (process.env.REACT_APP_API_GA) {
+  ReactGA.initialize(process.env.REACT_APP_API_GA)
+} else {
+  const message = ".env variable `REACT_APP_API_GA` is empty, GA will not be initialized."
+  alert(message)
+  console.warn(message)
+}
+
 
 function App() {
   return (

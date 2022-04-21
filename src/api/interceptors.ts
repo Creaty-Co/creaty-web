@@ -11,7 +11,7 @@ import { Action, APIResponseError } from "./client"
 type Response<T = unknown> = QueryResponse<T & APIResponseError>
 
 export function endpointTransform(action: Action) {
-  const endpoint = process.env.REACT_APP_BASE_URL + action.endpoint + "/"
+  const endpoint = process.env.REACT_APP_API_HOST + action.endpoint + "/"
   const query = createQuery(action.params)
 
   return endpoint + (query && "?" + query)
