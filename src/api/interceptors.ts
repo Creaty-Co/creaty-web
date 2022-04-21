@@ -16,7 +16,8 @@ export function endpointTransform(action: Action) {
 
   const url = new URL(API_URL)
 
-  const endpoint = `https://${url.host}/${action.endpoint}/`
+  const actionEndpoint = action.endpoint[0] === "/" ? action.endpoint.slice(1) : action.endpoint
+  const endpoint = `https://${url.host}/${actionEndpoint}/`
   const query = createQuery(action.params)
 
   return endpoint + (query && "?" + query)
