@@ -21,4 +21,4 @@ COPY ./.env ./.env
 COPY ./.env.production ./.env.production
 
 # Make a build and change mode to 777
-RUN npm run build && chmod -R 777 ./build/
+RUN npm run build
