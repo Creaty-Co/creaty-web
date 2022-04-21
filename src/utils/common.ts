@@ -119,6 +119,7 @@ export function stopPropagation(callback?: Function | null) {
  * @returns new array
  */
 export function minFill<T>(array: T[], minLevel?: number): T[] {
+  if (array.length === 0) return array
   if (minLevel == null || array.length >= minLevel) {
     return array
   }
