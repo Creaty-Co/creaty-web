@@ -3,13 +3,20 @@ import { useEffect } from "react"
 import ReactGA from "react-ga4"
 import { useDispatch } from "react-redux"
 import { formsFetch } from "redux/reducers/forms"
+import { topicsFetch } from "redux/reducers/topics"
 
 function AppInit() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    window.addEventListener("load", () => dispatch(formsFetch))
-    Localization.onTransition(() => dispatch(formsFetch))
+    window.addEventListener("load", () => {
+      dispatch(formsFetch)
+      dispatch(topicsFetch)
+    })
+    Localization.onTransition(() => {
+      dispatch(formsFetch)
+      dispatch(topicsFetch)
+    })
   }, [])
 
   return null
