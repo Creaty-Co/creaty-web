@@ -1,11 +1,13 @@
 import { deleteTags, patchTags, postTags } from "api/actions/tags"
 import ClientAPI from "api/client"
+import Form, { FormState } from "app/components/UI/Form/Form"
 import AdminInputsLayout from "app/layouts/AdminInputsLayout"
-import { FormElements } from "interfaces/common"
+import { ValuesOf } from "interfaces/common"
 import { TagType } from "interfaces/types"
 import { useModal } from "modules/modal/hook"
 import { FormEvent, useState } from "react"
-import { requestTags, requestTopics } from "redux/reducers/topics"
+import { useDispatch } from "react-redux"
+import { topicsFetch } from "redux/reducers/topics"
 
 import Button from "../../common/Button/Button"
 import Input from "../../UI/Input/Input"
@@ -18,38 +20,36 @@ interface PopupAdminNewTagProps {
 
 export function PopupAdminNewTag(props: PopupAdminNewTagProps) {
   const { close } = useModal()
+  const dispatch = useDispatch()
   const [pending, setPending] = useState(false)
-  async function submitTag(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
 
-    const target = event.currentTarget
-    const elements = target.elements as FormElements<"title_ru" | "title_en" | "shortcut" | "icon">
+  enum FormInputs {
+    titleRU = "title_ru",
+    titleEN = "title_en",
+    shortcut = "shortcut"
+  }
+  type FormValues = Record<ValuesOf<typeof FormInputs>, string>
 
+  async function onSubmitTag(_event: FormEvent<HTMLFormElement>, state: FormState<FormValues>) {
     setPending(true)
-    const { error } = await ClientAPI.query(postTags(props.topicId, {
-      shortcut: elements.shortcut.value,
-      title_ru: elements.title_ru.value,
-      title_en: elements.title_en.value
-    }))
+    const { error } = await ClientAPI.query(postTags(props.topicId, state.values))
+    setPending(false)
     if (error) return
 
-    await requestTopics()
-    await requestTags()
-
-    setPending(false)
+    dispatch(topicsFetch)
     close()
   }
   return (
     <PopupLayout title="Добавить тэг">
-      <form onSubmit={submitTag}>
+      <Form onSubmit={onSubmitTag}>
         <AdminInputsLayout>
-          <Input name="title_ru" placeholder="Название на русском" />
-          <Input name="title_en" placeholder="Название на английском" />
-          <Input name="shortcut" placeholder="Ярлык" />
+          <Input name={FormInputs.titleRU} placeholder="Название на русском" />
+          <Input name={FormInputs.titleEN} placeholder="Название на английском" />
+          <Input name={FormInputs.shortcut} placeholder="Ярлык" />
         </AdminInputsLayout>
         <br />
         <Button color="dark" type="submit" pending={pending}>Добавить</Button>
-      </form>
+      </Form>
     </PopupLayout>
   )
 }
@@ -61,46 +61,42 @@ interface PopupAdminEditTagProps {
 
 export function PopupAdminEditTag(props: PopupAdminEditTagProps) {
   const { close } = useModal()
+  const dispatch = useDispatch()
   const [pending, setPending] = useState(false)
+
+  enum FormInputs {
+    title = "title",
+    shortcut = "shortcut"
+  }
+  type FormValues = Record<ValuesOf<typeof FormInputs>, string>
+
+  async function onSubmitTag(_event: FormEvent<HTMLFormElement>, state: FormState<FormValues>) {
+    setPending(true)
+    const { error } = await ClientAPI.query(patchTags(props.tag.id, state.values))
+    setPending(false)
+    if (error) return
+
+    dispatch(topicsFetch)
+    close()
+  }
   async function deleteTag() {
     const { error } = await ClientAPI.query(deleteTags(props.tag.id))
     if (error) return
 
-    await requestTopics()
-    await requestTags()
-
-    close()
-  }
-  async function submitTag(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-
-    const target = event.currentTarget
-    const elements = target.elements as FormElements<"title" | "shortcut" | "icon">
-
-    setPending(true)
-    const { error } = await ClientAPI.query(patchTags(props.tag.id, {
-      shortcut: elements.shortcut.value,
-      title: elements.title.value
-    }))
-    if (error) return
-
-    await requestTopics()
-    await requestTags()
-
-    setPending(false)
+    dispatch(topicsFetch)
     close()
   }
   return (
     <PopupLayout title="Редактироть тэг">
-      <form onSubmit={submitTag}>
+      <Form onSubmit={onSubmitTag}>
         <AdminInputsLayout>
-          <Input name="title" placeholder="Название на выбраном языке" defaultValue={props.tag?.title} key={props.tag?.title} />
-          <Input name="shortcut" placeholder="Ярлык" defaultValue={props.tag?.shortcut} key={props.tag.shortcut} />
+          <Input name={FormInputs.title} placeholder="Название на выбраном языке" defaultValue={props.tag?.title} key={props.tag?.title} />
+          <Input name={FormInputs.shortcut} placeholder="Ярлык" defaultValue={props.tag?.shortcut} key={props.tag.shortcut} />
         </AdminInputsLayout>
         <br />
         <Button color="dark" type="submit" pending={pending}>Сохранить</Button>
         <Button color="violet" await onClick={deleteTag}>Удалить</Button>
-      </form>
+      </Form>
     </PopupLayout>
   )
 }

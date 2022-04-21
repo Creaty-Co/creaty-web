@@ -1,12 +1,13 @@
 import { deleteTagsTopic, patchTagsTopics, postTagsTopics } from "api/actions/tags"
 import ClientAPI from "api/client"
+import Form, { FormState } from "app/components/UI/Form/Form"
 import AdminInputsLayout from "app/layouts/AdminInputsLayout"
-import { FormElements } from "interfaces/common"
+import { URLDataBase64, ValuesOf } from "interfaces/common"
 import { TopicType } from "interfaces/types"
 import { useModal } from "modules/modal/hook"
 import { FormEvent, useState } from "react"
-import { requestTags, requestTopics } from "redux/reducers/topics"
-import { FileToURLDataBase64 } from "utils/common"
+import { useDispatch } from "react-redux"
+import { topicsFetch } from "redux/reducers/topics"
 
 import Button from "../../common/Button/Button"
 import Input from "../../UI/Input/Input"
@@ -15,44 +16,42 @@ import PopupLayout from "../PopupLayout"
 
 export function PopupAdminNewTopic() {
   const { close } = useModal()
+  const dispatch = useDispatch()
   const [pending, setPending] = useState(false)
-  async function submitTopic(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
 
-    const target = event.currentTarget
-    const elements = target.elements as FormElements<"title_ru" | "title_en" | "shortcut" | "icon">
+  enum FormInputs {
+    titleRU = "title_ru",
+    titleEN = "title_en",
+    shortcut = "shortcut",
+    icon = "icon"
+  }
+  type FormValues = Record<ValuesOf<typeof FormInputs>, string>
 
+  async function onSubmitTopic(_event: FormEvent<HTMLFormElement>, state: FormState<FormValues>) {
     setPending(true)
-    const { error } = await ClientAPI.query(postTagsTopics({
-      shortcut: elements.shortcut.value,
-      title_ru: elements.title_ru.value,
-      title_en: elements.title_en.value,
-      icon: elements.icon.files?.[0] ? await FileToURLDataBase64(elements.icon.files?.[0]) : ""
-    }))
+    const { error } = await ClientAPI.query(postTagsTopics(state.values))
+    setPending(false)
     if (error) return
 
-    await requestTopics()
-    await requestTags()
-
-    setPending(false)
+    dispatch(topicsFetch)
     close()
   }
 
   return (
     <PopupLayout title="Добавить категорию">
-      <form onSubmit={submitTopic}>
+      <Form onSubmit={onSubmitTopic}>
         <AdminInputsLayout>
-          <Input className="admin-header-input-markers" name="title_ru" placeholder="Название на русском" />
-          <Input className="admin-header-input-markers" name="title_en" placeholder="Название на английском" />
-          <Input name="shortcut" placeholder="Ярлык" />
+          <Input className="admin-header-input-markers" name={FormInputs.titleRU} placeholder="Название на русском" />
+          <Input className="admin-header-input-markers" name={FormInputs.titleEN} placeholder="Название на английском" />
+          <Input name={FormInputs.shortcut} placeholder="Ярлык" />
           <label>
             Иконка в .svg
-            <Input name="icon" type="file" />
+            <Input name={FormInputs.icon} type="file" />
           </label>
         </AdminInputsLayout>
         <br />
         <Button color="dark" type="submit" pending={pending}>Добавить</Button>
-      </form>
+      </Form>
     </PopupLayout>
   )
 }
@@ -64,24 +63,23 @@ interface PopupAdminEditTopicProps {
 
 export function PopupAdminEditTopic(props: PopupAdminEditTopicProps) {
   const { close } = useModal()
+  const dispatch = useDispatch()
   const [pending, setPending] = useState(false)
-  async function submitTopic(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
 
-    const target = event.currentTarget
-    const elements = target.elements as FormElements<"title" | "shortcut" | "icon">
+  enum FormInputs {
+    title = "title",
+    shortcut = "shortcut",
+    icon = "icon"
+  }
+  type FormValues = Record<ValuesOf<typeof FormInputs>, string> & { icon?: URLDataBase64 }
 
+  async function onSubmitTopic(_event: FormEvent<HTMLFormElement>, state: FormState<FormValues>) {
     setPending(true)
-    const { error } = await ClientAPI.query(patchTagsTopics(props.topic.id, {
-      shortcut: elements.shortcut.value,
-      title: elements.title.value,
-      icon: elements.icon.files?.[0] ? await FileToURLDataBase64(elements.icon.files?.[0]) : undefined
-    }))
-    if (error) return
-    await requestTopics()
-    await requestTags()
-
+    const { error } = await ClientAPI.query(patchTagsTopics(props.topic.id, state.values))
     setPending(false)
+    if (error) return
+
+    dispatch(topicsFetch)
     close()
   }
   async function removeTopic() {
@@ -90,32 +88,27 @@ export function PopupAdminEditTopic(props: PopupAdminEditTopicProps) {
       if (!canDelete) return
     }
 
-    ClientAPI
-      .query(deleteTagsTopic(props.topic.id))
-      .then(({ error }) => {
-        if (error) return
-        (async () => {
-          await requestTopics()
-          await requestTags()
-          close()
-        })
-      })
+    const { error } = await ClientAPI.query(deleteTagsTopic(props.topic.id))
+    if (error) return
+
+    dispatch(topicsFetch)
+    close()
   }
   return (
     <PopupLayout title="Редактировать категорию">
-      <form onSubmit={submitTopic}>
+      <Form onSubmit={onSubmitTopic}>
         <AdminInputsLayout>
-          <Input className="admin-header-input-markers" name="title" placeholder="Название на выбраном языке" defaultValue={props.topic.title} key={props.topic.title} />
-          <Input name="shortcut" placeholder="Ярлык" defaultValue={props.topic.shortcut} key={props.topic.shortcut} />
+          <Input className="admin-header-input-markers" name={FormInputs.title} placeholder="Название на выбраном языке" defaultValue={props.topic.title} key={props.topic.title} />
+          <Input name={FormInputs.shortcut} placeholder="Ярлык" defaultValue={props.topic.shortcut} key={props.topic.shortcut} />
           <label>
             Иконка в .svg
-            <Input name="icon" type="file" />
+            <Input name={FormInputs.icon} type="file" />
           </label>
         </AdminInputsLayout>
         <br />
         <Button color="dark" type="submit" pending={pending}>Сохранить</Button>
         <Button color="violet" await onClick={removeTopic}>Удалить</Button>
-      </form>
+      </Form>
     </PopupLayout>
   )
 }

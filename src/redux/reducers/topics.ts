@@ -3,8 +3,7 @@ import ClientAPI from "api/client"
 import { ValuesOf } from "interfaces/common"
 import { MapActions } from "interfaces/reducer"
 import { TagType, TopicType } from "interfaces/types"
-import Localization from "modules/localization/controller"
-import store from "redux/store"
+import { Dispatch } from "redux"
 
 
 const initialState: {
@@ -32,45 +31,20 @@ export default (state = initialState, action: Action): typeof initialState => {
   }
 }
 
+/* Plain Redux Actions */
 
-export const updateTopics = (payload: Partial<typeof initialState>) => ({
+export const topicsUpdate = (payload: Partial<typeof initialState>) => ({
   type: "TOPICS_UPDATE",
   payload
 })
 
+/* Thunk Actions */
 
-
-
-
-
-
-
-/// Request
-export async function requestTopics() {
+export async function topicsFetch(dispatch: Dispatch) {
   const { error, payload } = await ClientAPI.query(getTagsTopics(1, 25), true)
 
   if (error) throw new Error("unexpected error")
   if (!payload) throw new Error("no payload")
 
-  store.dispatch({
-    type: "TOPICS_UPDATE",
-    payload: { list: payload.results }
-  })
+  dispatch(topicsUpdate({ list: payload.results, tags: payload.results.flatMap(topic => topic.tags) }))
 }
-export async function requestTags() {
-  const { error, payload } = await ClientAPI.query(getTags(1, 1000), true)
-
-  if (error) throw new Error("unexpected error")
-  if (!payload) throw new Error("no payload")
-
-  store.dispatch({
-    type: "TOPICS_UPDATE",
-    payload: { tags: payload.results }
-  })
-}
-window.addEventListener("load", requestTopics)
-window.addEventListener("load", requestTags)
-Localization.onTransition(() => {
-  requestTopics()
-  requestTags()
-})
