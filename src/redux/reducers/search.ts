@@ -39,17 +39,10 @@ export const updateSearch = (payload: Partial<SearchState>) => ({
 
 export const updateSearchTopic = (topic: Partial<SearchState["topic"]>) => ({
   type: "SEARCH_UPDATE",
-  payload: {
-    topic,
-    tag: undefined,
-    focused: true
-  }
+  payload: { topic, tag: undefined }
 })
 
 export const updateSearchTag = (tag: Partial<SearchState["topic"]>) => ({
   type: "SEARCH_UPDATE",
-  payload: {
-    tag,
-    focused: false
-  }
+  payload: { tag }
 })

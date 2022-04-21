@@ -4,9 +4,8 @@ import Button from "app/components/common/Button/Button"
 import Icon from "app/components/common/Icon/Icon"
 import TopicTag from "app/components/UI/Tag/TopicTag"
 import useClickAway from "hooks/useClickAway"
-import { TagType, TopicType } from "interfaces/types"
 import useLocalization from "modules/localization/hook"
-import { useRef, useState } from "react"
+import { MouseEvent, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { updateSearch } from "redux/reducers/search"
@@ -101,16 +100,19 @@ function MentorSearchListDynamic(props: MentorSearchListProps & { value: string 
 
 
 function MentorSearchListStatic() {
+  const dispatch = useDispatch()
+
   const ll = useLocalization(ll => ll.views.home.mentorSearch)
   const topics = useSelector(state => state.topics)
   const search = useSelector(state => state.search)
 
+  function collapseSearchList(event: MouseEvent) {
+    // stop propagation of `MentorSearch Blur` callback
+    event.stopPropagation()
+    dispatch(updateSearch({ focused: false }))
+  }
+
   const [cursorTopic, setCursorTopic] = useState(search.topic)
-
-  const dispatch = useDispatch()
-  const updateTopic = (topic: TopicType) => dispatch(updateSearch({ topic, tag: undefined }))
-  const updateTag = (tag: TagType) => dispatch(updateSearch({ tag }))
-
   const topic = cursorTopic || search.topic
   return (
     <div className={classWithModifiers("mentor-search-list", search.focused && "visible")} onPointerLeave={() => setCursorTopic(search.topic)}>
@@ -119,7 +121,6 @@ function MentorSearchListStatic() {
           <Link
             className={classWithModifiers("mentor-search-list__item", !search.tag && topic.id === search.topic?.id && "active")}
             to={"/mentors/" + topic.shortcut}
-            onClick={() => updateTopic(topic)}
             onPointerEnter={() => setCursorTopic(topic)}
             key={topic.id}
           >
@@ -130,9 +131,7 @@ function MentorSearchListStatic() {
       </div>
       <div className="mentor-search-list__tags">
         {topic?.tags.map(tag => (
-          <Link className="topic-tag" to={`/mentors/${tag.shortcut}/`} onClick={() => updateTag(tag)} key={tag.id}>
-            <span className="topic-tag__text">{tag.title}</span>
-          </Link>
+          <TopicTag onClick={collapseSearchList} key={tag.id}>{tag}</TopicTag>
         ))}
         {topic == null && (
           <div className="mentor-search-list-empty">
