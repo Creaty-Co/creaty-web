@@ -18,7 +18,6 @@ COPY ./tsconfig.json ./tsconfig.json
 
 # Copy .env files
 COPY ./.env ./.env
-COPY ./.env.production ./.env.production
 
 # Make a build and change mode to 777
 RUN npm run build
