@@ -22,6 +22,7 @@ import { ToastContainer } from "react-toastify"
 import store from "redux/store"
 import { classWithModifiers } from "utils/common"
 
+import AppInit from "./AppInit"
 import AdminEditableValue from "./components/admin/AdminEditableValue"
 import AdminTopbar from "./components/admin/AdminTopbar"
 import Button from "./components/common/Button/Button"
@@ -44,16 +45,6 @@ import MentorsView from "./views/mentors/MentorsView"
 import MentorsViewTopicOrTag from "./views/mentors/MentorsView[topicOrTag]"
 import UserUserId from "./views/user/User[userId]"
 
-
-if (process.env.REACT_APP_API_GA) {
-  ReactGA.initialize(process.env.REACT_APP_API_GA)
-} else {
-  const message = ".env variable `REACT_APP_API_GA` is empty, GA will not be initialized."
-  alert(message)
-  console.warn(message)
-}
-
-
 function App() {
   return (
     <StrictMode>
@@ -62,6 +53,8 @@ function App() {
           <ClientContextProvider client={ClientAPI}>
             <Suspense fallback="Loading...">
               <ErrorBoundary fallback="Error">
+                <AppInit />
+
                 <Header />
                 <Main />
                 <Footer />
