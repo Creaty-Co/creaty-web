@@ -9,3 +9,7 @@ export type ValuesOf<T> = T[keyof T]
 
 
 export type FormElements<U extends string> = HTMLFormControlsCollection & Record<U, HTMLInputElement>
+
+
+// https://stackoverflow.com/questions/50158272/what-is-the-type-of-an-enum-in-typescript
+export type Enum<E> = Record<keyof E, number | string> & { [k: number]: string }

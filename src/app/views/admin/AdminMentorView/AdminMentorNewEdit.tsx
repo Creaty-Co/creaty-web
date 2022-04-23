@@ -7,16 +7,15 @@ import { PopupAdminNewTopic } from "app/components/popups/PopupAdmin/PopupAdminT
 import Checkbox from "app/components/UI/Checkbox/Checkbox"
 import CheckTree from "app/components/UI/CheckTree/CheckTree"
 import EditAvatar from "app/components/UI/EditAvatar/EditAvatar"
-import Form, { FormState } from "app/components/UI/Form/Form"
+import Form, { FormStateEnum } from "app/components/UI/Form/Form"
 import Input from "app/components/UI/Input/Input"
 import PackagesEdit from "app/components/UI/PackagesEdit/PackagesEdit"
 import AdminGroupLayout from "app/layouts/AdminGroupLayout/AdminGroupLayout"
 import AdminViewLayout from "app/layouts/AdminViewLayout/AdminViewLayout"
-import { ValuesOf } from "interfaces/common"
 import { MentorDetailedType, MentorPatchType } from "interfaces/types"
 import _ from "lodash"
 import { Modal } from "modules/modal/controller"
-import { FormEvent, useState } from "react"
+import { useState } from "react"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router"
 
@@ -47,8 +46,7 @@ enum FormInputs {
   tags = "tag_set"
 }
 
-type FormKeys = ValuesOf<typeof FormInputs>
-type FormValues = Pick<Omit<MentorPatchType, "info" | "packages"> & MentorPatchType["info"], FormKeys>
+type FormValues = Omit<MentorPatchType, "info" | "packages"> & MentorPatchType["info"]
 
 const formInfoKeys = ["languages", "portfolio", "experience", "resume", "trial_meeting", "what_help", "city_ru", "city_en"] as const
 
@@ -70,7 +68,7 @@ function AdminMentorNewEdit(props: AdminNewMentorViewProps | AdminEditMentorView
   const topics = useSelector(state => state.topics)
   const [packages, setPackages] = useState<MentorPatchType["packages"]>(props.data?.packages || [])
 
-  async function submitCreateMentor(_event: FormEvent<HTMLFormElement>, state: FormState<FormValues>) {
+  async function submitCreateMentor(state: FormStateEnum<typeof FormInputs, FormValues>) {
     const APIPayload: MentorPatchType = {
       info: {
         ..._.pick(state.values, formInfoKeys) as MentorPatchType["info"],

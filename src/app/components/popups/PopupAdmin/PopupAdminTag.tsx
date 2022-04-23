@@ -5,7 +5,7 @@ import AdminInputsLayout from "app/layouts/AdminInputsLayout"
 import { ValuesOf } from "interfaces/common"
 import { TagType } from "interfaces/types"
 import { useModal } from "modules/modal/hook"
-import { FormEvent, useState } from "react"
+import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { topicsFetch } from "redux/reducers/topics"
 
@@ -30,7 +30,7 @@ export function PopupAdminNewTag(props: PopupAdminNewTagProps) {
   }
   type FormValues = Record<ValuesOf<typeof FormInputs>, string>
 
-  async function onSubmitTag(_event: FormEvent<HTMLFormElement>, state: FormState<FormValues>) {
+  async function onSubmitTag(state: FormState<FormValues>) {
     setPending(true)
     const { error } = await ClientAPI.query(postTags(props.topicId, state.values))
     setPending(false)
@@ -70,7 +70,7 @@ export function PopupAdminEditTag(props: PopupAdminEditTagProps) {
   }
   type FormValues = Record<ValuesOf<typeof FormInputs>, string>
 
-  async function onSubmitTag(_event: FormEvent<HTMLFormElement>, state: FormState<FormValues>) {
+  async function onSubmitTag(state: FormState<FormValues>) {
     setPending(true)
     const { error } = await ClientAPI.query(patchTags(props.tag.id, state.values))
     setPending(false)

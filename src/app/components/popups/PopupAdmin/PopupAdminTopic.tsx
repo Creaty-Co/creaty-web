@@ -5,7 +5,7 @@ import AdminInputsLayout from "app/layouts/AdminInputsLayout"
 import { URLDataBase64, ValuesOf } from "interfaces/common"
 import { TopicType } from "interfaces/types"
 import { useModal } from "modules/modal/hook"
-import { FormEvent, useState } from "react"
+import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { topicsFetch } from "redux/reducers/topics"
 
@@ -27,7 +27,7 @@ export function PopupAdminNewTopic() {
   }
   type FormValues = Record<ValuesOf<typeof FormInputs>, string>
 
-  async function onSubmitTopic(_event: FormEvent<HTMLFormElement>, state: FormState<FormValues>) {
+  async function onSubmitTopic(state: FormState<FormValues>) {
     setPending(true)
     const { error } = await ClientAPI.query(postTagsTopics(state.values))
     setPending(false)
@@ -73,7 +73,7 @@ export function PopupAdminEditTopic(props: PopupAdminEditTopicProps) {
   }
   type FormValues = Record<ValuesOf<typeof FormInputs>, string> & { icon?: URLDataBase64 }
 
-  async function onSubmitTopic(_event: FormEvent<HTMLFormElement>, state: FormState<FormValues>) {
+  async function onSubmitTopic(state: FormState<FormValues>) {
     setPending(true)
     const { error } = await ClientAPI.query(patchTagsTopics(props.topic.id, state.values))
     setPending(false)

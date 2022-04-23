@@ -1,14 +1,21 @@
+import { Enum, ValuesOf } from "interfaces/common"
 import { DetailedHTMLProps, FormEvent, FormHTMLAttributes } from "react"
 import { FileToURLDataBase64 } from "utils/common"
 
-type FormValues = Record<string, string | string[] | number | number[] | boolean>
+type FormValue = string | string[] | number | number[] | boolean | null | undefined
+type FormValues = Record<string, FormValue>
+
 export interface FormState<V = FormValues> {
+  keys: keyof V[]
+  values: V
+}
+export interface FormStateEnum<E extends Enum<E>, V extends Record<ValuesOf<E>, FormValue>> {
   keys: keyof V[]
   values: V
 }
 
 interface FormProps<V> extends Omit<DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>, "onSubmit"> {
-  onSubmit?: (event: FormEvent<HTMLFormElement>, state: FormState<V>) => void
+  onSubmit?: (state: FormState<V>, event: FormEvent<HTMLFormElement>) => void
 }
 
 function Form<V>(props: FormProps<V>) {
@@ -17,7 +24,7 @@ function Form<V>(props: FormProps<V>) {
 
     const formState = await getFormState(event.currentTarget.elements) as unknown as FormState<V>
 
-    props.onSubmit?.(event, formState)
+    props.onSubmit?.(formState, event)
   }
   return (
     <form {...props} onSubmit={onSubmit} />

@@ -4,7 +4,6 @@ import Button from "app/components/common/Button/Button"
 import Form, { FormState } from "app/components/UI/Form/Form"
 import { MentorType, TagType } from "interfaces/types"
 import { useModal } from "modules/modal/hook"
-import { FormEvent } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { toast } from "react-toastify"
 import { formsFetch } from "redux/reducers/forms"
@@ -21,7 +20,7 @@ export function PopupAdminPersonalTags(props: PopupAdminPersonalTagsProps) {
   const { close } = useModal()
   const dispatch = useDispatch()
   const topics = useSelector(state => state.topics)
-  async function onSubmitTags(_event: FormEvent<HTMLFormElement>, state: FormState<{ tags: number[] }>) {
+  async function onSubmitTags(state: FormState<{ tags: number[] }>) {
     const APIPayload = state.values
     const APIAction = props.shortcut ? patchPagePersonal(props.shortcut, APIPayload) : patchPagesMain(APIPayload)
 
