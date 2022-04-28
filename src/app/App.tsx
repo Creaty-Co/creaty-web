@@ -91,9 +91,9 @@ function Header() {
         <div className={classWithModifiers("topbar__right", expanded && "expanded")}>
           <div className="topbar-menu">
             <ButtonLink to="/mentors">{ll.menu.mentors}</ButtonLink>
-            <Button onClick={() => Modal.open(PopupForm, { type: "become_mentor" })}>{ll.menu.becomeMentor}</Button>
+            <Button onClick={() => Modal.open(PopupForm, { type: "become_mentor", weak: true })}>{ll.menu.becomeMentor}</Button>
           </div>
-          <Button style="outline" size="small" color="green" className="topbar-menu__button" onClick={() => Modal.open(PopupForm, { type: "choose_mentor" })}>{ll.findMentor}</Button>
+          <Button style="outline" size="small" color="green" className="topbar-menu__button" onClick={() => Modal.open(PopupForm, { type: "choose_mentor", weak: true })}>{ll.findMentor}</Button>
           <LangSelector />
         </div>
       </div>
@@ -168,8 +168,8 @@ function Footer() {
             <div className="footer-links__group">
               <div className="footer-links__title">{ll.linkGroups.service}</div>
               <Link className="footer-links__link" to="/mentors">{ll.links.mentors}</Link>
-              <button className="footer-links__link" type="button" onClick={() => Modal.open(PopupForm, { type: "become_mentor" })}>{ll.links.becomeMentor}</button>
-              <button className="footer-links__link" type="button" onClick={() => Modal.open(PopupForm, { type: "choose_mentor" })}>{ll.links.pickMentor}</button>
+              <button className="footer-links__link" type="button" onClick={() => Modal.open(PopupForm, { type: "become_mentor", weak: true })}>{ll.links.becomeMentor}</button>
+              <button className="footer-links__link" type="button" onClick={() => Modal.open(PopupForm, { type: "choose_mentor", weak: true })}>{ll.links.pickMentor}</button>
             </div>
             <div className="footer-links__group">
               <div className="footer-links__title">{ll.linkGroups.docs}</div>
