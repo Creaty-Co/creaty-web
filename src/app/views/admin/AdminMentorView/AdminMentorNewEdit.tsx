@@ -7,7 +7,7 @@ import { PopupAdminNewTopic } from "app/components/popups/PopupAdmin/PopupAdminT
 import Checkbox from "app/components/UI/Checkbox/Checkbox"
 import CheckTree from "app/components/UI/CheckTree/CheckTree"
 import EditAvatar from "app/components/UI/EditAvatar/EditAvatar"
-import Form, { FormStateEnum } from "app/components/UI/Form/Form"
+import Form, { FormState } from "app/components/UI/Form/Form"
 import Input from "app/components/UI/Input/Input"
 import PackagesEdit from "app/components/UI/PackagesEdit/PackagesEdit"
 import AdminGroupLayout from "app/layouts/AdminGroupLayout/AdminGroupLayout"
@@ -68,7 +68,7 @@ function AdminMentorNewEdit(props: AdminNewMentorViewProps | AdminEditMentorView
   const topics = useSelector(state => state.topics)
   const [packages, setPackages] = useState<MentorPatchType["packages"]>(props.data?.packages || [])
 
-  async function submitCreateMentor(state: FormStateEnum<typeof FormInputs, FormValues>) {
+  async function submitCreateMentor(state: FormState<FormInputs, FormValues>) {
     const APIPayload: MentorPatchType = {
       info: {
         ..._.pick(state.values, formInfoKeys) as MentorPatchType["info"],

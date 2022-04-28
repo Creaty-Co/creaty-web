@@ -1,28 +1,23 @@
-import { Enum, ValuesOf } from "interfaces/common"
 import { DetailedHTMLProps, FormEvent, FormHTMLAttributes } from "react"
 import { FileToURLDataBase64 } from "utils/common"
 
 type FormValue = string | string[] | number | number[] | boolean | null | undefined
 type FormValues = Record<string, FormValue>
 
-export interface FormState<V = FormValues> {
-  keys: keyof V[]
-  values: V
-}
-export interface FormStateEnum<E extends Enum<E>, V extends Record<ValuesOf<E>, FormValue>> {
-  keys: keyof V[]
-  values: V
+export interface FormState<K extends keyof never, V> { // Type-safe Values
+  keys: K[]
+  values: V extends { [P in K]?: unknown } ? Pick<V, K> & Record<Exclude<keyof V, K>, unknown> : Record<K, V>
 }
 
-interface FormProps<V> extends Omit<DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>, "onSubmit"> {
-  onSubmit?: (state: FormState<V>, event: FormEvent<HTMLFormElement>) => void
+interface FormProps<K extends keyof never, V> extends Omit<DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>, "onSubmit"> {
+  onSubmit?: (state: FormState<K, V>, event: FormEvent<HTMLFormElement>) => void
 }
 
-function Form<V>(props: FormProps<V>) {
+function Form<K extends keyof never, V>(props: FormProps<K, V>) {
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
-    const formState = await getFormState(event.currentTarget.elements) as unknown as FormState<V>
+    const formState = await getFormState(event.currentTarget.elements) as unknown as FormState<K, V>
 
     props.onSubmit?.(formState, event)
   }
@@ -43,7 +38,7 @@ async function getFormState(elements: HTMLFormControlsCollection): Promise<{
     }
   }
 
-  const values: FormState["values"] = {}
+  const values: FormValues = {}
   for (const key of keys) {
     const next = elements.namedItem(key)
 

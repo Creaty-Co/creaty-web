@@ -25,9 +25,8 @@ export function PopupAdminNewTopic() {
     shortcut = "shortcut",
     icon = "icon"
   }
-  type FormValues = Record<ValuesOf<typeof FormInputs>, string>
 
-  async function onSubmitTopic(state: FormState<FormValues>) {
+  async function onSubmitTopic(state: FormState<FormInputs, string>) {
     setPending(true)
     const { error } = await ClientAPI.query(postTagsTopics(state.values))
     setPending(false)
@@ -73,7 +72,7 @@ export function PopupAdminEditTopic(props: PopupAdminEditTopicProps) {
   }
   type FormValues = Record<ValuesOf<typeof FormInputs>, string> & { icon?: URLDataBase64 }
 
-  async function onSubmitTopic(state: FormState<FormValues>) {
+  async function onSubmitTopic(state: FormState<FormInputs, FormValues>) {
     setPending(true)
     const { error } = await ClientAPI.query(patchTagsTopics(props.topic.id, state.values))
     setPending(false)

@@ -12,7 +12,7 @@ interface PackagesEditProps {
 }
 
 function PackagesEdit(props: PackagesEditProps) {
-  const uniqueID = useRef(Math.max(...props.defaultValues?.map(pack => pack.id) || [0]))
+  const uniqueID = useRef(0)
   const [packages, setPackages] = useState<MentorPackageType[]>(props.defaultValues || [])
   function editPack(pack: MentorPackageType) {
     return (event: ChangeEvent<HTMLInputElement>) => {
@@ -34,7 +34,7 @@ function PackagesEdit(props: PackagesEditProps) {
   return (
     <div className="packages-edit">
       {packages.map((pack, index) => (
-        <PackagesEditPack {...pack} index={index} onChange={editPack(pack)} onRemove={() => removePack(pack)} key={pack.id} />
+        <PackagesEditPack {...pack} index={index} name={props.name} onChange={editPack(pack)} onRemove={() => removePack(pack)} key={pack.id} />
       ))}
       <Button color="dark" onClick={addPack}>Добавить пакет</Button>
     </div>
@@ -44,7 +44,7 @@ function PackagesEdit(props: PackagesEditProps) {
 
 interface PackagesEditPackProps extends MentorPackageType {
   index: number
-
+  name?: string
   onRemove?(): void
   onChange?(event: ChangeEvent<HTMLInputElement>): void
 }
@@ -58,11 +58,11 @@ function PackagesEditPack(props: PackagesEditPackProps) {
       </div>
       <label className="packages-edit__label">
         <span>Кол-во</span>
-        <Input onChange={props.onChange} type="number" placeholder="Введите кол-во" defaultValue={props.lessons_count} />
+        <Input onChange={props.onChange} type="number" placeholder="Введите кол-во" name="lessons_count" defaultValue={props.lessons_count} />
       </label>
       <label className="packages-edit__label">
         <span>Скидку</span>
-        <Input onChange={props.onChange} type="number" placeholder="Введите скидку" defaultValue={props.discount} />
+        <Input onChange={props.onChange} type="number" placeholder="Введите скидку" name="discount" defaultValue={props.discount} />
       </label>
     </div>
   )

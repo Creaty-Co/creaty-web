@@ -28,9 +28,8 @@ export function PopupAdminNewTag(props: PopupAdminNewTagProps) {
     titleEN = "title_en",
     shortcut = "shortcut"
   }
-  type FormValues = Record<ValuesOf<typeof FormInputs>, string>
 
-  async function onSubmitTag(state: FormState<FormValues>) {
+  async function onSubmitTag(state: FormState<FormInputs, string>) {
     setPending(true)
     const { error } = await ClientAPI.query(postTags(props.topicId, state.values))
     setPending(false)
@@ -68,9 +67,8 @@ export function PopupAdminEditTag(props: PopupAdminEditTagProps) {
     title = "title",
     shortcut = "shortcut"
   }
-  type FormValues = Record<ValuesOf<typeof FormInputs>, string>
 
-  async function onSubmitTag(state: FormState<FormValues>) {
+  async function onSubmitTag(state: FormState<FormInputs, string>) {
     setPending(true)
     const { error } = await ClientAPI.query(patchTags(props.tag.id, state.values))
     setPending(false)

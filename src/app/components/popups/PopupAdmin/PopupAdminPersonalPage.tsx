@@ -20,9 +20,11 @@ export function PopupAdminPersonalTags(props: PopupAdminPersonalTagsProps) {
   const { close } = useModal()
   const dispatch = useDispatch()
   const topics = useSelector(state => state.topics)
-  async function onSubmitTags(state: FormState<{ tags: number[] }>) {
-    const APIPayload = state.values
-    const APIAction = props.shortcut ? patchPagePersonal(props.shortcut, APIPayload) : patchPagesMain(APIPayload)
+  enum FormInputs {
+    tags = "tags"
+  }
+  async function onSubmitTags(state: FormState<FormInputs, { tags: number[] }>) {
+    const APIAction = props.shortcut ? patchPagePersonal(props.shortcut, state.values) : patchPagesMain(state.values)
 
     const { error } = await ClientAPI.query(APIAction)
     if (error) return
@@ -37,7 +39,7 @@ export function PopupAdminPersonalTags(props: PopupAdminPersonalTagsProps) {
         {topics.tags.map(tag => (
           <label key={tag.id}>
             {tag.title}
-            <input name="tags" type="checkbox" defaultChecked={!!(props.tags.find(tagg => tagg.id === tag.id))} value={tag.id} />
+            <input name={FormInputs.tags} type="checkbox" defaultChecked={!!(props.tags.find(item => item.id === tag.id))} value={tag.id} />
           </label>
         ))}
         <Button color="dark" type="submit">Сохранить</Button>
