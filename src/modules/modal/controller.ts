@@ -91,7 +91,7 @@ export class Modal {
   private static remove(modalWindow: ModalWindow) {
     modalPrivate.dispatch(state => {
       const queue = state.queue.filter(mw => mw !== modalWindow)
-      if (modalWindow.params?.weak) {
+      if (!modalWindow.params?.weak) {
         // Hide modal without removing if it's the last window
         if (queue.length === 0) {
           return { isActive: false, queue: [modalWindow] }
