@@ -20,7 +20,7 @@ function HowItWorks() {
       </div>
       <div className="how-it-works__help">
         <InfoSection type="1" display="flex" {...ll.help}>
-          <Button size="big" color="green" onClick={() => Modal.open(PopupForm, { type: "test_meeting" })}>{ll.button}</Button>
+          <Button size="big" color="green" onClick={() => Modal.open(PopupForm, { type: "test_meeting", weak: true })}>{ll.button}</Button>
         </InfoSection>
       </div>
     </div >
