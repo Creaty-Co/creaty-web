@@ -67,7 +67,7 @@ function MentorsSlider(props: MentorsSliderProps) {
       <div className="mentors-slider__help">
         <ButtonLink size="big" color="white" to="/mentors">{ll.seeAllMentors}</ButtonLink>
         <span>{ll.or}</span>
-        <Button size="big" style="outline" onClick={() => Modal.open(PopupForm, { type: "choose_mentor" })}>{ll.getHelp}</Button>
+        <Button size="big" style="outline" onClick={() => Modal.open(PopupForm, { type: "choose_mentor", weak: true })}>{ll.getHelp}</Button>
       </div>
     </div>
   )
