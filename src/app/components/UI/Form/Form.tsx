@@ -59,11 +59,16 @@ async function getFormState(elements: HTMLFormControlsCollection): Promise<{
       values[next.name] = isNaN(Number(next.value)) ? next.value : Number(next.value)
     }
 
-    if (next instanceof RadioNodeList) {
-      const radios = [...next] as HTMLInputElement[]
-      const checks = radios.map(radio => radio.checked && radio.value)
+    if (next instanceof NodeList) {
+      const inputs = [...next] as HTMLInputElement[]
+      const inputValues = inputs.filter(input => {
+        if (["checkbox", "radio"].includes(input.type)) {
+          return input.checked
+        }
+        return true
+      }).map(input => input.value)
 
-      values[radios[0].name] = checks.flatMap(check => (!check || isNaN(Number(check))) ? [] : Number(check))
+      values[inputs[0].name] = inputValues.flatMap(check => isNaN(Number(check)) ? [] : Number(check))
     }
   }
 
