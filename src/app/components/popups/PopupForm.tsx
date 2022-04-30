@@ -7,7 +7,7 @@ import PopupLayout from "./PopupLayout"
 
 
 interface PopupFormProps {
-  type: FormType["type"]
+  type: Exclude<FormType["type"], "still_questions">
 }
 
 function PopupForm(props: PopupFormProps) {

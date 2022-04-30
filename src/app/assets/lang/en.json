@@ -49,15 +49,24 @@
         "points": [
           {
             "title": "Describe your goals",
-            "desc": "Leave <Link to=\"/become-mentor\" children=\"a request\" />, so that we can \n contact you and understand what kind \n of help you need"
+            "desc": [
+              "Leave ",
+              null,
+              ", so that we can \n contact you and understand what kind \n of help you need"
+            ],
+            "request": "a request"
           },
           {
             "title": "Choose a mentor",
-            "desc": "After choosing a mentor, you will have \n a FREE 15-minute trial session where \n you can discuss in details your goals \n and learing plan"
+            "desc": [
+              "After choosing a mentor, you will have \n a FREE 15-minute trial session where \n you can discuss in details your goals \n and learing plan"
+            ]
           },
           {
             "title": "Grow professionally!",
-            "desc": "And let your inner passion lead you to \n great new career achievements with \n dedicated mentors on your side"
+            "desc": [
+              "And let your inner passion lead you to \n great new career achievements with \n dedicated mentors on your side"
+            ]
           }
         ],
         "help": {
