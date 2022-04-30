@@ -3,7 +3,7 @@ import { HTMLAttributes } from "react"
 
 interface OuterLinkProps extends Omit<HTMLAttributes<HTMLAnchorElement>, "href" | "rel" | "target"> {
   to: string
-  eventLabel: string
+  eventLabel?: string
 }
 
 function OuterLink(props: OuterLinkProps) {

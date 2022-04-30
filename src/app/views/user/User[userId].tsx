@@ -7,6 +7,7 @@ import AdminInterface from "app/components/admin/AdminInterface"
 import Button from "app/components/common/Button/Button"
 import Icon, { IconName } from "app/components/common/Icon/Icon"
 import ContactForm from "app/components/other/ContactForm/ContactForm"
+import OuterLink from "app/components/services/OuterLink"
 import { getEmojiPNG } from "app/components/UI/MentorCard/MentorCard"
 import TopicTag from "app/components/UI/Tag/TopicTag"
 import useScrollToTop from "hooks/useScrollToTop"
@@ -96,20 +97,44 @@ function UserUserId() {
         </UserSection>
         <UserSection type="1" title={ll.info.portfolio}>
           <div className="user-section__rows">
-            <p>{payload.info.portfolio}</p>
+            <p>{ReactizeLinks(payload.info.portfolio)}</p>
           </div>
         </UserSection>
         <UserSection type="2" title={ll.info.garantee.title} iconName="r-square">
           <p>{ll.info.garantee.desc}</p>
         </UserSection>
         <a id="book" style={{ scrollMargin: "3em" }} />
-        <UserSection type="1" title={ll.info.bookMentor.title} >
+        <UserSection type="1" title={ll.info.bookMentor.title}>
           <p>{ll.info.bookMentor.desc}</p>
           <ContactForm type="test_meeting" submitText={ll.info.bookMentor.submit} />
         </UserSection>
       </div>
     </div >
   )
+}
+
+function ReactizeLinks(haystack: string) {
+  const regex = /(http[s]?:\/\/)?(.+\.[^/\s]+)(\/)?/
+
+  let content = String(haystack)
+  const result: ReactNode[] = []
+  let match: [string, string, string, string] & {
+    index: number
+    input: string
+    groups: undefined
+  }
+
+  while ((match = regex.exec(content) as unknown as typeof match) !== null) {
+    const [url, protocol, hostname] = match
+    const chunks = content.split(url)
+
+    console.log(match)
+
+    result.push(...chunks.slice(0, -1).flatMap((chunk, index) => [chunk, <OuterLink to={url} key={index}>{hostname}</OuterLink>]))
+    content = chunks.slice(-1)[0]
+  }
+
+  return [...result, content]
 }
 
 
