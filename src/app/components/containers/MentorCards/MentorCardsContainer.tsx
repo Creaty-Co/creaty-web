@@ -29,7 +29,7 @@ function MentorCardsContainer(props: MentorCardsContainerProps) {
 
   useEffect(() => { query() }, [ll])
   useEffect(() => {
-    setPage(6)
+    setPage(1)
     setResults(payload?.results || [])
   }, [props.topic, props.tag])
   useEffect(() => {
