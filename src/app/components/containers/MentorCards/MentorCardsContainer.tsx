@@ -29,7 +29,7 @@ function MentorCardsContainer(props: MentorCardsContainerProps) {
 
   useEffect(() => { query() }, [ll])
   useEffect(() => {
-    setPage(1)
+    setPage(6)
     setResults(payload?.results || [])
   }, [props.topic, props.tag])
   useEffect(() => {
@@ -40,6 +40,8 @@ function MentorCardsContainer(props: MentorCardsContainerProps) {
     }
     setResults(payload.results)
   }, [page, loading, payload])
+
+  const lastPageSize = (payload?.count || 0) % pageSize
   return (
     <div className="mentor-cards">
       <div className={classWithModifiers("mentor-cards__container", loading && "loading")}>
@@ -55,7 +57,7 @@ function MentorCardsContainer(props: MentorCardsContainerProps) {
           iconLeft={<Icon name="refresh" className={classWithModifiers("mentor-cards__icon", loading && "spin")} />}
           disabled={loading}
           onClick={() => setPage(page + 1)}
-        >{ll.showMore} {pageSize}</Button>
+        >{ll.showMore} {((page * pageSize) + lastPageSize) === (payload?.count || 0) ? lastPageSize : pageSize}</Button>
       )}
     </div >
   )
