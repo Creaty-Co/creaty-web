@@ -119,7 +119,7 @@ export interface PageLinkType {
 
 export interface PageLinkSocialType {
   id: number
-  icon: URLDataBase64
+  icon: URLDataBase64 | string
   url: string
 }
 

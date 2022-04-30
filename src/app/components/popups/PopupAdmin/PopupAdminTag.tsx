@@ -85,7 +85,7 @@ export function PopupAdminEditTag(props: PopupAdminEditTagProps) {
     close()
   }
   return (
-    <PopupLayout title="Редактироть тэг">
+    <PopupLayout title="Редактировать тэг">
       <Form onSubmit={onSubmitTag}>
         <AdminInputsLayout>
           <Input name={FormInputs.title} placeholder="Название на выбраном языке" defaultValue={props.tag?.title} key={props.tag?.title} />
