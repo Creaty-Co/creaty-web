@@ -3,6 +3,7 @@ import "./MentorsView.scss"
 import MentorCardsContainer from "app/components/containers/MentorCards/MentorCardsContainer"
 import HaveQuestions from "app/components/other/HaveQuestions/HaveQuestions"
 import MentorSearch from "app/components/other/MentorSearch/MentorSearch"
+import useScrollToTop from "hooks/useScrollToTop"
 import useLocalization from "modules/localization/hook"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
@@ -11,6 +12,7 @@ import { updateSearchTag, updateSearchTopic } from "redux/reducers/search"
 
 
 function MentorsViewTopicOrTag() {
+  useScrollToTop()
   const ll = useLocalization(ll => ll.views.mentors)
 
   const dispatch = useDispatch()
