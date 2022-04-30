@@ -21,13 +21,27 @@
 	line-height: 1.35;
 }
 
-.contact-form__text {
+.contact-form__content {
 	color: $color-black-main;
 	font-size: 1.25rem;
 
 	margin-bottom: 1em;
+	// white-space: pre-line;
 
 	em {
 		color: $color-violet;
+	}
+
+	h3,
+	h4,
+	h5 {
+		margin-block: 0.75em;
+	}
+
+	p,
+	ul,
+	em,
+	a {
+		margin-block: 0.75em;
 	}
 }

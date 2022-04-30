@@ -28,7 +28,7 @@ function ContactForm(props: ContactFormProps) {
   if (submitted) {
     return (
       <div className="contact-form">
-        <p className="contact-form__text">{form?.post_send}</p>
+        <p className="contact-form__content">{form?.post_send}</p>
       </div>
     )
   }
@@ -84,9 +84,9 @@ function ContactForm(props: ContactFormProps) {
   return (
     <form className="contact-form" onSubmit={onSubmit}>
       {!!form?.description?.length && (
-        <p className="contact-form__text">
+        <div className="contact-form__content">
           <ReactMarkdown>{form.description}</ReactMarkdown>
-        </p>
+        </div>
       )}
       <div className="contact-form__inputs">
         {name && (
