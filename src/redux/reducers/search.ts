@@ -15,6 +15,7 @@ const initialState: SearchState = {
 
 interface Actions {
   SEARCH_UPDATE: Partial<SearchState>
+  SEARCH_TAG_UPDATE: Pick<Partial<SearchState>, "tag">
 }
 
 type Action = ValuesOf<MapActions<Actions>>
@@ -23,6 +24,12 @@ export default (state = initialState, action: Action): typeof initialState => {
   switch (action.type) {
 
     case "SEARCH_UPDATE":
+      return { ...state, ...action.payload }
+
+    case "SEARCH_TAG_UPDATE":
+      if (state.topic?.tags.findIndex(tag => tag.id === action.payload.tag?.id) === -1) {
+        return { ...state, ...action.payload, topic: undefined }
+      }
       return { ...state, ...action.payload }
 
     default:
@@ -42,7 +49,7 @@ export const updateSearchTopic = (topic: Partial<SearchState["topic"]>) => ({
   payload: { topic, tag: undefined }
 })
 
-export const updateSearchTag = (tag: Partial<SearchState["topic"]>) => ({
-  type: "SEARCH_UPDATE",
+export const updateSearchTag = (tag: Partial<SearchState["tag"]>) => ({
+  type: "SEARCH_TAG_UPDATE",
   payload: { tag }
 })
