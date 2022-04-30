@@ -20,7 +20,7 @@ function BecomeMentor() {
           </ul>
         </div>
         <div className="become-mentor__bottom">
-          <Button size="big" color="dark" onClick={() => Modal.open(PopupForm, { type: "test_meeting", weak: true })}>{ll.button}</Button>
+          <Button size="big" color="dark" onClick={() => Modal.open(PopupForm, { type: "become_mentor", weak: true })}>{ll.button}</Button>
           <div className="become-mentor__terms">{ll.terms}</div>
         </div>
       </div>
