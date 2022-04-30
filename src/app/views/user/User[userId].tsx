@@ -14,7 +14,7 @@ import useLocalization from "modules/localization/hook"
 import { ReactNode, useEffect } from "react"
 import { useQuery } from "react-fetching-library"
 import { useNavigate, useParams } from "react-router"
-import { classWithModifiers, inter } from "utils/common"
+import { classWithModifiers, interpolate } from "utils/common"
 
 function UserUserId() {
   useScrollToTop()
@@ -54,7 +54,7 @@ function UserUserId() {
             {payload.packages.length > 0 && (
               <div className="mentor-card__discounts">
                 {payload.packages.map(pack => (
-                  <div className="mentor-card__discount" key={pack.id}>{inter(ll.card.discount, { courseCount: pack.lessons_count, courseDiscount: pack.discount })}</div>
+                  <div className="mentor-card__discount" key={pack.id}>{interpolate(ll.card.discount, { courseCount: pack.lessons_count, courseDiscount: pack.discount })}</div>
                 ))}
               </div>
             )}

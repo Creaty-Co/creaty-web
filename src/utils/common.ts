@@ -1,8 +1,8 @@
 import "./extensions"
 
 import { Buffer } from "buffer"
-import { URLDataBase64 } from "interfaces/common"
-import { cloneElement, SyntheticEvent } from "react"
+import { ExtractInterpolations, URLDataBase64 } from "interfaces/common"
+import { cloneElement, ReactNode, SyntheticEvent } from "react"
 
 /**
  *
@@ -71,33 +71,42 @@ export async function getFileFromURL(url: string) {
   return new File(Uint8Array ? [Uint8Array] : [], fileName, { type: response.headers.get("content-type") || "image" })
 }
 
-/**
- * Interpolate function for {variable} interpolations in string
- */
-export function inter<V = unknown>(value: V, vars: Record<string, string | number>) {
-  if (!value) throw new TypeError("interError: empty value gotten")
-  const varKeys = Object.keys(vars)
-  function interpolate(value: V): V | string {
-    // ------------------------------------------------ Hardcoded :(
-    const elementProps = (value as any)?.props
-    if (elementProps?.children) {
-      return cloneElement(value as any, elementProps, interpolate(elementProps.children) as any) as any
-    }
-    // ------------------------------------------------
-    if (typeof value === "string") {
-      return varKeys.reduce((result, next) => result.replace(new RegExp(`{${next}}`, "g"), String(vars[next])), value)
-    }
-    return value
-  }
-  if (value instanceof Array) {
-    return value.flatMap(a => a).map(interpolate)
-  }
-  return interpolate(value)
-}
-
 export function getCheckedValues(inputs: RadioNodeList & HTMLInputElement[]) {
   return [...inputs].filter(input => input.checked).map(input => input.value)
 }
+
+/**
+ * Interpolates {variable} in string
+ */
+export function interpolate<T extends string>(value: T, vars: Record<ExtractInterpolations<T>, string | number>): string {
+  const varKeys = Object.keys(vars) as ExtractInterpolations<T>[]
+  return varKeys.reduce((result: string, next) => result.replace(new RegExp(`{${next}}`, "g"), String(vars[next])), value)
+}
+
+/**
+ * Interpolates {variable} in string
+ */
+// export function reactopolate<T extends string>(value: T, vars: Record<ExtractInterpolations<T>, ReactNode>): ReactNode[] {
+//   let haystack = [value]
+
+//   const varKeys = Object.keys(vars) as ExtractInterpolations<T>[]
+//   const result = varKeys.flatMap(nextVarKey => {
+//     const regex = new RegExp(`{${nextVarKey}}`, "g")
+
+//     const result: ReactNode[] = []
+
+//     let match: Record<number, T>
+
+//     while ((match = regex.exec(haystack) as unknown as typeof match) !== null) {
+//       const [firstChunk, secondChunk] = haystack.split(match[0])
+//       result.push(firstChunk, vars[nextVarKey])
+//       haystack = secondChunk as T
+//     }
+
+//     return result
+//   }, value)
+//   return result.length > 0 ? result : [value]
+// }
 
 /**
  * Stops propagation from container
