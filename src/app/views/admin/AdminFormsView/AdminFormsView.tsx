@@ -10,17 +10,19 @@ import { FormFieldType, FormType } from "interfaces/types"
 import _ from "lodash"
 import useLocalization from "modules/localization/hook"
 import { FormEvent } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { formsFetch } from "redux/reducers/forms"
 import { FileToURLDataBase64 } from "utils/common"
 
 
 const formTypes = ["name", "email", "telegram", "facebook", "whats_app", "viber", "about"]
 
 function AdminFormsView() {
+  const dispatch = useDispatch()
   const ll = useLocalization(ll => ll.other)
   const forms = useSelector(state => state.forms)
   const formsKeys = Object.keys(forms) as FormType["type"][]
-  function submit(event: FormEvent<HTMLFormElement>) {
+  async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
     const target = event.currentTarget
@@ -28,16 +30,14 @@ function AdminFormsView() {
     const fieldInputs = [...elements].filter(element => ((element instanceof HTMLInputElement) || (element instanceof HTMLTextAreaElement)) && formTypes.includes(element.name)) as (HTMLInputElement | HTMLTextAreaElement)[]
     const fields = fieldInputs.map(input => ({ type: input.name as FormFieldType["type"], placeholder: input.value }))
 
-    ClientAPI
-      .query(patchForm(+elements.id.value, {
-        description: elements.description.value,
-        post_send: elements.post_send.value,
-        fields
-      }))
-      .then(({ error }) => {
-        if (error) return
-        window.location.reload()
-      })
+    const { error } = await ClientAPI.query(patchForm(+elements.id.value, {
+      description: elements.description.value,
+      post_send: elements.post_send.value,
+      fields
+    }))
+    if (error) return
+
+    dispatch(formsFetch)
   }
   async function submitXLSX(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -48,12 +48,10 @@ function AdminFormsView() {
 
     if (!xlsx) return
 
-    ClientAPI
-      .query(putFormsApplicationsXLSX(await FileToURLDataBase64(xlsx)))
-      .then(({ error }) => {
-        if (error) return
-        window.location.reload()
-      })
+    const { error } = await ClientAPI.query(putFormsApplicationsXLSX(await FileToURLDataBase64(xlsx)))
+    if (error) return
+
+    dispatch(formsFetch)
   }
   return (
     <AdminViewLayout>
