@@ -80,7 +80,7 @@ langs.keys().forEach(fileName => {
   Localization.add(lang, langFile)
 })
 // Set default language
-// Localization.setDefault("ru")
+Localization.setDefault(window.location.hostname.includes("ru.") ? "ru" : "en")
 
 // Declare explicit language type
 type DefaultLang = typeof DefaultLangJSON

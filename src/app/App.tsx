@@ -146,14 +146,6 @@ function Footer() {
   const ll = useLocalization(ll => ll.footer)
   const { error, payload, headers } = useQuery(getPagesLinksDocuments)
 
-  useEffect(() => {
-    const nextLang = location.hostname.split(".")[0]
-
-    if (Localization.getLangs().includes(nextLang)) {
-      Localization.transit(nextLang)
-    }
-  }, [headers])
-
   if (error || !payload) return null
   const links = payload.results.reduce<Record<PageLinkType["type"], PageLinkType>>((result, next) => ({ ...result, [next.type]: next }), {} as never)
   return (
