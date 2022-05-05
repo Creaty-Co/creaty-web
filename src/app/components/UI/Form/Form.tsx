@@ -32,7 +32,7 @@ async function getFormState(elements: HTMLFormControlsCollection): Promise<{
 }> {
   const keys: string[] = []
   for (const element of elements) {
-    if (element instanceof HTMLInputElement || element instanceof HTMLTextAreaElement) {
+    if (element instanceof HTMLInputElement || element instanceof HTMLTextAreaElement || element instanceof HTMLSelectElement) {
       if (keys.includes(element.name)) continue
       console.log(element.name)
       keys.push(element.name)
@@ -56,7 +56,7 @@ async function getFormState(elements: HTMLFormControlsCollection): Promise<{
       }
     }
 
-    if (next instanceof HTMLInputElement || next instanceof HTMLTextAreaElement) {
+    if (next instanceof HTMLInputElement || next instanceof HTMLTextAreaElement || next instanceof HTMLSelectElement) {
       if (next.value.length === 0) continue
       values[next.name] = isNaN(Number(next.value)) ? next.value : Number(next.value)
       continue
