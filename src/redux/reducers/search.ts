@@ -27,6 +27,7 @@ export default (state = initialState, action: Action): typeof initialState => {
       return { ...state, ...action.payload }
 
     case "SEARCH_TAG_UPDATE":
+      // Remove topic if it doesn't have the tag
       if (state.topic?.tags.findIndex(tag => tag.id === action.payload.tag?.id) === -1) {
         return { ...state, ...action.payload, topic: undefined }
       }

@@ -128,8 +128,6 @@ function ReactizeLinks(haystack: string) {
     const [url, protocol, hostname] = match
     const chunks = content.split(url)
 
-    console.log(match)
-
     result.push(...chunks.slice(0, -1).flatMap((chunk, index) => [chunk, <OuterLink to={url} key={index}>{hostname}</OuterLink>]))
     content = chunks.slice(-1)[0]
   }

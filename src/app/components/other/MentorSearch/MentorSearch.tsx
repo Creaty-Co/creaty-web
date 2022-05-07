@@ -74,23 +74,27 @@ function MentorSearchListDynamic(props: MentorSearchListProps & { value: string 
   const searchLowerCaseValue = props.value.toLowerCase()
   const findSearchValueEntry = (value: string) => value.toLowerCase().search(searchLowerCaseValue)
 
-  const searchEntries =
+  const SearchTagEntries =
     topics.tags
       .map(tag => ({ tag, index: findSearchValueEntry(tag.title) }))
       .filter(occur => occur.index >= 0)
+  // const SearchTopicEntries =
+  //   topics.list
+  //     .map(topic => ({ topic, index: findSearchValueEntry(topic.title) }))
+  //     .filter(entry => entry.index >= 0)
   return (
     <div className={classWithModifiers("mentor-search-list", props.visible && "visible")}>
       <div className="mentor-search-list__container">
-        {searchEntries.map(occur => (
-          <Link className="mentor-search-list__item" to={"/mentors/" + occur.tag.shortcut} key={occur.tag.id}>
+        {SearchTagEntries.map(entry => (
+          <Link className="mentor-search-list__item" to={"/mentors/" + entry.tag.shortcut} key={entry.tag.id}>
             <span>
-              {occur.tag.title.slice(0, occur.index)}
-              <em>{occur.tag.title.slice(occur.index, occur.index + props.value.length)}</em>
-              {occur.tag.title.slice(occur.index + props.value.length)}
+              {entry.tag.title.slice(0, entry.index)}
+              <em>{entry.tag.title.slice(entry.index, entry.index + props.value.length)}</em>
+              {entry.tag.title.slice(entry.index + props.value.length)}
             </span>
           </Link>
         ))}
-        {searchEntries.length === 0 && (
+        {SearchTagEntries.length === 0 && (
           <div className="mentor-search-list__item">По вашему запросу ничего не найдено.</div>
         )}
       </div>
