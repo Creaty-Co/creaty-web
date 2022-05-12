@@ -26,19 +26,19 @@ function MentorSearch() {
 
   useClickAway(searchRef, () => blur())
 
-  const isInputVisible = !(search.topic || search.tag)
+  const isInputVisible = !(search.topic || search.tag) || search.focused
   return (
     <div className="mentor-search">
       <div className={classWithModifiers("mentor-search__cover", search.focused && "active")} />
       <div className="mentor-search__container">
         <label className={classWithModifiers("mentor-search__search", search.focused && "focused", !!(search.tag || search.topic) && "filled")} onClick={focus} ref={searchRef}>
-          {search.topic && (
+          {!search.focused && search.topic && (
             <div className="mentor-search-list__item mentor-search-list__item--active">
               <Icon href={search.topic.icon} />
               <span>{search.topic.title}</span>
             </div>
           )}
-          {search.tag && (
+          {!search.focused && search.tag && (
             <TopicTag>{search.tag}</TopicTag>
           )}
           <input type="text" placeholder={isInputVisible ? ll.placeholder : undefined} className="mentor-search__input" value={value} onChange={event => setValue(event.currentTarget.value)} />
