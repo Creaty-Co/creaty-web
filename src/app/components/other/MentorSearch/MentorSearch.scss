@@ -231,9 +231,12 @@
 }
 
 .mentor-search-list__tags {
-	display: grid;
-	align-content: baseline;
-	justify-items: flex-start;
+	// display: grid;
+	// align-content: baseline;
+	// justify-items: flex-start;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
 	@include row-gap(0.5em);
 
 	width: 40%;

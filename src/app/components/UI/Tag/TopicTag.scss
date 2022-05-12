@@ -1,6 +1,8 @@
 @import "~app/assets/scss/bundle.scss";
 
 .topic-tag {
+	flex-shrink: 0;
+
 	padding: 0.5em 1em;
 	background: $color-gray-100;
 	border-radius: 0.75em;
