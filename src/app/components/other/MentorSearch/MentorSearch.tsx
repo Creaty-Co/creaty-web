@@ -5,7 +5,7 @@ import Icon from "app/components/common/Icon/Icon"
 import TopicTag from "app/components/UI/Tag/TopicTag"
 import useClickAway from "hooks/useClickAway"
 import useLocalization from "modules/localization/hook"
-import { MouseEvent, useRef, useState } from "react"
+import { MouseEvent, useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { updateSearch } from "redux/reducers/search"
@@ -24,6 +24,7 @@ function MentorSearch() {
   const blur = () => dispatch(updateSearch({ focused: false }))
   const reset = () => setValue("")
 
+  useEffect(reset, [search.tag, search.topic])
   useClickAway(searchRef, () => blur())
 
   const isInputVisible = !(search.topic || search.tag) || search.focused
@@ -41,9 +42,13 @@ function MentorSearch() {
           {!search.focused && search.tag && (
             <TopicTag>{search.tag}</TopicTag>
           )}
-          <input type="text" placeholder={isInputVisible ? ll.placeholder : undefined} className="mentor-search__input" value={value} onChange={event => setValue(event.currentTarget.value)} />
-          {isInputVisible && value.length > 0 && (
-            <Icon name="cross" className="mentor-search__icon" onClick={reset} />
+          {isInputVisible && (
+            <>
+              <input type="text" placeholder={ll.placeholder} className={classWithModifiers("mentor-search__input", search.focused && "focused")} value={value} onChange={event => setValue(event.currentTarget.value)} />
+              {value.length > 0 && (
+                <Icon name="cross" className="mentor-search__icon" onClick={reset} />
+              )}
+            </>
           )}
           <MentorSearchList value={value} visible={search.focused} />
           <Icon name="chevron" className="mentor-search__icon" modifiers={[search.focused && "up"]} />
@@ -69,6 +74,16 @@ function MentorSearchList(props: MentorSearchListProps) {
 
 
 function MentorSearchListDynamic(props: MentorSearchListProps & { value: string }) {
+  const dispatch = useDispatch()
+
+  function collapseSearchList(event: MouseEvent) {
+    // stop propagation of `MentorSearch Blur` callback
+    event.stopPropagation()
+
+    dispatch(updateSearch({ focused: false }))
+  }
+
+
   const topics = useSelector(state => state.topics)
 
   const searchLowerCaseValue = props.value.toLowerCase()
@@ -78,15 +93,25 @@ function MentorSearchListDynamic(props: MentorSearchListProps & { value: string 
     topics.tags
       .map(tag => ({ tag, index: findSearchValueEntry(tag.title) }))
       .filter(occur => occur.index >= 0)
-  // const SearchTopicEntries =
-  //   topics.list
-  //     .map(topic => ({ topic, index: findSearchValueEntry(topic.title) }))
-  //     .filter(entry => entry.index >= 0)
+  const SearchTopicEntries =
+    topics.list
+      .map(topic => ({ topic, index: findSearchValueEntry(topic.title) }))
+      .filter(entry => entry.index >= 0)
+
   return (
     <div className={classWithModifiers("mentor-search-list", props.visible && "visible")}>
       <div className="mentor-search-list__container">
+        {SearchTopicEntries.map(entry => (
+          <Link className="mentor-search-list__item" to={"/mentors/" + entry.topic.shortcut} onClick={collapseSearchList} key={entry.topic.id}>
+            <span>
+              {entry.topic.title.slice(0, entry.index)}
+              <em>{entry.topic.title.slice(entry.index, entry.index + props.value.length)}</em>
+              {entry.topic.title.slice(entry.index + props.value.length)}
+            </span>
+          </Link>
+        ))}
         {SearchTagEntries.map(entry => (
-          <Link className="mentor-search-list__item" to={"/mentors/" + entry.tag.shortcut} key={entry.tag.id}>
+          <Link className="mentor-search-list__item" to={"/mentors/" + entry.tag.shortcut} onClick={collapseSearchList} key={entry.tag.id}>
             <span>
               {entry.tag.title.slice(0, entry.index)}
               <em>{entry.tag.title.slice(entry.index, entry.index + props.value.length)}</em>
@@ -113,6 +138,7 @@ function MentorSearchListStatic() {
   function collapseSearchList(event: MouseEvent) {
     // stop propagation of `MentorSearch Blur` callback
     event.stopPropagation()
+
     dispatch(updateSearch({ focused: false }))
   }
 
@@ -126,6 +152,7 @@ function MentorSearchListStatic() {
             className={classWithModifiers("mentor-search-list__item", !search.tag && topic.id === search.topic?.id && "active")}
             to={"/mentors/" + topic.shortcut}
             onPointerEnter={() => setCursorTopic(topic)}
+            onClick={collapseSearchList}
             key={topic.id}
           >
             <Icon href={topic.icon} />

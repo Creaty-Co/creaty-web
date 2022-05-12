@@ -83,7 +83,7 @@
 		transition: 200ms ease color;
 	}
 
-	&:focus::placeholder {
+	&--focus::placeholder {
 		color: rgba($color-gray-90, 0.2);
 	}
 
