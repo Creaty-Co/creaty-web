@@ -8,10 +8,10 @@ export const getForms: Action<PaginationType<FormType>> = {
   endpoint: "/forms"
 }
 
-export const postFormsIdApplications = (id: string | number, url: string, inputs: Record<FormFieldType["type"], string>): Action => ({
+export const postFormsIdApplications = (id: string | number, path: string, inputs: Record<FormFieldType["type"], string>): Action => ({
   method: "POST",
   endpoint: `/forms/${id}/applications`,
-  body: { url, ...inputs }
+  body: { path, ...inputs }
 })
 
 export const patchForm = (id: string | number, body: {
