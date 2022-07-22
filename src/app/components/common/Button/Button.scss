@@ -67,11 +67,19 @@
 
 		background: unset;
 		border: 2px solid currentColor;
-		transition: 200ms ease box-shadow;
+		transition: 200ms ease color, 200ms ease box-shadow;
 
 		&:hover,
 		&:active {
 			box-shadow: inset 0 0 0 2px currentColor;
+		}
+	}
+
+	&--outline:not(&--white, &--green, &--violet, &--dark) {
+
+		&:hover,
+		&:active {
+			color: $color-white;
 		}
 	}
 
