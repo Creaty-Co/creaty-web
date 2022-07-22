@@ -47,10 +47,15 @@
 	&--small {
 		padding: 0.875em 0.75em;
 		border-radius: 1.25em;
+
+		.button__text {
+			font-size: 1rem;
+		}
 	}
 
 	&--big {
 		padding: 1.125em 1.5em;
+		border-radius: 1.5em;
 
 		.button__text {
 			font-size: 1.125rem;
@@ -106,4 +111,5 @@
 
 .button__text {
 	color: white;
+	font-size: 1.125rem;
 }
