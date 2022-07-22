@@ -135,7 +135,7 @@
 }
 
 .mentor-search__inner-tags {
-	--sliding-interval: 3.3ms;
+	--sliding-interval: 6.6ms;
 	--sliding-duration: calc(var(--inner-width) * var(--sliding-interval));
 
 	display: flex;
