@@ -54,6 +54,8 @@
 	grid-auto-columns: 23.75em;
 	@include gap(1.25em);
 
+	padding: 0 2.5em;
+
 	overflow: hidden;
 
 	@include Mobile {
