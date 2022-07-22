@@ -14,7 +14,7 @@
 
 	color: transparent;
 
-	&:active:not(&--green):not(&--white) {
+	&:active {
 		opacity: 0.7;
 	}
 
