@@ -55,7 +55,7 @@ function HomeView() {
         {payload?.tags && (
           <MentorSearchTags tags={payload.tags} />
         )}
-        {payload == null && (<LoaderCover />)}
+        {payload == null && (<LoaderCover white />)}
         <AdminInterface>
           <Button color="white" onClick={() => Modal.open(PopupAdminPersonalTags, { shortcut: params.shortcut, tags: payload?.tags || [] })}>Изменить тэги</Button>
         </AdminInterface>
