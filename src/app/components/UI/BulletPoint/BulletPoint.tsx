@@ -20,10 +20,10 @@ function BulletPoint(props: BulletPointProps) {
       </div>
       <div className="bullet-point__container">
         <div className="bullet-point__title">{props.title}</div>
-        <div className="bullet-point__desc">{props.desc.map(chunk => {
+        <div className="bullet-point__desc">{props.desc.map((chunk, index) => {
           if (chunk === null) {
             return (
-              <button type="button" onClick={() => Modal.open(PopupForm, { type: "choose_mentor" })}>
+              <button type="button" onClick={() => Modal.open(PopupForm, { type: "choose_mentor" })} key={index}>
                 <em>{ll.request}</em>
               </button>
             )
