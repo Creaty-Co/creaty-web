@@ -3,6 +3,7 @@ import "./MentorCards.scss"
 import { getMentors } from "api/actions/mentors"
 import Button from "app/components/common/Button/Button"
 import Icon from "app/components/common/Icon/Icon"
+import LoaderCover from "app/components/UI/Loader/LoaderCover"
 import MentorCard from "app/components/UI/MentorCard/MentorCard"
 import { MentorType, TagType, TopicType } from "interfaces/types"
 import useLocalization from "modules/localization/hook"
@@ -44,11 +45,14 @@ function MentorCardsContainer(props: MentorCardsContainerProps) {
   const lastPageSize = (payload?.count || 0) % pageSize
   return (
     <div className="mentor-cards">
-      <div className={classWithModifiers("mentor-cards__container", loading && "loading")}>
+      <div className="mentor-cards__container">
         {results.map(mentor => (
           <MentorCard {...mentor} key={mentor.id} />
         ))}
       </div>
+      {loading && (
+        <LoaderCover absolute white />
+      )}
       {(page * pageSize) < (payload?.count || 0) && (
         <Button
           className="mentor-cards__more"
@@ -59,7 +63,7 @@ function MentorCardsContainer(props: MentorCardsContainerProps) {
           onClick={() => setPage(page + 1)}
         >{ll.showMore} {((page * pageSize) + lastPageSize) === (payload?.count || 0) ? lastPageSize : pageSize}</Button>
       )}
-    </div >
+    </div>
   )
 }
 

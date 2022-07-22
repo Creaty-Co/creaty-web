@@ -3,6 +3,7 @@ import ClientAPI from "api/client"
 import { APIDynamicOuterLink } from "api/helpers"
 import Button from "app/components/common/Button/Button"
 import Input from "app/components/UI/Input/Input"
+import LoaderCover from "app/components/UI/Loader/LoaderCover"
 import { FormElements } from "interfaces/common"
 import { MailingPreviewType } from "interfaces/types"
 import { useModal } from "modules/modal/hook"
@@ -55,7 +56,7 @@ export function PopupAdminEditMailing(props: PopupAdminEditMailingsProps) {
   const { close } = useModal()
   const { error, loading, payload } = useQuery(getMailing(props.mailing.id))
   if (error) throw new Error("useQuery error")
-  if (loading) return <>loading...</>
+  if (loading) return <LoaderCover />
   if (!payload) return <>no content</>
   async function submitMailing(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()

@@ -4,6 +4,7 @@ import { postFormsIdApplications } from "api/actions/form"
 import ClientAPI from "api/client"
 import Button from "app/components/common/Button/Button"
 import Input, { InputStrainType as InputMaskType } from "app/components/UI/Input/Input"
+import LoaderCover from "app/components/UI/Loader/LoaderCover"
 import { FormElements } from "interfaces/common"
 import { FormFieldType, FormType } from "interfaces/types"
 import useLocalization from "modules/localization/hook"
@@ -83,6 +84,9 @@ function ContactForm(props: ContactFormProps) {
   }
   return (
     <form className="contact-form" onSubmit={onSubmit}>
+      {form == null && (
+        <LoaderCover />
+      )}
       {!!form?.description?.length && (
         <div className="contact-form__content">
           <ReactMarkdown>{form.description}</ReactMarkdown>

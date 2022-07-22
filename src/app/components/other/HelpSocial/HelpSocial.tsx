@@ -5,6 +5,7 @@ import AdminInterface from "app/components/admin/AdminInterface"
 import Button from "app/components/common/Button/Button"
 import { PopupAdminEditSocial, PopupAdminNewSocial } from "app/components/popups/PopupAdmin/PopupAdminSocial"
 import OuterLink from "app/components/services/OuterLink"
+import LoaderCover from "app/components/UI/Loader/LoaderCover"
 import useLocalization from "modules/localization/hook"
 import { Modal } from "modules/modal/controller"
 import { useQuery } from "react-fetching-library"
@@ -14,7 +15,7 @@ function HelpSocial() {
   const ll = useLocalization(ll => ll.components.helpSocial)
   const { error, loading, payload } = useQuery(getPagesLinksSocials)
   if (error) throw new Error("useQuery error")
-  if (loading) return <>loading...</>
+  if (loading) return <LoaderCover white />
   if (!payload) return <>no content</>
   return (
     <div className="help-social">

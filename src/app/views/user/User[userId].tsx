@@ -8,6 +8,7 @@ import Button from "app/components/common/Button/Button"
 import Icon, { IconName } from "app/components/common/Icon/Icon"
 import ContactForm from "app/components/other/ContactForm/ContactForm"
 import OuterLink from "app/components/services/OuterLink"
+import LoaderCover from "app/components/UI/Loader/LoaderCover"
 import { getEmojiPNG } from "app/components/UI/MentorCard/MentorCard"
 import TopicTag from "app/components/UI/Tag/TopicTag"
 import useScrollToTop from "hooks/useScrollToTop"
@@ -31,7 +32,7 @@ function UserUserId() {
   useEffect(() => { query() }, [ll])
 
   if (error) throw new Error("unexpected api error")
-  if (loading) return <>loading...</>
+  if (loading) return <LoaderCover white />
   if (!payload) return <>no payload</>
 
   return (

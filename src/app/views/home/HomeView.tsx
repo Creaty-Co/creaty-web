@@ -13,6 +13,8 @@ import { PopupAdminPersonalTags } from "app/components/popups/PopupAdmin/PopupAd
 import BigComment from "app/components/UI/BigComment/BigComment"
 import { FAQ, FAQClause } from "app/components/UI/FAQ/FAQ"
 import InfoSection from "app/components/UI/InfoSection/InfoSection"
+import Loader from "app/components/UI/Loader/Loader"
+import LoaderCover from "app/components/UI/Loader/LoaderCover"
 import useScrollToTop from "hooks/useScrollToTop"
 import useLocalization from "modules/localization/hook"
 import { Modal } from "modules/modal/controller"
@@ -53,6 +55,7 @@ function HomeView() {
         {payload?.tags && (
           <MentorSearchTags tags={payload.tags} />
         )}
+        {payload == null && (<LoaderCover />)}
         <AdminInterface>
           <Button color="white" onClick={() => Modal.open(PopupAdminPersonalTags, { shortcut: params.shortcut, tags: payload?.tags || [] })}>Изменить тэги</Button>
         </AdminInterface>
@@ -63,6 +66,9 @@ function HomeView() {
       <div className="home-view__slider">
         {payload?.mentors && (
           <MentorsSlider mentors={payload.mentors} />
+        )}
+        {payload == null && (
+          <LoaderCover white />
         )}
       </div>
       <div className="home-view__help">
@@ -99,7 +105,7 @@ function QAndA() {
   const { error, loading, payload, query } = useQuery(getPagesFAQs)
   useEffect(() => { query() }, [ll])
   if (error) throw new Error("useQuery error")
-  // if (loading) return <>loading...</>
+  if (loading) return <LoaderCover white />
   if (!payload) return <>no content</>
   return (
     <FAQ>

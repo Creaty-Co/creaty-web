@@ -2,6 +2,8 @@ import "./MentorSearch.scss"
 
 import Button from "app/components/common/Button/Button"
 import Icon from "app/components/common/Icon/Icon"
+import Loader from "app/components/UI/Loader/Loader"
+import LoaderCover from "app/components/UI/Loader/LoaderCover"
 import TopicTag from "app/components/UI/Tag/TopicTag"
 import useClickAway from "hooks/useClickAway"
 import useLocalization from "modules/localization/hook"
@@ -159,6 +161,9 @@ function MentorSearchListStatic() {
             <span>{topic.title}</span>
           </Link>
         ))}
+        {topics.list.length === 0 && (
+          <LoaderCover />
+        )}
       </div>
       <div className="mentor-search-list__tags">
         {topic?.tags.map(tag => (
