@@ -94,7 +94,7 @@ function Header() {
             <Button onClick={() => Modal.open(PopupForm, { type: "become_mentor", weak: true })}>{ll.menu.becomeMentor}</Button>
           </div>
           <Button style="outline" size="small" color="green" className="topbar-menu__button" onClick={() => Modal.open(PopupForm, { type: "choose_mentor", weak: true })}>{ll.findMentor}</Button>
-          <LangSelector />
+          {/* <LangSelector /> */}
         </div>
       </div>
     </header>
