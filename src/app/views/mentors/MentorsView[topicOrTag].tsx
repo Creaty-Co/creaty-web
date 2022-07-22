@@ -28,6 +28,8 @@ function MentorsViewTopicOrTag() {
   useEffect(() => {
     if (topic) dispatch(updateSearchTopic(topic))
     if (tag) dispatch(updateSearchTag(tag))
+
+    window.scrollTo(0, 0)
   }, [topic, tag])
 
   return (
