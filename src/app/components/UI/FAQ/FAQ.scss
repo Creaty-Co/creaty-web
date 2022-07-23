@@ -17,12 +17,19 @@
 		.faq__content {
 			height: var(--height, 100%);
 		}
+
+		.faq__summary {
+			.button .button__icon .icon {
+				transform: rotateX(180deg);
+			}
+		}
 	}
 }
 
 .faq__summary {
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
 
 	padding: 3em 3.5em;
 

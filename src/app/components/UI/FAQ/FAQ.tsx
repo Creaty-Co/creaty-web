@@ -1,5 +1,6 @@
 import "./FAQ.scss"
 
+import ButtonIcon from "app/components/common/Button/ButtonIcon"
 import { ReactNode, useState } from "react"
 import { classWithModifiers } from "utils/common"
 
@@ -23,6 +24,7 @@ export function FAQClause(props: FAQClauseProps) {
     <div className={classWithModifiers("faq__clause", expanded && "expanded")}>
       <div className="faq__summary" onClick={() => setExpanded(!expanded)}>
         <div className="faq__title">{props.summary}</div>
+        <ButtonIcon name="chevron" size="little" />
       </div>
       <div className="faq__content" style={{ "--height": height + "px" }} ref={element => setHeight(element?.scrollHeight)}>
         <div className="faq__inner">
