@@ -240,12 +240,12 @@
 	@include row-gap(0.5em);
 
 	width: 40%;
-	padding: 0 1em;
-	margin: 1em 0;
+	padding: 1em;
+	margin-right: 0.25em;
 
 	overflow: auto;
 
-	@include Scrollbar(0.75em, rgba($color-gray-90, 0.2));
+	@include Scrollbar(0.5em, rgba($color-gray-90, 0.2), transparent);
 
 	&>.topic-tag {
 		overflow: hidden;
