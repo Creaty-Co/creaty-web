@@ -19,7 +19,7 @@ function HelpfulCreaty() {
       <div className="helpful-creaty__group">
         <HelpfulCreatyBlock {...ll.blocks[2]} flag="orange" />
         <HelpfulCreatyBlock {...ll.blocks[3]} flag="blue" />
-        <Button className="helpful-creaty__button" style="outline" color="green" onClick={() => Modal.open(PopupForm, { type: "choose_mentor", weak: true })}>{ll.button}</Button>
+        <Button className="helpful-creaty__button" outline color="green" onClick={() => Modal.open(PopupForm, { type: "choose_mentor", weak: true })}>{ll.button}</Button>
       </div>
     </div>
   )

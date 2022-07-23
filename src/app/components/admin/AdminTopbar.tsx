@@ -25,7 +25,7 @@ function AdminTopbar() {
   return (
     <div className="admin-topbar">
       <div className="admin-topbar__edit">
-        <Button style={admin.editing ? "outline" : undefined} size="small" color="green" onClick={toggleEditing}>Редактировать</Button>
+        <Button outline={admin.editing} size="small" color="green" onClick={toggleEditing}>Редактировать</Button>
       </div>
       <AdminTopbarMenu />
     </div>

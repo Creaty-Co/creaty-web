@@ -74,6 +74,7 @@ function Header() {
   const ll = useLocalization(ll => ll.header)
   const [expanded, setExpanded] = useState(false)
   const location = useLocation()
+
   useEffect(() => ReactGA.send({
     hitType: "pageview",
     view: location.pathname + location.search + location.hash
@@ -93,7 +94,7 @@ function Header() {
             <ButtonLink size="small" to="/mentors">{ll.menu.mentors}</ButtonLink>
             <Button size="small" onClick={() => Modal.open(PopupForm, { type: "become_mentor", weak: true })}>{ll.menu.becomeMentor}</Button>
           </div>
-          <Button style="outline" size="small" color="green" className="topbar-menu__button" onClick={() => Modal.open(PopupForm, { type: "choose_mentor", weak: true })}>{ll.findMentor}</Button>
+          <Button outline size="small" color="green" onClick={() => Modal.open(PopupForm, { type: "choose_mentor", weak: true })}>{ll.findMentor}</Button>
           {/* <LangSelector /> */}
         </div>
       </div>

@@ -4,8 +4,7 @@ import { useModal } from "modules/modal/hook"
 import { ReactNode, useEffect } from "react"
 import ReactGA from "react-ga4"
 
-import Icon from "../common/Icon/Icon"
-
+import ButtonIcon from "../common/Button/ButtonIcon"
 
 interface PopupLayoutProps {
   title: string
@@ -15,19 +14,22 @@ interface PopupLayoutProps {
 
 function PopupLayout(props: PopupLayoutProps) {
   const { close, component } = useModal()
-  // useEffect(() => ReactGA.event({
-  //   action: "Modal View",
-  //   category: "as",
-  //   label: component.toString()
-  // }), [component])
+  useEffect(() => {
+    ReactGA.event({
+      action: "Modal view update",
+      category: "Modal view",
+      label: component.toString()
+    })
+  }, [component])
   return (
     <div className="popup-layout" style={{ width: props.width }}>
-      <button className="popup-layout__close" type="button" onClick={close}><Icon name="cross" /></button>
+      <div className="popup-layout__close">
+        <ButtonIcon name="cross" size="small" color="white" outline onClick={close} />
+      </div>
       <h3 className="popup-layout__title heading">{props.title}</h3>
       <div className="popup-layout__container">{props.children}</div>
     </div>
   )
 }
-
 
 export default PopupLayout

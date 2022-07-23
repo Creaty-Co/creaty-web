@@ -1,8 +1,8 @@
 import "./MentorsSlider.scss"
 
 import Button from "app/components/common/Button/Button"
+import ButtonIcon from "app/components/common/Button/ButtonIcon"
 import ButtonLink from "app/components/common/Button/ButtonLink"
-import Icon from "app/components/common/Icon/Icon"
 import PopupForm from "app/components/popups/PopupForm"
 import MentorCard from "app/components/UI/MentorCard/MentorCard"
 import { MentorType } from "interfaces/types"
@@ -49,12 +49,8 @@ function MentorsSlider(props: MentorsSliderProps) {
       <div className="mentors-slider__header">
         <h3 className="heading">{ll.title}</h3>
         <div className="mentors-slider__buttons">
-          <button className="mentors-slider__button" onClick={prev}>
-            <Icon className="mentors-slider__icon" name="arrow-left" />
-          </button>
-          <button className="mentors-slider__button" onClick={next}>
-            <Icon className="mentors-slider__icon" name="arrow-right" />
-          </button>
+          <ButtonIcon name="arrow-left" size="small" outline onClick={prev} />
+          <ButtonIcon name="arrow-right" size="small" outline onClick={next} />
         </div>
       </div>
       <div className="mentors-slider__container">
@@ -67,7 +63,7 @@ function MentorsSlider(props: MentorsSliderProps) {
       <div className="mentors-slider__help">
         <ButtonLink size="big" color="white" to="/mentors">{ll.seeAllMentors}</ButtonLink>
         <span>{ll.or}</span>
-        <Button size="big" style="outline" onClick={() => Modal.open(PopupForm, { type: "choose_mentor", weak: true })}>{ll.getHelp}</Button>
+        <Button size="big" outline onClick={() => Modal.open(PopupForm, { type: "choose_mentor", weak: true })}>{ll.getHelp}</Button>
       </div>
     </div>
   )

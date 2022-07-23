@@ -31,7 +31,7 @@ function Subscribe() {
             <span>{ll.thanks}</span>
           )}
         </div>
-        <Button style="outline" size="small" color="green" onClick={onSubscribe} eventLabel="Subscription">{ll.button}</Button>
+        <Button outline size="small" color="green" onClick={onSubscribe} eventLabel="Subscription">{ll.button}</Button>
       </div>
       <p className="subscribe__text">{ll.terms}</p>
     </div>

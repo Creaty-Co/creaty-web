@@ -56,7 +56,7 @@ function MentorCardsContainer(props: MentorCardsContainerProps) {
       {(page * pageSize) < (payload?.count || 0) && (
         <Button
           className="mentor-cards__more"
-          style="outline"
+          outline
           size="big"
           iconLeft={<Icon name="refresh" className={classWithModifiers("mentor-cards__icon", loading && "spin")} />}
           disabled={loading}
