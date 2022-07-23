@@ -13,13 +13,12 @@ import { PopupAdminPersonalTags } from "app/components/popups/PopupAdmin/PopupAd
 import BigComment from "app/components/UI/BigComment/BigComment"
 import { FAQ, FAQClause } from "app/components/UI/FAQ/FAQ"
 import InfoSection from "app/components/UI/InfoSection/InfoSection"
-import Loader from "app/components/UI/Loader/Loader"
 import LoaderCover from "app/components/UI/Loader/LoaderCover"
 import useScrollToTop from "hooks/useScrollToTop"
-import useLocalization from "modules/localization/hook"
 import { Modal } from "modules/modal/controller"
 import { useEffect } from "react"
 import { useQuery } from "react-fetching-library"
+import { useTranslation } from "react-i18next"
 import ReactMarkdown from "react-markdown"
 import { useDispatch } from "react-redux"
 import { useParams } from "react-router"
@@ -35,10 +34,10 @@ import MailingSubscribe from "./MailingSubscribe/MailingSubscribe"
 function HomeView() {
   useScrollToTop()
   const dispatch = useDispatch()
-  const ll = useLocalization(ll => ll.views.home)
+  const { t } = useTranslation("translation", { keyPrefix: "views.home" })
   const params = useParams<"shortcut">()
   const { payload, query } = useQuery(params.shortcut ? getPagePersonal(params.shortcut) : getPagesMain)
-  useEffect(() => { query() }, [ll])
+  useEffect(() => { query() }, [t("help.title")])
   useEffect(() => {
     dispatch(updateSearch({
       tag: undefined,
@@ -61,7 +60,7 @@ function HomeView() {
         </AdminInterface>
       </div>
       <div className="home-view__comment">
-        <BigComment>{ll.bigComment}</BigComment>
+        <BigComment>{t("bigComment")}</BigComment>
       </div>
       <div className="home-view__slider">
         {payload?.mentors && (
@@ -72,7 +71,7 @@ function HomeView() {
         )}
       </div>
       <div className="home-view__help">
-        <InfoSection type="2" display="flex" {...ll.help}>
+        <InfoSection type="2" display="flex" {...t("help")}>
           <HelpSocial />
         </InfoSection>
       </div>
@@ -83,7 +82,7 @@ function HomeView() {
         <HelpfulCreaty />
       </div>
       <div className="home-view__faq">
-        <h2 className="heading">{ll.QAndA.title}</h2>
+        <h2 className="heading">{t("QAndA.title")}</h2>
         <QAndA />
       </div>
       <div className="home-view__have-questions">
@@ -101,9 +100,9 @@ function HomeView() {
 
 
 function QAndA() {
-  const ll = useLocalization(ll => ll.lang)
+  const { t } = useTranslation("translation", { keyPrefix: "lang" })
   const { error, loading, payload, query } = useQuery(getPagesFAQs)
-  useEffect(() => { query() }, [ll])
+  useEffect(() => { query() }, [t("code")])
   if (error) throw new Error("useQuery error")
   if (loading) return <LoaderCover white />
   if (!payload) return <>no content</>

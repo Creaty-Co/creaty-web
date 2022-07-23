@@ -4,8 +4,8 @@ import MentorCardsContainer from "app/components/containers/MentorCards/MentorCa
 import HaveQuestions from "app/components/other/HaveQuestions/HaveQuestions"
 import MentorSearch from "app/components/other/MentorSearch/MentorSearch"
 import useScrollToTop from "hooks/useScrollToTop"
-import useLocalization from "modules/localization/hook"
 import { useEffect } from "react"
+import { useTranslation } from "react-i18next"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router"
 import { updateSearchTag, updateSearchTopic } from "redux/reducers/search"
@@ -13,7 +13,7 @@ import { updateSearchTag, updateSearchTopic } from "redux/reducers/search"
 
 function MentorsViewTopicOrTag() {
   useScrollToTop()
-  const ll = useLocalization(ll => ll.views.mentors)
+  const { t } = useTranslation("translation", { keyPrefix: "views.mentors" })
 
   const dispatch = useDispatch()
   const topics = useSelector(state => state.topics)
@@ -37,7 +37,7 @@ function MentorsViewTopicOrTag() {
       <div className="mentors-view__container">
         <div className="mentors-view__header">
           <h1 className="mentors-view__title heading">
-            <span className="weak">{ll.title}:</span> {topic?.title || tag?.title || params.topicOrTag}
+            <span className="weak">{t("title")}:</span> {topic?.title || tag?.title || params.topicOrTag}
           </h1>
         </div>
         <MentorSearch />

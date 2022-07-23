@@ -2,7 +2,7 @@ import "./MentorCard.scss"
 
 import Icon from "app/components/common/Icon/Icon"
 import { MentorType } from "interfaces/types"
-import useLocalization from "modules/localization/hook"
+import { useTranslation } from "react-i18next"
 import { Link } from "react-router-dom"
 
 import TopicTag from "../Tag/TopicTag"
@@ -11,8 +11,7 @@ import TopicTag from "../Tag/TopicTag"
 interface MentorCardProps extends MentorType { }
 
 function MentorCard(props: MentorCardProps) {
-  const ll = useLocalization(ll => ll.components.mentorCard)
-  const lang = useLocalization(ll => ll.lang)
+  const { t } = useTranslation("translation")
   return (
     <div className="mentor-card">
       <div className="mentor-card__preview">
@@ -37,11 +36,11 @@ function MentorCard(props: MentorCardProps) {
       </div>
       <Link className="mentor-card-button" to={"/user/" + props.id}>
         <div className="mentor-card-button__text">
-          <em>{Number(props.price).toPrice(lang.code, props.price_currency)}</em>
+          <em>{Number(props.price).toPrice(t("lang.code"), props.price_currency)}</em>
           <span>/</span>
           <span>{60}min.</span>
         </div>
-        <div className="mentor-card-button__hover-text">{ll.seeProfile}</div>
+        <div className="mentor-card-button__hover-text">{t("components.mentorCard.seeProfile")}</div>
         <Icon className="mentor-card-button__icon" name="arrow-right" />
       </Link>
     </div>

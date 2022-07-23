@@ -4,18 +4,18 @@ import MentorCardsContainer from "app/components/containers/MentorCards/MentorCa
 import HaveQuestions from "app/components/other/HaveQuestions/HaveQuestions"
 import MentorSearch from "app/components/other/MentorSearch/MentorSearch"
 import useScrollToTop from "hooks/useScrollToTop"
-import useLocalization from "modules/localization/hook"
+import { useTranslation } from "react-i18next"
 
 
 function MentorsView() {
   useScrollToTop()
-  const ll = useLocalization(ll => ll.views.mentors)
+  const { t } = useTranslation("translation", { keyPrefix: "views.mentors" })
   return (
     <div className="mentors-view">
       <div className="mentors-view__container">
         <div className="mentors-view__header">
-          <h1 className="mentors-view__title heading">{ll.title}</h1>
-          <p className="mentors-view__desc">{ll.desc}</p>
+          <h1 className="mentors-view__title heading">{t("title")}</h1>
+          <p className="mentors-view__desc">{t("desc")}</p>
         </div>
         <MentorSearch />
         <MentorCardsContainer />

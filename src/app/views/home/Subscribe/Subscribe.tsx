@@ -3,13 +3,13 @@ import "./Subscribe.scss"
 import { postMailingsSubscribe } from "api/actions/mailings"
 import ClientAPI from "api/client"
 import Button from "app/components/common/Button/Button"
-import useLocalization from "modules/localization/hook"
 import { ChangeEvent, useState } from "react"
+import { useTranslation } from "react-i18next"
 import { classWithModifiers } from "utils/common"
 
 
 function Subscribe() {
-  const ll = useLocalization(ll => ll.components.subscribe)
+  const { t } = useTranslation("translation", { keyPrefix: "components.subscribe" })
   const { value, isValueValid, onChange } = useInputValidation(/^\s*\w+@[a-zA-Z]+\.\w{2,}\s*$/m)
   const [subscribed, setSubscribed] = useState(false)
   function onSubscribe() {
@@ -25,15 +25,15 @@ function Subscribe() {
       <div className="subscribe__header">
         <div className={classWithModifiers("subscribe__field", !isValueValid && "red", subscribed && "dark")}>
           {!subscribed && (
-            <input className="subscribe__input" type="text" placeholder={ll.placeholder} onChange={onChange} />
+            <input className="subscribe__input" type="text" placeholder={t("placeholder")} onChange={onChange} />
           )}
           {subscribed && (
-            <span>{ll.thanks}</span>
+            <span>{t("thanks")}</span>
           )}
         </div>
-        <Button outline size="small" color="green" onClick={onSubscribe} eventLabel="Subscription">{ll.button}</Button>
+        <Button outline size="small" color="green" onClick={onSubscribe} eventLabel="Subscription">{t("button")}</Button>
       </div>
-      <p className="subscribe__text">{ll.terms}</p>
+      <p className="subscribe__text">{t("terms")}</p>
     </div>
   )
 }

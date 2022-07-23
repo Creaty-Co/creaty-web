@@ -6,9 +6,9 @@ import Icon from "app/components/common/Icon/Icon"
 import LoaderCover from "app/components/UI/Loader/LoaderCover"
 import MentorCard from "app/components/UI/MentorCard/MentorCard"
 import { MentorType, TagType, TopicType } from "interfaces/types"
-import useLocalization from "modules/localization/hook"
 import { useEffect, useState } from "react"
 import { useQuery } from "react-fetching-library"
+import { useTranslation } from "react-i18next"
 import { classWithModifiers } from "utils/common"
 
 
@@ -18,7 +18,7 @@ interface MentorCardsContainerProps {
 }
 
 function MentorCardsContainer(props: MentorCardsContainerProps) {
-  const ll = useLocalization(ll => ll.other.pagination)
+  const { t } = useTranslation("translation", { keyPrefix: "other.pagination" })
   const tagSet = props.tag ? [props.tag.id] : props.topic?.tags.map(tag => tag.id) || []
 
   const [page, setPage] = useState(1)
@@ -28,7 +28,7 @@ function MentorCardsContainer(props: MentorCardsContainerProps) {
   const { error, loading, payload, query } = useQuery(getMentors(page, pageSize, tagSet))
   if (error) throw new Error("unexpected api error")
 
-  useEffect(() => { query() }, [ll])
+  useEffect(() => { query() }, [t("showMore")])
   useEffect(() => {
     setPage(1)
     setResults(payload?.results || [])
@@ -61,7 +61,7 @@ function MentorCardsContainer(props: MentorCardsContainerProps) {
           iconLeft={<Icon name="refresh" className={classWithModifiers("mentor-cards__icon", loading && "spin")} />}
           disabled={loading}
           onClick={() => setPage(page + 1)}
-        >{ll.showMore} {((page * pageSize) + lastPageSize) === (payload?.count || 0) ? lastPageSize : pageSize}</Button>
+        >{t("showMore")} {((page * pageSize) + lastPageSize) === (payload?.count || 0) ? lastPageSize : pageSize}</Button>
       )}
     </div>
   )

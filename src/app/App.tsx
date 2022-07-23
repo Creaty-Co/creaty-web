@@ -4,15 +4,16 @@ import "app/assets/scss/app.scss"
 import { getPagesLinksDocuments } from "api/actions/pages"
 import ClientAPI from "api/client"
 import useDirectLogin from "hooks/useDirectLogin"
+import { localeDefault } from "i18n/config"
+import i18n from "i18next"
 import { PageLinkType } from "interfaces/types"
 import { UserType } from "interfaces/user"
-import Localization from "modules/localization/controller"
-import useLocalization from "modules/localization/hook"
 import { ModalContainer } from "modules/modal/container"
 import { Modal } from "modules/modal/controller"
 import { StrictMode, Suspense, useEffect, useRef, useState } from "react"
 import { ClientContextProvider, useQuery } from "react-fetching-library"
 import ReactGA from "react-ga4"
+import { I18nextProvider, useTranslation } from "react-i18next"
 import { Provider, useSelector } from "react-redux"
 import { Route, Routes } from "react-router"
 import { useLocation } from "react-router"
@@ -31,7 +32,6 @@ import Icon from "./components/common/Icon/Icon"
 import PopupForm from "./components/popups/PopupForm"
 import ErrorBoundary from "./components/services/ErrorBoundary"
 import OuterLink from "./components/services/OuterLink"
-import LangSelector from "./components/UI/LangSelector/LangSelector"
 import AdminFormsView from "./views/admin/AdminFormsView/AdminFormsView"
 import AdminMailings from "./views/admin/AdminMailings/AdminMailings"
 import AdminMentorsView from "./views/admin/AdminMentorsView/AdminMentorsView"
@@ -50,20 +50,22 @@ function App() {
     <StrictMode>
       <BrowserRouter>
         <Provider store={store}>
-          <ClientContextProvider client={ClientAPI}>
-            <Suspense fallback="Loading...">
-              <ErrorBoundary fallback="Error">
-                <AppInit />
+          <I18nextProvider defaultNS={localeDefault} i18n={i18n}>
+            <ClientContextProvider client={ClientAPI}>
+              <Suspense fallback="Loading...">
+                <ErrorBoundary fallback="Error">
+                  <AppInit />
 
-                <Header />
-                <Main />
-                <Footer />
-                <Cookies />
-                <ModalContainer />
-                <ToastContainer />
-              </ErrorBoundary>
-            </Suspense>
-          </ClientContextProvider>
+                  <Header />
+                  <Main />
+                  <Footer />
+                  <Cookies />
+                  <ModalContainer />
+                  <ToastContainer />
+                </ErrorBoundary>
+              </Suspense>
+            </ClientContextProvider>
+          </I18nextProvider>
         </Provider>
       </BrowserRouter>
     </StrictMode>
@@ -71,7 +73,7 @@ function App() {
 }
 
 function Header() {
-  const ll = useLocalization(ll => ll.header)
+  const { t } = useTranslation("translation", { keyPrefix: "header" })
   const [expanded, setExpanded] = useState(false)
   const location = useLocation()
 
@@ -91,10 +93,10 @@ function Header() {
         <Icon className="topbar__trigger" name={expanded ? "cross" : "menu"} onClick={() => setExpanded(!expanded)} />
         <div className={classWithModifiers("topbar__right", expanded && "expanded")}>
           <div className="topbar-menu">
-            <ButtonLink size="small" to="/mentors">{ll.menu.mentors}</ButtonLink>
-            <Button size="small" onClick={() => Modal.open(PopupForm, { type: "become_mentor", weak: true })}>{ll.menu.becomeMentor}</Button>
+            <ButtonLink size="small" to="/mentors">{t("menu.mentors")}</ButtonLink>
+            <Button size="small" onClick={() => Modal.open(PopupForm, { type: "become_mentor", weak: true })}>{t("menu.becomeMentor")}</Button>
           </div>
-          <Button outline size="small" color="green" onClick={() => Modal.open(PopupForm, { type: "choose_mentor", weak: true })}>{ll.findMentor}</Button>
+          <Button outline size="small" color="green" onClick={() => Modal.open(PopupForm, { type: "choose_mentor", weak: true })}>{t("findMentor")}</Button>
           {/* <LangSelector /> */}
         </div>
       </div>
@@ -144,8 +146,8 @@ function AdminViews() {
 }
 
 function Footer() {
-  const ll = useLocalization(ll => ll.footer)
-  const { error, payload, headers } = useQuery(getPagesLinksDocuments)
+  const { t } = useTranslation("translation", { keyPrefix: "footer" })
+  const { error, payload } = useQuery(getPagesLinksDocuments)
 
   if (error || !payload) return null
   const links = payload.results.reduce<Record<PageLinkType["type"], PageLinkType>>((result, next) => ({ ...result, [next.type]: next }), {} as never)
@@ -159,27 +161,27 @@ function Footer() {
           </div>
           <div className="footer-links__container">
             <div className="footer-links__group">
-              <div className="footer-links__title">{ll.linkGroups.service}</div>
-              <Link className="footer-links__link" to="/mentors">{ll.links.mentors}</Link>
-              <button className="footer-links__link" type="button" onClick={() => Modal.open(PopupForm, { type: "become_mentor", weak: true })}>{ll.links.becomeMentor}</button>
-              <button className="footer-links__link" type="button" onClick={() => Modal.open(PopupForm, { type: "choose_mentor", weak: true })}>{ll.links.pickMentor}</button>
+              <div className="footer-links__title">{t("linkGroups.service")}</div>
+              <Link className="footer-links__link" to="/mentors">{t("links.mentors")}</Link>
+              <button className="footer-links__link" type="button" onClick={() => Modal.open(PopupForm, { type: "become_mentor", weak: true })}>{t("links.becomeMentor")}</button>
+              <button className="footer-links__link" type="button" onClick={() => Modal.open(PopupForm, { type: "choose_mentor", weak: true })}>{t("links.pickMentor")}</button>
             </div>
             <div className="footer-links__group">
-              <div className="footer-links__title">{ll.linkGroups.docs}</div>
+              <div className="footer-links__title">{t("linkGroups.docs")}</div>
               <AdminEditableValue editingArea="links" id={links.user_agreement.id}>
-                <OuterLink className="footer-links__link" to={links.user_agreement.url} eventLabel="terms">{ll.links.terms}</OuterLink>
+                <OuterLink className="footer-links__link" to={links.user_agreement.url} eventLabel="terms">{t("links.terms", { policyLink: links.privacy_policy.url })}</OuterLink>
               </AdminEditableValue>
               <AdminEditableValue editingArea="links" id={links.privacy_policy.id}>
-                <OuterLink className="footer-links__link" to={links.privacy_policy.url} eventLabel="privacyPolicy">{ll.links.privacyPolicy}</OuterLink>
+                <OuterLink className="footer-links__link" to={links.privacy_policy.url} eventLabel="privacyPolicy">{t("links.privacyPolicy")}</OuterLink>
               </AdminEditableValue>
               <AdminEditableValue editingArea="links" id={links.cookie_policy.id}>
-                <OuterLink className="footer-links__link" to={links.cookie_policy.url} eventLabel="cookiePolicy">{ll.links.cookiePolicy}</OuterLink>
+                <OuterLink className="footer-links__link" to={links.cookie_policy.url} eventLabel="cookiePolicy">{t("links.cookiePolicy")}</OuterLink>
               </AdminEditableValue>
             </div>
             <div className="footer-links__group">
-              <div className="footer-links__title">{ll.linkGroups.help}</div>
+              <div className="footer-links__title">{t("linkGroups.help")}</div>
               <AdminEditableValue editingArea="links" id={links.help.id}>
-                <OuterLink className="footer-links__link" to={links.help.url} eventLabel="help">{ll.links.support}</OuterLink>
+                <OuterLink className="footer-links__link" to={links.help.url} eventLabel="help">{t("links.support")}</OuterLink>
               </AdminEditableValue>
             </div>
           </div>
@@ -199,7 +201,7 @@ function Footer() {
           </div>
         </div>
         <div className="footer-copyright">
-          © {new Date().getFullYear()}  Creaty.org — {ll.desc}
+          © {new Date().getFullYear()}  Creaty.org — {t("desc")}
         </div>
       </div>
     </footer>
@@ -208,7 +210,7 @@ function Footer() {
 
 
 function Cookies() {
-  const ll = useLocalization(ll => ll.components.cookies)
+  const { t } = useTranslation("translation", { keyPrefix: "components.cookies" })
 
   const cookiesRef = useRef(localStorage.getItem("cookies"))
   const [cookies, setCookies] = useState("")
@@ -229,12 +231,12 @@ function Cookies() {
     <div className={classWithModifiers("cookies", cookies === "accept" && "accept")}>
       <p className="cookies__text">
         <AdminEditableValue editingArea="links" id={cookiePolicy.id}>
-          <OuterLink to={cookiePolicy.url} eventLabel="cookiePolicy">{ll.byRules}</OuterLink>
+          <OuterLink to={cookiePolicy.url} eventLabel="cookiePolicy">{t("byRules")}</OuterLink>
         </AdminEditableValue>
         {", "}
-        {ll.desc}
+        {t("desc")}
       </p>
-      <Button onClick={onClick}>{ll.button}</Button>
+      <Button onClick={onClick}>{t("button")}</Button>
     </div>
   )
 }

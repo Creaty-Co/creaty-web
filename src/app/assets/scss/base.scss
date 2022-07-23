@@ -72,8 +72,8 @@ em {
 /* Anchor */
 
 a {
-	color: $color-white;
-	text-decoration: none;
+	color: inherit;
+	// text-decoration: none;
 	cursor: pointer;
 
 	&.ghost {

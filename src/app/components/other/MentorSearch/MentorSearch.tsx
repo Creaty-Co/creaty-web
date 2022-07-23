@@ -2,12 +2,11 @@ import "./MentorSearch.scss"
 
 import Button from "app/components/common/Button/Button"
 import Icon from "app/components/common/Icon/Icon"
-import Loader from "app/components/UI/Loader/Loader"
 import LoaderCover from "app/components/UI/Loader/LoaderCover"
 import TopicTag from "app/components/UI/Tag/TopicTag"
 import useClickAway from "hooks/useClickAway"
-import useLocalization from "modules/localization/hook"
 import { MouseEvent, useEffect, useRef, useState } from "react"
+import { useTranslation } from "react-i18next"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { updateSearch } from "redux/reducers/search"
@@ -18,7 +17,7 @@ function MentorSearch() {
   const dispatch = useDispatch()
   const search = useSelector(state => state.search)
 
-  const ll = useLocalization(ll => ll.views.home.mentorSearch)
+  const { t } = useTranslation("translation", { keyPrefix: "views.home.mentorSearch" })
   const [value, setValue] = useState("")
 
   const searchRef = useRef<HTMLLabelElement>(null)
@@ -46,16 +45,18 @@ function MentorSearch() {
           )}
           {isInputVisible && (
             <>
-              <input type="text" placeholder={ll.placeholder} className={classWithModifiers("mentor-search__input", search.focused && "focused")} value={value} onChange={event => setValue(event.currentTarget.value)} />
-              {value.length > 0 && (
-                <Icon name="cross" className="mentor-search__icon" onClick={reset} />
-              )}
+              <input type="text" placeholder={t("placeholder")} className={classWithModifiers("mentor-search__input", search.focused && "focused")} value={value} onChange={event => setValue(event.currentTarget.value)} />
+              {
+                value.length > 0 && (
+                  <Icon name="cross" className="mentor-search__icon" onClick={reset} />
+                )
+              }
             </>
           )}
           <MentorSearchList value={value} visible={search.focused} />
           <Icon name="chevron" className="mentor-search__icon" modifiers={[search.focused && "up"]} />
         </label>
-        <Button color="violet" size="big" eventLabel="Search Form">{ll.button}</Button>
+        <Button color="violet" size="big" eventLabel="Search Form">{t("button")}</Button>
       </div>
     </div>
   )
@@ -133,7 +134,7 @@ function MentorSearchListDynamic(props: MentorSearchListProps & { value: string 
 function MentorSearchListStatic() {
   const dispatch = useDispatch()
 
-  const ll = useLocalization(ll => ll.views.home.mentorSearch)
+  const { t } = useTranslation("translation", { keyPrefix: "views.home.mentorSearch" })
   const topics = useSelector(state => state.topics)
   const search = useSelector(state => state.search)
 
@@ -172,7 +173,7 @@ function MentorSearchListStatic() {
         {topic == null && (
           <div className="mentor-search-list-empty">
             <Icon className="mentor-search-list-empty__icon" name="touch" />
-            <span className="mentor-search-list-empty__text">{ll.chooseTopic}</span>
+            <span className="mentor-search-list-empty__text">{t("chooseTopic")}</span>
           </div>
         )}
       </div>

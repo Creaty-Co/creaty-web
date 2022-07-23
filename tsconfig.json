@@ -1,15 +1,13 @@
 {
   "compilerOptions": {
-    // "composite": true,
-    "target": "ES5",
+    "target": "es5",
     "lib": [
-      "DOM",
-      "DOM.Iterable",
-      "ESNext",
+      "dom",
+      "dom.iterable",
+      "esnext"
     ],
+    "rootDir": "",
     "baseUrl": "src",
-    "allowJs": true,
-    "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
@@ -20,16 +18,23 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "strictNullChecks": true,
+    "jsx": "react",
     "downlevelIteration": true,
-    "noImplicitAny": true,
-    "jsx": "react-jsx",
     "checkJs": false,
-    "types": [
-      "node",
-      "webpack-env"
-    ]
+    "importHelpers": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "typeRoots": [
+      "node_modules/@types",
+      "@types"
+    ],
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.json"],
-  "exclude": ["node_modules/**/*", "build", "config", "docs", "env", "public", "scripts", ".vscode", ".github", "design"]
+  "ts-node": {
+    "esm": true
+  },
+  "include": [
+    "src",
+    "scripts",
+    "@types"
+  ]
 }

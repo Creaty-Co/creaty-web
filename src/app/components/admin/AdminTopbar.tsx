@@ -25,7 +25,7 @@ function AdminTopbar() {
   return (
     <div className="admin-topbar">
       <div className="admin-topbar__edit">
-        <Button outline={admin.editing} size="small" color="green" onClick={toggleEditing}>Редактировать</Button>
+        <Button size="small" outline={admin.editing} color="green" onClick={toggleEditing}>Редактировать</Button>
       </div>
       <AdminTopbarMenu />
     </div>
@@ -40,12 +40,12 @@ function AdminTopbarMenu() {
   }
   return (
     <div className="admin-topbar__menu">
-      <ButtonLink to="/admin/forms">Формы</ButtonLink>
-      <ButtonLink to="/admin/mailings">Рассылки</ButtonLink>
-      <ButtonLink to="/admin/topics">Категории</ButtonLink>
-      <ButtonLink to="/admin/tags">Тэги</ButtonLink>
-      <ButtonLink to="/admin/mentors">Менторы</ButtonLink>
-      <Button color="violet" onClick={exit}>Выйти</Button>
+      <ButtonLink size="small" nav to="/admin/forms">Формы</ButtonLink>
+      <ButtonLink size="small" nav to="/admin/mailings">Рассылки</ButtonLink>
+      <ButtonLink size="small" nav to="/admin/topics">Категории</ButtonLink>
+      <ButtonLink size="small" nav to="/admin/tags">Тэги</ButtonLink>
+      <ButtonLink size="small" nav to="/admin/mentors">Менторы</ButtonLink>
+      <Button size="small" color="violet" onClick={exit}>Выйти</Button>
     </div>
   )
 }

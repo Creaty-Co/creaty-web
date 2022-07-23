@@ -1,4 +1,4 @@
-import Localization from "modules/localization/controller"
+import { localeDefault } from "i18n/config"
 import { QueryResponse } from "react-fetching-library"
 import { toast } from "react-toastify"
 import { updateUser } from "redux/reducers/user"
@@ -30,7 +30,7 @@ export function requestInterceptor() {
       endpoint: endpointTransform(action),
       headers: {
         Authorization: !action.config?.skipAuth && localStorage.getItem("token") || "",
-        "Accept-Language": Localization.lang
+        "Accept-Language": localeDefault
       }
     }
   }

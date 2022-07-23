@@ -32,7 +32,7 @@
     "home": {
       "primaryInfo": {
         "title": "1-on-1 with \n dedicated mentor",
-        "desc": "Improve effectively your <em>creative skills</em> in individual sessions with professional \n mentors on your side"
+        "desc": "Improve effectively your *creative skillsd* in individual sessions with professional \n mentors on your side"
       },
       "mentorSearch": {
         "placeholder": "Choose industry or specific skill",
@@ -43,12 +43,12 @@
         "title": "Don’t know where to start?",
         "desc": "Just write to us, we will help you choose a mentor \n and answer all your questions"
       },
-      "bigComment": "We are Creaty. <em>We help find mentors in the creative industries</em> to choose your career path, find an interesting job \n or understand how to grow as a pro faster",
+      "bigComment": "We are Creaty. *We help find mentors in the creative industriesd* to choose your career path, find an interesting job \n or understand how to grow as a pro faster",
       "howItWorks": {
         "title": "How it works",
         "points": [
           {
-            "title": "Describe your goals",
+            "title": "describe your goals",
             "desc": [
               "Leave ",
               null,
@@ -70,7 +70,7 @@
           }
         ],
         "help": {
-          "title": "First trial session is <em>FREE!</em>",
+          "title": "First trial session is *FREE!*",
           "desc": "To understand how you fit each other, agree on a learning plan \n and class schedule"
         },
         "button": "I'm in! Let me try"
@@ -128,22 +128,22 @@
           "Get extra income"
         ],
         "button": "Give me a shot",
-        "terms": "By clicking on the button, I agree to the processing of personal data in accordance with <Link to=\"/terms\" children=\"privacy policy\" />"
+        "terms": "By clicking on the button, I agree to the processing of personal data in accordance with [privacy policy]({{policyLink}})"
       },
       "mailingSubscribe": {
-        "title": "Trends in <em>creative industries</em> news, best practices \n and much more in the Creaty newsletter"
+        "title": "Trends in *creative industriesd* news, best practices \n and much more in the Creaty newsletter"
       }
     },
     "mentors": {
       "title": "Mentors",
-      "desc": "<em>Professionals from the creative industries</em> are ready to help you choose the right career path, find an interesting job or \n understand how to grow professionally faster."
+      "desc": "*Professionals from the creative industriesd* are ready to help you choose the right career path, find an interesting job or \n understand how to grow professionally faster."
     },
     "mentor": {
       "card": {
-        "discount": "Pack of {courseCount} lessons: <em>discount {courseDiscount}%</em>",
+        "discount": "Pack of {{courseCount}} lessons: *discount {{courseDiscount}}%d*",
         "rollIn": "Request a session",
-        "terms": "By clicking on the button, I consent to the processing of my personal data in accordance with privacy policy",
-        "trial": "* Trial 15 minute meeting <em>free!</em>"
+        "terms": "By clicking on the button, I consent to the processing of my personal data in accordance with [privacy policy]({{policyLink}})",
+        "trial": "* Trial 15 minute meeting *free!*"
       },
       "info": {
         "language": "Teaching language",
@@ -221,7 +221,7 @@
       },
       "mayDiscussLater": "May DiscussLater :)",
       "submit": "Get answers",
-      "terms": "By clicking on the button, I agree to the processing of personal data in accordance with the privacy policy"
+      "terms": "By clicking on the button, I agree to the processing of personal data in accordance with the [privacy policy]({{policyLink}})"
     },
     "cookies": {
       "byRules": "According to the rules",
@@ -231,18 +231,18 @@
     "subscribe": {
       "placeholder": "Enter your email address",
       "button": "Subscribe",
-      "thanks": "<em>Thank you!</em> We'll be back soon with good news :)",
+      "thanks": "*Thank you!d* We'll be back soon with good news :)",
       "terms": "By clicking «subscibe» you'll receive occasional emails from Creaty. You always have the choice to unsubscribe within every email you receive. "
     },
     "mentorsSlider": {
-      "title": "<em>Find your perfect mentor</em> among creative \n industry professionals",
+      "title": "*Find your perfect mentor* among creative \n industry professionals",
       "seeAllMentors": "Browse all mentors",
       "or": "or",
       "getHelp": "Get help to find a mentor"
     },
     "haveQuestions": {
       "title": "Still have questions?",
-      "desc": "If you have any questions about the learning format or you don't know what mentor to choose, just fill in the form and send it to us:\n<em>we will contact you to answer all your questions</em>"
+      "desc": "If you have any questions about the learning format or you don't know what mentor to choose, just fill in the form and send it to us:\n*we will contact you to answer all your questionsd*"
     },
     "helpSocial": {
       "text": "Ask questions where it's \n most convenient"
@@ -253,7 +253,7 @@
   },
   "popups": {
     "popupForm": {
-      "thanks": "Thanks for submitting <em>:)</em>"
+      "thanks": "Thanks for submitting *:)d*"
     }
   },
   "other": {
@@ -269,6 +269,9 @@
       },
       "test_meeting": {
         "title": "Sign up for a free test meeting"
+      },
+      "still_questions": {
+        "title": "[EMPTY]"
       }
     }
   }

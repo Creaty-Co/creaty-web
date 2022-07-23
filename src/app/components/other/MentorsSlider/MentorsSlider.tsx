@@ -6,9 +6,9 @@ import ButtonLink from "app/components/common/Button/ButtonLink"
 import PopupForm from "app/components/popups/PopupForm"
 import MentorCard from "app/components/UI/MentorCard/MentorCard"
 import { MentorType } from "interfaces/types"
-import useLocalization from "modules/localization/hook"
 import { Modal } from "modules/modal/controller"
 import { useEffect, useRef } from "react"
+import { useTranslation } from "react-i18next"
 
 
 interface MentorsSliderProps {
@@ -16,7 +16,8 @@ interface MentorsSliderProps {
 }
 
 function MentorsSlider(props: MentorsSliderProps) {
-  const ll = useLocalization(ll => ll.components.mentorsSlider)
+  const { t } = useTranslation("translation", { keyPrefix: "components.mentorsSlider" })
+
   const innerRef = useRef<HTMLDivElement>(null)
   function prev() {
     slideBy(-1)
@@ -47,7 +48,7 @@ function MentorsSlider(props: MentorsSliderProps) {
   return (
     <div className="mentors-slider">
       <div className="mentors-slider__header">
-        <h3 className="heading">{ll.title}</h3>
+        <h3 className="heading">{t("title")}</h3>
         <div className="mentors-slider__buttons">
           <ButtonIcon name="arrow-left" size="small" outline onClick={prev} />
           <ButtonIcon name="arrow-right" size="small" outline onClick={next} />
@@ -61,9 +62,9 @@ function MentorsSlider(props: MentorsSliderProps) {
         </div>
       </div>
       <div className="mentors-slider__help">
-        <ButtonLink size="big" color="white" to="/mentors">{ll.seeAllMentors}</ButtonLink>
-        <span>{ll.or}</span>
-        <Button size="big" outline onClick={() => Modal.open(PopupForm, { type: "choose_mentor", weak: true })}>{ll.getHelp}</Button>
+        <ButtonLink size="big" color="white" to="/mentors">{t("seeAllMentors")}</ButtonLink>
+        <span>{t("or")}</span>
+        <Button size="big" outline onClick={() => Modal.open(PopupForm, { type: "choose_mentor", weak: true })}>{t("getHelp")}</Button>
       </div>
     </div>
   )

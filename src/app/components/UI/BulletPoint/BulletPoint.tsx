@@ -1,8 +1,8 @@
 import "./BulletPoint.scss"
 
 import PopupForm from "app/components/popups/PopupForm"
-import useLocalization from "modules/localization/hook"
 import { Modal } from "modules/modal/controller"
+import { useTranslation } from "react-i18next"
 
 
 interface BulletPointProps {
@@ -12,7 +12,7 @@ interface BulletPointProps {
 }
 
 function BulletPoint(props: BulletPointProps) {
-  const ll = useLocalization(ll => ll.views.home.howItWorks.points[0])
+  const { t } = useTranslation("translation", { keyPrefix: "views.home.howItWorks" })
   return (
     <div className="bullet-point">
       <div className="bullet-point__circle">
@@ -24,7 +24,7 @@ function BulletPoint(props: BulletPointProps) {
           if (chunk === null) {
             return (
               <button type="button" onClick={() => Modal.open(PopupForm, { type: "choose_mentor" })} key={index}>
-                <em>{ll.request}</em>
+                <em>{t("points")[0].title}</em>
               </button>
             )
           }

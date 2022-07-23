@@ -2,6 +2,7 @@ import "./user.scss"
 import "app/components/UI/MentorCard/MentorCard.scss"
 
 import { deleteMentorsId, getMentorsId } from "api/actions/mentors"
+import { getPagesLinksDocuments } from "api/actions/pages"
 import ClientAPI from "api/client"
 import AdminInterface from "app/components/admin/AdminInterface"
 import Button from "app/components/common/Button/Button"
@@ -12,28 +13,34 @@ import LoaderCover from "app/components/UI/Loader/LoaderCover"
 import { getEmojiPNG } from "app/components/UI/MentorCard/MentorCard"
 import TopicTag from "app/components/UI/Tag/TopicTag"
 import useScrollToTop from "hooks/useScrollToTop"
-import useLocalization from "modules/localization/hook"
+import { PageLinkType } from "interfaces/types"
 import { ReactNode, useEffect } from "react"
 import { useQuery } from "react-fetching-library"
+import { useTranslation } from "react-i18next"
 import { useNavigate, useParams } from "react-router"
-import { classWithModifiers, interpolate } from "utils/common"
+import { classWithModifiers } from "utils/common"
 
 function UserUserId() {
   useScrollToTop()
   const navigate = useNavigate()
 
-  const ll = useLocalization(ll => ll.views.mentor)
-  const lang = useLocalization(ll => ll.lang)
+  const { t } = useTranslation("translation", { keyPrefix: "views.mentor" })
+  const { t: tRoot } = useTranslation("translation")
 
   const params = useParams<"userId">()
   if (!params.userId) throw new Error("This component should be used in Route context")
 
   const { error, loading, payload, query } = useQuery(getMentorsId(+params.userId))
-  useEffect(() => { query() }, [ll])
+  const { error: error2, payload: payload2 } = useQuery(getPagesLinksDocuments)
+  // useEffect(() => { query() }, [tRoot("lang.code")])
+  console.log(tRoot("lang.code"))
 
   if (error) throw new Error("unexpected api error")
   if (loading) return <LoaderCover white />
   if (!payload) return <>no payload</>
+
+  const links = payload2?.results.reduce<Record<PageLinkType["type"], PageLinkType>>((result, next) => ({ ...result, [next.type]: next }), {} as never)
+
 
   return (
     <div className="user">
@@ -51,21 +58,21 @@ function UserUserId() {
               <div className="mentor-card__job"><em>{payload.profession}・</em>{payload.company}</div>
             </div>
             <div className="mentor-card__price">
-              <em>{Number(payload.price).toPrice(lang.code, payload.price_currency)}</em> / 60min.
+              <em>{Number(payload.price).toPrice(tRoot("lang.code"), payload.price_currency)}</em> / 60min.
             </div>
             {payload.packages.length > 0 && (
               <div className="mentor-card__discounts">
                 {payload.packages.map(pack => (
-                  <div className="mentor-card__discount" key={pack.id}>{interpolate(ll.card.discount, { courseCount: pack.lessons_count, courseDiscount: pack.discount })}</div>
+                  <div className="mentor-card__discount" key={pack.id}>{t("card.discount", { courseCount: pack.lessons_count, courseDiscount: pack.discount })}</div>
                 ))}
               </div>
             )}
           </div>
-          <Button size="big" color="green" className="user-card__button" onClick={() => document.getElementById("book")?.scrollIntoView({ behavior: "smooth" })}>{ll.card.rollIn}</Button>
+          <Button size="big" color="green" className="user-card__button" onClick={() => document.getElementById("book")?.scrollIntoView({ behavior: "smooth" })}>{t("card.rollIn")}</Button>
         </div>
-        <div className="user-card__text">{ll.card.terms}</div>
+        <div className="user-card__text">{t("card.terms", { policyLink: links?.privacy_policy.url })}</div>
         {payload.info.trial_meeting && (
-          <div className="user-card__notice">{ll.card.trial}</div>
+          <div className="user-card__notice">{t("card.trial")}</div>
         )}
       </div>
       <div className="user__sections">
@@ -76,14 +83,14 @@ function UserUserId() {
         <UserSection type="3" title={payload.info.resume}>
           <div className="user-section__entry">
             <Icon name="location" />
-            <span>{(payload.info as never)["city_" + lang.code]}, <em>{ll.info.teachType}</em></span>
+            <span>{(payload.info as never)["city_" + tRoot("lang.code")]}, <em>{t("info.teachType")}</em></span>
           </div>
           <div className="user-section__entry">
             <Icon name="face" />
-            <span>{ll.info.language}: <em>{payload.info.languages.map(lang => lang.name_native).join(" / ")}</em></span>
+            <span>{t("info.language")}: <em>{payload.info.languages.map(lang => lang.name_native).join(" / ")}</em></span>
           </div>
         </UserSection>
-        <UserSection type="1" title={ll.info.whatHelp}>
+        <UserSection type="1" title={t("info.whatHelp")}>
           <p>{payload.info.what_help}</p>
         </UserSection>
         <UserSection type="1">
@@ -93,24 +100,24 @@ function UserUserId() {
             ))}
           </div>
         </UserSection>
-        <UserSection type="1" title={ll.info.experience}>
+        <UserSection type="1" title={t("info.experience")}>
           <p>{payload.info.experience}</p>
         </UserSection>
-        <UserSection type="1" title={ll.info.portfolio}>
+        <UserSection type="1" title={t("info.portfolio")}>
           <div className="user-section__rows">
             <p>{ReactizeLinks(payload.info.portfolio)}</p>
           </div>
         </UserSection>
-        <UserSection type="2" title={ll.info.garantee.title} iconName="r-square">
-          <p>{ll.info.garantee.desc}</p>
+        <UserSection type="2" title={t("info.garantee.title")} iconName="r-square">
+          <p>{t("info.garantee.desc")}</p>
         </UserSection>
         <a id="book" style={{ scrollMargin: "3em" }} />
-        <UserSection type="1" title={ll.info.bookMentor.title}>
-          <p>{ll.info.bookMentor.desc}</p>
-          <ContactForm type="test_meeting" submitText={ll.info.bookMentor.submit} />
+        <UserSection type="1" title={t("info.bookMentor.title")}>
+          <p>{t("info.bookMentor.desc")}</p>
+          <ContactForm type="test_meeting" submitText={t("info.bookMentor.submit")} />
         </UserSection>
       </div>
-    </div >
+    </div>
   )
 }
 
@@ -126,7 +133,8 @@ function ReactizeLinks(haystack: string) {
   }
 
   while ((match = regex.exec(content) as unknown as typeof match) !== null) {
-    const [url, protocol, hostname] = match
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [url, _protocol, hostname] = match
     const chunks = content.split(url)
 
     result.push(...chunks.slice(0, -1).flatMap((chunk, index) => [chunk, <OuterLink to={url} key={index}>{hostname}</OuterLink>]))

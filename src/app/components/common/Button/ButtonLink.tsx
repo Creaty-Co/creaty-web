@@ -25,7 +25,7 @@ function ButtonLink(props: ButtonLinkProps) {
   if (props.disabled) modifiers.push("disabled")
   return (
     <NavLink className={
-      link => classMerge(classWithModifiers("button", ...modifiers, props.outline && (props.nav && !link.isActive && "gray")), props.className)
+      link => classMerge(classWithModifiers("button", ...modifiers, props.nav && link.isActive && "white"), props.className)
     } replace={props.replace} to={props.disabled ? location : props.to} onClick={props.onClick} end={props.end}>
       {props.iconLeft && (
         <div className="button__icon">{props.iconLeft}</div>

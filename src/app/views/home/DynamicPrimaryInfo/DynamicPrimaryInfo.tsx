@@ -1,5 +1,5 @@
-import useLocalization from "modules/localization/hook"
 import { useEffect, useRef, useState } from "react"
+import { useTranslation } from "react-i18next"
 import { useSelector } from "react-redux"
 
 
@@ -13,7 +13,7 @@ interface DynamicPrimaryInfoProps {
 
 function DynamicPrimaryInfo(props: DynamicPrimaryInfoProps) {
   const topics = useSelector(state => state.topics)
-  const ll = useLocalization(ll => ll.views.home.primaryInfo)
+  const { t } = useTranslation("translation", { keyPrefix: "views.home.primaryInfo" })
 
   const rejectRef = useRef<Function>()
   const [dynamicHeading, setDynamicHeading] = useState("...")
@@ -77,9 +77,9 @@ function DynamicPrimaryInfo(props: DynamicPrimaryInfoProps) {
     <div className="dynamic-primary-info">
       <h1 className="dynamic-primary-info__title heading">
         <em>{dynamicHeading}</em>
-        <span>{ll.title}</span>
+        <span>{t("title")}</span>
       </h1>
-      <h2 className="dynamic-primary-info__desc">{ll.desc}</h2>
+      <h2 className="dynamic-primary-info__desc">{t("desc")}</h2>
     </div>
   )
 }

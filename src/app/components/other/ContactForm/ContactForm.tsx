@@ -1,14 +1,16 @@
 import "./ContactForm.scss"
 
 import { postFormsIdApplications } from "api/actions/form"
+import { getPagesLinksDocuments } from "api/actions/pages"
 import ClientAPI from "api/client"
 import Button from "app/components/common/Button/Button"
 import Input, { InputStrainType as InputMaskType } from "app/components/UI/Input/Input"
 import LoaderCover from "app/components/UI/Loader/LoaderCover"
 import { FormElements } from "interfaces/common"
-import { FormFieldType, FormType } from "interfaces/types"
-import useLocalization from "modules/localization/hook"
+import { FormFieldType, FormType, PageLinkType } from "interfaces/types"
 import { ChangeEvent, FormEvent, useState } from "react"
+import { useQuery } from "react-fetching-library"
+import { useTranslation } from "react-i18next"
 import ReactMarkdown from "react-markdown"
 import { useSelector } from "react-redux"
 
@@ -21,10 +23,13 @@ interface ContactFormProps {
 }
 
 function ContactForm(props: ContactFormProps) {
-  const ll = useLocalization(ll => ll.components.contactForm)
+  const { t } = useTranslation("translation", { keyPrefix: "components.contactForm" })
   const form = useSelector(state => state.forms[props.type])
   const [submitted, setSubmitted] = useState(false)
   const [socialMask, setSocialMask] = useState<InputMaskType<string>>()
+
+  const { error, payload } = useQuery(getPagesLinksDocuments)
+  const links = payload?.results.reduce<Record<PageLinkType["type"], PageLinkType>>((result, next) => ({ ...result, [next.type]: next }), {} as never)
 
   if (submitted) {
     return (
@@ -77,7 +82,7 @@ function ContactForm(props: ContactFormProps) {
     if (form == null) return []
     return form.fields.filter(includesSocial).map(field => {
       return {
-        title: ll.fields[field.type].title,
+        title: t("fields")[field.type as "telegram", "facebook", "whats_app", "viber"].title,
         value: field.type
       }
     })
@@ -108,8 +113,8 @@ function ContactForm(props: ContactFormProps) {
           </div>
         )}
       </div>
-      <Button className="contact-form__submit" size="big" type="submit" color="dark" eventLabel="Contact Form">{props.submitText || ll.submit}</Button>
-      <div className="contact-form__terms">{ll.terms}</div>
+      <Button className="contact-form__submit" size="big" type="submit" color="dark" eventLabel="Contact Form">{props.submitText || t("submit")}</Button>
+      <div className="contact-form__terms">{t("terms", { policyLink: links?.privacy_policy.url })}</div>
     </form>
   )
 }

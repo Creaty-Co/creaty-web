@@ -6,20 +6,20 @@ import Button from "app/components/common/Button/Button"
 import { PopupAdminEditSocial, PopupAdminNewSocial } from "app/components/popups/PopupAdmin/PopupAdminSocial"
 import OuterLink from "app/components/services/OuterLink"
 import LoaderCover from "app/components/UI/Loader/LoaderCover"
-import useLocalization from "modules/localization/hook"
 import { Modal } from "modules/modal/controller"
 import { useQuery } from "react-fetching-library"
+import { useTranslation } from "react-i18next"
 
 
 function HelpSocial() {
-  const ll = useLocalization(ll => ll.components.helpSocial)
+  const { t } = useTranslation("translation", { keyPrefix: "components.helpSocial" })
   const { error, loading, payload } = useQuery(getPagesLinksSocials)
   if (error) throw new Error("useQuery error")
   if (loading) return <LoaderCover white />
   if (!payload) return <>no content</>
   return (
     <div className="help-social">
-      <div className="help-social__text">{ll.text}</div>
+      <div className="help-social__text">{t("text")}</div>
       <div className="help-social__splitter" />
       {payload.results.map(img => (
         <div key={img.id}>

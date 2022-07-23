@@ -8,8 +8,8 @@ import AdminViewLayout from "app/layouts/AdminViewLayout/AdminViewLayout"
 import { FormElements } from "interfaces/common"
 import { FormFieldType, FormType } from "interfaces/types"
 import _ from "lodash"
-import useLocalization from "modules/localization/hook"
 import { FormEvent } from "react"
+import { useTranslation } from "react-i18next"
 import { useDispatch, useSelector } from "react-redux"
 import { formsFetch } from "redux/reducers/forms"
 import { FileToURLDataBase64 } from "utils/common"
@@ -19,7 +19,7 @@ const formTypes = ["name", "email", "telegram", "facebook", "whats_app", "viber"
 
 function AdminFormsView() {
   const dispatch = useDispatch()
-  const ll = useLocalization(ll => ll.other)
+  const { t } = useTranslation("translation", { keyPrefix: "other" })
   const forms = useSelector(state => state.forms)
   const formsKeys = Object.keys(forms) as FormType["type"][]
   async function submit(event: FormEvent<HTMLFormElement>) {
@@ -64,7 +64,7 @@ function AdminFormsView() {
       </form>
       {formsKeys.map(key => (
         <form className="admin-view__entires admin-view__entires--grid" onSubmit={submit} key={key}>
-          <AdminGroupLayout title={`Форма: ${ll.forms[forms[key]?.type || ""]?.title || "unknown"}`}>
+          <AdminGroupLayout title={`Форма: ${key in forms ? t("forms")[forms[key]!.type].title : "unknown"}`}>
             <h1>Данные</h1>
             <div className="admin-view__entires admin-view__entires--grid">
               <h3>Описание {"->"}</h3>
@@ -106,8 +106,9 @@ function AdminFormsView() {
             <div><Button color="dark" type="submit">Сохранить</Button></div>
           </AdminGroupLayout>
         </form>
-      ))}
-    </AdminViewLayout>
+      ))
+      }
+    </AdminViewLayout >
   )
 }
 

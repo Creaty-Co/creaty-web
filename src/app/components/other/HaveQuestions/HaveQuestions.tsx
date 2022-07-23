@@ -1,17 +1,17 @@
 import "./HaveQuestions.scss"
 
-import useLocalization from "modules/localization/hook"
+import { useTranslation } from "react-i18next"
 
 import ContactForm from "../ContactForm/ContactForm"
 
 
 function HaveQuestions() {
-  const ll = useLocalization(ll => ll.components.haveQuestions)
+  const { t } = useTranslation("translation", { keyPrefix: "components.haveQuestions" })
   return (
     <div className="have-questions">
       <div className="have-questions__info">
-        <h2 className="have-questions__title heading">{ll.title}</h2>
-        <p className="have-questions__desc">{ll.desc}</p>
+        <h2 className="have-questions__title heading">{t("title")}</h2>
+        <p className="have-questions__desc">{t("desc")}</p>
       </div>
       <div className="have-questions__form">
         <ContactForm type="still_questions" />

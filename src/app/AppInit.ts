@@ -1,4 +1,3 @@
-import Localization from "modules/localization/controller"
 import { useEffect } from "react"
 import ReactGA from "react-ga4"
 import { useDispatch } from "react-redux"
@@ -10,10 +9,6 @@ function AppInit() {
 
   useEffect(() => {
     window.addEventListener("load", () => {
-      dispatch(formsFetch)
-      dispatch(topicsFetch)
-    })
-    Localization.onTransition(() => {
       dispatch(formsFetch)
       dispatch(topicsFetch)
     })

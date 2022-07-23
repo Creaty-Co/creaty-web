@@ -14,10 +14,10 @@ Number.prototype.toPrice = function (this: number, locale = "EN", currency = "US
   } catch (error) {
     if (error instanceof Error) {
       if (error.message.includes("tag") || error.message.includes("locale")) {
-        return "Invalid language tag"
+        return `Invalid language tag (${locale})`
       }
 
-      return "Invalid currency code"
+      return `Invalid currency code (${currency})`
     }
 
     throw error
