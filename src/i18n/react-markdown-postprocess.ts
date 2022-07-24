@@ -17,11 +17,14 @@ interface ReactPostProcessorModule {
  */
 function createChildFromToken(token: marked.Token): ReactNode {
   switch (token.type) {
+    case "space":
+      return "\n\n"
+
+    case "html":
     case "text":
       // If there is no type, return as it is
       return token.text
 
-    case "space":
     case "br":
     case "hr":
     case "def":
@@ -44,12 +47,16 @@ function createChildFromToken(token: marked.Token): ReactNode {
 const initReactMarkdownPostProcess: ReactPostProcessorModule = {
   name: "reactMarkdownPostProcess",
   type: "postProcessor",
-  process: (value) => {
+  process: (value, key) => {
     const lexer = new Lexer({ smartypants: true })
     const tokens = lexer.lex(value)
     const children = tokens.flatMap(token => {
       // I don't why but for first tokens it always creates paragraphs
       // So go through tokens in first `paragraph` tokens :<
+      // console.log(key)
+      if (key[0].includes("garantee.desc"))
+        console.log(token)
+
       if (token.type === "paragraph") {
         return token.tokens.map(createChildFromToken)
       }

@@ -1,11 +1,13 @@
 import { useEffect } from "react"
 import ReactGA from "react-ga4"
+import { useTranslation } from "react-i18next"
 import { useDispatch } from "react-redux"
 import { formsFetch } from "redux/reducers/forms"
 import { topicsFetch } from "redux/reducers/topics"
 
 function AppInit() {
   const dispatch = useDispatch()
+  const { t } = useTranslation("translation")
 
   useEffect(() => {
     window.addEventListener("load", () => {
@@ -13,6 +15,11 @@ function AppInit() {
       dispatch(topicsFetch)
     })
   }, [])
+
+  useEffect(() => {
+    dispatch(formsFetch)
+    dispatch(topicsFetch)
+  }, [t("lang.code")])
 
   return null
 }

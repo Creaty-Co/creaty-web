@@ -4,8 +4,8 @@ import "app/assets/scss/app.scss"
 import { getPagesLinksDocuments } from "api/actions/pages"
 import ClientAPI from "api/client"
 import useDirectLogin from "hooks/useDirectLogin"
-import { localeDefault } from "i18n/config"
-import i18n from "i18next"
+import { localeCurrent } from "i18n/config"
+import i18next from "i18next"
 import { PageLinkType } from "interfaces/types"
 import { UserType } from "interfaces/user"
 import { ModalContainer } from "modules/modal/container"
@@ -32,6 +32,7 @@ import Icon from "./components/common/Icon/Icon"
 import PopupForm from "./components/popups/PopupForm"
 import ErrorBoundary from "./components/services/ErrorBoundary"
 import OuterLink from "./components/services/OuterLink"
+import LangSelector from "./components/UI/LangSelector/LangSelector"
 import AdminFormsView from "./views/admin/AdminFormsView/AdminFormsView"
 import AdminMailings from "./views/admin/AdminMailings/AdminMailings"
 import AdminMentorsView from "./views/admin/AdminMentorsView/AdminMentorsView"
@@ -50,7 +51,7 @@ function App() {
     <StrictMode>
       <BrowserRouter>
         <Provider store={store}>
-          <I18nextProvider defaultNS={localeDefault} i18n={i18n}>
+          <I18nextProvider defaultNS={localeCurrent} i18n={i18next}>
             <ClientContextProvider client={ClientAPI}>
               <Suspense fallback="Loading...">
                 <ErrorBoundary fallback="Error">
@@ -97,7 +98,7 @@ function Header() {
             <Button size="small" onClick={() => Modal.open(PopupForm, { type: "become_mentor", weak: true })}>{t("menu.becomeMentor")}</Button>
           </div>
           <Button outline size="small" color="green" onClick={() => Modal.open(PopupForm, { type: "choose_mentor", weak: true })}>{t("findMentor")}</Button>
-          {/* <LangSelector /> */}
+          <LangSelector />
         </div>
       </div>
     </header>

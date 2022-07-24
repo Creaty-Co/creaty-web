@@ -32,8 +32,8 @@ function UserUserId() {
 
   const { error, loading, payload, query } = useQuery(getMentorsId(+params.userId))
   const { error: error2, payload: payload2 } = useQuery(getPagesLinksDocuments)
-  // useEffect(() => { query() }, [tRoot("lang.code")])
-  console.log(tRoot("lang.code"))
+  useEffect(() => { query() }, [tRoot("lang.code")])
+  // console.log(tRoot("lang.code"))
 
   if (error) throw new Error("unexpected api error")
   if (loading) return <LoaderCover white />

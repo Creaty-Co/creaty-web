@@ -1,4 +1,5 @@
-import { localeDefault } from "i18n/config"
+import { localeCurrent } from "i18n/config"
+import i18next from "i18next"
 import { QueryResponse } from "react-fetching-library"
 import { toast } from "react-toastify"
 import { updateUser } from "redux/reducers/user"
@@ -30,7 +31,7 @@ export function requestInterceptor() {
       endpoint: endpointTransform(action),
       headers: {
         Authorization: !action.config?.skipAuth && localStorage.getItem("token") || "",
-        "Accept-Language": localeDefault
+        "Accept-Language": i18next.language
       }
     }
   }

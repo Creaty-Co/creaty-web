@@ -150,6 +150,12 @@
 	&--icon-only:not(&--little) {
 		border-radius: 1.5em;
 	}
+
+	&:not(&--icon-only) {
+		.button__icon {
+			padding: unset;
+		}
+	}
 }
 
 a.button {
