@@ -98,7 +98,7 @@ function Header() {
             <Button size="small" onClick={() => Modal.open(PopupForm, { type: "become_mentor", weak: true })}>{t("menu.becomeMentor")}</Button>
           </div>
           <Button outline size="small" color="green" onClick={() => Modal.open(PopupForm, { type: "choose_mentor", weak: true })}>{t("findMentor")}</Button>
-          <LangSelector />
+          {/* <LangSelector /> */}
         </div>
       </div>
     </header>
