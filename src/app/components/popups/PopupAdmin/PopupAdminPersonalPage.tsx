@@ -1,6 +1,7 @@
 import { deletePagePersonalMentor, deletePagesMainMentor, patchPagePersonal, patchPagePersonalMentor, patchPagesMain, patchPagesMainMentor } from "api/actions/pages"
 import ClientAPI from "api/client"
 import Button from "app/components/common/Button/Button"
+import Checkbox from "app/components/UI/Checkbox/Checkbox"
 import Form, { FormState } from "app/components/UI/Form/Form"
 import { MentorType, TagType } from "interfaces/types"
 import { useModal } from "modules/modal/hook"
@@ -39,7 +40,7 @@ export function PopupAdminPersonalTags(props: PopupAdminPersonalTagsProps) {
         {topics.tags.map(tag => (
           <label key={tag.id}>
             {tag.title}
-            <input name={FormInputs.tags} type="checkbox" defaultChecked={!!(props.tags.find(item => item.id === tag.id))} value={tag.id} />
+            <Checkbox name={FormInputs.tags} defaultChecked={!!(props.tags.find(item => item.id === tag.id))} value={tag.id} />
           </label>
         ))}
         <Button color="dark" type="submit">Сохранить</Button>
