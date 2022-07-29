@@ -17,6 +17,8 @@ $indent: 1.5em;
 
 .helpful-creaty__title {
 	margin-bottom: 0.5em;
+
+	word-break: break-all;
 }
 
 .helpful-creaty__button {
@@ -69,6 +71,8 @@ $indent: 1.5em;
 	font-size: 2rem;
 	font-weight: 700;
 	line-height: 1.25;
+
+	word-break: break-all;
 }
 
 .helpful-creaty-block__circle {
