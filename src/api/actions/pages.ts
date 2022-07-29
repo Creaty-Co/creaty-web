@@ -1,4 +1,5 @@
 import { Action } from "api/client"
+import { LocaleKeys, LocaleResourcesType } from "i18n/locales"
 import { PaginationType } from "interfaces/Django"
 import { PageFAQType, PageLinkSocialType, PageLinkType, PageType, TagType } from "interfaces/types"
 
@@ -123,4 +124,17 @@ export const patchPagesFAQs = (id: number, body: {
 export const deletePagesFAQs = (id: number): Action => ({
   method: "DELETE",
   endpoint: `/pages/faqs/${id}`
+})
+
+//! Locales
+
+export const getPagesLocalesLanguageNamespace = (language: LocaleKeys, namespace: "translation"): Action<LocaleResourcesType["en"]> => ({
+  method: "GET",
+  endpoint: `/pages/locales/${language}/${namespace}.json`
+})
+
+export const putPagesLocalesLanguageNamespace = (language: LocaleKeys, namespace: "translation", body: LocaleResourcesType["en"]): Action => ({
+  method: "PUT",
+  endpoint: `/pages/locales/${language}/${namespace}.json`,
+  body
 })
