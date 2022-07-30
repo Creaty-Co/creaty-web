@@ -46,29 +46,21 @@
       "bigComment": "We are Creaty. *We help find mentors in the creative industriesd* to choose your career path, find an interesting job \n or understand how to grow as a pro faster",
       "howItWorks": {
         "title": "How it works",
-        "points": [
-          {
-            "title": "describe your goals",
-            "desc": [
-              "Leave ",
-              null,
-              ", so that we can \n contact you and understand what kind \n of help you need"
-            ],
-            "request": "a request"
+        "requestButton": "a request",
+        "points": {
+          "1": {
+            "title": "Describe your goals",
+            "desc": "Leave {{requestButton}}, so that we can \n contact you and understand what kind \n of help you need"
           },
-          {
+          "2": {
             "title": "Choose a mentor",
-            "desc": [
-              "After choosing a mentor, you will have \n a FREE 15-minute trial session where \n you can discuss in details your goals \n and learing plan"
-            ]
+            "desc": "After choosing a mentor, you will have \n a FREE 15-minute trial session where \n you can discuss in details your goals \n and learing plan"
           },
-          {
+          "3": {
             "title": "Grow professionally!",
-            "desc": [
-              "And let your inner passion lead you to \n great new career achievements with \n dedicated mentors on your side"
-            ]
+            "desc": "And let your inner passion lead you to \n great new career achievements with \n dedicated mentors on your side"
           }
-        ],
+        },
         "help": {
           "title": "First trial session is *FREE!*",
           "desc": "To understand how you fit each other, agree on a learning plan \n and class schedule"
@@ -76,57 +68,11 @@
         "button": "I'm in! Let me try"
       },
       "QAndA": {
-        "title": "Frequently asked questions",
-        "clauses": [
-          {
-            "summary": "How does the Creaty service work?",
-            "points": [
-              "Do you want to expand your area of ​​competence or change the vector of development",
-              "Want to get an expert assessment of your skills / competencies",
-              "Need help with work tasks/projects"
-            ]
-          },
-          {
-            "summary": "How to find a mentor?",
-            "points": [
-              "Do you want to expand your area of ​​competence or change the vector of development",
-              "Want to get an expert assessment of your skills / competencies",
-              "Need help with work tasks/projects"
-            ]
-          },
-          {
-            "summary": "What is required of me before starting a consultation?",
-            "points": [
-              "Do you want to expand your area of ​​competence or change the vector of development",
-              "Want to get an expert assessment of your skills / competencies",
-              "Need help with work tasks/projects"
-            ]
-          },
-          {
-            "summary": "What if I don't like the mentor?",
-            "points": [
-              "Do you want to expand your area of ​​competence or change the vector of development",
-              "Want to get an expert assessment of your skills / competencies",
-              "Need help with work tasks/projects"
-            ]
-          },
-          {
-            "summary": "Can I continue working with the mentor?",
-            "points": [
-              "Do you want to expand your area of ​​competence or change the vector of development",
-              "Want to get an expert assessment of your skills / competencies",
-              "Need help with work tasks/projects"
-            ]
-          }
-        ]
+        "title": "Frequently asked questions"
       },
       "becomeMentor": {
         "title": "You too can become mentor",
-        "descPoints": [
-          "Share your experience and knowledge when and where it suits you most",
-          "Keep evolving your professional skills during sessions with students",
-          "Get extra income"
-        ],
+        "desc": "Share your experience and knowledge when and where it suits you most\n-Keep evolving your professional skills during sessions with students\n-Get extra income",
         "button": "Give me a shot",
         "terms": "By clicking on the button, I agree to the processing of personal data in accordance with [privacy policy]({{policyLink}})"
       },
@@ -166,42 +112,24 @@
   "components": {
     "helpfulCreaty": {
       "title": "Creaty will be \n useful if",
-      "blocks": [
-        {
+      "blocks": {
+        "1": {
           "title": "You are on start or \n choosing career path",
-          "points": [
-            "You decided to change your occupation, but there is \n no clear understanding of where to start",
-            "You have chosen the path of your creative career, \n but doubt that this is the best way",
-            "You want to talk with an industry professional to \n assess different options and your expectations"
-          ]
+          "desc": "You decided to change your occupation, but there is\nno clear understanding of where to start\n-You have chosen the path of your creative career,\nbut doubt that this is the best way\n-You want to talk with an industry professional to\nassess different options and your expectations"
         },
-        {
+        "2": {
           "title": "You have more than \n 2 years of experience",
-          "points": [
-            "You want to expand the area of expertise or change \n your career path",
-            "You want to get professional assessment of your \n skills and competencies",
-            "You need help with you project or work tasks"
-          ]
+          "desc": "You want to expand the area of expertise or change\nyour career path\n-You want to get professional assessment of your\nskills and competencies\n-You need help with you project or work tasks"
         },
-        {
+        "3": {
           "title": "You are student or \n recently graduated",
-          "points": [
-            "You need help with your student project or portfolio",
-            "Need an expert opinion or professional assessment",
-            "You have completed your study but need job advice",
-            "You want to create a career development plan"
-          ]
+          "desc": "You need help with your student project or portfolio\n-Need an expert opinion or professional assessment\n-You have completed your study but need job advice\n-You want to create a career development plan"
         },
-        {
+        "4": {
           "title": "You just got a new \n job or started an \n internship",
-          "points": [
-            "You need help with complex tasks",
-            "You got a good job but it is hard to get into details",
-            "You need advice about job processes, professional \n ethics and work tasks",
-            "You want to understand how you can grow \n professionally faster and more efficiently"
-          ]
+          "desc": "You need help with complex tasks\n-You got a good job but it is hard to get into details\n-You need advice about job processes, professional\nethics and work tasks\n-You want to understand how you can grow\nprofessionally faster and more efficiently"
         }
-      ],
+      },
       "button": "Great! Find me a mentor"
     },
     "contactForm": {
