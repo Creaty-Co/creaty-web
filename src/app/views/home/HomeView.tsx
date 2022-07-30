@@ -103,7 +103,7 @@ function QAndA() {
   const { t } = useTranslation("translation", { keyPrefix: "lang" })
   const { error, loading, payload, query } = useQuery(getPagesFAQs)
   useEffect(() => { query() }, [t("code")])
-  if (error) throw new Error("useQuery error")
+  if (error) return <>useQuery error</>
   if (loading) return <LoaderCover white />
   if (!payload) return <>no content</>
   return (

@@ -14,7 +14,7 @@ import { useTranslation } from "react-i18next"
 function HelpSocial() {
   const { t } = useTranslation("translation", { keyPrefix: "components.helpSocial" })
   const { error, loading, payload } = useQuery(getPagesLinksSocials)
-  if (error) throw new Error("useQuery error")
+  if (error) return <>useQuery error</>
   if (loading) return <LoaderCover white />
   if (!payload) return <>no content</>
   return (

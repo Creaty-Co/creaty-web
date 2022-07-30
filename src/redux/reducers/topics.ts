@@ -43,8 +43,11 @@ export const topicsUpdate = (payload: Partial<typeof initialState>) => ({
 export async function topicsFetch(dispatch: Dispatch) {
   const { error, payload } = await ClientAPI.query(getTagsTopics(1, 25), true)
 
-  if (error) throw new Error("unexpected error")
-  if (!payload) throw new Error("no payload")
+  // if (error) throw new Error("unexpected error")
+  // if (!payload) throw new Error("no payload")
+
+  if (error) return
+  if (!payload) return
 
   dispatch(topicsUpdate({ list: payload.results, tags: payload.results.flatMap(topic => topic.tags) }))
 }

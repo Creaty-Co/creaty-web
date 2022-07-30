@@ -23,7 +23,7 @@ interface APIDynamicOuterLinkProps extends Omit<HTMLAttributes<HTMLAnchorElement
 export function APIDynamicOuterLink(props: APIDynamicOuterLinkProps) {
   const [init, setInit] = useState(false)
   const { error, loading, payload, query } = useQuery(props.action, init)
-  if (error) throw new Error("useQuery error")
+  if (error) return <>useQuery error</>
 
   if (!init) {
     return (

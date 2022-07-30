@@ -55,7 +55,7 @@ interface PopupAdminEditMailingsProps {
 export function PopupAdminEditMailing(props: PopupAdminEditMailingsProps) {
   const { close } = useModal()
   const { error, loading, payload } = useQuery(getMailing(props.mailing.id))
-  if (error) throw new Error("useQuery error")
+  if (error) return <>useQuery error</>
   if (loading) return <LoaderCover />
   if (!payload) return <>no content</>
   async function submitMailing(event: FormEvent<HTMLFormElement>) {

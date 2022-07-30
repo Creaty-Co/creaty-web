@@ -12,7 +12,7 @@ function AdminMailings() {
   const [page, setPage] = useState(1)
   const [pageSize] = useState(15)
   const { error, loading, payload } = useQuery(getMailings(page, pageSize))
-  if (error) throw new Error("useQuery error")
+  if (error) return <>useQuery error</>
   return (
     <AdminViewLayout>
 
