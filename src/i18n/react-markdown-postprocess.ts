@@ -21,7 +21,7 @@ interface ReactPostProcessorModule {
  * @param token - is `marked.Token` from which is created `ReactNode`.
  * @param key - is a `React Element Key` in the case the function is mapped.
  */
-function createChildFromToken(token: marked.Token, key?: Key): ReactNode {
+function createChildFromToken(token: marked.Token, key: Key): ReactNode {
   switch (token.type) {
     // IDK, but it works.
     // `\n` is not tokenized but `\n\n` is.
@@ -67,14 +67,15 @@ const initReactMarkdownPostProcess: ReactPostProcessorModule = {
 
     const lexer = new Lexer({ smartypants: true })
     const tokens = lexer.lex(value)
-    const children = tokens.flatMap(token => {
+    const children = tokens.flatMap((token, index) => {
       // I don't why but for the first tokens it always creates paragraphs
       // So go through the tokens of the first `paragraph` tokens :<
       if (token.type === "paragraph") {
         return token.tokens.map(createChildFromToken)
       }
 
-      return createChildFromToken(token)
+      // Key (index) must always be passed
+      return createChildFromToken(token, index)
     })
 
     // If all children are plain `string`, return as it is
