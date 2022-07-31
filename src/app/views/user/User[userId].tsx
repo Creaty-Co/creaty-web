@@ -103,11 +103,11 @@ function UserUserId() {
         <UserSection type="1" title={t("info.experience")}>
           <p>{payload.info.experience}</p>
         </UserSection>
-        <UserSection type="1" title={t("info.portfolio")}>
+        {/* <UserSection type="1" title={t("info.portfolio")}>
           <div className="user-section__rows">
             <p>{ReactizeLinks(payload.info.portfolio)}</p>
           </div>
-        </UserSection>
+        </UserSection> */}
         <UserSection type="2" title={t("info.garantee.title")} iconName="r-square">
           <p>{t("info.garantee.desc")}</p>
         </UserSection>
