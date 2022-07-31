@@ -36,7 +36,11 @@ const initExternalResourceBackend: BackendModule = {
       if (!(language in resources)) {
         const resourceLanguage = await getResourceLanguage(language, namespace)
 
-        resources[language][namespace] = resourceLanguage
+        resources[language] = {
+          ...resources[language],
+          [namespace]: resourceLanguage
+        }
+        // resources[language][namespace] = resourceLanguage
       }
 
       const resourceKey = resources[language][namespace]
