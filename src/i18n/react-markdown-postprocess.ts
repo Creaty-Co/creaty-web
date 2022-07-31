@@ -1,8 +1,11 @@
+// import { ReactElement } from "react"
+// import ReactMarkdown from "react-markdown"
+
 import OuterLink from "app/components/services/OuterLink"
 import { TOptions } from "i18next"
 import type { marked } from "marked"
 import { Lexer } from "marked"
-import { createElement, Fragment, Key, ReactNode } from "react"
+import { createElement, Key, ReactNode } from "react"
 import { Link } from "react-router-dom"
 
 interface ReactPostProcessorModule {
@@ -55,13 +58,14 @@ const initReactMarkdownPostProcess: ReactPostProcessorModule = {
   type: "postProcessor",
   process: (value, key) => {
     // if there is no localization resource file or it is disabled
-    if (key === value) return value
+    // `ReactMarkdown` method causes issues
+    // return createElement(ReactMarkdown as ((props: { children: string }) => ReactElement), null, value)
 
     const lexer = new Lexer({ smartypants: true })
     const tokens = lexer.lex(value)
     const children = tokens.flatMap(token => {
-      // I don't why but for first tokens it always creates paragraphs
-      // So go through tokens in first `paragraph` tokens :<
+      // I don't why but for the first tokens it always creates paragraphs
+      // So go through the tokens of the first `paragraph` tokens :<
       if (token.type === "paragraph") {
         return token.tokens.map(createChildFromToken)
       }
@@ -69,8 +73,9 @@ const initReactMarkdownPostProcess: ReactPostProcessorModule = {
       return createChildFromToken(token)
     })
 
+    // If all children are plain `string`, return as it is
     if (children.every(child => typeof child === "string")) {
-      return children.join("")
+      return value
     }
 
     return children
