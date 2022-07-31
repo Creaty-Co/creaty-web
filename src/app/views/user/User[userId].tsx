@@ -35,7 +35,7 @@ function UserUserId() {
   useEffect(() => { query() }, [tRoot("lang.code")])
   // console.log(tRoot("lang.code"))
 
-  if (error) throw new Error("unexpected api error")
+  if (error) return <>useQuery error</>
   if (loading) return <LoaderCover white />
   if (!payload) return <>no payload</>
 

@@ -11,7 +11,7 @@ function AdminEditMentorView() {
   if (!params.mentorId) throw new Error("This component should be used in Route context")
 
   const { error, loading, payload } = useQuery(getMentorsId(+params.mentorId))
-  if (error) throw new Error("unexpected api query error")
+  if (error) return <>useQuery error</>
   if (loading) return <LoaderCover />
   if (!payload) return <>no content</>
 
