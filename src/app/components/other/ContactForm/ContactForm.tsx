@@ -29,7 +29,7 @@ function ContactForm(props: ContactFormProps) {
   const [socialMask, setSocialMask] = useState<InputMaskType<string>>()
 
   const { error, payload } = useQuery(getPagesLinksDocuments)
-  const links = payload?.results.reduce<Record<PageLinkType["type"], PageLinkType>>((result, next) => ({ ...result, [next.type]: next }), {} as never)
+  const links = payload?.results?.reduce<Record<PageLinkType["type"], PageLinkType>>((result, next) => ({ ...result, [next.type]: next }), {} as never)
 
   if (submitted) {
     return (
@@ -82,7 +82,7 @@ function ContactForm(props: ContactFormProps) {
     if (form == null) return []
     return form.fields.filter(includesSocial).map(field => {
       return {
-        title: t("fields")[field.type as "telegram", "facebook", "whats_app", "viber"].title,
+        title: t(`fields.${field.type as ("telegram" | "facebook" | "whats_app" | "viber")}.title`),
         value: field.type
       }
     })
