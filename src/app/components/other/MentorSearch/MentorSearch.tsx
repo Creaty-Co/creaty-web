@@ -1,6 +1,6 @@
 import "./MentorSearch.scss"
 
-import Button from "app/components/common/Button/Button"
+import ButtonLink from "app/components/common/Button/ButtonLink"
 import Icon from "app/components/common/Icon/Icon"
 import LoaderCover from "app/components/UI/Loader/LoaderCover"
 import TopicTag from "app/components/UI/Tag/TopicTag"
@@ -56,7 +56,7 @@ function MentorSearch() {
           <MentorSearchList value={value} visible={search.focused} />
           <Icon name="chevron" className="mentor-search__icon" modifiers={[search.focused && "up"]} />
         </label>
-        <Button color="violet" size="big" eventLabel="Search Form">{t("button")}</Button>
+        <ButtonLink color="violet" size="big" to="/mentors">{t("button")}</ButtonLink>
       </div>
     </div>
   )
