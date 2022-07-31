@@ -1,11 +1,8 @@
-import en from "./en.json"
-import ru from "./ru.json"
+import { ExtractArrayType } from "interfaces/common"
 
-const localeResources = {
-  en: { translation: en },
-  ru: { translation: ru }
-} as const
-export default localeResources
+import LocaleResourceSchemaJson from "./schema.json"
 
-export type LocaleResourcesType = typeof localeResources
-export type LocaleKeys = keyof LocaleResourcesType
+export const supportedLocales = ["ru", "en"] as const
+
+export type LocaleKeys = ExtractArrayType<typeof supportedLocales> | "dev"
+export type LocaleResourceSchema = typeof LocaleResourceSchemaJson

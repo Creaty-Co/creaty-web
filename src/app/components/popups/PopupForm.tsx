@@ -15,7 +15,7 @@ function PopupForm(props: PopupFormProps) {
   const { t: tPopup } = useTranslation("translation", { keyPrefix: "popups.popupForm" })
   const [submitted, setSubmitted] = useState(false)
   return (
-    <PopupLayout title={submitted ? tPopup("thanks") : t("forms")[props.type].title} width="35em">
+    <PopupLayout title={submitted ? tPopup("thanks") : t(`forms.${props.type}.title`)} width="35em">
       <ContactForm type={props.type} onSubmit={() => setSubmitted(true)} />
     </PopupLayout>
   )

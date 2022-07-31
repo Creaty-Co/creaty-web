@@ -53,7 +53,7 @@ function App() {
         <Provider store={store}>
           <I18nextProvider defaultNS={localeCurrent} i18n={i18next}>
             <ClientContextProvider client={ClientAPI}>
-              <Suspense fallback="Loading...">
+              <Suspense fallback="">
                 <ErrorBoundary fallback="Error">
                   <AppInit />
 
@@ -150,8 +150,7 @@ function Footer() {
   const { t } = useTranslation("translation", { keyPrefix: "footer" })
   const { error, payload } = useQuery(getPagesLinksDocuments)
 
-  if (error || !payload) return null
-  const links = payload.results.reduce<Record<PageLinkType["type"], PageLinkType>>((result, next) => ({ ...result, [next.type]: next }), {} as never)
+  const links = payload?.results.reduce<Record<PageLinkType["type"], PageLinkType>>((result, next) => ({ ...result, [next.type]: next }), {} as never)
   return (
     <footer>
       <div className="footer-container">
@@ -169,34 +168,34 @@ function Footer() {
             </div>
             <div className="footer-links__group">
               <div className="footer-links__title">{t("linkGroups.docs")}</div>
-              <AdminEditableValue editingArea="links" id={links.user_agreement.id}>
-                <OuterLink className="footer-links__link" to={links.user_agreement.url} eventLabel="terms">{t("links.terms", { policyLink: links.privacy_policy.url })}</OuterLink>
+              <AdminEditableValue editingArea="links" id={links?.user_agreement.id || ""}>
+                <OuterLink className="footer-links__link" to={links?.user_agreement.url || ""} eventLabel="terms">{t("links.terms", { policyLink: links?.privacy_policy.url })}</OuterLink>
               </AdminEditableValue>
-              <AdminEditableValue editingArea="links" id={links.privacy_policy.id}>
-                <OuterLink className="footer-links__link" to={links.privacy_policy.url} eventLabel="privacyPolicy">{t("links.privacyPolicy")}</OuterLink>
+              <AdminEditableValue editingArea="links" id={links?.privacy_policy.id || ""}>
+                <OuterLink className="footer-links__link" to={links?.privacy_policy.url || ""} eventLabel="privacyPolicy">{t("links.privacyPolicy")}</OuterLink>
               </AdminEditableValue>
-              <AdminEditableValue editingArea="links" id={links.cookie_policy.id}>
-                <OuterLink className="footer-links__link" to={links.cookie_policy.url} eventLabel="cookiePolicy">{t("links.cookiePolicy")}</OuterLink>
+              <AdminEditableValue editingArea="links" id={links?.cookie_policy.id || ""}>
+                <OuterLink className="footer-links__link" to={links?.cookie_policy.url || ""} eventLabel="cookiePolicy">{t("links.cookiePolicy")}</OuterLink>
               </AdminEditableValue>
             </div>
             <div className="footer-links__group">
               <div className="footer-links__title">{t("linkGroups.help")}</div>
-              <AdminEditableValue editingArea="links" id={links.help.id}>
-                <OuterLink className="footer-links__link" to={links.help.url} eventLabel="help">{t("links.support")}</OuterLink>
+              <AdminEditableValue editingArea="links" id={links?.help.id || ""}>
+                <OuterLink className="footer-links__link" to={links?.help.url || ""} eventLabel="help">{t("links.support")}</OuterLink>
               </AdminEditableValue>
             </div>
           </div>
           <div className="footer-links__social">
-            <AdminEditableValue editingArea="links" id={links.facebook.id}>
+            <AdminEditableValue editingArea="links" id={links?.facebook.id || ""}>
               <div>
                 <img src="/static/icons/facebook.svg" alt="facebook" />
-                <OuterLink to={links.facebook.url} className="ghost" eventLabel="facebook" />
+                <OuterLink to={links?.facebook.url || ""} className="ghost" eventLabel="facebook" />
               </div>
             </AdminEditableValue>
-            <AdminEditableValue editingArea="links" id={links.instagram.id}>
+            <AdminEditableValue editingArea="links" id={links?.instagram.id || ""}>
               <div>
                 <img src="/static/icons/instagram.svg" alt="instagram" />
-                <OuterLink to={links.instagram.url} className="ghost" eventLabel="instagram" />
+                <OuterLink to={links?.instagram.url || ""} className="ghost" eventLabel="instagram" />
               </div>
             </AdminEditableValue>
           </div>

@@ -3,7 +3,7 @@ import "./DropDown.scss"
 import { Children, ComponentProps, ReactElement, useState } from "react"
 import { classWithModifiers } from "utils/common"
 
-
+export type DropDownOption = ReactElement<ComponentProps<"option">>
 
 interface DropDownProps<V> {
   expanded: boolean
@@ -11,7 +11,7 @@ interface DropDownProps<V> {
 
   name?: string
   onSelect(value: V, children: unknown, index: number): void
-  children: ReactElement<ComponentProps<"option">>[]
+  children: DropDownOption[]
 }
 
 function DropDown<V = string | undefined>(props: DropDownProps<V>) {

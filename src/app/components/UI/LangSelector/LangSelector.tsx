@@ -1,7 +1,7 @@
 import "./LangSelector.scss"
 
 import useLocale from "i18n/hooks/useLocale"
-import localeResources from "i18n/locales"
+import { LocaleResourceSchema, supportedLocales } from "i18n/locales"
 import _ from "lodash"
 import { useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
@@ -9,11 +9,11 @@ import { classWithModifiers } from "utils/common"
 
 import Button from "../../common/Button/Button"
 import Icon from "../../common/Icon/Icon"
-import DropDown from "../DropDown/DropDown"
+import DropDown, { DropDownOption } from "../DropDown/DropDown"
 
 function LangSelector() {
   const parentRef = useRef<HTMLDivElement>(null)
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const [locale, setLocale] = useLocale()
   const [isExpanded, setIsExpanded] = useState(false)
   const mouseEnterRef = useRef<NodeJS.Timeout | null>(null)
@@ -24,6 +24,15 @@ function LangSelector() {
   function onMouseLeave() {
     mouseEnterRef.current = setTimeout(() => setIsExpanded(false), 250)
   }
+
+  const localeOptions: DropDownOption[] = supportedLocales.map((locale, index) => {
+    const resource = i18n.store.data[locale] as LocaleResourceSchema
+    const lang = resource.translation.lang
+
+    return (
+      <option value={lang.name} key={index}>{_.capitalize(lang.name)}, {lang.currency}</option>
+    )
+  })
   return (
     <div className="lang-selector" aria-label="Language selector" ref={parentRef} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
       <Button
@@ -31,21 +40,7 @@ function LangSelector() {
         iconRight={<Icon name="drop-down-triangle" className={classWithModifiers("lang-selector__icon", isExpanded && "up")} />}
         onClick={() => setIsExpanded(!isExpanded)}
       >{_.capitalize(t("lang.code"))}, {t("lang.currency")}</Button>
-      <DropDown expanded={isExpanded} default={locale} onSelect={setLocale}>
-        {Object.values(localeResources).map(({ translation: { lang } }, index) => (
-          <option value={lang.code} key={index}>{_.capitalize(lang.name)}, {lang.currency}</option>
-        ))}
-      </DropDown>
-      {/* <section className={classWithModifiers("lang-selector__list", isExpanded && "expanded")} role="listbox" aria-expanded={isExpanded}>
-        {langs.map((lang, index) => (
-          <button
-            className={classWithModifiers("lang-selector__option", currentLang.code === lang.code && "selected")}
-            role="option"
-            onClick={() => Localization.transit(lang.code)}
-            key={index}
-          >{_.capitalize(lang.name)}, {lang.currency}</button>
-        ))}
-      </section> */}
+      <DropDown expanded={isExpanded} default={locale} onSelect={setLocale}>{localeOptions}</DropDown>
     </div>
   )
 }

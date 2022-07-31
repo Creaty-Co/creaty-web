@@ -18,11 +18,7 @@ function BecomeMentor() {
       <div className="become-mentor__container">
         <div className="become-mentor__info">
           <h2 className="become-mentor__title heading">{t("title")}</h2>
-          <ul className="become-mentor__desc">
-            {t("descPoints").map((point, index) => (
-              <li key={index}>{point}</li>
-            ))}
-          </ul>
+          <div className="become-mentor__desc">{t("desc")}</div>
         </div>
         <div className="become-mentor__bottom">
           <Button size="big" color="dark" onClick={() => Modal.open(PopupForm, { type: "become_mentor", weak: true })}>{t("button")}</Button>
