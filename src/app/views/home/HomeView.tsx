@@ -105,10 +105,9 @@ function QAndA() {
   useEffect(() => { query() }, [t("code")])
   if (error) return <>useQuery error</>
   if (loading) return <LoaderCover white />
-  if (!payload) return <>no content</>
   return (
     <FAQ>
-      {payload.results.map((faq) => (
+      {payload?.results.map(faq => (
         <FAQClause summary={faq.question} key={faq.id}>
           <ReactMarkdown>{faq.answer}</ReactMarkdown>
           <AdminInterface>

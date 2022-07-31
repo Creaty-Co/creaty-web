@@ -19,6 +19,8 @@
 		}
 
 		.faq__summary {
+			padding-bottom: 1.5em;
+
 			.button .button__icon .icon {
 				transform: rotateX(180deg);
 			}
@@ -32,6 +34,7 @@
 	justify-content: space-between;
 
 	padding: 3em 3.5em;
+	transition: 200ms ease padding;
 
 	cursor: pointer;
 }
