@@ -6,21 +6,6 @@ import { Modal } from "modules/modal/controller"
 import { ReactNode } from "react"
 import { useTranslation } from "react-i18next"
 
-function asd(key: string, value: unknown): unknown {
-  if (key.length === 0) return value
-
-  switch (typeof value) {
-    case "object": {
-      return value
-    }
-
-    default:
-      return typeof value
-  }
-}
-
-console.log(JSON.stringify({ d: [1, 2, 3], g: { penis: 1 } }, asd).replace(/"/g, ""))
-
 function HelpfulCreaty() {
   const { t } = useTranslation("translation", { keyPrefix: "components.helpfulCreaty" })
   return (
