@@ -53,7 +53,7 @@ function App() {
         <Provider store={store}>
           <I18nextProvider defaultNS={localeCurrent} i18n={i18next}>
             <ClientContextProvider client={ClientAPI}>
-              <Suspense fallback="Loading...">
+              <Suspense fallback="">
                 <ErrorBoundary fallback="Error">
                   <AppInit />
 

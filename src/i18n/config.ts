@@ -1,6 +1,9 @@
+import { getPagesLocalesLanguageNamespace, putPagesLocalesLanguageNamespace } from "api/actions/pages"
+import ClientAPI from "api/client"
 import i18next from "i18next"
 import { initReactI18next } from "react-i18next"
 
+import initExternalResourceBackend from "./external-resource-backend"
 import { LocaleKeys, supportedLocales } from "./locales"
 import initReactMarkdownPostProcess from "./react-markdown-postprocess"
 
@@ -12,6 +15,7 @@ export const localeCurrent: LocaleKeys = localeLocalStorage || localeNavigator |
 i18next
   .use(initReactMarkdownPostProcess)
   .use(initReactI18next)
+  .use(initExternalResourceBackend)
   .init({
     lng: localeCurrent,
     interpolation: {
@@ -19,6 +23,23 @@ i18next
     },
     postProcess: ["reactMarkdownPostProcess"],
     returnObjects: true,
-    supportedLngs: supportedLocales
+    supportedLngs: supportedLocales,
+
+    backend: {
+      async get(language, namespace) {
+        const response = await ClientAPI.query(getPagesLocalesLanguageNamespace(language, namespace))
+
+        if (response.error) throw response.errorObject
+        if (response.payload == null) throw new Error("response.payload is empty")
+
+        return response.payload
+      },
+      async put(language, namespace, data) {
+        const response = await ClientAPI.query(putPagesLocalesLanguageNamespace(language, namespace, data))
+
+        if (response.error) return response.errorObject
+        if (response.payload == null) return new Error("response.payload is empty")
+      },
+    }
   })
 
