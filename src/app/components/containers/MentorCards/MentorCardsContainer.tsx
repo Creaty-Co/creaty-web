@@ -18,7 +18,7 @@ interface MentorCardsContainerProps {
 }
 
 function MentorCardsContainer(props: MentorCardsContainerProps) {
-  const { t } = useTranslation("translation", { keyPrefix: "other.pagination" })
+  const { t, i18n } = useTranslation("translation", { keyPrefix: "other.pagination" })
   const tagSet = props.tag ? [props.tag.id] : props.topic?.tags.map(tag => tag.id) || []
 
   const [page, setPage] = useState(1)
@@ -28,7 +28,7 @@ function MentorCardsContainer(props: MentorCardsContainerProps) {
   const { error, loading, payload, query } = useQuery(getMentors(page, pageSize, tagSet))
   if (error) return <>useQuery error</>
 
-  useEffect(() => { query() }, [t("showMore")])
+  useEffect(() => { query() }, [i18n.language])
   useEffect(() => {
     setPage(1)
     setResults(payload?.results || [])

@@ -25,6 +25,10 @@ i18next
     returnObjects: true,
     supportedLngs: supportedLocales,
 
+    react: {
+      bindI18n: "react-refresh"
+    },
+
     backend: {
       async get(language, namespace) {
         const response = await ClientAPI.query(getPagesLocalesLanguageNamespace(language, namespace))
@@ -42,4 +46,8 @@ i18next
       },
     }
   })
+
+i18next.on("languageChanged", () => {
+  i18next.emit("react-refresh")
+})
 

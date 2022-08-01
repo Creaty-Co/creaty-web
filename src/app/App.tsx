@@ -4,7 +4,7 @@ import "app/assets/scss/app.scss"
 import { getPagesLinksDocuments } from "api/actions/pages"
 import ClientAPI from "api/client"
 import useDirectLogin from "hooks/useDirectLogin"
-import { localeCurrent } from "i18n/config"
+import ReactJSONEditorContainer from "i18n/react-json-editor-thirdParty"
 import i18next from "i18next"
 import { PageLinkType } from "interfaces/types"
 import { UserType } from "interfaces/user"
@@ -51,7 +51,7 @@ function App() {
     <StrictMode>
       <BrowserRouter>
         <Provider store={store}>
-          <I18nextProvider defaultNS={localeCurrent} i18n={i18next}>
+          <I18nextProvider defaultNS="translation" i18n={i18next}>
             <ClientContextProvider client={ClientAPI}>
               <Suspense fallback="">
                 <ErrorBoundary fallback="Error">
@@ -63,6 +63,7 @@ function App() {
                   <Cookies />
                   <ModalContainer />
                   <ToastContainer />
+                  <AdminJSONEditorContainer />
                 </ErrorBoundary>
               </Suspense>
             </ClientContextProvider>
@@ -70,6 +71,20 @@ function App() {
         </Provider>
       </BrowserRouter>
     </StrictMode>
+  )
+}
+
+function AdminJSONEditorContainer() {
+  const user = useSelector(state => state.user)
+  const admin = useSelector(state => state.admin)
+
+  if (!user.auth) return null
+  if (user.type < UserType.admin) return null
+
+  if (!admin.editing) return null
+
+  return (
+    <ReactJSONEditorContainer i18n={i18next} />
   )
 }
 

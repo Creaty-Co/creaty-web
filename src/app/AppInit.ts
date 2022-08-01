@@ -8,7 +8,7 @@ import initSentry from "services/sentry"
 
 function AppInit() {
   const dispatch = useDispatch()
-  const { t } = useTranslation("translation")
+  const { i18n } = useTranslation("translation")
 
   useEffect(() => {
     window.addEventListener("load", () => {
@@ -20,7 +20,7 @@ function AppInit() {
   useEffect(() => {
     dispatch(formsFetch)
     dispatch(topicsFetch)
-  }, [t("lang.code")])
+  }, [i18n.language])
 
   return null
 }
