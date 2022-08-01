@@ -42,7 +42,7 @@ function createChildFromToken(token: marked.Token, key: Key): ReactNode {
     case "list":
       return createElement(token.ordered ? "ol" : "ul", { key }, token.items.map(createChildFromToken))
     case "list_item":
-      return createElement("", { key }, token.tokens.map(createChildFromToken))
+      return createElement("li", { key }, token.tokens.map(createChildFromToken))
 
     case "link": {
       if (token.href.startsWith("http") || token.href.startsWith("//")) {
