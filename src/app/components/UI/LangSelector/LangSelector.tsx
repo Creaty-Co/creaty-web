@@ -25,12 +25,14 @@ function LangSelector() {
     mouseEnterRef.current = setTimeout(() => setIsExpanded(false), 250)
   }
 
-  const localeOptions: DropDownOption[] = supportedLocales.map((locale, index) => {
+  const localeOptions: DropDownOption[] = supportedLocales.flatMap((locale, index) => {
     const resource = i18n.store.data[locale] as LocaleResourceSchema
+    if (resource == null) return []
     const lang = resource.translation.lang
+    if (lang == null) return []
 
     return (
-      <option value={lang.name} key={index}>{_.capitalize(lang.name)}, {lang.currency}</option>
+      <option value={lang.code} key={index}>{_.capitalize(lang.name)}, {lang.currency}</option>
     )
   })
   return (
