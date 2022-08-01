@@ -11,7 +11,7 @@ import { Link } from "react-router-dom"
 interface ReactPostProcessorModule {
   name: string
   type: "postProcessor"
-  process(value: string, key: string, options: TOptions, translator: unknown): ReactNode;
+  process(value: string, key: string[], options: TOptions, translator: unknown): ReactNode;
 }
 
 /**
@@ -40,9 +40,9 @@ function createChildFromToken(token: marked.Token, key: Key): ReactNode {
       return createElement(token.type, { key })
 
     case "list":
-      return createElement("ul", { key }, token.items.map(createChildFromToken))
+      return createElement(token.ordered ? "ol" : "ul", { key }, token.items.map(createChildFromToken))
     case "list_item":
-      return createElement("li", { key }, token.tokens.map(createChildFromToken))
+      return createElement("", { key }, token.tokens.map(createChildFromToken))
 
     case "link": {
       if (token.href.startsWith("http") || token.href.startsWith("//")) {
@@ -62,6 +62,10 @@ const initReactMarkdownPostProcess: ReactPostProcessorModule = {
   type: "postProcessor",
   process: (value, key) => {
     // if there is no localization resource file or it is disabled
+    if (key[0] === value) {
+      return key
+    }
+
     // `ReactMarkdown` method causes issues
     // return createElement(ReactMarkdown as ((props: { children: string }) => ReactElement), null, value)
 
