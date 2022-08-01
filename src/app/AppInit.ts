@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next"
 import { useDispatch } from "react-redux"
 import { formsFetch } from "redux/reducers/forms"
 import { topicsFetch } from "redux/reducers/topics"
+import initSentry from "services/sentry"
 
 function AppInit() {
   const dispatch = useDispatch()
@@ -34,3 +35,5 @@ if (process.env.REACT_APP_API_GA) {
   alert(message)
   console.warn(message)
 }
+
+initSentry()
