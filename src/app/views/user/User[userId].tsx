@@ -24,7 +24,7 @@ function UserUserId() {
   useScrollToTop()
   const navigate = useNavigate()
 
-  const { t } = useTranslation("translation", { keyPrefix: "views.mentor" })
+  const { t, i18n } = useTranslation("translation", { keyPrefix: "views.mentor" })
   const { t: tRoot } = useTranslation("translation")
 
   const params = useParams<"userId">()
@@ -32,8 +32,7 @@ function UserUserId() {
 
   const { error, loading, payload, query } = useQuery(getMentorsId(+params.userId))
   const { error: error2, payload: payload2 } = useQuery(getPagesLinksDocuments)
-  useEffect(() => { query() }, [tRoot("lang.code")])
-  // console.log(tRoot("lang.code"))
+  useEffect(() => { query() }, [i18n.language])
 
   if (error) return <>useQuery error</>
   if (loading) return <LoaderCover white />

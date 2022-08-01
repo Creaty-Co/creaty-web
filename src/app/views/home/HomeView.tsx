@@ -34,10 +34,10 @@ import MailingSubscribe from "./MailingSubscribe/MailingSubscribe"
 function HomeView() {
   useScrollToTop()
   const dispatch = useDispatch()
-  const { t } = useTranslation("translation", { keyPrefix: "views.home" })
+  const { t, i18n } = useTranslation("translation", { keyPrefix: "views.home" })
   const params = useParams<"shortcut">()
   const { payload, query } = useQuery(params.shortcut ? getPagePersonal(params.shortcut) : getPagesMain)
-  useEffect(() => { query() }, [t("help.title")])
+  useEffect(() => { query() }, [i18n.language])
   useEffect(() => {
     dispatch(updateSearch({
       tag: undefined,
@@ -100,9 +100,9 @@ function HomeView() {
 
 
 function QAndA() {
-  const { t } = useTranslation("translation", { keyPrefix: "lang" })
+  const { i18n } = useTranslation("translation", { keyPrefix: "lang" })
   const { error, loading, payload, query } = useQuery(getPagesFAQs)
-  useEffect(() => { query() }, [t("code")])
+  useEffect(() => { query() }, [i18n.language])
   if (error) return <>useQuery error</>
   if (loading) return <LoaderCover white />
   return (
