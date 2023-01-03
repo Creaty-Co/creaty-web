@@ -149,6 +149,12 @@
           }
         },
         "mayDiscussLater": "string",
+        "submits": {
+          "still_questions": "string",
+          "become_mentor": "string",
+          "choose_mentor": "string",
+          "test_meeting": "string"
+        },
         "submit": "string",
         "terms": "string"
       },

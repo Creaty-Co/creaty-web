@@ -100,6 +100,7 @@ function Header() {
   return (
     <header>
       <AdminTopbar />
+
       <div className="topbar">
         <div aria-label="Home">
           <img src="/static/images/logo.svg" alt="logo" className="topbar__logo" />
@@ -123,6 +124,7 @@ function Header() {
 
 
 function Main() {
+  console.log(123)
   useDirectLogin()
   return (
     <main>

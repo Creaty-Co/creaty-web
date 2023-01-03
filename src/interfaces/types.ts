@@ -39,6 +39,12 @@ export interface TopicType {
 
 /* Mentors */
 
+export interface MenorPage {
+  id: number | null
+  tag: number | null
+  category: number | null
+}
+
 export interface MentorType {
   id: number
   avatar: string
@@ -54,6 +60,7 @@ export interface MentorType {
   }
   tags: TagType[]
   packages: MentorPackageType[]
+  pages?: MenorPage[]
 }
 
 export interface MentorPackageType {
