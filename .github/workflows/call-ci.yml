@@ -25,11 +25,14 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      - run: |
+          repository=${{ github.repository }}
+          echo "REPOSITORY=${repository,,}" >> ${GITHUB_ENV}
       - name: Build and push docker image
         uses: docker/build-push-action@v3.2.0
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ github.repository }}/web:${{ inputs.tag }}
-          cache-from: type=registry,ref=ghcr.io/${{ github.repository }}/web:${{ inputs.tag }}
+          tags: ghcr.io/${{ env.REPOSITORY }}/web:${{ inputs.tag }}
+          cache-from: type=registry,ref=ghcr.io/${{ env.REPOSITORY }}/web:${{ inputs.tag }}
           cache-to: type=inline
