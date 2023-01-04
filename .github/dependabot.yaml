@@ -35,8 +35,8 @@ updates:
       separator: "-"
     ignore:
       - dependency-name: "react"
-        version: "*"
+        versions: "*"
       - dependency-name: "react-dom"
-        version: "*"
+        versions: "*"
       - dependency-name: "react-scripts"
-        version: "*"
+        versions: "*"
