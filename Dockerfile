@@ -1,15 +1,18 @@
-# * Dockerfile only for building purposes and not serving app
-# * Served by outer service
+FROM node:15.14.0 as builder
 
-FROM node:14 as build-deps
-
-WORKDIR /usr/src/app
+WORKDIR /web
 
 COPY package.json package-lock.json ./
 RUN npm i --silent
 RUN npm i -g serve
-COPY . ./
+COPY . .
 RUN npm run build
 
-# Serve command
-# CMD serve -s build
+FROM ubuntu:22.10 as web
+
+WORKDIR /web
+
+COPY --from=builder /web .
+
+RUN cd .. && mv web/build build && rm -r web && mv build web
+RUN gzip -rkv9 .
