@@ -1,0 +1,13 @@
+name: "Push: not main"
+
+on:
+  push:
+    branches-ignore:
+      - 'main'
+
+jobs:
+  ci:
+    uses: ./.github/workflows/call-ci.yml
+    with:
+      push: false
+    secrets: inherit
