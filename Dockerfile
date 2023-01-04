@@ -1,4 +1,4 @@
-FROM node:15.14.0 as builder
+FROM node:19.3.0 as builder
 
 WORKDIR /web
 
