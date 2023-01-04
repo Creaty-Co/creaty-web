@@ -34,9 +34,9 @@ updates:
     pull-request-branch-name:
       separator: "-"
     ignore:
-      - package: "react"
+      - dependency-name: "react"
         version: "*"
-      - package: "react-dom"
+      - dependency-name: "react-dom"
         version: "*"
-      - package: "react-scripts"
+      - dependency-name: "react-scripts"
         version: "*"
