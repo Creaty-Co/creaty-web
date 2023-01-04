@@ -2,6 +2,15 @@ name: CI
 
 on:
   workflow_call:
+    inputs:
+      tag:
+        required: false
+        type: string
+        default: latest
+      push:
+        required: false
+        type: boolean
+        default: true
   workflow_dispatch:
     inputs:
       tag:
