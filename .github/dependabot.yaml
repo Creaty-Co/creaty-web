@@ -33,7 +33,7 @@ updates:
       prefix: "⬆️ "
     pull-request-branch-name:
       separator: "-"
-    ignores:
+    ignore:
       - package: "react"
         version: "*"
       - package: "react-dom"
