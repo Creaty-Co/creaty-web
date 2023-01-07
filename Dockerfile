@@ -1,4 +1,4 @@
-FROM node:15.14.0 as builder
+FROM node:14 as builder
 
 WORKDIR /web
 
@@ -6,6 +6,7 @@ COPY package.json package-lock.json ./
 RUN npm i --silent
 RUN npm i -g serve
 COPY . .
+RUN ls
 RUN npm run build
 
 FROM ubuntu:22.10 as web
