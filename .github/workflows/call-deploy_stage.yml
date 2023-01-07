@@ -2,11 +2,14 @@ name: "Call: Deploy stage"
 
 on:
   workflow_call:
-  workflow_despatch:
+  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: [ self-hosted ]
+    environment:
+      name: stage
+      url: 'https://test.creaty.club'
     steps:
     - name: Deploy stage environment
       run: |
