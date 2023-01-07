@@ -1,0 +1,14 @@
+name: "Call: Deploy stage"
+
+on:
+  workflow_call:
+  workflow_despatch:
+
+jobs:
+  deploy:
+    runs-on: [ self-hosted ]
+    steps:
+    - name: Deploy stage environment
+      run: |
+        cd /home/www/runner/work/creaty-api/creaty-api
+        sudo docker-compose -f docker/stage/docker-compose.stage.yml up --build -d
