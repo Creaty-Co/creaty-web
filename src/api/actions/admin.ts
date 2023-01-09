@@ -22,6 +22,5 @@ export const getAdminMentors = (page: number, page_size: number): Action<Paginat
 }>> => ({
   method: "GET",
   endpoint: "/admin/mentors",
-  params: { page, page_size },
-  cache: "no-cache"
+  params: { page, page_size }
 })

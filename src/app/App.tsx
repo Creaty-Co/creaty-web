@@ -32,7 +32,6 @@ import Icon from "./components/common/Icon/Icon"
 import PopupForm from "./components/popups/PopupForm"
 import ErrorBoundary from "./components/services/ErrorBoundary"
 import OuterLink from "./components/services/OuterLink"
-import LangSelector from "./components/UI/LangSelector/LangSelector"
 import AdminFormsView from "./views/admin/AdminFormsView/AdminFormsView"
 import AdminMailings from "./views/admin/AdminMailings/AdminMailings"
 import AdminMentorsView from "./views/admin/AdminMentorsView/AdminMentorsView"
@@ -124,7 +123,6 @@ function Header() {
 
 
 function Main() {
-  console.log(123)
   useDirectLogin()
   return (
     <main>

@@ -149,12 +149,6 @@
           }
         },
         "mayDiscussLater": "string",
-        "submits": {
-          "still_questions": "string",
-          "become_mentor": "string",
-          "choose_mentor": "string",
-          "test_meeting": "string"
-        },
         "submit": "string",
         "terms": "string"
       },
@@ -197,16 +191,20 @@
       },
       "forms": {
         "become_mentor": {
-          "title": "string"
+          "title": "string",
+          "submitText": "string"
         },
         "choose_mentor": {
-          "title": "string"
+          "title": "string",
+          "submitText": "string"
         },
         "test_meeting": {
-          "title": "string"
+          "title": "string",
+          "submitText": "string"
         },
         "still_questions": {
-          "title": "string"
+          "title": "string",
+          "submitText": "string"
         }
       }
     }

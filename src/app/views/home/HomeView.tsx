@@ -45,8 +45,6 @@ function HomeView() {
     }))
   }, [])
 
-  console.log("payload", payload)
-
   return (
     <div className="home-view">
       <div className="home-view__header">

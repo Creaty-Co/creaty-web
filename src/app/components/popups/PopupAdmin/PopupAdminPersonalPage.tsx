@@ -6,15 +6,11 @@ import ClientAPI from "api/client"
 import Button from "app/components/common/Button/Button"
 import Checkbox from "app/components/UI/Checkbox/Checkbox"
 import Form, { FormState } from "app/components/UI/Form/Form"
-import MentorCard from "app/components/UI/MentorCard/MentorCard"
-import { changeLanguage } from "i18next"
 import { MentorType, TagType } from "interfaces/types"
-import { remove } from "lodash"
 import { useModal } from "modules/modal/hook"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { toast } from "react-toastify"
-import { useSetState } from "react-use"
 import { formsFetch } from "redux/reducers/forms"
 
 import PopupLayout from "../PopupLayout"
@@ -69,9 +65,7 @@ interface MentorPage {
 
 const mainMentorPage: MentorPage = { id: 0, shortcut: "main", title: "Главная страница" }
 export function PopupAdminPersonalMentors(props: PopupAdminPersonalMentorsProps) {
-  const dispatch = useDispatch()
   const { close } = useModal()
-  const [loaded, setLoaded] = useState(false)
   const [changedIds, setChangedIds] = useState<number[]>([])
   const [list, setList] = useState<MentorPage[]>([mainMentorPage])
   
@@ -91,18 +85,6 @@ export function PopupAdminPersonalMentors(props: PopupAdminPersonalMentorsProps)
       if (prev.includes(id)) return prev.filter(i => i !== id)
       else return [...prev, id]
     })
-  }
-
-  async function addOrRemoveMentor(isAdding: boolean, shortcut: string) {
-    const APIAction =
-      isAdding
-        ? shortcut === "main" ? patchPagesMainMentor(props.mentor.id) : patchPagePersonalMentor(shortcut, props.mentor.id)
-        : shortcut === "main" ? deletePagesMainMentor(props.mentor.id) : deletePagePersonalMentor(shortcut, props.mentor.id)
-
-    const { error } = await ClientAPI.query(APIAction)
-    if (error) return
-
-    toast.info((isAdding ? "Ментор был добавлен в " : "Ментор был убран из ") + shortcut)
   }
 
   const handleSave = (): void => {
@@ -158,10 +140,12 @@ export function PopupAdminPersonalMentors(props: PopupAdminPersonalMentorsProps)
       pages.push(...addedPage)
       
       if (mainChanged) {
-        if (mainAdded)
+        if (mainAdded) {
           props.mentor.pages = [...mainPage, ...pages]
-        else
+        }
+        else {
           props.mentor.pages = [...pages].filter(p => !(p.tag === null && p.category === null))
+        }
       } else {
         props.mentor.pages = [...pages]
       }
@@ -217,36 +201,5 @@ export function PopupAdminPersonalMentors(props: PopupAdminPersonalMentorsProps)
         {rTagsContainer}
       </div>
     </PopupLayoutChanged>
-  // return (
-  //   <PopupLayoutChanged title="Изменить менторов" width="35em">
-  //     <div className="popup-admin-personal-page">
-  //       <div>
-  //         Главная
-  //         <Button color="green" await onClick={async () => await addOrRemoveMentor(true, "main")}>Добавить</Button>
-  //         <Button color="violet" await onClick={async () => await addOrRemoveMentor(false, "main")}>Удалить</Button>
-  //         {/* <input name="main" type="checkbox" onChange={onChange} /> */}
-  //       </div>
-  //       {topics.tags.map(tag => (
-  //         <div key={tag.id}>
-  //           {tag.title}
-  //           <Button color="green" await onClick={async () => await addOrRemoveMentor(true, tag.shortcut)}>Добавить</Button>
-  //           <Button color="violet" await onClick={async () => await addOrRemoveMentor(false, tag.shortcut)}>Удалить</Button>
-  //           {/* <input name={tag.shortcut} type="checkbox" onChange={onChange} /> */}
-  //         </div>
-  //       ))}
-  //     </div>
-  //   </PopupLayoutChanged>
-
-  // async function addOrRemoveMentor(isAdding: boolean, shortcut: string) {
-  //   const APIAction =
-  //     isAdding
-  //       ? shortcut === "main" ? patchPagesMainMentor(props.mentor.id) : patchPagePersonalMentor(shortcut, props.mentor.id)
-  //       : shortcut === "main" ? deletePagesMainMentor(props.mentor.id) : deletePagePersonalMentor(shortcut, props.mentor.id)
-
-  //   const { error } = await ClientAPI.query(APIAction)
-  //   if (error) return
-
-  //   toast.info((isAdding ? "Ментор был добавлен в " : "Ментор был убран из ") + shortcut)
-  // }
   )
 }

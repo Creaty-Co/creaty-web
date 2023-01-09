@@ -25,10 +25,7 @@ const DEFAULT_PAGE_SIZE = 20
 function AdminMentorsView() {
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE)
-  ClientAPI.cache?.remove(getAdminMentors(page, pageSize))
-  const { payload, loading, reset, query} = useQuery(getAdminMentors(page, pageSize))
-
-  console.log("payload", payload?.results)
+  const { payload, loading } = useQuery(getAdminMentors(page, pageSize))
 
   return (
     <AdminViewLayout maxWidth="75vw">
