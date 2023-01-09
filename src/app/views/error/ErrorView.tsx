@@ -11,10 +11,10 @@ function ErrorView({
   error,
   errorCode = "404"
 } : ErrorViewProps) {
-  const msg = error? error.message : "Ooops, something goes wrong...";
+  const msg = error? error.message : "Ooops, something goes wrong..."
   const code = error
     ? errorCode !== "404"? errorCode : error.name
-    : "404";
+    : "404"
   
   return (
     <div className="error-view">

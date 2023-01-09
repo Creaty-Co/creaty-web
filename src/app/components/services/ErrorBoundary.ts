@@ -31,10 +31,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
       description: "An error ocurred",
       errorName: error.name,
       errorMessage: error.message
-    });
-
-    console.log('error: ', error);
-    console.log('error info:', errorInfo);
+    })
 
     this.setState({ error, errorInfo })
   }
