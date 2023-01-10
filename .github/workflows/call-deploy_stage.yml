@@ -9,7 +9,7 @@ jobs:
     runs-on: self-hosted
     environment:
       name: stage
-      url: 'http://stage.creaty.club:81'
+      url: 'http://stage.creaty.club'
     steps:
       - name: Pull web docker image
         run: docker pull ghcr.io/creaty-co/creaty-web/web:latest
