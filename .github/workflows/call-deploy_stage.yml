@@ -6,12 +6,14 @@ on:
 
 jobs:
   deploy:
-    runs-on: [ self-hosted ]
+    runs-on: self-hosted
     environment:
       name: stage
-      url: 'https://test.creaty.club'
+      url: 'http://stage.creaty.club:81'
     steps:
-    - name: Deploy stage environment
-      run: |
-        cd /home/www/runner/work/creaty-api/creaty-api
-        sudo docker-compose -f docker/stage/docker-compose.stage.yml up --build -d
+      - name: Pull web docker image
+        run: docker pull ghcr.io/creaty-co/creaty-web/web:latest
+      - name: Deploy stage environment
+        run: |
+          cd /home/www/runner/work/creaty-api/creaty-api
+          docker-compose -f docker/stage/docker-compose.stage.yml up --build -d
