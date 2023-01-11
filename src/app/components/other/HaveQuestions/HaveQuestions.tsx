@@ -7,6 +7,7 @@ import ContactForm from "../ContactForm/ContactForm"
 
 function HaveQuestions() {
   const { t } = useTranslation("translation", { keyPrefix: "components.haveQuestions" })
+  const { t: tForm } = useTranslation("translation", { keyPrefix: "other.forms.still_questions" })
   return (
     <div className="have-questions">
       <div className="have-questions__info">
@@ -14,7 +15,7 @@ function HaveQuestions() {
         <p className="have-questions__desc">{t("desc")}</p>
       </div>
       <div className="have-questions__form">
-        <ContactForm type="still_questions" />
+        <ContactForm type="still_questions" submitText={tForm("submitText")} />
       </div>
     </div>
   )
