@@ -26,6 +26,7 @@ function AdminMentorsView() {
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE)
   const { payload, loading } = useQuery(getAdminMentors(page, pageSize))
+
   return (
     <AdminViewLayout maxWidth="75vw">
       <AdminGroupLayout title="Добавить Ментора">

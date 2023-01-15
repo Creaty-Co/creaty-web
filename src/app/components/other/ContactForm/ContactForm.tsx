@@ -113,7 +113,9 @@ function ContactForm(props: ContactFormProps) {
           </div>
         )}
       </div>
+      
       <Button className="contact-form__submit" size="big" type="submit" color="dark" eventLabel="Contact Form">{props.submitText || t("submit")}</Button>
+
       <div className="contact-form__terms">{t("terms", { policyLink: links?.privacy_policy.url })}</div>
     </form>
   )

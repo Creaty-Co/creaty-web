@@ -16,7 +16,7 @@ function PopupForm(props: PopupFormProps) {
   const [submitted, setSubmitted] = useState(false)
   return (
     <PopupLayout title={submitted ? tPopup("thanks") : t(`forms.${props.type}.title`)} width="35em">
-      <ContactForm type={props.type} onSubmit={() => setSubmitted(true)} />
+      <ContactForm submitText={t(`forms.${props.type}.submitText`)} type={props.type} onSubmit={() => setSubmitted(true)} />
     </PopupLayout>
   )
 }

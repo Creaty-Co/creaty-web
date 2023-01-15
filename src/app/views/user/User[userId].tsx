@@ -167,7 +167,4 @@ function UserSection(props: UserSectionProps) {
   )
 }
 
-
-
-
 export default UserUserId

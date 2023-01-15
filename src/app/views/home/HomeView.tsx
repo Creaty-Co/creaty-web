@@ -44,6 +44,7 @@ function HomeView() {
       topic: undefined
     }))
   }, [])
+
   return (
     <div className="home-view">
       <div className="home-view__header">
