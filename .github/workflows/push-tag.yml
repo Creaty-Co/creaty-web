@@ -1,0 +1,13 @@
+name: "Push: tag"
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  ci:
+    uses: ./.github/workflows/call-ci.yml
+    secrets: inherit
+    with:
+      tag: ${{ github.ref_name }}
