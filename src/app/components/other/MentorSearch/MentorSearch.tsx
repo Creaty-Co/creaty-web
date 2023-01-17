@@ -7,7 +7,7 @@ import TopicTag from "app/components/UI/Tag/TopicTag"
 import useClickAway from "hooks/useClickAway"
 import { MouseEvent, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { useDispatch, useSelector } from "react-redux"
+import { DefaultRootState, useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { updateSearch } from "redux/reducers/search"
 import { classWithModifiers } from "utils/common"
@@ -15,7 +15,7 @@ import { classWithModifiers } from "utils/common"
 
 function MentorSearch() {
   const dispatch = useDispatch()
-  const search = useSelector(state => state.search)
+  const search = useSelector<DefaultRootState, DefaultRootState["search"]>(state => state.search)
 
   const { t } = useTranslation("translation", { keyPrefix: "views.home.mentorSearch" })
   const [value, setValue] = useState("")
@@ -87,7 +87,7 @@ function MentorSearchListDynamic(props: MentorSearchListProps & { value: string 
   }
 
 
-  const topics = useSelector(state => state.topics)
+  const topics = useSelector<DefaultRootState, DefaultRootState["topics"]>(state => state.topics)
 
   const searchLowerCaseValue = props.value.toLowerCase()
   const findSearchValueEntry = (value: string) => value.toLowerCase().search(searchLowerCaseValue)
@@ -135,8 +135,8 @@ function MentorSearchListStatic() {
   const dispatch = useDispatch()
 
   const { t } = useTranslation("translation", { keyPrefix: "views.home.mentorSearch" })
-  const topics = useSelector(state => state.topics)
-  const search = useSelector(state => state.search)
+  const topics = useSelector<DefaultRootState, DefaultRootState["topics"]>(state => state.topics)
+  const search = useSelector<DefaultRootState, DefaultRootState["search"]>(state => state.search)
 
   function collapseSearchList(event: MouseEvent) {
     // stop propagation of `MentorSearch Blur` callback

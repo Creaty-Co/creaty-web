@@ -9,7 +9,7 @@ import Form, { FormState } from "app/components/UI/Form/Form"
 import { MentorType, TagType } from "interfaces/types"
 import { useModal } from "modules/modal/hook"
 import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { DefaultRootState, useDispatch, useSelector } from "react-redux"
 import { toast } from "react-toastify"
 import { formsFetch } from "redux/reducers/forms"
 
@@ -24,7 +24,7 @@ interface PopupAdminPersonalTagsProps {
 export function PopupAdminPersonalTags(props: PopupAdminPersonalTagsProps) {
   const { close } = useModal()
   const dispatch = useDispatch()
-  const topics = useSelector(state => state.topics)
+  const topics = useSelector<DefaultRootState, DefaultRootState["topics"]>(state => state.topics)
   enum FormInputs {
     tags = "tags"
   }
@@ -69,7 +69,7 @@ export function PopupAdminPersonalMentors(props: PopupAdminPersonalMentorsProps)
   const [changedIds, setChangedIds] = useState<number[]>([])
   const [list, setList] = useState<MentorPage[]>([mainMentorPage])
   
-  const topics = useSelector(state => state.topics)
+  const topics = useSelector<DefaultRootState, DefaultRootState["topics"]>(state => state.topics)
 
   useEffect(() => {
     setList([mainMentorPage])

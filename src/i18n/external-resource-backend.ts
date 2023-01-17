@@ -1,26 +1,9 @@
-import i18next, { BackendModule, Resource } from "i18next"
-
-declare module "i18next" {
-  interface PluginOptions {
-    backend: {
-      /**
-       * GET request
-       */
-      get(language: string, namespace: string): Promise<ResourceKey>
-      /**
-       * POST, PUT, PATCH Request.
-       * 
-       * @returns `Error`
-       */
-      put?(language: string, namespace: string, data: ResourceKey): Promise<Error | null>
-    }
-  }
-}
+import i18next, { BackendModule, BackendOptions, Resource } from "i18next"
 
 const resources: Resource = {}
 
 async function getResourceLanguage(language: string, namespace: string) {
-  const resourceLanguage = await i18next.options.backend.get(language, namespace)
+  const resourceLanguage = await (<BackendOptions>i18next.options.backend).get(language, namespace)
   return resourceLanguage
 }
 

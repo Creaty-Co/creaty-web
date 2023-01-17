@@ -14,7 +14,7 @@ import { StrictMode, Suspense, useEffect, useRef, useState } from "react"
 import { ClientContextProvider, useQuery } from "react-fetching-library"
 import ReactGA from "react-ga4"
 import { I18nextProvider, useTranslation } from "react-i18next"
-import { Provider, useSelector } from "react-redux"
+import { DefaultRootState, Provider, useSelector } from "react-redux"
 import { Route, Routes } from "react-router"
 import { useLocation } from "react-router"
 import { BrowserRouter } from "react-router-dom"
@@ -55,7 +55,6 @@ function App() {
               <Suspense fallback="">
                 <ErrorBoundary fallback="Error">
                   <AppInit />
-
                   <Header />
                   <Main />
                   <Footer />
@@ -74,8 +73,8 @@ function App() {
 }
 
 function AdminJSONEditorContainer() {
-  const user = useSelector(state => state.user)
-  const admin = useSelector(state => state.admin)
+  const user = useSelector<DefaultRootState, DefaultRootState["user"]>(state => state.user)
+  const admin = useSelector<DefaultRootState, DefaultRootState["admin"]>(state => state.admin)
 
   if (!user.auth) return null
   if (user.type < UserType.admin) return null
@@ -120,8 +119,6 @@ function Header() {
   )
 }
 
-
-
 function Main() {
   useDirectLogin()
   return (
@@ -142,7 +139,7 @@ function Main() {
 }
 
 function AdminViews() {
-  const user = useSelector(state => state.user)
+  const user = useSelector<DefaultRootState, DefaultRootState["user"]>(state => state.user)
   if (!user.auth || user.type < UserType.admin) return null
   return (
     <Routes>

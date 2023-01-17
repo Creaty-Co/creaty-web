@@ -10,7 +10,7 @@ import { FormFieldType, FormType } from "interfaces/types"
 import _ from "lodash"
 import { FormEvent } from "react"
 import { useTranslation } from "react-i18next"
-import { useDispatch, useSelector } from "react-redux"
+import { DefaultRootState, useDispatch, useSelector } from "react-redux"
 import { formsFetch } from "redux/reducers/forms"
 import { FileToURLDataBase64 } from "utils/common"
 
@@ -20,7 +20,7 @@ const formTypes = ["name", "email", "telegram", "facebook", "whats_app", "viber"
 function AdminFormsView() {
   const dispatch = useDispatch()
   const { t } = useTranslation("translation", { keyPrefix: "other" })
-  const forms = useSelector(state => state.forms)
+  const forms = useSelector<DefaultRootState, DefaultRootState["forms"]>(state => state.forms)
   const formsKeys = Object.keys(forms) as FormType["type"][]
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
