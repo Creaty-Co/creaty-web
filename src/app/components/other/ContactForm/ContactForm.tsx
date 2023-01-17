@@ -12,7 +12,8 @@ import { ChangeEvent, FormEvent, useState } from "react"
 import { useQuery } from "react-fetching-library"
 import { useTranslation } from "react-i18next"
 import ReactMarkdown from "react-markdown"
-import { useSelector } from "react-redux"
+import { DefaultRootState, useSelector } from "react-redux"
+
 
 
 interface ContactFormProps {
@@ -24,7 +25,7 @@ interface ContactFormProps {
 
 function ContactForm(props: ContactFormProps) {
   const { t } = useTranslation("translation", { keyPrefix: "components.contactForm" })
-  const form = useSelector(state => state.forms[props.type])
+  const form = useSelector<DefaultRootState, FormType | undefined>(state => state.forms[props.type])
   const [submitted, setSubmitted] = useState(false)
   const [socialMask, setSocialMask] = useState<InputMaskType<string>>()
 

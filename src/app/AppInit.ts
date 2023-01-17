@@ -27,7 +27,6 @@ function AppInit() {
 
 export default AppInit
 
-
 if (process.env.REACT_APP_API_GA) {
   ReactGA.initialize(process.env.REACT_APP_API_GA)
 } else {

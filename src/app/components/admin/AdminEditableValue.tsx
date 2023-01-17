@@ -3,7 +3,7 @@ import ClientAPI from "api/client"
 import useClickAway from "hooks/useClickAway"
 import { FormElements } from "interfaces/common"
 import { Children, FormEvent, ReactElement, useRef, useState } from "react"
-import { useSelector } from "react-redux"
+import { DefaultRootState, useSelector } from "react-redux"
 import { classWithModifiers } from "utils/common"
 
 import Button from "../common/Button/Button"
@@ -21,7 +21,7 @@ interface AdminEditableValueProps {
 }
 
 function AdminEditableValue(props: AdminEditableValueProps) {
-  const admin = useSelector(state => state.admin)
+  const admin = useSelector<DefaultRootState, DefaultRootState["admin"]>(state => state.admin)
   if (admin.editing) {
     return (
       <AdminEditableValueContainer {...props} />

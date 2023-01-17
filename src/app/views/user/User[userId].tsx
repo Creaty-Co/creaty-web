@@ -40,7 +40,6 @@ function UserUserId() {
 
   const links = payload2?.results.reduce<Record<PageLinkType["type"], PageLinkType>>((result, next) => ({ ...result, [next.type]: next }), {} as never)
 
-
   return (
     <div className="user">
       <div className="user-card">

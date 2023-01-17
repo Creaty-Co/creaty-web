@@ -3,10 +3,10 @@ import "./ReactJSONEditorContainer.scss"
 
 import Button from "app/components/common/Button/Button"
 import LangSelector from "app/components/UI/LangSelector/LangSelector"
-import { i18n, ResourceLanguage } from "i18next"
+import { BackendOptions,i18n, ResourceLanguage } from "i18next"
+// import { BackendOptions,i18n, ResourceLanguage } from "i18next"
 import JSONEditor, { JSONEditorOptions } from "jsoneditor"
 import { Component, createRef } from "react"
-
 
 interface JSONEditorContainerProps {
   i18n: i18n
@@ -65,13 +65,13 @@ class ReactJSONEditorContainer extends Component<JSONEditorContainerProps> {
 
     this.editor = editor
   }
-
+  
   async putUpdate() {
     const data = this.editor?.get()
     if (data == null) return
 
     const i18n = this.props.i18n
-    const put = i18n.options.backend.put
+    const put = (i18n.options.backend as BackendOptions).put
     if (put == null) return
 
 

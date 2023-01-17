@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { useSelector } from "react-redux"
+import { DefaultRootState, useSelector } from "react-redux"
 
 
 const ENTER_INTERVAL = 100
@@ -12,7 +12,7 @@ interface DynamicPrimaryInfoProps {
 }
 
 function DynamicPrimaryInfo(props: DynamicPrimaryInfoProps) {
-  const topics = useSelector(state => state.topics)
+  const topics = useSelector<DefaultRootState, DefaultRootState["topics"]>(state => state.topics)
   const { t } = useTranslation("translation", { keyPrefix: "views.home.primaryInfo" })
 
   const rejectRef = useRef<Function>()
