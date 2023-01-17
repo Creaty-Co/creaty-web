@@ -1,10 +1,12 @@
 import * as Sentry from "@sentry/react"
 import { BrowserTracing } from "@sentry/tracing"
 
+/*
 interface HTTPData {
   method: "POST" | "GET"
   url: string
 }
+*/
 
 function initSentry() {
   Sentry.init({
@@ -12,19 +14,19 @@ function initSentry() {
     integrations: [new BrowserTracing()],
     maxBreadcrumbs: 50,
     allowUrls: [location.host],
-    beforeBreadcrumb(breadcrumb, hint?) {
+    beforeBreadcrumb(breadcrumb/*, hint?*/) {
       if (["log", "warning"].includes(breadcrumb.level || "")) {
         return null
       }
 
       return breadcrumb
     },
-    beforeSend(event, hint?) {
+    beforeSend(event/*, hint?*/) {
       if (event.breadcrumbs != null) {
         const lastBreadcrumb = event.breadcrumbs[event.breadcrumbs.length - 1]
         if (lastBreadcrumb.category === "fetch") {
           return null
-
+          /*
           const lastBreadcrumbData = lastBreadcrumb.data as HTTPData
           const lastBreadcrumbURL = new URL(lastBreadcrumbData.url)
 
@@ -37,6 +39,7 @@ function initSentry() {
               }],
             }
           }
+          */
         }
       }
 

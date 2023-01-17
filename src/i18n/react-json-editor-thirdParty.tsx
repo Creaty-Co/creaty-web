@@ -3,8 +3,7 @@ import "./ReactJSONEditorContainer.scss"
 
 import Button from "app/components/common/Button/Button"
 import LangSelector from "app/components/UI/LangSelector/LangSelector"
-import { BackendOptions,i18n, ResourceLanguage } from "i18next"
-// import { BackendOptions,i18n, ResourceLanguage } from "i18next"
+import { BackendOptions,i18n } from "i18next"
 import JSONEditor, { JSONEditorOptions } from "jsoneditor"
 import { Component, createRef } from "react"
 

@@ -160,7 +160,7 @@ function AdminViews() {
 
 function Footer() {
   const { t } = useTranslation("translation", { keyPrefix: "footer" })
-  const { error, payload } = useQuery(getPagesLinksDocuments)
+  const { payload } = useQuery(getPagesLinksDocuments)
 
   const links = payload?.results.reduce<Record<PageLinkType["type"], PageLinkType>>((result, next) => ({ ...result, [next.type]: next }), {} as never)
   return (

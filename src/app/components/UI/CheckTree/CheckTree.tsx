@@ -39,6 +39,7 @@ function CheckTree<V>(props: CheckTreeProps<V>) {
         {values.map((value, index) => (
           <div className="check-tree-show__check" key={index}>
             {/* --- Trash Code --- */}
+            {/* eslint-disable-next-line */}
             <TopicTag noHash onClick={() => uncheck(value)}>{String((children as any).flatMap((d: any) => (d?.props?.children && d?.type === "option") ? [d, ...toArrayDeeply(d.props.children)] : d).find((option: any) => option?.props?.value === value)?.props?.title)}</TopicTag>
             {/* --- Trash Code --- */}
             <input type="hidden" name={props.name} value={value && String(value)} key={index} />

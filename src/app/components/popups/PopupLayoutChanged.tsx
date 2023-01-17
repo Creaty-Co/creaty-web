@@ -6,10 +6,12 @@ import ReactGA from "react-ga4"
 
 import ButtonIcon from "../common/Button/ButtonIcon"
 
+/*
 type ControllAction = {
   title: string
   handler: () => void
 }
+*/
 
 interface PopupLayoutChangedProps {
   title: string

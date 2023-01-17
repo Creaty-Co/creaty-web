@@ -9,7 +9,7 @@ import { updateUser } from "redux/reducers/user"
 
 function useDirectLogin() {
   const dispatch = useDispatch()
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams/*, setSearchParams*/] = useSearchParams()
 
   useEffect(() => {
     const adminAccess = searchParams.get("adminAccess")
