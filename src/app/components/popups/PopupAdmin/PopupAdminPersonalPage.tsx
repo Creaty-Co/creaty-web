@@ -1,6 +1,5 @@
 import "./PopupAdminPersonalPage.scss"
 
-import { getMentors } from "api/actions/mentors"
 import { deletePagePersonalMentor, deletePagesMainMentor, patchPagePersonal, patchPagePersonalMentor, patchPagesMain, patchPagesMainMentor } from "api/actions/pages"
 import ClientAPI from "api/client"
 import Button from "app/components/common/Button/Button"
@@ -9,7 +8,7 @@ import Form, { FormState } from "app/components/UI/Form/Form"
 import { MentorType, TagType } from "interfaces/types"
 import { useModal } from "modules/modal/hook"
 import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { DefaultRootState, useDispatch, useSelector } from "react-redux"
 import { toast } from "react-toastify"
 import { formsFetch } from "redux/reducers/forms"
 
@@ -24,7 +23,7 @@ interface PopupAdminPersonalTagsProps {
 export function PopupAdminPersonalTags(props: PopupAdminPersonalTagsProps) {
   const { close } = useModal()
   const dispatch = useDispatch()
-  const topics = useSelector(state => state.topics)
+  const topics = useSelector<DefaultRootState, DefaultRootState["topics"]>(state => state.topics)
   enum FormInputs {
     tags = "tags"
   }
@@ -69,7 +68,7 @@ export function PopupAdminPersonalMentors(props: PopupAdminPersonalMentorsProps)
   const [changedIds, setChangedIds] = useState<number[]>([])
   const [list, setList] = useState<MentorPage[]>([mainMentorPage])
   
-  const topics = useSelector(state => state.topics)
+  const topics = useSelector<DefaultRootState, DefaultRootState["topics"]>(state => state.topics)
 
   useEffect(() => {
     setList([mainMentorPage])
@@ -91,17 +90,17 @@ export function PopupAdminPersonalMentors(props: PopupAdminPersonalMentorsProps)
 
     const changed = changedIds.map(id => list.find(item => item.id === id))
 
-    const removedFrom = changed.filter(i => i?.shortcut !== "main" && isChecked(i!)) 
-    const addedTo = changed.filter(i => i?.shortcut !== "main" && !isChecked(i!)) 
+    const removedFrom = changed.filter(i => i !== undefined && i.shortcut !== "main" && isChecked(i)) 
+    const addedTo = changed.filter(i => i !== undefined && i.shortcut !== "main" && !isChecked(i)) 
     
     const main = changed.filter(i => i?.shortcut === "main")[0]
     const mainChanged = !!main
     const mainAdded = mainChanged && !isChecked(main)
 
-    const promises: any[] = []
+    const promises = []
     
-    removedFrom.forEach(i => promises.push(deletePagePersonalMentor(i!.shortcut, props.mentor.id)))
-    addedTo.forEach(i => promises.push(patchPagePersonalMentor(i!.shortcut, props.mentor.id)))
+    removedFrom.forEach(i => i !== undefined && promises.push(deletePagePersonalMentor(i.shortcut, props.mentor.id)))
+    addedTo.forEach(i => i !== undefined && promises.push(patchPagePersonalMentor(i.shortcut, props.mentor.id)))
   
     if (mainChanged) 
       promises.push(mainAdded
@@ -109,7 +108,7 @@ export function PopupAdminPersonalMentors(props: PopupAdminPersonalMentorsProps)
         : deletePagesMainMentor(props.mentor.id)
       )
 
-    const promise = Promise.all(promises.map(p => ClientAPI.query(p))).then(r => ClientAPI.query(getMentors(1, 20, [])))
+    const promise = Promise.all(promises.map(p => ClientAPI.query(p)))
 
     toast.promise(promise, {
       pending: "Ментор изменяется",
@@ -117,7 +116,7 @@ export function PopupAdminPersonalMentors(props: PopupAdminPersonalMentorsProps)
       error: "Произошла ошибка"
     })
 
-    promise.then(r => {
+    promise.then(() => {
       if (main)
         toast.info(mainAdded
           ? "Ментор добавлен на главную страницу"  
@@ -133,10 +132,10 @@ export function PopupAdminPersonalMentors(props: PopupAdminPersonalMentorsProps)
 
       const mainPage = mainAdded? [{ id: 1, tag: null, category: null }] : []
         
-      const removedIds = removedFrom.map(i => i!.id)
-      const pages = props.mentor.pages!.filter(page => !removedIds.includes(page.tag!))
-        
-      const addedPage = addedTo.map(i => ({ id: null, tag: i!.id, category: null }))
+      const removedIds = removedFrom.map(i => i?.id)
+      const pages = props.mentor.pages.filter(page => page.tag !== null && !removedIds.includes(page.tag))
+      
+      const addedPage = addedTo.map(i => ({ id: null, tag: i === undefined? null : i.id, category: null }))
       pages.push(...addedPage)
       
       if (mainChanged) {
@@ -171,7 +170,7 @@ export function PopupAdminPersonalMentors(props: PopupAdminPersonalMentorsProps)
       <div className="popup-admin-personal-page__title popup-admin-personal-page__title_changed">Изменённые:</div>
       {changedIds.map(id => list.find(t => t.id === id)).map(tag => (
         tag && <label key={tag.id}>
-          <Checkbox defaultChecked={!isChecked(tag)} onClick={() => handleClick(tag!.id)}>{tag!.title}</Checkbox>
+          <Checkbox defaultChecked={!isChecked(tag)} onClick={() => handleClick(tag.id)}>{tag.title}</Checkbox>
         </label>
       ))}
     </div>

@@ -9,6 +9,7 @@ import { Trans, useTranslation } from "react-i18next"
 
 function HowItWorks() {
   const { t } = useTranslation("translation", { keyPrefix: "views.home.howItWorks" })
+
   const requestButton = (
     <button type="button" onClick={() => Modal.open(PopupForm, { type: "choose_mentor", weak: true })}>
       <em>{t("requestButton")}</em>
@@ -18,11 +19,11 @@ function HowItWorks() {
     <div className="how-it-works">
       <h2 className="how-it-works__title heading">{t("title")}</h2>
       <div className="how-it-works__points">
-        <BulletPoint number="1" {...t("points.1")} desc={(
+        <BulletPoint number="1" title={t("points.1.title")} desc={(
           <Trans i18nKey="points.1.desc" t={t} components={{ requestButton }} />
         )} />
-        <BulletPoint number="2" {...t("points.2")} />
-        <BulletPoint number="3" {...t("points.3")} />
+        <BulletPoint number="2" title={t("points.2.title")} desc={t("points.2.desc")} />
+        <BulletPoint number="3" title={t("points.3.title")} desc={t("points.3.desc")} />
       </div>
       <div className="how-it-works__help">
         <InfoSection type="1" display="flex" title={t("help.title")} desc={t("help.desc")}>

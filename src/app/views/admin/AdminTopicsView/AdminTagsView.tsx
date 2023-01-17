@@ -3,11 +3,11 @@ import TopicTag from "app/components/UI/Tag/TopicTag"
 import AdminGroupLayout from "app/layouts/AdminGroupLayout/AdminGroupLayout"
 import AdminViewLayout from "app/layouts/AdminViewLayout/AdminViewLayout"
 import { Modal } from "modules/modal/controller"
-import { useSelector } from "react-redux"
+import { DefaultRootState, useSelector } from "react-redux"
 
 
 function AdminTagsView() {
-  const topics = useSelector(state => state.topics)
+  const topics = useSelector<DefaultRootState, DefaultRootState["topics"]>(state => state.topics)
   return (
     <AdminViewLayout>
       <AdminGroupLayout title="Тэги">

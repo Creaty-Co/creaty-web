@@ -1,6 +1,6 @@
 import { getPagesLocalesLanguageNamespace, putPagesLocalesLanguageNamespace } from "api/actions/pages"
 import ClientAPI from "api/client"
-import i18next from "i18next"
+import i18next, { BackendOptions, ResourceKey } from "i18next"
 import { initReactI18next } from "react-i18next"
 
 import initExternalResourceBackend from "./external-resource-backend"
@@ -16,7 +16,9 @@ i18next
   .use(initReactMarkdownPostProcess)
   .use(initReactI18next)
   .use(initExternalResourceBackend)
-  .init({
+  .init<BackendOptions>({
+    returnNull: false,
+    
     lng: localeCurrent,
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
@@ -30,7 +32,7 @@ i18next
     },
 
     backend: {
-      async get(language, namespace) {
+      async get(language: string, namespace: string) {
         const response = await ClientAPI.query(getPagesLocalesLanguageNamespace(language, namespace))
 
         if (response.error) throw response.errorObject
@@ -38,7 +40,7 @@ i18next
 
         return response.payload
       },
-      async put(language, namespace, data) {
+      async put(language: string, namespace: string, data: ResourceKey) {
         const response = await ClientAPI.query(putPagesLocalesLanguageNamespace(language, namespace, data))
 
         if (response.error) return response.errorObject

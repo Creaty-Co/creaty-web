@@ -12,19 +12,18 @@ function HelpfulCreaty() {
     <div className="helpful-creaty">
       <div className="helpful-creaty__group">
         <h2 className="helpful-creaty__title heading">{t("title")}</h2>
-        <HelpfulCreatyBlock {...t("blocks.1")} flag="yellow" />
-        <HelpfulCreatyBlock {...t("blocks.2")} flag="purple" />
+        <HelpfulCreatyBlock title={"blocks.1.title"} desc={"blocks.1.desc"} flag="yellow" />
+        <HelpfulCreatyBlock title={"blocks.2.title"} desc={"blocks.2.desc"} flag="purple" />
       </div>
 
       <div className="helpful-creaty__group">
-        <HelpfulCreatyBlock {...t("blocks.3")} flag="orange" />
-        <HelpfulCreatyBlock {...t("blocks.4")} flag="blue" />
+        <HelpfulCreatyBlock title={"blocks.3.title"} desc={"blocks.3.desc"} flag="orange" />
+        <HelpfulCreatyBlock title={"blocks.4.title"} desc={"blocks.4.desc"} flag="blue" />
         <Button className="helpful-creaty__button" outline color="green" onClick={() => Modal.open(PopupForm, { type: "choose_mentor", weak: true })}>{t("button")}</Button>
       </div>
     </div>
   )
 }
-
 
 interface HelpfulCreatyBlockProps {
   title: ReactNode

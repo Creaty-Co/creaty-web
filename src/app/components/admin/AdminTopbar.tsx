@@ -1,7 +1,7 @@
 import "./admin.scss"
 
 import { UserType } from "interfaces/user"
-import { useDispatch, useSelector } from "react-redux"
+import { DefaultRootState, useDispatch, useSelector } from "react-redux"
 import { updateAdminEditing } from "redux/reducers/admin"
 import { updateUser } from "redux/reducers/user"
 
@@ -12,8 +12,8 @@ import ButtonLink from "../common/Button/ButtonLink"
 function AdminTopbar() {
   const dispatch = useDispatch()
 
-  const admin = useSelector(state => state.admin)
-  const user = useSelector(state => state.user)
+  const admin = useSelector<DefaultRootState, DefaultRootState["admin"]>(state => state.admin)
+  const user = useSelector<DefaultRootState, DefaultRootState["user"]>(state => state.user)
   if (!user.auth || user.type < UserType.admin) return null
 
   const toggleEditing = () => {

@@ -1,4 +1,4 @@
-import { getTags, getTagsTopics } from "api/actions/tags"
+import { getTagsTopics } from "api/actions/tags"
 import ClientAPI from "api/client"
 import { ValuesOf } from "interfaces/common"
 import { MapActions } from "interfaces/reducer"
@@ -43,8 +43,10 @@ export const topicsUpdate = (payload: Partial<typeof initialState>) => ({
 export async function topicsFetch(dispatch: Dispatch) {
   const { error, payload } = await ClientAPI.query(getTagsTopics(1, 25), true)
 
-  // if (error) throw new Error("unexpected error")
-  // if (!payload) throw new Error("no payload")
+  /*
+  if (error) throw new Error("unexpected error")
+  if (!payload) throw new Error("no payload")
+  */
 
   if (error) return
   if (!payload) return

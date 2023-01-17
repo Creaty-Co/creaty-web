@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next"
 
 function BecomeMentor() {
   const { t } = useTranslation("translation", { keyPrefix: "views.home.becomeMentor" })
-  const { error, payload } = useQuery(getPagesLinksDocuments)
+  const { payload } = useQuery(getPagesLinksDocuments)
   const links = payload?.results.reduce<Record<PageLinkType["type"], PageLinkType>>((result, next) => ({ ...result, [next.type]: next }), {} as never)
   return (
     <div className="become-mentor">

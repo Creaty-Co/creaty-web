@@ -8,7 +8,7 @@ import AdminInterface from "app/components/admin/AdminInterface"
 import Button from "app/components/common/Button/Button"
 import Icon, { IconName } from "app/components/common/Icon/Icon"
 import ContactForm from "app/components/other/ContactForm/ContactForm"
-import OuterLink from "app/components/services/OuterLink"
+// import OuterLink from "app/components/services/OuterLink"
 import LoaderCover from "app/components/UI/Loader/LoaderCover"
 import { getEmojiPNG } from "app/components/UI/MentorCard/MentorCard"
 import TopicTag from "app/components/UI/Tag/TopicTag"
@@ -31,7 +31,7 @@ function UserUserId() {
   if (!params.userId) throw new Error("This component should be used in Route context")
 
   const { error, loading, payload, query } = useQuery(getMentorsId(+params.userId))
-  const { error: error2, payload: payload2 } = useQuery(getPagesLinksDocuments)
+  const { payload: payload2 } = useQuery(getPagesLinksDocuments)
   useEffect(() => { query() }, [i18n.language])
 
   if (error) return <>useQuery error</>
@@ -39,7 +39,6 @@ function UserUserId() {
   if (!payload) return <>no payload</>
 
   const links = payload2?.results.reduce<Record<PageLinkType["type"], PageLinkType>>((result, next) => ({ ...result, [next.type]: next }), {} as never)
-
 
   return (
     <div className="user">
@@ -120,6 +119,7 @@ function UserUserId() {
   )
 }
 
+/*
 function ReactizeLinks(haystack: string) {
   const regex = /(http[s]?:\/\/)?(.+\.[^/\s]+)(\/)?/
 
@@ -142,6 +142,7 @@ function ReactizeLinks(haystack: string) {
 
   return [...result, content]
 }
+*/
 
 
 interface UserSectionProps {
