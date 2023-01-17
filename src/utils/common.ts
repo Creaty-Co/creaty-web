@@ -1,8 +1,8 @@
 import "./extensions"
 
 import { Buffer } from "buffer"
-import { ExtractInterpolations, URLDataBase64 } from "interfaces/common"
-import { cloneElement, ReactNode, SyntheticEvent } from "react"
+import { URLDataBase64 } from "interfaces/common"
+import { cloneElement, SyntheticEvent } from "react"
 
 /**
  *
@@ -83,8 +83,10 @@ export function interpolate<V = unknown>(value: V, vars: Record<string, string |
   const varKeys = Object.keys(vars)
   function interpolate(value: V): V | string {
     // ------------------------------------------------ Hardcoded :(
+    // eslint-disable-next-line
     const elementProps = (value as any)?.props
     if (elementProps?.children) {
+      // eslint-disable-next-line
       return cloneElement(value as any, elementProps, interpolate(elementProps.children) as any) as any
     }
     // ------------------------------------------------
@@ -102,10 +104,10 @@ export function interpolate<V = unknown>(value: V, vars: Record<string, string |
 /**
  * Interpolates {variable} in string
  */
-// export function reactopolate<T extends string>(value: T, vars: Record<ExtractInterpolations<T>, ReactNode>): ReactNode[] {
+// export function reactopolate<T extends string>(value: T, vars: RecordT>, ReactNode>): ReactNode[] {
 //   let haystack = [value]
 
-//   const varKeys = Object.keys(vars) as ExtractInterpolations<T>[]
+//   const varKeys = Object.keys(vars) asT>[]
 //   const result = varKeys.flatMap(nextVarKey => {
 //     const regex = new RegExp(`{${nextVarKey}}`, "g")
 

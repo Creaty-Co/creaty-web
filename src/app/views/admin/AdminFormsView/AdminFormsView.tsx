@@ -64,7 +64,7 @@ function AdminFormsView() {
       </form>
       {formsKeys.map(key => (
         <form className="admin-view__entires admin-view__entires--grid" onSubmit={submit} key={key}>
-          <AdminGroupLayout title={`Форма: ${t(`forms.${forms[key]!.type}.title`)}`}>
+          <AdminGroupLayout title={`Форма: ${t(`forms.${forms[key]?.type}.title`)}`}>
             <h1>Данные</h1>
             <div className="admin-view__entires admin-view__entires--grid">
               <h3>Описание {"->"}</h3>

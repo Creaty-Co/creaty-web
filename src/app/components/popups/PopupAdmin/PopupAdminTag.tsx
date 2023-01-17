@@ -2,7 +2,6 @@ import { deleteTags, patchTags, postTags } from "api/actions/tags"
 import ClientAPI from "api/client"
 import Form, { FormState } from "app/components/UI/Form/Form"
 import AdminInputsLayout from "app/layouts/AdminInputsLayout"
-import { ValuesOf } from "interfaces/common"
 import { TagType } from "interfaces/types"
 import { useModal } from "modules/modal/hook"
 import { useState } from "react"
@@ -12,7 +11,6 @@ import { topicsFetch } from "redux/reducers/topics"
 import Button from "../../common/Button/Button"
 import Input from "../../UI/Input/Input"
 import PopupLayout from "../PopupLayout"
-
 
 interface PopupAdminNewTagProps {
   topicId: number
@@ -52,7 +50,6 @@ export function PopupAdminNewTag(props: PopupAdminNewTagProps) {
     </PopupLayout>
   )
 }
-
 
 interface PopupAdminEditTagProps {
   tag: TagType

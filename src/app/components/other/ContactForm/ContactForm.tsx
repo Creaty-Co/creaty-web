@@ -14,8 +14,6 @@ import { useTranslation } from "react-i18next"
 import ReactMarkdown from "react-markdown"
 import { DefaultRootState, useSelector } from "react-redux"
 
-
-
 interface ContactFormProps {
   type: FormType["type"]
 
@@ -29,7 +27,7 @@ function ContactForm(props: ContactFormProps) {
   const [submitted, setSubmitted] = useState(false)
   const [socialMask, setSocialMask] = useState<InputMaskType<string>>()
 
-  const { error, payload } = useQuery(getPagesLinksDocuments)
+  const { payload } = useQuery(getPagesLinksDocuments)
   const links = payload?.results?.reduce<Record<PageLinkType["type"], PageLinkType>>((result, next) => ({ ...result, [next.type]: next }), {} as never)
 
   if (submitted) {
