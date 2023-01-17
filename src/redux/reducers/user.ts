@@ -25,7 +25,6 @@ export default (state = initialState, action: Action): User => {
   }
 }
 
-
 export const updateUser = (payload: Partial<User>) => ({
   type: "USER_UPDATE",
   payload

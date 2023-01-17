@@ -191,16 +191,20 @@
       },
       "forms": {
         "become_mentor": {
-          "title": "string"
+          "title": "string",
+          "submitText": "string"
         },
         "choose_mentor": {
-          "title": "string"
+          "title": "string",
+          "submitText": "string"
         },
         "test_meeting": {
-          "title": "string"
+          "title": "string",
+          "submitText": "string"
         },
         "still_questions": {
-          "title": "string"
+          "title": "string",
+          "submitText": "string"
         }
       }
     }

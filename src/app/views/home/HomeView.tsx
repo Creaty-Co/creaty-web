@@ -44,6 +44,7 @@ function HomeView() {
       topic: undefined
     }))
   }, [])
+
   return (
     <div className="home-view">
       <div className="home-view__header">
@@ -71,7 +72,7 @@ function HomeView() {
         )}
       </div>
       <div className="home-view__help">
-        <InfoSection type="2" display="flex" {...t("help")}>
+        <InfoSection type="2" display="flex" title={t("help.title")} desc={t("help.desc")}>
           <HelpSocial />
         </InfoSection>
       </div>

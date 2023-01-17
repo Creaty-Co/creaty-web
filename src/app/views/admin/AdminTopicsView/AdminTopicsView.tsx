@@ -7,12 +7,12 @@ import AdminViewLayout from "app/layouts/AdminViewLayout/AdminViewLayout"
 import { TopicType } from "interfaces/types"
 import { Modal } from "modules/modal/controller"
 import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
+import { DefaultRootState, useSelector } from "react-redux"
 import { classWithModifiers } from "utils/common"
 
 
 function AdminTopicsView() {
-  const topics = useSelector(state => state.topics)
+  const topics = useSelector<DefaultRootState, DefaultRootState["topics"]>(state => state.topics)
   const [currentTopic, setCurrentTopic] = useState<TopicType | null>(null)
   useEffect(() => {
     setCurrentTopic(topics.list.find(topic => topic.id === currentTopic?.id) || null)

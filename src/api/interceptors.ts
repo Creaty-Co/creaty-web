@@ -1,4 +1,3 @@
-import { localeCurrent } from "i18n/config"
 import i18next from "i18next"
 import { QueryResponse } from "react-fetching-library"
 import { toast } from "react-toastify"
@@ -15,10 +14,15 @@ export function endpointTransform(action: Action) {
   const API_URL = process.env.REACT_APP_API_HOST
   if (API_URL == null) return ""
 
+  /*
+  For the best times
+  const protocol = process.env.NODE_ENV === "development" ? "http" : "https"
+  */
   const url = new URL(API_URL)
+  const protocol = url.protocol + "//"
 
   const actionEndpoint = action.endpoint[0] === "/" ? action.endpoint.slice(1) : action.endpoint
-  const endpoint = `https://${url.host}/${actionEndpoint}/`
+  const endpoint = `${protocol}${url.host}/${actionEndpoint}/`
   const query = createQuery(action.params)
 
   return endpoint + (query && "?" + query)

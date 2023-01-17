@@ -12,8 +12,7 @@ import { ChangeEvent, FormEvent, useState } from "react"
 import { useQuery } from "react-fetching-library"
 import { useTranslation } from "react-i18next"
 import ReactMarkdown from "react-markdown"
-import { useSelector } from "react-redux"
-
+import { DefaultRootState, useSelector } from "react-redux"
 
 interface ContactFormProps {
   type: FormType["type"]
@@ -24,11 +23,11 @@ interface ContactFormProps {
 
 function ContactForm(props: ContactFormProps) {
   const { t } = useTranslation("translation", { keyPrefix: "components.contactForm" })
-  const form = useSelector(state => state.forms[props.type])
+  const form = useSelector<DefaultRootState, FormType | undefined>(state => state.forms[props.type])
   const [submitted, setSubmitted] = useState(false)
   const [socialMask, setSocialMask] = useState<InputMaskType<string>>()
 
-  const { error, payload } = useQuery(getPagesLinksDocuments)
+  const { payload } = useQuery(getPagesLinksDocuments)
   const links = payload?.results?.reduce<Record<PageLinkType["type"], PageLinkType>>((result, next) => ({ ...result, [next.type]: next }), {} as never)
 
   if (submitted) {
@@ -113,7 +112,9 @@ function ContactForm(props: ContactFormProps) {
           </div>
         )}
       </div>
+      
       <Button className="contact-form__submit" size="big" type="submit" color="dark" eventLabel="Contact Form">{props.submitText || t("submit")}</Button>
+
       <div className="contact-form__terms">{t("terms", { policyLink: links?.privacy_policy.url })}</div>
     </form>
   )

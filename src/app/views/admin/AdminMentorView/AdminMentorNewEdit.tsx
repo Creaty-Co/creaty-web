@@ -16,7 +16,7 @@ import { MentorDetailedType, MentorPatchType } from "interfaces/types"
 import _ from "lodash"
 import { Modal } from "modules/modal/controller"
 import { useState } from "react"
-import { useSelector } from "react-redux"
+import { DefaultRootState, useSelector } from "react-redux"
 import { useNavigate } from "react-router"
 
 import { AdminCountriesSelect, AdminLangsCheckboxes } from "../helpers"
@@ -65,7 +65,7 @@ interface AdminEditMentorViewProps {
 function AdminMentorNewEdit(props: AdminNewMentorViewProps | AdminEditMentorViewProps) {
   const navigate = useNavigate()
   const [pending, setPending] = useState(false)
-  const topics = useSelector(state => state.topics)
+  const topics = useSelector<DefaultRootState, DefaultRootState["topics"]>(state => state.topics)
   const [packages, setPackages] = useState<MentorPatchType["packages"]>(props.data?.packages || [])
 
   async function submitCreateMentor(state: FormState<FormInputs, FormValues>) {
