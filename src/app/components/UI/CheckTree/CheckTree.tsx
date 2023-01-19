@@ -18,6 +18,7 @@ interface CheckTreeProps<V> {
 function CheckTree<V>(props: CheckTreeProps<V>) {
   const [values, setValues] = useState<CheckTreeState<V>>(props.defaultChecks || [])
   const [cursor, setCursor] = useState<number[]>([0])
+
   function onCheck(value: V) {
     if (values.includes(value)) {
       return uncheck(value)
@@ -32,6 +33,7 @@ function CheckTree<V>(props: CheckTreeProps<V>) {
     if (values.length === 1) return
     setValues(state => state.filter(comparedValue => comparedValue !== value))
   }
+  
   const children = toArrayDeeply<CheckTreeOption<V> | ReactNode>(props.children)
   return (
     <div className="check-tree">
@@ -91,8 +93,6 @@ function toArrayDeeply<T>(obj?: T | T[]): T[] {
   if (obj == null) return []
   return obj instanceof Array ? obj.flatMap(v => v) : [obj]
 }
-
-
 
 interface CheckTreeColumnProps {
   children: ReactNode | ReactNode[]

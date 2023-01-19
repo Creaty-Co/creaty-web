@@ -77,8 +77,12 @@ function AdminMentorNewEdit(props: AdminNewMentorViewProps | AdminEditMentorView
       packages,
       ..._.omit(state.values, ...formInfoKeys)
     }
-    const APIAction = props.new ? postMentors(APIPayload) : patchMentorsId(props.id, APIPayload)
+    
+    /* type assertion fall bug! */
+    if (!Array.isArray(APIPayload.info.languages)) APIPayload.info.languages = [APIPayload.info.languages]
+    if (!Array.isArray(APIPayload.tag_set)) APIPayload.tag_set = [APIPayload.tag_set]
 
+    const APIAction = props.new ? postMentors(APIPayload) : patchMentorsId(props.id, APIPayload)
     setPending(true)
     const { error, payload } = await ClientAPI.query(APIAction)
     setPending(false)

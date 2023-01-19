@@ -34,7 +34,6 @@ async function getFormState(elements: HTMLFormControlsCollection): Promise<{
   for (const element of elements) {
     if (element instanceof HTMLInputElement || element instanceof HTMLTextAreaElement || element instanceof HTMLSelectElement) {
       if (keys.includes(element.name)) continue
-      console.log(element.name)
       keys.push(element.name)
     }
   }
@@ -48,20 +47,20 @@ async function getFormState(elements: HTMLFormControlsCollection): Promise<{
         values[next.name] = true
         continue
       }
-
+      
       const file = next.files?.[0]
       if (file instanceof File) {
         values[next.name] = await FileToURLDataBase64(file)
         continue
       }
     }
-
+    
     if (next instanceof HTMLInputElement || next instanceof HTMLTextAreaElement || next instanceof HTMLSelectElement) {
       if (next.value.length === 0) continue
       values[next.name] = isNaN(Number(next.value)) ? next.value : Number(next.value)
       continue
     }
-
+    
     if (next instanceof NodeList) {
       const inputs = [...next] as HTMLInputElement[]
       const inputValues = inputs.filter(input => {
@@ -70,12 +69,13 @@ async function getFormState(elements: HTMLFormControlsCollection): Promise<{
         }
         return true
       }).map(input => input.value)
-
+      
       values[inputs[0].name] = inputValues.flatMap(check => isNaN(Number(check)) ? [] : Number(check))
       continue
     }
   }
-
+  
+  console.log("end", { keys, values })
   return { keys, values }
 }
 
