@@ -35,4 +35,4 @@ if (process.env.REACT_APP_API_GA) {
   console.warn(message)
 }
 
-if (process.env.NODE_ENV === "production") initSentry()
+initSentry()

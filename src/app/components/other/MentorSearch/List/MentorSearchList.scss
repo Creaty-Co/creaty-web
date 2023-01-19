@@ -1,0 +1,112 @@
+@import "~app/assets/scss/bundle.scss";
+
+.mentor-search-list {
+  $height: calc(2.5em * 12);
+
+  position: absolute;
+  top: calc(100% + 0.75em);
+  left: 0;
+  right: 0;
+
+  display: flex;
+
+  max-height: $height;
+  background: $color-white;
+  border-radius: 1.5em;
+
+  box-shadow: 0 0 0 3px rgba($color-green, $alpha: 0.5);
+  transition: 200ms ease opacity, 200ms ease transform;
+  z-index: 1;
+  cursor: initial;
+
+  &:not(&--visible) {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-1em);
+  }
+
+  @include Mobile {
+    display: grid;
+  }
+
+  &__container {
+    display: grid;
+    align-content: baseline;
+
+    flex: 1;
+    padding: 1em;
+
+    &:not(:only-child) {
+      border-right: 1px solid #D2D6DC;
+    }
+
+    overflow: auto;
+    @include Scrollbar(0.75em, rgba($color-gray-90, 0.2));
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    @include gap(0.75em);
+
+    padding: 0.75em 1em;
+
+    border-radius: 1em;
+    color: $color-black-main;
+    transition: 200ms ease background-color;
+    cursor: pointer;
+
+    &:hover,
+    &--active {
+      background: $color-gray-30;
+    }
+
+    em {
+      font-weight: bold;
+    }
+
+    text-decoration: none;
+  }
+
+
+  &__tags {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    @include row-gap(0.5em);
+
+    width: 40%;
+    padding: 1em;
+    margin-right: 0.25em;
+
+    overflow: auto;
+
+    @include Scrollbar(0.5em, rgba($color-gray-90, 0.2), transparent);
+
+    &>.topic-tag {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+  }
+
+  &__icon {
+    --icon-size: 1.5em;
+  }
+
+  &__text {
+    font-size: 1.125rem;
+  }
+
+  &_empty {
+    position: absolute;
+    inset: 0;
+
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    @include row-gap(0.5em);
+
+    color: $color-gray-80;
+  }
+}
