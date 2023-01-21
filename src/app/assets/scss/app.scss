@@ -116,7 +116,6 @@ header {
 	}
 }
 
-
 .topbar__trigger {
 	--icon-size: 1.25em;
 	display: none;
@@ -147,17 +146,24 @@ header {
 /* Main */
 
 main {
-	margin-top: 10em;
+	& > div {
+		margin-top: 10em;
 
+		@include Mobile {
+			margin-top: 22vw;
+
+			&.home-view {
+				margin-top: 11vw;
+			}
+		}
+	}
+	overflow: hidden;
 }
 
 main:not(.home-view__slider) {
-
 	@include Mobile {
-		padding: 5vw;
-		margin: 2.5em 0;
+		padding: 0 5vw;
 	}
-
 }
 
 /* Footer */

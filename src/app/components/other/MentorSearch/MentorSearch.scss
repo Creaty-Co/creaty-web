@@ -16,41 +16,37 @@
 
 	&__container {
 		display: flex;
-		@include gap(0.75em);
+		grid-gap: 12px;
+		// @include gap(0.75em);
 
 		width: 100%;
 		margin: 0 auto;
 		padding: 2em;
 		background: $color-black-90;
-		border-radius: 3em;
+		border-radius: 50px;
 		z-index: 1;
-
+		
 		@include Mobile {
 			display: grid;
-			padding: 1.5em;
+			grid-gap: 8px;
 
-			.button {
-				background: $color-green;
-
-				.button__text {
-					color: $color-black-main;
-					font-weight: bold;
-				}
-			}
+			padding: 8px;
+			
+			border-radius: 35px;
 		}
 	}
 
 	&__search {
 		display: flex;
 		align-items: center;
-		@include gap(0.5em);
+		// @include gap(0.5em);
 
 		flex: 1;
 
 		padding: 0.5em;
 		padding-right: 1em;
 		background: white;
-		border-radius: 1.5em;
+		border-radius: 24px;
 		transition: 200ms ease box-shadow;
 		cursor: text;
 
@@ -60,20 +56,22 @@
 		}
 
 		&--filled#{&}--focused {
-
 			>.mentor-search-list__item,
 			>.topic-tag {
 				opacity: 0.5;
 			}
 		}
 
-		@include Mobile {
+		@include for-size(big-phone-screen) {
 			flex-wrap: wrap;
 			min-height: 3.5em;
+			border-radius: 24px;
 		}
 	}
 
 	&__input {
+		@include Text2Regular;
+
 		flex: 1;
 		color: $color-gray-100;
 
@@ -112,6 +110,7 @@
 	}
 
 	&__tags {
+		margin-top: 15px;
 		overflow: hidden;
 	}
 

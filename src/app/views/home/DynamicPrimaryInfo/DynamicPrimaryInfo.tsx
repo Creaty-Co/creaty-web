@@ -1,3 +1,5 @@
+import "./DynamicPrimaryInfo.scss"
+
 import { useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { DefaultRootState, useSelector } from "react-redux"
@@ -75,11 +77,11 @@ function DynamicPrimaryInfo(props: DynamicPrimaryInfoProps) {
   }, [props.firstHeadingShortcut, topics])
   return (
     <div className="dynamic-primary-info">
-      <h1 className="dynamic-primary-info__title heading">
+      <div className="dynamic-primary-info__title heading">
         <em>{dynamicHeading}</em>
         <span>{t("title")}</span>
-      </h1>
-      <h2 className="dynamic-primary-info__desc">{t("desc")}</h2>
+      </div>
+      <div className="dynamic-primary-info__desc">{t("desc")}</div>
     </div>
   )
 }

@@ -2,7 +2,11 @@
 
 * {
 	position: relative;
-	box-sizing: border-box;
+	box-sizing: border-box ;
+	
+	// remove all default margins and paddings
+	padding: 0;
+	margin: 0;
 }
 
 body {
@@ -45,20 +49,7 @@ h5 {
 	font-weight: 600;
 }
 
-// h4.heading {
-// 	font-size: 4.5rem;
-// 	font-weight: 700;
-// 	@include emphasize;
-// }
-
-// h5.heading {
-// 	font-size: 4.5rem;
-// 	font-weight: 700;
-// 	@include emphasize;
-// }
-
 /* Text */
-
 p {
 	line-height: 1.25;
 	white-space: pre-line;

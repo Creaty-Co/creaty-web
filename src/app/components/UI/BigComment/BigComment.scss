@@ -10,22 +10,30 @@
 	box-shadow: 0px 2px 8px rgba($color-green, 0.1), 0px 8px 30px rgba($color-green, 0.2), 0px 8px 200px rgba($color-green, 0.4);
 	border-radius: 4.25em;
 
-	@include Mobile {
-		padding: 36px;
+	@include for-size(big-phone-screen) {
+		padding: 48px 36px 36px;
 	}
 }
 
 .big-comment__text {
-	font-size: 1.125rem;
-	line-height: 1.5;
 	text-align: center;
 
-	& span {
-		font-weight: 700;
+	@include TextRegular();
+	@include for-size(big-phone-screen) {
+		@include Text2Regular();
 	}
 
-	@include Mobile {
-		line-height: 24px;
+	& span {
+		@include TextBold();
+		@include for-size(big-phone-screen) {
+			@include Text2Bold();
+		}
+	}
+
+	& > p {
+		// temporary fix before deleter @Typography and @Font
+		line-height: inherit;
+		margin: 0;
 	}
 }
 

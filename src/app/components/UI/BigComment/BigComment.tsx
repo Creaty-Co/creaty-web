@@ -8,10 +8,15 @@ interface BigCommentProps {
   children: ReactNode
 }
 
+const toParagraphs = (text: string) => text.split("\n").map((paragraph, index) => <p key={`paragraph-${index}`}>{paragraph}</p>)
+
 function BigComment(props: BigCommentProps) {
+  const rChildren = typeof props.children === "string"
+    ? toParagraphs(props.children) : props.children
+
   return (
     <div className="big-comment">
-      <div className="big-comment__text">{props.children}</div>
+      <div className="big-comment__text">{rChildren}</div>
       <Icon className="big-comment__icon" name="star-union" />
     </div>
   )

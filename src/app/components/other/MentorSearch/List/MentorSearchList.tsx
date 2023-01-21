@@ -28,7 +28,7 @@ function MentorSearchListDynamic(props: MentorSearchListProps & { value: string 
   function collapseSearchList(event: MouseEvent) {
     // stop propagation of `MentorSearch Blur` callback
     event.stopPropagation()
-
+    
     dispatch(updateSearch({ focused: false }))
   }
 
@@ -37,14 +37,12 @@ function MentorSearchListDynamic(props: MentorSearchListProps & { value: string 
   const searchLowerCaseValue = props.value.toLowerCase()
   const findSearchValueEntry = (value: string) => value.toLowerCase().search(searchLowerCaseValue)
 
-  const SearchTagEntries =
-topics.tags
-  .map(tag => ({ tag, index: findSearchValueEntry(tag.title) }))
-  .filter(occur => occur.index >= 0)
-  const SearchTopicEntries =
-topics.list
-  .map(topic => ({ topic, index: findSearchValueEntry(topic.title) }))
-  .filter(entry => entry.index >= 0)
+  const SearchTagEntries = topics.tags
+    .map(tag => ({ tag, index: findSearchValueEntry(tag.title) }))
+    .filter(occur => occur.index >= 0)
+  const SearchTopicEntries = topics.list
+    .map(topic => ({ topic, index: findSearchValueEntry(topic.title) }))
+    .filter(entry => entry.index >= 0)
 
   return (
     <div className={classWithModifiers("mentor-search-list", props.visible && "visible")}>

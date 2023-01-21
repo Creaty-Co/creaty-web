@@ -31,30 +31,48 @@ function MentorSearch() {
   return (
     <div className="mentor-search">
       <div className={classWithModifiers("mentor-search__cover", search.focused && "active")} />
+
       <div className="mentor-search__container">
         <label className={classWithModifiers("mentor-search__search", search.focused && "focused", !!(search.tag || search.topic) && "filled")} onClick={focus} ref={searchRef}>
+
+          {/* Topic Icon */}
           {!search.focused && search.topic && (
             <div className="mentor-search-list__item mentor-search-list__item--active">
               <Icon href={search.topic.icon} />
               <span>{search.topic.title}</span>
             </div>
           )}
+
+          {/* Search Input */}
           {!search.focused && search.tag && (
             <TopicTag>{search.tag}</TopicTag>
           )}
+
+          {/* Search Input */}
           {isInputVisible && (
             <>
-              <input type="text" placeholder={t("placeholder")} className={classWithModifiers("mentor-search__input", search.focused && "focused")} value={value} onChange={event => setValue(event.currentTarget.value)} />
+              <input  
+                className={classWithModifiers("mentor-search__input", search.focused && "focused")} 
+                type="text"
+
+                placeholder={t("placeholder")} 
+                value={value} 
+
+                onChange={event => setValue(event.currentTarget.value)}
+              />
               {
-                value.length > 0 && (
-                  <Icon name="cross" className="mentor-search__icon" onClick={reset} />
-                )
+                value.length > 0 && 
+                <Icon name="cross" className="mentor-search__icon" onClick={reset} />
               }
             </>
           )}
+
+          {/* DropDown List */}
           <MentorSearchList value={value} visible={search.focused} />
+
           <Icon name="chevron" className="mentor-search__icon" modifiers={[search.focused && "up"]} />
         </label>
+        
         <ButtonLink color="violet" size="big" to="/mentors">{t("button")}</ButtonLink>
       </div>
     </div>

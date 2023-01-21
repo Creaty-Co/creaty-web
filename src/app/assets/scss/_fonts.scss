@@ -32,71 +32,95 @@ $font_size_small-phone-screen: math.round(math.div($font_size_middle-phone-scree
 
 /* Real fonts */
 // H1
-@mixin H1($size: 72px, $height: 72px, $weight: 400, $style: normal) {
+@mixin H1($size: 72px, $height: null, $weight: 400, $style: normal) {
+    @if $height == null { $height: $size }
     @include FontFamily;
     @include FontSize($size, $height);
     @include FontDecoration($weight, $style);
 }
-@mixin H1Bold($size: 72px, $height: 72px) { @include H1($size, $height, 700) }
+@mixin H1Bold($size: 72px, $height: null) { @include H1($size, $height, 700) }
 
 // H2
-@mixin H2($size: 56px, $height: 72px, $weight: 400, $style: normal) {
+@mixin H2($size: 56px, $height: null, $weight: 400, $style: normal) {
+    @if $height == null {
+        $height: $size * 1.29;
+    }
+
     @include FontFamily;
     @include FontSize($size, $height);
     @include FontDecoration($weight, $style);
 }
-@mixin H2Bold($size: 56px, $height: 72px) { @include H2($size, $height, 700) }
+@mixin H2Bold($size: 56px, $height: null) { @include H2($size, $height, 700) }
 
 // H3
-@mixin H3($size: 32px, $height: 40px, $weight: 400, $style: normal) {
+@mixin H3($size: 32px, $height: null, $weight: 400, $style: normal) {
+    @if $height == null {
+        $height: $size * 1.25;
+    }
     @include FontFamily;
     @include FontSize($size, $height);
     @include FontDecoration($weight, $style);
 }
-@mixin H3Bold($size: 32px, $height: 40px) { @include H3($size, $height, 700) } 
-@mixin H3Regular($size: 32px, $height: 40px) { @include H3($size, $height, 400) } 
+@mixin H3Bold($size: 32px, $height: null) { @include H3($size, $height, 700) } 
+@mixin H3Regular($size: 32px, $height: null) { @include H3($size, $height, 400) } 
 
 // H4
-@mixin H4($size: 24px, $height: 32px, $weight: 400, $style: normal) {
+@mixin H4($size: 24px, $height: null, $weight: 400, $style: normal) {
+    @if $height == null {
+        $height: $size * 1.33;
+    }
     @include FontFamily;
     @include FontSize($size, $height);
     @include FontDecoration($weight, $style);
 }
-@mixin H4Bold($size: 24px, $height: 32px) { @include H4($size, $height, 700) }
-@mixin H4Medium($size: 24px, $height: 32px) { @include H4($size, $height, 500) }
-@mixin H4Regular($size: 24px, $height: 32px) { @include H4($size, $height, 400) }
+@mixin H4Bold($size: 24px, $height: null) { @include H4($size, $height, 700) }
+@mixin H4Medium($size: 24px, $height: null) { @include H4($size, $height, 500) }
+@mixin H4Regular($size: 24px, $height: null) { @include H4($size, $height, 400) }
 
 // Text
-@mixin Text($size: 18px, $height: 24px, $weight: 400, $style: normal) {
+@mixin Text($size: 18px, $height: null, $weight: 400, $style: normal) {
+    @if $height == null {
+        $height: $size * 1.33;
+    }
     @include FontFamily;
     @include FontSize($size, $height);
     @include FontDecoration($weight, $style);
 }
-@mixin TextBold($size: 18px, $height: 24px) { @include Text($size, $height, 700) }
-@mixin TextMedium($size: 18px, $height: 24px) { @include Text($size, $height, 500) }
-@mixin TextRegular($size: 18px, $height: 24px) { @include Text($size, $height, 400) }
+@mixin TextBold($size: 18px, $height: null) { @include Text($size, $height, 700) }
+@mixin TextMedium($size: 18px, $height: null) { @include Text($size, $height, 500) }
+@mixin TextRegular($size: 18px, $height: null) { @include Text($size, $height, 400) }
 
 // Text 2
-@mixin Text2($size: 16px, $height: 24px, $weight: 400, $style: normal) {
+@mixin Text2($size: 16px, $height: null, $weight: 400, $style: normal) {
+    @if $height == null {
+        $height: $size * 1.5;
+    }
     @include FontFamily;
     @include FontSize($size, $height);
     @include FontDecoration($weight, $style);
 }
-@mixin Text2Medium($size: 16px, $height: 24px) { @include Text2($size, $height, 500) }
-@mixin Text2Regular($size: 16px, $height: 24px) { @include Text2($size, $height, 400) }
+@mixin Text2Bold($size: 16px, $height: null) { @include Text2($size, $height, 700) }
+@mixin Text2Medium($size: 16px, $height: null) { @include Text2($size, $height, 500) }
+@mixin Text2Regular($size: 16px, $height: null) { @include Text2($size, $height, 400) }
 
 // Tags
-@mixin Tags($size: 14px, $height: 16px, $weight: 400, $style: normal) {
+@mixin Tags($size: 14px, $height: null, $weight: 400, $style: normal) {
+    @if $height ==  null {
+        $height: $size * 1.14;
+    }
     @include FontFamily;
     @include FontSize($size, $height);
     @include FontDecoration($weight, $style);
 }
-@mixin TagsRegular($size: 14px, $height: 16px) { @include Tags($size, $height, 400) }
+@mixin TagsRegular($size: 14px, $height: null) { @include Tags($size, $height, 400) }
 
 // Caption
-@mixin Tags($size: 12px, $height: 16px, $weight: 400, $style: normal) {
+@mixin Tags($size: 12px, $height: null, $weight: 400, $style: normal) {
+    @if $height == null {
+        $height: $size * 1.33;
+    }
     @include FontFamily;
     @include FontSize($size, $height);
     @include FontDecoration($weight, $style);
 }
-@mixin TagsRegular($size: 12px, $height: 16px) { @include Tags($size, $height, 400) }
+@mixin TagsRegular($size: 12px, $height: null) { @include Tags($size, $height, 400) }

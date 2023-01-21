@@ -6,5 +6,6 @@
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "cSpell.words": [
     "Creaty"
-  ]
+  ],
+  "editor.tabSize": 2
 }
