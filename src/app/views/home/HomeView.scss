@@ -45,18 +45,12 @@
 	}
 }
 
-.home-view__how-it-works {
+.home-view__how-it-works, .home-view__helpful-creaty {
 	@include WidthLimit;
 	margin-top: 240px;
-	
 	@include for-size(big-phone-screen) {
 		margin-top: 96px;
 	}
-}
-
-.home-view__helpful-creaty {
-	@include WidthLimit;
-	margin-top: 15em;
 }
 
 .home-view__faq {

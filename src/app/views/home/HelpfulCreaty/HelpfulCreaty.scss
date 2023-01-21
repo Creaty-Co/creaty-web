@@ -16,24 +16,32 @@ $indent: 1.5em;
 }
 
 .helpful-creaty__title {
-	margin-bottom: 0.5em;
+	@include H2Bold;
+	padding-bottom: 36px;
 
-	word-break: break-all;
+	@include for-size(big-phone-screen) {
+		@include H2Bold(32px);
+		padding-bottom: 12px;
+	}
+
+	word-break: break-word;
 }
 
 .helpful-creaty__button {
 	height: 100%;
-	border-radius: 2.5em;
+	border-radius: 40px;
 
 	@include Mobile {
-		padding: 3.5em;
+		width: 100%;
+		padding: 62px 0;
 	}
 }
 
 .helpful-creaty__group {
 	display: flex;
 	flex-direction: column;
-	@include gap($indent);
+
+	@include gap(20px);
 }
 
 /* Block */
@@ -41,14 +49,15 @@ $indent: 1.5em;
 .helpful-creaty-block {
 	display: grid;
 	align-content: baseline;
-	@include row-gap(1em);
-
-	padding: 4em;
+	@include row-gap(24px);
+	
+	padding: 64px;
 	background: $color-white;
-	border-radius: 2.5em;
-
-	@include Mobile {
-		padding: 2em;
+	border-radius: 40px;
+	
+	@include for-size(big-phone-screen) {
+		@include row-gap(16px);
+		padding: 36px 36px 48px;
 	}
 }
 
@@ -57,22 +66,24 @@ $indent: 1.5em;
 	align-items: center;
 	justify-content: space-between;
 
-	@include gap(1em);
-
-	@include Mobile {
+	@include gap(40px);
+	
+	@include for-size(big-phone-screen) {
 		flex-direction: column-reverse;
 		align-items: flex-start;
+		@include gap(24px);
 	}
 }
 
 .helpful-creaty-block__title {
 	color: $color-black-main;
 
-	font-size: 2rem;
-	font-weight: 700;
-	line-height: 1.25;
+	@include H3Bold;
+	@include for-size(big-phone-screen) {
+		@include H3Bold(24px);
+	}
 
-	word-break: break-all;
+	word-break: break-word;
 }
 
 .helpful-creaty-block__circle {
@@ -80,22 +91,36 @@ $indent: 1.5em;
 	align-items: center;
 	justify-content: center;
 
-	width: 5em;
-	height: 5em;
+	height: 80px;
+	width: 80px;
 
 	background: $color-black-main;
 	border-radius: 50%;
 
 	flex-shrink: 0;
+	
+	@include for-size(big-phone-screen) {
+		height: 64px;
+		width: 64px;
+	}
 }
 
 .helpful-creaty-block__flag {
-	position: absolute;
+	position: relative;
+
+	height: 58%;
+	width: auto;
 }
 
 .helpful-creaty-block__content {
 	color: $color-gray-80;
-
-	font-size: 1.125rem;
-	line-height: 1.25;
+	@include TextRegular;
+	@include for-size(big-phone-screen) {
+		@include Text2Regular;
+	}
+	
+	& > ul {
+		padding-left: 27px;
+		@include gap(0);
+	}
 }
