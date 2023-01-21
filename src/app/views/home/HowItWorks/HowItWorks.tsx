@@ -17,7 +17,7 @@ function HowItWorks() {
   )
   return (
     <div className="how-it-works">
-      <h2 className="how-it-works__title heading">{t("title")}</h2>
+      <div className="how-it-works__title heading">{t("title")}</div>
       <div className="how-it-works__points">
         <BulletPoint number="1" title={t("points.1.title")} desc={(
           <Trans i18nKey="points.1.desc" t={t} components={{ requestButton }} />
@@ -26,8 +26,8 @@ function HowItWorks() {
         <BulletPoint number="3" title={t("points.3.title")} desc={t("points.3.desc")} />
       </div>
       <div className="how-it-works__help">
-        <InfoSection type="1" display="flex" title={t("help.title")} desc={t("help.desc")}>
-          <Button size="big" color="green" onClick={() => Modal.open(PopupForm, { type: "test_meeting", weak: true })}>{t("button")}</Button>
+        <InfoSection className="how-it-works__free" type="1" display="flex" title={t("help.title")} desc={t("help.desc")}>
+          <Button className="how-it-works__button how-it-works__button_free" size="big" color="green" onClick={() => Modal.open(PopupForm, { type: "test_meeting", weak: true })}>{t("button")}</Button>
         </InfoSection>
       </div>
     </div>

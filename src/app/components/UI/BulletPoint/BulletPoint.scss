@@ -2,7 +2,7 @@
 
 .bullet-point {
 	display: flex;
-	@include gap(1.5em);
+	@include gap(16px);
 
 	flex: 1;
 }
@@ -12,8 +12,8 @@
 	align-items: center;
 	justify-content: center;
 
-	width: 2.5em;
-	height: 2.5em;
+	width: 40px;
+	height: 40px;
 
 	background: $color-white;
 	border-radius: 50%;
@@ -29,24 +29,26 @@
 }
 
 .bullet-point__number {
-	position: absolute;
+	position: relative;
+	top: 2px;
 
 	color: $color-black-main;
 
-	font-size: 1.5rem;
-	font-weight: 700;
+	@include H4Bold;
 }
 
 .bullet-point__title {
-	font-size: 1.5rem;
-	line-height: 1.35;
 	white-space: pre-line;
+	@include H4Medium;
+	@include for-size(big-phone-screen) {
+		@include H4Medium(20px, 24px);
+	}
 }
 
 .bullet-point__desc {
 	color: $color-gray-50;
-	line-height: 1.5;
 	white-space: pre-line;
+	@include Text2Regular;
 
 	button {
 		color: $color-gray-10;

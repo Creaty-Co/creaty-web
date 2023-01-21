@@ -5,8 +5,6 @@
 	background: $color-white;
 	border-radius: 70px;
 
-
-
 	&--1 {
 		background: #151618;
 	}
@@ -48,10 +46,13 @@
 }
 
 .info-section__title {
-	// @include Typography(2rem, 700);
 	@include H3Bold;
 	@include for-size (big-phone-screen) {
 		@include H3Bold(24px);
+	}
+
+	em {
+		color: $color-green;
 	}
 }
 

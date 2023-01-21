@@ -11,11 +11,13 @@ interface InfoSectionProps {
   title: ReactNode
   desc: ReactNode
   children: ReactNode
+
+  className?: string
 }
 
 function InfoSection(props: InfoSectionProps) {
   return (
-    <div className={classWithModifiers("info-section", props.display, props.type)}>
+    <div className={`${props.className} ${classWithModifiers("info-section", props.display, props.type)}`}>
       <div className="info-section__header">
         <div className="info-section__title">{props.title}</div>
         <div className="info-section__desc">{props.desc}</div>

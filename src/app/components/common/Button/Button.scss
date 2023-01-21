@@ -3,9 +3,8 @@
 .button {
 	overflow: hidden;
 	text-align: center;
+	box-sizing: border-box;
 	
-	// @include TextMedium();
-
 	--button-color: transparent;
 	--button-outline-width: 0;
 	--button-padding: 2em;
@@ -65,7 +64,7 @@
 
 		.button__text {
 			color: $color-black-main;
-			font-weight: 600;
+			font-weight: 500;
 		}
 	}
 
@@ -173,7 +172,6 @@ a.button {
 .button__text {
 	color: white;
 	@include TextMedium();
-	// font-size: 1.125rem;
 }
 
 
