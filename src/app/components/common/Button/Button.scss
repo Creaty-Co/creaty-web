@@ -133,11 +133,14 @@
 	}
 
 	&--big {
-		padding: 1.25em 2em;
+		padding: 16px 32px;
 		border-radius: 24px;
 
 		.button__text {
-			font-size: 1.125rem;
+			position: relative;
+			top: 2px; 
+
+			@include TextMedium;
 		}
 	}
 

@@ -34,14 +34,22 @@
 
 	display: grid;
 	@include row-gap($indent);
-
 	padding: $indent;
+	
+	@include for-size(big-phone-screen) {
+			@include gap(20px);
+			padding: 24px;
+			padding-bottom: 0;
+		}
 }
 
 .mentor-card__name {
 	color: $color-black-main;
-	font-size: 1.5rem;
-	font-weight: bold;
+	@include H4Bold;
+
+	@include for-size(big-phone-screen) {
+		@include H4Bold(20px);
+	}
 }
 
 .mentor-card__flag {
@@ -54,11 +62,17 @@
 
 .mentor-card__job {
 	color: $color-gray-80;
-	font-size: 1.125rem;
+	@include TextRegular;
+	@include for-size(big-phone-screen) {
+		@include TextRegular(16px);
+	}
 
 	em {
 		color: $color-black-main;
-		font-weight: bold;
+		@include TextMedium;
+		@include for-size(big-phone-screen) {
+			@include TextMedium(16px);
+		}
 	}
 }
 
@@ -66,6 +80,10 @@
 	display: flex;
 	flex-wrap: wrap;
 	@include gap(0.5em);
+
+	@include for-size(big-phone-screen) {
+		@include gap(8px);
+	}
 }
 
 .mentor-card__price {
@@ -93,13 +111,14 @@
 }
 
 /* Mentor Card Button */
-
 .mentor-card-button {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 
-	padding: 1.5em;
+	padding: 24px;
+	padding-left: 32px;
+
 	margin-top: auto;
 	background: $color-gray-10;
 	border-radius: inherit;
@@ -111,19 +130,25 @@
 }
 
 .mentor-card-button__text {
+	// Trouble with font layout
+	position: relative;
+	top: 2px;
+
 	display: flex;
 	@include gap(0.25em);
 
 	color: $color-black-main;
-	font-size: 1.125rem;
+	// font-size: 1.125rem;
 	transition: 200ms ease opacity;
+
+	@include TextRegular;
 
 	.mentor-card-button:hover & {
 		opacity: 0;
 	}
 
 	em {
-		font-weight: bold;
+			@include TextBold;
 	}
 }
 
