@@ -101,7 +101,7 @@ function HomeView() {
 
       {/* FAQ */}
       <div className="home-view__faq">
-        <h2 className="heading">{t("QAndA.title")}</h2>
+        <div className="heading home-view__title">{t("QAndA.title")}</div>
         <QAndA />
       </div>
 

@@ -2,14 +2,14 @@
 
 .faq {
 	display: grid;
-	@include row-gap(0.5em);
+	@include row-gap(8px);
 }
 
 .faq__clause {
 	display: grid;
 	background: $color-black-90;
-	border-radius: 3.125em;
-	transition: 200ms ease background-color;
+	border-radius: 50px;
+	transition: 300ms ease background-color;
 
 	&--expanded {
 		background: $color-gray-100;
@@ -19,12 +19,16 @@
 		}
 
 		.faq__summary {
-			padding-bottom: 1.5em;
+			padding-bottom: 16px;
 
 			.button .button__icon .icon {
 				transform: rotateX(180deg);
 			}
 		}
+	}
+
+	@include for-size(big-phone-screen) {
+		border-radius: 40px;
 	}
 }
 
@@ -33,14 +37,25 @@
 	align-items: center;
 	justify-content: space-between;
 
-	padding: 3em 3.5em;
+	padding: 40px 40px 40px 64px;
 	transition: 200ms ease padding;
 
 	cursor: pointer;
+
+	@include for-size(big-phone-screen) {
+		padding: 36px;
+	}
+}
+
+.faq__button {
+	min-width: 40px;
 }
 
 .faq__title {
-	font-size: 1.5rem;
+	@include H4Regular;
+	@include for-size(big-phone-screen) {
+		@include H4Regular(20px);
+	}
 }
 
 .faq__content {
@@ -50,12 +65,34 @@
 }
 
 .faq__inner {
-	padding: 3em 3.5em;
-	padding-top: unset;
+	padding: 0 40px 40px 64px;
+	@include for-size(big-phone-screen) {
+		padding: 0 36px 36px;
+	}
 }
 
 .faq__text {
 	color: $color-gray-50;
-	font-size: 1.125rem;
-	line-height: 1.25;
+	@include TextRegular;
+	
+	ul, p {
+		padding-bottom: 1em;
+	}
+
+	*:first-child {
+		text-indent: 0;
+	}
+
+	*:last-child {
+		padding-bottom: 0;
+	}
+
+	p {
+		text-indent: 27px;
+	}
+
+	ul {
+		@include gap(0.5em);
+		padding-left: 27px;
+	}
 }

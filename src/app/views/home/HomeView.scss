@@ -2,6 +2,13 @@
 
 .home-view {}
 
+.home-view__title {
+	@include H2Bold;
+	@include for-size(big-phone-screen) {
+		@include H2Bold(32px);
+	}
+}
+
 .home-view__header {
 	display: grid;
 	@include row-gap(0);
@@ -45,7 +52,7 @@
 	}
 }
 
-.home-view__how-it-works, .home-view__helpful-creaty {
+.home-view__how-it-works, .home-view__helpful-creaty, .home-view__faq {
 	@include WidthLimit;
 	margin-top: 240px;
 	@include for-size(big-phone-screen) {
@@ -55,10 +62,10 @@
 
 .home-view__faq {
 	display: grid;
-	@include row-gap(3.25em);
-
-	@include WidthLimit;
-	margin-top: 15em;
+	@include row-gap(56px);
+	@include for-size(big-phone-screen) {
+		@include row-gap(32px);
+	}
 }
 
 .home-view__have-questions {
