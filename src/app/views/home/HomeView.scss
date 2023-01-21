@@ -39,7 +39,10 @@
 
 .home-view__help {
 	@include WidthLimit;
-	margin-top: 5em;
+	margin-top: 80px;
+	@include for-size(big-phone-screen) {
+		margin-top: 40px;
+	}
 }
 
 .home-view__how-it-works {
