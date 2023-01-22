@@ -43,7 +43,7 @@ $font_size_small-phone-screen: math.round(math.div($font_size_middle-phone-scree
 // H2
 @mixin H2($size: 56px, $height: null, $weight: 400, $style: normal) {
     @if $height == null {
-        $height: $size * 1.29;
+        $height: $size * 1.14;
     }
 
     @include FontFamily;

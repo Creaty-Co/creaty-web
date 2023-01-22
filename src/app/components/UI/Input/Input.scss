@@ -2,21 +2,26 @@
 
 .input {
 	display: flex;
-	@include gap(0.5em);
+	@include gap(8px);
 
-	padding-bottom: 0.5em;
+	padding-bottom: 7px;
 	border-bottom: 1px solid rgba($color-gray-90, 0.2);
 
-	@include Mobile {
+	@include for-size(big-phone-screen) {
 		display: grid;
 	}
+
+	position: relative;
 }
 
 .input__input {
 	width: 100%;
 
 	color: $color-black-main;
-	font-size: 1.5rem;
+	@include H4Regular;
+	@include for-size(big-phone-screen) {
+		@include H4Regular(20px, 24px);
+	}
 
 	&::placeholder {
 		color: $color-gray-80;
@@ -27,29 +32,32 @@
 		color: rgba($color-gray-90, 0.2);
 	}
 
-
-
-
-
-
-
 	resize: vertical;
 }
 
-.input-masks {}
+.input-masks {
+	@include for-size(big-phone-screen) {
+		transform: translateY(100%);
+		position: absolute;
+		bottom: -8px;
+	}
+}
 
 .input-masks__current {
 	display: flex;
 	align-items: center;
-	@include gap(0.5em);
+	@include gap(8px);
 
 	color: $color-violet;
-
-	font-size: 1.5rem;
+	
+	@include H4Regular;
+	@include for-size(big-phone-screen) {
+		@include H4Regular(20px, 24px);
+	}
 }
 
 .input-masks__icon {
-	--icon-size: 0.5em;
+	--icon-size: 8px;
 
 	color: $color-gray-50;
 	transition: 200ms ease transform;
