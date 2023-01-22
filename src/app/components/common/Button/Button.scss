@@ -123,11 +123,11 @@
 	}
 
 	&--small {
-		padding: 1em 1.25em;
-		border-radius: 1.25em;
+		padding: 12px 20px;
+		border-radius: 20px;
 
 		.button__text {
-			font-size: 1rem;
+			@include Text2Regular;
 		}
 	}
 

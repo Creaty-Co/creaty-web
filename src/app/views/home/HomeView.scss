@@ -81,5 +81,9 @@
 
 .home-view__mailing-subscribe {
 	@include WidthLimit;
-	margin-top: 15em;
+
+	margin-top: 170px;
+	@include for-size(big-phone-screen) {
+		margin-top: 80px;
+	}
 }
