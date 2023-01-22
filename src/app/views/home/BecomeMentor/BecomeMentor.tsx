@@ -12,12 +12,14 @@ import { useTranslation } from "react-i18next"
 function BecomeMentor() {
   const { t } = useTranslation("translation", { keyPrefix: "views.home.becomeMentor" })
   const { payload } = useQuery(getPagesLinksDocuments)
+
   const links = payload?.results.reduce<Record<PageLinkType["type"], PageLinkType>>((result, next) => ({ ...result, [next.type]: next }), {} as never)
+
   return (
     <div className="become-mentor">
       <div className="become-mentor__container">
         <div className="become-mentor__info">
-          <h2 className="become-mentor__title heading">{t("title")}</h2>
+          <div className="become-mentor__title heading">{t("title")}</div>
           <div className="become-mentor__desc">{t("desc")}</div>
         </div>
         <div className="become-mentor__bottom">
@@ -26,9 +28,12 @@ function BecomeMentor() {
         </div>
       </div>
       <div className="become-mentor__images">
-        <img src="/static/images/mentor-cards/1.png" alt="stock image of mentor" />
-        <img src="/static/images/mentor-cards/2.png" alt="stock image of mentor" />
-        <img src="/static/images/mentor-cards/3.png" alt="stock image of mentor" />
+        <div className="become-mentor__image become-mentor__image_1">
+          <img src="/static/images/mentor-cards/1.png" alt="stock image of mentor" /></div>
+        <div className="become-mentor__image become-mentor__image_2">
+          <img src="/static/images/mentor-cards/2.png" alt="stock image of mentor" /></div>
+        <div className="become-mentor__image become-mentor__image_3">
+          <img src="/static/images/mentor-cards/3.png" alt="stock image of mentor" /></div>
       </div>
     </div>
   )

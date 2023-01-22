@@ -115,7 +115,7 @@ $font_size_small-phone-screen: math.round(math.div($font_size_middle-phone-scree
 @mixin TagsRegular($size: 14px, $height: null) { @include Tags($size, $height, 400) }
 
 // Caption
-@mixin Tags($size: 14px, $height: null, $weight: 400, $style: normal) {
+@mixin Caption($size: 12px, $height: null, $weight: 400, $style: normal) {
     @if $height == null {
         $height: $size * 1.33;
     }
@@ -125,4 +125,4 @@ $font_size_small-phone-screen: math.round(math.div($font_size_middle-phone-scree
     
     letter-spacing: 0.02em;
 }
-@mixin TagsRegular($size: 12px, $height: null) { @include Tags($size, $height, 400) }
+@mixin CaptionRegular($size: 12px, $height: null) { @include Caption($size, $height, 400) }

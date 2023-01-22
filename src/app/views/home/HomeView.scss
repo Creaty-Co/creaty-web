@@ -52,7 +52,10 @@
 	}
 }
 
-.home-view__how-it-works, .home-view__helpful-creaty, .home-view__faq {
+.home-view__helpful-creaty, 
+.home-view__become-mentor,
+.home-view__how-it-works, 
+.home-view__faq {
 	@include WidthLimit;
 	margin-top: 240px;
 	@include for-size(big-phone-screen) {
@@ -74,11 +77,6 @@
 	@include for-size(big-phone-screen) {
 		margin-top: 40px;
 	}
-}
-
-.home-view__become-mentor {
-	@include WidthLimit;
-	margin-top: 15em;
 }
 
 .home-view__mailing-subscribe {
