@@ -7,6 +7,7 @@ import { MouseEvent, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { DefaultRootState, useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
+import { selectIsMobile } from "redux/reducers/device"
 import { updateSearch } from "redux/reducers/search"
 import { classWithModifiers } from "utils/common"
 
@@ -27,29 +28,44 @@ function MentorSearchListStatic() {
 
   const { t } = useTranslation("translation", { keyPrefix: "views.home.mentorSearch" })
 
+  const isMobile = useSelector<DefaultRootState, boolean | null>(state => selectIsMobile(state.device))
   const topics = useSelector<DefaultRootState, DefaultRootState["topics"]>(state => state.topics)
   const search = useSelector<DefaultRootState, DefaultRootState["search"]>(state => state.search)
   
   function collapseSearchList(event: MouseEvent) {
     // stop propagation of `MentorSearch Blur` callback
+    event.preventDefault()
     event.stopPropagation()
     dispatch(updateSearch({ focused: false }))
+  }
+
+  const handleLinkClick = (event: MouseEvent) => {
+    console.log("handleLinkClick")
+    if (isMobile) event.preventDefault()
   }
 
   const [cursorTopic, setCursorTopic] = useState(search.topic)
   const topic = cursorTopic || search.topic
 
   return (
-    <div className={classWithModifiers("mentor-search-list", search.focused && "visible")} onPointerLeave={() => setCursorTopic(search.topic)}>
+    <div
+      className={classWithModifiers("mentor-search-list", search.focused && "visible")} 
+      onPointerLeave={() => setCursorTopic(search.topic)}
+    >
 
       <div className="mentor-search-list__container">
+
         {topics.list.map(topic => (
-          <Link
-            className={classWithModifiers("mentor-search-list__item", !search.tag && topic.id === search.topic?.id && "active")}
+          <Link key={topic.id}
+            className={classWithModifiers(
+              "mentor-search-list__item", 
+              !search.tag && topic.id === search.topic?.id && "active"
+            )}
+
             to={"/mentors/" + topic.shortcut}
+
             onPointerEnter={() => setCursorTopic(topic)}
-            onClick={collapseSearchList}
-            key={topic.id}
+            onClick={handleLinkClick}
           >
             <Icon href={topic.icon} />
             <span>{topic.title}</span>

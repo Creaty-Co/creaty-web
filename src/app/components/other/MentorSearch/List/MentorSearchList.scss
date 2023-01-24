@@ -27,19 +27,18 @@
   &:not(&--visible) {
     opacity: 0;
     pointer-events: none;
-    transform: translateY(-1em);
+    transform: translateY(16px);
   }
 
   @include for-size(big-phone-screen) {
     display: grid;
     
-    padding: 8px;
-    padding-bottom: 0;
-
     overflow: hidden;
-
+    
     max-height: calc(100dvh - 120px);
     height: auto;
+
+    padding: 8px;
   }
 
   &__container {
@@ -51,13 +50,15 @@
 
     &:not(:only-child) {
       border-right: 1px solid #D2D6DC;
+      @include for-size(big-phone-screen) {
+        border: 0;
+      }
     }
 
     overflow: auto;
     // @include Scrollbar(0.75em, rgba($color-gray-90, 0.2));
 
     @include for-size(big-phone-screen) {
-      
       @include gap(0);
 
       padding: 0;
@@ -136,6 +137,9 @@
     }
 
     @include for-size(big-phone-screen) {
+      display: none;
+
+      visibility: hidden;
       width: 100%;
     }
   }

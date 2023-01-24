@@ -15,6 +15,7 @@ import { classWithModifiers } from "utils/common"
 import MentorSearchList from "./List/MentorSearchList"
 
 function MentorSearch() {  
+
   const { t } = useTranslation("translation", { keyPrefix: "views.home.mentorSearch" })
 
   const isMoblie = useSelector<DefaultRootState, boolean | null>(state => selectIsMobile(state.device))
@@ -34,6 +35,8 @@ function MentorSearch() {
   const focus = () => dispatch(updateSearch({ focused: true }))
   const blur = () => dispatch(updateSearch({ focused: false }))
   const reset = () => setValue("")
+
+  console.log("rerender", search)
 
   useLayoutEffect(() => {
     if (search.focused && !scrolledToRef.current) {
