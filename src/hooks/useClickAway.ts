@@ -1,13 +1,12 @@
-import { MutableRefObject, useEffect } from "react"
-
+import { MutableRefObject, useLayoutEffect } from "react"
 
 function useClickAway(ref: MutableRefObject<HTMLElement | null | undefined>, callback: () => void) {
-  useEffect(() => {
+  useLayoutEffect(() => {
     function listener(event: MouseEvent) {
       if (!(event.target instanceof Element)) return
       if (!ref.current) return
       if (ref.current.contains(event.target)) return
-
+        
       callback()
     }
 
@@ -15,6 +14,5 @@ function useClickAway(ref: MutableRefObject<HTMLElement | null | undefined>, cal
     return () => document.removeEventListener("click", listener)
   }, [])
 }
-
 
 export default useClickAway

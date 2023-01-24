@@ -1,6 +1,102 @@
 @import "~app/assets/scss/bundle.scss";
 
 .mentor-search {
+	margin-top: 0;
+	transition: left ease-in 500ms, width ease-in 500ms, margin-top linear 300ms;
+	
+	&--focused {
+		// margin-top: 100px;
+		@include for-size(big-phone-screen) {
+			z-index: 2;
+			left: -4vw;
+			width: 98vw;
+			
+			& .mentor-search__wrapper {
+				visibility: visible;
+				opacity: 1;
+			}
+			
+			.mentor-search__button-link {
+				display: none;
+			}
+			
+			.mentor-search__icon-search {
+				visibility: visible;
+				opacity: 1;
+			}
+		}
+	}
+
+	&__icon-search {
+		transition: opacity ease 300ms;
+		opacity: 0;
+
+		display: none;
+
+		background-color: $color-violet;
+		color: $color-white; 
+		
+		border-radius: 16px;
+		height: 40px;
+		width: 40px;
+
+		transform: translate(0, -50%);
+		position: absolute;
+		right: 16px;
+		top: 50%;
+		
+		& svg {
+			transform: translate(50%, -50%);
+			position: absolute;
+			right: 50%;
+			top: 50%;
+			
+			height: 20px;
+			width: 20px;
+		}
+		
+		@include for-size(big-phone-screen) {
+			visibility: hidden;
+			display: block;
+		}
+	}
+
+	&__wrapper {
+		display: none;
+
+		transition: opacity ease 300ms;
+		opacity: 0;
+
+		@include for-size(big-phone-screen) {
+			visibility: hidden;
+			display: flex;
+
+			position: absolute;
+			z-index: 2;
+			left: 0;
+			top: 0;
+
+			height: 100%;
+			width: 56px;
+		}
+	}
+	
+	&__button {
+		&_icon {
+			@include for-size(big-phone-screen) {
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
+
+				height: 16px;
+				width: 16px;
+
+				color: $color-gray-80;
+			}
+		}
+	}
+
 	&__cover {
 		position: fixed;
 		inset: 0;
@@ -12,23 +108,26 @@
 		&:not(&--active) {
 			opacity: 0;
 		}
+
 	}
-
+	
 	&__container {
-		display: flex;
-		grid-gap: 12px;
-		// @include gap(0.75em);
+		z-index: 1;
 
+		display: flex;
+		@include gap(12px);
+		
 		width: 100%;
 		margin: 0 auto;
-		padding: 2em;
-		background: $color-black-90;
-		border-radius: 50px;
-		z-index: 1;
+		padding: 32px;
 		
-		@include Mobile {
+		border-radius: 50px;
+
+		background: $color-black-90;
+		
+		@include for-size(big-phone-screen) {
 			display: grid;
-			grid-gap: 8px;
+			@include gap(8px);
 
 			padding: 8px;
 			
@@ -39,20 +138,25 @@
 	&__search {
 		display: flex;
 		align-items: center;
-		// @include gap(0.5em);
-
+		@include gap(8px);
 		flex: 1;
-
-		padding: 0.5em;
-		padding-right: 1em;
+		
+		padding: 16px;
+		padding-left: 32px;
+		
 		background: white;
 		border-radius: 24px;
-		transition: 200ms ease box-shadow;
+		transition: 200ms ease box-shadow, padding-left ease 300ms;
 		cursor: text;
-
+		
 		&:hover,
 		&--focused {
 			box-shadow: 0 0 0 3px rgba($color-green, $alpha: 0.5);
+			@include for-size(big-phone-screen) {
+				@include gap(0);
+				padding-left: 56px;
+				padding-right: 55px;
+			}
 		}
 
 		&--filled#{&}--focused {
@@ -64,28 +168,27 @@
 
 		@include for-size(big-phone-screen) {
 			flex-wrap: wrap;
-			min-height: 3.5em;
 			border-radius: 24px;
 		}
 	}
 
 	&__input {
 		@include Text2Regular;
+		top: 2px;
 
 		flex: 1;
 		color: $color-gray-100;
+
+		text-overflow: ellipsis;
+		white-space: nowrap;
 
 		&::placeholder {
 			color: $color-gray-80;
 			transition: 200ms ease color;
 		}
-
+		
 		&--focus::placeholder {
 			color: rgba($color-gray-90, 0.2);
-		}
-
-		&:first-child {
-			padding-left: 1em;
 		}
 	}
 
@@ -106,6 +209,10 @@
 			&--up {
 				transform: rotateX(180deg);
 			}
+		}
+		
+		@include for-size(big-phone-screen) {
+			display: none;
 		}
 	}
 

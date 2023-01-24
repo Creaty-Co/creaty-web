@@ -22,13 +22,73 @@ function MentorSearchList(props: MentorSearchListProps) {
   return <MentorSearchListStatic />
 }
 
+function MentorSearchListStatic() {
+  const dispatch = useDispatch()
+
+  const { t } = useTranslation("translation", { keyPrefix: "views.home.mentorSearch" })
+
+  const topics = useSelector<DefaultRootState, DefaultRootState["topics"]>(state => state.topics)
+  const search = useSelector<DefaultRootState, DefaultRootState["search"]>(state => state.search)
+  
+  function collapseSearchList(event: MouseEvent) {
+    // stop propagation of `MentorSearch Blur` callback
+    event.stopPropagation()
+    dispatch(updateSearch({ focused: false }))
+  }
+
+  const [cursorTopic, setCursorTopic] = useState(search.topic)
+  const topic = cursorTopic || search.topic
+
+  return (
+    <div className={classWithModifiers("mentor-search-list", search.focused && "visible")} onPointerLeave={() => setCursorTopic(search.topic)}>
+
+      <div className="mentor-search-list__container">
+        {topics.list.map(topic => (
+          <Link
+            className={classWithModifiers("mentor-search-list__item", !search.tag && topic.id === search.topic?.id && "active")}
+            to={"/mentors/" + topic.shortcut}
+            onPointerEnter={() => setCursorTopic(topic)}
+            onClick={collapseSearchList}
+            key={topic.id}
+          >
+            <Icon href={topic.icon} />
+            <span>{topic.title}</span>
+
+            <div className="mentor-search-list__icon-item">
+              <Icon name="chevron" />
+            </div>
+          </Link>
+        ))}
+
+        {topics.list.length === 0 && (
+          <LoaderCover />
+        )}
+      </div>
+
+      <div className="mentor-search-list__tags">
+        {topic?.tags.map(tag => (
+          <TopicTag onClick={collapseSearchList} key={tag.id}>{tag}</TopicTag>
+        ))}
+        
+        {topic == null && (
+          <div className="mentor-search-list_empty">
+            <Icon className="mentor-search-list__icon" name="touch" />
+            <span className="mentor-search-list__text">{t("chooseTopic")}</span>
+          </div>
+        )}
+      </div>
+
+    </div>
+  )
+}
+
 function MentorSearchListDynamic(props: MentorSearchListProps & { value: string }) {
   const dispatch = useDispatch()
 
   function collapseSearchList(event: MouseEvent) {
     // stop propagation of `MentorSearch Blur` callback
     event.stopPropagation()
-    
+
     dispatch(updateSearch({ focused: false }))
   }
 
@@ -47,6 +107,7 @@ function MentorSearchListDynamic(props: MentorSearchListProps & { value: string 
   return (
     <div className={classWithModifiers("mentor-search-list", props.visible && "visible")}>
       <div className="mentor-search-list__container">
+
         {SearchTopicEntries.map(entry => (
           <Link className="mentor-search-list__item" to={"/mentors/" + entry.topic.shortcut} onClick={collapseSearchList} key={entry.topic.id}>
             <span>
@@ -56,6 +117,7 @@ function MentorSearchListDynamic(props: MentorSearchListProps & { value: string 
             </span>
           </Link>
         ))}
+
         {SearchTagEntries.map(entry => (
           <Link className="mentor-search-list__item" to={"/mentors/" + entry.tag.shortcut} onClick={collapseSearchList} key={entry.tag.id}>
             <span>
@@ -65,59 +127,11 @@ function MentorSearchListDynamic(props: MentorSearchListProps & { value: string 
             </span>
           </Link>
         ))}
+
         {SearchTagEntries.length === 0 && (
           <div className="mentor-search-list__item">По вашему запросу ничего не найдено.</div>
         )}
-      </div>
-    </div>
-  )
-}
 
-function MentorSearchListStatic() {
-  const dispatch = useDispatch()
-
-  const { t } = useTranslation("translation", { keyPrefix: "views.home.mentorSearch" })
-  const topics = useSelector<DefaultRootState, DefaultRootState["topics"]>(state => state.topics)
-  const search = useSelector<DefaultRootState, DefaultRootState["search"]>(state => state.search)
-
-  function collapseSearchList(event: MouseEvent) {
-    // stop propagation of `MentorSearch Blur` callback
-    event.stopPropagation()
-
-    dispatch(updateSearch({ focused: false }))
-  }
-
-  const [cursorTopic, setCursorTopic] = useState(search.topic)
-  const topic = cursorTopic || search.topic
-  return (
-    <div className={classWithModifiers("mentor-search-list", search.focused && "visible")} onPointerLeave={() => setCursorTopic(search.topic)}>
-      <div className="mentor-search-list__container">
-        {topics.list.map(topic => (
-          <Link
-            className={classWithModifiers("mentor-search-list__item", !search.tag && topic.id === search.topic?.id && "active")}
-            to={"/mentors/" + topic.shortcut}
-            onPointerEnter={() => setCursorTopic(topic)}
-            onClick={collapseSearchList}
-            key={topic.id}
-          >
-            <Icon href={topic.icon} />
-            <span>{topic.title}</span>
-          </Link>
-        ))}
-        {topics.list.length === 0 && (
-          <LoaderCover />
-        )}
-      </div>
-      <div className="mentor-search-list__tags">
-        {topic?.tags.map(tag => (
-          <TopicTag onClick={collapseSearchList} key={tag.id}>{tag}</TopicTag>
-        ))}
-        {topic == null && (
-          <div className="mentor-search-list_empty">
-            <Icon className="mentor-search-list__icon" name="touch" />
-            <span className="mentor-search-list__text">{t("chooseTopic")}</span>
-          </div>
-        )}
       </div>
     </div>
   )

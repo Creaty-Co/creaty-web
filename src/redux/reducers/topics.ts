@@ -32,7 +32,6 @@ export default (state = initialState, action: Action): typeof initialState => {
 }
 
 /* Plain Redux Actions */
-
 export const topicsUpdate = (payload: Partial<typeof initialState>) => ({
   type: "TOPICS_UPDATE",
   payload

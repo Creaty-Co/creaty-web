@@ -47,15 +47,17 @@ p.paragraph {
 header {
 	position: sticky;
 	top: 0;
-
-	padding: 0.596em;
-	background: rgba($color-black-main, 0.8);
-	border-bottom: 1px solid rgba($color: $color-gray-10, $alpha: 0.1);
-	backdrop-filter: blur(50px);
+	
 	z-index: 2;
 
-	@include Mobile {
-		padding: 0.5em 1.5em;
+	border-bottom: 1px solid rgba($color: $color-gray-10, $alpha: 0.1);
+	padding: 12px 0;
+
+	background: rgba($color-black-main, 0.8);
+	backdrop-filter: blur(50px);
+
+	@include for-size(big-phone-screen) {
+		padding: 8px 7.5vw 8px 5vw;
 	}
 }
 
@@ -68,14 +70,14 @@ header {
 }
 
 .topbar__logo {
-	height: 2.5em;
+	height: 40px;
 
 	&--mobile {
 		display: none;
 
 	}
 
-	@include Mobile {
+	@include for-size(big-phone-screen) {
 		display: none;
 
 		&--mobile {
@@ -87,20 +89,20 @@ header {
 .topbar__right {
 	display: flex;
 	align-items: center;
-	@include gap(0.5em);
+	@include gap(8px);
 
 	@include Tablet {
 		position: absolute;
-		top: 3.25em;
+		top: 50px;
 		right: 0;
 
 		display: grid;
 		justify-items: center;
-		@include gap(1em);
+		@include gap(16px);
 
 		background: $color-black-90;
 		border: 2px solid $color-gray-100;
-		border-radius: 1.5em;
+		border-radius: 20px;
 		transition: 200ms ease opacity, 200ms ease transform;
 		z-index: 2;
 
@@ -117,7 +119,7 @@ header {
 }
 
 .topbar__trigger {
-	--icon-size: 1.25em;
+	--icon-size: 25px;
 	display: none;
 
 	@include Tablet {
@@ -127,12 +129,12 @@ header {
 
 .topbar-menu {
 	display: flex;
-	@include gap(0.5em);
+	@include gap(8px);
 
 	@include Tablet {
-		padding: 1em;
+		padding: 16px;
 		display: grid;
-		@include gap(0.5em);
+		@include gap(8px);
 	}
 }
 
@@ -146,10 +148,12 @@ header {
 /* Main */
 
 main {
-	& > div {
-		margin-top: 10em;
+	overflow: hidden;
 
-		@include Mobile {
+	& > div {
+		margin-top: 120px;
+
+		@include for-size(big-phone-screen) {
 			margin-top: 22vw;
 
 			&.home-view {
@@ -157,7 +161,6 @@ main {
 			}
 		}
 	}
-	overflow: hidden;
 }
 
 main:not(.home-view__slider) {

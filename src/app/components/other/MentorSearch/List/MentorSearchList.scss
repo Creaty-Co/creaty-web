@@ -1,18 +1,23 @@
 @import "~app/assets/scss/bundle.scss";
 
 .mentor-search-list {
-  $height: calc(2.5em * 12);
+  // overflow: hidden;
+  // overflow-y: scroll;
+
+  height: 100%;
+  
+  // $height: calc(16px * 12);
 
   position: absolute;
   top: calc(100% + 0.75em);
-  left: 0;
   right: 0;
+  left: 0;
 
   display: flex;
 
-  max-height: $height;
+  // max-height: $height;
   background: $color-white;
-  border-radius: 1.5em;
+  border-radius: 24px;
 
   box-shadow: 0 0 0 3px rgba($color-green, $alpha: 0.5);
   transition: 200ms ease opacity, 200ms ease transform;
@@ -25,8 +30,16 @@
     transform: translateY(-1em);
   }
 
-  @include Mobile {
+  @include for-size(big-phone-screen) {
     display: grid;
+    
+    padding: 8px;
+    padding-bottom: 0;
+
+    overflow: hidden;
+
+    max-height: calc(100dvh - 120px);
+    height: auto;
   }
 
   &__container {
@@ -41,31 +54,64 @@
     }
 
     overflow: auto;
-    @include Scrollbar(0.75em, rgba($color-gray-90, 0.2));
+    // @include Scrollbar(0.75em, rgba($color-gray-90, 0.2));
+
+    @include for-size(big-phone-screen) {
+      
+      @include gap(0);
+
+      padding: 0;
+      margin: 0;
+    }
   }
 
   &__item {
+    position: relative;
+
     display: flex;
     align-items: center;
-    @include gap(0.75em);
+    @include gap(12px);
 
-    padding: 0.75em 1em;
-
-    border-radius: 1em;
-    color: $color-black-main;
-    transition: 200ms ease background-color;
+    border-radius: 16px;
+    padding: 8px 16px;
+    
     cursor: pointer;
-
-    &:hover,
-    &--active {
+    
+    transition: 200ms ease background-color;
+    &:hover, &--active {
       background: $color-gray-30;
     }
+    
+    @include Text2Medium;
+    text-decoration: none;
+    color: $color-black-main;
 
-    em {
-      font-weight: bold;
+    & > span {
+      position: relative;
+      top: 1px;
     }
 
-    text-decoration: none;
+    & > img {
+      height: 20px;
+      width: 20px;
+    }
+
+    & > div {
+      position: absolute;
+      right: 16px;
+      top: 0;
+
+      height: 100%;
+
+      & > svg {
+        color: $color-gray-50;
+        
+        height: 100%;
+        width: 16px;
+
+        transform: rotate(-90deg);
+      }
+    }
   }
 
 
@@ -73,20 +119,24 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    @include row-gap(0.5em);
+    @include row-gap(8px);
 
     width: 40%;
-    padding: 1em;
-    margin-right: 0.25em;
+    padding: 16px;
+    margin-right: 4px;
 
     overflow: auto;
 
-    @include Scrollbar(0.5em, rgba($color-gray-90, 0.2), transparent);
+    // @include Scrollbar(8px, rgba($color-gray-90, 0.2), transparent);
 
     &>.topic-tag {
       overflow: hidden;
       text-overflow: ellipsis;
       max-width: 100%;
+    }
+
+    @include for-size(big-phone-screen) {
+      width: 100%;
     }
   }
 
