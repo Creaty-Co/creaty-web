@@ -5,13 +5,68 @@ import { MapActions } from "interfaces/reducer"
 import { TagType, TopicType } from "interfaces/types"
 import { Dispatch } from "redux"
 
+const mokaTags = [
+  {
+    id: 1,
+    shortcut: "tag-one",
+    title: "tag-1"
+  }, {
+    id: 2,
+    shortcut: "tag-two",
+    title: "tag-2"
+  }, {
+    id: 3,
+    shortcut: "tag-three",
+    title: "tag-3"
+  }
+]
+
+const mokaTopics = [
+  {
+    id: 1,
+    shortcut: "topic-1",
+    title: "Topic one",
+    icon: "",
+    tags: [
+      {
+        id: 1,
+        shortcut: "tag-one",
+        title: "tag-1"
+      }
+    ]
+  }, {
+    id: 2,
+    shortcut: "topic-2",
+    title: "Topic two",
+    icon: "",
+    tags: [
+      {
+        id: 2,
+        shortcut: "tag-two",
+        title: "tag-2"
+      }
+    ]
+  }, {
+    id: 3,
+    shortcut: "topic-3",
+    title: "Topic three",
+    icon: "",
+    tags: [
+      {
+        id: 3,
+        shortcut: "tag-three",
+        title: "tag-3"
+      }
+    ]
+  }
+]
 
 const initialState: {
   list: TopicType[]
   tags: TagType[]
 } = {
-  list: [],
-  tags: []
+  list: mokaTopics,
+  tags: mokaTags
 }
 
 interface Actions {
@@ -38,7 +93,6 @@ export const topicsUpdate = (payload: Partial<typeof initialState>) => ({
 })
 
 /* Thunk Actions */
-
 export async function topicsFetch(dispatch: Dispatch) {
   const { error, payload } = await ClientAPI.query(getTagsTopics(1, 25), true)
 
@@ -50,5 +104,5 @@ export async function topicsFetch(dispatch: Dispatch) {
   if (error) return
   if (!payload) return
 
-  dispatch(topicsUpdate({ list: payload.results, tags: payload.results.flatMap(topic => topic.tags) }))
+  // dispatch(topicsUpdate({ list: payload.results, tags: payload.results.flatMap(topic => topic.tags) }))
 }

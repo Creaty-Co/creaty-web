@@ -20,44 +20,18 @@
 				display: none;
 			}
 			
-			.mentor-search__icon-search {
-				visibility: visible;
-				opacity: 1;
+			.mentor-search__icon {
+				&--search {
+					visibility: visible;
+					opacity: 1;
+				}
+
+				&--chevron {
+					display: none;
+					visibility: hidden;
+					opacity: 0;
+				}
 			}
-		}
-	}
-
-	&__icon-search {
-		transition: opacity ease 300ms;
-		opacity: 0;
-
-		display: none;
-
-		background-color: $color-violet;
-		color: $color-white; 
-		
-		border-radius: 16px;
-		height: 40px;
-		width: 40px;
-
-		transform: translate(0, -50%);
-		position: absolute;
-		right: 16px;
-		top: 50%;
-		
-		& svg {
-			transform: translate(50%, -50%);
-			position: absolute;
-			right: 50%;
-			top: 50%;
-			
-			height: 20px;
-			width: 20px;
-		}
-		
-		@include for-size(big-phone-screen) {
-			visibility: hidden;
-			display: block;
 		}
 	}
 
@@ -73,7 +47,7 @@
 
 			position: absolute;
 			z-index: 2;
-			left: 0;
+			left: 2vw;
 			top: 0;
 
 			height: 100%;
@@ -82,7 +56,7 @@
 	}
 	
 	&__button {
-		&_icon {
+		&--icon {
 			@include for-size(big-phone-screen) {
 				position: absolute;
 				left: 50%;
@@ -136,6 +110,8 @@
 	}
 
 	&__search {
+		position: relative;
+
 		display: flex;
 		align-items: center;
 		@include gap(8px);
@@ -159,15 +135,20 @@
 			}
 		}
 
-		&--filled#{&}--focused {
+		// &--filled#{&}--focused {
+		&--filled {
 			>.mentor-search-list__item,
 			>.topic-tag {
 				opacity: 0.5;
 			}
+
+			@include for-size(big-phone-screen) {
+				padding: 8px 8px;
+			}
 		}
 
 		@include for-size(big-phone-screen) {
-			flex-wrap: wrap;
+			// flex-wrap: wrap;
 			border-radius: 24px;
 		}
 	}
@@ -185,6 +166,8 @@
 		&::placeholder {
 			color: $color-gray-80;
 			transition: 200ms ease color;
+					text-overflow: ellipsis;
+						white-space: nowrap;
 		}
 		
 		&--focus::placeholder {
@@ -193,10 +176,6 @@
 	}
 
 	&__icon {
-		--icon-size: 2.5em;
-
-		padding: 0.825em;
-		margin-left: auto;
 		color: $color-gray-50;
 
 		&--cross {
@@ -204,15 +183,55 @@
 		}
 
 		&--chevron {
-			transition: 250ms ease transform;
+			position: absolute;
+			right: 30px;
+			top: 2px;
 
+			height: 100%;
+			width: 12px;
+
+			// margin-right: 14px;
+			margin: 0;
+			padding: 0;
+
+			transition: 250ms ease transform;
 			&--up {
 				transform: rotateX(180deg);
 			}
 		}
 		
-		@include for-size(big-phone-screen) {
+		&--search {
 			display: none;
+
+			transition: opacity ease 300ms;
+			opacity: 0;
+		
+			background-color: $color-violet;
+			color: $color-white;
+		
+			border-radius: 16px;
+			height: 40px;
+			width: 40px;
+		
+			transform: translate(0, -50%);
+			position: absolute;
+			right: 16px;
+			top: 50%;
+		
+			& svg {
+				transform: translate(50%, -50%);
+				position: absolute;
+				right: 50%;
+				top: 50%;
+		
+				height: 20px;
+				width: 20px;
+			}
+		
+			@include for-size(big-phone-screen) {
+				visibility: hidden;
+				display: block;
+			}
 		}
 	}
 

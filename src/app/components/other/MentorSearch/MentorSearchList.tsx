@@ -3,13 +3,20 @@ import "./MentorSearchList.scss"
 import Icon from "app/components/common/Icon/Icon"
 import LoaderCover from "app/components/UI/Loader/LoaderCover"
 import TopicTag from "app/components/UI/Tag/TopicTag"
-import { MouseEvent, useState } from "react"
+import { functionsIn } from "lodash"
+import { /* MouseEvent, */ ReactNode,useState } from "react"
 import { useTranslation } from "react-i18next"
-import { DefaultRootState, useDispatch, useSelector } from "react-redux"
+import { DefaultRootState, /*useDispatch,*/ useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import { selectIsMobile } from "redux/reducers/device"
-import { updateSearch } from "redux/reducers/search"
-import { classWithModifiers } from "utils/common"
+// import { Link } from "react-router-dom"
+// import { selectIsMobile } from "redux/reducers/device"
+// import { updateSearch } from "redux/reducers/search"
+import { bem, classMerge, classWithModifiers } from "utils/common"
+
+import MentorSearchListItem from "./MentorSearchListItem"
+
+const CN = "mentor-search-list"
+const { getElement, getModifier } = bem(CN)
 
 interface MentorSearchListProps {
   value: string | null
@@ -17,6 +24,54 @@ interface MentorSearchListProps {
 }
 
 function MentorSearchList(props: MentorSearchListProps) {
+  const { t } = useTranslation("translation", { keyPrefix: "views.home.mentorSearch" })
+
+  const topics = useSelector<DefaultRootState, DefaultRootState["topics"]>(state => state.topics)
+  const search = useSelector<DefaultRootState, DefaultRootState["search"]>(state => state.search)
+
+  const [cursorTopic, setCursorTopic] = useState(search.topic)
+  const topic = cursorTopic || search.topic
+
+  return (
+    <div
+      className={getModifier(CN, search.focused && "visible")}
+      onPointerLeave={() => setCursorTopic(search.topic)}
+      onPointerEnter={() => console.log("topic:enter")}
+    >
+
+      {/* Topics */}
+      <div className={getElement("container")}>
+        {/* Selected */}
+        {search.topic && <div className={getElement("selected")}>
+          <MentorSearchListItem className={getElement("item")} state="selected" topic={search.topic} />
+          <MentorSearchListItem type="view-all" className={getElement("item")} topic={search.topic} />
+        </div>}
+        {/* All */}
+        {!search.topic && topics.list.map(topic => <MentorSearchListItem key={topic.id} {...{topic}}/>)}
+        {/* Loader */}
+        {topics.list.length === 0 && <LoaderCover />}
+      </div>
+
+      {/* Tags */}
+      <div className="mentor-search-list__tags">
+        {topic?.tags.map(tag => <TopicTag key={tag.id}>{tag}</TopicTag>)}
+        {topic == null && <MentorSearchListEmpty>{t("chooseTopic")}</MentorSearchListEmpty>}
+      </div>
+
+    </div>
+  )
+}
+
+const MentorSearchListEmpty = ({ children }: { children: ReactNode }) => (
+  <div className="mentor-search-list--empty">
+    <Icon className="mentor-search-list__icon" name="touch" />
+    <span className="mentor-search-list__text">{children}</span>
+  </div>
+)
+
+export default MentorSearchList
+/*
+function MentorSearchListAgregation(props: MentorSearchListProps) {
   if (props.value && props.value.length > 0) {
     return <MentorSearchListDynamic {...props} value={props.value} />
   }
@@ -33,7 +88,6 @@ function MentorSearchListStatic() {
   const search = useSelector<DefaultRootState, DefaultRootState["search"]>(state => state.search)
   
   function collapseSearchList(event: MouseEvent) {
-    // stop propagation of `MentorSearch Blur` callback
     event.preventDefault()
     event.stopPropagation()
     dispatch(updateSearch({ focused: false }))
@@ -46,6 +100,7 @@ function MentorSearchListStatic() {
 
   const [cursorTopic, setCursorTopic] = useState(search.topic)
   const topic = cursorTopic || search.topic
+  const topicSelected = !!search.topic
 
   return (
     <div
@@ -54,6 +109,9 @@ function MentorSearchListStatic() {
     >
 
       <div className="mentor-search-list__container">
+        {topicSelected && <div className="mentor-search-list__selected">
+          
+        </div>}
 
         {topics.list.map(topic => (
           <Link key={topic.id}
@@ -152,5 +210,5 @@ function MentorSearchListDynamic(props: MentorSearchListProps & { value: string 
     </div>
   )
 }
+*/
 
-export default MentorSearchList

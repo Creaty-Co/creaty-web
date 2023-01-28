@@ -1,6 +1,11 @@
 @import "~app/assets/scss/bundle.scss";
 
-.home-view {}
+.home-view {
+	& > div {
+		// overflow: hidden;
+	}
+}
+
 
 .home-view__title {
 	@include H2Bold;

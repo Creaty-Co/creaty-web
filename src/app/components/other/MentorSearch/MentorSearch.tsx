@@ -4,24 +4,30 @@ import ButtonLink from "app/components/common/Button/ButtonLink"
 import Icon from "app/components/common/Icon/Icon"
 import TopicTag from "app/components/UI/Tag/TopicTag"
 import useClickAway from "hooks/useClickAway"
+import { TopicType } from "interfaces/types"
 import { MouseEvent, useEffect, useLayoutEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { DefaultRootState, useDispatch, useSelector } from "react-redux"
 import { NavLink } from "react-router-dom"
 import { selectIsMobile } from "redux/reducers/device"
 import { updateSearch } from "redux/reducers/search"
-import { classWithModifiers } from "utils/common"
+import { bem, classWithModifiers } from "utils/common"
 
-import MentorSearchList from "./List/MentorSearchList"
+import MentorSearchList from "./MentorSearchList"
+import MentorSearchListItem from "./MentorSearchListItem"
+
+const CN = "mentor-search"
+const { getElement, getModifier } = bem(CN)
 
 function MentorSearch() {  
-
   const { t } = useTranslation("translation", { keyPrefix: "views.home.mentorSearch" })
 
-  const isMoblie = useSelector<DefaultRootState, boolean | null>(state => selectIsMobile(state.device))
+  const isMoblie = useSelector<DefaultRootState, boolean | null>(state => selectIsMobile(state.device)) 
+  const topics = useSelector<DefaultRootState, DefaultRootState["topics"]>(state => state.topics)
   const search = useSelector<DefaultRootState, DefaultRootState["search"]>(state => state.search)
+  console.log("rerender. search", search)
+
   const dispatch = useDispatch()
-  
   const [value, setValue] = useState("")
   
   const scrolledToRef = useRef<boolean>(search.focused)
@@ -36,7 +42,18 @@ function MentorSearch() {
   const blur = () => dispatch(updateSearch({ focused: false }))
   const reset = () => setValue("")
 
-  console.log("rerender", search)
+  const selectTopic = (id: string | null) => {
+    if (id === null ) return null
+
+    const topic = topics.list.find((topic) => topic.id === +id) || null
+    if (topic) dispatch(updateSearch({ topic }))
+  }
+
+  const unselectTopic = (id: string | null) => {
+    if (id === null ) return null
+    const topic = topics.list.find((topic) => topic.id === +id) || null
+    if (topic) dispatch(updateSearch({ topic: undefined }))
+  }
 
   useLayoutEffect(() => {
     if (search.focused && !scrolledToRef.current) {
@@ -69,62 +86,67 @@ function MentorSearch() {
     console.log("target: ", event.target)
 
     const target = event.target as HTMLElement
-    const isInput = target.hasAttribute("data-is-input")
-    const isClose = 
-      target.hasAttribute("data-is-close") || 
-      target.parentElement?.hasAttribute("data-is-close")
 
+    const isTopicRemove = targetHasAttr(target, "data-is-topic-remove")
+    const isTopicAdd = targetHasAttr(target, "data-is-topic-add")
+    const isClose = targetHasAttr(target, "data-is-close")
+    const isInput = targetHasAttr(target, "data-is-input")
+
+    /*
+    */
     console.log("isInput", isInput)
     console.log("isClose", isClose)
+    console.log("isTopicRemove", isTopicRemove)
+    console.log("isTopicAdd", isTopicAdd)
 
+    // TODO: fix to strong names
     if (isInput) focus()
     if (isClose) close()
+    if (isTopicRemove) unselectTopic(target.getAttribute("data-topic-id"))
+    if (isTopicAdd) selectTopic(target.getAttribute("data-topic-id"))
   }
 
   return (
-    <div 
-      className={classWithModifiers(
-        "mentor-search",
+    <div ref={containerRef}
+      className={getModifier(CN,
         search.focused && "focused"
       )}
-      ref={containerRef}
 
       onMouseDownCapture={onMouseDownHandler}
     >
-      <div className={classWithModifiers("mentor-search__cover", search.focused && "active")} />
+      {/* Cover */}
+      <div 
+        className={getModifier(getElement("cover"), 
+          search.focused && "active"
+        )} 
+      />
 
-      <div className="mentor-search__container">
+      {/* Search */}
+      <div className={getElement("container")}>
         {/* Close. Mobile */}
         <div
-          className="mentor-search__wrapper mentor-search__wrapper_button"
+          className={getModifier(getElement("wrapper"), "button")}
           data-is-close
         >
-          <Icon
+          <Icon name="arrow-left"
+            className={getModifier(getElement("button"), "icon")}
             data-is-close
-            className="mentor-search__button_icon"
-            name="arrow-left"
           />
         </div>
 
-        <label 
+        <label ref={searchLabelRef}
+          className={getModifier(getElement("search"), 
+            search.focused && "focused",
+            !search.focused && !!(search.tag || search.topic) && "filled"
+          )}
           data-is-input
-          className={classWithModifiers(
-            "mentor-search__search", 
-            search.focused && "focused", 
-            !!(search.tag || search.topic) && "filled"
-          )}
-          ref={searchLabelRef}
         >
-
-          {/* Topic Icon */}
+          {/* Selected topic in search area */}
           {!search.focused && search.topic && (
-            <div className="mentor-search-list__item mentor-search-list__item--active">
-              <Icon href={search.topic.icon} />
-              <span>{search.topic.title}</span>
-            </div>
+            <MentorSearchListItem topic={search.topic} type="short" state="selected" />
           )}
 
-          {/* Tags */}
+          {/* Selected tags in search area */}
           {!search.focused && search.tag && (
             <TopicTag>{search.tag}</TopicTag>
           )}
@@ -132,43 +154,58 @@ function MentorSearch() {
           {/* Search Input */}
           {isInputVisible && (
             <>
-              <input
-                ref={inputRef}
-                data-is-input
-
-                className={classWithModifiers("mentor-search__input", search.focused && "focused")} 
-                type="text"
+              <input ref={inputRef} type="text"
+                className={getModifier(getElement("input"), 
+                  search.focused && "focused"
+                )} 
 
                 placeholder={t("placeholder")} 
                 value={value} 
+                data-is-input
 
-                onChange={event => {
-                  console.log("onchange", event.currentTarget.value)
-                  setValue(event.currentTarget.value)
-                }}
+                onChange={event => setValue(event.currentTarget.value)}
               />
               {
                 value.length > 0 && 
-                <Icon name="cross" className="mentor-search__icon" />
+                <Icon name="cross" className={getElement("icon")} />
               }
             </>
           )}
           {/* {onClick = { reset } } */}
           {/* DropDown List */}
           <MentorSearchList value={value} visible={search.focused} />
-
           {/* Icon */}
-          <Icon name="chevron" className="mentor-search__icon" modifiers={[search.focused && "up"]} />
+          <Icon name="chevron"
+            className={getElement("icon")}
+            modifiers={[search.focused && "up"]}
+            data-is-input
+          />
         </label>
-        
-        <NavLink to="/mentors" className="mentor-search__icon-search">
+
+        <NavLink to={"/mentors" + (search.topic && "/" + search.topic.shortcut || "")}
+          className={getModifier(getElement("icon"),
+            "search"
+          )}
+        >
           <Icon name="search" />
         </NavLink>
 
-        <ButtonLink className="mentor-search__button-link" color="violet" size="big" to="/mentors">{t("button")}</ButtonLink>
+        <ButtonLink to={"/mentors" + (search.topic && "/" + search.topic.shortcut || "")}
+          className={getElement("button-link")} 
+          color="violet" 
+          size="big" 
+        >
+          {t("button")}
+        </ButtonLink>
       </div>
     </div>
   )
+}
+
+function targetHasAttr(target: HTMLElement, attrName: string): boolean {
+  return target.hasAttribute(attrName) ||
+    target.parentElement?.hasAttribute(attrName) || 
+    false
 }
 
 export default MentorSearch

@@ -21,11 +21,51 @@ export function classWithModifiers(originClass: string, ...modifiers: Array<stri
   modifiers = modifiers.filter(Boolean)
   if (!modifiers.length) return originClass
 
-  const space = " "
   const separator = "--"
+  const space = " "
 
   modifiers = modifiers.map(modifier => originClass + separator + modifier)
   return originClass + space + modifiers.join(space)
+}
+
+/**
+ * Join element name with origin class
+ * @returns `"origin-class__elmName"`
+ */
+export function classElement(originClass: string, element: string | false | null | undefined): string {
+  if (!element || !element.length) return originClass
+
+  const separator = "__"
+
+  return originClass + separator + element
+}
+
+/**
+ * Curry of classElement
+ * @returns `function element => classElement(originalClass, element)`
+ */
+export function getClassElement(originClass: string): Function {
+  return (element : string | false | null | undefined): string => classElement(originClass, element)
+}
+
+/**
+ * Curry of classWithModifiers
+ * @returns `function modifiers => classWithModifiers(classOrigin, ...modifiers)`
+ */
+export function getClassWithModifiers(originClass: string): Function {
+  return (...modifiers: Array<string | number | false | null | undefined>): string => classWithModifiers(originClass, ...modifiers)
+}
+
+/**
+ * Generate functions produce elems and modifiers in block
+ * @param block: string. CSS class of block
+ * @returns { createModifier, createElement } 
+ */
+export function bem(block: string) {
+  const getModifier = classWithModifiers
+  const getElement = getClassElement(block)
+
+  return { getModifier, getElement }
 }
 
 /**
@@ -46,6 +86,7 @@ export function createQuery(queryObject?: Record<string, unknown> | null): strin
 
   return queryArray.filter(Boolean).join("&")
 }
+
 
 export function toBase64(value: unknown) {
   return Buffer.from(JSON.stringify(value)).toString("base64")
