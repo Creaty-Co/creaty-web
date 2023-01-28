@@ -25,8 +25,7 @@ enum FormInputs {
   // ---------- INFO --------------------------
   languages = "languages",
 
-  cityRU = "city_ru",
-  cityEN = "city_en",
+  city = "city",
 
   portfolio = "portfolio",
   experience = "experience",
@@ -48,7 +47,7 @@ enum FormInputs {
 
 type FormValues = Omit<MentorPatchType, "info" | "packages"> & MentorPatchType["info"]
 
-const formInfoKeys = ["languages", "portfolio", "experience", "resume", "trial_meeting", "what_help", "city_ru", "city_en"] as const
+const formInfoKeys = ["languages", "portfolio", "experience", "resume", "trial_meeting", "what_help", "city"] as const
 
 interface AdminNewMentorViewProps {
   new: true
@@ -129,8 +128,7 @@ function AdminMentorNewEdit(props: AdminNewMentorViewProps | AdminEditMentorView
             <h4 className="heading">Страна</h4>
             <AdminCountriesSelect name={FormInputs.country} defaultValue={props.data?.country.id} />
           </div>
-          <Input name={FormInputs.cityRU} placeholder="Город на русском" defaultValue={props.data?.info.city_ru} required />
-          <Input name={FormInputs.cityEN} placeholder="Город на английском" defaultValue={props.data?.info.city_en} required />
+          <Input name={FormInputs.city} placeholder="Город" defaultValue={props.data?.info.city} required />
         </AdminGroupLayout>
         <AdminGroupLayout title="Языки">
           <AdminLangsCheckboxes name={FormInputs.languages} defaultChecked={props.data?.info.languages.map(lang => lang.id) || [9, 4]} />

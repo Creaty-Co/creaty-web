@@ -50,8 +50,7 @@ function AdminMentorsView() {
                 <th>Оплата</th>
                 <th>Валюта Оплаты</th>
                 <th>Пробная встреча?</th>
-                <th>Город на русском</th>
-                <th>Город на английском</th>
+                <th>Город</th>
               </tr>
             </thead>
             <tbody>
@@ -80,8 +79,7 @@ function AdminMentorsView() {
                   <td><PartialEditMentorInput id={mentor.id} name="price" defaultValue={mentor.price} /></td>
                   <td><PartialEditMentorInput id={mentor.id} name="price_currency" defaultValue={mentor.price_currency} /></td>
                   <td><PartialEditMentorInput id={mentor.id} name="trial_meeting" defaultChecked={!!mentor.info.trial_meeting} type="checkbox" /></td>
-                  <td><PartialEditMentorInput id={mentor.id} name="city_ru" defaultValue={mentor.info.city_ru} /></td>
-                  <td><PartialEditMentorInput id={mentor.id} name="city_en" defaultValue={mentor.info.city_en} /></td>
+                  <td><PartialEditMentorInput id={mentor.id} name="city" defaultValue={mentor.info.city} /></td>
                 </tr>
               ))}
             </tbody>
@@ -119,8 +117,7 @@ function PartialEditMentorInput(props: PartialEditMentorInputProps) {
     "what_help",
     "experience",
     "portfolio",
-    "city_ru",
-    "city_en"
+    "city"
   ]
   function onBlur(event: FocusEvent<HTMLInputElement>) {
     const target = event.currentTarget

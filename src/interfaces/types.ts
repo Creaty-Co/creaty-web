@@ -82,8 +82,7 @@ export interface MentorDetailedType extends MentorType {
     experience: string
     portfolio: string
     languages: MentorDetailedLanguages[]
-    city_ru: string
-    city_en: string
+    city: string
   }
 }
 
@@ -95,8 +94,7 @@ export interface MentorPatchType {
     experience: string
     portfolio: string
     languages: number[]
-    city_ru: string
-    city_en: string
+    city: string
   }
   avatar: string
   company: string
