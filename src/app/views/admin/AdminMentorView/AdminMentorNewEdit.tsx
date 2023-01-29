@@ -103,7 +103,6 @@ function AdminMentorNewEdit(props: AdminNewMentorViewProps | AdminEditMentorView
         </AdminGroupLayout>
         <AdminGroupLayout title="Оплата">
           <Input name={FormInputs.price} type="number" placeholder="Оплата за час" defaultValue={props.data?.price} required masks={[
-            { title: "Рубль", value: "RUB" },
             { title: "Доллар", value: "USD" }
           ]} masksName={FormInputs.priceCurrency} />
           {/* <select name="price_currency" defaultValue={props.data?.price_currency} required>
