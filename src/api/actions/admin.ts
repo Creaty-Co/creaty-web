@@ -15,7 +15,6 @@ export const getAdminMentors = (page: number, page_size: number): Action<Paginat
   first_name: string
   last_name: string
   price: string
-  price_currency: string
   country: {
     id: number
     name: string

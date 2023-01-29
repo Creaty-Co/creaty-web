@@ -53,7 +53,6 @@ export interface MentorType {
   first_name: string
   last_name: string
   price: string
-  price_currency: string
   country: {
     id: number
     flag_unicode: string
@@ -80,7 +79,6 @@ export interface MentorDetailedType extends MentorType {
     resume: string
     what_help: string
     experience: string
-    portfolio: string
     languages: MentorDetailedLanguages[]
     city: string
   }
@@ -92,7 +90,6 @@ export interface MentorPatchType {
     resume: string
     what_help: string
     experience: string
-    portfolio: string
     languages: number[]
     city: string
   }
@@ -102,14 +99,12 @@ export interface MentorPatchType {
   first_name: string
   last_name: string
   price: string
-  price_currency: string
   tag_set: number[]
   country: number
   packages: Omit<MentorPackageType, "id">[]
 }
 
 /* Pages */
-
 export interface PageType {
   id: number
   tags: TagType[]

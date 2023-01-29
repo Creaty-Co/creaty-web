@@ -27,7 +27,6 @@ enum FormInputs {
 
   city = "city",
 
-  portfolio = "portfolio",
   experience = "experience",
   whatHelp = "what_help",
   resume = "resume",
@@ -40,14 +39,13 @@ enum FormInputs {
   firstName = "first_name",
   lastName = "last_name",
   price = "price",
-  priceCurrency = "price_currency",
   country = "country",
   tags = "tag_set"
 }
 
 type FormValues = Omit<MentorPatchType, "info" | "packages"> & MentorPatchType["info"]
 
-const formInfoKeys = ["languages", "portfolio", "experience", "resume", "trial_meeting", "what_help", "city"] as const
+const formInfoKeys = ["languages", "experience", "resume", "trial_meeting", "what_help", "city"] as const
 
 interface AdminNewMentorViewProps {
   new: true
@@ -93,6 +91,8 @@ function AdminMentorNewEdit(props: AdminNewMentorViewProps | AdminEditMentorView
   return (
     <Form onSubmit={submitCreateMentor}>
       <AdminViewLayout>
+
+        {/* General */}
         <AdminGroupLayout title="Общая информация">
           <Input name={FormInputs.firstName} placeholder="Имя" defaultValue={props.data?.first_name} required />
           <Input name={FormInputs.lastName} placeholder="Фамилия" defaultValue={props.data?.last_name} required />
@@ -100,16 +100,19 @@ function AdminMentorNewEdit(props: AdminNewMentorViewProps | AdminEditMentorView
           <Input name={FormInputs.profession} placeholder="Профессия" defaultValue={props.data?.profession} required />
           <Input name={FormInputs.company} placeholder="Компания" defaultValue={props.data?.company} required />
         </AdminGroupLayout>
+
+        {/* Price */}
         <AdminGroupLayout title="Оплата">
-          <Input name={FormInputs.price} type="number" placeholder="Оплата за час" defaultValue={props.data?.price} required masks={[
-            { title: "Рубль", value: "RUB" },
-            { title: "Доллар", value: "USD" }
-          ]} masksName={FormInputs.priceCurrency} />
-          {/* <select name="price_currency" defaultValue={props.data?.price_currency} required>
-            <option value="RUB">Рубль</option>
-            <option value="USD">Доллар</option>
-          </select> */}
+          <Input required
+            name={FormInputs.price} 
+            type="number" 
+            placeholder="Оплата за час" 
+            defaultValue={props.data?.price}  
+            masks={[{ title: "Доллар", value: "USD" }]}
+            masksName="USD" />
         </AdminGroupLayout>
+
+        {/* Tags */}
         <AdminGroupLayout title="Тэги">
           <CheckTree name={FormInputs.tags} defaultChecks={props.data?.tags.map(tag => tag.id) || [2, 3]}>
             <Button iconLeft={<Icon name="touch" />} color="white" onClick={() => Modal.open(PopupAdminNewTopic)}>Добавить категорию</Button>
@@ -123,6 +126,8 @@ function AdminMentorNewEdit(props: AdminNewMentorViewProps | AdminEditMentorView
             ))}
           </CheckTree>
         </AdminGroupLayout>
+
+        {/* Location */}
         <AdminGroupLayout title="Местоположение">
           <div>
             <h4 className="heading">Страна</h4>
@@ -130,19 +135,30 @@ function AdminMentorNewEdit(props: AdminNewMentorViewProps | AdminEditMentorView
           </div>
           <Input name={FormInputs.city} placeholder="Город" defaultValue={props.data?.info.city} required />
         </AdminGroupLayout>
+
+        {/* Languages */}
         <AdminGroupLayout title="Языки">
           <AdminLangsCheckboxes name={FormInputs.languages} defaultChecked={props.data?.info.languages.map(lang => lang.id) || [9, 4]} />
         </AdminGroupLayout>
+
+        {/* Avatar */}
         <AdminGroupLayout title="Аватарка">
           <EditAvatar image={props.data?.avatar || ""} name={FormInputs.avatar} />
         </AdminGroupLayout>
+
+        {/* About */}
         <AdminGroupLayout title="Наполнение профиля">
+
           <div className="input">
-            <textarea name={FormInputs.portfolio} placeholder="Портфолио" className="input__input" defaultValue={props.data?.info.portfolio} required />
+            <textarea
+              name={FormInputs.experience} 
+              placeholder="Опыт" 
+              className="input__input" 
+              defaultValue={props.data?.info.experience}
+              required
+            />
           </div>
-          <div className="input">
-            <textarea name={FormInputs.experience} placeholder="Опыт" className="input__input" defaultValue={props.data?.info.experience} required />
-          </div>
+
           <div className="input">
             <textarea name={FormInputs.whatHelp} placeholder="С чем помогу" className="input__input" defaultValue={props.data?.info.what_help} required />
           </div>

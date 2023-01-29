@@ -58,6 +58,7 @@ function AdminMentorsView() {
                 <tr key={mentor.id}>
                   <td><Button color="dark" onClick={() => Modal.open(PopupAdminPersonalMentors, { mentor })}>Ред. перс. страницу</Button></td>
                   <td>{mentor.id}</td>
+                  
                   <td>
                     <section>
                       <div>
@@ -67,18 +68,25 @@ function AdminMentorsView() {
                       <PartialEditMentorInput id={mentor.id} name="avatar" defaultValue={mentor.avatar} />
                     </section>
                   </td>
+
                   <td><PartialEditMentorInput id={mentor.id} name="first_name" defaultValue={mentor.first_name} /></td>
+
                   <td><PartialEditMentorInput id={mentor.id} name="last_name" defaultValue={mentor.last_name} /></td>
+
                   <td>
                     <PartialEditMentorInput id={mentor.id} name="country" defaultValue={mentor.country.id}>
                       <AdminCountriesSelect defaultValue={mentor.country.id} />
                     </PartialEditMentorInput>
                   </td>
+
                   <td><PartialEditMentorInput id={mentor.id} name="profession" defaultValue={mentor.profession} /></td>
+
                   <td><PartialEditMentorInput id={mentor.id} name="company" defaultValue={mentor.company} /></td>
+
                   <td><PartialEditMentorInput id={mentor.id} name="price" defaultValue={mentor.price} /></td>
-                  <td><PartialEditMentorInput id={mentor.id} name="price_currency" defaultValue={mentor.price_currency} /></td>
+
                   <td><PartialEditMentorInput id={mentor.id} name="trial_meeting" defaultChecked={!!mentor.info.trial_meeting} type="checkbox" /></td>
+
                   <td><PartialEditMentorInput id={mentor.id} name="city" defaultValue={mentor.info.city} /></td>
                 </tr>
               ))}
@@ -116,7 +124,6 @@ function PartialEditMentorInput(props: PartialEditMentorInputProps) {
     "resume",
     "what_help",
     "experience",
-    "portfolio",
     "city"
   ]
   function onBlur(event: FocusEvent<HTMLInputElement>) {
