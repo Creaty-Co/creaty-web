@@ -47,6 +47,7 @@ export interface MentorPage {
 
 export interface MentorType {
   id: number
+  slug: string
   avatar: string
   company: string
   profession: string
@@ -103,6 +104,7 @@ export interface MentorPatchType {
   profession: string
   first_name: string
   last_name: string
+  slug: string
   price: string
   price_currency: string
   tag_set: number[]

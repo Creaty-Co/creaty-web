@@ -40,6 +40,7 @@ enum FormInputs {
   profession = "profession",
   firstName = "first_name",
   lastName = "last_name",
+  slug = "slug",
   price = "price",
   priceCurrency = "price_currency",
   country = "country",
@@ -97,6 +98,8 @@ function AdminMentorNewEdit(props: AdminNewMentorViewProps | AdminEditMentorView
         <AdminGroupLayout title="Общая информация">
           <Input name={FormInputs.firstName} placeholder="Имя" defaultValue={props.data?.first_name} required />
           <Input name={FormInputs.lastName} placeholder="Фамилия" defaultValue={props.data?.last_name} required />
+          
+          <Input name={FormInputs.slug} placeholder="Короткое имя" defaultValue={props.data?.slug} required />
 
           <Input name={FormInputs.profession} placeholder="Профессия" defaultValue={props.data?.profession} required />
           <Input name={FormInputs.company} placeholder="Компания" defaultValue={props.data?.company} required />

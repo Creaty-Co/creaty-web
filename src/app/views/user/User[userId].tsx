@@ -1,7 +1,7 @@
 import "./user.scss"
 import "app/components/UI/MentorCard/MentorCard.scss"
 
-import { deleteMentorsId, getMentorsId } from "api/actions/mentors"
+import { deleteMentorsId, getMentorBySlug } from "api/actions/mentors"
 import { getPagesLinksDocuments } from "api/actions/pages"
 import ClientAPI from "api/client"
 import AdminInterface from "app/components/admin/AdminInterface"
@@ -27,10 +27,10 @@ function UserUserId() {
   const { t, i18n } = useTranslation("translation", { keyPrefix: "views.mentor" })
   const { t: tRoot } = useTranslation("translation")
 
-  const params = useParams<"userId">()
-  if (!params.userId) throw new Error("This component should be used in Route context")
+  const params = useParams<"slug">()
+  if (!params.slug) throw new Error("This component should be used in Route context")
 
-  const { error, loading, payload, query } = useQuery(getMentorsId(+params.userId))
+  const { error, loading, payload, query } = useQuery(getMentorBySlug(params.slug))
   const { payload: payload2 } = useQuery(getPagesLinksDocuments)
   useEffect(() => { query() }, [i18n.language])
 

@@ -26,6 +26,10 @@ export const getMentorsId = (id: number): Action<MentorDetailedType> => ({
   endpoint: `/mentors/${id}`
 })
 
+export const getMentorBySlug= (slug: string): Action<MentorDetailedType> => ({
+  method: "GET",
+  endpoint: `/mentors/${slug}`
+})
 
 export const deleteMentorsId = (id: number): Action => ({
   method: "DELETE",
