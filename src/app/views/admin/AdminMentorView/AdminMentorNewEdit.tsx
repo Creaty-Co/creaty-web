@@ -101,7 +101,7 @@ function AdminMentorNewEdit(props: AdminNewMentorViewProps | AdminEditMentorView
             
             placeholder="Короткое имя" 
             defaultValue={props.data?.slug} 
-           />
+          />
           
           <Input name={FormInputs.firstName}
             required
