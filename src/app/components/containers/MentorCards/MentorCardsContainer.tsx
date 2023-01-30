@@ -11,7 +11,6 @@ import { useQuery } from "react-fetching-library"
 import { useTranslation } from "react-i18next"
 import { classWithModifiers } from "utils/common"
 
-
 interface MentorCardsContainerProps {
   topic?: TopicType
   tag?: TagType
