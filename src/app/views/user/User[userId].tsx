@@ -56,7 +56,7 @@ function UserUserId() {
               <div className="mentor-card__job"><em>{payload.profession}・</em>{payload.company}</div>
             </div>
             <div className="mentor-card__price">
-              <em>{Number(payload.price).toPrice(tRoot("lang.code"), payload.price_currency)}</em> / 60min.
+              <em>{Number(payload.price).toPrice(tRoot("lang.code"), "USD")}</em> / 60min.
             </div>
             {payload.packages.length > 0 && (
               <div className="mentor-card__discounts">
@@ -73,12 +73,14 @@ function UserUserId() {
           <div className="user-card__notice">{t("card.trial")}</div>
         )}
       </div>
+
       <div className="user__sections">
         <AdminInterface>
           <Button onClick={() => ClientAPI.query(deleteMentorsId(payload.id)).then(() => navigate("/admin/mentors"))}>Удалить ментора</Button>
           <Button onClick={() => navigate("/admin/edit-mentor/" + payload.id)}>Редактировать ментора</Button>
         </AdminInterface>
-        <UserSection type="3" title={payload.info.resume}>
+
+        <UserSection type="3" title={payload.info.top_info}>
           <div className="user-section__entry">
             <Icon name="location" />
             <span>{(payload.info as never)["city_" + tRoot("lang.code")]}, <em>{t("info.teachType")}</em></span>
@@ -88,9 +90,11 @@ function UserUserId() {
             <span>{t("info.language")}: <em>{payload.info.languages.map(lang => lang.name_native).join(" / ")}</em></span>
           </div>
         </UserSection>
+
         <UserSection type="1" title={t("info.whatHelp")}>
           <p>{payload.info.what_help}</p>
         </UserSection>
+
         <UserSection type="1">
           <div className="user-section__tags">
             {payload.tags.map(tag => (
@@ -98,22 +102,21 @@ function UserUserId() {
             ))}
           </div>
         </UserSection>
+
         <UserSection type="1" title={t("info.experience")}>
           <p>{payload.info.experience}</p>
         </UserSection>
-        {/* <UserSection type="1" title={t("info.portfolio")}>
-          <div className="user-section__rows">
-            <p>{ReactizeLinks(payload.info.portfolio)}</p>
-          </div>
-        </UserSection> */}
+
         <UserSection type="2" title={t("info.garantee.title")} iconName="r-square">
           <p>{t("info.garantee.desc")}</p>
         </UserSection>
+
         <a id="book" style={{ scrollMargin: "3em" }} />
         <UserSection type="1" title={t("info.bookMentor.title")}>
           <p>{t("info.bookMentor.desc")}</p>
           <ContactForm type="test_meeting" submitText={t("info.bookMentor.submit")} />
         </UserSection>
+
       </div>
     </div>
   )

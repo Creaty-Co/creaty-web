@@ -36,7 +36,7 @@ function MentorCard(props: MentorCardProps) {
       </div>
       <Link className="mentor-card-button" to={"/user/" + props.id}>
         <div className="mentor-card-button__text">
-          <em>{Number(props.price).toPrice(t("lang.code"), props.price_currency)}</em>
+          <em>{Number(props.price).toPrice(t("lang.code"), "USD")}</em>
           <span>/</span>
           <span>{60}min.</span>
         </div>
