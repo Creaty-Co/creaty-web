@@ -8,8 +8,7 @@ export const getAdminMentors = (page: number, page_size: number): Action<Paginat
   slug: string
   info: {
     trial_meeting: number
-    city_ru: string
-    city_en: string
+    city: string
   }
   avatar: string
   company: string
@@ -17,7 +16,6 @@ export const getAdminMentors = (page: number, page_size: number): Action<Paginat
   first_name: string
   last_name: string
   price: string
-  price_currency: string
   country: {
     id: number
     name: string

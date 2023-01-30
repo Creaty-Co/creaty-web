@@ -54,7 +54,6 @@ export interface MentorType {
   first_name: string
   last_name: string
   price: string
-  price_currency: string
   country: {
     id: number
     flag_unicode: string
@@ -78,26 +77,22 @@ export interface MentorDetailedLanguages {
 export interface MentorDetailedType extends MentorType {
   info: {
     trial_meeting: number | null
-    resume: string
+    top_info: string
     what_help: string
     experience: string
-    portfolio: string
     languages: MentorDetailedLanguages[]
-    city_ru: string
-    city_en: string
+    city: string
   }
 }
 
 export interface MentorPatchType {
   info: {
     trial_meeting: number | null
-    resume: string
+    top_info: string
     what_help: string
     experience: string
-    portfolio: string
     languages: number[]
-    city_ru: string
-    city_en: string
+    city: string
   }
   avatar: string
   company: string
@@ -106,14 +101,12 @@ export interface MentorPatchType {
   last_name: string
   slug: string
   price: string
-  price_currency: string
   tag_set: number[]
   country: number
   packages: Omit<MentorPackageType, "id">[]
 }
 
 /* Pages */
-
 export interface PageType {
   id: number
   tags: TagType[]

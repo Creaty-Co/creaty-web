@@ -25,13 +25,11 @@ enum FormInputs {
   // ---------- INFO --------------------------
   languages = "languages",
 
-  cityRU = "city_ru",
-  cityEN = "city_en",
+  city = "city",
 
-  portfolio = "portfolio",
   experience = "experience",
   whatHelp = "what_help",
-  resume = "resume",
+  topInfo = "top_info",
 
   trialMeeting = "trial_meeting",
   // ----------------------------
@@ -42,14 +40,13 @@ enum FormInputs {
   lastName = "last_name",
   slug = "slug",
   price = "price",
-  priceCurrency = "price_currency",
   country = "country",
   tags = "tag_set"
 }
 
 type FormValues = Omit<MentorPatchType, "info" | "packages"> & MentorPatchType["info"]
 
-const formInfoKeys = ["languages", "portfolio", "experience", "resume", "trial_meeting", "what_help", "city_ru", "city_en"] as const
+const formInfoKeys = ["languages", "experience", "top_info", "trial_meeting", "what_help", "city"] as const
 
 interface AdminNewMentorViewProps {
   new: true
@@ -95,73 +92,173 @@ function AdminMentorNewEdit(props: AdminNewMentorViewProps | AdminEditMentorView
   return (
     <Form onSubmit={submitCreateMentor}>
       <AdminViewLayout>
-        <AdminGroupLayout title="Общая информация">
-          <Input name={FormInputs.firstName} placeholder="Имя" defaultValue={props.data?.first_name} required />
-          <Input name={FormInputs.lastName} placeholder="Фамилия" defaultValue={props.data?.last_name} required />
-          
-          <Input name={FormInputs.slug} placeholder="Короткое имя" defaultValue={props.data?.slug} required />
 
-          <Input name={FormInputs.profession} placeholder="Профессия" defaultValue={props.data?.profession} required />
-          <Input name={FormInputs.company} placeholder="Компания" defaultValue={props.data?.company} required />
+        {/* General */}
+        <AdminGroupLayout title="Общая информация">
+          
+          <Input name={FormInputs.slug}
+            required
+            
+            placeholder="Короткое имя" 
+            defaultValue={props.data?.slug} 
+           />
+          
+          <Input name={FormInputs.firstName}
+            required
+
+            defaultValue={props.data?.first_name}
+            placeholder="Имя"
+          />
+          <Input name={FormInputs.lastName}
+            required
+
+            placeholder="Фамилия"
+            defaultValue={props.data?.last_name}
+          />
+
+          <Input name={FormInputs.profession}
+            required  
+
+            placeholder="Профессия"
+            defaultValue={props.data?.profession}
+          />
+          
+          <Input name={FormInputs.company} 
+
+            placeholder="Компания"
+            defaultValue={props.data?.company}
+          />
         </AdminGroupLayout>
+
+        {/* Price */}
         <AdminGroupLayout title="Оплата">
-          <Input name={FormInputs.price} type="number" placeholder="Оплата за час" defaultValue={props.data?.price} required masks={[
-            { title: "Рубль", value: "RUB" },
-            { title: "Доллар", value: "USD" }
-          ]} masksName={FormInputs.priceCurrency} />
-          {/* <select name="price_currency" defaultValue={props.data?.price_currency} required>
-            <option value="RUB">Рубль</option>
-            <option value="USD">Доллар</option>
-          </select> */}
+          <Input name={FormInputs.price}
+            required
+
+            placeholder="Оплата за час*" 
+            defaultValue={props.data?.price}  
+
+            type="number" masksName="USD" masks={[{ title: "Доллар", value: "USD" }]} 
+          />
         </AdminGroupLayout>
+
+        {/* Tags */}
         <AdminGroupLayout title="Тэги">
-          <CheckTree name={FormInputs.tags} defaultChecks={props.data?.tags.map(tag => tag.id) || [2, 3]}>
-            <Button iconLeft={<Icon name="touch" />} color="white" onClick={() => Modal.open(PopupAdminNewTopic)}>Добавить категорию</Button>
+          <CheckTree name={FormInputs.tags} 
+            defaultChecks={props.data?.tags.map(tag => tag.id) || [2, 3]}
+          >
+            <Button 
+              iconLeft={<Icon name="touch" />} 
+              color="white" onClick={() => Modal.open(PopupAdminNewTopic)}
+            >
+              Добавить категорию
+            </Button>
+
             {topics.list.map(topic => (
               <option title={topic.title} key={topic.id}>
-                <Button iconLeft={<Icon name="touch" />} color="white" onClick={() => Modal.open(PopupAdminNewTag, { topicId: topic.id })}>Добавить тэг</Button>
-                {topic.tags.map(tag => (
-                  <option title={tag.title} value={tag.id} key={tag.id} />
-                ))}
+                <Button 
+                  iconLeft={<Icon name="touch" />}
+                  color="white" 
+                  
+                  onClick={() => Modal.open(PopupAdminNewTag, { topicId: topic.id })}
+                >
+                    Добавить тэг
+                </Button>
+
+                {topic.tags.map(tag => <option title={tag.title} value={tag.id} key={tag.id} />)}
               </option>
             ))}
           </CheckTree>
         </AdminGroupLayout>
+
+        {/* Location */}
         <AdminGroupLayout title="Местоположение">
           <div>
             <h4 className="heading">Страна</h4>
             <AdminCountriesSelect name={FormInputs.country} defaultValue={props.data?.country.id} />
           </div>
-          <Input name={FormInputs.cityRU} placeholder="Город на русском" defaultValue={props.data?.info.city_ru} required />
-          <Input name={FormInputs.cityEN} placeholder="Город на английском" defaultValue={props.data?.info.city_en} required />
+          <Input name={FormInputs.city} 
+          
+            placeholder="Город"
+            defaultValue={props.data?.info.city}
+          />
         </AdminGroupLayout>
+
+        {/* Languages */}
         <AdminGroupLayout title="Языки">
-          <AdminLangsCheckboxes name={FormInputs.languages} defaultChecked={props.data?.info.languages.map(lang => lang.id) || [9, 4]} />
+          <AdminLangsCheckboxes name={FormInputs.languages} 
+          
+            defaultChecked={props.data?.info.languages.map(lang => lang.id) || [9, 4]} 
+          />
         </AdminGroupLayout>
+
+        {/* Avatar */}
         <AdminGroupLayout title="Аватарка">
-          <EditAvatar image={props.data?.avatar || ""} name={FormInputs.avatar} />
+          <EditAvatar name={FormInputs.avatar}
+          
+            image={props.data?.avatar || ""}
+          />
         </AdminGroupLayout>
+
+        {/* About */}
         <AdminGroupLayout title="Наполнение профиля">
+
           <div className="input">
-            <textarea name={FormInputs.portfolio} placeholder="Портфолио" className="input__input" defaultValue={props.data?.info.portfolio} required />
+            <textarea name={FormInputs.experience}
+              
+              placeholder="Опыт" 
+              defaultValue={props.data?.info.experience}
+              
+              className="input__input" 
+            />
           </div>
+
           <div className="input">
-            <textarea name={FormInputs.experience} placeholder="Опыт" className="input__input" defaultValue={props.data?.info.experience} required />
+            <textarea name={FormInputs.whatHelp} 
+
+              placeholder="С чем помогу" 
+              defaultValue={props.data?.info.what_help}
+
+              className="input__input"
+            />
           </div>
+
           <div className="input">
-            <textarea name={FormInputs.whatHelp} placeholder="С чем помогу" className="input__input" defaultValue={props.data?.info.what_help} required />
-          </div>
-          <div className="input">
-            <textarea name={FormInputs.resume} placeholder="Резюме" className="input__input" defaultValue={props.data?.info.resume} required />
+            <textarea name={FormInputs.topInfo} 
+              required
+
+              placeholder="Резюме*"
+              defaultValue={props.data?.info.top_info}
+              
+              className="input__input"
+            />
           </div>
         </AdminGroupLayout>
+
         <AdminGroupLayout title="Пакеты">
-          <PackagesEdit defaultValues={props.data?.packages} onChange={setPackages} />
+          <PackagesEdit
+            defaultValues={props.data?.packages}
+            onChange={setPackages}
+          />
         </AdminGroupLayout>
+
+        {/* Addop */}
         <AdminGroupLayout title="Доп. Настройки">
-          <Checkbox name={FormInputs.trialMeeting} defaultChecked={!!props.data?.info.trial_meeting}>15 минут бесплатной встречи</Checkbox>
+          <Checkbox name={FormInputs.trialMeeting} 
+            defaultChecked={!!props.data?.info.trial_meeting}
+          >
+            15 минут бесплатной встречи
+          </Checkbox>
         </AdminGroupLayout>
-        <Button size="big" color="violet" type="submit" pending={pending}>{props.new ? "Добавить ментора" : "Сохранить изменения"}</Button>
+
+        <Button 
+          size="big" 
+          color="violet"
+          type="submit" 
+          pending={pending}
+        >
+          {props.new ? "Добавить ментора" : "Сохранить изменения"}
+        </Button>
       </AdminViewLayout>
     </Form>
   )
