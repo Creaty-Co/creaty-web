@@ -121,7 +121,7 @@ function PartialEditMentorInput(props: PartialEditMentorInputProps) {
   const prevValueRef = useRef<string | number | boolean | null | undefined>(props.defaultValue || props.defaultChecked)
   const infoFields = [
     "trial_meeting",
-    "resume",
+    "top_info",
     "what_help",
     "experience",
     "city"

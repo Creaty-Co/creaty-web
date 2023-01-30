@@ -80,7 +80,7 @@ function UserUserId() {
           <Button onClick={() => navigate("/admin/edit-mentor/" + payload.id)}>Редактировать ментора</Button>
         </AdminInterface>
 
-        <UserSection type="3" title={payload.info.resume}>
+        <UserSection type="3" title={payload.info.top_info}>
           <div className="user-section__entry">
             <Icon name="location" />
             <span>{(payload.info as never)["city_" + tRoot("lang.code")]}, <em>{t("info.teachType")}</em></span>
