@@ -56,7 +56,7 @@ function UserUserId() {
               <div className="mentor-card__job"><em>{payload.profession}・</em>{payload.company}</div>
             </div>
             <div className="mentor-card__price">
-              <em>{Number(payload.price).toPrice(tRoot("lang.code"), "USD")}</em> / 60min.
+              <em>{Number(payload.price).toPrice(tRoot("lang.code"), payload.price_currency)}</em> / 60min.
             </div>
             {payload.packages.length > 0 && (
               <div className="mentor-card__discounts">
@@ -80,7 +80,7 @@ function UserUserId() {
           <Button onClick={() => navigate("/admin/edit-mentor/" + payload.id)}>Редактировать ментора</Button>
         </AdminInterface>
 
-        <UserSection type="3" title={payload.info.top_info}>
+        <UserSection type="3" title={payload.info.resume}>
           <div className="user-section__entry">
             <Icon name="location" />
             <span>{(payload.info as never)["city_" + tRoot("lang.code")]}, <em>{t("info.teachType")}</em></span>

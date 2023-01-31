@@ -1,4 +1,4 @@
-import { patchMentorsId, postMentors } from "api/actions/mentors"
+import { patchMentorsSlug, postMentors } from "api/actions/mentors"
 import ClientAPI from "api/client"
 import Button from "app/components/common/Button/Button"
 import Icon from "app/components/common/Icon/Icon"
@@ -29,7 +29,7 @@ enum FormInputs {
 
   experience = "experience",
   whatHelp = "what_help",
-  topInfo = "top_info",
+  resume = "resume",
 
   trialMeeting = "trial_meeting",
   // ----------------------------
@@ -40,13 +40,14 @@ enum FormInputs {
   lastName = "last_name",
   slug = "slug",
   price = "price",
+  priceCurrency = "price_currency",
   country = "country",
   tags = "tag_set"
 }
 
 type FormValues = Omit<MentorPatchType, "info" | "packages"> & MentorPatchType["info"]
 
-const formInfoKeys = ["languages", "experience", "top_info", "trial_meeting", "what_help", "city"] as const
+const formInfoKeys = ["languages", "experience", "resume", "trial_meeting", "what_help", "city"] as const
 
 interface AdminNewMentorViewProps {
   new: true
@@ -56,7 +57,7 @@ interface AdminNewMentorViewProps {
 
 interface AdminEditMentorViewProps {
   new?: false
-  id: number
+  slug: string
   data: MentorDetailedType
 }
 
@@ -80,13 +81,13 @@ function AdminMentorNewEdit(props: AdminNewMentorViewProps | AdminEditMentorView
     if (!Array.isArray(APIPayload.info.languages)) APIPayload.info.languages = [APIPayload.info.languages]
     if (!Array.isArray(APIPayload.tag_set)) APIPayload.tag_set = [APIPayload.tag_set]
 
-    const APIAction = props.new ? postMentors(APIPayload) : patchMentorsId(props.id, APIPayload)
+    const APIAction = props.new ? postMentors(APIPayload) : patchMentorsSlug(props.slug, APIPayload)
     setPending(true)
     const { error, payload } = await ClientAPI.query(APIAction)
     setPending(false)
     if (error || !payload) return
 
-    navigate("/user/" + payload.id)
+    navigate("/user/" + payload.slug)
   }
 
   return (
@@ -138,7 +139,9 @@ function AdminMentorNewEdit(props: AdminNewMentorViewProps | AdminEditMentorView
             placeholder="Оплата за час*" 
             defaultValue={props.data?.price}  
 
-            type="number" masksName="USD" masks={[{ title: "Доллар", value: "USD" }]} 
+            type="number"
+            masksName={FormInputs.priceCurrency} 
+            masks={[{ title: "Доллар", value: "USD" }]} 
           />
         </AdminGroupLayout>
 
@@ -224,11 +227,11 @@ function AdminMentorNewEdit(props: AdminNewMentorViewProps | AdminEditMentorView
           </div>
 
           <div className="input">
-            <textarea name={FormInputs.topInfo} 
+            <textarea name={FormInputs.resume} 
               required
 
               placeholder="Резюме*"
-              defaultValue={props.data?.info.top_info}
+              defaultValue={props.data?.info.resume}
               
               className="input__input"
             />
