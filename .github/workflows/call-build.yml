@@ -58,7 +58,7 @@ jobs:
         run: |
           echo "${{ secrets.PROD_ENV }}" > .env
       - name: Build and push docker image
-        uses: docker/build-push-action@v3.3.0
+        uses: docker/build-push-action@v4.0.0
         with:
           context: .
           push: ${{ inputs.push }}
