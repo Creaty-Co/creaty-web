@@ -23,7 +23,7 @@ categories:
 autolabeler:
   - label: 'bug'
     title:
-      - 'fix:'
+      - 'fix:.+'
 
 exclude-contributors:
   - dependabot
