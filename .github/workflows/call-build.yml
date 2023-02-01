@@ -1,4 +1,4 @@
-name: CI
+name: "Call: build"
 
 on:
   workflow_call:
