@@ -12,3 +12,7 @@ jobs:
   cd:
     uses: ./.github/workflows/call-deploy_dev.yml
     needs: [ ci ]
+  release_draft:
+    uses: ./.github/workflows/call-release_draft.yml
+    secrets: inherit
+    needs: [ ci ]
