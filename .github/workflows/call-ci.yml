@@ -6,7 +6,7 @@ on:
       tag:
         type: string
         required: false
-        default: latest
+        default: 'latest'
       push:
         type: boolean
         required: false
@@ -14,13 +14,13 @@ on:
       environ:
         type: string
         required: false
-        default: 'stage'
+        default: 'dev'
   workflow_dispatch:
     inputs:
       tag:
         type: string
         required: false
-        default: latest
+        default: 'latest'
       push:
         type: boolean
         required: false
@@ -28,7 +28,7 @@ on:
       environ:
         type: string
         required: false
-        default: 'stage'
+        default: 'dev'
 
 jobs:
   build:
@@ -45,6 +45,10 @@ jobs:
       - run: |
           repository=${{ github.repository }}
           echo "REPOSITORY=${repository,,}" >> ${GITHUB_ENV}
+      - name: Set stage env
+        if: ${{ inputs.environ == 'dev' }}
+        run: |
+          echo "${{ secrets.DEV_ENV }}" > .env
       - name: Set stage env
         if: ${{ inputs.environ == 'stage' }}
         run: |
