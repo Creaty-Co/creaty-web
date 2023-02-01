@@ -1,9 +1,8 @@
-name: "Push: tag"
+name: "Release: pre release"
 
 on:
-  push:
-    tags:
-      - 'v*'
+  release:
+    types: [ published ]
 
 jobs:
   ci:
@@ -11,4 +10,4 @@ jobs:
     secrets: inherit
     with:
       tag: ${{ github.ref_name }}
-      environ: 'prod'
+      environ: 'stage'
