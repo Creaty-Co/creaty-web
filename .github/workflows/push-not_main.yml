@@ -7,7 +7,7 @@ on:
 
 jobs:
   ci:
-    uses: ./.github/workflows/call-ci.yml
+    uses: ./.github/workflows/call-build.yml
     with:
       push: false
     secrets: inherit
