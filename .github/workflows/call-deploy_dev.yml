@@ -1,0 +1,22 @@
+name: "Call: Deploy dev"
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: [ self-hosted, dev ]
+    environment:
+      name: dev
+      url: 'https://dev.creaty.club'
+    steps:
+      - name: Pull images
+        run: |
+          cd /home/www/runner/work/creaty-api/creaty-api
+          docker-compose -f docker/dev/docker-compose.yml pull api
+          docker pull ghcr.io/creaty-co/creaty-web/web:latest
+      - name: Deploy dev environment
+        run: |
+          cd /home/www/runner/work/creaty-api/creaty-api
+          docker-compose -f docker/dev/docker-compose.yml up --build -d
