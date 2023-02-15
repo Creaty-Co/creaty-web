@@ -2,18 +2,23 @@
 
 .mentor-cards {
 	display: grid;
-	@include row-gap(2.5em);
+	@include row-gap(50px);
 }
 
 .mentor-cards__container {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(min(100%, 23.75em), 1fr));
-	@include gap(1.25em);
-	transition: 250ms ease opacity;
 
+	@include gap(20px);
+	
+	transition: 250ms ease opacity;
 	&--loading {
 		opacity: 0.5;
 		pointer-events: none;
+	}
+
+	@include for-size(big-phone-screen) {
+		@include gap(12px);
 	}
 }
 

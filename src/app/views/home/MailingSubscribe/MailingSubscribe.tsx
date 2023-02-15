@@ -9,7 +9,7 @@ function MailingSubscribe() {
   const { t } = useTranslation("translation", { keyPrefix: "views.home.mailingSubscribe" })
   return (
     <div className="mailing-subscribe">
-      <h3 className="mailing-subscribe__title heading">{t("title")}</h3>
+      <div className="mailing-subscribe__title heading">{t("title")}</div>
       <img src="/static/images/curvy-arrow.svg" className="mailing-subscribe__arrow" />
       <div className="mailing-subscribe__form">
         <Subscribe />

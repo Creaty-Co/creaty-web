@@ -2,22 +2,45 @@
 
 .how-it-works {
 	display: grid;
-	@include row-gap(5em);
+	@include row-gap(56px);
 
-	@include Mobile {
-		@include row-gap(2.5em);
+	@include for-size(big-phone-screen) {
+		@include row-gap(32px);
 	}
 }
 
-.how-it-works__title {}
+.how-it-works__title {
+	@include H2Bold;
+	@include for-size(big-phone-screen) {
+		@include H2Bold(32px);
+	}
+}
 
 .how-it-works__points {
 	display: flex;
 	flex-wrap: wrap;
-	@include gap(5em);
+	@include gap(74px);
 
-	@include Mobile {
+	@include for-size(big-phone-screen) {
 		display: grid;
-		@include gap(2.5em);
+		@include gap(32px);
+	}
+}
+
+.how-it-works__help {
+	padding-top: 24px;
+	@include for-size(big-phone-screen) {
+		padding-top: 28px;
+	}
+}
+
+.how-it-works__button {
+	width: 100%;
+}
+
+.how-it-works__free {
+	@include gap(80px);
+	@include for-size(big-phone-screen) {
+		@include gap(32px);
 	}
 }

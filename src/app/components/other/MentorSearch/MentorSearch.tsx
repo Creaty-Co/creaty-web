@@ -2,184 +2,369 @@ import "./MentorSearch.scss"
 
 import ButtonLink from "app/components/common/Button/ButtonLink"
 import Icon from "app/components/common/Icon/Icon"
-import LoaderCover from "app/components/UI/Loader/LoaderCover"
 import TopicTag from "app/components/UI/Tag/TopicTag"
-import useClickAway from "hooks/useClickAway"
-import { MouseEvent, useEffect, useRef, useState } from "react"
+import { TopicType } from "interfaces/types"
+import { MouseEvent as SMouseEvent, useCallback,useEffect, useLayoutEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { DefaultRootState, useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
+import { selectIsMobile } from "redux/reducers/device"
 import { updateSearch } from "redux/reducers/search"
-import { classWithModifiers } from "utils/common"
+import { bem, targetGetAttr, toDataAttrs, togglerTransformAction } from "utils/common"
 
+import MentorSearchList from "./MentorSearchList"
+import MentorSearchListItem from "./MentorSearchListItem"
 
-function MentorSearch() {
+/* Selectors type */ 
+const SELECTORS = ["topic", "tag"] as const
+type SelectorsTuple = typeof SELECTORS;
+type Selectors = SelectorsTuple[number];
+const isSelector = (selector: string): selector is Selectors => SELECTORS.includes(selector as Selectors)
+
+/* BEM */ 
+const CN = "mentor-search"
+const { getElement, getModifier } = bem(CN)
+
+function MentorSearch() {  
+  const navigate = useNavigate()
   const dispatch = useDispatch()
-  const search = useSelector<DefaultRootState, DefaultRootState["search"]>(state => state.search)
 
   const { t } = useTranslation("translation", { keyPrefix: "views.home.mentorSearch" })
+
+  /* Get data from store */ 
+  const searchStore = useSelector<DefaultRootState, DefaultRootState["search"]>(state => state.search)
+  const isMoblie = useSelector<DefaultRootState, boolean | null>(state => selectIsMobile(state.device)) 
+  const topics = useSelector<DefaultRootState, DefaultRootState["topics"]>(state => state.topics)
+  
+  /* Local search state */ 
+  const [searchState, setSearchState] = useState<DefaultRootState["search"]>({ ...searchStore })
+  useEffect(() => setSearchState({...searchStore}), [searchStore.topic, searchStore.tag])
+
+  /* Compare state and store */
+  const pureSearch = 
+    searchState.topic === searchStore.topic && 
+    searchState.tag === searchStore.tag &&
+    searchState.tag !== undefined
+
+  /* Searching in topics and tags */
   const [value, setValue] = useState("")
+  useEffect(() => setValue(""), [searchState.topic, searchState.tag])
 
-  const searchRef = useRef<HTMLLabelElement>(null)
-  const focus = () => dispatch(updateSearch({ focused: true }))
-  const blur = () => dispatch(updateSearch({ focused: false }))
-  const reset = () => setValue("")
+  /* For what??? */ 
+  const selectedRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
-  useEffect(reset, [search.tag, search.topic])
-  useClickAway(searchRef, () => blur())
+  /* Close on click out of search */
+  const searchContainerRef = useRef<HTMLDivElement>(null)
+  const searchLabelRef = useRef<HTMLLabelElement>(null)
+  const cbClicAway = useCallback(listener, [searchState.focused])
+  useLayoutEffect(clickAway, [searchState.focused])
 
-  const isInputVisible = !(search.topic || search.tag) || search.focused
+  /* Scroll controll */
+  const scrolledFromRef = useRef<number>(0)
+  const scrolledToRef = useRef<boolean>(searchState.focused)
+  const containerRef = useRef<HTMLDivElement>(null)
+  useLayoutEffect(focusedScroll, [searchState.focused])
+
+  /* Routes */ 
+  const redirectTo = "/mentors" + (
+    (searchState.topic && !searchState.tag && "/" + searchState.topic.shortcut) ||
+    (!searchState.topic && searchState.tag && "/" + searchState.tag.shortcut) || 
+    (searchState.topic && searchState.tag && "/" + searchState.tag.shortcut) || "")
+
   return (
-    <div className="mentor-search">
-      <div className={classWithModifiers("mentor-search__cover", search.focused && "active")} />
-      <div className="mentor-search__container">
-        <label className={classWithModifiers("mentor-search__search", search.focused && "focused", !!(search.tag || search.topic) && "filled")} onClick={focus} ref={searchRef}>
-          {!search.focused && search.topic && (
-            <div className="mentor-search-list__item mentor-search-list__item--active">
-              <Icon href={search.topic.icon} />
-              <span>{search.topic.title}</span>
+    <div ref={containerRef}
+      className={getModifier(CN,
+        searchState.focused && "focused"
+      )}
+
+      onMouseDownCapture={onMouseDownHandler}
+    >
+      {/* Cover */}
+      <div 
+        className={getModifier(getElement("cover"), 
+          searchState.focused && "active"
+        )} 
+      />
+
+      {/* Search */}
+      <div ref={searchContainerRef}
+        className={getElement("container")}
+      >
+        {/* Close. Mobile */}
+        <div
+          className={getModifier(getElement("wrapper"), "button")}
+          data-action="input/close"
+        >
+          <Icon name="arrow-left"
+            className={getModifier(getElement("button"), "icon")}
+            data-action="input/close"
+          />
+        </div>
+
+        <label ref={searchLabelRef}
+          className={getModifier(getElement("search"), 
+            searchState.focused && "focused",
+            !searchState.focused && !!(searchState.tag || searchState.topic) && "filled"
+          )}
+          data-action="input/focus"
+        >
+          {/* If selected */}
+          {!searchState.focused && (searchState.topic || searchState.tag) && 
+            <div ref={selectedRef}
+              className={getElement("selected")}
+
+              data-action="input/focus"
+            >
+              {/* Selected topic in search area */}
+              {searchState.topic &&
+                <MentorSearchListItem
+                  topic={searchState.topic}
+                  state="selected"
+                  type="short"
+
+                  dataAttrs={toDataAttrs({
+                    "action": "input/focus" 
+                  })}
+                />
+              }
+
+              {/* Selected tags in search area */}
+              {!searchState.focused && searchState.tag &&
+                <TopicTag
+                  dataAttrs={toDataAttrs({
+                    "action": "input/focus" 
+                  })}
+                >{searchState.tag}</TopicTag>
+              }
             </div>
-          )}
-          {!search.focused && search.tag && (
-            <TopicTag>{search.tag}</TopicTag>
-          )}
-          {isInputVisible && (
+          }
+
+          {/* Search Input */}
+          {(!(searchState.topic || searchState.tag) || searchState.focused) &&
             <>
-              <input type="text" placeholder={t("placeholder")} className={classWithModifiers("mentor-search__input", search.focused && "focused")} value={value} onChange={event => setValue(event.currentTarget.value)} />
-              {
-                value.length > 0 && (
-                  <Icon name="cross" className="mentor-search__icon" onClick={reset} />
-                )
+              {/* Searching input */}
+              <input ref={inputRef} type="text"
+                className={getModifier(getElement("input"), 
+                  searchState.focused && "focused"
+                )} 
+
+                placeholder={t("placeholder")} 
+                value={value} 
+                
+                onChange={event => setValue(event.currentTarget.value)}
+                data-action="input/focus"
+              />
+
+              {/* Clear search field */}
+              {value.length > 0 && 
+                <Icon name="cross" 
+                  className={getElement("icon")}
+                  onClick={() => setValue("")}
+                />
               }
             </>
-          )}
-          <MentorSearchList value={value} visible={search.focused} />
-          <Icon name="chevron" className="mentor-search__icon" modifiers={[search.focused && "up"]} />
+          }
+          
+          {/* Mentros' list */}
+          <MentorSearchList
+            searchState={searchState}
+            pureSearch={pureSearch}
+            topics={topics}
+            value={value}
+          />
+
+          {/* Icon dropdown */}
+          <Icon name="chevron"
+            className={getElement("icon")}
+            modifiers={[searchState.focused && "up"]}
+            data-action="input/focus"
+          />
         </label>
-        <ButtonLink color="violet" size="big" to="/mentors">{t("button")}</ButtonLink>
+
+        <NavLink to={redirectTo}
+          className={getModifier(getElement("icon"),
+            "search"
+          )}
+          data-action="search"
+        >
+          <Icon name="search" data-action="search"/>
+        </NavLink>
+
+        <ButtonLink to={redirectTo}
+          className={getElement("button-link")} 
+          color="violet" 
+          size="big" 
+
+          dataAttrs={toDataAttrs({
+            "action": "search"
+          })}
+        >
+          {t("button")}
+        </ButtonLink>
       </div>
     </div>
   )
-}
 
+  /* Functions */ 
+  function toggle(name: string | boolean, id: number | string | null | undefined, forceTo?: boolean | null): void {
+    if (id === null || id === undefined) return
+    if (typeof name === "boolean" || !isSelector(name)) return
 
-interface MentorSearchListProps {
-  value: string | null
-  visible: boolean
-}
+    const values = name === "topic" ? topics.list : topics.tags
+    const value = values.find(value => value.id === +id)
 
-function MentorSearchList(props: MentorSearchListProps) {
-  if (props.value && props.value.length > 0) {
-    return <MentorSearchListDynamic {...props} value={props.value} />
-  }
-  return <MentorSearchListStatic />
-}
+    if (value) setSearchState(prevState => {
+      const to = forceTo === undefined || forceTo === null
+        ? prevState[name]?.id !== id
+        : forceTo
 
+      const duoSearch = { [name]: to ? value : undefined }
+      /* Turn off tag connected with topic */ 
+      if (name === "topic" && !to) duoSearch.tag = undefined
 
-function MentorSearchListDynamic(props: MentorSearchListProps & { value: string }) {
-  const dispatch = useDispatch()
+      /*
+        If topic was turned on and We have some tag 
+        We need to check according tag to topic
+      */
+      if (
+        name === "topic" && to && searchState.tag && 
+        !(value as TopicType).tags.find(tag => tag.id === searchState.tag?.id)
+      ) duoSearch.tag = undefined
 
-  function collapseSearchList(event: MouseEvent) {
-    // stop propagation of `MentorSearch Blur` callback
-    event.stopPropagation()
+      if (
+        name === "tag" && to && searchState.topic &&
+        !searchState.topic.tags.find(tag => tag.id === value.id)
+      ) duoSearch.topic = undefined
 
-    dispatch(updateSearch({ focused: false }))
-  }
-
-
-  const topics = useSelector<DefaultRootState, DefaultRootState["topics"]>(state => state.topics)
-
-  const searchLowerCaseValue = props.value.toLowerCase()
-  const findSearchValueEntry = (value: string) => value.toLowerCase().search(searchLowerCaseValue)
-
-  const SearchTagEntries =
-    topics.tags
-      .map(tag => ({ tag, index: findSearchValueEntry(tag.title) }))
-      .filter(occur => occur.index >= 0)
-  const SearchTopicEntries =
-    topics.list
-      .map(topic => ({ topic, index: findSearchValueEntry(topic.title) }))
-      .filter(entry => entry.index >= 0)
-
-  return (
-    <div className={classWithModifiers("mentor-search-list", props.visible && "visible")}>
-      <div className="mentor-search-list__container">
-        {SearchTopicEntries.map(entry => (
-          <Link className="mentor-search-list__item" to={"/mentors/" + entry.topic.shortcut} onClick={collapseSearchList} key={entry.topic.id}>
-            <span>
-              {entry.topic.title.slice(0, entry.index)}
-              <em>{entry.topic.title.slice(entry.index, entry.index + props.value.length)}</em>
-              {entry.topic.title.slice(entry.index + props.value.length)}
-            </span>
-          </Link>
-        ))}
-        {SearchTagEntries.map(entry => (
-          <Link className="mentor-search-list__item" to={"/mentors/" + entry.tag.shortcut} onClick={collapseSearchList} key={entry.tag.id}>
-            <span>
-              {entry.tag.title.slice(0, entry.index)}
-              <em>{entry.tag.title.slice(entry.index, entry.index + props.value.length)}</em>
-              {entry.tag.title.slice(entry.index + props.value.length)}
-            </span>
-          </Link>
-        ))}
-        {SearchTagEntries.length === 0 && (
-          <div className="mentor-search-list__item">По вашему запросу ничего не найдено.</div>
-        )}
-      </div>
-    </div>
-  )
-}
-
-
-function MentorSearchListStatic() {
-  const dispatch = useDispatch()
-
-  const { t } = useTranslation("translation", { keyPrefix: "views.home.mentorSearch" })
-  const topics = useSelector<DefaultRootState, DefaultRootState["topics"]>(state => state.topics)
-  const search = useSelector<DefaultRootState, DefaultRootState["search"]>(state => state.search)
-
-  function collapseSearchList(event: MouseEvent) {
-    // stop propagation of `MentorSearch Blur` callback
-    event.stopPropagation()
-
-    dispatch(updateSearch({ focused: false }))
+      return { ...prevState, ...duoSearch }
+    })
   }
 
-  const [cursorTopic, setCursorTopic] = useState(search.topic)
-  const topic = cursorTopic || search.topic
-  return (
-    <div className={classWithModifiers("mentor-search-list", search.focused && "visible")} onPointerLeave={() => setCursorTopic(search.topic)}>
-      <div className="mentor-search-list__container">
-        {topics.list.map(topic => (
-          <Link
-            className={classWithModifiers("mentor-search-list__item", !search.tag && topic.id === search.topic?.id && "active")}
-            to={"/mentors/" + topic.shortcut}
-            onPointerEnter={() => setCursorTopic(topic)}
-            onClick={collapseSearchList}
-            key={topic.id}
-          >
-            <Icon href={topic.icon} />
-            <span>{topic.title}</span>
-          </Link>
-        ))}
-        {topics.list.length === 0 && (
-          <LoaderCover />
-        )}
-      </div>
-      <div className="mentor-search-list__tags">
-        {topic?.tags.map(tag => (
-          <TopicTag onClick={collapseSearchList} key={tag.id}>{tag}</TopicTag>
-        ))}
-        {topic == null && (
-          <div className="mentor-search-list-empty">
-            <Icon className="mentor-search-list-empty__icon" name="touch" />
-            <span className="mentor-search-list-empty__text">{t("chooseTopic")}</span>
-          </div>
-        )}
-      </div>
-    </div>
-  )
-}
+  function getURLByTagID(ID: number): string {
+    const url = ["mentors"]
+    const tag = topics.tags.find(tag => tag.id === ID)
 
+    /*
+    const tagInCategory = !!searchState.topic?.tags.find(tag => tag.id === ID)
+
+    tagInCategory && searchState.topic &&
+      url.push(searchState.topic.shortcut)
+    */
+
+    tag && url.push(tag.shortcut)
+
+    return "/" + url.join("/")
+  }
+
+  function focus() {setSearchState(state => ({ ...state, focused: true }))} 
+
+  function close() {
+    if (!searchStore.topic && !searchStore.tag)
+      return setSearchState(state => ({...state, focused: false}))
+
+    setSearchState({
+      ...searchStore,
+      focused: false
+    })
+  }
+
+  /* Handlers */
+  function onMouseDownHandler(event: SMouseEvent<HTMLElement>) {
+    // console.group("onMouseDownHandler")
+
+    const target = event.target as HTMLElement
+    // console.log("target: ", event.target)
+
+    const getAttr = (name: string) => targetGetAttr(target, name)
+    
+    const selector = getAttr("selector")
+    const action = getAttr("action")
+    const id = getAttr("id")
+    /*
+    console.log(
+      ` selector: ${selector}\n`,
+      `action: ${action}\n`,
+      `id: ${getAttr("id")}\n`
+    )
+    */
+    
+    /* Control focus and blur */
+    action === "input/focus" && focus() ||
+    action === "input/close" && close()
+    
+    /* Toggle topic and tag */
+    selector && isSelector(selector) && 
+      toggle(selector, id, togglerTransformAction(action))
+    
+    /* Redirect on tag add */
+    selector === "tag" && action === "add" && id &&
+      dispatch(updateSearch({
+        ...searchState,
+        tag: topics.tags.find(tag => tag.id === +id),
+        focused: false
+      })) && navigate(getURLByTagID(+id))
+
+    action && action === "search" &&
+      dispatch(updateSearch({
+        ...searchState,
+        focused: false
+      }))
+
+    // console.groupEnd()
+  } 
+
+  /* Side effects */ 
+  /*
+    Handle focus and blur events at search input
+  */
+  function focusedScroll() {
+    focusedScrollBootstrap()
+    return focusedScrollCleanup
+  }
+
+  function focusedScrollBootstrap() {
+    if (!searchState.focused || scrolledToRef.current) return
+
+    const scrollTo = containerRef.current?.getBoundingClientRect().top || 0
+    const scrollDelay = isMoblie? 6 : 100
+
+    scrolledFromRef.current = document.documentElement.scrollTop
+    scrolledToRef.current = true
+
+    document.body.style.overflow = "hidden"
+    window.scrollTo({
+      top: document.documentElement.scrollTop + scrollTo - scrollDelay,
+      behavior: "smooth" 
+    })
+  }
+
+  function focusedScrollCleanup() {
+    if (!searchState.focused || !scrolledToRef.current) return
+
+    document.body.style.overflow = ""
+    window.scrollTo({ top: scrolledFromRef.current, behavior: "smooth" })
+    scrolledToRef.current = false
+  }
+
+  /*
+    Handle click away
+  */
+  function clickAway() {
+    if (!searchState.focused)
+      document.removeEventListener("click", cbClicAway)
+    else
+      document.addEventListener("click", cbClicAway)
+    
+    return () => document.removeEventListener("click", cbClicAway)
+  }
+
+  function listener(event: MouseEvent) {
+    const target = event.target as HTMLElement
+    searchContainerRef.current && target.tagName !== "use" &&
+        !searchContainerRef.current.contains(target) &&
+          close()
+  }
+}
 
 export default MentorSearch

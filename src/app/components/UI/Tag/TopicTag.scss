@@ -5,7 +5,7 @@
 
 	padding: 0.5em 1em;
 	background: $color-gray-100;
-	border-radius: 0.75em;
+	border-radius: 12px;
 
 	color: $color-white;
 	white-space: nowrap;
@@ -31,5 +31,5 @@ a.topic-tag {
 }
 
 .topic-tag__text {
-	font-size: 0.875rem;
+	@include TagsRegular;
 }

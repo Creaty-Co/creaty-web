@@ -1,9 +1,9 @@
 @import "~app/assets/scss/bundle.scss";
 
 .info-section {
-	padding: 3.5em 5em;
+	padding: 56px 80px;
 	background: $color-white;
-	border-radius: 4.25em;
+	border-radius: 70px;
 
 	&--1 {
 		background: #151618;
@@ -23,7 +23,7 @@
 		align-items: center;
 		justify-content: space-between;
 
-		@include gap(1em);
+		@include gap(32px);
 	}
 
 	&--grid {
@@ -31,24 +31,37 @@
 		@include row-gap(1em);
 	}
 
-	@include Mobile {
+	@include for-size(big-phone-screen) {
 		display: grid;
-		padding: 2em;
+
+		padding: 36px;
+
+		border-radius: 50px;
 	}
 }
 
 .info-section__header {
 	display: grid;
-	@include row-gap(1em);
+	@include row-gap(16px);
 }
 
 .info-section__title {
-	@include Typography(2rem, 700);
+	@include H3Bold;
+	@include for-size (big-phone-screen) {
+		@include H3Bold(24px);
+	}
+
+	em {
+		color: $color-green;
+	}
 }
 
 .info-section__desc {
 	color: $color-gray-10;
-	@include Typography(1.5rem, 400);
+	@include H4Regular;
+	@include for-size (big-phone-screen) {
+		@include H4Regular(20px);
+	}
 }
 
 .info-section__content {

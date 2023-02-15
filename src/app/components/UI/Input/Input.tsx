@@ -60,6 +60,7 @@ function InputMasks<V>(props: InputMasksProps<V>) {
     setIsExpanded(false)
   }
   useClickAway(parentRef, () => setIsExpanded(false))
+  
   return (
     <div className="input-masks" ref={parentRef}>
       <button className="input-masks__current" type="button" onClick={() => setIsExpanded(!isExpanded)} >

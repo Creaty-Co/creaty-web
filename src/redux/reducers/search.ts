@@ -2,7 +2,6 @@ import { ValuesOf } from "interfaces/common"
 import { MapActions } from "interfaces/reducer"
 import { TagType, TopicType } from "interfaces/types"
 
-
 export interface SearchState {
   topic?: TopicType
   tag?: TagType
@@ -22,7 +21,6 @@ type Action = ValuesOf<MapActions<Actions>>
 
 export default (state = initialState, action: Action): typeof initialState => {
   switch (action.type) {
-
     case "SEARCH_UPDATE":
       return { ...state, ...action.payload }
 
@@ -38,12 +36,10 @@ export default (state = initialState, action: Action): typeof initialState => {
   }
 }
 
-
 export const updateSearch = (payload: Partial<SearchState>) => ({
   type: "SEARCH_UPDATE",
   payload
 })
-
 
 export const updateSearchTopic = (topic: Partial<SearchState["topic"]>) => ({
   type: "SEARCH_UPDATE",

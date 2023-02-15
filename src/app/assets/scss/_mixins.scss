@@ -1,3 +1,4 @@
+/* Old Mixins. Need to be deprecated */
 /* Layout */
 
 @mixin WidthLimit {
@@ -14,7 +15,6 @@
 }
 
 /* Font */
-
 @mixin Font($size: null, $weight: null, $line-height: 1.35) {
 	font: {
 		size: $size;
@@ -86,5 +86,85 @@ $tabletMaxWidth: 1000px;
 		background-color: $thumbColor;
 		border-radius: 0.5em;
 		border: 3px solid $trackColor;
+	}
+}
+
+/* New mixins */
+/*
+$q-hd-screen: 3451px;
+$high-hd-screen: 2561px;
+$full-hd-screen: 1930px; use this one
+$dell-hd-screen: 1660px;  use this one
+$mac-hd-screen: 1450px;  use this one
+$hd-screen: 1290px;  use this one
+
+$big-tablet-screen: 1030px; use this one
+$middle-tablet-screen: 850px; use this one
+$small-tablet-screen: 780px; use this one
+
+$big-phone-screen: 415px; use this one
+$middle-phone-screen: 376px; use this one
+$small-phone-screen: 321px; use this one
+*/
+
+@mixin for-size($size) {
+	@if $size == full-hd-screen {
+		@media screen and (max-width: $full-hd-screen) {
+			@content;
+		}
+	}
+
+	@else if $size == dell-hd-screen {
+		@media screen and (max-width: $dell-hd-screen) {
+			@content;
+		}
+	}
+
+	@else if $size == mac-hd-screen {
+		@media screen and (max-width: $mac-hd-screen) {
+			@content;
+		}
+	}
+
+	@else if $size == hd-screen {
+		@media screen and (max-width: $hd-screen) {
+			@content;
+		}
+	}
+
+	@else if $size == big-tablet-screen {
+		@media screen and (max-width: $big-tablet-screen) {
+			@content;
+		}
+	}
+
+	@else if $size == middle-tablet-screen {
+		@media screen and (max-width: $middle-tablet-screen) {
+			@content;
+		}
+	}
+
+	@else if $size == small-tablet-screen {
+		@media screen and (max-width: $small-tablet-screen) {
+			@content;
+		}
+	}
+
+	@else if $size == big-phone-screen {
+		@media screen and (max-width: $big-phone-screen) {
+			@content;
+		}
+	}
+
+	@else if $size == middle-phone-screen {
+		@media screen and (max-width: $middle-phone-screen) {
+			@content;
+		}
+	}
+
+	@else if $size == small-phone-screen {
+		@media screen and (max-width: $small-phone-screen) {
+			@content;
+		}
 	}
 }

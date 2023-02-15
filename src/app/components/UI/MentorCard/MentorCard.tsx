@@ -29,7 +29,7 @@ function MentorCard(props: MentorCardProps) {
             <TopicTag key={tag.id}>{tag}</TopicTag>
           ))}
           {props.tags.length > 3 && (
-            <TopicTag noHash>...</TopicTag>
+            <TopicTag noHash>•••</TopicTag>
           )}
         </div>
       </div>

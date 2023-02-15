@@ -2,7 +2,7 @@ import "./Button.scss"
 
 import { MouseEventHandler } from "react"
 import { NavLink, useLocation } from "react-router-dom"
-import { classMerge, classWithModifiers } from "utils/common"
+import { bem,classMerge, classWithModifiers } from "utils/common"
 
 import { ButtonBaseProps } from "./Button.types"
 
@@ -13,7 +13,12 @@ interface ButtonLinkProps extends ButtonBaseProps {
   disabled?: boolean
   replace?: boolean
   onClick?: MouseEventHandler<HTMLAnchorElement>
+
+  dataAttrs?: Record<string,string>
 }
+
+const CN = "button"
+const { getElement, getModifier } = bem(CN)
 
 function ButtonLink(props: ButtonLinkProps) {
   const location = useLocation()
@@ -23,17 +28,28 @@ function ButtonLink(props: ButtonLinkProps) {
   if (props.size) modifiers.push(props.size)
   if (props.outline) modifiers.push("outline")
   if (props.disabled) modifiers.push("disabled")
+  
   return (
-    <NavLink className={
-      link => classMerge(classWithModifiers("button", ...modifiers, props.nav && link.isActive && "white"), props.className)
-    } replace={props.replace} to={props.disabled ? location : props.to} onClick={props.onClick} end={props.end}>
-      {props.iconLeft && (
-        <div className="button__icon">{props.iconLeft}</div>
+    <NavLink 
+      className={link => classMerge(
+        getModifier(CN, 
+          ...modifiers,
+          props.nav && link.isActive && "white"
+        ),
+        props.className
       )}
-      <div className="button__text">{props.children}</div>
-      {props.iconRight && (
-        <div className="button__icon">{props.iconRight}</div>
-      )}
+
+      replace={props.replace}
+      to={props.disabled ? location : props.to}
+      
+      onClick={props.onClick} 
+      end={props.end}
+
+      {...props.dataAttrs}
+    >
+      {props.iconLeft && <div className={getElement("icon")} {...props.dataAttrs}>{props.iconLeft}</div>}
+      <div className={getElement("text")} {...props.dataAttrs}>{props.children}</div>
+      {props.iconRight && <div className={getElement("icon")} {...props.dataAttrs}>{props.iconRight}</div>}
     </NavLink>
   )
 }

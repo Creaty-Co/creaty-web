@@ -2,33 +2,36 @@
 
 .help-social {
 	display: flex;
-	@include gap(1em);
+	@include gap(20px);
+	@include for-size(big-phone-screen) {
+		@include gap(16px);
+	}
 }
 
 .help-social__text {
 	align-self: center;
 	color: rgba($color-white, 0.6);
 
-	font-size: 0.75rem;
-	line-height: 1.5;
+	@include Text(12px, 20px);
 	text-align: right;
 	white-space: pre-line;
 
-	@include Mobile {
+	@include for-size(big-phone-screen) {
 		display: none;
 	}
 }
 
 .help-social__splitter {
 	width: 2px;
+	margin: 0 4px;
 	background: rgba($color-white, 0.2);
 
-	@include Mobile {
+	@include for-size(big-phone-screen) {
 		display: none;
 	}
 }
 
 .help-social__icon {
-	width: 3.5em;
-	height: 3.5em;
+	width: 56px;
+	height: 56px;
 }

@@ -1,119 +1,94 @@
 @import "~app/assets/scss/bundle.scss";
 
-.home-view {}
+.home-view {
+	& > div {
+		// overflow: hidden;
+	}
+}
+
+
+.home-view__title {
+	@include H2Bold;
+	@include for-size(big-phone-screen) {
+		@include H2Bold(32px);
+	}
+}
 
 .home-view__header {
 	display: grid;
-	@include row-gap(1em);
-
+	@include row-gap(0);
 	@include WidthLimit;
+
+	@include Mobile {
+		@include row-gap(0);
+	}
 }
 
 .home-view__search {
 	width: 100%;
 	max-width: 61.125em;
-	margin: 4em auto 0;
+	margin: 80px auto 0;
+
+	@include for-size(big-phone-screen) {
+		margin-top: 40px;
+	}
 }
 
 .home-view__comment {
 	@include WidthLimit;
-	margin-top: 15em;
+	margin-top: 240px;
+	@include for-size(big-phone-screen) {
+		margin-top: 80px;
+	}
 }
 
 .home-view__slider {
-	margin-top: 10em;
+	margin-top: 160px;
+	@include for-size(big-phone-screen) {
+		margin-top: 80px;
+	}
 }
 
 .home-view__help {
 	@include WidthLimit;
-	margin-top: 5em;
+	margin-top: 80px;
+	@include for-size(big-phone-screen) {
+		margin-top: 40px;
+	}
 }
 
-.home-view__how-it-works {
+.home-view__helpful-creaty, 
+.home-view__become-mentor,
+.home-view__how-it-works, 
+.home-view__faq {
 	@include WidthLimit;
-	margin-top: 15em;
-}
-
-.home-view__helpful-creaty {
-	@include WidthLimit;
-	margin-top: 15em;
+	margin-top: 240px;
+	@include for-size(big-phone-screen) {
+		margin-top: 96px;
+	}
 }
 
 .home-view__faq {
 	display: grid;
-	@include row-gap(3.25em);
-
-	@include WidthLimit;
-	margin-top: 15em;
+	@include row-gap(56px);
+	@include for-size(big-phone-screen) {
+		@include row-gap(32px);
+	}
 }
 
 .home-view__have-questions {
 	@include WidthLimit;
-	margin-top: 15em;
-}
-
-.home-view__become-mentor {
-	@include WidthLimit;
-	margin-top: 15em;
+	margin-top: 80px;
+	@include for-size(big-phone-screen) {
+		margin-top: 40px;
+	}
 }
 
 .home-view__mailing-subscribe {
 	@include WidthLimit;
-	margin-top: 15em;
-}
 
-/* Dynamic Primary Info */
-
-.dynamic-primary-info {
-	display: grid;
-	@include row-gap(2.5em);
-	text-align: center;
-
-	@include Mobile {
-		text-align: left;
-	}
-}
-
-.dynamic-primary-info__title {
-	color: $color-white;
-	line-height: 1;
-	word-break: break-all;
-
-	@include Mobile {
-		height: 5em;
-	}
-
-	em {
-		color: $color-green;
-
-		&::after {
-			content: "|";
-			color: rgba($color-green, $alpha: 0.3);
-			animation: 1.2s ease-out flick infinite;
-		}
-
-		@include Mobile {
-			line-clamp: 2;
-			display: -webkit-box;
-			-webkit-box-orient: vertical;
-			-webkit-line-clamp: 2;
-			overflow: hidden;
-			text-overflow: ellipsis;
-		}
-	}
-}
-
-.dynamic-primary-info__desc {
-	color: $color-gray-text;
-	font-size: 2rem;
-	font-weight: normal;
-	line-height: 1.25;
-
-	em {
-		color: $color-green;
-	}
-
-	@include Mobile {
-		font-size: 1.5rem;
+	margin-top: 170px;
+	@include for-size(big-phone-screen) {
+		margin-top: 80px;
 	}
 }

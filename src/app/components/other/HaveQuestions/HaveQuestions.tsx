@@ -11,7 +11,7 @@ function HaveQuestions() {
   return (
     <div className="have-questions">
       <div className="have-questions__info">
-        <h2 className="have-questions__title heading">{t("title")}</h2>
+        <div className="have-questions__title heading">{t("title")}</div>
         <p className="have-questions__desc">{t("desc")}</p>
       </div>
       <div className="have-questions__form">

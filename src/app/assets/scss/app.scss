@@ -47,15 +47,17 @@ p.paragraph {
 header {
 	position: sticky;
 	top: 0;
-
-	padding: 0.596em;
-	background: rgba($color-black-main, 0.8);
-	border-bottom: 1px solid rgba($color: $color-gray-10, $alpha: 0.1);
-	backdrop-filter: blur(50px);
+	
 	z-index: 2;
 
-	@include Mobile {
-		padding: 0.5em 1.5em;
+	border-bottom: 1px solid rgba($color: $color-gray-10, $alpha: 0.1);
+	padding: 12px 0;
+
+	background: rgba($color-black-main, 0.8);
+	backdrop-filter: blur(50px);
+
+	@include for-size(big-phone-screen) {
+		padding: 8px 7.5vw 8px 5vw;
 	}
 }
 
@@ -68,14 +70,14 @@ header {
 }
 
 .topbar__logo {
-	height: 2.5em;
+	height: 40px;
 
 	&--mobile {
 		display: none;
 
 	}
 
-	@include Mobile {
+	@include for-size(big-phone-screen) {
 		display: none;
 
 		&--mobile {
@@ -87,20 +89,20 @@ header {
 .topbar__right {
 	display: flex;
 	align-items: center;
-	@include gap(0.5em);
+	@include gap(8px);
 
 	@include Tablet {
 		position: absolute;
-		top: 3.25em;
+		top: 50px;
 		right: 0;
 
 		display: grid;
 		justify-items: center;
-		@include gap(1em);
+		@include gap(16px);
 
 		background: $color-black-90;
 		border: 2px solid $color-gray-100;
-		border-radius: 1.5em;
+		border-radius: 20px;
 		transition: 200ms ease opacity, 200ms ease transform;
 		z-index: 2;
 
@@ -116,9 +118,8 @@ header {
 	}
 }
 
-
 .topbar__trigger {
-	--icon-size: 1.25em;
+	--icon-size: 25px;
 	display: none;
 
 	@include Tablet {
@@ -128,12 +129,12 @@ header {
 
 .topbar-menu {
 	display: flex;
-	@include gap(0.5em);
+	@include gap(8px);
 
 	@include Tablet {
-		padding: 1em;
+		padding: 16px;
 		display: grid;
-		@include gap(0.5em);
+		@include gap(8px);
 	}
 }
 
@@ -145,70 +146,90 @@ header {
 
 
 /* Main */
-
 main {
-	margin-top: 10em;
+	overflow: hidden;
 
+	& > div {
+		margin-top: 120px;
+
+		@include for-size(big-phone-screen) {
+			margin-top: 22vw;
+
+			&.home-view {
+				margin-top: 11vw;
+			}
+		}
+	}
 }
 
 main:not(.home-view__slider) {
-
 	@include Mobile {
-		padding: 5vw;
-		margin: 2.5em 0;
+		padding: 0 5vw;
 	}
-
 }
 
 /* Footer */
-
 footer {
-	padding: 1em;
-	padding-top: 5em;
-	margin-top: 15em;
 	background: $color-black-90;
+
+	padding: 80px 0 28px;
+	margin-top: 160px;
+	
+	@include for-size(big-phone-screen) {
+		padding: 40px 5vw 32px;
+		margin-top: 80px;
+	}
 }
 
 .footer-container {
-	display: grid;
-	@include row-gap(2.5em);
-
 	@include WidthLimit;
+
+	display: grid;
+	@include row-gap(56px);
+	
+	@include for-size(big-phone-screen) {
+		@include row-gap(48px);
+	}
 }
 
 .footer-links {
-	display: flex;
-	justify-content: space-between;
+	display: grid;
+	grid-template: 1fr / auto 1fr auto;
+	@include gap(120px);
 
-	@include Mobile {
+	@include for-size(big-phone-screen) {
 		display: grid;
-		@include row-gap(2.5em);
+		grid-template: repeat(2, auto) / 1fr;
+		@include row-gap(48px);
 	}
 }
 
 .footer-links__container {
-	display: flex;
-	flex-wrap: wrap;
-	@include gap(5em);
+	display: grid;
+	grid-template: 1fr / repeat(3, 1fr);
+	@include gap(40px);
 
-	@include Mobile {
-		@include gap(2.5em);
+	@include for-size(big-phone-screen) {
+		grid-template: repeat(3, auto) / 1fr;
+		@include gap(32px);
 	}
 }
 
 .footer-links__group {
 	display: grid;
 	align-content: baseline;
-	@include row-gap(0.5em);
+	@include row-gap(8px);
 }
 
 .footer-links__title {
-	margin-bottom: 0.5em;
+	margin-bottom: 4px;
+	@include Text2Medium;
 }
 
 .footer-links__link {
 	color: $color-gray-50;
 	transition: 200ms ease color;
+	@include TagsRegular;
 
 	&:hover {
 		color: $color-white;
@@ -220,27 +241,37 @@ a.footer-links__link {
 }
 
 .footer-links__logo {
-	height: 3em;
+	height: 50px;
+	@include for-size(big-phone-screen) {
+		height: 32px;
+	}
 }
 
 .footer-links__social {
 	align-self: center;
 
 	display: flex;
-	@include gap(0.5em);
+	@include gap(8px);
 
 	img {
-		width: 2em;
-		height: 2em;
+		height: 32px;
+		width: 32px;
+	}
+
+	@include for-size(big-phone-screen) {
+		position: absolute;
+		right: 0;
+		top: 0;
 	}
 }
 
 .footer-copyright {
-	padding: 1.5em 0;
 	border-top: 1px solid rgba($color: $color-gray-10, $alpha: 0.1);
 	color: $color-gray-80;
-	font-size: 0.75rem;
-	line-height: 1.25;
+	
+	padding-top: 16px;
+
+	@include Caption;
 }
 
 .cookies {

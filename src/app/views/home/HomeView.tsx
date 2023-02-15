@@ -30,23 +30,22 @@ import HelpfulCreaty from "./HelpfulCreaty/HelpfulCreaty"
 import HowItWorks from "./HowItWorks/HowItWorks"
 import MailingSubscribe from "./MailingSubscribe/MailingSubscribe"
 
-
 function HomeView() {
   useScrollToTop()
-  const dispatch = useDispatch()
+  
   const { t, i18n } = useTranslation("translation", { keyPrefix: "views.home" })
+  const dispatch = useDispatch()
+
   const params = useParams<"shortcut">()
-  const { payload, query } = useQuery(params.shortcut ? getPagePersonal(params.shortcut) : getPagesMain)
+  const { payload, query } = useQuery(params.shortcut 
+    ? getPagePersonal(params.shortcut) 
+    : getPagesMain)
+  
   useEffect(() => { query() }, [i18n.language])
-  useEffect(() => {
-    dispatch(updateSearch({
-      tag: undefined,
-      topic: undefined
-    }))
-  }, [])
 
   return (
     <div className="home-view">
+      {/* Header  */}
       <div className="home-view__header">
         <DynamicPrimaryInfo firstHeadingShortcut={params.shortcut} />
         <div className="home-view__search">
@@ -60,9 +59,13 @@ function HomeView() {
           <Button color="white" onClick={() => Modal.open(PopupAdminPersonalTags, { shortcut: params.shortcut, tags: payload?.tags || [] })}>Изменить тэги</Button>
         </AdminInterface>
       </div>
+
+      {/* Coomment */}
       <div className="home-view__comment">
         <BigComment>{t("bigComment")}</BigComment>
       </div>
+
+      {/* Mentors */}
       <div className="home-view__slider">
         {payload?.mentors && (
           <MentorsSlider mentors={payload.mentors} />
@@ -71,34 +74,47 @@ function HomeView() {
           <LoaderCover white />
         )}
       </div>
+
+      {/* Help */}
       <div className="home-view__help">
         <InfoSection type="2" display="flex" title={t("help.title")} desc={t("help.desc")}>
           <HelpSocial />
         </InfoSection>
       </div>
+
+      {/* How it works */}
       <div className="home-view__how-it-works">
         <HowItWorks />
       </div>
+
+      {/* Helps */}
       <div className="home-view__helpful-creaty">
         <HelpfulCreaty />
       </div>
+
+      {/* FAQ */}
       <div className="home-view__faq">
-        <h2 className="heading">{t("QAndA.title")}</h2>
+        <div className="heading home-view__title">{t("QAndA.title")}</div>
         <QAndA />
       </div>
+
+      {/* Form */}
       <div className="home-view__have-questions">
         <HaveQuestions />
       </div>
+
+      {/* Become mentros */}
       <div className="home-view__become-mentor">
         <BecomeMentor />
       </div>
+
+      {/* Subscribe form */}
       <div className="home-view__mailing-subscribe">
         <MailingSubscribe />
       </div>
     </div>
   )
 }
-
 
 function QAndA() {
   const { i18n } = useTranslation("translation", { keyPrefix: "lang" })

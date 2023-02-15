@@ -4,49 +4,70 @@
 	display: flex;
 	flex-direction: column;
 
-	padding: 0.5em;
+	padding: 8px;
 	background: $color-white;
-	border-radius: 2.5em;
+	border-radius: 40px;
 
 	&--center {
 		text-align: center;
 	}
+	
+	@include for-size(big-phone-screen) {
+		width: 90vw;
+	}
 }
 
 .mentor-card__preview {
-	border-radius: 2em;
+	position: relative;
+	
+	overflow: hidden;
+	width: 100%;
+
+	border-radius: 32px;
+	padding-top: 78%;
 }
 
 .mentor-card__image {
+	position: absolute;
+	left: 0;
+	top: 0;
+
 	width: 100%;
-	height: 17em;
 	border-radius: inherit;
 	object-fit: cover;
 }
 
 .mentor-card__info {
 	display: grid;
-	@include row-gap(0.5em);
+	@include row-gap(4px);
 }
 
 .mentor-card__container {
-	$indent: 1.25em;
-
 	display: grid;
-	@include row-gap($indent);
-
-	padding: $indent;
+	@include row-gap(20px);
+	padding: 20px;
+	
+	@include for-size(big-phone-screen) {
+			@include gap(20px);
+			padding: 24px 16px 36px;
+		}
 }
 
 .mentor-card__name {
 	color: $color-black-main;
-	font-size: 1.5rem;
-	font-weight: bold;
+	@include H4Bold;
+
+	@include for-size(big-phone-screen) {
+		@include H4Bold(20px);
+	}
 }
 
 .mentor-card__flag {
-	width: 1em;
-	height: 1em;
+	position: relative;
+	top: -3px;
+
+	height: 1.33em;
+	width: auto;
 
 	margin-left: 0.25em;
 	vertical-align: bottom;
@@ -54,18 +75,28 @@
 
 .mentor-card__job {
 	color: $color-gray-80;
-	font-size: 1.125rem;
+	@include TextRegular;
+	@include for-size(big-phone-screen) {
+		@include TextRegular(16px);
+	}
 
 	em {
 		color: $color-black-main;
-		font-weight: bold;
+		@include TextMedium;
+		@include for-size(big-phone-screen) {
+			@include TextMedium(16px);
+		}
 	}
 }
 
 .mentor-card__tags {
 	display: flex;
 	flex-wrap: wrap;
-	@include gap(0.5em);
+	@include gap(8px);
+
+	@include for-size(big-phone-screen) {
+		@include gap(8px);
+	}
 }
 
 .mentor-card__price {
@@ -93,13 +124,14 @@
 }
 
 /* Mentor Card Button */
-
 .mentor-card-button {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 
-	padding: 1.5em;
+	padding: 24px;
+	padding-left: 32px;
+
 	margin-top: auto;
 	background: $color-gray-10;
 	border-radius: inherit;
@@ -111,19 +143,24 @@
 }
 
 .mentor-card-button__text {
+	// Trouble with font layout
+	position: relative;
+	top: 2px;
+
 	display: flex;
 	@include gap(0.25em);
 
 	color: $color-black-main;
-	font-size: 1.125rem;
 	transition: 200ms ease opacity;
+
+	@include TextRegular;
 
 	.mentor-card-button:hover & {
 		opacity: 0;
 	}
 
 	em {
-		font-weight: bold;
+			@include TextBold;
 	}
 }
 

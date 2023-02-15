@@ -11,7 +11,7 @@ function HelpfulCreaty() {
   return (
     <div className="helpful-creaty">
       <div className="helpful-creaty__group">
-        <h2 className="helpful-creaty__title heading">{t("title")}</h2>
+        <div className="helpful-creaty__title heading">{t("title")}</div>
         <HelpfulCreatyBlock title={t("blocks.1.title")} desc={t("blocks.1.desc")} flag="yellow" />
         <HelpfulCreatyBlock title={t("blocks.2.title")} desc={t("blocks.2.desc")} flag="purple" />
       </div>

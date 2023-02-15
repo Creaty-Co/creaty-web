@@ -2,21 +2,30 @@
 
 .subscribe {
 	display: grid;
-	@include row-gap(0.5em);
+	@include row-gap(16px);
+	@include for-size(big-phone-screen) {
+		@include row-gap(24px);
+	}
 }
 
 .subscribe__header {
 	display: flex;
 	align-items: flex-end;
-	@include gap(1em);
+	@include gap(16px);
+	
+	@include for-size(big-phone-screen) {
+		flex-direction: column;
+		align-items: stretch;
+		@include row-gap(16px);
+	}
 }
 
 .subscribe__field {
 	flex: 1;
 
-	padding-bottom: 1em;
-	border-bottom: 1px solid rgba($color-gray-10, 0.1);
-	border-radius: 1px;
+	padding: 12px 0 10px;
+
+	border-bottom: 1px solid rgba($color-gray-10, 0.2);
 	transition: 200ms ease border-color;
 
 	&:hover:not(&--red, &--dark),
@@ -41,6 +50,8 @@
 	width: 100%;
 	color: $color-white;
 
+	@include Text2Regular;
+
 	&::placeholder {
 		color: $color-white;
 		transition: 200ms ease color;
@@ -53,10 +64,8 @@
 
 .subscribe__text {
 	color: $color-gray-80;
-	font-size: 0.75rem;
-	line-height: 1.35;
-
-	@include Mobile {
+	@include Caption;
+	@include for-size(big-phone-screen) {
 		text-align: center;
 	}
 }
