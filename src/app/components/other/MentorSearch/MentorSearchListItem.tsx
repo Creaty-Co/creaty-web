@@ -37,12 +37,13 @@ function MentorSearchListItem({
   
   className
 }: MentorSearchListItemProps) {
+  
+  /*
   const isMobile = useSelector<DefaultRootState, boolean | null>(state => selectIsMobile(state.device))
-
   const handleLinkClick = (event: MouseEvent) => {
-    // if (type !== "view-all" && isMobile) event.preventDefault()
+    if (type !== "view-all" && isMobile) event.preventDefault()
   }
-
+  */
   return (
     <Link to={"/mentors/" + topic.shortcut}
       className={classMerge(
@@ -65,7 +66,7 @@ function MentorSearchListItem({
 
       {/* View-all */}
       {type === "view-all" && 
-        <span>View all mentors in category</span>
+        <span {...dataAttrs}>View all mentors in category</span>
       }
 
       {/* In search */}

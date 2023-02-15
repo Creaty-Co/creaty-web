@@ -58,13 +58,13 @@ function MentorSearch() {
   const searchContainerRef = useRef<HTMLDivElement>(null)
   const searchLabelRef = useRef<HTMLLabelElement>(null)
   const cbClicAway = useCallback(listener, [searchState.focused])
-  // useLayoutEffect(clickAway, [searchState.focused])
+  useLayoutEffect(clickAway, [searchState.focused])
 
   /* Scroll controll */
   const scrolledFromRef = useRef<number>(0)
   const scrolledToRef = useRef<boolean>(searchState.focused)
   const containerRef = useRef<HTMLDivElement>(null)
-  // useLayoutEffect(focusedScroll, [searchState.focused])
+  useLayoutEffect(focusedScroll, [searchState.focused])
 
   /* Routes */ 
   const redirectTo = "/mentors" + (
@@ -298,11 +298,12 @@ function MentorSearch() {
       toggle(selector, id, togglerTransformAction(action))
     
     /* Redirect on tag add */
-    // selector === "tag" && action === "add" && id &&
-    //   navigate(getURLByTagID("mentor/" + ))
-    // navigate(getURLByTagID(+id))
-    // selector === "tag" && action === "add" && id &&
-    //   close()
+    selector === "tag" && action === "add" && id &&
+      dispatch(updateSearch({
+        ...searchState,
+        tag: topics.tags.find(tag => tag.id === +id),
+        focused: false
+      })) && navigate(getURLByTagID(+id))
 
     action && action === "search" &&
       dispatch(updateSearch({
@@ -359,7 +360,6 @@ function MentorSearch() {
   }
 
   function listener(event: MouseEvent) {
-    console.log(123)
     const target = event.target as HTMLElement
     searchContainerRef.current && target.tagName !== "use" &&
         !searchContainerRef.current.contains(target) &&
