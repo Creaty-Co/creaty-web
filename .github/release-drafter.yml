@@ -1,0 +1,29 @@
+name-template: 'v$NEXT_MINOR_VERSION 🔥'
+tag-template: 'v$NEXT_MINOR_VERSION'
+
+categories:
+  - title: '🚀 Solved tasks'
+    collapse-after: 1
+
+  - title: '⬆️ Updated dependencies'
+    collapse-after: 1
+    labels:
+      - 'dependencies'
+
+  - title: '♾️ Upgraded CI/CD'
+    collapse-after: 1
+    labels:
+      - 'devops'
+
+exclude-contributors:
+  - dependabot
+  - github-actions[bot]
+  - pre-commit-ci
+
+change-template: |
+  - $TITLE in #$NUMBER
+
+template: |
+  # Changes
+  
+  $CHANGES

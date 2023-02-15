@@ -7,7 +7,6 @@ import { Link } from "react-router-dom"
 
 import TopicTag from "../Tag/TopicTag"
 
-
 interface MentorCardProps extends MentorType { }
 
 function MentorCard(props: MentorCardProps) {
@@ -34,7 +33,7 @@ function MentorCard(props: MentorCardProps) {
           )}
         </div>
       </div>
-      <Link className="mentor-card-button" to={"/user/" + props.id}>
+      <Link className="mentor-card-button" to={"/user/" + props.slug}>
         <div className="mentor-card-button__text">
           <em>{Number(props.price).toPrice(t("lang.code"), props.price_currency)}</em>
           <span>/</span>
@@ -46,7 +45,6 @@ function MentorCard(props: MentorCardProps) {
     </div>
   )
 }
-
 
 export default MentorCard
 

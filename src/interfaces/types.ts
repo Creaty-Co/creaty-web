@@ -47,6 +47,7 @@ export interface MentorPage {
 
 export interface MentorType {
   id: number
+  slug: string
   avatar: string
   company: string
   profession: string
@@ -80,10 +81,8 @@ export interface MentorDetailedType extends MentorType {
     resume: string
     what_help: string
     experience: string
-    portfolio: string
     languages: MentorDetailedLanguages[]
-    city_ru: string
-    city_en: string
+    city: string
   }
 }
 
@@ -93,16 +92,15 @@ export interface MentorPatchType {
     resume: string
     what_help: string
     experience: string
-    portfolio: string
     languages: number[]
-    city_ru: string
-    city_en: string
+    city: string
   }
   avatar: string
   company: string
   profession: string
   first_name: string
   last_name: string
+  slug: string
   price: string
   price_currency: string
   tag_set: number[]
@@ -111,7 +109,6 @@ export interface MentorPatchType {
 }
 
 /* Pages */
-
 export interface PageType {
   id: number
   tags: TagType[]

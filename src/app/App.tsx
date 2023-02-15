@@ -138,7 +138,7 @@ function Main() {
           <Route path=":shortcut" element={<HomeView />} />
           <Route path="mentors" element={<MentorsView />} />
           <Route path="mentors/:topicOrTag" element={<MentorsViewTopicOrTag />} />
-          <Route path="user/:userId" element={<UserUserId />} />
+          <Route path="user/:slug" element={<UserUserId />} />
           <Route path="admin/*" element={<AdminViews />} />
         </Route>
         <Route path="/*" element={<ErrorView />} />

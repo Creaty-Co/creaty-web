@@ -5,10 +5,10 @@ import { MentorPage } from "../../interfaces/types"
 
 export const getAdminMentors = (page: number, page_size: number): Action<PaginationType<{
   id: number
+  slug: string
   info: {
     trial_meeting: number
-    city_ru: string
-    city_en: string
+    city: string
   }
   avatar: string
   company: string

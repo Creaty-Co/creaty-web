@@ -1,7 +1,7 @@
 import "react-toastify/dist/ReactToastify.css"
 
 import { getAdminMentors } from "api/actions/admin"
-import { patchMentorsId } from "api/actions/mentors"
+import { patchMentorsSlug } from "api/actions/mentors"
 import ClientAPI from "api/client"
 import Button from "app/components/common/Button/Button"
 import ButtonLink from "app/components/common/Button/ButtonLink"
@@ -50,8 +50,7 @@ function AdminMentorsView() {
                 <th>Оплата</th>
                 <th>Валюта Оплаты</th>
                 <th>Пробная встреча?</th>
-                <th>Город на русском</th>
-                <th>Город на английском</th>
+                <th>Город</th>
               </tr>
             </thead>
             <tbody>
@@ -59,29 +58,38 @@ function AdminMentorsView() {
                 <tr key={mentor.id}>
                   <td><Button color="dark" onClick={() => Modal.open(PopupAdminPersonalMentors, { mentor })}>Ред. перс. страницу</Button></td>
                   <td>{mentor.id}</td>
+                  
                   <td>
                     <section>
                       <div>
                         <img src={mentor.avatar} />
                         <Link className="ghost" to={"/user/" + mentor.id} />
                       </div>
-                      <PartialEditMentorInput id={mentor.id} name="avatar" defaultValue={mentor.avatar} />
+                      <PartialEditMentorInput slug={mentor.slug} name="avatar" defaultValue={mentor.avatar} />
                     </section>
                   </td>
-                  <td><PartialEditMentorInput id={mentor.id} name="first_name" defaultValue={mentor.first_name} /></td>
-                  <td><PartialEditMentorInput id={mentor.id} name="last_name" defaultValue={mentor.last_name} /></td>
+
+                  <td><PartialEditMentorInput slug={mentor.slug} name="first_name" defaultValue={mentor.first_name} /></td>
+
+                  <td><PartialEditMentorInput slug={mentor.slug} name="last_name" defaultValue={mentor.last_name} /></td>
+
                   <td>
-                    <PartialEditMentorInput id={mentor.id} name="country" defaultValue={mentor.country.id}>
+                    <PartialEditMentorInput slug={mentor.slug} name="country" defaultValue={mentor.country.id}>
                       <AdminCountriesSelect defaultValue={mentor.country.id} />
                     </PartialEditMentorInput>
                   </td>
-                  <td><PartialEditMentorInput id={mentor.id} name="profession" defaultValue={mentor.profession} /></td>
-                  <td><PartialEditMentorInput id={mentor.id} name="company" defaultValue={mentor.company} /></td>
-                  <td><PartialEditMentorInput id={mentor.id} name="price" defaultValue={mentor.price} /></td>
-                  <td><PartialEditMentorInput id={mentor.id} name="price_currency" defaultValue={mentor.price_currency} /></td>
-                  <td><PartialEditMentorInput id={mentor.id} name="trial_meeting" defaultChecked={!!mentor.info.trial_meeting} type="checkbox" /></td>
-                  <td><PartialEditMentorInput id={mentor.id} name="city_ru" defaultValue={mentor.info.city_ru} /></td>
-                  <td><PartialEditMentorInput id={mentor.id} name="city_en" defaultValue={mentor.info.city_en} /></td>
+
+                  <td><PartialEditMentorInput slug={mentor.slug} name="profession" defaultValue={mentor.profession} /></td>
+
+                  <td><PartialEditMentorInput slug={mentor.slug} name="company" defaultValue={mentor.company} /></td>
+
+                  <td><PartialEditMentorInput slug={mentor.slug} name="price" defaultValue={mentor.price} /></td>
+
+                  <td><PartialEditMentorInput slug={mentor.slug} name="price_currency" defaultValue={mentor.price_currency} /></td>
+
+                  <td><PartialEditMentorInput slug={mentor.slug} name="trial_meeting" defaultChecked={!!mentor.info.trial_meeting} type="checkbox" /></td>
+
+                  <td><PartialEditMentorInput slug={mentor.slug} name="city" defaultValue={mentor.info.city} /></td>
                 </tr>
               ))}
             </tbody>
@@ -103,7 +111,7 @@ function AdminMentorsView() {
 
 
 interface PartialEditMentorInputProps extends Omit<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, "id"> {
-  id: number
+  slug: string
   name: Exclude<keyof MentorPatchType, "info"> | Exclude<keyof MentorPatchType["info"], "languages">
   defaultValue?: string | number
 
@@ -118,9 +126,7 @@ function PartialEditMentorInput(props: PartialEditMentorInputProps) {
     "resume",
     "what_help",
     "experience",
-    "portfolio",
-    "city_ru",
-    "city_en"
+    "city"
   ]
   function onBlur(event: FocusEvent<HTMLInputElement>) {
     const target = event.currentTarget
@@ -130,7 +136,7 @@ function PartialEditMentorInput(props: PartialEditMentorInputProps) {
     if (prevValueRef.current === targetValue) return
 
     ClientAPI
-      .query(patchMentorsId(+props.id,
+      .query(patchMentorsSlug(props.slug,
         infoFields.includes(props.name)
           ? { info: { [props.name]: targetValue } }
           : { [props.name]: targetValue }
@@ -139,9 +145,9 @@ function PartialEditMentorInput(props: PartialEditMentorInputProps) {
         if (error) return
 
         if (props.defaultChecked !== undefined) {
-          toast.info(`ALTER \`${props.name}\` IN ${props.id} VALUE ${!!prevValueRef.current} => ${!!targetValue}`)
+          toast.info(`ALTER \`${props.name}\` IN ${props.slug} VALUE ${!!prevValueRef.current} => ${!!targetValue}`)
         } else {
-          toast.info(`ALTER \`${props.name}\` IN ${props.id} VALUE ${prevValueRef.current} => ${targetValue}`)
+          toast.info(`ALTER \`${props.name}\` IN ${props.slug} VALUE ${prevValueRef.current} => ${targetValue}`)
         }
 
         prevValueRef.current = targetValue

@@ -8,6 +8,7 @@ interface EditAvatarProps {
   name?: string
   image: string
   onChange?(file: File): void | Promise<unknown>
+  required?: boolean
 }
 
 function EditAvatar(props: EditAvatarProps) {
@@ -34,7 +35,7 @@ function EditAvatar(props: EditAvatarProps) {
       <img src={image} alt="avatar" className="edit-avatar__image" />
       <label className="edit-avatar__cover">
         <Icon className="edit-avatar__icon" name="touch" />
-        <input className="edit-avatar__input" name={props.name} type="file" accept="image/*" onChange={onChange} aria-hidden={false} />
+        <input name={props.name} required={props.required} className="edit-avatar__input" type="file" accept="image/*" onChange={onChange} aria-hidden={false} />
       </label>
     </div>
   )

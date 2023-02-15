@@ -1,7 +1,7 @@
 import "./user.scss"
 import "app/components/UI/MentorCard/MentorCard.scss"
 
-import { deleteMentorsId, getMentorsId } from "api/actions/mentors"
+import { deleteMentorsId, getMentorBySlug } from "api/actions/mentors"
 import { getPagesLinksDocuments } from "api/actions/pages"
 import ClientAPI from "api/client"
 import AdminInterface from "app/components/admin/AdminInterface"
@@ -27,10 +27,10 @@ function UserUserId() {
   const { t, i18n } = useTranslation("translation", { keyPrefix: "views.mentor" })
   const { t: tRoot } = useTranslation("translation")
 
-  const params = useParams<"userId">()
-  if (!params.userId) throw new Error("This component should be used in Route context")
+  const params = useParams<"slug">()
+  if (!params.slug) throw new Error("This component should be used in Route context")
 
-  const { error, loading, payload, query } = useQuery(getMentorsId(+params.userId))
+  const { error, loading, payload, query } = useQuery(getMentorBySlug(params.slug))
   const { payload: payload2 } = useQuery(getPagesLinksDocuments)
   useEffect(() => { query() }, [i18n.language])
 
@@ -73,11 +73,13 @@ function UserUserId() {
           <div className="user-card__notice">{t("card.trial")}</div>
         )}
       </div>
+
       <div className="user__sections">
         <AdminInterface>
           <Button onClick={() => ClientAPI.query(deleteMentorsId(payload.id)).then(() => navigate("/admin/mentors"))}>Удалить ментора</Button>
           <Button onClick={() => navigate("/admin/edit-mentor/" + payload.id)}>Редактировать ментора</Button>
         </AdminInterface>
+
         <UserSection type="3" title={payload.info.resume}>
           <div className="user-section__entry">
             <Icon name="location" />
@@ -88,9 +90,11 @@ function UserUserId() {
             <span>{t("info.language")}: <em>{payload.info.languages.map(lang => lang.name_native).join(" / ")}</em></span>
           </div>
         </UserSection>
+
         <UserSection type="1" title={t("info.whatHelp")}>
           <p>{payload.info.what_help}</p>
         </UserSection>
+
         <UserSection type="1">
           <div className="user-section__tags">
             {payload.tags.map(tag => (
@@ -98,22 +102,21 @@ function UserUserId() {
             ))}
           </div>
         </UserSection>
+
         <UserSection type="1" title={t("info.experience")}>
           <p>{payload.info.experience}</p>
         </UserSection>
-        {/* <UserSection type="1" title={t("info.portfolio")}>
-          <div className="user-section__rows">
-            <p>{ReactizeLinks(payload.info.portfolio)}</p>
-          </div>
-        </UserSection> */}
+
         <UserSection type="2" title={t("info.garantee.title")} iconName="r-square">
           <p>{t("info.garantee.desc")}</p>
         </UserSection>
+
         <a id="book" style={{ scrollMargin: "3em" }} />
         <UserSection type="1" title={t("info.bookMentor.title")}>
           <p>{t("info.bookMentor.desc")}</p>
           <ContactForm type="test_meeting" submitText={t("info.bookMentor.submit")} />
         </UserSection>
+
       </div>
     </div>
   )
