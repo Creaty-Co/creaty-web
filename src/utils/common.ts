@@ -198,3 +198,45 @@ export function minFill<T>(array: T[], minLevel?: number): T[] {
   }
   return newArray
 }
+
+/**
+ * Transform string to toggler state
+ * 
+ */
+export function togglerTransformAction(to?: string | null | undefined): boolean | undefined | null {
+  switch (to) {
+    case "remove": return false
+    case "add": return true
+    default: return undefined
+  }
+}
+
+export function toDataAttrs(dataAttrs: Record<string, string>): Record<string, string> {
+  const reducer = (dataAttrs: Record<string, string>, [key, value]: [string, string]): Record<string, string> => ({...dataAttrs, [toDataAttrName(key)]: value})
+  return Object.entries(dataAttrs).reduce(reducer, {})
+}
+
+export function toDataAttrName(attrName: string): string {
+  const regex = /data-/
+  const dataAttrName = !attrName.match(regex)
+    ? `data-${attrName}` : attrName
+    
+  return dataAttrName
+}
+
+export function targetHasAttr(target: HTMLElement, attrName: string): boolean {
+  attrName = toDataAttrName(attrName)
+
+  return target.hasAttribute(attrName) ||
+    target.parentElement?.hasAttribute(attrName) || 
+    false
+}
+
+export function targetGetAttr(target: HTMLElement, attrName: string): string | null | undefined {
+  attrName = toDataAttrName(attrName)
+
+  const te = (target.tagName === "use"? target.parentElement : target) as HTMLElement
+  const value = te.getAttribute(attrName)
+  
+  return value
+}

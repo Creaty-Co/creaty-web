@@ -7,15 +7,19 @@
   align-items: center;
   @include gap(12px);
 
+  white-space: nowrap;
+
   border-radius: 16px;
   padding: 8px 16px;
 
-  
   transition: 200ms ease background-color;
   cursor: pointer;
 
   &:hover {
     background: $color-gray-30;
+    @include for-size(big-phone-screen) {
+      background: none;
+    }
   }
 
   @include Text2Medium;
@@ -39,6 +43,11 @@
 
     height: 100%;
 
+    display: none;
+    @include for-size(big-phone-screen) {
+      display: block;
+    }
+
     & > svg {
       color: $color-gray-50;
 
@@ -57,6 +66,17 @@
 
   &--state--selected {
     background: $color-gray-30;
+    &:hover {
+      background: $color-gray-30;
+    }
+
+    @include for-size(big-phone-screen) {
+      width: 100%;
+    }
+
+    & > div {
+      display: block;
+    }
   }
 
   &__icon {

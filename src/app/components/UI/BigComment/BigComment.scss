@@ -3,15 +3,27 @@
 .big-comment {
 	display: grid;
 	justify-items: center;
-	@include row-gap(1.25em);
+	@include row-gap(16px);
 
-	padding: 5em 7.5em 3.5em;
+	padding: 80px 120px 56px;
 	background: $color-black-90;
-	box-shadow: 0px 2px 8px rgba($color-green, 0.1), 0px 8px 30px rgba($color-green, 0.2), 0px 8px 200px rgba($color-green, 0.4);
-	border-radius: 4.25em;
+	border-radius: 70px;
 
+	animation: live-shadow 7s infinite;
+
+	box-shadow: 
+		0px 2px 8px rgba($color-green, 0.1), 
+		0px 8px 30px rgba($color-green, 0.2), 
+		0px 8px 200px rgba($color-green, 0.4);
+	
 	@include for-size(big-phone-screen) {
 		padding: 48px 36px 36px;
+	}
+
+	& > svg {
+		transform-origin: center center;
+		overflow: visible;
+		animation: star-blink 12s ease-in-out infinite;
 	}
 }
 
@@ -31,12 +43,55 @@
 	}
 
 	& > p {
-		// temporary fix before deleter @Typography and @Font
 		line-height: inherit;
 		margin: 0;
 	}
 }
 
 .big-comment__icon {
-	--icon-size: 2.25em;
+	--icon-size: 35px;
+}
+
+@keyframes star-blink {
+	0% {
+		transform: rotate(0) scale(1) translate(0, 0);
+	}
+	25% {
+		transform: rotate(10deg) scale(1.2) translate(5px, -2px);
+	}
+	50% {
+		transform: rotate(0deg) scale(1.1) translate(6px, 0);
+	}
+	75% {
+		transform: rotate(-13deg) scale(1.3)  translate(-3px, 4px);
+	}
+	100% {
+		transform: rotate(0) scale(1) translate(0, 0);
+	}
+}
+
+@keyframes live-shadow {
+	0% {
+		box-shadow: 
+			-50px -50px 50px rgba($color-green, 0.2), 
+			2px 12px 18px rgba($color-green, 0.1), 
+			-5px 8px 10px rgba($color-green, 0.2), 
+			0px 8px 200px rgba($color-green, 0.4);
+		}
+		
+		50% {
+			box-shadow: 
+			50px 50px 150px rgba($color-green, 0.2), 
+			-4px 5px 28px rgba($color-green, 0.1), 
+			5px 8px 30px rgba($color-green, 0.2), 
+			0px 0px 50px rgba($color-green, 0.4);
+		}
+		
+		100% {
+			box-shadow: 
+			-50px -50px 50px rgba($color-green, 0.2), 
+			2px 12px 18px rgba($color-green, 0.1), 
+			-5px 8px 10px rgba($color-green, 0.2), 
+			0px 8px 200px rgba($color-green, 0.4);
+	}
 }

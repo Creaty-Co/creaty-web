@@ -41,10 +41,12 @@ function MentorsSlider(props: MentorsSliderProps) {
       left: scrollInterval * by
     })
   }
+  
   useEffect(() => {
     if (!innerRef.current) return
     innerRef.current.scrollTo(innerRef.current.scrollWidth / 2 - innerRef.current.offsetWidth / 2, 0)
   }, [])
+  
   return (
     <div className="mentors-slider">
       <div className="mentors-slider__header">
@@ -56,8 +58,8 @@ function MentorsSlider(props: MentorsSliderProps) {
       </div>
       <div className="mentors-slider__container">
         <div className="mentors-slider__inner" ref={innerRef}>
-          {props.mentors.map(mentor => (
-            <MentorCard {...mentor} key={mentor.id} />
+          {props.mentors.map((mentor, index) => (
+            <MentorCard {...mentor} key={mentor.id + "" + index} />
           ))}
         </div>
       </div>

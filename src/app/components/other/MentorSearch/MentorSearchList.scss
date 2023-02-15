@@ -1,50 +1,74 @@
 @import "~app/assets/scss/bundle.scss";
 
 .mentor-search-list {
-  height: 100%;  
-  // $height: calc(16px * 12);
-
+  z-index: 1;
   position: absolute;
-  top: calc(100% + 0.75em);
-  right: 0;
+  bottom: -12px;
   left: 0;
 
-  display: flex;
+  display: grid;
 
-  // max-height: $height;
-  background: $color-white;
-  border-radius: 24px;
+  grid-template: 1fr / 520fr 390fr;
+
+  max-height: 50vh;
+  height: auto; 
+  width: 100%;
+  
+  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  transition: 200ms ease opacity, 200ms ease transform;
+  transform: translate(0, 100%);
+  opacity: 1;
 
   box-shadow: 0 0 0 3px rgba($color-green, $alpha: 0.5);
-  transition: 200ms ease opacity, 200ms ease transform;
-  z-index: 1;
+  background: $color-white;
+  border-radius: 24px;
   cursor: initial;
 
   &:not(&--visible) {
+    visibility: hidden;
+    display: none;
     opacity: 0;
     pointer-events: none;
     transform: translateY(16px);
   }
 
+  &--selected {
+    @include for-size(big-phone-screen) {
+      .mentor-search-list__separator {
+        visibility: visible;
+        display: block;
+      }
+    }
+  }
+
   @include for-size(big-phone-screen) {
     display: grid;
-    
-    overflow: auto;
-    overflow-x: hidden;
-    overflow-y: auto;
+
+    grid-template: none;
+    @include gap(8px);
     
     max-height: calc(100dvh - 120px);
     height: auto;
 
     padding: 8px;
   }
+  
+  &__selected {
+    display: grid;
+    grid-auto-rows: auto;
+    grid-template-columns: 1fr;
+    justify-items: flex-start;
+    @include gap(8px);
+  }
 
-  &__container {
+  &__categories {
     display: grid;
     align-content: baseline;
 
-    flex: 1;
-    padding: 1em;
+    padding: 16px;
 
     &:not(:only-child) {
       border-right: 1px solid #D2D6DC;
@@ -54,7 +78,6 @@
     }
 
     overflow: auto;
-    // @include Scrollbar(0.75em, rgba($color-gray-90, 0.2));
 
     @include for-size(big-phone-screen) {
       @include gap(0);
@@ -65,46 +88,127 @@
   }
 
   &__tags {
+    display: grid;
+    justify-items: flex-start;
+    align-content: flex-start;
+    @include gap(8px);
+
+    width: 100%;
+    padding: 16px;
+    margin: 0;
+
+    overflow: auto;
+
+		-ms-overflow-style: none;
+		scrollbar-width: none;
+	
+		&::-webkit-scrollbar {
+			display: none;
+		}
+
+    &--hidden {
+      visibility: hidden;
+      display: none;
+    }
+
+    & > .topic-tag {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+      height: min-content;
+    }
+
+    @include for-size(big-phone-screen) {
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  &___tags {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     @include row-gap(8px);
 
-    width: 40%;
-    padding: 16px;
-    margin-right: 4px;
+    width: 100%;
+    padding: 0;
+    margin: 0;
 
     overflow: auto;
+    
+    &--hidden {
+      visibility: hidden;
+      display: none;
+    }
 
     // @include Scrollbar(8px, rgba($color-gray-90, 0.2), transparent);
 
-    &>.topic-tag {
+    & > .topic-tag {
       overflow: hidden;
       text-overflow: ellipsis;
       max-width: 100%;
     }
 
     @include for-size(big-phone-screen) {
-      // display: none;
-
-      // visibility: hidden;
       width: 100%;
     }
   }
 
-  &--empty {
+  &__indicator-empty {
     position: absolute;
     inset: 0;
 
     display: grid;
     align-content: center;
     justify-items: center;
-    @include row-gap(8px);
+    @include row-gap(10px);
 
     color: $color-gray-80;
 
     @include for-size(big-phone-screen) {
       display: none;
     }
+  }
+  
+  &__text {
+    @include Tags();
+  }
+
+  &__icon {
+    &--touch {
+      height: 21px;
+    }
+  }
+
+  &__separator {
+    background-color: #D2D6DC;
+
+    position: relative;
+    left: -10px;
+
+    margin: 8px 16px;
+    height: 2px;
+    width: calc(100% - 16px);
+
+    &--only-for-mobile {
+      display: none;
+    }
+
+    @include for-size(big-phone-screen) {
+      left: 0;
+
+      visibility: hidden;
+      display: none;
+
+      width: auto;
+    }
+  }
+
+  &__search-result {
+    padding: 8px 16px;
+
+    @include Text2Medium;
+    text-decoration: none;
+    color: $color-black-main;
   }
 }

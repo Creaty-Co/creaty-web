@@ -88,7 +88,9 @@
 	&__container {
 		z-index: 1;
 
-		display: flex;
+		display: grid;
+		grid-template: 1fr / 1fr auto;
+
 		@include gap(12px);
 		
 		width: 100%;
@@ -100,38 +102,49 @@
 		background: $color-black-90;
 		
 		@include for-size(big-phone-screen) {
-			display: grid;
 			@include gap(8px);
+			grid-template: none;
 
-			padding: 8px;
-			
 			border-radius: 35px;
+			padding: 8px;
 		}
 	}
 
 	&__search {
 		position: relative;
 
-		display: flex;
+		display: grid;
 		align-items: center;
 		@include gap(8px);
-		flex: 1;
 		
-		padding: 16px;
+		padding: 12px;
 		padding-left: 32px;
 		
-		background: white;
 		border-radius: 24px;
 		transition: 200ms ease box-shadow, padding-left ease 300ms;
+		background: white;
 		cursor: text;
+
+		@include for-size(big-phone-screen) {
+			padding: 16px;
+			padding-left: 32px;
+	
+			border-radius: 24px;
+		}
 		
-		&:hover,
+		// &:hover, 
 		&--focused {
 			box-shadow: 0 0 0 3px rgba($color-green, $alpha: 0.5);
+			padding-left: 56px;
+			
 			@include for-size(big-phone-screen) {
 				@include gap(0);
 				padding-left: 56px;
 				padding-right: 55px;
+
+				&--filled {
+					padding: 8px 8px;
+				}
 			}
 		}
 
@@ -141,16 +154,31 @@
 			>.topic-tag {
 				opacity: 0.5;
 			}
+			padding: 8px 8px 8px 12px;
 
 			@include for-size(big-phone-screen) {
 				padding: 8px 8px;
 			}
 		}
+	}
 
-		@include for-size(big-phone-screen) {
-			// flex-wrap: wrap;
-			border-radius: 24px;
+	&__selected {
+		-ms-overflow-style: none;
+		scrollbar-width: none;
+	
+		&::-webkit-scrollbar {
+			display: none;
 		}
+
+		display: grid;
+		grid-template: 1fr / auto auto;
+		justify-content: flex-start;
+		align-items: center;
+		@include gap(10px);
+
+		margin-right: 45px;
+
+		overflow: auto;
 	}
 
 	&__input {
@@ -180,6 +208,19 @@
 
 		&--cross {
 			cursor: pointer;
+
+			transform: translate(0, -50%);
+			position: absolute;
+			left: 22px;
+			top: 52%;
+		
+			@include for-size(big-phone-screen) {
+				left: unset;
+				top: unset;
+
+				transform: translate(0, 0);
+				right: 60px;
+			}
 		}
 
 		&--chevron {
@@ -190,7 +231,6 @@
 			height: 100%;
 			width: 12px;
 
-			// margin-right: 14px;
 			margin: 0;
 			padding: 0;
 

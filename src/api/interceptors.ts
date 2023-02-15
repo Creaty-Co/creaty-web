@@ -19,7 +19,8 @@ export function endpointTransform(action: Action) {
   const protocol = process.env.NODE_ENV === "development" ? "http" : "https"
   */
   const url = new URL(API_URL)
-  const protocol = url.protocol + "//"
+  const protocol = "https://"
+  // const protocol = url.protocol + "//"
 
   const actionEndpoint = action.endpoint[0] === "/" ? action.endpoint.slice(1) : action.endpoint
   const endpoint = `${protocol}${url.host}/${actionEndpoint}/`

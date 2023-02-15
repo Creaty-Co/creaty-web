@@ -6,8 +6,7 @@ import { MouseEvent } from "react"
 import { DefaultRootState, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { selectIsMobile } from "redux/reducers/device"
-import { bem, classMerge, classWithModifiers } from "utils/common"
-
+import { bem, classMerge } from "utils/common"
 
 type MentorSearchListItemState = "normal" | "selected"
 type MentorSearchListItemType = "regular" | "view-all" | "short"
@@ -17,7 +16,10 @@ interface MentorSearchListItemProps {
   
   state?: MentorSearchListItemState
   type?: MentorSearchListItemType
-  
+
+  dataAttrs?: Record<string,string>
+  dataAttrsIcon?: Record<string,string>
+
   className?: string
 }
 
@@ -29,15 +31,16 @@ function MentorSearchListItem({
   
   state = "normal",
   type = "regular",
+
+  dataAttrsIcon,
+  dataAttrs,
   
   className
 }: MentorSearchListItemProps) {
-
   const isMobile = useSelector<DefaultRootState, boolean | null>(state => selectIsMobile(state.device))
 
   const handleLinkClick = (event: MouseEvent) => {
     // if (type !== "view-all" && isMobile) event.preventDefault()
-    event.preventDefault()
   }
 
   return (
@@ -50,16 +53,13 @@ function MentorSearchListItem({
         className
       )}
 
-      data-topic-id={topic.id}
-      data-is-topic-add
-
-      onClick={handleLinkClick}
+      {...dataAttrs}
     >
       {/* Topic's icon and title */}
       {type !== "view-all" && 
         <>
-          <Icon href={topic.icon} />
-          <span data-topic-id={topic.id}>{topic.title}</span>
+          <Icon {...dataAttrs} href={topic.icon} />
+          <span {...dataAttrs} >{topic.title}</span>
         </>
       }
 
@@ -70,21 +70,20 @@ function MentorSearchListItem({
 
       {/* In search */}
       {type === "regular" &&
-        <SwitchIcons state={state} id={topic.id} /> 
+        <SwitchIcons dataAttrsIcon={dataAttrsIcon} state={state} id={topic.id} /> 
       }
     </Link>
   )
 }
 
-const SwitchIcons = ({ state, id }: { state: MentorSearchListItemState, id: number }) => (
-  <div className={getElement("wrapper")}>
+const SwitchIcons = ({ state, id, dataAttrsIcon }: { state: MentorSearchListItemState, id: number, dataAttrsIcon?: Record<string,string> }) => (
+  <div className={getElement("wrapper")} {...dataAttrsIcon}>
     <Icon name="chevron"
       className={getModifier(getElement("icon"),
         state === "selected" && "hidden"
       )}
 
-      data-is-topic-add
-      data-topic-id={id}
+      {...dataAttrsIcon}
     />
 
     <Icon name="close"
@@ -92,8 +91,7 @@ const SwitchIcons = ({ state, id }: { state: MentorSearchListItemState, id: numb
         state === "normal" && "hidden"
       )}
 
-      data-is-topic-remove
-      data-topic-id={id}
+      {...dataAttrsIcon}
     />
   </div>
 )

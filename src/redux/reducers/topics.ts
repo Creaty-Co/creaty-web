@@ -5,6 +5,7 @@ import { MapActions } from "interfaces/reducer"
 import { TagType, TopicType } from "interfaces/types"
 import { Dispatch } from "redux"
 
+/*
 const mokaTags = [
   {
     id: 1,
@@ -60,13 +61,14 @@ const mokaTopics = [
     ]
   }
 ]
+*/
 
 const initialState: {
   list: TopicType[]
   tags: TagType[]
 } = {
-  list: mokaTopics,
-  tags: mokaTags
+  list: [],
+  tags: []
 }
 
 interface Actions {
@@ -104,5 +106,5 @@ export async function topicsFetch(dispatch: Dispatch) {
   if (error) return
   if (!payload) return
 
-  // dispatch(topicsUpdate({ list: payload.results, tags: payload.results.flatMap(topic => topic.tags) }))
+  dispatch(topicsUpdate({ list: payload.results, tags: payload.results.flatMap(topic => topic.tags) }))
 }

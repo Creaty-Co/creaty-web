@@ -14,7 +14,7 @@ import { StrictMode, Suspense, useEffect, useRef, useState } from "react"
 import { ClientContextProvider, useQuery } from "react-fetching-library"
 import ReactGA from "react-ga4"
 import { I18nextProvider, useTranslation } from "react-i18next"
-import { DefaultRootState, Provider, useSelector } from "react-redux"
+import { DefaultRootState, Provider, useDispatch,useSelector } from "react-redux"
 import { Route, Routes } from "react-router"
 import { useLocation } from "react-router"
 import { BrowserRouter } from "react-router-dom"
@@ -23,6 +23,7 @@ import { ToastContainer } from "react-toastify"
 import store from "redux/store"
 import { classWithModifiers } from "utils/common"
 
+import { updateSearch } from "../redux/reducers/search"
 import AppInit from "./AppInit"
 import AdminEditableValue from "./components/admin/AdminEditableValue"
 import AdminTopbar from "./components/admin/AdminTopbar"
@@ -46,6 +47,8 @@ import MentorsViewTopicOrTag from "./views/mentors/MentorsView[topicOrTag]"
 import UserUserId from "./views/user/User[userId]"
 
 function App() {
+  if (process.env.NODE_ENV === "development") console.clear()
+  
   return (
     <StrictMode>
       <BrowserRouter>
@@ -91,10 +94,16 @@ function Header() {
   const [expanded, setExpanded] = useState(false)
   const location = useLocation()
 
+  const dispatch = useDispatch()
+  const handleClick = () => {
+    dispatch(updateSearch({ topic: undefined, tag: undefined, focused: false }))
+  }
+
   useEffect(() => ReactGA.send({
     hitType: "pageview",
     view: location.pathname + location.search + location.hash
   }), [location])
+  
   return (
     <header>
       <AdminTopbar />
@@ -103,7 +112,7 @@ function Header() {
         <div aria-label="Home">
           <img src="/static/images/logo.svg" alt="logo" className="topbar__logo" />
           <img src="/static/icons/logo.svg" alt="logo" className="topbar__logo topbar__logo--mobile" />
-          <Link className="ghost" to="/" />
+          <Link className="ghost" to="/" onClick={handleClick} />
         </div>
         <Icon className="topbar__trigger" name={expanded ? "cross" : "menu"} onClick={() => setExpanded(!expanded)} />
         <div className={classWithModifiers("topbar__right", expanded && "expanded")}>

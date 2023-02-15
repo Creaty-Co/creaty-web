@@ -3,212 +3,235 @@ import "./MentorSearchList.scss"
 import Icon from "app/components/common/Icon/Icon"
 import LoaderCover from "app/components/UI/Loader/LoaderCover"
 import TopicTag from "app/components/UI/Tag/TopicTag"
-import { functionsIn } from "lodash"
-import { /* MouseEvent, */ ReactNode,useState } from "react"
+import { ReactNode } from "react"
 import { useTranslation } from "react-i18next"
-import { DefaultRootState, /*useDispatch,*/ useSelector } from "react-redux"
-import { Link } from "react-router-dom"
-// import { Link } from "react-router-dom"
-// import { selectIsMobile } from "redux/reducers/device"
-// import { updateSearch } from "redux/reducers/search"
-import { bem, classMerge, classWithModifiers } from "utils/common"
+import { DefaultRootState, useSelector } from "react-redux"
+import { selectIsMobile } from "redux/reducers/device"
+import { bem, toDataAttrs } from "utils/common"
 
 import MentorSearchListItem from "./MentorSearchListItem"
 
+/* BEM */ 
 const CN = "mentor-search-list"
 const { getElement, getModifier } = bem(CN)
 
 interface MentorSearchListProps {
+  searchState: DefaultRootState["search"]
+  topics: DefaultRootState["topics"]
+
   value: string | null
-  visible: boolean
+
+  pureSearch: boolean
 }
 
-function MentorSearchList(props: MentorSearchListProps) {
+function MentorSearchList({
+  searchState,
+  pureSearch,
+  topics,
+  value
+}: MentorSearchListProps) {
   const { t } = useTranslation("translation", { keyPrefix: "views.home.mentorSearch" })
+  const isMobile = useSelector<DefaultRootState, boolean | null>(state => selectIsMobile(state.device))
 
-  const topics = useSelector<DefaultRootState, DefaultRootState["topics"]>(state => state.topics)
-  const search = useSelector<DefaultRootState, DefaultRootState["search"]>(state => state.search)
+  /*
+  const onPointerLeave = () => console.log("topic:leave")
+  const onPointerEnter = () => console.log("topic:enter")
+  */
 
-  const [cursorTopic, setCursorTopic] = useState(search.topic)
-  const topic = cursorTopic || search.topic
+  const categories = value === null || value.length === 0
+    ? topics.list
+    : topics.list.filter(t => t.title.toLocaleLowerCase().search(value.toLocaleLowerCase()) !== -1)
+  /* console.log("categories", categories) */
 
+  const tags = value === null || value.length === 0
+    ? searchState.topic?.tags || topics.tags
+    : topics.tags.filter(t => t.title.toLocaleLowerCase().search(value.toLocaleLowerCase()) !== -1)
+  /* console.log("tags", tags) */
+
+
+  // console.log("NOUNT")
   return (
     <div
-      className={getModifier(CN, search.focused && "visible")}
-      onPointerLeave={() => setCursorTopic(search.topic)}
-      onPointerEnter={() => console.log("topic:enter")}
+      className={getModifier(CN,
+        searchState.focused && "visible",
+        (searchState.topic || searchState.tag) && "selected"
+      )}
     >
+      {/* Selected only in Mobil*/}
+      {isMobile && (searchState.topic || searchState.tag) && 
+          <div className={getElement("selected")}>
+            {/* if selected a topic */}
+            {searchState.topic &&
+              <MentorSearchListItem 
+                topic={searchState.topic}
+                state="selected"
+                
+                className={getElement("item")} 
 
-      {/* Topics */}
-      <div className={getElement("container")}>
-        {/* Selected */}
-        {search.topic && <div className={getElement("selected")}>
-          <MentorSearchListItem className={getElement("item")} state="selected" topic={search.topic} />
-          <MentorSearchListItem type="view-all" className={getElement("item")} topic={search.topic} />
-        </div>}
-        {/* All */}
-        {!search.topic && topics.list.map(topic => <MentorSearchListItem key={topic.id} {...{topic}}/>)}
+                dataAttrsIcon={toDataAttrs({
+                  "selector": "topic",
+                  "action": "remove",
+                  "id": searchState.topic.id.toString()
+                })}
+              />
+            }
+
+            {/* if selected a tag */}
+            {searchState.tag &&
+              <TopicTag key={searchState.tag.id}
+                dataAttrs={toDataAttrs({
+                  "selector": "tag",
+                  "action": "remove",
+                  "id": searchState.tag.id.toString()
+                })}
+              >
+                {searchState.tag}
+              </TopicTag>
+            }
+
+            {/* if selected a topic but not a tag */}
+            {searchState.topic && !searchState.tag &&
+              <MentorSearchListItem
+                topic={searchState.topic}
+                type="view-all"
+
+                className={getElement("item")}
+              />
+            }
+          </div>
+      }
+
+      {/* Separator */}
+      <div className={getModifier(getElement("separator"), "only-for-mobile")}></div>
+
+      {/* Empty search results for all. Only mobile */}
+      {isMobile && value !== null && value.length > 0 && 
+          categories.length === 0 && tags.length === 0 &&          
+            <div className={getModifier(getElement("search-result"), "all")}>NO ONE SEARCH RESULTS</div>
+      }
+
+      {/* Categories */}
+      {(!isMobile || 
+        !searchState.topic || 
+        (searchState.topic && pureSearch)
+      ) && <div className={getElement("categories")}>
+        {/* Selected categories only on desktop */}
+        {!isMobile && searchState.topic && 
+          <>
+            <MentorSearchListItem 
+              topic={searchState.topic}
+              state="selected"
+            
+              className={getElement("item")} 
+
+              dataAttrsIcon={toDataAttrs({
+                "selector": "topic",
+                "action": "remove",
+                "id": searchState.topic.id.toString()
+              })}
+            />
+
+            <MentorSearchListItem
+              topic={searchState.topic}
+              type="view-all"
+
+              className={getElement("item")}
+            />
+
+            <div className={getElement("separator")}></div>
+          </>
+        }
+      
+        {/* Empty search results for categories. Only desktop */}
+        {!isMobile && value !== null && value.length > 0 && 
+          categories.length === 0 &&          
+            <div className={getModifier(getElement("search-result"), "categories")}>No avaliable categories</div>
+        }
+
+        {/* All topics */}
+        {
+          categories.filter(t => t.id !== searchState.topic?.id).map(topic => 
+            <MentorSearchListItem key={topic.id} 
+              {...{topic}}
+
+              dataAttrs={toDataAttrs({
+                "selector": "topic",
+                "action": "add",
+                "id": topic.id.toString()
+              })}
+            />
+          )
+        }
+
         {/* Loader */}
-        {topics.list.length === 0 && <LoaderCover />}
-      </div>
+        {topics.list.length === 0 && 
+          <LoaderCover />
+        }
+      </div> }
 
       {/* Tags */}
-      <div className="mentor-search-list__tags">
-        {topic?.tags.map(tag => <TopicTag key={tag.id}>{tag}</TopicTag>)}
-        {topic == null && <MentorSearchListEmpty>{t("chooseTopic")}</MentorSearchListEmpty>}
+      <div
+        className={getModifier(getElement("tags"),
+          isMobile && 
+          (value === null || value.length === 0) && (
+            (searchState.topic && pureSearch) || 
+            !searchState.topic
+          ) && "hidden"
+        )}
+      >
+        {/* Selected only on desktop */}
+        {!isMobile && searchState.tag && 
+          <>
+            <TopicTag key={searchState.tag.id}
+              dataAttrs={toDataAttrs({
+                "selector": "tag",
+                "action": "remove",
+                "id": searchState.tag.id.toString()
+              })}
+            >
+              {searchState.tag}
+            </TopicTag>
+
+            <div className={getElement("separator")}></div>
+          </>
+        }
+
+        {/* Empty search results for tags. Only desktop */}
+        {!isMobile && value !== null && value.length > 0 && 
+        tags.length === 0 &&          
+          <div className={getModifier(getElement("search-result"), "tags")}>No avaliable categories</div>
+        }
+
+        {/* Tags of topic */}
+        {tags.filter(tag => tag.id !== searchState.tag?.id)
+          .filter(tag => tag.title)
+          .map(tag => 
+            <TopicTag key={tag.id}
+              dataAttrs={toDataAttrs({
+                "selector": "tag",
+                "action": "add",
+                "id": tag.id.toString()
+              })}
+            >
+              {tag}
+            </TopicTag>
+          )}
+
+        {/* Empty tags */}
+        {!searchState.topic && false &&
+          <MentorSearchListIndicatorEmpty>{t("chooseTopic")}</MentorSearchListIndicatorEmpty>
+        }
       </div>
 
     </div>
   )
 }
 
-const MentorSearchListEmpty = ({ children }: { children: ReactNode }) => (
-  <div className="mentor-search-list--empty">
-    <Icon className="mentor-search-list__icon" name="touch" />
-    <span className="mentor-search-list__text">{children}</span>
+const MentorSearchListIndicatorEmpty = ({ children }: { children: ReactNode }) => (
+  <div className={getElement("indicator-empty")}>
+    <Icon className={getElement("icon")} name="touch" />
+    <span className={getElement("text")}>{children}</span>
   </div>
 )
 
 export default MentorSearchList
-/*
-function MentorSearchListAgregation(props: MentorSearchListProps) {
-  if (props.value && props.value.length > 0) {
-    return <MentorSearchListDynamic {...props} value={props.value} />
-  }
-  return <MentorSearchListStatic />
-}
-
-function MentorSearchListStatic() {
-  const dispatch = useDispatch()
-
-  const { t } = useTranslation("translation", { keyPrefix: "views.home.mentorSearch" })
-
-  const isMobile = useSelector<DefaultRootState, boolean | null>(state => selectIsMobile(state.device))
-  const topics = useSelector<DefaultRootState, DefaultRootState["topics"]>(state => state.topics)
-  const search = useSelector<DefaultRootState, DefaultRootState["search"]>(state => state.search)
-  
-  function collapseSearchList(event: MouseEvent) {
-    event.preventDefault()
-    event.stopPropagation()
-    dispatch(updateSearch({ focused: false }))
-  }
-
-  const handleLinkClick = (event: MouseEvent) => {
-    console.log("handleLinkClick")
-    if (isMobile) event.preventDefault()
-  }
-
-  const [cursorTopic, setCursorTopic] = useState(search.topic)
-  const topic = cursorTopic || search.topic
-  const topicSelected = !!search.topic
-
-  return (
-    <div
-      className={classWithModifiers("mentor-search-list", search.focused && "visible")} 
-      onPointerLeave={() => setCursorTopic(search.topic)}
-    >
-
-      <div className="mentor-search-list__container">
-        {topicSelected && <div className="mentor-search-list__selected">
-          
-        </div>}
-
-        {topics.list.map(topic => (
-          <Link key={topic.id}
-            className={classWithModifiers(
-              "mentor-search-list__item", 
-              !search.tag && topic.id === search.topic?.id && "active"
-            )}
-
-            to={"/mentors/" + topic.shortcut}
-
-            onPointerEnter={() => setCursorTopic(topic)}
-            onClick={handleLinkClick}
-          >
-            <Icon href={topic.icon} />
-            <span>{topic.title}</span>
-
-            <div className="mentor-search-list__icon-item">
-              <Icon name="chevron" />
-            </div>
-          </Link>
-        ))}
-
-        {topics.list.length === 0 && (
-          <LoaderCover />
-        )}
-      </div>
-
-      <div className="mentor-search-list__tags">
-        {topic?.tags.map(tag => (
-          <TopicTag onClick={collapseSearchList} key={tag.id}>{tag}</TopicTag>
-        ))}
-        
-        {topic == null && (
-          <div className="mentor-search-list_empty">
-            <Icon className="mentor-search-list__icon" name="touch" />
-            <span className="mentor-search-list__text">{t("chooseTopic")}</span>
-          </div>
-        )}
-      </div>
-
-    </div>
-  )
-}
-
-function MentorSearchListDynamic(props: MentorSearchListProps & { value: string }) {
-  const dispatch = useDispatch()
-
-  function collapseSearchList(event: MouseEvent) {
-    // stop propagation of `MentorSearch Blur` callback
-    event.stopPropagation()
-
-    dispatch(updateSearch({ focused: false }))
-  }
-
-  const topics = useSelector<DefaultRootState, DefaultRootState["topics"]>(state => state.topics)
-
-  const searchLowerCaseValue = props.value.toLowerCase()
-  const findSearchValueEntry = (value: string) => value.toLowerCase().search(searchLowerCaseValue)
-
-  const SearchTagEntries = topics.tags
-    .map(tag => ({ tag, index: findSearchValueEntry(tag.title) }))
-    .filter(occur => occur.index >= 0)
-  const SearchTopicEntries = topics.list
-    .map(topic => ({ topic, index: findSearchValueEntry(topic.title) }))
-    .filter(entry => entry.index >= 0)
-
-  return (
-    <div className={classWithModifiers("mentor-search-list", props.visible && "visible")}>
-      <div className="mentor-search-list__container">
-
-        {SearchTopicEntries.map(entry => (
-          <Link className="mentor-search-list__item" to={"/mentors/" + entry.topic.shortcut} onClick={collapseSearchList} key={entry.topic.id}>
-            <span>
-              {entry.topic.title.slice(0, entry.index)}
-              <em>{entry.topic.title.slice(entry.index, entry.index + props.value.length)}</em>
-              {entry.topic.title.slice(entry.index + props.value.length)}
-            </span>
-          </Link>
-        ))}
-
-        {SearchTagEntries.map(entry => (
-          <Link className="mentor-search-list__item" to={"/mentors/" + entry.tag.shortcut} onClick={collapseSearchList} key={entry.tag.id}>
-            <span>
-              {entry.tag.title.slice(0, entry.index)}
-              <em>{entry.tag.title.slice(entry.index, entry.index + props.value.length)}</em>
-              {entry.tag.title.slice(entry.index + props.value.length)}
-            </span>
-          </Link>
-        ))}
-
-        {SearchTagEntries.length === 0 && (
-          <div className="mentor-search-list__item">По вашему запросу ничего не найдено.</div>
-        )}
-
-      </div>
-    </div>
-  )
-}
-*/
-

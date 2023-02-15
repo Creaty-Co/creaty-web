@@ -30,7 +30,6 @@ import HelpfulCreaty from "./HelpfulCreaty/HelpfulCreaty"
 import HowItWorks from "./HowItWorks/HowItWorks"
 import MailingSubscribe from "./MailingSubscribe/MailingSubscribe"
 
-
 function HomeView() {
   useScrollToTop()
   
@@ -43,12 +42,6 @@ function HomeView() {
     : getPagesMain)
   
   useEffect(() => { query() }, [i18n.language])
-  useEffect(() => {
-    dispatch(updateSearch({
-      tag: undefined,
-      topic: undefined
-    }))
-  }, [])
 
   return (
     <div className="home-view">

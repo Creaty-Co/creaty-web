@@ -5,6 +5,7 @@ function useClickAway(ref: MutableRefObject<HTMLElement | null | undefined>, cal
     function listener(event: MouseEvent) {
       if (!(event.target instanceof Element)) return
       if (!ref.current) return
+      if (event.target.tagName === "use") return
       if (ref.current.contains(event.target)) return
         
       callback()
