@@ -18,6 +18,7 @@ interface ButtonProps extends ButtonBaseProps {
 
 function Button(props: ButtonProps) {
   const [pending, setPending] = useState(false)
+  
   async function onClick(event: MouseEvent<HTMLButtonElement>) {
     if (props.await) {
       setPending(true)

@@ -49,6 +49,12 @@
 .subscribe__input {
 	width: 100%;
 	color: $color-white;
+	
+	all: unset;
+
+	position: relative;
+	cursor: initial;
+	outline: initial;
 
 	@include Text2Regular;
 

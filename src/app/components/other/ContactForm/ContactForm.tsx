@@ -86,6 +86,7 @@ function ContactForm(props: ContactFormProps) {
       }
     })
   }
+  
   return (
     <form className="contact-form" onSubmit={onSubmit}>
       {form == null && (

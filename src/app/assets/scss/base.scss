@@ -1,5 +1,9 @@
 @import "bundle";
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
 	position: relative;
 	box-sizing: border-box;
@@ -28,6 +32,7 @@ h5 {
 	white-space: pre-line;
 }
 
+/*
 h1 {
 	font-size: 1.5rem;
 	font-weight: 700;
@@ -48,13 +53,16 @@ h5 {
 	font-size: 1rem;
 	font-weight: 600;
 }
+*/
 
 /* Text */
+/*
 p {
 	line-height: 1.25;
 	white-space: pre-line;
 	margin: unset;
 }
+*/
 
 em {
 	font-style: unset;
@@ -75,9 +83,9 @@ a {
 
 /* UX */
 
-input,
-button,
-textarea {
+input.cc-base,
+button.cc-base,
+textarea.cc-base {
 	all: unset;
 
 	position: relative;
@@ -89,11 +97,13 @@ button {
 	cursor: pointer;
 }
 
+/*
 textarea {
 	white-space: pre-wrap;
 	line-height: 1.25;
 	overflow-wrap: break-word;
 }
+*/
 
 ul {
 	display: grid;

@@ -1,6 +1,8 @@
 @import "~app/assets/scss/bundle.scss";
 
-.button {
+.button { 
+	$class: &;
+
 	overflow: hidden;
 	text-align: center;
 	box-sizing: border-box;
@@ -119,14 +121,20 @@
 
 
 	&--little {
-		border-radius: 1em;
+		border-radius: 20px;
+		padding: 12px 16px;
+
+
+		#{$class}__text {
+			@include Text2Regular;
+		}
 	}
 
 	&--small {
 		padding: 12px 20px;
 		border-radius: 20px;
 
-		.button__text {
+		#{$class}__text {
 			@include Text2Regular;
 		}
 	}

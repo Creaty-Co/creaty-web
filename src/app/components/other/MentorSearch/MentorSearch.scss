@@ -184,6 +184,12 @@
 	&__input {
 		@include Text2Regular;
 		top: 2px;
+		
+		all: unset;
+
+		position: relative;
+		cursor: initial;
+		outline: initial;
 
 		flex: 1;
 		color: $color-gray-100;

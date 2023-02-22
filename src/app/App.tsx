@@ -10,29 +10,24 @@ import { PageLinkType } from "interfaces/types"
 import { UserType } from "interfaces/user"
 import { ModalContainer } from "modules/modal/container"
 import { Modal } from "modules/modal/controller"
-import { StrictMode, Suspense, useEffect, useRef, useState } from "react"
+import { StrictMode, Suspense, useRef, useState } from "react"
 import { ClientContextProvider, useQuery } from "react-fetching-library"
-import ReactGA from "react-ga4"
 import { I18nextProvider, useTranslation } from "react-i18next"
-import { DefaultRootState, Provider, useDispatch,useSelector } from "react-redux"
+import { DefaultRootState, Provider,useSelector } from "react-redux"
 import { Route, Routes } from "react-router"
-import { useLocation } from "react-router"
 import { BrowserRouter } from "react-router-dom"
 import { Link } from "react-router-dom"
 import { ToastContainer } from "react-toastify"
 import store from "redux/store"
 import { classWithModifiers } from "utils/common"
 
-import { updateSearch } from "../redux/reducers/search"
 import AppInit from "./AppInit"
 import AdminEditableValue from "./components/admin/AdminEditableValue"
-import AdminTopbar from "./components/admin/AdminTopbar"
 import Button from "./components/common/Button/Button"
-import ButtonLink from "./components/common/Button/ButtonLink"
-import Icon from "./components/common/Icon/Icon"
 import PopupForm from "./components/popups/PopupForm"
 import ErrorBoundary from "./components/services/ErrorBoundary"
 import OuterLink from "./components/services/OuterLink"
+import Header from "./components/UI/Header/Header"
 import AdminFormsView from "./views/admin/AdminFormsView/AdminFormsView"
 import AdminMailings from "./views/admin/AdminMailings/AdminMailings"
 import AdminMentorsView from "./views/admin/AdminMentorsView/AdminMentorsView"
@@ -89,7 +84,7 @@ function AdminJSONEditorContainer() {
   )
 }
 
-function Header() {
+/* function Header() {
   const { t } = useTranslation("translation", { keyPrefix: "header" })
   const [expanded, setExpanded] = useState(false)
   const location = useLocation()
@@ -121,12 +116,11 @@ function Header() {
             <Button size="small" onClick={() => Modal.open(PopupForm, { type: "become_mentor", weak: true })}>{t("menu.becomeMentor")}</Button>
           </div>
           <Button outline size="small" color="green" onClick={() => Modal.open(PopupForm, { type: "choose_mentor", weak: true })}>{t("findMentor")}</Button>
-          {/* <LangSelector /> */}
         </div>
       </div>
     </header>
   )
-}
+} */
 
 function Main() {
   useDirectLogin()

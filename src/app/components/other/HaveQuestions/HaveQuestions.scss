@@ -22,48 +22,51 @@
 
 		border-radius: 60px;
 	}
-}
+	
+	&__info {
+		display: grid;
 
-.have-questions__info {
-	display: grid;
-
-	@include row-gap(24px);
-	@include for-size(big-phone-screen) {
-		@include row-gap(16px);
-	}
-}
-
-.have-questions__title {
-	@include H2Bold;
-	@include for-size(big-phone-screen) {
-		@include H2Bold(32px);
-	}
-	color: $color-black-main;
-	word-break: break-word;
-}
-
-.have-questions__desc {
-	color: $color-gray-80;
-
-	@include H4Regular;
-	em { 
-		white-space: normal;
-		@include H4Medium; 
-		display: block;
-	}
-
-	@include for-size(big-phone-screen) {
-		@include H4Regular(16px);
-		em { @include H4Medium(16px) }
-	}
-}
-
-.have-questions__form {
-	@include for-size(big-phone-screen) {
-		.input-masks {
-			.drop-down {
-				left: 0;
-			}
+		@include row-gap(24px);
+		@include for-size(big-phone-screen) {
+			@include row-gap(16px);
 		}
-	}	
+	}
+
+	&__title {
+		@include H2Bold;
+		@include for-size(big-phone-screen) {
+			@include H2Bold(32px);
+		}
+		color: $color-black-main;
+		word-break: break-word;
+	}
+
+	&__desc {
+		color: $color-gray-80;
+
+		@include H4Regular;
+		em { 
+			white-space: normal;
+			@include H4Medium; 
+			display: block;
+		}
+
+		@include for-size(big-phone-screen) {
+			@include H4Regular(16px);
+			em { @include H4Medium(16px) }
+		}
+	}
+
+	&__container {
+		&--form {
+			@include for-size(big-phone-screen) {
+				.input-masks {
+					.drop-down {
+						left: 0;
+					}
+				}
+			}	
+		}
+	}
+	
 }

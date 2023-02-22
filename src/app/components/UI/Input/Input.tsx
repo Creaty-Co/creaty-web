@@ -4,7 +4,7 @@ import Icon from "app/components/common/Icon/Icon"
 import useClickAway from "hooks/useClickAway"
 import _ from "lodash"
 import { ChangeEvent, DetailedHTMLProps, Dispatch, InputHTMLAttributes, useRef, useState } from "react"
-import { classMerge, classWithModifiers } from "utils/common"
+import { bem, classMerge, classWithModifiers } from "utils/common"
 
 import DropDown from "../DropDown/DropDown"
 
@@ -13,6 +13,9 @@ export interface InputStrainType<V> {
   title: string
   value: V
 }
+
+const CN = "input"
+const { getElement, getModifier } = bem(CN)
 
 interface InputProps<V> extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
   masks?: InputStrainType<V>[]
@@ -23,23 +26,32 @@ interface InputProps<V> extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputE
 
 function Input<V>(props: InputProps<V>) {
   const [currentMask, setCurrentMask] = useState(props.masks?.[0])
+
   function onChange(event: ChangeEvent<HTMLInputElement>) {
     props.onChange?.(event, currentMask)
   }
+
   function onMaskSelect(mask: InputStrainType<V>) {
     props.onMaskSelect?.(mask)
     setCurrentMask(mask)
   }
+
   return (
-    <label className={classMerge("input", props.className)}>
-      <input {..._.omit(props, "masks", "onMaskSelect", "masksName")} className="input__input" placeholder={props.placeholder + ((props.required && !props.masks?.length) ? "*" : "")} onChange={onChange} />
-      {props.masks && (
+    <label className={classMerge(CN, props.className)}>
+      <input
+        {..._.omit(props, "masks", "onMaskSelect", "masksName")}
+        className={getElement("input")} 
+        placeholder={props.placeholder + ((props.required && !props.masks?.length) ? "*" : "")}
+
+        onChange={onChange}
+      />
+
+      {props.masks &&
         <InputMasks masks={props.masks} masksName={props.masksName} onSelect={onMaskSelect} />
-      )}
+      }
     </label>
   )
 }
-
 
 interface InputMasksProps<V> {
   masks: InputStrainType<V>[]
