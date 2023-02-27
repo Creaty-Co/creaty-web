@@ -1,6 +1,6 @@
 import { ReactNode } from "react"
 
-type ButtonSize = "little" | "small" | "big"
+type ButtonSize = "little" | "small" | "big" | "biggest"
 type ButtonColor = "dark" | "white" | "green" | "violet"
 
 export interface ButtonBaseProps {

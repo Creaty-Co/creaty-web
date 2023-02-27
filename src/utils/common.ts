@@ -240,3 +240,9 @@ export function targetGetAttr(target: HTMLElement, attrName: string): string | n
   
   return value
 }
+
+export function twPseudo(pseudo: string, ...args: (string|false)[]): string {
+  pseudo = pseudo.replace(":", "") + ":"
+
+  return args.filter(Boolean).map(arg => pseudo + arg).join(" ")
+}

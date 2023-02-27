@@ -1,1 +1,12 @@
-.formus {}
+@import "~app/assets/scss/bundle.scss";
+
+.formus {
+  &__agreement {
+    letter-spacing: 0.02em;
+    @include Tags;
+
+    & > em {
+      @include TagsBold;
+    }
+  }
+}

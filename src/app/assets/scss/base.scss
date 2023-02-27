@@ -5,8 +5,8 @@
 @tailwind utilities;
 
 * {
-	position: relative;
 	box-sizing: border-box;
+	position: relative;
 	
 	// remove all default margins and paddings
 	padding: 0;
@@ -17,12 +17,13 @@ body {
 	font: 16px/1 "Google Sans", Arial, sans-serif;
 	color: $color-white;
 
-	margin: unset;
 	background: $color-black-main;
+	margin: 0;
 }
 
 /* Headings */
 
+/*
 h1,
 h2,
 h3,
@@ -31,6 +32,7 @@ h5 {
 	margin: unset;
 	white-space: pre-line;
 }
+*/
 
 /*
 h1 {

@@ -113,6 +113,7 @@ $font_size_small-phone-screen: math.round(math.div($font_size_middle-phone-scree
     @include FontDecoration($weight, $style);
 }
 @mixin TagsRegular($size: 14px, $height: null) { @include Tags($size, $height, 400) }
+@mixin TagsBold($size: 14px, $height: null) { @include Tags($size, $height, 700) }
 
 // Caption
 @mixin Caption($size: 12px, $height: null, $weight: 400, $style: normal) {

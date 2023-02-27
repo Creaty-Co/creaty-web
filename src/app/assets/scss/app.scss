@@ -1,7 +1,7 @@
 @import "bundle";
 
 /* Typography */
-
+/*
 h1.heading {
 	@include Typography(4.5rem, 700);
 
@@ -29,11 +29,12 @@ h3.heading {
 p.paragraph {
 	@include Typography(1.125rem, 400, $color-gray-text);
 }
+*/
 
 /* ---- */
 
 .icon {
-	$size: var(--icon-size, 1em);
+	$size: var(--icon-size, 16px);
 
 	display: inline-block;
 	width: $size;

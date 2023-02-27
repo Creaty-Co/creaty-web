@@ -1,3 +1,9 @@
+@import "~app/assets/scss/bundle.scss";
+
 .field {
+  @include Text2;
   
+  &__label, &__input {
+    @include Text2; 
+  }
 }
