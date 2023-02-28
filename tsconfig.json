@@ -1,5 +1,73 @@
 {
   "compilerOptions": {
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "paths": {
+      "@interfaces/*": ["./src/interfaces/*"],
+      "@interfaces": ["./src/interfaces"],
+
+      "@modules/*": ["./src/modules/*"],
+      "@modules": ["./src/modules"],
+
+      "@redux/*": ["./src/redux/*"],
+      "@redux": ["./src/redux"],
+
+      "@utils/*": ["src/_utils/*"],
+      "@utils": ["src/_utils"],
+
+      "@store/*": ["./src/store/*"],
+      "@store": ["./src/store"],
+
+      "@hooks/*": ["./src/hooks/*"],
+      "@hooks": ["./src/hooks"],
+
+      "@i18n/*": ["./src/i18n/*"],
+      "@i18n": ["./src/i18n"],
+
+      "@app/*": ["./src/app/*"],
+      "@app": ["./src/app"],
+
+      "@api/*": ["./src/api/*"],
+      "@api": ["./src/api"],
+
+      "@src/*": ["./src/*"],
+      "@src": ["./src"],
+
+      /* FSD structure */
+      "@shared/*": ["./src/shared/*"],
+      "@shared": ["./src/shared"],
+      
+      "@pages/*": ["./src/pages/*"],
+      "@pages": ["./src/pages"],
+      
+      "@features/*": ["./src/features/*"],
+      "@features": ["./src/features"],
+    },
+    "baseUrl": "."
+  },
+  "include": [
+    "src",
+    "scripts",
+    "@types"
+  ]
+}
+
+/*
+{
+  "compilerOptions": {
     "target": "es5",
     "lib": [
       "dom",
@@ -38,3 +106,4 @@
     "@types"
   ]
 }
+*/

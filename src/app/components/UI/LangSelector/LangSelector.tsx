@@ -7,7 +7,7 @@ import { useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { classWithModifiers } from "utils/common"
 
-import Button from "../../common/Button/Button"
+import Button from "../../../../shared/ui/button/Button"
 import Icon from "../../common/Icon/Icon"
 import DropDown, { DropDownOption } from "../DropDown/DropDown"
 

@@ -1,10 +1,7 @@
 import "./assets/scss/base.scss"
 import "./assets/scss/app.scss"
 
-import { Router } from "@pages"
-import { Layout } from "@shared"
-/*
-import { classWithModifiers } from "@utils/common"
+import { classWithModifiers } from "@src/_utils/common"
 import { getPagesLinksDocuments } from "api/actions/pages"
 import ClientAPI from "api/client"
 import useDirectLogin from "hooks/useDirectLogin"
@@ -19,32 +16,30 @@ import { ClientContextProvider, useQuery } from "react-fetching-library"
 import { I18nextProvider, useTranslation } from "react-i18next"
 import { DefaultRootState, Provider,useSelector } from "react-redux"
 import { Route, Routes } from "react-router"
-
+import { BrowserRouter } from "react-router-dom"
 import { Link } from "react-router-dom"
 import { ToastContainer } from "react-toastify"
 import store from "redux/store"
 
+import Button from "../shared/ui/button/button"
+import AdminFormsView from "./_views/admin/AdminFormsView/AdminFormsView"
+import AdminMailings from "./_views/admin/AdminMailings/AdminMailings"
+import AdminMentorsView from "./_views/admin/AdminMentorsView/AdminMentorsView"
+import AdminEditMentorView from "./_views/admin/AdminMentorView/AdminEditMentorView"
+import AdminNewMentorView from "./_views/admin/AdminMentorView/AdminNewMentorView"
+import AdminTagsView from "./_views/admin/AdminTopicsView/AdminTagsView"
+import AdminTopicsView from "./_views/admin/AdminTopicsView/AdminTopicsView"
+import ErrorView from "./_views/error/ErrorView"
+import HomeView from "./_views/home/HomeView"
+import MentorsView from "./_views/mentors/MentorsView"
+import MentorsViewTopicOrTag from "./_views/mentors/MentorsView[topicOrTag]"
+import UserUserId from "./_views/user/User[userId]"
 import AppInit from "./AppInit"
-import AdminEditableValue from "./components/admin/AdminEditableValue"
-import Button from "./components/common/Button/Button"
-import PopupForm from "./components/popups/PopupForm"
-import ErrorBoundary from "./components/services/ErrorBoundary"
-import OuterLink from "./components/services/OuterLink"
+import AdminEditableValue from "./components/_admin/AdminEditableValue"
+import PopupForm from "./components/_popups/PopupForm"
+import ErrorBoundary from "./components/_services/ErrorBoundary"
+import OuterLink from "./components/_services/OuterLink"
 import Header from "./components/UI/Header/Header"
-import AdminFormsView from "./views/admin/AdminFormsView/AdminFormsView"
-import AdminMailings from "./views/admin/AdminMailings/AdminMailings"
-import AdminMentorsView from "./views/admin/AdminMentorsView/AdminMentorsView"
-import AdminEditMentorView from "./views/admin/AdminMentorView/AdminEditMentorView"
-import AdminNewMentorView from "./views/admin/AdminMentorView/AdminNewMentorView"
-import AdminTagsView from "./views/admin/AdminTopicsView/AdminTagsView"
-import AdminTopicsView from "./views/admin/AdminTopicsView/AdminTopicsView"
-import ErrorView from "./views/error/ErrorView"
-import HomeView from "./views/home/HomeView"
-import MentorsView from "./views/mentors/MentorsView"
-import MentorsViewTopicOrTag from "./views/mentors/MentorsView[topicOrTag]"
-import UserUserId from "./views/user/User[userId]"
-*/
-import { BrowserRouter } from "react-router-dom"
 
 function App() {
   if (process.env.NODE_ENV === "development") console.clear()
@@ -54,20 +49,20 @@ function App() {
       <BrowserRouter>
         <Provider store={store}>
           <I18nextProvider defaultNS="translation" i18n={i18next}>
-            <Suspense fallback="">
-              <ErrorBoundary fallback="Error">
-                <AppInit />
-
-                <Layout>
-                  <Router />
-                </Layout>
-
-                <Cookies />
-                <ModalContainer />
-                <ToastContainer />
-
-              </ErrorBoundary>
-            </Suspense>
+            <ClientContextProvider client={ClientAPI}>
+              <Suspense fallback="">
+                <ErrorBoundary fallback="Error">
+                  <AppInit />
+                  <Header />
+                  <Main />
+                  <Footer />
+                  <Cookies />
+                  <ModalContainer />
+                  <ToastContainer />
+                  <AdminJSONEditorContainer />
+                </ErrorBoundary>
+              </Suspense>
+            </ClientContextProvider>
           </I18nextProvider>
         </Provider>
       </BrowserRouter>
@@ -75,11 +70,35 @@ function App() {
   )
 }
 
+function AdminJSONEditorContainer() {
+  const user = useSelector<DefaultRootState, DefaultRootState["user"]>(state => state.user)
+  const admin = useSelector<DefaultRootState, DefaultRootState["admin"]>(state => state.admin)
+
+  if (!user.auth) return null
+  if (user.type < UserType.admin) return null
+
+  if (!admin.editing) return null
+
+  return (
+    <ReactJSONEditorContainer i18n={i18next} />
+  )
+}
+
 function Main() {
   useDirectLogin()
   return (
     <main>
-
+      <Routes>
+        <Route path="/">
+          <Route index element={<HomeView />} />
+          <Route path=":shortcut" element={<HomeView />} />
+          <Route path="mentors" element={<MentorsView />} />
+          <Route path="mentors/:topicOrTag" element={<MentorsViewTopicOrTag />} />
+          <Route path="user/:slug" element={<UserUserId />} />
+          {/* <Route path="admin/*" element={<AdminViews />} /> */}
+        </Route>
+        <Route path="/*" element={<ErrorView />} />
+      </Routes>
     </main>
   )
 }

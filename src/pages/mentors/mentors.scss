@@ -1,0 +1,50 @@
+@import "~app/assets/scss/bundle.scss";
+
+.mentors-view {
+	@include WidthLimit;
+	margin-top: 120px;
+
+	display: grid;
+	@include row-gap(160px);
+
+	@include for-size(big-phone-screen) {
+		margin-top: 22vw;
+		@include row-gap(80px);
+	}
+
+}
+
+.mentors-view__header {
+	display: grid;
+	@include row-gap(24px);
+	@include for-size(big-phone-screen) {
+		@include row-gap(16px);
+	}
+}
+
+.mentors-view__title {
+  @include H1Bold();
+  @include for-size(big-phone-screen) {
+    @include H1Bold(40px, 40px);
+  }
+
+	span.weak {
+		color: $color-gray-50;
+	}
+}
+
+.mentors-view__desc {
+	color: $color-gray-50;
+	@include TextRegular();
+	white-space: normal;
+
+	em {
+		@include TextMedium();
+		color: white;
+	}
+}
+
+.mentors-view__container {
+	display: grid;
+	@include row-gap(40px);
+}

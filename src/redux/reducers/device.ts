@@ -1,7 +1,7 @@
 import { ValuesOf } from "interfaces/common"
 import { MapActions } from "interfaces/reducer"
 
-import { getBrowser, getOrientation, getOS, getTouch } from "../../utils/devise"
+import { getBrowser, getOrientation, getOS, getTouch } from "../../_utils/devise"
 
 const initialState: {
   orientation: string | null 

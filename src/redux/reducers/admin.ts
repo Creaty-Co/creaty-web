@@ -1,7 +1,6 @@
 import { ValuesOf } from "interfaces/common"
 import { MapActions } from "interfaces/reducer"
 
-
 interface InitialStateType {
   editing: boolean
 }
