@@ -6,7 +6,7 @@ import { Children, FormEvent, ReactElement, useRef, useState } from "react"
 import { DefaultRootState, useSelector } from "react-redux"
 import { classWithModifiers } from "utils/common"
 
-import Button from "../../../shared/ui/button/Button"
+import Button from "../../../shared/ui/button/button"
 
 
 const acceptedAPIActions = {

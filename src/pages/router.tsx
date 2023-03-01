@@ -1,17 +1,15 @@
 import { Route, Routes } from "react-router"
 
-const Router = () => (
+export const Router = () => (
   <Routes>
     <Route path="/">
-      <Route index element={<HomeView />} />
-      <Route path=":shortcut" element={<HomeView />} />
-      <Route path="mentors" element={<MentorsView />} />
-      <Route path="mentors/:topicOrTag" element={<MentorsViewTopicOrTag />} />
+      <Route index element={<Home />} />
+      <Route path=":shortcut" element={<Home />} />
+      <Route path="mentors" element={<Mentors />} />
+      <Route path="mentors/:topicOrTag" element={<MentorsTopicOrTag />} />
       <Route path="user/:slug" element={<UserUserId />} />
-      {/* <Route path="admin/*" element={<AdminViews />} /> */}
+      {/* <Route path="admin/*" element={<Admins />} /> */}
     </Route>
-    <Route path="/*" element={<ErrorView />} />
+    <Route path="/*" element={<Error />} />
   </Routes>
 )
-
-export default Router

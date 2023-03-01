@@ -55,6 +55,12 @@
       
       "@features/*": ["./src/features/*"],
       "@features": ["./src/features"],
+      
+      "@entiies/*": ["./src/entiies/*"],
+      "@entiies": ["./src/entiies"],
+      
+      "@widgets/*": ["./src/widgets/*"],
+      "@widgets": ["./src/widgets"],
     },
     "baseUrl": "."
   },

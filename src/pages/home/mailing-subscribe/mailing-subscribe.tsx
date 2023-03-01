@@ -2,7 +2,7 @@ import "./mailing-subscribe.scss"
 
 import { useTranslation } from "react-i18next"
 
-import Subscribe from "../Subscribe/Subscribe"
+import Subscribe from "../subscribe/Subscribe"
 
 
 function MailingSubscribe() {

@@ -5,7 +5,7 @@ import { DefaultRootState, useDispatch, useSelector } from "react-redux"
 import { updateAdminEditing } from "redux/reducers/admin"
 import { updateUser } from "redux/reducers/user"
 
-import Button from "../../../shared/ui/button/Button"
+import Button from "../../../shared/ui/button/button"
 import ButtonLink from "../../../shared/ui/button/ButtonLink"
 
 
