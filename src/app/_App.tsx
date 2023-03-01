@@ -22,6 +22,11 @@ import { ToastContainer } from "react-toastify"
 import store from "redux/store"
 
 import Button from "../shared/ui/button/button"
+import AdminEditableValue from "./_components/_admin/AdminEditableValue"
+import PopupForm from "./_components/_popups/PopupForm"
+import ErrorBoundary from "./_components/_services/ErrorBoundary"
+import OuterLink from "./_components/_services/OuterLink"
+import Header from "./_components/_UI/Header/Header"
 import AdminFormsView from "./_views/admin/AdminFormsView/AdminFormsView"
 import AdminMailings from "./_views/admin/AdminMailings/AdminMailings"
 import AdminMentorsView from "./_views/admin/AdminMentorsView/AdminMentorsView"
@@ -35,11 +40,6 @@ import MentorsView from "./_views/mentors/MentorsView"
 import MentorsViewTopicOrTag from "./_views/mentors/MentorsView[topicOrTag]"
 import UserUserId from "./_views/user/User[userId]"
 import AppInit from "./AppInit"
-import AdminEditableValue from "./components/_admin/AdminEditableValue"
-import PopupForm from "./components/_popups/PopupForm"
-import ErrorBoundary from "./components/_services/ErrorBoundary"
-import OuterLink from "./components/_services/OuterLink"
-import Header from "./components/UI/Header/Header"
 
 function App() {
   if (process.env.NODE_ENV === "development") console.clear()

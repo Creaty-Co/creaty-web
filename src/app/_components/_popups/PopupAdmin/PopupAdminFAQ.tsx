@@ -6,7 +6,7 @@ import { useModal } from "modules/modal/hook"
 import { FormEvent } from "react"
 
 import Button from "../../../../shared/ui/button/button"
-import Input from "../../UI/Input/Input"
+import Input from "../../_UI/Input/Input"
 import PopupLayout from "../PopupLayout"
 
 

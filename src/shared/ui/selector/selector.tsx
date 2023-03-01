@@ -2,7 +2,7 @@ import "./Selector.scss"
 
 import { Children, ComponentProps, Dispatch, ReactElement, useState } from "react"
 
-import DropDown from "../drop-down/DropDown"
+import DropDown from "../drop-down/drop-down"
 
 
 interface SelectorProps<V> {

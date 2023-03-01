@@ -7,7 +7,7 @@ import { useClient } from "react-fetching-library"
 import { toast } from "react-toastify"
 
 import Button from "../../../../shared/ui/button/button"
-import Input from "../../UI/Input/Input"
+import Input from "../../_UI/Input/Input"
 import PopupLayout from "../PopupLayout"
 
 enum FormInputs {
