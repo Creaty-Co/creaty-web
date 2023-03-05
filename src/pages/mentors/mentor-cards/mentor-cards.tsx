@@ -1,5 +1,6 @@
 import "./mentor-cards.scss"
 
+import { bem, classMerge,classWithModifiers } from "@shared/utils"
 import { getMentors } from "api/actions/mentors"
 import Button from "app/components/common/Button/Button"
 import Icon from "app/components/common/Icon/Icon"
@@ -9,14 +10,16 @@ import { MentorType, TagType, TopicType } from "interfaces/types"
 import { useEffect, useState } from "react"
 import { useQuery } from "react-fetching-library"
 import { useTranslation } from "react-i18next"
-import { classWithModifiers } from "utils/common"
 
-interface MentorCardsContainerProps {
+export interface IMentorCards {
   topic?: TopicType
   tag?: TagType
 }
 
-function MentorCardsContainer(props: MentorCardsContainerProps) {
+const CN = "mentor-cards"
+const { getElement, getModifier } = bem(CN)
+
+export function MentorCards(props: IMentorCards) {
   const { t, i18n } = useTranslation("translation", { keyPrefix: "other.pagination" })
   const tagSet = props.tag ? [props.tag.id] : props.topic?.tags.map(tag => tag.id) || []
 
@@ -65,6 +68,3 @@ function MentorCardsContainer(props: MentorCardsContainerProps) {
     </div>
   )
 }
-
-
-export default MentorCardsContainer

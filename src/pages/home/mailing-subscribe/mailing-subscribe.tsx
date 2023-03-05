@@ -1,11 +1,10 @@
 import "./mailing-subscribe.scss"
 
+import { Subscribe } from "@shared/ui"
 import { useTranslation } from "react-i18next"
 
-import Subscribe from "../subscribe/Subscribe"
 
-
-function MailingSubscribe() {
+export function MailingSubscribe() {
   const { t } = useTranslation("translation", { keyPrefix: "views.home.mailingSubscribe" })
   return (
     <div className="mailing-subscribe">
@@ -17,6 +16,3 @@ function MailingSubscribe() {
     </div>
   )
 }
-
-
-export default MailingSubscribe

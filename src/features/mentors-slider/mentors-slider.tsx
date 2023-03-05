@@ -1,24 +1,23 @@
 import "./mentors-slider.scss"
 
-import Button from "app/components/common/Button/Button"
-import ButtonIcon from "app/components/common/Button/ButtonIcon"
-import ButtonLink from "app/components/common/Button/ButtonLink"
-import PopupForm from "app/components/popups/PopupForm"
-import MentorCard from "app/components/UI/MentorCard/MentorCard"
-import { MentorType } from "interfaces/types"
-import { Modal } from "modules/modal/controller"
+import { useAppDispatch } from "@app/store"
+import { MentorCard, MentorType } from "@entities"
+import { PopupForm } from "@features"
+import { open } from "@shared/layout/modal"
+import { Button, ButtonIcon, ButtonLink } from "@shared/ui"
 import { useEffect, useRef } from "react"
 import { useTranslation } from "react-i18next"
 
-
-interface MentorsSliderProps {
+interface IMentorsSlider {
   mentors: MentorType[]
 }
 
-function MentorsSlider(props: MentorsSliderProps) {
+export function MentorsSlider(props: IMentorsSlider) {
   const { t } = useTranslation("translation", { keyPrefix: "components.mentorsSlider" })
+  const dispatch = useAppDispatch()
 
   const innerRef = useRef<HTMLDivElement>(null)
+  
   function prev() {
     slideBy(-1)
   }
@@ -66,11 +65,13 @@ function MentorsSlider(props: MentorsSliderProps) {
       <div className="mentors-slider__help">
         <ButtonLink size="big" color="white" to="/mentors">{t("seeAllMentors")}</ButtonLink>
         <span>{t("or")}</span>
-        <Button size="big" outline onClick={() => Modal.open(PopupForm, { type: "choose_mentor", weak: true })}>{t("getHelp")}</Button>
+        <Button 
+          size="big" outline 
+          onClick={() => dispatch(open(<PopupForm type="choose_mentor" />))}
+        >
+          {t("getHelp")}
+        </Button>
       </div>
     </div>
   )
 }
-
-
-export default MentorsSlider

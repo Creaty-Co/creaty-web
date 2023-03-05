@@ -1,18 +1,17 @@
 import "./mentor-search-list-item.scss"
 
-import Icon from "app/components/common/Icon/Icon"
-import { TopicType } from "interfaces/types"
-import { MouseEvent } from "react"
-import { DefaultRootState, useSelector } from "react-redux"
+import { CategoryType } from "@entities"
+// import { selectIsMobile } from "@entities/device"
+import { Icon } from "@shared/ui"
+import { bem } from "@shared/utils"
+import cn from "classnames"
 import { Link } from "react-router-dom"
-import { selectIsMobile } from "redux/reducers/device"
-import { bem, classMerge } from "utils/common"
 
 type MentorSearchListItemState = "normal" | "selected"
 type MentorSearchListItemType = "regular" | "view-all" | "short"
 
-interface MentorSearchListItemProps {
-  topic: TopicType
+interface IMentorSearchListItem {
+  topic: CategoryType
   
   state?: MentorSearchListItemState
   type?: MentorSearchListItemType
@@ -26,7 +25,7 @@ interface MentorSearchListItemProps {
 const CN = "mentor-search-list-item"
 const { getElement, getModifier } = bem(CN)
 
-function MentorSearchListItem({ 
+export function MentorSearchListItem({ 
   topic,
   
   state = "normal",
@@ -36,17 +35,17 @@ function MentorSearchListItem({
   dataAttrs,
   
   className
-}: MentorSearchListItemProps) {
+}: IMentorSearchListItem) {
   
   /*
   const isMobile = useSelector<DefaultRootState, boolean | null>(state => selectIsMobile(state.device))
-  const handleLinkClick = (event: MouseEvent) => {
+  const handleLinkClick = (event: React.MouseEvent) => {
     if (type !== "view-all" && isMobile) event.preventDefault()
   }
   */
   return (
     <Link to={"/mentors/" + topic.shortcut}
-      className={classMerge(
+      className={cn(
         getModifier(CN, 
           "state", `state--${state}`, 
           "type", `type--${type}`
@@ -71,13 +70,27 @@ function MentorSearchListItem({
 
       {/* In search */}
       {type === "regular" &&
-        <SwitchIcons dataAttrsIcon={dataAttrsIcon} state={state} id={topic.id} /> 
+        <SwitchIcons 
+          dataAttrsIcon={dataAttrsIcon} 
+          state={state} 
+          id={topic.id} 
+        /> 
       }
     </Link>
   )
 }
 
-const SwitchIcons = ({ state, id, dataAttrsIcon }: { state: MentorSearchListItemState, id: number, dataAttrsIcon?: Record<string,string> }) => (
+interface ISwitchIcons {
+  dataAttrsIcon?: Record<string,string> 
+  state: MentorSearchListItemState
+  id: number
+}
+
+const SwitchIcons = ({
+  dataAttrsIcon,
+  state, 
+  id,
+}: ISwitchIcons) => (
   <div className={getElement("wrapper")} {...dataAttrsIcon}>
     <Icon name="chevron"
       className={getModifier(getElement("icon"),
@@ -96,5 +109,3 @@ const SwitchIcons = ({ state, id, dataAttrsIcon }: { state: MentorSearchListItem
     />
   </div>
 )
-
-export default MentorSearchListItem

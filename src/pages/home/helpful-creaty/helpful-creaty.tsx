@@ -1,49 +1,98 @@
 import "./helpful-creaty.scss"
 
-import Button from "app/components/common/Button/Button"
-import PopupForm from "app/components/popups/PopupForm"
-import { Modal } from "modules/modal/controller"
+import { useAppDispatch } from "@app/store"
+import { PopupForm } from "@features"
+import { open } from "@shared/layout/modal"
+import { Button } from "@shared/ui"
+import { bem } from "@shared/utils"
+import cn from "classnames"
 import { ReactNode } from "react"
 import { useTranslation } from "react-i18next"
 
-function HelpfulCreaty() {
+const CN = "helpful-creaty"
+const { getElement } = bem(CN)
+
+export function HelpfulCreaty() {
   const { t } = useTranslation("translation", { keyPrefix: "components.helpfulCreaty" })
+  const dispatch = useAppDispatch()
+
   return (
     <div className="helpful-creaty">
-      <div className="helpful-creaty__group">
-        <div className="helpful-creaty__title heading">{t("title")}</div>
-        <HelpfulCreatyBlock title={t("blocks.1.title")} desc={t("blocks.1.desc")} flag="yellow" />
-        <HelpfulCreatyBlock title={t("blocks.2.title")} desc={t("blocks.2.desc")} flag="purple" />
+      <div className={getElement("group")}>
+        <div className={cn(getElement("title"), "heading")}>
+          {t("title")}
+        </div>
+
+        <HelpfulCreatyBlock 
+          title={t("blocks.1.title")} 
+          desc={t("blocks.1.desc")} 
+          flag="yellow"
+        />
+
+        <HelpfulCreatyBlock 
+          title={t("blocks.2.title")} 
+          desc={t("blocks.2.desc")}
+          flag="purple" 
+        />
       </div>
 
-      <div className="helpful-creaty__group">
-        <HelpfulCreatyBlock title={t("blocks.3.title")} desc={t("blocks.3.desc")} flag="orange" />
-        <HelpfulCreatyBlock title={t("blocks.4.title")} desc={t("blocks.4.desc")} flag="blue" />
-        <Button className="helpful-creaty__button" outline color="green" onClick={() => Modal.open(PopupForm, { type: "choose_mentor", weak: true })}>{t("button")}</Button>
+      <div className={getElement("group")}>
+        <HelpfulCreatyBlock 
+          title={t("blocks.3.title")} 
+          desc={t("blocks.3.desc")} 
+          flag="orange" 
+        />
+
+        <HelpfulCreatyBlock 
+          title={t("blocks.4.title")} 
+          desc={t("blocks.4.desc")} 
+          flag="blue" 
+        />
+
+        <Button 
+          className={getElement("button")} 
+          outline color="green" 
+          
+          onClick={() => dispatch(open(<PopupForm type="choose_mentor" />))}
+        >
+          {t("button")}
+        </Button>
       </div>
     </div>
   )
 }
 
-interface HelpfulCreatyBlockProps {
+/* Block */
+export interface IHelpfulCreatyBlock {
   title: ReactNode
   desc: ReactNode
 
   flag: "yellow" | "orange" | "blue" | "purple"
 }
 
-function HelpfulCreatyBlock(props: HelpfulCreatyBlockProps) {
+const CNBlock = CN + "-block"
+const { getElement: getElementBlock } = bem(CNBlock)
+
+export function HelpfulCreatyBlock(props: IHelpfulCreatyBlock) {
   return (
-    <div className="helpful-creaty-block" >
-      <div className="helpful-creaty-block__header">
-        <div className="helpful-creaty-block__title">{props.title}</div>
-        <div className="helpful-creaty-block__circle">
-          <img src={`/static/icons/flags/flag-${props.flag}.svg`} alt={props.flag + " flag"} className="helpful-creaty-block__flag" />
+    <div className={CNBlock} >
+      <div className={getElementBlock("header")}>
+        <div className={getElementBlock("title")}>
+          {props.title}
+        </div>
+
+        <div className={getElementBlock("circle")}>
+          <img
+            src={`/static/icons/flags/flag-${props.flag}.svg`} 
+            alt={props.flag + " flag"} 
+            className={getElementBlock("flag")} 
+          />
         </div>
       </div>
-      <div className="helpful-creaty-block__content">{props.desc}</div>
+
+      <div className={getElementBlock("content")}>
+        {props.desc}
+      </div>
     </div>
   )
 }
-
-export default HelpfulCreaty

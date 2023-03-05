@@ -1,15 +1,10 @@
-import "./Loader.scss"
+import "./loader.scss"
 
-import { classMerge } from "utils/common"
+import { classMerge } from "@shared/utils"
 
-interface LoaderProps {
+export interface ILoader {
   className?: string
 }
 
-function Loader(props: LoaderProps) {
-  return (
-    <div className={classMerge("loader", props.className)} />
-  )
-}
-
-export default Loader
+const CN = "loader"
+export const Loader = (props: ILoader) => <div className={classMerge(CN, props.className)} />

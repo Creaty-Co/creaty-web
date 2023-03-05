@@ -1,19 +1,17 @@
 import "./mentor-search.scss"
 
-import ButtonLink from "app/components/common/Button/ButtonLink"
-import Icon from "app/components/common/Icon/Icon"
-import TopicTag from "app/components/UI/Tag/TopicTag"
-import { TopicType } from "interfaces/types"
-import { MouseEvent as SMouseEvent, useCallback,useEffect, useLayoutEffect, useRef, useState } from "react"
+import { useAppDispatch, useAppSelector } from "@app/store"
+import { CategoryType, selectTopics, Tag } from "@entities"
+import { selectIsMobile } from "@entities/device"
+import { ISearchState, selectSearch, updateSearch } from "@features"
+import { ButtonLink, Icon } from "@shared/ui"
+import { bem, targetGetAttr, toDataAttrs, togglerTransformAction } from "@shared/utils"
+import { MouseEvent as SMouseEvent, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { DefaultRootState, useDispatch, useSelector } from "react-redux"
 import { NavLink, useNavigate } from "react-router-dom"
-import { selectIsMobile } from "redux/reducers/device"
-import { updateSearch } from "redux/reducers/search"
-import { bem, targetGetAttr, toDataAttrs, togglerTransformAction } from "utils/common"
 
-import MentorSearchList from "./mentor-search-list"
-import MentorSearchListItem from "./mentor-search-list-item"
+import { MentorSearchList } from "./mentor-search-list"
+import { MentorSearchListItem } from "./mentor-search-list-item"
 
 /* Selectors type */ 
 const SELECTORS = ["topic", "tag"] as const
@@ -25,19 +23,19 @@ const isSelector = (selector: string): selector is Selectors => SELECTORS.includ
 const CN = "mentor-search"
 const { getElement, getModifier } = bem(CN)
 
-function MentorSearch() {  
+export function MentorSearch() {  
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const dispatch = useDispatch()
 
   const { t } = useTranslation("translation", { keyPrefix: "views.home.mentorSearch" })
 
   /* Get data from store */ 
-  const searchStore = useSelector<DefaultRootState, DefaultRootState["search"]>(state => state.search)
-  const isMoblie = useSelector<DefaultRootState, boolean | null>(state => selectIsMobile(state.device)) 
-  const topics = useSelector<DefaultRootState, DefaultRootState["topics"]>(state => state.topics)
+  const searchStore = useAppSelector(selectSearch)
+  const isMoblie = useAppSelector(selectIsMobile) 
+  const topics = useAppSelector(selectTopics)
   
   /* Local search state */ 
-  const [searchState, setSearchState] = useState<DefaultRootState["search"]>({ ...searchStore })
+  const [searchState, setSearchState] = useState<ISearchState>({ ...searchStore })
   useEffect(() => setSearchState({...searchStore}), [searchStore.topic, searchStore.tag])
 
   /* Compare state and store */
@@ -131,11 +129,11 @@ function MentorSearch() {
 
               {/* Selected tags in search area */}
               {!searchState.focused && searchState.tag &&
-                <TopicTag
+                <Tag
                   dataAttrs={toDataAttrs({
                     "action": "input/focus" 
                   })}
-                >{searchState.tag}</TopicTag>
+                >{searchState.tag}</Tag>
               }
             </div>
           }
@@ -229,7 +227,7 @@ function MentorSearch() {
       */
       if (
         name === "topic" && to && searchState.tag && 
-        !(value as TopicType).tags.find(tag => tag.id === searchState.tag?.id)
+        !(value as CategoryType).tags.find(tag => tag.id === searchState.tag?.id)
       ) duoSearch.tag = undefined
 
       if (

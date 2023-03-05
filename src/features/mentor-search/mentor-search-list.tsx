@@ -1,42 +1,35 @@
 import "./mentor-search-list.scss"
 
-import Icon from "app/components/common/Icon/Icon"
-import LoaderCover from "app/components/UI/Loader/LoaderCover"
-import TopicTag from "app/components/UI/Tag/TopicTag"
-import { ReactNode } from "react"
+import { RootState, useAppSelector } from "@app/store"
+import { Tag } from "@entities"
+import { selectIsMobile } from "@entities/device"
+import { Icon, LoaderCover } from "@shared/ui"
+import { bem, toDataAttrs } from "@shared/utils"
 import { useTranslation } from "react-i18next"
-import { DefaultRootState, useSelector } from "react-redux"
-import { selectIsMobile } from "redux/reducers/device"
-import { bem, toDataAttrs } from "utils/common"
 
-import MentorSearchListItem from "./MentorSearchListItem"
+import { MentorSearchListItem } from "./mentor-search-list-item"
 
 /* BEM */ 
 const CN = "mentor-search-list"
 const { getElement, getModifier } = bem(CN)
 
 interface MentorSearchListProps {
-  searchState: DefaultRootState["search"]
-  topics: DefaultRootState["topics"]
+  searchState: RootState["search"]
+  topics: RootState["topics"]
 
   value: string | null
 
   pureSearch: boolean
 }
 
-function MentorSearchList({
+export function MentorSearchList({
   searchState,
   pureSearch,
   topics,
   value
 }: MentorSearchListProps) {
+  const isMobile = useAppSelector(selectIsMobile)
   const { t } = useTranslation("translation", { keyPrefix: "views.home.mentorSearch" })
-  const isMobile = useSelector<DefaultRootState, boolean | null>(state => selectIsMobile(state.device))
-
-  /*
-  const onPointerLeave = () => console.log("topic:leave")
-  const onPointerEnter = () => console.log("topic:enter")
-  */
 
   const categories = value === null || value.length === 0
     ? topics.list
@@ -78,7 +71,7 @@ function MentorSearchList({
 
             {/* if selected a tag */}
             {searchState.tag &&
-              <TopicTag key={searchState.tag.id}
+              <Tag key={searchState.tag.id}
                 dataAttrs={toDataAttrs({
                   "selector": "tag",
                   "action": "remove",
@@ -86,7 +79,7 @@ function MentorSearchList({
                 })}
               >
                 {searchState.tag}
-              </TopicTag>
+              </Tag>
             }
 
             {/* if selected a topic but not a tag */}
@@ -182,7 +175,7 @@ function MentorSearchList({
         {/* Selected only on desktop */}
         {!isMobile && searchState.tag && 
           <>
-            <TopicTag key={searchState.tag.id}
+            <Tag key={searchState.tag.id}
               dataAttrs={toDataAttrs({
                 "selector": "tag",
                 "action": "remove",
@@ -190,7 +183,7 @@ function MentorSearchList({
               })}
             >
               {searchState.tag}
-            </TopicTag>
+            </Tag>
 
             <div className={getElement("separator")}></div>
           </>
@@ -206,7 +199,7 @@ function MentorSearchList({
         {tags.filter(tag => tag.id !== searchState.tag?.id)
           .filter(tag => tag.title)
           .map(tag => 
-            <TopicTag key={tag.id}
+            <Tag key={tag.id}
               dataAttrs={toDataAttrs({
                 "selector": "tag",
                 "action": "add",
@@ -214,7 +207,7 @@ function MentorSearchList({
               })}
             >
               {tag}
-            </TopicTag>
+            </Tag>
           )}
 
         {/* Empty tags */}
@@ -227,11 +220,9 @@ function MentorSearchList({
   )
 }
 
-const MentorSearchListIndicatorEmpty = ({ children }: { children: ReactNode }) => (
+const MentorSearchListIndicatorEmpty = ({ children }: { children: React.ReactNode }) => (
   <div className={getElement("indicator-empty")}>
     <Icon className={getElement("icon")} name="touch" />
     <span className={getElement("text")}>{children}</span>
   </div>
 )
-
-export default MentorSearchList

@@ -1,24 +1,33 @@
-import { FormType } from "interfaces/types"
-import { useState } from "react"
-import { useTranslation } from "react-i18next"
 
-import ContactForm from "../../../features/contact-form/ContactForm"
-import PopupLayout from "./PopupLayout"
+import { ContactFormTypes } from "@features/contact-form"
 
+import {
+  IPopupFormTestMeeting,
+  PopupFormTestMeeting
+} from "./ui"
 
-interface PopupFormProps {
-  type: Exclude<FormType["type"], "still_questions">
+export interface IPopupForm {
+  type: ContactFormTypes
+  className?: string
 }
 
-function PopupForm(props: PopupFormProps) {
-  const { t } = useTranslation("translation", { keyPrefix: "other" })
-  const { t: tPopup } = useTranslation("translation", { keyPrefix: "popups.popupForm" })
-  const [submitted, setSubmitted] = useState(false)
-  return (
-    <PopupLayout title={submitted ? tPopup("thanks") : t(`forms.${props.type}.title`)} width="35em">
-      <ContactForm submitText={t(`forms.${props.type}.submitText`)} type={props.type} onSubmit={() => setSubmitted(true)} />
-    </PopupLayout>
-  )
+export type IPopupFormComponent = IPopupFormTestMeeting
+// export type IPopupFormComponent = IPopupFormBecomeMentor | IPopupFormChooseMentor | IPopupFormSignupMentor | IPopupFormStillQuestions | IPopupFormTestMeeting
+export interface IPopupFormFactory extends Record<ContactFormTypes, React.FC<IPopupFormComponent>> {}
+
+export const PopupFormFactory: IPopupFormFactory = {
+  "still_questions": PopupFormTestMeeting,
+  "become_mentor": PopupFormTestMeeting,
+  "choose_mentor": PopupFormTestMeeting,
+  "signup_mentor": PopupFormTestMeeting,
+  "test_meeting": PopupFormTestMeeting,
+  
 }
 
-export default PopupForm
+export function PopupForm({
+  className,
+  type
+}: IPopupForm) {
+  const Component = PopupFormFactory[type]
+  return <Component className={className} />
+}

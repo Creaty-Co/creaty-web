@@ -1,25 +1,29 @@
 import "./dynamic-primary-info.scss"
 
+import { useAppSelector } from "@app/store"
+import { selectTopics } from "@entities/category"
+import { bem } from "@shared/utils"
+import cn from "classnames"
 import { useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { DefaultRootState, useSelector } from "react-redux"
-
 
 const ENTER_INTERVAL = 100
 const CYCLE_INTERVAL = 5000
 const PERSONAL_PAGE_TIMEOUT = 12000
 
-interface DynamicPrimaryInfoProps {
+interface IDynamicPrimaryInfo {
   firstHeadingShortcut?: string
 }
 
-function DynamicPrimaryInfo(props: DynamicPrimaryInfoProps) {
-  const topics = useSelector<DefaultRootState, DefaultRootState["topics"]>(state => state.topics)
+const CN = "dynamic-primary-info"
+const { getElement } = bem(CN)
+
+export function DynamicPrimaryInfo(props: IDynamicPrimaryInfo) {
+  const topics = useAppSelector(selectTopics)
   const { t } = useTranslation("translation", { keyPrefix: "views.home.primaryInfo" })
 
   const rejectRef = useRef<Function>()
   const [dynamicHeading, setDynamicHeading] = useState("...")
-
 
   async function delay(ms: number) {
     return new Promise<void>((resolve, reject) => {
@@ -27,23 +31,27 @@ function DynamicPrimaryInfo(props: DynamicPrimaryInfoProps) {
       setTimeout(resolve, ms)
     })
   }
+
   async function eraseHeading(heading: string) {
     for (let i = 0; i <= heading.length; i++) {
       await delay(ENTER_INTERVAL)
       setDynamicHeading(heading.slice(0, heading.length - i))
     }
   }
+
   async function writeHeading(heading: string) {
     for (let i = 0; i <= heading.length; i++) {
       await delay(ENTER_INTERVAL)
       setDynamicHeading(heading.slice(0, i))
     }
   }
+
   async function writeEraseHeading(heading: string) {
     await writeHeading(heading)
     await delay(CYCLE_INTERVAL)
     await eraseHeading(heading)
   }
+
   async function runHeadingCycle() {
     // eslint-disable-next-line no-constant-condition
     while (true) {
@@ -75,16 +83,17 @@ function DynamicPrimaryInfo(props: DynamicPrimaryInfoProps) {
     })
     return () => rejectRef.current?.("DynamicPrimaryInfo was unmounted or updated")
   }, [props.firstHeadingShortcut, topics])
+
   return (
-    <div className="dynamic-primary-info">
-      <div className="dynamic-primary-info__title heading">
+    <div className={CN}>
+      <div className={cn(getElement("title"), "heading")}>
         <em>{dynamicHeading}</em>
         <span>{t("title")}</span>
       </div>
-      <div className="dynamic-primary-info__desc">{t("desc")}</div>
+
+      <div className={getElement("desc")}>
+        {t("desc")}
+      </div>
     </div>
   )
 }
-
-
-export default DynamicPrimaryInfo

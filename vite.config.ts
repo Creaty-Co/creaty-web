@@ -13,18 +13,9 @@ export default defineConfig(({ mode }) => {
     plugins: [envCompatible({ prefix: ENV_PREFIX }), react(), eslint()],
     resolve: {
       alias: {
-        "@interfaces": path.resolve(__dirname, "./src/interfaces"),
-        "@modules": path.resolve(__dirname, "./src/modules"),
-        "@redux": path.resolve(__dirname, "./src/redux"),
-        "@utils": path.resolve(__dirname, "./src/utils"),
-        "@store": path.resolve(__dirname, "./src/store"),
-        "@hooks": path.resolve(__dirname, "./src/hooks"),
-        "@i18n": path.resolve(__dirname, "./src/i18n"),
-        "@app": path.resolve(__dirname, "./src/app"),
-        "@api": path.resolve(__dirname, "./src/api"),
-        "@src": path.resolve(__dirname, "./src"),
-
         /* FSD structure */
+        "@app": path.resolve(__dirname, "./src/app"),
+        "@i18n": path.resolve(__dirname, "./src/i18n"),
         "@entities": path.resolve(__dirname, "./src/entities"),
         "@features": path.resolve(__dirname, "./src/features"),
         "@widgets": path.resolve(__dirname, "./src/widgets"),

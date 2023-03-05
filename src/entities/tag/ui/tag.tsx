@@ -1,15 +1,15 @@
 import "./tag.scss"
 
-import { bem } from "@utils/common"
-import { MouseEventHandler } from "react"
+import { bem } from "@src/_legacy/_utils/common"
+// import { MouseEventHandler } from "react"
 import { NavLink } from "react-router-dom"
 
-import { ITagSearch, ITagString, TagType } from "./../tag.model"
+import { ITagSearch, ITagString /*, TagType*/ } from "../tag.types"
 
 const CN = "topic-tag"
 const { getElement, getModifier } = bem(CN)
 
-function Tag(props: ITagString | ITagSearch) {
+export function Tag(props: ITagString | ITagSearch) {
   if (typeof props.children === "string") {
     return (
       <button type="button" 
@@ -42,5 +42,3 @@ function Tag(props: ITagString | ITagSearch) {
     </NavLink>
   )
 }
-
-export default Tag

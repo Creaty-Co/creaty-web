@@ -1,1 +1,1 @@
-export * from "./mentor-card"
+export * from "./header"

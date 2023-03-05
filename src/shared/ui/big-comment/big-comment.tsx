@@ -1,26 +1,33 @@
 import "./big-comment.scss"
 
-import Icon from "app/components/common/Icon/Icon"
+import { Icon } from "@shared/ui"
+import { bem } from "@shared/utils"
+import cn from "classnames"
 import { ReactNode } from "react"
 
+const CN = "big-comment"
+const { getElement } = bem(CN)
 
-interface BigCommentProps {
+export interface IBigComment {
+  className?: string
   children: ReactNode
 }
 
-const toParagraphs = (text: string) => text.split("\n").map((paragraph, index) => <p key={`paragraph-${index}`}>{paragraph}</p>)
+const toParagraphs = (text: string) => text.split("\n")
+  .map((paragraph, index) => <p key={`paragraph-${index}`}>{paragraph}</p>)
 
-function BigComment(props: BigCommentProps) {
-  const rChildren = typeof props.children === "string"
-    ? toParagraphs(props.children) : props.children
+export function BigComment({
+  className,
+  children
+}: IBigComment) {
+
+  const rChildren = typeof children === "string"
+    ? toParagraphs(children) : children
 
   return (
-    <div className="big-comment">
-      <div className="big-comment__text">{rChildren}</div>
-      <Icon className="big-comment__icon" name="star-union" />
+    <div className={cn(CN, className)}>
+      <div className={getElement("text")}>{rChildren}</div>
+      <Icon className={getElement("icon")} name="star-union" />
     </div>
   )
 }
-
-
-export default BigComment

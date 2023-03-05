@@ -1,26 +1,27 @@
 import "./bullet-point.scss"
 
+import { bem } from "@shared/utils"
 import { ReactNode } from "react-markdown/lib/react-markdown"
 
-interface BulletPointProps {
+const CN = "bullet-point"
+const { getElement } = bem(CN)
+
+export interface IBulletPoint {
   number: string | number
   title: ReactNode
   desc: ReactNode
 }
 
-function BulletPoint(props: BulletPointProps) {
+export function BulletPoint(props: IBulletPoint) {
   return (
-    <div className="bullet-point">
-      <div className="bullet-point__circle">
-        <div className="bullet-point__number">{props.number}</div>
+    <div className={CN}>
+      <div className={getElement("circle")}>
+        <div className={getElement("number")}>{props.number}</div>
       </div>
-      <div className="bullet-point__container">
-        <div className="bullet-point__title">{props.title}</div>
-        <p className="bullet-point__desc">{props.desc}</p>
+      <div className={getElement("container")}>
+        <div className={getElement("title")}>{props.title}</div>
+        <p className={getElement("desc")}>{props.desc}</p>
       </div>
     </div>
   )
 }
-
-
-export default BulletPoint

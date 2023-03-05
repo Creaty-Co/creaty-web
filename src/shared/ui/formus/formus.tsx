@@ -1,19 +1,18 @@
 import "./formus.scss"
 
 import { yupResolver } from "@hookform/resolvers/yup"
-import Button from "app/components/common/Button/Button"
-import Field from "app/components/common/Field/Field"
-import { FormProvider, useForm} from "react-hook-form"
-import { bem, classMerge } from "utils/common"
+import { bem, classMerge } from "@shared/utils"
+import { ReactNode } from "react"
+import { FieldValues, FormProvider, SubmitHandler, useForm } from "react-hook-form"
 import * as yup from "yup"
-
-const schema = yup.object({
-  fullname: yup.string().required(),
-  email: yup.string().email().required(),
-}).required()
 
 export interface IFormus {
   className?: string
+  onSubmit: SubmitHandler<FieldValues>
+  schema?: yup.ObjectSchema<any>
+  
+  elementControl?: ReactNode
+  elementContent: ReactNode
 }
 
 export interface IFormusHaveQuetions {
@@ -25,14 +24,19 @@ const CN = "formus"
 const { getElement } = bem(CN)
 
 export function Formus({
-  className
+  elementControl,
+  elementContent,
+
+  className,
+  onSubmit,
+
+  schema
 }: IFormus) {
-  const methods = useForm<IFormusHaveQuetions>({
+
+  const methods = useForm({
     resolver: yupResolver(schema),
     mode: "onChange"
   })
-
-  const onSubmit = (data: IFormusHaveQuetions) => console.log(data)
 
   return (
     <FormProvider {...methods}>
@@ -48,19 +52,7 @@ export function Formus({
             "grid grid-flow-row grid-cols-1 grid-rows-auto gap-y-3"
           )}
         >
-          <Field 
-            className={getElement("field")}
-          
-            label="Full Name"
-            name="fullname"
-          />
-
-          <Field
-            className={getElement("field")}
-            
-            label="Email address"
-            name="email"
-          />
+          {elementContent}
         </div>
 
         <div 
@@ -68,20 +60,40 @@ export function Formus({
             "grid grid-flow-row grid-cols-1 grid-rows-auto gap-y-4"
           )}
         >
-          <Button size="biggest" color="dark" type="submit">
-            Get Help
-          </Button>
-
-          <div 
-            className={classMerge(getElement("agreement"),
-              "text-gray-800 text-center"
-            )}
-          >
-            By clicking on the Get Help, you agree to Creaty Co. <em>Terms of Use and</em> <em>Privacy Policy</em>
-          </div>
+          {elementControl}
         </div>
       </form>
     </FormProvider>
   )
 }
 
+
+/*
+const onSubmit = (data: IFormusHaveQuetions) => console.log(data)
+*/
+
+/* <Field 
+    className={getElement("field")}
+  
+    label="Full Name"
+    name="fullname"
+  />
+
+  <Field
+    className={getElement("field")}
+    
+    label="Email address"
+    name="email"
+/> */
+
+/* <Button size="biggest" color="dark" type="submit">
+  Get Help
+</Button>
+
+<div 
+  className={classMerge(getElement("agreement"),
+    "text-gray-800 text-center"
+  )}
+>
+  By clicking on the Get Help, you agree to Creaty Co. <em>Terms of Use and</em> <em>Privacy Policy</em>
+</div> */
