@@ -47,7 +47,7 @@ export function FieldInput({
       <div className="relative m-0 border-0">
         <input {...register(name)}
           className={classMerge(getElement("input"),
-            "block w-full px-3 py-3",
+            "block w-full px-3 py-3 bg-gray-50",
             "text-black-900",
             "rounded-xl border-2",
             "focus:ring-0 focus:outline-none",

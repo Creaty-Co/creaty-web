@@ -31,7 +31,7 @@ export function ModalContainer({
         onClick={stopPropagation(() => dispatch(close()))}
       >
         <div className={getElement("inner")}>
-          {elementContent}
+          { elementContent }
         </div>
       </div>
     </div>

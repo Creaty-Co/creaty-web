@@ -1,4 +1,4 @@
-import { createApi } from "@reduxjs/toolkit/query/react"
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 import { ResponseLocaleLanguage } from "@shared/lib/i18n"
 import { PaginationType } from "@shared/types"
 import { getFetchBaseQuery } from "@shared/utils"
@@ -10,6 +10,9 @@ export const pagesApi = createApi({
   reducerPath: "pagesApi",
 
   baseQuery: getFetchBaseQuery("/pages"),
+  // baseQuery: fetchBaseQuery({
+  //   baseUrl: "/"
+  // }),
 
   endpoints: builder => ({
     getPagesMain: builder.query<PageType, void>({

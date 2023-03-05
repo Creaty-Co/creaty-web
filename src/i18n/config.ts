@@ -41,7 +41,6 @@ i18next
         // if (response.error) throw response.errorObject
         // if (response.data == null) throw new Error("response.payload is empty")
 
-        console.log("data", data)
         return data
       },
       /*
