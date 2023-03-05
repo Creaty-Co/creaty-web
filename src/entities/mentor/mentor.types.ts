@@ -6,6 +6,10 @@ export interface MentorPage {
   category: number | null
 }
 
+export interface IMentorState {
+  list: MentorType[]
+} 
+
 export interface MentorType {
   id: number
   slug: string

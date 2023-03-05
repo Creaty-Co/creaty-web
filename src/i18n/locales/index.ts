@@ -1,4 +1,4 @@
-import { ExtractArrayType } from "interfaces/common"
+import { ExtractArrayType } from "@shared/types"
 
 import LocaleResourceSchemaJson from "./schema.json"
 

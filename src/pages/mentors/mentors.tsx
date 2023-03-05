@@ -1,14 +1,13 @@
 import "./mentors.scss"
 
+import { useAppDispatch, useAppSelector } from "@app/store"
+import { selectTopics } from "@entities"
+import { HaveQuestions, MentorSearch, selectSearch, updateSearch } from "@features"
+import { useScrollToTop } from "@shared/hooks"
 import { bem, classMerge } from "@shared/utils"
-import HaveQuestions from "app/components/other/HaveQuestions/HaveQuestions"
-import MentorSearch from "app/components/other/MentorSearch/MentorSearch"
-import useScrollToTop from "hooks/useScrollToTop"
 import { useEffect } from "react"
 import { useTranslation } from "react-i18next"
-import { DefaultRootState, useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router"
-import { updateSearch } from "redux/reducers/search"
 
 import { MentorCards } from "./mentor-cards/mentor-cards"
 
@@ -20,10 +19,10 @@ export function Mentors() {
 
   const { t } = useTranslation("translation", { keyPrefix: "views.mentors" })
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
-  const search = useSelector<DefaultRootState, DefaultRootState["search"]>(state => state.search)
-  const topics = useSelector<DefaultRootState, DefaultRootState["topics"]>(state => state.topics)
+  const search = useAppSelector(selectSearch)
+  const topics = useAppSelector(selectTopics)
   const params = useParams<"topicOrTag">()
       
   useEffect(() => {
@@ -89,7 +88,7 @@ export function Mentors() {
   )
 }
 
-
+/*
 function _Mentors() {
   useScrollToTop()
   const { t } = useTranslation("translation", { keyPrefix: "views.mentors" })
@@ -116,3 +115,4 @@ function _Mentors() {
     </div>
   )
 }
+*/

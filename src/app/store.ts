@@ -1,6 +1,7 @@
 import { categoryApi } from "@entities/category/category.api"
 import categoryReducer from "@entities/category/category.slice"
 import deviceReducer from "@entities/device/device.slice"
+import mentorReducer from "@entities/mentor/mentor.slice"
 import contactFormReducer from "@features/contact-form/contact-from.slice"
 import searchReducer from "@features/search/search.slice"
 import { configureStore } from "@reduxjs/toolkit"
@@ -8,7 +9,6 @@ import { pagesApi } from "@shared/api"
 import modalReducer from "@shared/layout/modal/modal.slice"
 import { subscribeApi } from "@shared/ui/subscribe"
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
-
 
 export const store = configureStore({
   reducer: {
@@ -18,6 +18,7 @@ export const store = configureStore({
     
     contactForm: contactFormReducer,
     topics: categoryReducer,
+    mentor: mentorReducer,
     device: deviceReducer,
     search: searchReducer,
     modal: modalReducer,

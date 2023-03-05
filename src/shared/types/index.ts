@@ -10,7 +10,6 @@ export type FormElements<U extends string> = HTMLFormControlsCollection & Record
 /* https://stackoverflow.com/questions/50158272/what-is-the-type-of-an-enum-in-typescript */
 export type Enum<E> = Record<keyof E, number | string> & { [k: number]: string }
 export type ExtractInterpolations<T extends string> = T extends `${infer _Start}{${infer V}}${infer Rest}` ? V | ExtractInterpolations<Rest> : never
-export type ExtractArrayType<T> = T extends readonly (infer S)[] ? S : never
 
 /* Django */ 
 export type OrderingType<U extends string> = U | `-${U}`
@@ -25,4 +24,8 @@ export interface PaginationType<D> {
 export interface PaginationQueryType {
   page_size: number
   page: number
+
+  tag_set__in?: (number|undefined)[]
 }
+
+export type ExtractArrayType<T> = T extends readonly (infer S)[] ? S : never

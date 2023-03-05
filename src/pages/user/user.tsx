@@ -1,24 +1,16 @@
 import "./user.scss"
-import "app/components/UI/MentorCard/MentorCard.scss"
 
-import { deleteMentorsId, getMentorBySlug } from "api/actions/mentors"
-import { getPagesLinksDocuments } from "api/actions/pages"
-import ClientAPI from "api/client"
-import AdminInterface from "app/components/admin/AdminInterface"
-import Button from "app/components/common/Button/Button"
-import Icon, { IconName } from "app/components/common/Icon/Icon"
-import ContactForm from "app/components/other/ContactForm/ContactForm"
-// import OuterLink from "app/components/services/OuterLink"
-import LoaderCover from "app/components/UI/Loader/LoaderCover"
-import { getEmojiPNG } from "app/components/UI/MentorCard/MentorCard"
-import TopicTag from "app/components/UI/Tag/TopicTag"
-import useScrollToTop from "hooks/useScrollToTop"
-import { PageLinkType } from "interfaces/types"
+import { Tag, useGetMentorBySlugQuery } from "@entities"
+import { ContactForm } from "@features"
+import { useGetPagesLinksDocumentsQuery } from "@shared/api/pages"
+import { PageLinkType } from "@shared/api/pages"
+import { useScrollToTop } from "@shared/hooks"
+import { Button, Icon, IconName, LoaderCover } from "@shared/ui"
+import { getEmojiPNG } from "@shared/utils"
+import { classWithModifiers } from "@shared/utils"
 import { ReactNode, useEffect } from "react"
-import { useQuery } from "react-fetching-library"
 import { useTranslation } from "react-i18next"
 import { useNavigate, useParams } from "react-router"
-import { classWithModifiers } from "utils/common"
 
 function UserUserId() {
   useScrollToTop()
@@ -30,37 +22,39 @@ function UserUserId() {
   const params = useParams<"slug">()
   if (!params.slug) throw new Error("This component should be used in Route context")
 
-  const { error, loading, payload, query } = useQuery(getMentorBySlug(params.slug))
-  const { payload: payload2 } = useQuery(getPagesLinksDocuments)
-  useEffect(() => { query() }, [i18n.language])
+  const { data: user, isLoading } = useGetMentorBySlugQuery(params.slug)
+  const { data: linksDocs } = useGetPagesLinksDocumentsQuery()
+  
+  if (isLoading || !user) return <LoaderCover white />
 
+  /* useEffect(() => { query() }, [i18n.language])
   if (error) return <>useQuery error</>
-  if (loading) return <LoaderCover white />
   if (!payload) return <>no payload</>
+  */
 
-  const links = payload2?.results.reduce<Record<PageLinkType["type"], PageLinkType>>((result, next) => ({ ...result, [next.type]: next }), {} as never)
+  const links = linksDocs?.results.reduce<Record<PageLinkType["type"], PageLinkType>>((result, next) => ({ ...result, [next.type]: next }), {} as never)
 
   return (
     <div className="user">
       <div className="user-card">
         <div className="mentor-card mentor-card--center">
           <div className="mentor-card__preview">
-            <img src={payload.avatar} alt="mentor's face" className="mentor-card__image" />
+            <img src={user.avatar} alt="mentor's face" className="mentor-card__image" />
           </div>
           <div className="mentor-card__container">
             <div className="mentor-card__info">
               <div className="mentor-card__name">
-                <span>{payload.first_name} {payload.last_name}</span>
-                <img src={getEmojiPNG(payload.country.flag_unicode)} alt="flag" className="mentor-card__flag" />
+                <span>{user.first_name} {user.last_name}</span>
+                <img src={getEmojiPNG(user.country.flag_unicode)} alt="flag" className="mentor-card__flag" />
               </div>
-              <div className="mentor-card__job"><em>{payload.profession}・</em>{payload.company}</div>
+              <div className="mentor-card__job"><em>{user.profession}・</em>{user.company}</div>
             </div>
             <div className="mentor-card__price">
-              <em>{Number(payload.price).toPrice(tRoot("lang.code"), payload.price_currency)}</em> / 60min.
+              <em>{Number(user.price).toPrice(tRoot("lang.code"), user.price_currency)}</em> / 60min.
             </div>
-            {payload.packages.length > 0 && (
+            {user.packages.length > 0 && (
               <div className="mentor-card__discounts">
-                {payload.packages.map(pack => (
+                {user.packages.map(pack => (
                   <div className="mentor-card__discount" key={pack.id}>{t("card.discount", { courseCount: pack.lessons_count, courseDiscount: pack.discount })}</div>
                 ))}
               </div>
@@ -69,42 +63,37 @@ function UserUserId() {
           <Button size="big" color="green" className="user-card__button" onClick={() => document.getElementById("book")?.scrollIntoView({ behavior: "smooth" })}>{t("card.rollIn")}</Button>
         </div>
         <div className="user-card__text">{t("card.terms", { policyLink: links?.privacy_policy.url })}</div>
-        {payload.info.trial_meeting && (
+        {user.info.trial_meeting && (
           <div className="user-card__notice">{t("card.trial")}</div>
         )}
       </div>
 
       <div className="user__sections">
-        <AdminInterface>
-          <Button onClick={() => ClientAPI.query(deleteMentorsId(payload.id)).then(() => navigate("/admin/mentors"))}>Удалить ментора</Button>
-          <Button onClick={() => navigate("/admin/edit-mentor/" + payload.id)}>Редактировать ментора</Button>
-        </AdminInterface>
-
-        <UserSection type="3" title={payload.info.resume}>
+        <UserSection type="3" title={user.info.resume}>
           <div className="user-section__entry">
             <Icon name="location" />
-            <span>{(payload.info as never)["city_" + tRoot("lang.code")]}, <em>{t("info.teachType")}</em></span>
+            <span>{(user.info as never)["city_" + tRoot("lang.code")]}, <em>{t("info.teachType")}</em></span>
           </div>
           <div className="user-section__entry">
             <Icon name="face" />
-            <span>{t("info.language")}: <em>{payload.info.languages.map(lang => lang.name_native).join(" / ")}</em></span>
+            <span>{t("info.language")}: <em>{user.info.languages.map(lang => lang.name_native).join(" / ")}</em></span>
           </div>
         </UserSection>
 
         <UserSection type="1" title={t("info.whatHelp")}>
-          <p>{payload.info.what_help}</p>
+          <p>{user.info.what_help}</p>
         </UserSection>
 
         <UserSection type="1">
           <div className="user-section__tags">
-            {payload.tags.map(tag => (
-              <TopicTag key={tag.id}>{tag}</TopicTag>
+            {user.tags.map(tag => (
+              <Tag key={tag.id}>{tag}</Tag>
             ))}
           </div>
         </UserSection>
 
         <UserSection type="1" title={t("info.experience")}>
-          <p>{payload.info.experience}</p>
+          <p>{user.info.experience}</p>
         </UserSection>
 
         <UserSection type="2" title={t("info.garantee.title")} iconName="r-square">
@@ -114,7 +103,7 @@ function UserUserId() {
         <a id="book" style={{ scrollMargin: "3em" }} />
         <UserSection type="1" title={t("info.bookMentor.title")}>
           <p>{t("info.bookMentor.desc")}</p>
-          <ContactForm type="test_meeting" submitText={t("info.bookMentor.submit")} />
+          <ContactForm type="test_meeting" /* submitText={t("info.bookMentor.submit")} */ />
         </UserSection>
 
       </div>

@@ -1,6 +1,6 @@
 import "./error.scss"
 
-import ButtonLink from "app/components/common/Button/ButtonLink"
+import { ButtonLink } from "@shared/ui"
 
 interface ErrorViewProps {
   error?: Error
