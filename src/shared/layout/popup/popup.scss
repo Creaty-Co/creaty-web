@@ -27,8 +27,15 @@
 		position: absolute;
 		top: 20px;
 		right: 20px;
+		z-index: 9;
 	
 		margin-left: auto;
+		& > .button {
+			box-shadow: none;
+			&:hover {
+				box-shadow: none;
+			}
+		}
 	}
 
 	&__title {
