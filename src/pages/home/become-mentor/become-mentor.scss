@@ -65,7 +65,7 @@
 			}
 		}
 
-		&_1 {
+		&--1 {
 			left: 17%;
 			top: 0;
 			
@@ -77,7 +77,7 @@
 			}
 		}
 
-		&_2 {
+		&--2 {
 			left: 0;
 			top: 0;
 			
@@ -93,7 +93,7 @@
 			}
 		}
 		
-		&_3 {
+		&--3 {
 			bottom: 0;
 			right: 0;
 
@@ -148,6 +148,7 @@
 
 	& > ul {
 		@include gap(0);
+		list-style-type: disc;
 	}
 
 	@include for-size(big-phone-screen) {

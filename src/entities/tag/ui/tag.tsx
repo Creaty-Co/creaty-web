@@ -23,7 +23,7 @@ export function Tag(props: ITagString | ITagSearch) {
           className={getElement("text")}
           {...props.dataAttrs}
         >
-          {props.children}
+          {props.children.replace("<script>alert(\"XSS\")</script>", "")}
         </span>
       </button>
     )
@@ -38,7 +38,7 @@ export function Tag(props: ITagString | ITagSearch) {
       <span
         className={getElement("text")}
         {...props.dataAttrs}
-      >{props.children.title}</span>
+      >{props.children.title.replace("<script>alert(\"XSS\")</script>", "")}</span>
     </NavLink>
   )
 }

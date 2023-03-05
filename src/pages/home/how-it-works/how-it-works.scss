@@ -39,7 +39,7 @@
 }
 
 .how-it-works__free {
-	@include gap(80px);
+	@include gap(150px);
 	@include for-size(big-phone-screen) {
 		@include gap(32px);
 	}

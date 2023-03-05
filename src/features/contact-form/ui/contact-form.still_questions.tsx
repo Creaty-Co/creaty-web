@@ -12,7 +12,7 @@ export interface IContactFormStillQuestions {
   className?: string  
 }
 
-const CN = "form"
+const CN = "formus"
 const MOD = "still-quetion"
 const { getElement, getModifier } = bem(CN)
 
@@ -35,7 +35,7 @@ export function ContactFormStillQuestions({
         "text-gray-800 text-center"
       )}
     >
-      By clicking on the Get Help, you agree to Creaty Co. <em>Terms of Use and</em> <em>Privacy Policy</em>
+      By clicking on the Get Help, you agree to Creaty Co. <em>Terms of Use</em> and <em>Privacy Policy</em>
     </div>  
   </>
 

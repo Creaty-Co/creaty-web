@@ -24,9 +24,9 @@ export function HowItWorks() {
 
   return (
     <div className={CN}>
-      <div className={getElement("title")}>
+      <div className={cn(getElement("title"), "heading")}>
         {t("title")}
-      </div>heading
+      </div>
 
       <div className={getElement("points")}>
         <BulletPoint 

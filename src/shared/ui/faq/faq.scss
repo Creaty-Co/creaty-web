@@ -79,16 +79,18 @@
 		padding-bottom: 1em;
 	}
 
+	/*
 	*:first-child {
 		text-indent: 0;
 	}
+	*/
 
 	*:last-child {
 		padding-bottom: 0;
 	}
 
 	p {
-		text-indent: 27px;
+		text-indent: 15px;
 	}
 
 	ul {

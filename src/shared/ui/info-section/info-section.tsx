@@ -28,7 +28,12 @@ export const InfoSection = ({
   <div className={cn(className, getModifier(CN, display, type))}>
     <div className={getElement("header")}>
       <div className={getElement("title")}>{title}</div>
+      
       <div className={getElement("desc")}>{desc}</div>
+
+      <div className={getElement("additional")}>
+        *Free trial session is held only if the mentor is willing to conduct such sessions
+      </div>
     </div>
     <div className={getElement("content")}>{children}</div>
   </div>

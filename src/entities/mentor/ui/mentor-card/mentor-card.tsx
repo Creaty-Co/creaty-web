@@ -14,7 +14,7 @@ export interface IMentorCard extends MentorType {
   className?: string
 }
 
-const CN = "mentro-card"
+const CN = "mentor-card"
 const { getElement } = bem(CN)
 
 const CNButton = CN + "-button"
@@ -76,7 +76,7 @@ export function MentorCard({
         </div>
       </div>
 
-      <Link className="CNButton" to={"/user/" + slug}>
+      <Link className={CNButton} to={"/user/" + slug}>
         <div className={getElementButton("text")}>
           <em>{Number(price).toPrice(t("lang.code"), price_currency)}</em>
           <span>/</span>
