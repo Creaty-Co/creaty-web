@@ -1,5 +1,5 @@
+import { classMerge, classWithModifiers } from "@shared/utils"
 import { SVGAttributes } from "react"
-import { classMerge, classWithModifiers } from "utils/common"
 
 export type IconName =
   | "language"

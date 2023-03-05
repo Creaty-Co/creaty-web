@@ -1,8 +1,8 @@
 import "./button.scss"
 
+import { bem, classMerge } from "@shared/utils"
 import { MouseEventHandler } from "react"
 import { NavLink, useLocation } from "react-router-dom"
-import { bem,classMerge, classWithModifiers } from "utils/common"
 
 import { ButtonBaseProps } from "./button.types"
 

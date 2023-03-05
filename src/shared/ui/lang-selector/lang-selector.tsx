@@ -1,15 +1,12 @@
 import "./lang-selector.scss"
 
-import useLocale from "i18n/hooks/useLocale"
-import { LocaleResourceSchema, supportedLocales } from "i18n/locales"
+import useLocale from "@i18n/hooks/useLocale"
+import { LocaleResourceSchema, supportedLocales } from "@i18n/locales"
+import { Button, DropDown, DropDownOption, Icon } from "@shared/ui"
+import { classWithModifiers } from "@shared/utils/common"
 import _ from "lodash"
 import { useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { classWithModifiers } from "utils/common"
-
-import Button from "../../../../shared/ui/button/button"
-import Icon from "../../common/Icon/Icon"
-import DropDown, { DropDownOption } from "../drop-down/drop-down"
 
 function LangSelector() {
   const parentRef = useRef<HTMLDivElement>(null)

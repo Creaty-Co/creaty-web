@@ -1,6 +1,6 @@
 import "./tag.scss"
 
-import { bem } from "@src/_legacy/_utils/common"
+import { bem } from "@shared/utils"
 // import { MouseEventHandler } from "react"
 import { NavLink } from "react-router-dom"
 

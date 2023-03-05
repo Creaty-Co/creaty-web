@@ -1,9 +1,7 @@
-import "./Selector.scss"
+import "./selector.scss"
 
+import { DropDown } from "@shared/ui"
 import { Children, ComponentProps, Dispatch, ReactElement, useState } from "react"
-
-import DropDown from "../drop-down/drop-down"
-
 
 interface SelectorProps<V> {
   name?: string

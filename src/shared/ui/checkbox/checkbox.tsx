@@ -7,7 +7,7 @@ export interface CheckboxProps<V> extends Omit<DetailedHTMLProps<InputHTMLAttrib
   value?: V
 }
 
-function Checkbox<V>(props: CheckboxProps<V>) {
+export function Checkbox<V>(props: CheckboxProps<V>) {
   return (
     <label className="checkbox">
       <input {..._.omit(props, "children")} value={props.value && String(props.value)} type="checkbox" className="checkbox__input" />
@@ -22,5 +22,3 @@ function Checkbox<V>(props: CheckboxProps<V>) {
     </label>
   )
 }
-
-export default Checkbox

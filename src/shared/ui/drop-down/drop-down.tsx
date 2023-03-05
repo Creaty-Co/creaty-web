@@ -1,11 +1,11 @@
 import "./drop-down.scss"
 
+import { classWithModifiers } from "@shared/utils"
 import { Children, ComponentProps, ReactElement, useState } from "react"
-import { classWithModifiers } from "utils/common"
 
 export type DropDownOption = ReactElement<ComponentProps<"option">>
 
-interface DropDownProps<V> {
+export interface DropDownProps<V> {
   expanded: boolean
   default?: V
 
@@ -14,7 +14,7 @@ interface DropDownProps<V> {
   children: DropDownOption[]
 }
 
-function DropDown<V = string | undefined>(props: DropDownProps<V>) {
+export function DropDown<V = string | undefined>(props: DropDownProps<V>) {
   const options = Children.map(props.children, child => child.props)
   const initChoice = props.default ? options.findIndex(option => option.value === props.default) : 0
   const [choice, Choose] = useState<number>(initChoice)
@@ -33,6 +33,3 @@ function DropDown<V = string | undefined>(props: DropDownProps<V>) {
     </section>
   )
 }
-
-
-export default DropDown

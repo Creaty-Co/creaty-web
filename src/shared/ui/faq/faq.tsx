@@ -1,9 +1,8 @@
 import "./faq.scss"
 
-import ButtonIcon from "app/components/common/Button/ButtonIcon"
+import { ButtonIcon } from "@shared/ui"
+import { classWithModifiers } from "@shared/utils"
 import { ReactNode, useState } from "react"
-import { classWithModifiers } from "utils/common"
-
 
 export function FAQ(props: { children: ReactNode }) {
   return (
@@ -11,12 +10,12 @@ export function FAQ(props: { children: ReactNode }) {
   )
 }
 
-
-interface FAQClauseProps {
+interface IFAQClause {
   summary: string
   children: ReactNode
 }
-export function FAQClause(props: FAQClauseProps) {
+
+export function FAQClause(props: IFAQClause) {
   const [expanded, setExpanded] = useState<boolean>(false)
   const [height, setHeight] = useState<number | undefined>()
 

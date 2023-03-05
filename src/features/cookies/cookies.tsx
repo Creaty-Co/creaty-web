@@ -1,8 +1,8 @@
 import "./cookies.scss"
 
+import { useGetPagesLinksDocumentsQuery } from "@shared/api"
 import { Button,OuterLink } from "@shared/ui"
 import { bem, classWithModifiers } from "@shared/utils"
-import { useGetPagesLinksDocumentsQuery } from "@src/shared/api"
 import { useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 

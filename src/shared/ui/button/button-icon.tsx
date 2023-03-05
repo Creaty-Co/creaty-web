@@ -1,11 +1,10 @@
 import "./button.scss"
 
-import LoaderCover from "app/components/UI/Loader/LoaderCover"
+import { Icon, IconName, LoaderCover } from "@shared/ui"
+import { classMerge, classWithModifiers } from "@shared/utils"
 import { MouseEvent, MouseEventHandler, useState } from "react"
 import ReactGA from "react-ga4"
-import { classMerge, classWithModifiers } from "utils/common"
 
-import Icon, { IconName } from "../Icon/Icon"
 import { ButtonBaseProps } from "./button.types"
 
 interface ButtonIconProps extends Omit<ButtonBaseProps, "iconLeft" | "iconRight" | "children"> {

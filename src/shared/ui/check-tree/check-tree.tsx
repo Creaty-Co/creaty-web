@@ -1,11 +1,11 @@
 import "./check-tree.scss"
 
-import { Tag } from "@entiies"
+import { Tag } from "@entities"
 import { Icon } from "@shared/ui"
+import { Checkbox } from "@shared/ui"
 import { classWithModifiers } from "@shared/utils"
 import { ReactNode, useState } from "react"
 
-import Checkbox from "../checkbox/Checkbox"
 import { CheckTreeOption, CheckTreeOptionChildren, CheckTreeState } from "./check-tree.model"
 
 export interface ICheckTree<V> {
@@ -41,7 +41,7 @@ export function CheckTree<V>(props: ICheckTree<V>) {
           <div className="check-tree-show__check" key={index}>
             {/* --- Trash Code --- */}
             {/* eslint-disable-next-line */}
-            <TopicTag noHash onClick={() => uncheck(value)}>{String((children as any).flatMap((d: any) => (d?.props?.children && d?.type === "option") ? [d, ...toArrayDeeply(d.props.children)] : d).find((option: any) => option?.props?.value === value)?.props?.title)}</TopicTag>
+            <Tag noHash onClick={() => uncheck(value)}>{String((children as any).flatMap((d: any) => (d?.props?.children && d?.type === "option") ? [d, ...toArrayDeeply(d.props.children)] : d).find((option: any) => option?.props?.value === value)?.props?.title)}</Tag>
             {/* --- Trash Code --- */}
             <input type="hidden" name={props.name} value={value && String(value)} key={index} />
           </div>
