@@ -14,10 +14,12 @@ export interface IInfoSection {
   desc: React.ReactNode
   children: React.ReactNode
 
+  additional?: string
   className?: string
 }
 
 export const InfoSection = ({
+  additional,
   className,
   children,
   display,
@@ -31,9 +33,11 @@ export const InfoSection = ({
       
       <div className={getElement("desc")}>{desc}</div>
 
-      <div className={getElement("additional")}>
-        *Free trial session is held only if the mentor is willing to conduct such sessions
-      </div>
+      {additional && 
+        <div className={getElement("additional")}>
+          {additional}
+        </div>
+      }
     </div>
     <div className={getElement("content")}>{children}</div>
   </div>

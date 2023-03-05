@@ -49,7 +49,8 @@ export function HowItWorks() {
       </div>
 
       <div className={getElement("help")}>
-        <InfoSection 
+        <InfoSection
+          additional="*Free trial session is held only if the mentor is willing to conduct such sessions"
           className={getElement("free")} 
 
           display="flex" 

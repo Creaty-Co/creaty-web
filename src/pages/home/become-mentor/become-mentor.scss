@@ -166,8 +166,9 @@
 	@include CaptionRegular;
 
 
-	a {
+	& > a {
 		color: inherit;
+		text-decoration: underline;
 	}
 
 	@include Mobile {
