@@ -1,12 +1,10 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
-import { getBaseURL } from "@shared/utils"
+import { createApi } from "@reduxjs/toolkit/query/react"
+import { getFetchBaseQuery } from "@shared/utils"
 
 export const subscribeApi = createApi({
   reducerPath: "subscribeApi",
 
-  baseQuery: fetchBaseQuery({
-    baseUrl: getBaseURL() + "/mailings"
-  }),
+  baseQuery: getFetchBaseQuery("/mailings"),
 
   endpoints: builder => ({
     postMailingsSubscribe: builder.mutation<void, { email: string }>({

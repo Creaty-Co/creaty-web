@@ -1,3 +1,5 @@
+import { fetchBaseQuery } from "@reduxjs/toolkit/query/react"
+
 export function getBaseURL() {
   const API_URL = process.env.REACT_APP_API_HOST
   if (API_URL == null) return ""
@@ -15,4 +17,27 @@ export function getBaseURL() {
   console.log("uri", uri)
 
   return uri
+}
+
+export interface IConfigurationConnection {
+  baseUrl: string
+  prepareHeaders: (headers: Headers) => Headers
+}
+
+export const configurationConnection: IConfigurationConnection = {
+  baseUrl: getBaseURL(),
+  prepareHeaders: (headers) => {
+    headers.set("Accept-Language", "en")
+    return headers
+  }
+}
+
+export function getFetchBaseQuery(url?: string) {
+  return fetchBaseQuery({
+    baseUrl: getBaseURL() + (url || ""),
+    prepareHeaders: (headers) => {
+      headers.set("Accept-Language", "en")
+      return headers
+    }
+  })
 }

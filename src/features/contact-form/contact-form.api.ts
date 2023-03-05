@@ -1,19 +1,13 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
+import { createApi } from "@reduxjs/toolkit/query/react"
 import { PaginationType } from "@shared/types"
-import { getBaseURL } from "@shared/utils"
+import { getFetchBaseQuery } from "@shared/utils"
 
 import { ContactFormRequestParamsType, ContactFormType } from "./contact-form.types"
 
 export const contactFormApi = createApi({
   reducerPath: "contactFormApi",
 
-  baseQuery: fetchBaseQuery({
-    baseUrl: getBaseURL(),
-    prepareHeaders: (headers) => {
-      headers.set("Accept-Language", "en")
-      return headers
-    }
-  }),
+  baseQuery: getFetchBaseQuery(),
 
   endpoints: builder => ({
     getForms: builder.query<PaginationType<ContactFormType>, void>({

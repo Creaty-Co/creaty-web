@@ -1,7 +1,7 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
+import { createApi } from "@reduxjs/toolkit/query/react"
 import { ResponseLocaleLanguage } from "@shared/lib/i18n"
 import { PaginationType } from "@shared/types"
-import { getBaseURL } from "@shared/utils"
+import { getFetchBaseQuery } from "@shared/utils"
 import { ResourceKey } from "i18next"
 
 import { PageFAQType, PageLinkSocialType, PageLinkType, PagePersonalType, PageType } from "./pages.types"
@@ -9,9 +9,7 @@ import { PageFAQType, PageLinkSocialType, PageLinkType, PagePersonalType, PageTy
 export const pagesApi = createApi({
   reducerPath: "pagesApi",
 
-  baseQuery: fetchBaseQuery({
-    baseUrl: getBaseURL() + "/pages"
-  }),
+  baseQuery: getFetchBaseQuery("/pages"),
 
   endpoints: builder => ({
     getPagesMain: builder.query<PageType, void>({

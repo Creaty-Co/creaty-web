@@ -1,6 +1,6 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
+import { createApi } from "@reduxjs/toolkit/query/react"
 import { PaginationQueryType, PaginationType } from "@shared/types"
-import { getBaseURL } from "@shared/utils"
+import { getFetchBaseQuery } from "@shared/utils"
 
 import { topicsUpdate } from "./category.slice"
 import { CategoryType } from "./category.types"
@@ -8,9 +8,7 @@ import { CategoryType } from "./category.types"
 export const categoryApi = createApi({
   reducerPath: "topicsApi",
 
-  baseQuery: fetchBaseQuery({
-    baseUrl: getBaseURL() + "/"
-  }),
+  baseQuery: getFetchBaseQuery(),
 
   endpoints: builder => ({
     getTagsTopics: builder.query<PaginationType<CategoryType>, PaginationQueryType>({
