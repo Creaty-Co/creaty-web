@@ -65,6 +65,8 @@
 
 	&:focus::placeholder {
 		color: rgba($color-gray-10, 0.1);
+		outline: 0;
+		box-shadow: none;
 	}
 }
 

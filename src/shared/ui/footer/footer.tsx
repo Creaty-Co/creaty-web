@@ -16,7 +16,7 @@ const CNContainer = CN + "-container"
 const CNCopyright = CN + "-copyright"
 
 const CNLinks = CN + "-links"
-const { getElement: getElementLinks } = bem(CN)
+const { getElement: getElementLinks } = bem(CNLinks)
 
 export interface IFooter {
   className?: string

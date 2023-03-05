@@ -1,0 +1,108 @@
+
+@import "/src/app/assets/scss/bundle.scss";
+
+.footer {
+	background: $color-black-90;
+
+	padding: 80px 0 28px;
+	margin-top: 160px;
+	
+	@include for-size(big-phone-screen) {
+		padding: 40px 5vw 32px;
+		margin-top: 80px;
+	}
+}
+
+.footer-container {
+	@include WidthLimit;
+
+	display: grid;
+	@include row-gap(56px);
+	
+	@include for-size(big-phone-screen) {
+		@include row-gap(48px);
+	}
+}
+
+.footer-links {
+	display: grid;
+	grid-template: 1fr / auto 1fr auto;
+	@include gap(120px);
+
+	@include for-size(big-phone-screen) {
+		display: grid;
+		grid-template: repeat(2, auto) / 1fr;
+		@include row-gap(48px);
+	}
+}
+
+.footer-links__container {
+	display: grid;
+	grid-template: 1fr / repeat(3, 1fr);
+	@include gap(40px);
+
+	@include for-size(big-phone-screen) {
+		grid-template: repeat(3, auto) / 1fr;
+		@include gap(32px);
+	}
+}
+
+.footer-links__group {
+	display: grid;
+	align-content: baseline;
+	@include row-gap(8px);
+}
+
+.footer-links__title {
+	margin-bottom: 4px;
+	@include Text2Medium;
+}
+
+.footer-links__link {
+	color: $color-gray-50;
+	transition: 200ms ease color;
+	@include TagsRegular;
+  text-align: left;
+
+	&:hover {
+		color: $color-white;
+	}
+}
+
+a.footer-links__link {
+	text-decoration: none;
+}
+
+.footer-links__logo {
+	height: 50px;
+	@include for-size(big-phone-screen) {
+		height: 32px;
+	}
+}
+
+.footer-links__social {
+	align-self: center;
+
+	display: flex;
+	@include gap(8px);
+
+	img {
+		height: 32px;
+		width: 32px;
+	}
+
+	@include for-size(big-phone-screen) {
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+}
+
+.footer-copyright {
+	border-top: 1px solid rgba($color: $color-gray-10, $alpha: 0.1);
+	color: $color-gray-80;
+	
+	padding-top: 16px;
+
+	@include Caption;
+}
