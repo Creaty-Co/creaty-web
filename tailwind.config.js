@@ -53,6 +53,10 @@ module.exports = {
         sans: ["Google Sans", "sans-serif"],
         serif: ["Google Sans", "serif"],
       },
+
+      gridTemplateColumns: {
+        "formus__notify": "auto 1fr"
+      }
     },
   },
   plugins: [

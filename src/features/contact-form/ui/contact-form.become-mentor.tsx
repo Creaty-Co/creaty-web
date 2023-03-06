@@ -13,7 +13,7 @@ export interface IContactFormBecomeMentor {
 }
 
 const CN = "form"
-const MOD = "still-quetion"
+const MOD = "become-mentor"
 const { getElement, getModifier } = bem(CN)
 
 export function ContactFormBecomeMentor({ 

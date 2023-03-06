@@ -1,5 +1,6 @@
 import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/20/solid"
 import { bem, classMerge } from "@shared/utils"
+import cn from "classnames"
 import { FieldValues, useForm, useFormContext, UseFormRegister } from "react-hook-form"
 
 import { FieldInputType } from "./field.types"
@@ -11,6 +12,7 @@ export interface IInputOptions {
 export interface IFieldInput {
   className?: string
   
+  hints?: Record<string, string>
   helper?: string
   label?: string
   name: string
@@ -24,13 +26,24 @@ export function FieldInput({
   className,
 
   helper,
+  hints,
   label,
   name
 }: IFieldInput) {
 
   const { register, getFieldState, formState: { isDirty: isDirtyForm, isValid: isValidForm, errors: errorsForm } } = useFormContext()
   const { error, isDirty, isTouched, invalid } = getFieldState(name)
-  
+
+  // console.group("input", name)
+  // console.log("errorsForm", errorsForm)
+  // console.log("error", error)
+  // console.groupEnd()
+
+  // const rHints = !hints || !error || Object.keys(error).length === 0 || Object.values(hints).length === 0? null : 
+  //   <div className={cn(getElement("hints"))}>
+  //     {Object.keys(hints).map(hintKey => error[hintKey] !== undefined )}
+  //   </div>
+
   return (
     <label className={classMerge(
       getModifier(CN, MOD),
@@ -75,6 +88,10 @@ export function FieldInput({
             {!invalid && <CheckCircleIcon className="h-5 w-5 text-green-700" /> }
             {invalid && <XCircleIcon className="h-5 w-5 text-red" /> }
           </div>
+        }
+
+        {
+
         }
 
       </div>

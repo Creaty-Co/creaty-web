@@ -1,11 +1,14 @@
 import { Button, Field, Formus } from "@shared/ui"
-import { bem } from "@shared/utils"
+import { bem, isEmail } from "@shared/utils"
 import cn from "classnames"
 import * as yup from "yup"
 
 const schema = yup.object().shape({
-  fullname: yup.string().required(),
-  email: yup.string().email().required()
+  fullname: yup.string().min(3).required("Full Name"),
+  email: yup.string().test("email", function(value) {
+    const { path, createError } = this
+    return (value && isEmail(value)) || createError({ path, message: "invalid email" })
+  }).min(3).required("Email")
 }).required()
 
 export interface IContactFormStillQuestions {

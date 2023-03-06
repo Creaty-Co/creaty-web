@@ -9,4 +9,16 @@
       @include TagsBold;
     }
   }
+
+  &__notifies {
+    position: absolute;
+  }
+
+  &__notify {
+    @include Text2Regular();
+  }
+  
+  &__notifies-title {
+    @include Text2Medium();
+  }
 }

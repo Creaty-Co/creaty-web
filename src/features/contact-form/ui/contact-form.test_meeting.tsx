@@ -20,7 +20,7 @@ export interface IContactFormTestMeeting {
 }
 
 const CN = "form"
-const MOD = "still-quetion"
+const MOD = "test-meeting"
 const { getElement, getModifier } = bem(CN)
 
 export function ContactFormTestMeeting({ 

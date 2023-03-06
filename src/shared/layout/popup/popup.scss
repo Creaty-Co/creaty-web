@@ -14,12 +14,13 @@
 	background: $color-white;
 	border-radius: 40px;
 	
-	overflow: hidden;
+	// overflow: hidden;
 	// height: 90vh;
 	// width: 480px;
 
 	&__container {
-		overflow: auto;
+		overflow: visible;
+		// overflow: auto;
 		padding-bottom: 24px;
 	}
 
