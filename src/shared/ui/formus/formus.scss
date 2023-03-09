@@ -1,0 +1,24 @@
+@import "/src/app/assets/scss/bundle.scss";
+
+.formus {
+  &__agreement {
+    letter-spacing: 0.02em;
+    @include Tags;
+
+    & > em {
+      @include TagsBold;
+    }
+  }
+
+  &__notifies {
+    position: absolute;
+  }
+
+  &__notify {
+    @include Text2Regular();
+  }
+  
+  &__notifies-title {
+    @include Text2Medium();
+  }
+}

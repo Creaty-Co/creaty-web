@@ -1,7 +1,7 @@
 // import { ReactElement } from "react"
 // import ReactMarkdown from "react-markdown"
 
-import OuterLink from "app/components/services/OuterLink"
+import { OuterLink } from "@shared/ui"
 import { TOptions } from "i18next"
 import type { marked } from "marked"
 import { Lexer } from "marked"

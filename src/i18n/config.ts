@@ -1,6 +1,7 @@
-import { getPagesLocalesLanguageNamespace, putPagesLocalesLanguageNamespace } from "api/actions/pages"
-import ClientAPI from "api/client"
-import i18next, { BackendOptions, ResourceKey } from "i18next"
+// import { getPagesLocalesLanguageNamespace, putPagesLocalesLanguageNamespace } from "api/actions/pages"
+// import ClientAPI from "api/client"
+import { getBaseURL } from "@shared/utils"
+import i18next, { BackendOptions } from "i18next"
 import { initReactI18next } from "react-i18next"
 
 import initExternalResourceBackend from "./external-resource-backend"
@@ -33,19 +34,23 @@ i18next
 
     backend: {
       async get(language: string, namespace: string) {
-        const response = await ClientAPI.query(getPagesLocalesLanguageNamespace(language, namespace))
+        // const response = await ClientAPI.query(getPagesLocalesLanguageNamespace(language, namespace))
+        // const response = await pagesApi.endpoints.getPagesLocalesLanguageNamespace.initiate({ language, namespace })
+        const response = await fetch(`${getBaseURL()}/pages/locales/${language}/${namespace}.json`)
+        const data = await response.json()
+        // if (response.error) throw response.errorObject
+        // if (response.data == null) throw new Error("response.payload is empty")
 
-        if (response.error) throw response.errorObject
-        if (response.payload == null) throw new Error("response.payload is empty")
-
-        return response.payload
+        return data
       },
+      /*
       async put(language: string, namespace: string, data: ResourceKey) {
         const response = await ClientAPI.query(putPagesLocalesLanguageNamespace(language, namespace, data))
 
         if (response.error) return response.errorObject
         if (response.payload == null) return new Error("response.payload is empty")
       },
+      */
     }
   })
 

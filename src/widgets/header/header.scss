@@ -1,0 +1,152 @@
+@import "/src/app/assets/scss/bundle.scss";
+
+.header {
+  $class: &;
+
+	position: sticky;
+	top: 0;
+	
+	z-index: 2;
+
+	border-bottom: 1px solid rgba($color: $color-gray-10, $alpha: 0.1);
+	padding: 12px 0;
+
+	background: rgba($color-black-main, 0.8);
+	backdrop-filter: blur(50px);
+
+	@include for-size(big-phone-screen) {
+		padding: 8px 7.5vw 8px 5vw;
+	}
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    @include gap(8px);
+    @include WidthLimit;
+  }
+
+  &__logo {
+    height: 40px;
+
+    &--mobile {
+      display: none;
+    }
+
+    @include for-size(big-phone-screen) {
+      display: none;
+
+      &--mobile {
+        display: initial;
+      }
+    }
+  }
+
+  &__right {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: flex-end;
+
+    @include gap(8px);
+
+    @include Tablet {
+      position: absolute;
+      top: 50px;
+      right: 0;
+
+      display: grid;
+      justify-items: center;
+      @include gap(16px);
+
+      background: $color-black-90;
+      border: 2px solid $color-gray-100;
+      border-radius: 20px;
+      transition: 200ms ease opacity, 200ms ease transform;
+      z-index: 2;
+
+      padding-bottom: 10px;
+
+      &:not(&--expanded) {
+        opacity: 0;
+        transform: translateY(-16px);
+        pointer-events: none;
+      }
+
+      & > * {
+        flex: 1;
+      }
+    }
+  }
+
+  &__trigger {
+    --icon-size: 25px;
+    display: none;
+
+    @include Tablet {
+      display: initial;
+    }
+  }
+
+  &__menu {
+    display: flex;
+    @include gap(8px);
+
+    @include Tablet {
+      padding: 16px;
+      display: grid;
+      @include gap(8px);
+    }
+  }
+
+  &__button {
+    @include Tablet {
+      grid-row: 3;
+    }
+  }
+
+  &__separator {
+    background-color: $color-gray-100;
+    padding: 8px 0;
+
+    border-radius: 20px;
+    height: 32px;
+    width: 3px;
+
+    @include for-size(big-phone-screen) {
+      display: none;
+    }
+  }
+
+  &__sign-group {
+    display: flex;
+    flex-direction: row;
+    @include gap(8px);
+
+    @include for-size(big-phone-screen) {
+      width: 100%;
+      padding: 0 8px;
+    }
+  }
+
+  &__log-in {
+    color: $color-white;
+    @include for-size(big-phone-screen) {
+      width: 100%;
+    }
+  }
+
+  &__sign-up {
+    background-color: $color-gray-10;
+    
+    & > .button__text {
+      color: $color-black-100;
+      @include Text2Medium;
+    }
+
+    @include for-size(big-phone-screen) {
+      width: 100%;
+    }
+  }
+
+}

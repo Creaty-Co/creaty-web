@@ -1,0 +1,72 @@
+@import "/src/app/assets/scss/bundle.scss";
+
+.have-questions {
+	display: grid;
+	align-items: center;
+	justify-content: space-between;
+
+	padding: 80px 120px;
+	background: $color-white;
+	border-radius: 70px;
+
+	grid-template: 1fr / 4fr 3fr;
+	@include gap(123px);
+
+	@include for-size(big-phone-screen) {
+		display: grid;
+		grid-template: auto auto / 1fr;
+		@include row-gap(32px);
+
+		padding: 36px;
+		margin-bottom: 20px;
+
+		border-radius: 60px;
+	}
+	
+	&__info {
+		display: grid;
+
+		@include row-gap(24px);
+		@include for-size(big-phone-screen) {
+			@include row-gap(16px);
+		}
+	}
+
+	&__title {
+		@include H2Bold;
+		@include for-size(big-phone-screen) {
+			@include H2Bold(32px);
+		}
+		color: $color-black-main;
+		word-break: break-word;
+	}
+
+	&__desc {
+		color: $color-gray-80;
+
+		@include H4Regular;
+		em { 
+			white-space: normal;
+			@include H4Medium; 
+			display: block;
+		}
+
+		@include for-size(big-phone-screen) {
+			@include H4Regular(16px);
+			em { @include H4Medium(16px) }
+		}
+	}
+
+	&__container {
+		&--form {
+			@include for-size(big-phone-screen) {
+				.input-masks {
+					.drop-down {
+						left: 0;
+					}
+				}
+			}	
+		}
+	}
+	
+}

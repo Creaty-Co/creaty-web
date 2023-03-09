@@ -1,5 +1,55 @@
 {
   "compilerOptions": {
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "paths": {
+      "@i18n/*": ["./src/i18n/*"],
+      "@i18n": ["./src/i18n"],
+      
+      /* FSD structure */
+      "@app/*": ["./src/app/*"],
+      "@app": ["./src/app"],
+
+      "@shared/*": ["./src/shared/*"],
+      "@shared": ["./src/shared"],
+      
+      "@pages/*": ["./src/pages/*"],
+      "@pages": ["./src/pages"],
+      
+      "@features/*": ["./src/features/*"],
+      "@features": ["./src/features"],
+      
+      "@entities/*": ["./src/entities/*"],
+      "@entities": ["./src/entities"],
+      
+      "@widgets/*": ["./src/widgets/*"],
+      "@widgets": ["./src/widgets"],
+    },
+    "baseUrl": "."
+  },
+  "include": [
+    "src",
+    "scripts",
+    "@types"
+  ]
+}
+
+/*
+{
+  "compilerOptions": {
     "target": "es5",
     "lib": [
       "dom",
@@ -38,3 +88,4 @@
     "@types"
   ]
 }
+*/

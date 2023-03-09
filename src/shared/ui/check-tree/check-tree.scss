@@ -1,0 +1,82 @@
+@import "/src/app/assets/scss/bundle.scss";
+
+.check-tree {
+	display: grid;
+	@include gap(1em);
+
+	padding: 1.25em;
+	background: $color-white;
+	border: 1px solid $color-gray-40;
+	border-radius: 1.5em;
+}
+
+.check-tree__list {
+	display: flex;
+	@include gap(1em);
+}
+
+.check-tree__column {
+	display: grid;
+	align-content: flex-start;
+
+	border: 1px solid $color-gray-40;
+	border-radius: 1em;
+
+	max-height: 50vh;
+	overflow: auto;
+}
+
+.check-tree__checks {
+	display: none;
+}
+
+/* Row */
+
+.check-tree-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	@include gap(2em);
+
+	padding: 1em;
+	// border-radius: 0.35em;
+	cursor: pointer;
+
+
+	&:hover {
+		background: rgba($color-gray-50, 0.2);
+	}
+
+	&--active {
+		background: linear-gradient(to right, rgba($color-gray-50, 0.1), rgba($color-gray-50, 0.25));
+	}
+
+	input {
+		margin: unset;
+	}
+}
+
+.check-tree-row__title {
+	display: flex;
+	@include gap(0.5em);
+}
+
+.check-tree-row__icon {
+	color: $color-black-main;
+	transform: rotate(-90deg);
+}
+
+/* Show */
+
+.check-tree-show {
+	display: flex;
+	flex-wrap: wrap;
+	@include gap(0.5em);
+
+	padding: 1em 1.25em;
+	background: $color-white;
+	border: 1px solid $color-gray-40;
+	border-radius: 1.5em;
+}
+
+.check-tree-show__check {}

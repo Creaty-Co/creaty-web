@@ -1,0 +1,50 @@
+@import "/src/app/assets/scss/bundle.scss";
+
+.popup-layout {
+	position: relative;
+
+	display: grid;
+	@include row-gap(32px);
+	
+	max-height: 80vh;
+	max-width: 480px;
+
+	padding: 40px 40px 0;
+
+	background: $color-white;
+	border-radius: 40px;
+	
+	// overflow: hidden;
+	// height: 90vh;
+	// width: 480px;
+
+	&__container {
+		overflow: visible;
+		// overflow: auto;
+		padding-bottom: 24px;
+	}
+
+	&__close {
+		position: absolute;
+		top: 20px;
+		right: 20px;
+		z-index: 9;
+	
+		margin-left: auto;
+		& > .button {
+			box-shadow: none;
+			&:hover {
+				box-shadow: none;
+			}
+		}
+	}
+
+	&__title {
+		color: $color-black-main;
+		@include H3Bold();
+
+		em {
+			color: $color-violet;
+		}
+	}
+}

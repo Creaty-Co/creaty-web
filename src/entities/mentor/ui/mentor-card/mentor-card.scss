@@ -1,0 +1,187 @@
+@import "/src/app/assets/scss/bundle.scss";
+
+.mentor-card {
+	display: flex;
+	flex-direction: column;
+
+	padding: 8px;
+	background: $color-white;
+	border-radius: 40px;
+
+	&--center {
+		text-align: center;
+	}
+	
+	@include for-size(big-phone-screen) {
+		width: 90vw;
+	}
+}
+
+.mentor-card__preview {
+	position: relative;
+	
+	overflow: hidden;
+	width: 100%;
+
+	border-radius: 32px;
+	padding-top: 78%;
+}
+
+.mentor-card__image {
+	position: absolute;
+	left: 0;
+	top: 0;
+
+	width: 100%;
+	border-radius: inherit;
+	object-fit: cover;
+}
+
+.mentor-card__info {
+	display: grid;
+	@include row-gap(4px);
+}
+
+.mentor-card__container {
+	display: grid;
+	@include row-gap(20px);
+	padding: 20px;
+	
+	@include for-size(big-phone-screen) {
+			@include gap(20px);
+			padding: 24px 16px 36px;
+		}
+}
+
+.mentor-card__name {
+	color: $color-black-main;
+	@include H4Bold;
+
+	@include for-size(big-phone-screen) {
+		@include H4Bold(20px);
+	}
+}
+
+.mentor-card__flag {
+	position: relative;
+	top: -3px;
+
+	height: 1.33em;
+	width: auto;
+
+	margin-left: 0.25em;
+	vertical-align: bottom;
+}
+
+.mentor-card__job {
+	color: $color-gray-80;
+	@include TextRegular;
+	@include for-size(big-phone-screen) {
+		@include TextRegular(16px);
+	}
+
+	em {
+		color: $color-black-main;
+		@include TextMedium;
+		@include for-size(big-phone-screen) {
+			@include TextMedium(16px);
+		}
+	}
+}
+
+.mentor-card__tags {
+	display: flex;
+	flex-wrap: wrap;
+	@include gap(8px);
+
+	@include for-size(big-phone-screen) {
+		@include gap(8px);
+	}
+}
+
+.mentor-card__price {
+	color: $color-gray-80;
+	font-size: 1.5rem;
+
+	em {
+		color: $color-black-main;
+		font-weight: bold;
+	}
+}
+
+.mentor-card__discounts {
+	display: grid;
+	@include row-gap(0.5em);
+}
+
+.mentor-card__discount {
+	color: $color-black-main;
+	font-size: 1.125rem;
+
+	em {
+		color: $color-violet;
+	}
+}
+
+/* Mentor Card Button */
+.mentor-card-button {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	padding: 24px;
+	padding-left: 32px;
+
+	margin-top: auto;
+	background: $color-gray-10;
+	border-radius: inherit;
+	transition: 200ms ease background-color;
+
+	&:hover {
+		background: $color-green;
+	}
+}
+
+.mentor-card-button__text {
+	// Trouble with font layout
+	position: relative;
+	top: 2px;
+
+	display: flex;
+	@include gap(0.25em);
+
+	color: $color-black-main;
+	transition: 200ms ease opacity;
+
+	@include TextRegular;
+
+	.mentor-card-button:hover & {
+		opacity: 0;
+	}
+
+	em {
+			@include TextBold;
+	}
+}
+
+.mentor-card-button__icon {
+	color: $color-gray-50;
+	transition: 200ms ease color, 200ms ease transform;
+
+	.mentor-card-button:hover & {
+		color: $color-black-main;
+		transform: translateX(0.5em);
+	}
+}
+
+.mentor-card-button__hover-text {
+	position: absolute;
+	color: $color-black-main;
+	font-weight: bold;
+	transition: 200ms ease opacity;
+
+	&:not(.mentor-card-button:hover &) {
+		opacity: 0;
+		pointer-events: none;
+	}
+}
