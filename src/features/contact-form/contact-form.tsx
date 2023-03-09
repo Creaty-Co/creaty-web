@@ -28,7 +28,6 @@ export const ContactFormFactory: IContactFormFactory = {
   "choose_mentor": ContactFormChooseMentor,
   "signup_mentor": ContactFormSignupMentor,
   "test_meeting": ContactFormTestMeeting,
-  
 }
 
 export function ContactForm({

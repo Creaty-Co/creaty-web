@@ -1,7 +1,7 @@
 import "./field.scss"
 
 import { FieldInputType } from "./field.types"
-import { FieldInput } from "./field-input"
+import { FieldInput, IFieldInput } from "./ui"
 
 export type IFieldFactory = Record<FieldInputType, Function>
 export const FieldFactory: IFieldFactory = {
@@ -11,32 +11,14 @@ export const FieldFactory: IFieldFactory = {
   "select": FieldInput,
 }
 
-export interface IField {
-  className?: string
-
+type IFieldComponent = IFieldInput
+export interface IField extends IFieldComponent {
   type: FieldInputType
   name: string
-
-  helper?: string
-  label?: string
 }
 
-export function Field({
-  className,
+export function Field(props: IField) {
+  const Component = FieldFactory[props.type]
 
-  type,
-  name,
-  
-  helper,
-  label
-}: IField) {
-  const Component = FieldFactory[type]
-
-  return <Component
-    className={className}
-    name={name}
-
-    helper={helper}
-    label={label}
-  />
+  return <Component {...props}/>
 } 

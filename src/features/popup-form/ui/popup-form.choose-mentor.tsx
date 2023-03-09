@@ -5,15 +5,15 @@ import { useTranslation } from "react-i18next"
 
 import { PopupFormThanks } from "./popup-form.thanks"
 
-export interface IPopupFormTestMeeting {
+export interface IPopupFormBecomeMentor {
   className?: string
 } 
 
-const FORM_TYPE = "test_meeting"
+const FORM_TYPE = "choose_mentor"
 
-export function PopupFormTestMeeting({
+export function PopupFormBecomeMentor({
   className
-}: IPopupFormTestMeeting) {
+}: IPopupFormBecomeMentor) {
   /*
   const { t: tPopup } = useTranslation("translation", { keyPrefix: "popups.popupForm" })
   */

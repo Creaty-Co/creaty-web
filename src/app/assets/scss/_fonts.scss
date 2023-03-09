@@ -127,3 +127,32 @@ $font_size_small-phone-screen: math.round(math.div($font_size_middle-phone-scree
     letter-spacing: 0.02em;
 }
 @mixin CaptionRegular($size: 12px, $height: null) { @include Caption($size, $height, 400) }
+
+.font {
+    &--h3 {
+        @include H3();
+        &-regular { @include H3Regular(); }
+        &-bold { @include H3Bold(); }
+    }
+
+    &--h4 {
+        @include H4();
+        &-bold { @include H4Bold(); }
+        &-medium { @include H4Medium(); }
+        &-regular { @include H4Regular(); }
+    }
+
+    &--text {
+        @include Text();
+        &-bold { @include TextBold(); }
+        &-medium { @include TextMedium(); }
+        &-regular { @include TextRegular(); }
+    }
+
+    &--text2 {
+        @include Text2();
+        &-bold { @include Text2Bold(); }
+        &-medium { @include Text2Medium(); }
+        &-regular { @include Text2Regular(); }
+    }
+}

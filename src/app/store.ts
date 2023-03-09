@@ -2,6 +2,7 @@ import { categoryApi } from "@entities/category/category.api"
 import categoryReducer from "@entities/category/category.slice"
 import deviceReducer from "@entities/device/device.slice"
 import mentorReducer from "@entities/mentor/mentor.slice"
+import { contactFormApi } from "@features/contact-form/contact-form.api"
 import contactFormReducer from "@features/contact-form/contact-from.slice"
 import searchReducer from "@features/search/search.slice"
 import { configureStore } from "@reduxjs/toolkit"
@@ -12,6 +13,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
 
 export const store = configureStore({
   reducer: {
+    [contactFormApi.reducerPath]: contactFormApi.reducer,
     [subscribeApi.reducerPath]: subscribeApi.reducer,
     [categoryApi.reducerPath]: categoryApi.reducer,
     [pagesApi.reducerPath]: pagesApi.reducer,
@@ -30,6 +32,7 @@ export const store = configureStore({
     getDefaultMiddleware({
       serializableCheck: false
     }).concat([
+      contactFormApi.middleware,
       subscribeApi.middleware,
       categoryApi.middleware,
       pagesApi.middleware

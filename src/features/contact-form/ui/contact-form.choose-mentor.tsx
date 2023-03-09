@@ -1,3 +1,4 @@
+import { ChatBubbleLeftEllipsisIcon } from "@heroicons/react/24/solid"
 import { Button, Field, Formus } from "@shared/ui"
 import { bem } from "@shared/utils"
 import cn from "classnames"
@@ -27,7 +28,10 @@ export function ContactFormChooseMentor({
 
   const elementControl = <>
     <Button size="biggest" color="dark" type="submit">
-      Get Help
+      <span className="flex flex-row gap-3">
+        <ChatBubbleLeftEllipsisIcon className="text-white w-5 h-5" />
+        Get Help
+      </span>
     </Button>
 
     <div 

@@ -1,9 +1,13 @@
+import "./field.input.scss"
+
 import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/20/solid"
-import { bem, classMerge } from "@shared/utils"
+import { bem } from "@shared/utils"
 import cn from "classnames"
+import { useState } from "react"
 import { FieldValues, useForm, useFormContext, UseFormRegister } from "react-hook-form"
 
-import { FieldInputType } from "./field.types"
+import { FieldInputType } from "../field.types"
+import { FieldHints } from "./field.hints"
 
 export interface IInputOptions {
   placeholder?: string
@@ -11,10 +15,12 @@ export interface IInputOptions {
 
 export interface IFieldInput {
   className?: string
+  disabled?: boolean
   
   hints?: Record<string, string>
   helper?: string
   label?: string
+  
   name: string
 }
 
@@ -24,34 +30,27 @@ const { getElement, getModifier } = bem(CN)
 
 export function FieldInput({
   className,
-
+  disabled,
   helper,
   hints,
   label,
   name
 }: IFieldInput) {
+  const [focused, setFocused] = useState(false)
 
   const { register, getFieldState, formState: { isDirty: isDirtyForm, isValid: isValidForm, errors: errorsForm } } = useFormContext()
   const { error, isDirty, isTouched, invalid } = getFieldState(name)
 
-  // console.group("input", name)
-  // console.log("errorsForm", errorsForm)
-  // console.log("error", error)
-  // console.groupEnd()
-
-  // const rHints = !hints || !error || Object.keys(error).length === 0 || Object.values(hints).length === 0? null : 
-  //   <div className={cn(getElement("hints"))}>
-  //     {Object.keys(hints).map(hintKey => error[hintKey] !== undefined )}
-  //   </div>
-
   return (
-    <label className={classMerge(
+    <label className={cn(
       getModifier(CN, MOD),
       className,
-      "grid grid-cols-1 grid-flow-row auto-rows-auto gap-y-1")}>
+      "grid grid-cols-1 grid-flow-row auto-rows-auto gap-y-1",
+      "relative"
+    )}>
       { label && 
         <span
-          className={classMerge(getElement("label"),
+          className={cn(getElement("label"),
             "block text-gray-800"
           )}
         >{label}</span> 
@@ -59,7 +58,7 @@ export function FieldInput({
 
       <div className="relative m-0 border-0">
         <input {...register(name)}
-          className={classMerge(getElement("input"),
+          className={cn(getElement("input"),
             "block w-full px-3 py-3 bg-gray-50",
             "text-black-900",
             "rounded-xl border-2",
@@ -81,6 +80,10 @@ export function FieldInput({
               ? "border-red focus:border-red" : "",
           )}
 
+          disabled={disabled !== undefined? disabled : false}
+
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
         />
 
         {isDirty && 
@@ -90,13 +93,20 @@ export function FieldInput({
           </div>
         }
 
-        {
+        {focused && hints && 
+          <FieldHints 
+            hints={hints}
 
+            {...{
+              isDirty,
+              error
+            }}
+          />
         }
 
       </div>
 
-      { helper && <span className={classMerge(getElement("helper"))}>{helper}</span> }
+      { helper && <span className={cn(getElement("helper"))}>{helper}</span> }
     </label>
   )
 } 

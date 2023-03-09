@@ -16,7 +16,7 @@ export const contactFormApi = createApi({
 
     postFormsIdApplications: builder.mutation<ContactFormType, ContactFormRequestParamsType>({
       query: ({ id, path, ...fields }) => ({
-        url: `/forms/${id}/applications`,
+        url: `/forms/${id}/applications/`,
         method: "POST",
         body: { path, ...fields }
       })

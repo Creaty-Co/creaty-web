@@ -1,6 +1,7 @@
 import { RootState } from "@app/store"
 import { createSelector,createSlice, PayloadAction } from "@reduxjs/toolkit"
 
+import { ContactForm } from "./contact-form"
 import { ContactFormType, ContactFormTypes, IContactFormState } from "./contact-form.types"
 
 const initialState: IContactFormState = {
@@ -93,12 +94,20 @@ export const contactFormSlice = createSlice({
     // setForms: (state, action: PayloadAction<Partial<typeof initialState>>) => action.payload,
     submitForm: (state, action: PayloadAction<{ type: ContactFormTypes }>) => {
       state[action.payload.type].submitted = true
+    },
+
+    submit: (state, action: PayloadAction<{ type: ContactFormTypes }>) => {
+      state[action.payload.type].submitted = true
+    },
+
+    reset: (state, action: PayloadAction<{ type: ContactFormTypes }>) => {
+      state[action.payload.type].submitted = false
     }
   },
 })
 
 export default contactFormSlice.reducer
-export const { submitForm } = contactFormSlice.actions
+export const { submitForm, submit, reset } = contactFormSlice.actions
 
 export const selectContactForms = (state: RootState) => state.contactForm
 export const selectContactFormByType = (type: ContactFormType["type"]) => createSelector(

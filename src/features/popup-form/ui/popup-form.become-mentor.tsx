@@ -5,27 +5,25 @@ import { useTranslation } from "react-i18next"
 
 import { PopupFormThanks } from "./popup-form.thanks"
 
-export interface IPopupFormTestMeeting {
+export interface IPopupFormBecomeMentor {
   className?: string
 } 
 
-const FORM_TYPE = "test_meeting"
-
-export function PopupFormTestMeeting({
+export function PopupFormBecomeMentor({
   className
-}: IPopupFormTestMeeting) {
+}: IPopupFormBecomeMentor) {
   /*
   const { t: tPopup } = useTranslation("translation", { keyPrefix: "popups.popupForm" })
   */
   const { t } = useTranslation("translation", { keyPrefix: "other" })
-  const form = useAppSelector(selectContactFormByType(FORM_TYPE))
+  const form = useAppSelector(selectContactFormByType("become_mentor"))
 
   const rForm = (
     <PopupLayout 
-      title={t(`forms.${FORM_TYPE}.title`)} 
+      title={t(`forms.become_mentor.title`)} 
       width="35em"
     >
-      <ContactForm type={FORM_TYPE} />
+      <ContactForm type="become_mentor" />
     </PopupLayout>
   )
 

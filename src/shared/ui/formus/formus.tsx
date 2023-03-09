@@ -13,8 +13,9 @@ export interface IFormus {
   onSubmit: SubmitHandler<FieldValues>
   schema?: yup.ObjectSchema<any>
   
-  elementControl?: ReactNode
   elementContent: ReactNode
+  elementControl?: ReactNode
+  elementAfter?: ReactNode
 }
 
 export interface IFormusHaveQuetions {
@@ -28,6 +29,7 @@ const { getElement } = bem(CN)
 export function Formus({
   elementControl,
   elementContent,
+  elementAfter,
 
   className,
   onSubmit,
@@ -43,7 +45,7 @@ export function Formus({
     criteriaMode: "all"
   })
 
-  const { formState: { isValid, isDirty, errors, submitCount } } = methods
+  const { formState: { isValid, isDirty, errors, submitCount, isSubmitSuccessful } } = methods
 
   /*
   console.log("isValid", isValid)
@@ -76,14 +78,6 @@ export function Formus({
     return () => { refTimeout.current && clearTimeout(refTimeout.current) }
   }, [submitCount])
 
-  /*
-  console.log("methods", methods)
-  console.log("formState", methods.formState)
-  console.log("isValid", isValid)
-  console.log("isDirty", isDirty)
-  console.log("errors", errors)
-  */
-
   return (
     <FormProvider {...methods}>
       <form 
@@ -105,13 +99,21 @@ export function Formus({
           {elementContent}
         </div>
 
-        <div 
-          className={cn(getElement("controll"),
-            "grid grid-flow-row grid-cols-1 grid-rows-auto gap-y-4"
-          )}
-        >
-          {elementControl}
-        </div>
+        {elementControl && 
+          <div 
+            className={cn(getElement("controll"),
+              "grid grid-flow-row grid-cols-1 grid-rows-auto gap-y-4"
+            )}
+          >
+            {elementControl}
+          </div>
+        }
+
+        {elementAfter && isSubmitSuccessful &&
+          <div className={cn(getElement("after"))}>
+            {elementAfter}
+          </div>
+        } 
 
         {!isValid && rErrorsRequeried && showNotifeis && rErrorsRequeried.length > 0 &&
           <div 

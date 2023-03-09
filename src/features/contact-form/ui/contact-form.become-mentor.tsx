@@ -1,11 +1,27 @@
+import { useAppDispatch, useAppSelector } from "@app/store"
+import { ChatBubbleBottomCenterIcon } from "@heroicons/react/24/solid"
 import { Button, Field, Formus } from "@shared/ui"
-import { bem } from "@shared/utils"
+import { bem, isEmail } from "@shared/utils"
 import cn from "classnames"
+import { FieldValues, SubmitHandler } from "react-hook-form"
 import * as yup from "yup"
 
+import { usePostFormsIdApplicationsMutation } from "../contact-form.api"
+import { selectContactFormByType, submit } from "../contact-from.slice"
+
 const schema = yup.object().shape({
-  fullname: yup.string().required(),
-  email: yup.string().email().required()
+  name: yup.string()
+    .required("Name"),
+
+  email: yup.string()
+    .test("email", function(value) {  
+      return (value && isEmail(value)) || this.createError({ path: this.path, message: "invalid email" }) 
+    })
+    .required("Email"),
+
+  about: yup.string().max(256, "Maximum length is 256 chapters"),
+
+  url: yup.string().required("LinkedIn URL")
 }).required()
 
 export interface IContactFormBecomeMentor {
@@ -15,19 +31,39 @@ export interface IContactFormBecomeMentor {
 const CN = "form"
 const MOD = "become-mentor"
 const { getElement, getModifier } = bem(CN)
+const FORM_TYPE = "become_mentor"
 
 export function ContactFormBecomeMentor({ 
   className
 }: IContactFormBecomeMentor) {
 
+  const form = useAppSelector(selectContactFormByType(FORM_TYPE))
+  const dispatch = useAppDispatch()
+
+  const [ postFormsIdApplications, { isLoading } ] = usePostFormsIdApplicationsMutation()
+  const onSubmit: SubmitHandler<FieldValues> = async (values: FieldValues) => {
+    await postFormsIdApplications({
+      id: form.id,
+      path: document.location.pathname,
+      values
+    })
+    
+    dispatch(submit({ type: FORM_TYPE }))
+  }
+
   const elementContent = <>
-    <Field type="input" name="fullname" label="Full name" />
-    <Field type="input" name="email" label="Email" />
+    <Field disabled={isLoading} type="input" name="name" label="Name*" />
+    <Field disabled={isLoading} type="input" name="email" label="Email*" />
+    <Field disabled={isLoading} type="textarea" name="about" label="About you" />
+    <Field disabled={isLoading} type="input" name="url" label="LinkedIn profile*" />
   </>
 
   const elementControl = <>
-    <Button size="biggest" color="dark" type="submit">
-      Get Help
+    <Button disabled={isLoading} size="biggest" color="dark" type="submit">
+      <span className="flex gap-3 flex-row">
+        <ChatBubbleBottomCenterIcon className="text-white w-5 h-5" />
+        Send application
+      </span>
     </Button>
 
     <div 
@@ -45,7 +81,7 @@ export function ContactFormBecomeMentor({
       elementContent={elementContent}
       elementControl={elementControl}
       schema={schema}
-      onSubmit={() => null}
+      onSubmit={onSubmit}
     />
   )
 }
