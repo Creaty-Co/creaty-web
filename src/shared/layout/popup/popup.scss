@@ -1,26 +1,31 @@
 @import "/src/app/assets/scss/bundle.scss";
 
 .popup-layout {
+	
 	position: relative;
-
+	
 	display: grid;
 	@include row-gap(32px);
+	grid-template: auto 1fr / 1fr;
 	
 	max-height: 80vh;
 	max-width: 480px;
-
+	
 	padding: 40px 40px 0;
-
+	
 	background: $color-white;
 	border-radius: 40px;
+	
+	overflow: hidden;
 	
 	// overflow: hidden;
 	// height: 90vh;
 	// width: 480px;
-
+	
 	&__container {
-		overflow: visible;
-		// overflow: auto;
+		// overflow: visible;
+		@include ScrollbarHidden;
+		overflow: auto;
 		padding-bottom: 24px;
 	}
 

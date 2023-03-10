@@ -89,6 +89,16 @@ $tabletMaxWidth: 1000px;
 	}
 }
 
+@mixin ScrollbarHidden() {
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+	// overflow: -moz-scrollbars-none;
+	&::-webkit-scrollbar {
+		display: none !important;
+		width: 0 !important
+	}
+}
+
 /* New mixins */
 /*
 $q-hd-screen: 3451px;
