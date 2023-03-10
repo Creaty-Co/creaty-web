@@ -13,13 +13,13 @@ import { Provider } from "react-redux"
 import { BrowserRouter } from "react-router-dom"
 import { ToastContainer } from "react-toastify"
 
+import { AppInit } from "./app-init"
 import { ErrorBoundary } from "./providers"
 import initSentry from "./providers/sentry"
 import { store } from "./store"
 
 function App() {
   if (process.env.NODE_ENV === "development") console.clear()
-  useGetTagsTopicsQuery({ page: 1, page_size: 25 })
 
   return (
     <StrictMode>
@@ -28,6 +28,7 @@ function App() {
           <I18nextProvider defaultNS="translation" i18n={i18next}>
             <Suspense fallback="">
               <ErrorBoundary fallback="Error">
+                <AppInit />
 
                 <LayoutPage>
                   <Router />

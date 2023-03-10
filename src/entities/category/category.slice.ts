@@ -17,7 +17,7 @@ export const topicsSlice = createSlice({
       state.list = action.payload.list
       state.tags = action.payload.tags
     }
-  },
+  }
 })
 
 export default topicsSlice.reducer
