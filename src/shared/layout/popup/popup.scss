@@ -23,7 +23,6 @@
 	// width: 480px;
 	
 	&__container {
-		// overflow: visible;
 		@include ScrollbarHidden;
 		overflow: auto;
 		padding-bottom: 24px;
