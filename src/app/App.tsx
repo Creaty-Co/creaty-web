@@ -1,6 +1,7 @@
 import "./assets/scss/base.scss"
 import "./assets/scss/app.scss"
 
+import { useGetTagsTopicsQuery } from "@entities/category/category.api"
 import { Cookies } from "@features/cookies" 
 import { Router } from "@pages"
 import { LayoutPage, ModalContainer } from "@shared/layout"
@@ -18,6 +19,7 @@ import { store } from "./store"
 
 function App() {
   if (process.env.NODE_ENV === "development") console.clear()
+  useGetTagsTopicsQuery({ page: 1, page_size: 25 })
 
   return (
     <StrictMode>
