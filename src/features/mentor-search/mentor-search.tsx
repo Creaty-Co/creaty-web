@@ -63,6 +63,12 @@ export function MentorSearch() {
   const scrolledToRef = useRef<boolean>(searchState.focused)
   const containerRef = useRef<HTMLDivElement>(null)
   useLayoutEffect(focusedScroll, [searchState.focused])
+  
+  /* Close on Escape */
+  const handleEscKey = useCallback((event: KeyboardEvent) => {
+    if (event.code === "Escape") close() 
+  }, [searchState.focused])
+  useLayoutEffect(closeOnEscape, [searchState.focused])
 
   /* Routes */ 
   const redirectTo = "/mentors" + (
@@ -343,6 +349,16 @@ export function MentorSearch() {
     document.body.style.overflow = ""
     window.scrollTo({ top: scrolledFromRef.current, behavior: "smooth" })
     scrolledToRef.current = false
+  }
+
+  /*
+    Handle escape button
+  */
+  function closeOnEscape() {
+    if (!searchState.focused) return
+
+    window.addEventListener("keydown", handleEscKey)
+    return () => window.removeEventListener("keydown", handleEscKey)
   }
 
   /*

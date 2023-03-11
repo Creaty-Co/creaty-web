@@ -10,6 +10,7 @@ const { getElement } = bem(CN)
 
 export interface IFieldHints {
   hints: Record<string,string>
+  value?: string
 
   isDirty: boolean
   error: FieldError | undefined
@@ -18,7 +19,10 @@ export interface IFieldHints {
 export const FieldHints = ({ hints, isDirty, error }: IFieldHints) => {
   const rElements = Object.keys(hints).map((hint: string) => {
     const isValid = !(error && "types" in error && error.types && hint in error.types)
-    return <FieldHint key={hint} {...{ isDirty, isValid, hint: hints[hint] }} />
+    return <FieldHint key={hint} {...{ 
+      isDirty, isValid, 
+      hint: hints[hint]
+    }} />
   })
 
   return (

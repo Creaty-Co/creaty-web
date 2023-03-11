@@ -1,19 +1,16 @@
-import "./field.input.scss"
+import "./field.textarea.scss"
 
 import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/20/solid"
 import { bem } from "@shared/utils"
 import cn from "classnames"
 import { useState } from "react"
-import { FieldValues, useForm, useFormContext, UseFormRegister } from "react-hook-form"
+import { useFormContext } from "react-hook-form"
 
-import { FieldInputType } from "../field.types"
 import { FieldHints } from "./field.hints"
 
-export interface IInputOptions {
+type FuncHint = (value:string) => string
+export interface IFieldTextarea {
   placeholder?: string
-}
-
-export interface IFieldInput {
   className?: string
   disabled?: boolean
   
@@ -25,29 +22,33 @@ export interface IFieldInput {
 }
 
 const CN = "field"
-const MOD = "input"
+const MOD = "textarea"
 const { getElement, getModifier } = bem(CN)
 
-export function FieldInput({
+export function FieldTextarea({
+  placeholder,
   className,
   disabled,
   helper,
   hints,
   label,
-  name
-}: IFieldInput) {
+  name,
+
+}: IFieldTextarea) {
   const [focused, setFocused] = useState(false)
 
-  const { register, getFieldState, getValues, formState: { isDirty: isDirtyForm, isValid: isValidForm, errors: errorsForm } } = useFormContext()
+  const { register, getFieldState, formState: { 
+    isDirty: isDirtyForm, isValid: isValidForm, errors: errorsForm } 
+  } = useFormContext()
   const { error, isDirty, isTouched, invalid } = getFieldState(name)
-  const value = getValues(name)
 
   return (
     <label className={cn(
       getModifier(CN, MOD),
       className,
       "grid grid-cols-1 grid-flow-row auto-rows-auto gap-y-1",
-      "relative"
+      "relative",
+      invalid && getModifier(CN, "invalid")
     )}>
       { label && 
         <span
@@ -58,11 +59,11 @@ export function FieldInput({
       }
 
       <div className="relative m-0 border-0">
-        <input {...register(name)}
-          className={cn(getElement("input"),
+        <textarea {...register(name)} rows={3}
+          className={cn(getElement("textarea"),
             "block w-full px-3 py-3 bg-gray-50",
             "text-black-900",
-            "rounded-xl border-2",
+            "rounded-xl border-2 rounded-br-sm",
             "focus:ring-0 focus:outline-none",
             "disabled:cursor-not-allowed disabled:border-gray-300 disabled:bg-gray-300 disabled:text-gray-500",
             /*
@@ -81,18 +82,12 @@ export function FieldInput({
               ? "border-red focus:border-red" : "",
           )}
 
+          placeholder={placeholder}
           disabled={disabled !== undefined? disabled : false}
 
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
         />
-
-        {isDirty && 
-          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-            {!invalid && <CheckCircleIcon className="h-5 w-5 text-green-700" /> }
-            {invalid && <XCircleIcon className="h-5 w-5 text-red" /> }
-          </div>
-        }
 
         {focused && hints && 
           <FieldHints 
@@ -100,8 +95,7 @@ export function FieldInput({
 
             {...{
               isDirty,
-              error,
-              value
+              error
             }}
           />
         }

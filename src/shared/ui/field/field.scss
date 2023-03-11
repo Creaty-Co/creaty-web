@@ -3,7 +3,7 @@
 .field {
   @include Text2;
   
-  &__label, &__input {
+  &__label, &__input, &__textarea {
     @include Text2; 
   }
 }

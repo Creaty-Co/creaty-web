@@ -24,7 +24,6 @@ export function ModalContainer({
   const isActive = useAppSelector(selectModalActive())
 
   const handleEscKey = useCallback((event: KeyboardEvent) => {
-    console.log("event.code", event.code)
     if (event.code === "Escape") dispatch(close()) 
   }, [isActive])
 
