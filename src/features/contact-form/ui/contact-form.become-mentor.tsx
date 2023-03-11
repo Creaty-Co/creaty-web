@@ -63,12 +63,20 @@ export function ContactFormBecomeMentor({
   const hintsAbout = {
     max: "Max width is 256 symbols"
   }
+  
+  const hintsEmail = {
+    email: "Should be like@this.com"
+  }
+
+  const hintsUrl = {
+    "linkedin-url": "Should be likedin.com/in/username"
+  }
 
   const elementContent = <>
     <Field disabled={isLoading} type="input" name="name" label="Name*" />
-    <Field disabled={isLoading} type="input" name="email" label="Email*" />
+    <Field disabled={isLoading} type="input" name="email" label="Email*" hints={hintsEmail} />
     <Field disabled={isLoading} type="textarea" name="about" label="About you" placeholder="Tell us about yourself!" hints={hintsAbout}/>
-    <Field disabled={isLoading} type="input" name="url" label="LinkedIn profile*" />
+    <Field disabled={isLoading} type="input" name="url" label="LinkedIn profile*" hints={hintsUrl} />
   </>
 
   const elementControl = <>
