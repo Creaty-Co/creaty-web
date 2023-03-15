@@ -44,16 +44,25 @@ module.exports = {
         700: "#0FAB60"
       },
 
+      "viol": {
+        50: "rgba(240, 244, 249, 0.7)",
+        100: "#EEEEFF",
+        200: "#A26CF5"
+      },
+
       "violet": "#6610EB",
       "blue": "#4eb4f9",
       "red": "#FF3434"
     },
 
-    /* borderRadius: {
-      "sm": "20px",
+    borderRadius: {
+      "3xl": "64px",
+      "2xl": "40px",
+      "sm": "8px",
       "lg": "22px",
-      "xl": "24px",
-    }, */
+      // "sm": "20px",
+      // "xl": "24px",
+    },
     extend: {
       fontFamily: {
         sans: ["Google Sans", "sans-serif"],

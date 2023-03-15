@@ -145,6 +145,12 @@ $font_size_small-phone-screen: math.round(math.div($font_size_middle-phone-scree
         @include H3();
         &-regular { @include H3Regular(); }
         &-bold { @include H3Bold(); }
+
+        @include for-size(big-phone-screen) {
+            @include H3(24px);
+            &-regular { @include H3Regular(24px); }
+            &-bold { @include H3Bold(24px); }
+        }
     }
 
     &--h4 {

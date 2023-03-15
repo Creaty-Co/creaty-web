@@ -2,20 +2,24 @@
 
 .user {
 	display: flex;
-	@include gap(1.25em);
-
+	flex-direction: row-reverse;
+	@include gap(20px);
+	
 	@include WidthLimit;
+	margin-top: 120px;
 
 	@include Mobile {
 		display: grid;
+		margin-top: 22vw;
 	}
-}
 
-.user__sections {
-	display: grid;
-	align-content: baseline;
-	@include row-gap(1.5em);
-	flex: 1;
+	/* Section */
+	&__sections {
+		display: grid;
+		align-content: baseline;
+		@include row-gap(1.5em);
+		flex: 1;
+	}
 }
 
 /* Card */
@@ -42,7 +46,7 @@
 	max-width: 18ch;
 	margin: 0 auto;
 
-	@include Typography(1.5rem, 400, $color-green);
+	// @include Typography(1.5rem, 400, $color-green);
 	text-align: center;
 }
 
@@ -52,9 +56,9 @@
 	display: flex;
 	@include gap(2.5em);
 
-	padding: 2.5em 4em;
+	padding: 40px 64px;
 	background: white;
-	border-radius: 2.5em;
+	border-radius: 32px;
 
 	&--1 {
 		.user-section__title {
@@ -71,11 +75,11 @@
 	}
 
 	&--3 {
-		background: $color-black-90;
+		background: #070707;
 		box-shadow: 0px 2px 8px rgba($color-green, 0.1), 0px 8px 80px rgba($color-green, 0.4);
 
 		.user-section__title {
-			margin-bottom: 1em;
+			margin-bottom: 32px;
 		}
 	}
 
@@ -95,7 +99,7 @@
 
 	p {
 		margin: 1em 0;
-		@include Typography(1.125rem, null, null);
+		// @include Typography(1.125rem, null, null);
 
 		em {
 			font-weight: bold;
@@ -127,7 +131,10 @@
 
 	margin: 0.5em 0;
 	color: $color-gray-50;
-	@include Typography(1.125rem, null, $color-white);
+	& em {
+		color: white
+	}
+	// @include Typography(1.125rem, null, $color-white);
 
 	@include Mobile {
 		align-items: flex-start;
@@ -145,4 +152,8 @@
 	@include Mobile {
 		--icon-size: 1.25em;
 	}
+}
+
+.packages {
+	box-shadow: 0px 2px 8px rgba(147, 78, 255, 0.1), 0px 8px 30px rgba(159, 97, 255, 0.3), 0px 8px 200px rgba(102, 16, 235, 0.7);
 }
