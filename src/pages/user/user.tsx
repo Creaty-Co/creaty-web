@@ -191,8 +191,8 @@ const Packages = () => (
       Select your mentoring plan
     </div>
 
-    <div className="packages bg-black-1000 rounded-3xl p-6 flex flex-col gap-4">
-      <div className="bg-black-900 rounded-2xl grid grid-cols-[1fr_auto] pl-10 pr-6 py-10 items-start">
+    <div className="packages bg-black-1000 rounded-3xl p-6 flex flex-col gap-4 gap-4">
+      <div className="bg-black-900 rounded-2xl grid grid-cols-[1fr_auto] pl-10 pr-6 pt-6 pb-10 items-start">
         <div className="grid grid-rows-[auto_auto] gap-2">
           <div className="font--h4-bold text-white">Free 15-minute trial session</div>
           <div className="font--text-regular text-gray-700">15-minute trial session without any commitment, to give you a taste of what's to come.</div>
@@ -201,7 +201,7 @@ const Packages = () => (
         <Button size="big" type="submit" color="white">Book now</Button>
       </div>
 
-      <div className="bg-white rounded-2xl grid grid-cols-[1fr_auto] pl-10 pr-6 py-10 items-start">
+      <div className="bg-white rounded-2xl grid grid-cols-[1fr_auto] pl-10 pr-6 py-6 items-start gap-4">
         <div className="grid grid-rows-[auto_auto] gap-2">
           <div className="font--h4-bold text-black-900">Mentoring session with <em className="text-violet">Gina T.</em></div>
           <div className="font--text-regular text-gray-800">1-hour personal mentoring session.<br />No nonsense, just straight-up support and guidance.</div>
@@ -211,8 +211,8 @@ const Packages = () => (
         <Button size="big" type="submit" color="violet">Book now</Button>
       </div>
 
-      <div className="bg-white rounded-2xl grid grid-rows-[auto_auto] gap-6 py-10">
-        <div className="grid grid-cols-[1fr_auto] pl-10 pr-6 items-start">
+      <div className="bg-white rounded-2xl grid grid-rows-[auto_auto] gap-6 py-6">
+        <div className="grid grid-cols-[1fr_auto] pl-10 pr-6 items-start gap-4">
           <div className="grid grid-rows-[auto_auto] gap-2">
             <div className="font--h4-bold text-black-900">Session packs <em className="text-violet">with discount</em></div>
             <div className="font--text-regular text-gray-800">Boost your creative career to new heights with a packs of  mentoring sessions and enjoy special prices.</div>
