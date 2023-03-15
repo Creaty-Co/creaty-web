@@ -5,6 +5,7 @@ import { selectTopics } from "@entities"
 import { HaveQuestions, MentorSearch, selectSearch, updateSearch } from "@features"
 import { useScrollToTop } from "@shared/hooks"
 import { bem, classMerge } from "@shared/utils"
+import cn from "classnames"
 import { useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import { useParams } from "react-router"
@@ -70,9 +71,13 @@ export function Mentors() {
               "heading"
             )}
           >    
-            <span className="weak">{t("title")}: </span>
+            <span className="weak">{t("title")}{(tagFromURL || topicFromURL) && ":"} </span>
             {pageTitle}
           </div>
+          
+          {!(tagFromURL || topicFromURL) && 
+            <div className={cn(getElement("desc"))}>{t("desc")}</div>
+          }
         </div>
 
         <MentorSearch/>

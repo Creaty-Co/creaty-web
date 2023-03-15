@@ -1,18 +1,18 @@
 import "./field.scss"
 
 import { FieldInputType } from "./field.types"
-import { FieldInput, IFieldInput } from "./ui"
+import { FieldInput, FieldTextarea, IFieldInput, IFieldTextarea } from "./ui"
 
 export type IFieldFactory = Record<FieldInputType, Function>
 export const FieldFactory: IFieldFactory = {
   "input": FieldInput,
   "password": FieldInput,
-  "textarea": FieldInput,
+  "textarea": FieldTextarea,
   "select": FieldInput,
 }
 
-type IFieldComponent = IFieldInput
-export interface IField extends IFieldComponent {
+export type IFieldComponent = IFieldInput | IFieldTextarea
+export interface IField extends IFieldInput, IFieldTextarea {
   type: FieldInputType
   name: string
 }

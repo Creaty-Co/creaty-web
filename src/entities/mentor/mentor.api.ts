@@ -6,14 +6,14 @@ import { getFetchBaseQuery } from "@shared/utils"
 import { mentorsPush } from "./mentor.slice"
 import { MentorDetailedType, MentorType } from "./mentor.types"
 
-export const mentorsApi = createApi({
-  reducerPath: "topicsApi",
+export const mentorApi = createApi({
+  reducerPath: "mentorApi",
 
   baseQuery: getFetchBaseQuery("/mentors"),
 
   endpoints: builder => ({
     getMentors: builder.query<PaginationType<MentorType>, PaginationQueryType>({
-      query: ({ page, page_size, tag_set__in }) => "/tags/categories?" + 
+      query: ({ page, page_size, tag_set__in }) => "/?" + 
         new URLSearchParams({ page: page + "", page_size: page_size + "", tag_set__in: tag_set__in?.filter(Boolean).join(",") || "" }).toString(),
 
       async onQueryStarted(args, { dispatch, queryFulfilled}) {
@@ -33,4 +33,4 @@ export const mentorsApi = createApi({
 export const {
   useGetMentorBySlugQuery,
   useGetMentorsQuery
-} = mentorsApi
+} = mentorApi

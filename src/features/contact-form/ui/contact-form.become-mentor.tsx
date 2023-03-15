@@ -19,9 +19,18 @@ const schema = yup.object().shape({
     })
     .required("Email"),
 
-  about: yup.string().max(256, "Maximum length is 256 chapters"),
+  about: yup.string().max(256, ({ value }) => {
+    return `Maximum 300 symbols. Now It's ${value.length}`
+  }),
 
-  url: yup.string().required("LinkedIn URL")
+  url: yup.string().test("linkedin-url", function(value) {
+    if (!value) return this.createError({ path: this.path, message: "no url" })
+
+    const regex = /^(?:http(?:s?):\/\/)?(?:www\.)?linkedin\.[a-z]+\/(?:in\/)(?<username>[A-Za-z0-9]+)\/?$/gi
+    const [ result ] = value.matchAll(regex)
+
+    return (result && !!result.groups?.username) || this.createError({ path: this.path, message: "no valid url" })
+  }).required("LinkedIn URL")
 }).required()
 
 export interface IContactFormBecomeMentor {
@@ -51,11 +60,23 @@ export function ContactFormBecomeMentor({
     dispatch(submit({ type: FORM_TYPE }))
   }
 
+  const hintsAbout = {
+    max: "Max width is 256 symbols"
+  }
+  
+  const hintsEmail = {
+    email: "Should be like@this.com"
+  }
+
+  const hintsUrl = {
+    "linkedin-url": "Should be likedin.com/in/username"
+  }
+
   const elementContent = <>
     <Field disabled={isLoading} type="input" name="name" label="Name*" />
-    <Field disabled={isLoading} type="input" name="email" label="Email*" />
-    <Field disabled={isLoading} type="textarea" name="about" label="About you" />
-    <Field disabled={isLoading} type="input" name="url" label="LinkedIn profile*" />
+    <Field disabled={isLoading} type="input" name="email" label="Email*" hints={hintsEmail} />
+    <Field disabled={isLoading} type="textarea" name="about" label="About you" placeholder="Tell us about yourself!" hints={hintsAbout}/>
+    <Field disabled={isLoading} type="input" name="url" label="LinkedIn profile*" hints={hintsUrl} />
   </>
 
   const elementControl = <>

@@ -111,6 +111,8 @@ $font_size_small-phone-screen: math.round(math.div($font_size_middle-phone-scree
     @include FontFamily;
     @include FontSize($size, $height);
     @include FontDecoration($weight, $style);
+
+    letter-spacing: 0.02em;
 }
 @mixin TagsRegular($size: 14px, $height: null) { @include Tags($size, $height, 400) }
 @mixin TagsBold($size: 14px, $height: null) { @include Tags($size, $height, 700) }
@@ -129,10 +131,26 @@ $font_size_small-phone-screen: math.round(math.div($font_size_middle-phone-scree
 @mixin CaptionRegular($size: 12px, $height: null) { @include Caption($size, $height, 400) }
 
 .font {
+    &--h1 {
+        @include H1();
+        &-bold { @include H1Bold(); }
+    }
+
+    &--h2 {
+        @include H2();
+        &-bold { @include H2Bold(); }
+    }
+
     &--h3 {
         @include H3();
         &-regular { @include H3Regular(); }
         &-bold { @include H3Bold(); }
+
+        @include for-size(big-phone-screen) {
+            @include H3(24px);
+            &-regular { @include H3Regular(24px); }
+            &-bold { @include H3Bold(24px); }
+        }
     }
 
     &--h4 {
@@ -154,5 +172,16 @@ $font_size_small-phone-screen: math.round(math.div($font_size_middle-phone-scree
         &-bold { @include Text2Bold(); }
         &-medium { @include Text2Medium(); }
         &-regular { @include Text2Regular(); }
+    }
+
+    &--tags {
+        @include Tags();
+        &-regular { @include TagsRegular(); }
+        &-bold { @include TagsBold(); }
+    }
+
+    &--caption {
+        @include Caption();
+        &-regular { @include CaptionRegular(); }
     }
 }

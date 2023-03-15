@@ -1,0 +1,7 @@
+@import "/src/app/assets/scss/bundle.scss";
+
+.field--textarea {
+  .field__textarea {
+    @include ScrollbarHidden;
+  }
+}

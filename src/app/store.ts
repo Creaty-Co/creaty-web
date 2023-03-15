@@ -1,6 +1,7 @@
 import { categoryApi } from "@entities/category/category.api"
 import categoryReducer from "@entities/category/category.slice"
 import deviceReducer from "@entities/device/device.slice"
+import { mentorApi } from "@entities/mentor/mentor.api"
 import mentorReducer from "@entities/mentor/mentor.slice"
 import { contactFormApi } from "@features/contact-form/contact-form.api"
 import contactFormReducer from "@features/contact-form/contact-from.slice"
@@ -16,6 +17,7 @@ export const store = configureStore({
     [contactFormApi.reducerPath]: contactFormApi.reducer,
     [subscribeApi.reducerPath]: subscribeApi.reducer,
     [categoryApi.reducerPath]: categoryApi.reducer,
+    [mentorApi.reducerPath]: mentorApi.reducer,
     [pagesApi.reducerPath]: pagesApi.reducer,
     
     contactForm: contactFormReducer,
@@ -35,6 +37,7 @@ export const store = configureStore({
       contactFormApi.middleware,
       subscribeApi.middleware,
       categoryApi.middleware,
+      mentorApi.middleware,
       pagesApi.middleware
     ]),
 })

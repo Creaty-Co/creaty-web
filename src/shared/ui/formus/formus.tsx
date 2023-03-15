@@ -121,7 +121,7 @@ export function Formus({
               "px-5 py-3 w-max",
               "bg-black-main opacity-90 rounded-2xl",
               "grid grid-cols-1 grid-flow-row gap-1 items-start",
-              "absolute top-0 left-2/4 -translate-x-1/2 -translate-y-1/4"
+              "absolute top-0 left-2/4 -translate-x-1/2 -translate-y-0"
             )}
           >
             <div className={cn(getElement("notifies-title"))}>

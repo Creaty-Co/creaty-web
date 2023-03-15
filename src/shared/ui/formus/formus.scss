@@ -10,9 +10,7 @@
     }
   }
 
-  &__notifies {
-    position: absolute;
-  }
+  &__notifies {}
 
   &__notify {
     @include Text2Regular();

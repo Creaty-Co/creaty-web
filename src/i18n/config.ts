@@ -11,7 +11,8 @@ import initReactMarkdownPostProcess from "./react-markdown-postprocess"
 export const localeLocalStorage = localStorage.getItem("lang") as LocaleKeys | null
 export const localeNavigator = window.navigator.language.split("-")[0] as LocaleKeys
 export const localeFallback: LocaleKeys = "en"
-export const localeCurrent: LocaleKeys = localeLocalStorage || localeNavigator || localeFallback
+// export const localeCurrent: LocaleKeys = localeLocalStorage || localeNavigator || localeFallback
+export const localeCurrent: LocaleKeys = localeFallback
 
 i18next
   .use(initReactMarkdownPostProcess)
