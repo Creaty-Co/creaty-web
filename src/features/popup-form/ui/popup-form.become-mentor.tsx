@@ -19,6 +19,8 @@ export function PopupFormBecomeMentor({
   const { t } = useTranslation("translation", { keyPrefix: "other" })
   const form = useAppSelector(selectContactFormByType("become_mentor"))
 
+  const fieldEmail = form.fields.find(field => field.name === "email")
+
   const rForm = (
     <PopupLayout 
       title="Apply to be a mentor"
@@ -31,14 +33,20 @@ export function PopupFormBecomeMentor({
           <li>with time available for sessions with students</li>
         </ol>
       </div>
-
-      <VerifyForm email="yasha.petrunin@gmail.com"/>
-      
+    
       <ContactForm type="become_mentor" />
     </PopupLayout>
   )
 
-  const rThanks = <PopupFormThanks />
+  const rThanks = (
+    <PopupLayout 
+      title="Verify your email"
+      width="35em"
+    >
+      <VerifyForm email="yasha.petrunin@gmail.com"/>
+    </PopupLayout>
+  )
+
   return (
     <>
       { form.submitted? rThanks : rForm }
