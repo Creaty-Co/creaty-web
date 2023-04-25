@@ -5,6 +5,8 @@ import { forwardRef, useEffect, useRef, useState } from "react"
 
 export interface IVerifyForm {
   className?: string
+
+  onSubmit: () => void
   email: string
 }
 
@@ -14,6 +16,7 @@ const { getElement } = bem(CN)
 
 export function VerifyForm({
   className,
+  onSubmit,
   email
 }: IVerifyForm) {
   const [submitted, setSubmitted] = useState(false)
@@ -34,6 +37,7 @@ export function VerifyForm({
     if (!ticktack) return
 
     animate()
+
     restSecondsRef.current = 30
     intervalRef.current = setInterval(() => {
       if (restSecondsRef.current > 1) {
@@ -44,17 +48,21 @@ export function VerifyForm({
         setTicktack(false)
       }
     }, 1000)
-    
+
     return () => {
       animationRequestRef.current && cancelAnimationFrame(animationRequestRef.current)
       intervalRef.current && clearInterval(intervalRef.current)
     }
   }, [ticktack])
 
-  const onSubmit = () => {
+  const onSubmitHandler = () => {
     const code = charInputRefs.current.map(input => input && input.value).filter(Boolean).join("")
-    if (code !== "123456") setHasError(true)
-    else setSubmitted(true)
+    if (code !== "123456") 
+      setHasError(true)
+    else {
+      setSubmitted(true)
+      onSubmit()
+    }
   }
 
   const rCharInputs = Array.from(
@@ -112,7 +120,7 @@ export function VerifyForm({
       
       <Button type="submit" color="dark" size="biggest"
         className="mt-6 w-full"
-        onClick={onSubmit}
+        onClick={onSubmitHandler}
       >
         Verify me
       </Button>
@@ -201,6 +209,7 @@ export function VerifyForm({
 
   function onChange(event: React.ChangeEvent) {
     if (hasError) setHasError(false)
+
     const target = event.target as HTMLInputElement
     const indexAttr = target.getAttribute("data-check-input-index")
 
@@ -237,6 +246,7 @@ interface IVFInput {
   className?: string
   index: number
 }
+
 const VFInput = forwardRef<HTMLInputElement, IVFInput>(({
   className,
   hasError,
@@ -248,7 +258,7 @@ const VFInput = forwardRef<HTMLInputElement, IVFInput>(({
     className={cn(getElement("input"), className,
       "py-3 px-4 w-14",
       "text-black-1000 text-center font--text-regular",
-      " border-2 rounded-xl",
+      " border-2 rounded-md",
       hasError? "border-red" : "border-gray-300"
     )}
     onChange={onChange}

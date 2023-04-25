@@ -30,7 +30,7 @@ const schema = yup.object().shape({
     const [ result ] = value.matchAll(regex)
 
     return (result && !!result.groups?.username) || this.createError({ path: this.path, message: "no valid url" })
-  }).required("LinkedIn URL")
+  })
 }).required()
 
 export interface IContactFormBecomeMentor {
@@ -76,7 +76,7 @@ export function ContactFormBecomeMentor({
     <Field disabled={isLoading} type="input" name="name" label="Name*" />
     <Field disabled={isLoading} type="input" name="email" label="Email*" hints={hintsEmail} />
     <Field disabled={isLoading} type="textarea" name="about" label="About you" placeholder="Tell us about yourself!" hints={hintsAbout}/>
-    <Field disabled={isLoading} type="input" name="url" label="LinkedIn profile*" hints={hintsUrl} />
+    <Field disabled={isLoading} type="input" name="url" label="LinkedIn profile" hints={hintsUrl} />
   </>
 
   const elementControl = <>

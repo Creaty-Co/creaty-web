@@ -11,6 +11,14 @@ const ENV_PREFIX = "REACT_APP_"
 export default defineConfig(({ mode }) => {
   return {
     plugins: [envCompatible({ prefix: ENV_PREFIX }), react(), eslint()],
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `@import "@app/assets/scss/_mixins.scss"; 
+          @import "@app/assets/scss/_colors.scss";`
+        }
+      }
+    },
     resolve: {
       alias: {
         /* FSD structure */

@@ -31,7 +31,7 @@ export const FieldHints = ({ hints, isDirty, error }: IFieldHints) => {
         getElement("hints"),
         "absolute -top-2 left-1/2 -translate-x-1/2 -translate-y-full z-10",
         "px-5 py-3 w-max",
-        "bg-black-main opacity-90 rounded-2xl",
+        "bg-black-main opacity-90 rounded-md",
       )}
     >
       {rElements}

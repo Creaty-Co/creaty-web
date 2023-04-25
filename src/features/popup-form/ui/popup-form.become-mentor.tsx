@@ -43,7 +43,10 @@ export function PopupFormBecomeMentor({
       title="Verify your email"
       width="35em"
     >
-      <VerifyForm email="yasha.petrunin@gmail.com"/>
+      <VerifyForm 
+        email="yasha.petrunin@gmail.com"
+        onSubmit={() => console.log("submitted")}
+      />
     </PopupLayout>
   )
 

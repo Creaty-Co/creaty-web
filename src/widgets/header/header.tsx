@@ -36,7 +36,7 @@ export function Header({
   }), [location])
   
   return (
-    <header className={classMerge(CN, className)}>
+    <header className={classMerge(CN, className, "select-none")}>
       <div className={getElement("container")}>
 
         <div aria-label="Home">
@@ -70,12 +70,12 @@ export function Header({
           <div className={getElement("sign-group")}>
             <Button size="little"
               className={getElement("log-in")}
-              onClick={() => console.log("log-in")}
+              onClick={() => dispatch(open(<PopupForm type="sign-in" />))}
             >Log In</Button>
 
             <Button size="little"
               className={getElement("sign-up")}
-              onClick={() => console.log("sign-up")}
+              onClick={() => dispatch(open(<PopupForm type="sign-up" />))}
             >Sign up</Button>
           </div>
         </div>

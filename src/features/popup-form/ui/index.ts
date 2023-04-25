@@ -1,3 +1,6 @@
 export * from "./popup-form.become-mentor"
 export * from "./popup-form.test-meeting"
 export * from "./popup-form.thanks"
+export * from "./popup-form.choose-mentor"
+export * from "./popup-form.sign-in"
+export * from "./popup-form.sign-up"

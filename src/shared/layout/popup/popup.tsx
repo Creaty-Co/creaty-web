@@ -12,39 +12,54 @@ const CN = "popup-layout"
 const { getElement } = bem(CN)
 
 export interface IPopupLayout {
-  title: string
+  title: string | React.ReactNode
   width?: string
   children: ReactNode
 
   controlled?: boolean
   controll?: ReactNode
+
+  className?: string
+  theme?: "dark" | "light"
 }
 
-export function PopupLayout(props: IPopupLayout) {
+export function PopupLayout({
+  className,
+  theme = "light",
+
+  width,
+  title,
+
+  controll,
+  children,
+}: IPopupLayout) {
   const dispatch = useAppDispatch()
   
   return (
-    <div className={CN} style={{ width: props.width }}>
-      
+    <div 
+      className={cn(CN, className, theme === "light"? "bg-white": `bg-black-900 ${CN}--dark`)} 
+      style={{ width: width }}
+    >
+
       <div className={getElement("close")}>
         <ButtonIcon 
           name="cross" size="small" color="white" outline 
           onClick={() => dispatch(close())} 
         />
       </div>
-      
+
       <h3 className={cn(getElement("title"), "heading")}>
-        {props.title}
+        {title}
       </h3>
 
-      {props.controll && 
+      {controll && 
         <div className={getElement("controlled")}>
-          {props.controll}
+          {controll}
         </div>
       }
-      
+
       <div className={getElement("container")}>
-        {props.children}
+        {children}
       </div>
     </div>
   )

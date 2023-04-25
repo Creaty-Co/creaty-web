@@ -11,7 +11,7 @@ import * as yup from "yup"
 export interface IFormus {
   className?: string
   onSubmit: SubmitHandler<FieldValues>
-  schema?: yup.ObjectSchema<any>
+  schema: yup.ObjectSchema<any>
   
   elementContent: ReactNode
   elementControl?: ReactNode

@@ -59,9 +59,9 @@ module.exports = {
       "3xl": "64px",
       "2xl": "40px",
       "sm": "8px",
+      "md": "16px",
       "lg": "22px",
-      // "sm": "20px",
-      // "xl": "24px",
+      "xl": "24px",
     },
     extend: {
       fontFamily: {

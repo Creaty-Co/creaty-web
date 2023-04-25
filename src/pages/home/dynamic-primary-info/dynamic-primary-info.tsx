@@ -85,7 +85,7 @@ export function DynamicPrimaryInfo(props: IDynamicPrimaryInfo) {
   }, [props.firstHeadingShortcut, topics])
 
   return (
-    <div className={CN}>
+    <div className={cn(CN, "select-none")}>
       <div className={cn(getElement("title"), "heading")}>
         <em>{dynamicHeading}</em>
         <span>{t("title")}</span>

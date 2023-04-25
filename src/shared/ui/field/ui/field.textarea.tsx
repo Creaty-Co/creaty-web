@@ -63,7 +63,7 @@ export function FieldTextarea({
           className={cn(getElement("textarea"),
             "block w-full px-3 py-3 bg-gray-50",
             "text-black-900",
-            "rounded-xl border-2 rounded-br-sm",
+            "rounded-md border-2 rounded-br-sm",
             "focus:ring-0 focus:outline-none",
             "disabled:cursor-not-allowed disabled:border-gray-300 disabled:bg-gray-300 disabled:text-gray-500",
             /*

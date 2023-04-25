@@ -3,6 +3,8 @@ import categoryReducer from "@entities/category/category.slice"
 import deviceReducer from "@entities/device/device.slice"
 import { mentorApi } from "@entities/mentor/mentor.api"
 import mentorReducer from "@entities/mentor/mentor.slice"
+import { authApi } from "@features/auth/auth.api"
+import authReducer from "@features/auth/auth.slice"
 import { contactFormApi } from "@features/contact-form/contact-form.api"
 import contactFormReducer from "@features/contact-form/contact-from.slice"
 import searchReducer from "@features/search/search.slice"
@@ -19,6 +21,7 @@ export const store = configureStore({
     [categoryApi.reducerPath]: categoryApi.reducer,
     [mentorApi.reducerPath]: mentorApi.reducer,
     [pagesApi.reducerPath]: pagesApi.reducer,
+    [authApi.reducerPath]: authApi.reducer,
     
     contactForm: contactFormReducer,
     topics: categoryReducer,
@@ -26,6 +29,7 @@ export const store = configureStore({
     device: deviceReducer,
     search: searchReducer,
     modal: modalReducer,
+    auth: authReducer,
   },
 
   devTools: process.env.NODE_ENV === "development",
@@ -38,7 +42,8 @@ export const store = configureStore({
       subscribeApi.middleware,
       categoryApi.middleware,
       mentorApi.middleware,
-      pagesApi.middleware
+      pagesApi.middleware,
+      authApi.middleware
     ]),
 })
 

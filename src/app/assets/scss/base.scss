@@ -19,6 +19,8 @@ body {
 
 	background: $color-black-main;
 	margin: 0;
+
+  @include ScrollbarHidden;
 }
 
 em {
