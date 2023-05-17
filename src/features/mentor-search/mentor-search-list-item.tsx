@@ -89,7 +89,7 @@ interface ISwitchIcons {
 const SwitchIcons = ({
   dataAttrsIcon,
   state, 
-  id,
+  // id,
 }: ISwitchIcons) => (
   <div className={getElement("wrapper")} {...dataAttrsIcon}>
     <Icon name="chevron"

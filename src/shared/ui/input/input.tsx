@@ -13,7 +13,7 @@ export interface InputStrainType<V> {
 }
 
 const CN = "input"
-const { getElement, getModifier } = bem(CN)
+const { getElement } = bem(CN)
 
 interface InputProps<V> extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
   masks?: InputStrainType<V>[]

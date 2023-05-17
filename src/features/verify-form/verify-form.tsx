@@ -16,12 +16,12 @@ export function VerifyForm({
   className,
   email
 }: IVerifyForm) {
-  const [submitted, setSubmitted] = useState(false)
+  // const [submitted, setSubmitted] = useState(false)
   const [hasError, setHasError] = useState(false)
 
   const [ticktack, setTicktack] = useState(false)
   const elementSecondsRef = useRef<HTMLSpanElement|null>(null)
-  const intervalRef = useRef<NodeJS.Timer | null>(null)
+  const intervalRef = useRef<NodeJS.Timer | undefined>()
 
   const animationRequestRef = useRef<number | null>(null)
   const restSecondsRef = useRef<number>(0)
@@ -39,8 +39,8 @@ export function VerifyForm({
       if (restSecondsRef.current > 1) {
         restSecondsRef.current = restSecondsRef.current - 1
       } else {
-        clearInterval(intervalRef.current!)
-        intervalRef.current = null
+        clearInterval(intervalRef.current)
+        intervalRef.current = undefined
         setTicktack(false)
       }
     }, 1000)
@@ -54,7 +54,7 @@ export function VerifyForm({
   const onSubmit = () => {
     const code = charInputRefs.current.map(input => input && input.value).filter(Boolean).join("")
     if (code !== "123456") setHasError(true)
-    else setSubmitted(true)
+    // else setSubmitted(true)
   }
 
   const rCharInputs = Array.from(

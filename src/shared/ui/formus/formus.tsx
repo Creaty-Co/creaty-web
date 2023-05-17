@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import { bem } from "@shared/utils"
 import cn from "classnames"
 import { ReactNode, useEffect, useRef, useState } from "react"
-import { FieldError, FieldValues, FormProvider, SubmitHandler, useForm } from "react-hook-form"
+import { FieldValues, FormProvider, SubmitHandler, useForm } from "react-hook-form"
 import * as yup from "yup"
 
 export interface IFormus {
@@ -45,7 +45,7 @@ export function Formus({
     criteriaMode: "all"
   })
 
-  const { formState: { isValid, isDirty, errors, submitCount, isSubmitSuccessful } } = methods
+  const { formState: { isValid, errors, submitCount, isSubmitSuccessful } } = methods
 
   /*
   console.log("isValid", isValid)

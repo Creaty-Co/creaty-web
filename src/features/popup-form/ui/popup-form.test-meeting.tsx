@@ -11,9 +11,7 @@ export interface IPopupFormTestMeeting {
 
 const FORM_TYPE = "test_meeting"
 
-export function PopupFormTestMeeting({
-  className
-}: IPopupFormTestMeeting) {
+export function PopupFormTestMeeting() {
   /*
   const { t: tPopup } = useTranslation("translation", { keyPrefix: "popups.popupForm" })
   */

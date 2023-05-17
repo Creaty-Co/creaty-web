@@ -13,6 +13,7 @@ export function getOrientation(): string | null {
     case 90: return "landscape-secondary"
     case -90: return "landscape-primary"
     case 180: return "portrait-primary"
+    default: return ""
   }
 
   return null

@@ -1,7 +1,7 @@
 import { RootState } from "@app/store"
 import { createSelector,createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-import { ContactForm } from "./contact-form"
+// import { ContactForm } from "./contact-form"
 import { ContactFormType, ContactFormTypes, IContactFormState } from "./contact-form.types"
 
 const initialState: IContactFormState = {

@@ -1,7 +1,6 @@
 import { Button, Field, Formus } from "@shared/ui"
 import { bem } from "@shared/utils"
 import cn from "classnames"
-import * as yup from "yup"
 
 export interface IFormStillQuestions {
   className?: string  

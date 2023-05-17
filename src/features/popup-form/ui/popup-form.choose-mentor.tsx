@@ -11,9 +11,7 @@ export interface IPopupFormBecomeMentor {
 
 const FORM_TYPE = "choose_mentor"
 
-export function PopupFormBecomeMentor({
-  className
-}: IPopupFormBecomeMentor) {
+export function PopupFormBecomeMentor() {
   /*
   const { t: tPopup } = useTranslation("translation", { keyPrefix: "popups.popupForm" })
   */

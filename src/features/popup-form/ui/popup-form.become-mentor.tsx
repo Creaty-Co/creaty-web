@@ -2,24 +2,18 @@ import { useAppSelector } from "@app/store"
 import { ContactForm, selectContactFormByType } from "@features/contact-form"
 import { VerifyForm } from "@features/verify-form"
 import { PopupLayout } from "@shared/layout"
-import { useTranslation } from "react-i18next"
-
-import { PopupFormThanks } from "./popup-form.thanks"
 
 export interface IPopupFormBecomeMentor {
   className?: string
 } 
 
-export function PopupFormBecomeMentor({
-  className
-}: IPopupFormBecomeMentor) {
+export function PopupFormBecomeMentor() {
   /*
   const { t: tPopup } = useTranslation("translation", { keyPrefix: "popups.popupForm" })
   */
-  const { t } = useTranslation("translation", { keyPrefix: "other" })
   const form = useAppSelector(selectContactFormByType("become_mentor"))
 
-  const fieldEmail = form.fields.find(field => field.name === "email")
+  // const fieldEmail = form.fields.find(field => field.name === "email")
 
   const rForm = (
     <PopupLayout 
