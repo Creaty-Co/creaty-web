@@ -92,10 +92,7 @@ export const contactFormSlice = createSlice({
   
   reducers: {
     // setForms: (state, action: PayloadAction<Partial<typeof initialState>>) => action.payload,
-    submitForm: (state, action: PayloadAction<{ type: ContactFormTypes }>) => {
-      state[action.payload.type].submitted = true
-    },
-
+   
     submit: (state, action: PayloadAction<{ type: ContactFormTypes }>) => {
       state[action.payload.type].submitted = true
     },
@@ -107,7 +104,7 @@ export const contactFormSlice = createSlice({
 })
 
 export default contactFormSlice.reducer
-export const { submitForm, submit, reset } = contactFormSlice.actions
+export const { submit, reset } = contactFormSlice.actions
 
 export const selectContactForms = (state: RootState) => state.contactForm
 export const selectContactFormByType = (type: ContactFormType["type"]) => createSelector(

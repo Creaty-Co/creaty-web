@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@app/store"
-import { selectContactFormByType, submitForm } from "@features/contact-form"
+import { selectContactFormByType, submit } from "@features/contact-form"
 import { Button, Field, Formus } from "@shared/ui"
 import { bem } from "@shared/utils"
 import cn from "classnames"
@@ -39,7 +39,7 @@ export function ContactFormTestMeeting({
       values
     })
     
-    dispatch(submitForm({ type: "test_meeting" }))
+    dispatch(submit({ type: "test_meeting" }))
   }
 
   const elementContent = <>
