@@ -32,6 +32,7 @@
     "no-multi-spaces": "error",
     "simple-import-sort/imports": "error",
     "semi": ["error", "never"],
+    "no-debugger": "warn",
 
     "indent": [
       "error",

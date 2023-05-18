@@ -16,7 +16,6 @@ import { ErrorBoundary } from "./providers"
 import { store } from "./store"
 
 function App() {
-  if (process.env.NODE_ENV === "development") console.clear()
 
   return (
     <StrictMode>

@@ -1,8 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react"
-import { ResponseLocaleLanguage } from "@shared/lib/i18n"
 import { PaginationType } from "@shared/types"
 import { getFetchBaseQuery } from "@shared/utils"
-import { ResourceKey } from "i18next"
 
 import { PageFAQType, PageLinkSocialType, PageLinkType, PagePersonalType, PageType } from "./pages.types"
 
@@ -10,9 +8,6 @@ export const pagesApi = createApi({
   reducerPath: "pagesApi",
 
   baseQuery: getFetchBaseQuery("/pages"),
-  // baseQuery: fetchBaseQuery({
-  //   baseUrl: "/"
-  // }),
 
   endpoints: builder => ({
     getPagesMain: builder.query<PageType, void>({
@@ -34,16 +29,10 @@ export const pagesApi = createApi({
     getPagesFAQs: builder.query<PaginationType<PageFAQType>, void>({
       query: () => "/faqs"
     }),
-
-    getPagesLocalesLanguageNamespace: builder.query<ResourceKey, ResponseLocaleLanguage>({
-      query: ({ language, namespace }) => `/locales/${language}/${namespace}.json`
-    }),
-
   })
 })
 
 export const {
-  useGetPagesLocalesLanguageNamespaceQuery,
   useGetPagesLinksDocumentsQuery,
   useGetPagesLinksSocialsQuery,
   useGetPagePersonalQuery,
