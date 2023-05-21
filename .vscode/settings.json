@@ -8,5 +8,12 @@
     "Creaty"
   ],
   "editor.tabSize": 2,
-  "prettier.printWidth": 120
+  "prettier.printWidth": 120,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "eslint.format.enable": true,
 }
