@@ -1,7 +1,7 @@
 import "./how-it-works.scss"
 
 import { useAppDispatch } from "@app/store"
-import { PopupForm } from "@features/popup-form" 
+import { PopupForm } from "@features/PopupForm" 
 import { open } from "@shared/layout/modal"
 import { BulletPoint ,Button, InfoSection } from "@shared/ui"
 import { bem } from "@shared/utils"

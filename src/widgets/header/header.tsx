@@ -11,6 +11,8 @@ import ReactGA from "react-ga4"
 import { useTranslation } from "react-i18next"
 import { Link, useLocation } from "react-router-dom"
 
+import { SignUp } from "../../features/SignUp/SignUp"
+
 export interface IHeader {
   className?: string
 }
@@ -73,10 +75,7 @@ export function Header({
               onClick={() => console.log("log-in")}
             >Log In</Button>
 
-            <Button size="little"
-              className={getElement("sign-up")}
-              onClick={() => console.log("sign-up")}
-            >Sign up</Button>
+            <SignUp/>
           </div>
         </div>
         

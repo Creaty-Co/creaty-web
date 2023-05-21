@@ -24,28 +24,28 @@ export const modalSlice = createSlice({
       state.isActive = false
     },
 
-    /* Content */
-    setContent: (state, action: PayloadAction<ModalType["elementContent"]>) => {
-      state.elementContent = action.payload
-    },
+    // /* Content */
+    // setContent: (state, action: PayloadAction<ModalType["elementContent"]>) => {
+    //   state.elementContent = action.payload
+    // },
 
-    /* Visibility */ 
-    toggle: (state) => {
-      state.isActive = !state.isActive
-    },
+    // /* Visibility */ 
+    // toggle: (state) => {
+    //   state.isActive = !state.isActive
+    // },
 
-    show: (state) => {
-      state.isActive = true
-    },
+    // show: (state) => {
+    //   state.isActive = true
+    // },
 
-    hide: (state) => {
-      state.isActive = false
-    }
+    // hide: (state) => {
+    //   state.isActive = false
+    // }
   }
 })
 
 export default modalSlice.reducer
-export const { open, close, setContent, toggle, show, hide } = modalSlice.actions
+export const { open, close } = modalSlice.actions
 
 export const selectModal = (state: RootState) => state.modal
 export const selectModalActive = () => createSelector(

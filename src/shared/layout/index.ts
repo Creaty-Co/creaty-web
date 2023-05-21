@@ -1,3 +1,2 @@
-export * from "./popup"
+export * from "./PopupLayout/PopupLayout"
 export * from "./modal"
-export * from "./page"

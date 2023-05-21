@@ -3,8 +3,8 @@ import categoryReducer from "@entities/category/category.slice"
 import deviceReducer from "@entities/device/device.slice"
 import { mentorApi } from "@entities/mentor/mentor.api"
 import mentorReducer from "@entities/mentor/mentor.slice"
-import { contactFormApi } from "@features/contact-form/contact-form.api"
-import contactFormReducer from "@features/contact-form/contact-from.slice"
+import { FormApi } from "@features/Form/form.api"
+import formReducer from "@features/Form/form.slice"
 import searchReducer from "@features/search/search.slice"
 import { configureStore } from "@reduxjs/toolkit"
 import { pagesApi } from "@shared/api"
@@ -14,13 +14,13 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
 
 export const store = configureStore({
   reducer: {
-    [contactFormApi.reducerPath]: contactFormApi.reducer,
+    [FormApi.reducerPath]: FormApi.reducer,
     [subscribeApi.reducerPath]: subscribeApi.reducer,
     [categoryApi.reducerPath]: categoryApi.reducer,
     [mentorApi.reducerPath]: mentorApi.reducer,
     [pagesApi.reducerPath]: pagesApi.reducer,
     
-    contactForm: contactFormReducer,
+    form: formReducer,
     topics: categoryReducer,
     mentor: mentorReducer,
     device: deviceReducer,
@@ -34,7 +34,7 @@ export const store = configureStore({
     getDefaultMiddleware({
       serializableCheck: false
     }).concat([
-      contactFormApi.middleware,
+      FormApi.middleware,
       subscribeApi.middleware,
       categoryApi.middleware,
       mentorApi.middleware,

@@ -1,9 +1,10 @@
 import "./assets/scss/base.scss"
 import "./assets/scss/app.scss"
 
-import { Cookies } from "@features/cookies" 
+import { Cookies } from "@features/cookies"
 import { Router } from "@pages"
-import { LayoutPage, ModalContainer } from "@shared/layout"
+import { ModalContainer } from "@shared/layout"
+import { Header } from "@widgets"
 import i18next from "i18next"
 import { StrictMode, Suspense } from "react"
 import { I18nextProvider } from "react-i18next"
@@ -16,7 +17,6 @@ import { ErrorBoundary } from "./providers"
 import { store } from "./store"
 
 function App() {
-
   return (
     <StrictMode>
       <BrowserRouter>
@@ -26,15 +26,15 @@ function App() {
               <ErrorBoundary fallback="Error">
                 <AppInit />
 
-                <LayoutPage>
+                <Header />
+                <main>
                   <Router />
-                </LayoutPage>
+                </main>
 
                 <Cookies />
-                
+
                 <ModalContainer />
                 <ToastContainer />
-
               </ErrorBoundary>
             </Suspense>
           </I18nextProvider>
