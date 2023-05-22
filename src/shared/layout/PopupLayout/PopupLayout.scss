@@ -1,49 +1,54 @@
 @import "/src/app/assets/scss/bundle.scss";
 
-.popup-layout {	
-	position: relative;
-	
-	display: grid;
-	@include row-gap(8px);
-	grid-template: auto 1fr / 1fr;
-	
-	max-height: 97vh;
-	max-width: 480px;
-	
-	padding: 40px 40px 0;
-	
-	background: $color-white;
-	border-radius: 40px;
-	
-	overflow: hidden;
-	
-	&__container {
-		@include ScrollbarHidden;
-		overflow: auto;
-		padding-bottom: 24px;
-	}
+.popup-layout {
+  position: relative;
 
-	&__close {
-		position: absolute;
-		top: 20px;
-		right: 20px;
-		z-index: 9;
-	
-		margin-left: auto;
-		& > .button {
-			box-shadow: none;
-			&:hover {
-				box-shadow: none;
-			}
-		}
-	}
+  display: grid;
+  @include row-gap(8px);
+  grid-template: auto 1fr / 1fr;
 
-	&__title {
-		color: $color-black-main;
-		@include H3Bold();
+  max-height: 97vh;
+  max-width: 480px;
 
-		em {
-			color: $color-violet;
-		}
-	}
+  padding: 40px 40px 0;
+
+  background: $color-white;
+  border-radius: 40px;
+
+  overflow: hidden;
+
+  &__container {
+    @include ScrollbarHidden;
+    overflow: auto;
+    padding-bottom: 24px;
+  }
+
+  &__close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 9;
+
+    margin-left: auto;
+    & > .button {
+      box-shadow: none;
+      &:hover {
+        box-shadow: none;
+      }
+    }
+  }
+
+  &__title {
+    color: $color-black-main;
+    @include H3Bold();
+
+    em {
+      color: $color-violet;
+    }
+  }
+
+  &__sub-title {
+    color: $color-black-main;
+    @include Text2();
+  }
 }

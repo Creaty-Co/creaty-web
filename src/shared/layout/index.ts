@@ -1,2 +1,3 @@
 export * from "./PopupLayout/PopupLayout"
-export * from "./modal"
+export * from "./ModalContainer/ModalContainer"
+export * from "./ModalContainer/modalContainerSlice"

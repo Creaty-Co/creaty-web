@@ -13,4 +13,9 @@
       width: 100%;
     }
   }
+
+  &__confirmation {
+    @include H3Regular();
+    color: $color-black-90;
+  }
 }

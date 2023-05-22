@@ -3,23 +3,41 @@ import categoryReducer from "@entities/category/category.slice"
 import deviceReducer from "@entities/device/device.slice"
 import { mentorApi } from "@entities/mentor/mentor.api"
 import mentorReducer from "@entities/mentor/mentor.slice"
+import { AuthApi } from "@features/auth/auth.api"
+import authReducer from "@features/auth/auth.slice"
 import { FormApi } from "@features/Form/form.api"
 import formReducer from "@features/Form/form.slice"
 import searchReducer from "@features/search/search.slice"
 import { configureStore } from "@reduxjs/toolkit"
 import { pagesApi } from "@shared/api"
-import modalReducer from "@shared/layout/modal/modal.slice"
+import modalReducer from "@shared/layout/ModalContainer/modalContainerSlice"
 import { subscribeApi } from "@shared/ui/subscribe"
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
+import logger from "redux-logger"
+
+const development = process.env.NODE_ENV === "development"
+
+const middlewares = [
+  AuthApi.middleware,
+  FormApi.middleware,
+  subscribeApi.middleware,
+  categoryApi.middleware,
+  mentorApi.middleware,
+  pagesApi.middleware
+]
+
+if (development) middlewares.push(logger)
 
 export const store = configureStore({
   reducer: {
+    [AuthApi.reducerPath]: AuthApi.reducer,
     [FormApi.reducerPath]: FormApi.reducer,
     [subscribeApi.reducerPath]: subscribeApi.reducer,
     [categoryApi.reducerPath]: categoryApi.reducer,
     [mentorApi.reducerPath]: mentorApi.reducer,
     [pagesApi.reducerPath]: pagesApi.reducer,
     
+    auth: authReducer,
     form: formReducer,
     topics: categoryReducer,
     mentor: mentorReducer,
@@ -28,18 +46,12 @@ export const store = configureStore({
     modal: modalReducer,
   },
 
-  devTools: process.env.NODE_ENV === "development",
+  devTools: development,
 
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false
-    }).concat([
-      FormApi.middleware,
-      subscribeApi.middleware,
-      categoryApi.middleware,
-      mentorApi.middleware,
-      pagesApi.middleware
-    ]),
+    }).concat(middlewares),
 })
 
 export type RootState = ReturnType<typeof store.getState>

@@ -12,7 +12,7 @@ import { useParams } from "react-router"
 import { BecomeMentor } from "./become-mentor/become-mentor"
 import { DynamicPrimaryInfo } from "./dynamic-primary-info/dynamic-primary-info"
 import { HelpfulCreaty } from "./helpful-creaty"
-import { HowItWorks } from "./how-it-works"
+import { HowItWorks } from "./HowItWorks"
 import { MailingSubscribe } from "./mailing-subscribe"
 import { QAndA } from "./q-and-a" 
 

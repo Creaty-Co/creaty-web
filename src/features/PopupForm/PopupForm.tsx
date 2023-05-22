@@ -1,4 +1,5 @@
 import { FormTypes } from "@features/Form"
+import { ReactNode } from "react"
 
 import { PopupFormBecomeMentor, PopupFormTestMeeting } from "./index"
 
@@ -9,6 +10,7 @@ export interface IPopupFormComponent {
 export interface IPopupForm {
   type: FormTypes | string
   className?: string
+  popup?: ReactNode
 }
 
 export interface IPopupFormFactory extends Record<FormTypes | string, React.FC<IPopupFormComponent>> {}

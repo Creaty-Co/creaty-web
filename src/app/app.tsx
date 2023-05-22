@@ -4,7 +4,8 @@ import "./assets/scss/app.scss"
 import { Cookies } from "@features/cookies"
 import { Router } from "@pages"
 import { ModalContainer } from "@shared/layout"
-import { Header } from "@widgets"
+import { Footer } from "@shared/ui"
+import { MemoHeader } from "@widgets"
 import i18next from "i18next"
 import { StrictMode, Suspense } from "react"
 import { I18nextProvider } from "react-i18next"
@@ -26,10 +27,12 @@ function App() {
               <ErrorBoundary fallback="Error">
                 <AppInit />
 
-                <Header />
+                <MemoHeader />
                 <main>
                   <Router />
                 </main>
+
+                <Footer />
 
                 <Cookies />
 

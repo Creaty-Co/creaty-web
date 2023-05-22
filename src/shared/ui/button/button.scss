@@ -1,228 +1,235 @@
 @import "/src/app/assets/scss/bundle.scss";
 
-.button { 
-	$class: &;
+.button {
+  $class: &;
 
-	overflow: hidden;
-	text-align: center;
-	box-sizing: border-box;
-	
-	--button-color: transparent;
-	--button-outline-width: 0;
-	--button-padding: 2em;
+  overflow: hidden;
+  text-align: center;
+  box-sizing: border-box;
 
-	display: flex;
-	align-items: center;
-	justify-content: center;
+  --button-color: transparent;
+  --button-outline-width: 0;
+  --button-padding: 2em;
 
-	@include gap(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-	padding: 1.125em 1.5em;
-	background: var(--button-color);
-	// border: 2px solid red;
-	box-shadow: inset 0 0 0 var(--button-outline-width) var(--button-color);
-	border-radius: 1.5em;
+  @include gap(8px);
 
-	transition: 200ms ease color, 200ms ease background-color, 200ms ease opacity, 200ms ease box-shadow;
+  padding: 1.125em 1.5em;
+  background: var(--button-color);
+  // border: 2px solid red;
+  box-shadow: inset 0 0 0 var(--button-outline-width) var(--button-color);
+  border-radius: 1.5em;
 
-	&:active {
-		opacity: 0.7;
-	}
+  transition: 200ms ease color, 200ms ease background-color, 200ms ease opacity,
+    200ms ease box-shadow;
 
-	&:disabled {
-		cursor: not-allowed;
-	}
+  &:active {
+    opacity: 0.7;
+  }
 
-	&:hover:not(&--outline) {
-		--button-color: #{rgba($color-gray-10, 0.1)};
-	}
+  &:disabled {
+    cursor: not-allowed;
+  }
 
-	&--outline {
-		--button-outline-width: 2px;
-		--button-color: #{rgba($color-gray-10, 0.1)};
+  &:hover:not(&--outline) {
+    --button-color: #{rgba($color-gray-10, 0.1)};
+  }
 
-		background: unset;
+  &--outline {
+    --button-outline-width: 2px;
+    --button-color: #{rgba($color-gray-10, 0.1)};
 
-		&:hover {
-			--button-outline-width: 4px;
-		}
-	}
+    background: unset;
 
-	&--outline:not(&--white, &--green, &--violet, &--dark) {
-		&:hover {
-			--button-color:#{rgba(white, 0.85)};
-		}
-	}
+    &:hover {
+      --button-outline-width: 4px;
+    }
+  }
 
-	&--green {
-		--button-color: #{$color-green};
+  &--outline:not(&--white, &--green, &--violet, &--dark, &--google) {
+    &:hover {
+      --button-color: #{rgba(white, 0.85)};
+    }
+  }
 
-	}
+  &--green {
+    --button-color: #{$color-green};
+  }
 
-	&--green:not(&--outline) {
-		&:hover {
-			--button-color: #{rgba($color-green, 0.85)};
-		}
+  &--green:not(&--outline) {
+    &:hover {
+      --button-color: #{rgba($color-green, 0.85)};
+    }
 
-		.button__text {
-			color: $color-black-main;
-			font-weight: 500;
-		}
-	}
+    .button__text {
+      color: $color-black-main;
+      font-weight: 500;
+    }
+  }
 
-	&--violet {
-		--button-color: #{$color-violet};
-	}
+  &--violet {
+    --button-color: #{$color-violet};
+  }
 
-	&--violet:not(&--outline) {
-		&:hover {
-			--button-color: #{rgba($color-violet, 0.85)};
-		}
-	}
+  &--violet:not(&--outline) {
+    &:hover {
+      --button-color: #{rgba($color-violet, 0.85)};
+    }
+  }
 
-	&--white {
-		--button-color: #{$color-gray-10};
+  &--white {
+    --button-color: #{$color-gray-10};
 
-		.button__text {
-			color: #{$color-black-main};
-			font-weight: 600;
-		}
+    .button__text {
+      color: #{$color-black-main};
+      font-weight: 600;
+    }
 
-		.button__icon {
-			color: #{$color-gray-80};
-		}
-	}
+    .button__icon {
+      color: #{$color-gray-80};
+    }
+  }
 
-	// If is `&--white` and `&--outline`
-	&--white#{&}--outline {
+  // If is `&--white` and `&--outline`
+  &--white#{&}--outline {
+    box-shadow: inset 0 0 0 2px #eef2f7;
 
-		box-shadow: inset 0 0 0 2px #EEF2F7;
+    &:hover {
+      box-shadow: inset 0 0 0 2px $color-gray-80;
+    }
+  }
 
-		&:hover {
-			box-shadow: inset 0 0 0 2px $color-gray-80;
-		}
-	}
+  &--white:not(&--outline) {
+    &:hover {
+      --button-color: #{rgba(white, 0.85)};
+    }
+  }
 
-	&--white:not(&--outline) {
-		&:hover {
-			--button-color: #{rgba(white, 0.85)};
-		}
-	}
+  &--dark {
+    --button-color: #{$color-black-main};
+  }
 
-	&--dark {
-		--button-color: #{$color-black-main};
-	}
+  &--dark:not(&--outline) {
+    &:hover {
+      --button-color: #{rgba($color-black-main, 0.85)};
+    }
+  }
 
-	&--dark:not(&--outline) {
-		&:hover {
-			--button-color: #{rgba($color-black-main, 0.85)};
-		}
-	}
+  &--google {
+    --button-color: #{$color-google};
+  }
 
+  &--google:not(&--outline) {
+    &:hover {
+      --button-color: #{rgba($color-google, 0.85)};
+    }
+  }
 
-	&--little {
-		border-radius: 20px;
-		padding: 12px 16px;
+  &--little {
+    border-radius: 20px;
+    padding: 12px 16px;
 
-		#{$class}__text {
-			@include Text2Regular;
-		}
-	}
+    #{$class}__text {
+      @include Text2Regular;
+    }
+  }
 
-	&--small {
-		padding: 12px 20px;
-		border-radius: 20px;
+  &--small {
+    padding: 12px 20px;
+    border-radius: 20px;
 
-		#{$class}__text {
-			@include Text2Regular;
-		}
-	}
+    #{$class}__text {
+      @include Text2Regular;
+    }
+  }
 
-	&--big {
-		padding: 16px 32px;
-		border-radius: 24px;
+  &--big {
+    padding: 16px 32px;
+    border-radius: 24px;
 
-		#{$class}__text {
-			position: relative;
-			top: 2px; 
+    #{$class}__text {
+      position: relative;
+      top: 2px;
 
-			@include TextMedium;
-		}
-	}
+      @include TextMedium;
+    }
+  }
 
-	&--biggest {
-		padding: 24px 16px;
-		border-radius: 32px;
+  &--biggest {
+    padding: 24px 16px;
+    border-radius: 32px;
 
-		#{$class}__text {
-			position: relative;
-			top: 2px; 
+    #{$class}__text {
+      position: relative;
+      top: 2px;
 
-			@include TextBold;
-		}
-	}
+      @include TextBold;
+    }
+  }
 
-	&:not(&--pending) {
-		.button__loader {
-			opacity: 0;
-			pointer-events: none;
-		}
-	}
+  &:not(&--pending) {
+    .button__loader {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
 
-	&--icon-only {
-		padding: unset;
-	}
+  &--icon-only {
+    padding: unset;
+  }
 
-	&--icon-only:not(&--little) {
-		border-radius: 1.5em;
-	}
+  &--icon-only:not(&--little) {
+    border-radius: 1.5em;
+  }
 
-	&:not(&--icon-only) {
-		.button__icon {
-			padding: unset;
-		}
-	}
+  &:not(&--icon-only) {
+    .button__icon {
+      padding: unset;
+    }
+  }
 }
 
 a.button {
-	text-decoration: none;
+  text-decoration: none;
 }
 
 .button__text {
-	color: white;
-	@include TextMedium();
+  color: white;
+  @include TextMedium();
 }
 
-
 .button__icon {
-	display: grid;
-	padding: 1.5em;
+  display: grid;
+  padding: 1.5em;
 
-	.icon {
-		transition: 200ms ease transform;
-	}
+  .icon {
+    transition: 200ms ease transform;
+  }
 
-	&--little {
-		--icon-size: 16px;
-		padding: 12px;
-	}
+  &--little {
+    --icon-size: 16px;
+    padding: 12px;
+  }
 
-	&--small {
-		padding: 1.25em;
-	}
+  &--small {
+    padding: 1.25em;
+  }
 
-	&--big {
-		padding: 2em;
-	}
+  &--big {
+    padding: 2em;
+  }
 }
 
 .button__loader {
-	position: absolute;
-	inset: 0;
+  position: absolute;
+  inset: 0;
 
-	transition: 200ms ease opacity;
+  transition: 200ms ease opacity;
 
-	display: grid;
-	background: rgba($color-dark, 0.5);
-	border-radius: inherit;
+  display: grid;
+  background: rgba($color-dark, 0.5);
+  border-radius: inherit;
 }
