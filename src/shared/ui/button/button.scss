@@ -35,7 +35,7 @@
   }
 
   &:hover:not(&--outline) {
-    --button-color: #{rgba($color-gray-10, 0.1)};
+    --button-color: #{rgba($color-gray-10, 0.1)} !important;
   }
 
   &--outline {
@@ -45,13 +45,13 @@
     background: unset;
 
     &:hover {
-      --button-outline-width: 4px;
+      --button-outline-width: 4px !important;
     }
   }
 
   &--outline:not(&--white, &--green, &--violet, &--dark, &--google) {
     &:hover {
-      --button-color: #{rgba(white, 0.85)};
+      --button-color: #{rgba(white, 0.85)} !important;
     }
   }
 
@@ -61,7 +61,7 @@
 
   &--green:not(&--outline) {
     &:hover {
-      --button-color: #{rgba($color-green, 0.85)};
+      --button-color: #{rgba($color-green, 0.85)} !important;
     }
 
     .button__text {
@@ -76,7 +76,7 @@
 
   &--violet:not(&--outline) {
     &:hover {
-      --button-color: #{rgba($color-violet, 0.85)};
+      --button-color: #{rgba($color-violet, 0.85)} !important;
     }
   }
 
@@ -98,13 +98,13 @@
     box-shadow: inset 0 0 0 2px #eef2f7;
 
     &:hover {
-      box-shadow: inset 0 0 0 2px $color-gray-80;
+      box-shadow: inset 0 0 0 2px $color-gray-80 !important;
     }
   }
 
   &--white:not(&--outline) {
     &:hover {
-      --button-color: #{rgba(white, 0.85)};
+      --button-color: #{rgba(white, 0.85)} !important;
     }
   }
 
@@ -114,7 +114,7 @@
 
   &--dark:not(&--outline) {
     &:hover {
-      --button-color: #{rgba($color-black-main, 0.85)};
+      --button-color: #{rgba($color-black-main, 0.85)} !important;
     }
   }
 
@@ -124,7 +124,7 @@
 
   &--google:not(&--outline) {
     &:hover {
-      --button-color: #{rgba($color-google, 0.85)};
+      --button-color: #{rgba($color-google, 0.85)} !important;
     }
   }
 
@@ -161,6 +161,8 @@
   &--biggest {
     padding: 24px 16px;
     border-radius: 32px;
+    min-height: 72px;
+    
 
     #{$class}__text {
       position: relative;

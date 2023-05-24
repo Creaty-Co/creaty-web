@@ -1,5 +1,3 @@
-import "./field.input.scss"
-
 import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/20/solid"
 import { bem } from "@shared/utils"
 import cn from "classnames"
@@ -73,6 +71,7 @@ export function FieldInput({
           )}
 
           disabled={disabled !== undefined? disabled : false}
+          autoComplete="on"
 
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}

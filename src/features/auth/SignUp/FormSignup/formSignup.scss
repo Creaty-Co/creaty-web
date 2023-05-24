@@ -1,0 +1,8 @@
+@import "/src/app/assets/scss/bundle.scss";
+
+.form {
+  &__confirmation {
+    @include H3Regular();
+    color: $color-black-90;
+  }
+}

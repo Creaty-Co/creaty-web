@@ -1,14 +1,16 @@
 import { RootState } from "@app/store"
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-import { IAuthState, ISignUpData } from "./auth.types"
+import { IAuthState, ISignUpData, SignUpStepT } from "./auth.types"
 
 const initialState: IAuthState = {
-  email: undefined,
-  password: undefined,
-  first_name: undefined,
-  last_name: undefined,
+  email: null,
+  password: null,
+  first_name: null,
+  last_name: null,
+  signUpStep: null,
 
+  token: null,
   isAuth: false,
 }
 
@@ -29,6 +31,18 @@ export const authSlice = createSlice({
       state.last_name = last_name
     },
 
+    setSignUpStep: (state, action: PayloadAction<SignUpStepT>) => {
+      state.signUpStep = action.payload
+    },
+
+    abortSignUp: state => {
+      state.signUpStep = null
+      state.email = null
+      state.password = null
+      state.first_name = null
+      state.last_name = null
+    },
+
     signOut: state => {
       state.email = null
       state.password = null
@@ -39,9 +53,10 @@ export const authSlice = createSlice({
   },
 })
 export default authSlice.reducer
-export const { signOut, signUpStep1, signUpStep2 } = authSlice.actions
+export const { signOut, signUpStep1, signUpStep2, setSignUpStep, abortSignUp } = authSlice.actions
 
 export const selectAuth = (state: RootState) => state.auth
+export const selectAuthSignUpStep = (state: RootState) => state.auth.signUpStep
 export const selectAuthData = createSelector(selectAuth, state => ({
   email: state.email,
   password: state.password,

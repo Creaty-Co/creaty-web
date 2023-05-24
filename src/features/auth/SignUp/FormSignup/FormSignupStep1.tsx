@@ -1,7 +1,11 @@
 import { useAppDispatch } from "@app/store"
-import { signUpStep1 } from "@features/auth/auth.slice"
-import { Button, Field, Formus } from "@shared/ui"
+import { useLazySignUpGoogleQuery } from "@features/auth/auth.api"
+import { setSignUpStep, signUpStep1 } from "@features/auth/auth.slice"
+import { skipToken } from "@reduxjs/toolkit/query"
+import { PopupLayout } from "@shared/layout"
+import { Field, Formus } from "@shared/ui"
 import { bem } from "@shared/utils"
+import { Button } from "antd"
 import cn from "classnames"
 import { FieldValues } from "react-hook-form"
 
@@ -11,21 +15,19 @@ const CN = "form"
 const MOD = "signup"
 const { getElement, getModifier } = bem(CN)
 
-interface IProps {
-  goToNextStep: () => void
-}
-
-export function FormSignupStep1({ goToNextStep }: IProps) {
+export function FormSignupStep1() {
   const dispatch = useAppDispatch()
+
+  const [signUpGoogle] = useLazySignUpGoogleQuery()
 
   const handleSubmit = (values: FieldValues) => {
     const { email, password } = values
     dispatch(signUpStep1({ email, password }))
-    goToNextStep()
+    dispatch(setSignUpStep(2))
   }
 
-  const handleGoogleClick = () => {
-    console.log("google")
+  const handleGoogleClick = async () => {
+    signUpGoogle(skipToken)
   }
 
   const elementContent = (
@@ -65,11 +67,20 @@ export function FormSignupStep1({ goToNextStep }: IProps) {
 
   const elementControl = (
     <>
-      <Button size="biggest" color="dark" type="submit">
+      <Button className="button button--dark button--biggest button__text" type="primary" htmlType="submit">
         Continue with email
       </Button>
-      <br />
-      <Button size="biggest" color="google" onClick={handleGoogleClick}>
+
+      <div className="relative flex py-2 items-center">
+        <div className="flex-grow border-t border-gray-400"></div>
+        <span className="flex-shrink mx-4 text-gray-400">Or</span>
+        <div className="flex-grow border-t border-gray-400"></div>
+      </div>
+
+      <Button
+        className="button button--google button--biggest button__text"
+        htmlType="submit"
+        onClick={handleGoogleClick}>
         Continue with Google
       </Button>
 
@@ -80,12 +91,14 @@ export function FormSignupStep1({ goToNextStep }: IProps) {
   )
 
   return (
-    <Formus
-      className={cn(getModifier(CN, MOD))}
-      elementContent={elementContent}
-      elementControl={elementControl}
-      schema={formSignupStep1Schema}
-      onSubmit={handleSubmit}
-    />
+    <PopupLayout title="Sign up to find your perfect mentor" width="35em">
+      <Formus
+        className={cn(getModifier(CN, MOD))}
+        elementContent={elementContent}
+        elementControl={elementControl}
+        schema={formSignupStep1Schema}
+        onSubmit={handleSubmit}
+      />
+    </PopupLayout>
   )
 }

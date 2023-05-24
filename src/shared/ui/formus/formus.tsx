@@ -47,11 +47,6 @@ export function Formus({
 
   const { formState: { isValid, errors, submitCount, isSubmitSuccessful } } = methods
 
-  /*
-  console.log("isValid", isValid)
-  console.log("Object.values(errors)", Object.values(errors))
-  */
-
   const requiredErrors = isValid? []
     : Object.values(errors).filter(error => error && error.types && "required" in error.types && error.types.required)
       .map(error => error && error.types && "required" in error.types && error.types.required )

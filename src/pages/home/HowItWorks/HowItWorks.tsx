@@ -49,6 +49,7 @@ export function HowItWorks() {
             className={cn(getElement("button"), getElement("button_free"))}
             size="big"
             color="green"
+            type="button"
             onClick={() => dispatch(open(<PopupForm type="test_meeting" />))}>
             {t("button")}
           </Button>

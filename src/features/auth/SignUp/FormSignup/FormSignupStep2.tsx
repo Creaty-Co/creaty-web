@@ -1,9 +1,12 @@
 import { useAppDispatch, useAppSelector } from "@app/store"
 import { useSignUpEmailMutation } from "@features/auth/auth.api"
 import { selectAuthData, signUpStep2 } from "@features/auth/auth.slice"
-import { Button, Field, Formus } from "@shared/ui"
+import { PopupLayout } from "@shared/layout"
+import { Field, Formus } from "@shared/ui"
 import { bem } from "@shared/utils"
+import { Button, notification } from "antd"
 import cn from "classnames"
+import { useEffect } from "react"
 import { FieldValues, SubmitHandler } from "react-hook-form"
 
 import { formSignupStep2Schema } from "./validationSchemas"
@@ -12,21 +15,36 @@ const CN = "form"
 const MOD = "signup"
 const { getModifier } = bem(CN)
 
-interface IProps {
-  goToNextStep: () => void
-}
-
-export function FormSignupStep2({ goToNextStep }: IProps) {
+export function FormSignupStep2() {
   const dispatch = useAppDispatch()
-
-  const [signUpEmail] = useSignUpEmailMutation()
   const authData = useAppSelector(selectAuthData)
+  const [api, contextHolder] = notification.useNotification()
+
+  const [signUpEmail, { error, isLoading, reset }] = useSignUpEmailMutation()
+
+  useEffect(() => {
+    if (!error || ("status" in error && error?.status !== 409)) return
+    api.error({
+      message: `There is already registered user with this data`,
+      placement: "topRight",
+      duration: 10,
+      btn: (
+        <Button
+          className="button button--dark button--little button__text"
+          onClick={() => api.destroy()}
+          // className="button button--green button--outline"
+        >
+          Login
+        </Button>
+      ),
+    })
+    reset()
+  }, [error])
 
   const handleSubmit: SubmitHandler<FieldValues> = async (values: FieldValues) => {
     const data = { first_name: values.first_name, last_name: values.last_name }
     dispatch(signUpStep2(data))
     signUpEmail({ ...authData, ...data })
-    goToNextStep()
   }
 
   const elementContent = (
@@ -37,18 +55,25 @@ export function FormSignupStep2({ goToNextStep }: IProps) {
   )
 
   const elementControl = (
-    <Button size="biggest" color="dark" type="submit">
+    <Button
+      className="button button--dark button--biggest button__text"
+      type="primary"
+      htmlType="submit"
+      loading={isLoading}>
       Continue
     </Button>
   )
 
   return (
-    <Formus
-      className={cn(getModifier(CN, MOD))}
-      elementContent={elementContent}
-      elementControl={elementControl}
-      schema={formSignupStep2Schema}
-      onSubmit={handleSubmit}
-    />
+    <PopupLayout title="Almost done" subTitle="To start, what's your name?" width="35em">
+      <Formus
+        className={cn(getModifier(CN, MOD))}
+        elementContent={elementContent}
+        elementControl={elementControl}
+        schema={formSignupStep2Schema}
+        onSubmit={handleSubmit}
+      />
+      {contextHolder}
+    </PopupLayout>
   )
 }

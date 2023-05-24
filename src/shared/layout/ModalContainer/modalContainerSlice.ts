@@ -6,6 +6,7 @@ export interface ModalContainerType {
   elementContent: React.ReactNode
   isActive: boolean
 }
+
 const initialState: ModalContainerType = {
   elementContent: null,
   isActive: false
@@ -26,12 +27,9 @@ export const ModalContainerSlice = createSlice({
       state.isActive = false
     },
     
-    /* Content */
     setContent: (state, action: PayloadAction<ModalContainerType["elementContent"]>) => {
       state.elementContent = action.payload
     },
-
-
   }
 })
 

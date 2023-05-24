@@ -8,13 +8,16 @@ export const AuthApi = createApi({
 
   endpoints: builder => ({
     signUpEmail: builder.mutation({
-      query: autData => ({
-        url: `/users/register`,
+      query: body => ({
+        url: `/users/register/`,
         method: "POST",
-        body: { ...autData },
+        body,
       }),
+    }),
+    signUpGoogle: builder.query({
+      query: () => "users/register/social/google/",
     }),
   }),
 })
 
-export const { useSignUpEmailMutation } = AuthApi
+export const { useSignUpEmailMutation, useLazySignUpGoogleQuery } = AuthApi

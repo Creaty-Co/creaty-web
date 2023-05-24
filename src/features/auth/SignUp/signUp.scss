@@ -1,21 +1,14 @@
 @import "/src/app/assets/scss/bundle.scss";
 
 .sign-up {
-  &__sign-up {
-    background-color: $color-gray-10;
+  background-color: $color-gray-10;
 
-    & > .button__text {
-      color: $color-black-100;
-      @include Text2Medium;
-    }
-
-    @include for-size(big-phone-screen) {
-      width: 100%;
-    }
+  & > .button__text {
+    color: $color-black-100;
+    @include Text2Medium;
   }
 
-  &__confirmation {
-    @include H3Regular();
-    color: $color-black-90;
+  @include for-size(big-phone-screen) {
+    width: 100%;
   }
 }
