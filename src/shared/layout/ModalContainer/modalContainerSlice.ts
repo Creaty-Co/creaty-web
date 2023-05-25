@@ -22,13 +22,13 @@ export const ModalContainerSlice = createSlice({
       state.isActive = true
     },
 
+    setContent: (state, action: PayloadAction<ModalContainerType["elementContent"]>) => {
+      state.elementContent = action.payload
+    },
+
     close: (state) => {
       state.elementContent = null
       state.isActive = false
-    },
-    
-    setContent: (state, action: PayloadAction<ModalContainerType["elementContent"]>) => {
-      state.elementContent = action.payload
     },
   }
 })

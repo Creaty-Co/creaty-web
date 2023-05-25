@@ -7,17 +7,32 @@ export const AuthApi = createApi({
   baseQuery: getFetchBaseQuery(),
 
   endpoints: builder => ({
-    signUpEmail: builder.mutation({
-      query: body => ({
-        url: `/users/register/`,
-        method: "POST",
-        body,
-      }),
-    }),
     signUpGoogle: builder.query({
       query: () => "users/register/social/google/",
+    }),
+    signUpEmail: builder.mutation({
+      query: body => ({ url: `/users/register/`, method: "POST", body }),
+    }),
+    loginGoogle: builder.query({
+      query: () => "users/",
+    }),
+    loginEmail: builder.mutation({
+      query: body => ({ url: `/users/token/`, method: "POST", body }),
+    }),
+    refreshToken: builder.query({
+      query: () => ({ url: "users/token/refresh/", method: "POST" }),
+    }),
+    getUserData: builder.query({
+      query: () => "users/me/",
     }),
   }),
 })
 
-export const { useSignUpEmailMutation, useLazySignUpGoogleQuery } = AuthApi
+export const {
+  useSignUpEmailMutation,
+  useLazySignUpGoogleQuery,
+  useLazyLoginGoogleQuery,
+  useLoginEmailMutation,
+  useLazyRefreshTokenQuery,
+  useGetUserDataQuery,
+} = AuthApi

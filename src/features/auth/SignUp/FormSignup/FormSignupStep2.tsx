@@ -1,7 +1,8 @@
 import { useAppDispatch, useAppSelector } from "@app/store"
 import { useSignUpEmailMutation } from "@features/auth/auth.api"
-import { selectAuthData, signUpStep2 } from "@features/auth/auth.slice"
+import { selectAuthData, setSignUpStep, signUpStep2 } from "@features/auth/auth.slice"
 import { PopupLayout } from "@shared/layout"
+import { setContent } from "@shared/layout"
 import { Field, Formus } from "@shared/ui"
 import { bem } from "@shared/utils"
 import { Button, notification } from "antd"
@@ -9,6 +10,7 @@ import cn from "classnames"
 import { useEffect } from "react"
 import { FieldValues, SubmitHandler } from "react-hook-form"
 
+import { FormLogin } from "../../Login/FormLogin"
 import { formSignupStep2Schema } from "./validationSchemas"
 
 const CN = "form"
@@ -22,6 +24,12 @@ export function FormSignupStep2() {
 
   const [signUpEmail, { error, isLoading, reset }] = useSignUpEmailMutation()
 
+  const openLoginModal = () => {
+    dispatch(setSignUpStep(null))
+    dispatch(setContent(<FormLogin />))
+    api.destroy()
+  }
+
   useEffect(() => {
     if (!error || ("status" in error && error?.status !== 409)) return
     api.error({
@@ -29,11 +37,7 @@ export function FormSignupStep2() {
       placement: "topRight",
       duration: 10,
       btn: (
-        <Button
-          className="button button--dark button--little button__text"
-          onClick={() => api.destroy()}
-          // className="button button--green button--outline"
-        >
+        <Button className="button button--dark button--little button__text" onClick={openLoginModal}>
           Login
         </Button>
       ),
