@@ -14,20 +14,19 @@ import { DynamicPrimaryInfo } from "./dynamic-primary-info/dynamic-primary-info"
 import { HelpfulCreaty } from "./helpful-creaty"
 import { HowItWorks } from "./HowItWorks"
 import { MailingSubscribe } from "./mailing-subscribe"
-import { QAndA } from "./q-and-a" 
+import { QAndA } from "./q-and-a"
 
 const CN = "home-view"
 const { getElement } = bem(CN)
 
 export function Home() {
   useScrollToTop()
-  
+
   const { t } = useTranslation("translation", { keyPrefix: "views.home" })
 
   const params = useParams<"shortcut">()
-  const { data } = params.shortcut
-    ? useGetPagePersonalQuery({ shortcut: params.shortcut })
-    : useGetPagesMainQuery()
+
+  const { data } = params.shortcut ? useGetPagePersonalQuery({ shortcut: params.shortcut }) : useGetPagesMainQuery()
 
   return (
     <div className={CN}>
@@ -39,40 +38,26 @@ export function Home() {
           <MentorSearch />
         </div>
 
-        {data?.tags && (
-          <MentorSearchTags tags={data.tags} />
-        )}
+        {data?.tags && <MentorSearchTags tags={data.tags} />}
 
-        {data == null && (<LoaderCover white />)}
+        {data == null && <LoaderCover white />}
       </div>
 
       {/* Coomment */}
       <div className={getElement("comment")}>
-        <BigComment>
-          {t("bigComment")}
-        </BigComment>
+        <BigComment>{t("bigComment")}</BigComment>
       </div>
 
       {/* Mentors */}
       <div className={getElement("slider")}>
-        {data?.mentors && (
-          <MentorsSlider mentors={data.mentors} />
-        )}
+        {data?.mentors && <MentorsSlider mentors={data.mentors} />}
 
-        {data == null && (
-          <LoaderCover white />
-        )}
+        {data == null && <LoaderCover white />}
       </div>
 
       {/* Help */}
       <div className={getElement("help")}>
-        <InfoSection
-          display="flex" 
-          type="2" 
-          
-          title={t("help.title")} 
-          desc={t("help.desc")}
-        >
+        <InfoSection display="flex" type="2" title={t("help.title")} desc={t("help.desc")}>
           <HelpSocial />
         </InfoSection>
       </div>
@@ -89,9 +74,7 @@ export function Home() {
 
       {/* FAQ */}
       <div className={getElement("faq")}>
-        <div className={cn(getElement("title"), "heading")}>
-          {t("QAndA.title")}
-        </div>  
+        <div className={cn(getElement("title"), "heading")}>{t("QAndA.title")}</div>
 
         <QAndA />
       </div>

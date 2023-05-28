@@ -1,9 +1,7 @@
 import { useAppDispatch } from "@app/store"
 import { useLazyLoginGoogleQuery, useLoginEmailMutation } from "@features/auth/auth.api"
-import { setSignUpStep, signUpStep1 } from "@features/auth/auth.slice"
 import { skipToken } from "@reduxjs/toolkit/query"
-import { close, open, setContent } from "@shared/layout"
-import { PopupLayout } from "@shared/layout"
+import { open, PopupLayout } from "@shared/layout"
 import { Field, Formus } from "@shared/ui"
 import { bem } from "@shared/utils"
 import { Button, notification } from "antd"
@@ -11,6 +9,9 @@ import cn from "classnames"
 import { useEffect } from "react"
 import { FieldValues } from "react-hook-form"
 import * as yup from "yup"
+
+import { ResendPassword } from "../ResetPassword/ResendPassword"
+import { SignupFormStep1 } from "../SignUp/SignupFormStep1"
 
 export const schema = yup
   .object()
@@ -24,7 +25,7 @@ const CN = "form"
 const MOD = "login"
 const { getElement, getModifier } = bem(CN)
 
-export function FormLogin() {
+export function LoginForm() {
   const dispatch = useAppDispatch()
   const [api, contextHolder] = notification.useNotification()
 
@@ -41,18 +42,27 @@ export function FormLogin() {
     reset()
   }, [error])
 
-  const handleEmailLogin = (values: FieldValues) => {
-    loginEmail({ email: values.email, password: values.password })
-  }
-
-  const handleGoogleLogin = async () => {
-    loginGoogle(skipToken)
-  }
+  const handleGoogleLogin = () => loginGoogle(skipToken)
+  const handleEmailLogin = (values: FieldValues) => loginEmail({ email: values.email, password: values.password })
+  const handleSignUpRedirect = () => dispatch(open(<SignupFormStep1 />))
+  const handleForgotPasswordRedirect = () => dispatch(open(<ResendPassword />))
 
   const elementContent = (
     <>
+      <span className={cn(getElement("suggestion"))}>
+        Don't you have an account?{" "}
+        <em className={cn(getElement("redirection"))} onClick={handleSignUpRedirect}>
+          Sign Up
+        </em>
+      </span>
       <Field type="input" name="email" label="Email address*" />
       <Field type="password" name="password" label="Password*" />
+
+      <span className={cn(getElement("suggestion"))}>
+        <em className={cn(getElement("redirection"))} onClick={handleForgotPasswordRedirect}>
+          Forgot your password?
+        </em>
+      </span>
     </>
   )
 

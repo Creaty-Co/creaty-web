@@ -15,11 +15,10 @@
   background: $color-white;
   border-radius: 40px;
 
-  overflow: hidden;
+  overflow: auto;
+  @include ScrollbarHidden;
 
   &__container {
-    @include ScrollbarHidden;
-    overflow: auto;
     padding-bottom: 24px;
   }
 

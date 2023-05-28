@@ -1,8 +1,6 @@
-import "./formSignup.scss"
-
 import { useAppDispatch, useAppSelector } from "@app/store"
-import { selectAuthData, setSignUpStep } from "@features/auth/auth.slice"
-import { PopupLayout } from "@shared/layout"
+import { selectAuthData } from "@features/auth/auth.slice"
+import { close, PopupLayout } from "@shared/layout"
 import { Button } from "@shared/ui"
 import { bem } from "@shared/utils"
 import cn from "classnames"
@@ -10,13 +8,11 @@ import cn from "classnames"
 const CN = "form"
 const { getElement } = bem(CN)
 
-export function FormSignupStep3() {
+export function SignupFormStep3() {
   const dispatch = useAppDispatch()
   const email = useAppSelector(selectAuthData).email
 
-  const handleClick = () => {
-    dispatch(setSignUpStep(4))
-  }
+  const handleClick = () => dispatch(close())
 
   return (
     <PopupLayout title="Check your email" width="35em">

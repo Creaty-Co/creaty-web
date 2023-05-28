@@ -14,7 +14,7 @@ export const AuthApi = createApi({
       query: body => ({ url: `/users/register/`, method: "POST", body }),
     }),
     loginGoogle: builder.query({
-      query: () => "users/",
+      query: () => "users/register/social/google/",
     }),
     loginEmail: builder.mutation({
       query: body => ({ url: `/users/token/`, method: "POST", body }),
@@ -24,6 +24,12 @@ export const AuthApi = createApi({
     }),
     getUserData: builder.query({
       query: () => "users/me/",
+    }),
+    resendPassword: builder.mutation({
+      query: body => ({ url: `/users/register/resend/`, method: "POST", body }),
+    }),
+    resetPassword: builder.mutation({
+      query: body => ({ url: `/users/password`, method: "PUT", body }),
     }),
   }),
 })
@@ -35,4 +41,6 @@ export const {
   useLoginEmailMutation,
   useLazyRefreshTokenQuery,
   useGetUserDataQuery,
+  useResendPasswordMutation,
+  useResetPasswordMutation,
 } = AuthApi

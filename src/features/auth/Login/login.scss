@@ -1,1 +1,18 @@
 @import "/src/app/assets/scss/bundle.scss";
+
+.form {
+  color: $color-black-90;
+
+  &__confirmation {
+    @include H3Regular();
+  }
+
+  &__suggestion {
+    @include TagsRegular;
+  }
+
+  &__redirection {
+    cursor: pointer;
+		color: $color-violet;
+  }
+}

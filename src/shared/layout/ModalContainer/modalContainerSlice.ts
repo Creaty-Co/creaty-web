@@ -22,10 +22,6 @@ export const ModalContainerSlice = createSlice({
       state.isActive = true
     },
 
-    setContent: (state, action: PayloadAction<ModalContainerType["elementContent"]>) => {
-      state.elementContent = action.payload
-    },
-
     close: (state) => {
       state.elementContent = null
       state.isActive = false
@@ -34,7 +30,7 @@ export const ModalContainerSlice = createSlice({
 })
 
 export default ModalContainerSlice.reducer
-export const { open, close, setContent } = ModalContainerSlice.actions
+export const { open, close } = ModalContainerSlice.actions
 
 export const selectModalContainer = (state: RootState) => state.modal
 export const selectModalContainerActive = () => createSelector(

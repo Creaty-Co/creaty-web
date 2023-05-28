@@ -1,45 +1,79 @@
 import { useAppDispatch } from "@app/store"
 import { useLazySignUpGoogleQuery } from "@features/auth/auth.api"
-import { setSignUpStep, signUpStep1 } from "@features/auth/auth.slice"
+import { signUpStep1 } from "@features/auth/auth.slice"
+import { LoginForm } from "@features/auth/Login/LoginForm"
 import { skipToken } from "@reduxjs/toolkit/query"
-import { PopupLayout } from "@shared/layout"
+import { open, PopupLayout } from "@shared/layout"
 import { Field, Formus } from "@shared/ui"
 import { bem } from "@shared/utils"
 import { Button } from "antd"
 import cn from "classnames"
 import { FieldValues } from "react-hook-form"
+import * as yup from "yup"
 
-import { formSignupStep1Schema } from "./validationSchemas"
+import { ISignUpFormStep1 } from "../auth.types"
+import { SignupFormStep2 } from "./SignupFormStep2"
+
+const schema = yup
+  .object()
+  .shape({
+    email: yup.string().email("Must be a valid email").required("Email is required"),
+    password: yup
+      .string()
+      .test("passwordsMatch", "Passwords must match", function (value) {
+        return this.parent.password === value
+      })
+      .test("upperLowerCase", "UPPERCASE & lowercase letters", function (value) {
+        return /[A-Z]/.test(value ?? "") && /[a-z]/.test(value ?? "")
+      })
+      .test("containNumber", "contain at least 1 number", function (value) {
+        return /\d/.test(value ?? "")
+      })
+      .min(8, "Please enter a password more than 8 character")
+      .required("Password is required"),
+    password2: yup
+      .string()
+      .test("passwordsMatch", "Passwords must match", function (value) {
+        return this.parent.password === value
+      })
+      .test("upperLowerCase", "UPPERCASE & lowercase letters", function (value) {
+        return /[A-Z]/.test(value ?? "") && /[a-z]/.test(value ?? "")
+      })
+      .test("containNumber", "contain at least 1 number", function (value) {
+        return /\d/.test(value ?? "")
+      })
+      .min(8, "Please enter a password more than 8 character")
+      .required("Repeat the password is required"),
+  })
+  .required()
 
 const CN = "form"
 const MOD = "signup"
 const { getElement, getModifier } = bem(CN)
 
-export function FormSignupStep1() {
+export function SignupFormStep1() {
   const dispatch = useAppDispatch()
 
   const [signUpGoogle] = useLazySignUpGoogleQuery()
 
   const handleSubmit = (values: FieldValues) => {
-    const { email, password } = values
-    dispatch(signUpStep1({ email, password }))
-    dispatch(setSignUpStep(2))
+    const data: ISignUpFormStep1 = { email: values.email, password: values.password }
+    dispatch(signUpStep1(data))
+    dispatch(open(<SignupFormStep2 />))
   }
 
-  const handleGoogleClick = async () => {
-    signUpGoogle(skipToken)
-  }
+  const handleGoogleClick = () => signUpGoogle(skipToken)
+  const handleSignUpRedirect = () => dispatch(open(<LoginForm />))
 
   const elementContent = (
     <>
-      <Field
-        type="input"
-        name="email"
-        label="Email address*"
-        hints={{
-          email: "Should be like@this.com",
-        }}
-      />
+      <span className={cn(getElement("suggestion"))}>
+        Already have an account?{" "}
+        <em className={cn(getElement("redirection"))} onClick={handleSignUpRedirect}>
+          Log In
+        </em>
+      </span>
+      <Field type="input" name="email" label="Email address*" />
       <Field
         type="password"
         name="password"
@@ -96,7 +130,7 @@ export function FormSignupStep1() {
         className={cn(getModifier(CN, MOD))}
         elementContent={elementContent}
         elementControl={elementControl}
-        schema={formSignupStep1Schema}
+        schema={schema}
         onSubmit={handleSubmit}
       />
     </PopupLayout>

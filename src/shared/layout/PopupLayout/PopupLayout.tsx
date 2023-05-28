@@ -19,15 +19,20 @@ export interface IPopupLayout {
 
   controlled?: boolean
   controll?: ReactNode
+  onClose?: () => void
 }
 
 export function PopupLayout(props: IPopupLayout) {
   const dispatch = useAppDispatch()
 
+  const handleClose = () => {
+    props.onClose?.() || dispatch(close())
+  }
+  
   return (
     <div className={CN} style={{ width: props.width }}>
       <div className={getElement("close")}>
-        <ButtonIcon name="cross" size="small" color="white" outline onClick={() => dispatch(close())} />
+        <ButtonIcon name="cross" size="small" color="white" outline onClick={handleClose} />
       </div>
 
       <h3 className={cn(getElement("title"), "heading")}>{props.title}</h3>
