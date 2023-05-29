@@ -1,8 +1,7 @@
+import { history } from "@app/App"
 import { useAppDispatch } from "@app/store"
-import { useLazySignUpGoogleQuery } from "@features/auth/auth.api"
 import { signUpStep1 } from "@features/auth/auth.slice"
 import { LoginForm } from "@features/auth/Login/LoginForm"
-import { skipToken } from "@reduxjs/toolkit/query"
 import { open, PopupLayout } from "@shared/layout"
 import { Field, Formus } from "@shared/ui"
 import { bem } from "@shared/utils"
@@ -54,15 +53,13 @@ const { getElement, getModifier } = bem(CN)
 export function SignupFormStep1() {
   const dispatch = useAppDispatch()
 
-  const [signUpGoogle] = useLazySignUpGoogleQuery()
-
   const handleSubmit = (values: FieldValues) => {
     const data: ISignUpFormStep1 = { email: values.email, password: values.password }
     dispatch(signUpStep1(data))
     dispatch(open(<SignupFormStep2 />))
   }
 
-  const handleGoogleClick = () => signUpGoogle(skipToken)
+  const handleGoogleClick = () => history.push(`${process.env.REACT_APP_API_HOST}/users/register/social/google/`)
   const handleSignUpRedirect = () => dispatch(open(<LoginForm />))
 
   const elementContent = (

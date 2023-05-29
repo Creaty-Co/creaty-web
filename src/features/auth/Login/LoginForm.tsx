@@ -1,6 +1,6 @@
+import { history } from "@app/App"
 import { useAppDispatch } from "@app/store"
-import { useLazyLoginGoogleQuery, useLoginEmailMutation } from "@features/auth/auth.api"
-import { skipToken } from "@reduxjs/toolkit/query"
+import { useLoginEmailMutation } from "@features/auth/auth.api"
 import { open, PopupLayout } from "@shared/layout"
 import { Field, Formus } from "@shared/ui"
 import { bem } from "@shared/utils"
@@ -29,7 +29,6 @@ export function LoginForm() {
   const dispatch = useAppDispatch()
   const [api, contextHolder] = notification.useNotification()
 
-  const [loginGoogle] = useLazyLoginGoogleQuery()
   const [loginEmail, { isLoading, error, reset }] = useLoginEmailMutation()
 
   useEffect(() => {
@@ -42,7 +41,7 @@ export function LoginForm() {
     reset()
   }, [error])
 
-  const handleGoogleLogin = () => loginGoogle(skipToken)
+  const handleGoogleLogin = () => history.push(`${process.env.REACT_APP_API_HOST}/users/register/social/google/`)
   const handleEmailLogin = (values: FieldValues) => loginEmail({ email: values.email, password: values.password })
   const handleSignUpRedirect = () => dispatch(open(<SignupFormStep1 />))
   const handleForgotPasswordRedirect = () => dispatch(open(<ResendPassword />))

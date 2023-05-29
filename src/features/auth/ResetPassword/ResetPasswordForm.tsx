@@ -3,7 +3,6 @@ import { useResetPasswordMutation } from "@features/auth/auth.api"
 import { close, PopupLayout } from "@shared/layout"
 import { Field, Formus } from "@shared/ui"
 import { bem } from "@shared/utils"
-import { parseJwt } from "@shared/utils/token"
 import { Button, notification } from "antd"
 import cn from "classnames"
 import { useEffect } from "react"
@@ -11,7 +10,7 @@ import { FieldValues } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 import * as yup from "yup"
 
-import { setTokens, setUserData } from "../auth.slice"
+import { setTokens } from "../auth.slice"
 
 const schema = yup
   .object()
@@ -69,9 +68,8 @@ export function ResetPasswordForm({ code }: IProps) {
 
   useEffect(() => {
     if (!data) return
-    const { user, tokens } = data
-    dispatch(setUserData(user))
-    dispatch(setTokens({ ...tokens, authUserId: parseJwt(tokens.access).user_id }))
+    const { access, refresh } = data
+    dispatch(setTokens({ accessToken: access, refreshToken: refresh }))
     dispatch(close())
     navigate("/")
     api.success({ message: "Password successfully changed", placement: "topRight", duration: 10 })
