@@ -14,10 +14,9 @@ export const usersApi = createApi({
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const data = await queryFulfilled
-          console.log("data: ", data)
-          // dispatch(setAuthUserData(data.data))
+          dispatch(setAuthUserData(data.data))
         } catch (error) {
-          throw Error("error")
+          throw Error("error: users/me/")
         }
       },
     }),
