@@ -1,6 +1,8 @@
 import { history } from "@app/App"
 import { useAppDispatch } from "@app/store"
 import { useLoginEmailMutation } from "@features/auth/auth.api"
+import { useLazyGetMeQuery } from "@features/users/users.api"
+import { skipToken } from "@reduxjs/toolkit/dist/query/react"
 import { open, PopupLayout } from "@shared/layout"
 import { Field, Formus } from "@shared/ui"
 import { bem } from "@shared/utils"
@@ -10,6 +12,7 @@ import { useEffect } from "react"
 import { FieldValues } from "react-hook-form"
 import * as yup from "yup"
 
+import { setTokens } from "../auth.slice"
 import { ResendPassword } from "../ResetPassword/ResendPassword"
 import { SignupFormStep1 } from "../SignUp/SignupFormStep1"
 
@@ -29,7 +32,8 @@ export function LoginForm() {
   const dispatch = useAppDispatch()
   const [api, contextHolder] = notification.useNotification()
 
-  const [loginEmail, { isLoading, error, reset }] = useLoginEmailMutation()
+  const [getMe] = useLazyGetMeQuery()
+  const [loginEmail, { data, isLoading, error, reset }] = useLoginEmailMutation()
 
   useEffect(() => {
     if (!error) return
@@ -40,6 +44,13 @@ export function LoginForm() {
     })
     reset()
   }, [error])
+
+  useEffect(() => {
+    if (!data) return
+    dispatch(close())
+    dispatch(setTokens({ accessToken: data.access, refreshToken: data.refresh }))
+    getMe(skipToken)
+  }, [data])
 
   const handleGoogleLogin = () => history.push(`${process.env.REACT_APP_API_HOST}/users/register/social/google/`)
   const handleEmailLogin = (values: FieldValues) => loginEmail({ email: values.email, password: values.password })

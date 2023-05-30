@@ -7,29 +7,29 @@ import { PageFAQType, PageLinkSocialType, PageLinkType, PagePersonalType, PageTy
 export const pagesApi = createApi({
   reducerPath: "pagesApi",
 
-  baseQuery: getFetchBaseQuery("/pages"),
+  baseQuery: getFetchBaseQuery(false, "/pages"),
 
   endpoints: builder => ({
     getPagesMain: builder.query<PageType, void>({
-      query: () => "/main"
+      query: () => "/main",
     }),
 
     getPagePersonal: builder.query<PagePersonalType, { shortcut: string }>({
-      query: ({ shortcut }) => `/personal/${shortcut}`
+      query: ({ shortcut }) => `/personal/${shortcut}`,
     }),
 
     getPagesLinksDocuments: builder.query<PaginationType<PageLinkType>, void>({
-      query: () => "/links/documents"
+      query: () => "/links/documents",
     }),
 
     getPagesLinksSocials: builder.query<PaginationType<PageLinkSocialType>, void>({
-      query: () => "/links/socials"
+      query: () => "/links/socials",
     }),
 
     getPagesFAQs: builder.query<PaginationType<PageFAQType>, void>({
-      query: () => "/faqs"
+      query: () => "/faqs",
     }),
-  })
+  }),
 })
 
 export const {
@@ -37,5 +37,5 @@ export const {
   useGetPagesLinksSocialsQuery,
   useGetPagePersonalQuery,
   useGetPagesMainQuery,
-  useGetPagesFAQsQuery
+  useGetPagesFAQsQuery,
 } = pagesApi

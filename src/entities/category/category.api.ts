@@ -8,7 +8,7 @@ import { CategoryType } from "./category.types"
 export const categoryApi = createApi({
   reducerPath: "topicsApi",
 
-  baseQuery: getFetchBaseQuery(),
+  baseQuery: getFetchBaseQuery(false),
 
   endpoints: builder => ({
     getTagsTopics: builder.query<PaginationType<CategoryType>, PaginationQueryType>({

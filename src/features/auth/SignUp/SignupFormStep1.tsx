@@ -1,7 +1,7 @@
 import { history } from "@app/App"
 import { useAppDispatch } from "@app/store"
-import { signUpStep1 } from "@features/auth/auth.slice"
-import { LoginForm } from "@features/auth/Login/LoginForm"
+import { signUpStep1 } from "@features/users/users.slice"
+import { ISignUpFormStep1 } from "@features/users/users.types"
 import { open, PopupLayout } from "@shared/layout"
 import { Field, Formus } from "@shared/ui"
 import { bem } from "@shared/utils"
@@ -10,7 +10,7 @@ import cn from "classnames"
 import { FieldValues } from "react-hook-form"
 import * as yup from "yup"
 
-import { ISignUpFormStep1 } from "../auth.types"
+import { LoginForm } from "../Login/LoginForm"
 import { SignupFormStep2 } from "./SignupFormStep2"
 
 const schema = yup

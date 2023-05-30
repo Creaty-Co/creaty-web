@@ -3,11 +3,13 @@ import categoryReducer from "@entities/category/category.slice"
 import deviceReducer from "@entities/device/device.slice"
 import { mentorApi } from "@entities/mentor/mentor.api"
 import mentorReducer from "@entities/mentor/mentor.slice"
-import { AuthApi } from "@features/auth/auth.api"
+import { authApi } from "@features/auth/auth.api"
 import authReducer from "@features/auth/auth.slice"
 import { FormApi } from "@features/Form/form.api"
 import formReducer from "@features/Form/form.slice"
 import searchReducer from "@features/search/search.slice"
+import { usersApi } from "@features/users/users.api"
+import usersReducer from "@features/users/users.slice"
 import { AnyAction, combineReducers, configureStore, Reducer } from "@reduxjs/toolkit"
 import { pagesApi } from "@shared/api"
 import modalReducer from "@shared/layout/ModalContainer/modalContainerSlice"
@@ -18,7 +20,8 @@ import logger from "redux-logger"
 const development = process.env.NODE_ENV === "development"
 
 const middlewares = [
-  AuthApi.middleware,
+  authApi.middleware,
+  usersApi.middleware,
   FormApi.middleware,
   subscribeApi.middleware,
   categoryApi.middleware,
@@ -29,7 +32,8 @@ const middlewares = [
 if (development) middlewares.push(logger)
 
 const combinedReducer = combineReducers({
-  [AuthApi.reducerPath]: AuthApi.reducer,
+  [authApi.reducerPath]: authApi.reducer,
+  [usersApi.reducerPath]: usersApi.reducer,
   [FormApi.reducerPath]: FormApi.reducer,
   [subscribeApi.reducerPath]: subscribeApi.reducer,
   [categoryApi.reducerPath]: categoryApi.reducer,
@@ -37,6 +41,7 @@ const combinedReducer = combineReducers({
   [pagesApi.reducerPath]: pagesApi.reducer,
 
   auth: authReducer,
+  users: usersReducer,
   form: formReducer,
   topics: categoryReducer,
   mentor: mentorReducer,

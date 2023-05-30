@@ -1,6 +1,9 @@
 import { useAppDispatch, useAppSelector } from "@app/store"
 import { useSignUpEmailMutation } from "@features/auth/auth.api"
-import { selectAuthData, signUpStep2 } from "@features/auth/auth.slice"
+import { useLazyGetMeQuery } from "@features/users/users.api"
+import { selectAuthUsersData, signUpStep2 } from "@features/users/users.slice"
+import { ISignUpFormStep2 } from "@features/users/users.types"
+import { skipToken } from "@reduxjs/toolkit/dist/query/react"
 import { open, PopupLayout } from "@shared/layout"
 import { Field, Formus } from "@shared/ui"
 import { bem } from "@shared/utils"
@@ -10,7 +13,7 @@ import { useEffect } from "react"
 import { FieldValues, SubmitHandler } from "react-hook-form"
 import * as yup from "yup"
 
-import { ISignUpFormStep2 } from "../auth.types"
+import { setTokens } from "../auth.slice"
 import { LoginForm } from "../Login/LoginForm"
 import { SignupFormStep3 } from "./SignupFormStep3"
 
@@ -28,15 +31,15 @@ const { getModifier } = bem(CN)
 
 export function SignupFormStep2() {
   const dispatch = useAppDispatch()
-  const authData = useAppSelector(selectAuthData)
+  const authData = useAppSelector(selectAuthUsersData)
   const [api, contextHolder] = notification.useNotification()
 
-  const [signUpEmail, { error, isLoading, reset }] = useSignUpEmailMutation()
+  const [getMe] = useLazyGetMeQuery()
+  const [signUpEmail, { data, error, isLoading, reset }] = useSignUpEmailMutation()
 
   const openLoginModal = () => dispatch(open(<LoginForm />))
 
   useEffect(() => {
-    if (error && "status" in error && error?.status === 204) dispatch(open(<SignupFormStep3 />))
     if (!error || ("status" in error && error?.status !== 409)) return
     api.error({
       message: `There is already registered user with this data`,
@@ -50,6 +53,13 @@ export function SignupFormStep2() {
     })
     reset()
   }, [error])
+
+  useEffect(() => {
+    if (!data) return
+    dispatch(open(<SignupFormStep3 />))
+    dispatch(setTokens({ accessToken: data.access, refreshToken: data.refresh }))
+    getMe(skipToken)
+  }, [data])
 
   const handleSubmit: SubmitHandler<FieldValues> = async (values: FieldValues) => {
     const data: ISignUpFormStep2 = { first_name: values.first_name, last_name: values.last_name }

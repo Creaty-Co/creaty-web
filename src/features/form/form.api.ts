@@ -7,7 +7,7 @@ import { FormRequestParamsType, FormType } from "./form.types"
 export const FormApi = createApi({
   reducerPath: "formApi",
 
-  baseQuery: getFetchBaseQuery(),
+  baseQuery: getFetchBaseQuery(false),
 
   endpoints: builder => ({
     getForms: builder.query<PaginationType<FormType>, void>({

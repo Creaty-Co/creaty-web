@@ -9,7 +9,7 @@ import { MentorDetailedType, MentorType } from "./mentor.types"
 export const mentorApi = createApi({
   reducerPath: "mentorApi",
 
-  baseQuery: getFetchBaseQuery("/mentors"),
+  baseQuery: getFetchBaseQuery(false, "/mentors"),
 
   endpoints: builder => ({
     getMentors: builder.query<PaginationType<MentorType>, PaginationQueryType>({

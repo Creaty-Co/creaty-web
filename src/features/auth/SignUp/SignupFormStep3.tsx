@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@app/store"
-import { selectAuthData } from "@features/auth/auth.slice"
+import { selectAuthUsersData } from "@features/users/users.slice"
 import { close, PopupLayout } from "@shared/layout"
 import { Button } from "@shared/ui"
 import { bem } from "@shared/utils"
@@ -10,7 +10,7 @@ const { getElement } = bem(CN)
 
 export function SignupFormStep3() {
   const dispatch = useAppDispatch()
-  const email = useAppSelector(selectAuthData).email
+  const email = useAppSelector(selectAuthUsersData).email
 
   const handleClick = () => dispatch(close())
 

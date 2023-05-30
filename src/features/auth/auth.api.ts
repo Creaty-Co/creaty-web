@@ -1,10 +1,11 @@
+import { usersApi } from "@features/users/users.api"
 import { createApi } from "@reduxjs/toolkit/query/react"
 import { getFetchBaseQuery } from "@shared/utils"
 
-export const AuthApi = createApi({
+export const authApi = createApi({
   reducerPath: "authApi",
 
-  baseQuery: getFetchBaseQuery(),
+  baseQuery: getFetchBaseQuery(false),
 
   endpoints: builder => ({
     signUpEmail: builder.mutation({
@@ -15,9 +16,6 @@ export const AuthApi = createApi({
     }),
     refreshToken: builder.query({
       query: () => ({ url: "users/token/refresh/", method: "POST" }),
-    }),
-    getUserData: builder.query({
-      query: () => "users/me/",
     }),
     resendPassword: builder.mutation({
       query: body => ({ url: `/users/register/resend/`, method: "POST", body }),
@@ -32,7 +30,6 @@ export const {
   useSignUpEmailMutation,
   useLoginEmailMutation,
   useLazyRefreshTokenQuery,
-  useGetUserDataQuery,
   useResendPasswordMutation,
   useResetPasswordMutation,
-} = AuthApi
+} = authApi

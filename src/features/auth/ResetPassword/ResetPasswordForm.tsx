@@ -1,5 +1,7 @@
 import { useAppDispatch } from "@app/store"
 import { useResetPasswordMutation } from "@features/auth/auth.api"
+import { useLazyGetMeQuery } from "@features/users/users.api"
+import { skipToken } from "@reduxjs/toolkit/dist/query/react"
 import { close, PopupLayout } from "@shared/layout"
 import { Field, Formus } from "@shared/ui"
 import { bem } from "@shared/utils"
@@ -57,6 +59,7 @@ export function ResetPasswordForm({ code }: IProps) {
   const navigate = useNavigate()
   const [api, contextHolder] = notification.useNotification()
 
+  const [getMe] = useLazyGetMeQuery()
   const [resetPassword, { isLoading, error, reset, data }] = useResetPasswordMutation()
 
   useEffect(() => {
@@ -70,6 +73,7 @@ export function ResetPasswordForm({ code }: IProps) {
     if (!data) return
     const { access, refresh } = data
     dispatch(setTokens({ accessToken: access, refreshToken: refresh }))
+    getMe(skipToken)
     dispatch(close())
     navigate("/")
     api.success({ message: "Password successfully changed", placement: "topRight", duration: 10 })

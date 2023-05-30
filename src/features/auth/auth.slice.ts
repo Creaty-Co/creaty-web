@@ -1,21 +1,11 @@
 import { history } from "@app/App"
 import { RootState } from "@app/store"
-import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { parseJwt } from "@shared/utils/token"
 
-import { IAuthState, ISignUpFormStep1, ISignUpFormStep2, ITokens, IUserData } from "./auth.types"
+import { IAuthState, ITokens } from "./auth.types"
 
 const initialState: IAuthState = {
-  authUserId: null,
-
-  email: null,
-  password: null,
-  first_name: null,
-  last_name: null,
-
-  discount: null,
-  verified: null,
-
   accessToken: null,
   refreshToken: null,
   expAt: null,
@@ -27,53 +17,23 @@ export const authSlice = createSlice({
   name: "auth",
 
   reducers: {
-    // initApp: (state, action: PayloadAction<ITokens>) => {
-    //   localStorage.getItem("accessToken")
-    //   localStorage.getItem("refreshToken")
-    //   localStorage.getItem("expAt")
-
-    //   const { accessToken, refreshToken } = action.payload
-    //   const JWTBody = parseJwt(accessToken).user_id
-    //   state.authUserId = JWTBody.user_id
-
-    //   state.accessToken = accessToken
-    //   state.refreshToken = refreshToken
-    //   state.isAuth = true
-    // },
     setTokens: (state, action: PayloadAction<ITokens>) => {
       const { accessToken, refreshToken } = action.payload
-      const expAt = parseJwt(accessToken).exp
-      state.expAt = expAt
+      try {
+        const JWTBody = parseJwt(accessToken)
+        console.log("JWTBody: ", JWTBody)
+        state.expAt = JWTBody.exp
 
-      localStorage.setItem("accessToken", accessToken)
-      localStorage.setItem("refreshToken", refreshToken)
-      localStorage.setItem("expAt", expAt)
+        localStorage.setItem("accessToken", accessToken)
+        localStorage.setItem("refreshToken", refreshToken)
+        localStorage.setItem("expAt", JWTBody.exp)
 
-      state.accessToken = accessToken
-      state.refreshToken = refreshToken
-      state.isAuth = true
-    },
-
-    setAuthUserData: (state, action: PayloadAction<IUserData>) => {
-      const { id, email, first_name, last_name, discount, verified } = action.payload
-      state.authUserId = id
-      state.email = email
-      state.first_name = first_name
-      state.last_name = last_name || null
-      state.discount = discount
-      state.verified = verified
-    },
-
-    signUpStep1: (state, action: PayloadAction<ISignUpFormStep1>) => {
-      const { email, password } = action.payload
-      state.email = email
-      state.password = password
-    },
-
-    signUpStep2: (state, action: PayloadAction<ISignUpFormStep2>) => {
-      const { first_name, last_name } = action.payload
-      state.first_name = first_name
-      state.last_name = last_name || null
+        state.accessToken = accessToken
+        state.refreshToken = refreshToken
+        state.isAuth = true
+      } catch {
+        state.isAuth = false
+      }
     },
 
     logOut: () => {
@@ -86,12 +46,6 @@ export const authSlice = createSlice({
 })
 
 export default authSlice.reducer
-export const { logOut, signUpStep1, signUpStep2, setAuthUserData, setTokens } = authSlice.actions
+export const { logOut, setTokens } = authSlice.actions
 
 export const selectAuth = (state: RootState) => state.auth
-export const selectAuthData = createSelector(selectAuth, state => ({
-  email: state.email,
-  password: state.password,
-  first_name: state.first_name,
-  last_name: state.last_name,
-}))
