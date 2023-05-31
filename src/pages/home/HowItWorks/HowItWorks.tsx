@@ -44,13 +44,14 @@ export function HowItWorks() {
           display="flex"
           type="1"
           title={t("help.title")}
-          desc={t("help.desc")}>
+          desc={t("help.desc")}
+        >
           <Button
             className={cn(getElement("button"), getElement("button_free"))}
             size="big"
             color="green"
-            type="button"
-            onClick={() => dispatch(open(<PopupForm type="test_meeting" />))}>
+            onClick={() => dispatch(open(<PopupForm type="test_meeting" />))}
+          >
             {t("button")}
           </Button>
         </InfoSection>

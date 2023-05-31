@@ -62,11 +62,15 @@ export function DynamicPrimaryInfo(props: IDynamicPrimaryInfo) {
   }
 
   useEffect(() => {
-    (async () => {
+    ;(async () => {
       if (topics.list.length === 0) return
       if (props.firstHeadingShortcut) {
-        const topic = topics.list.find(topic => topic.shortcut === props.firstHeadingShortcut)
-        const tag = topics.tags.find(tag => tag.shortcut === props.firstHeadingShortcut)
+        const topic = topics.list.find(
+          (topic: { shortcut: string | undefined }) => topic.shortcut === props.firstHeadingShortcut
+        )
+        const tag = topics.tags.find(
+          (tag: { shortcut: string | undefined }) => tag.shortcut === props.firstHeadingShortcut
+        )
         const heading = topic?.title || tag?.title
 
         if (heading) {
@@ -91,9 +95,7 @@ export function DynamicPrimaryInfo(props: IDynamicPrimaryInfo) {
         <span>{t("title")}</span>
       </div>
 
-      <div className={getElement("desc")}>
-        {t("desc")}
-      </div>
+      <div className={getElement("desc")}>{t("desc")}</div>
     </div>
   )
 }

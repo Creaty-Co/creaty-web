@@ -25,70 +25,64 @@ export function Mentors() {
   const search = useAppSelector(selectSearch)
   const topics = useAppSelector(selectTopics)
   const params = useParams<"topicOrTag">()
-      
+
   useEffect(() => {
-    if (!params.topicOrTag) 
-      dispatch(updateSearch({ tag: undefined, topic: undefined }))
+    if (!params.topicOrTag) dispatch(updateSearch({ tag: undefined, topic: undefined }))
   }, [])
 
-  const topicFromURL = topics.list.find(topic => topic.shortcut === params.topicOrTag)
-  const tagFromURL = topics.tags.find(tag => tag.shortcut === params.topicOrTag)
+  const topicFromURL = topics.list.find(
+    (topic: { shortcut: string | undefined }) => topic.shortcut === params.topicOrTag
+  )
+  const tagFromURL = topics.tags.find((tag: { shortcut: string | undefined }) => tag.shortcut === params.topicOrTag)
   const pageTitle = tagFromURL?.title || topicFromURL?.title || params.topicOrTag
 
   useEffect(() => {
     /*
       Topic from URL to search.topic
     */
-    topicFromURL && !tagFromURL && (
-      (search.topic && search.topic.id !== topicFromURL.id) ||
-      !search.topic
-    ) && dispatch(updateSearch({ tag: undefined, topic: topicFromURL }))
-      
+    topicFromURL &&
+      !tagFromURL &&
+      ((search.topic && search.topic.id !== topicFromURL.id) || !search.topic) &&
+      dispatch(updateSearch({ tag: undefined, topic: topicFromURL }))
+
     /*
       Tag from URL to search.tag
     */
-    tagFromURL && (
-      (!!search.tag && search.tag.id !== tagFromURL.id) ||
-      !search.tag
-    ) && dispatch(updateSearch({ tag: tagFromURL }))
-      
+    tagFromURL &&
+      ((!!search.tag && search.tag.id !== tagFromURL.id) || !search.tag) &&
+      dispatch(updateSearch({ tag: tagFromURL }))
+
     /* 
       If tagFromURL isn't part of the topic.tags
       Then set search.topic to undefined
     */
-    tagFromURL && search.topic &&
-      !search.topic.tags.find(tag => tag.id === tagFromURL.id) &&
-        dispatch(updateSearch({ topic: undefined }))
+    tagFromURL &&
+      search.topic &&
+      !search.topic.tags.find((tag: { id: unknown }) => tag.id === tagFromURL.id) &&
+      dispatch(updateSearch({ topic: undefined }))
   }, [topics])
 
   return (
     <div className={CN}>
       <div className={getElement("container")}>
         <div className={getElement("header")}>
-          <div 
-            className={classMerge(
-              getElement("title"),
-              "heading"
-            )}
-          >    
-            <span className="weak">{t("title")}{(tagFromURL || topicFromURL) && ":"} </span>
+          <div className={classMerge(getElement("title"), "heading")}>
+            <span className="weak">
+              {t("title")}
+              {(tagFromURL || topicFromURL) && ":"}{" "}
+            </span>
             {pageTitle}
           </div>
-          
-          {!(tagFromURL || topicFromURL) && 
-            <div className={cn(getElement("desc"))}>{t("desc")}</div>
-          }
+
+          {!(tagFromURL || topicFromURL) && <div className={cn(getElement("desc"))}>{t("desc")}</div>}
         </div>
 
-        <MentorSearch/>
+        <MentorSearch />
 
-        <MentorCards
-          topic={topicFromURL}
-          tag={tagFromURL}
-        />
+        <MentorCards topic={topicFromURL} tag={tagFromURL} />
       </div>
 
-      <HaveQuestions/>
+      <HaveQuestions />
     </div>
   )
 }

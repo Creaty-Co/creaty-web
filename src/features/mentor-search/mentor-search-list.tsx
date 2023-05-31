@@ -1,10 +1,11 @@
 import "./mentor-search-list.scss"
 
 import { RootState, useAppSelector } from "@app/store"
-import { Tag } from "@entities"
+import { CategoryType, Tag, TagType } from "@entities"
 import { selectIsMobile } from "@entities/device"
 import { Icon, LoaderCover } from "@shared/ui"
 import { bem, toDataAttrs } from "@shared/utils"
+import { Key } from "react"
 import { useTranslation } from "react-i18next"
 
 import { MentorSearchListItem } from "./mentor-search-list-item"
@@ -33,12 +34,12 @@ export function MentorSearchList({
 
   const categories = value === null || value.length === 0
     ? topics.list
-    : topics.list.filter(t => t.title.toLocaleLowerCase().search(value.toLocaleLowerCase()) !== -1)
+    : topics.list.filter((t: { title: string }) => t.title.toLocaleLowerCase().search(value.toLocaleLowerCase()) !== -1)
   /* console.log("categories", categories) */
 
   const tags = value === null || value.length === 0
     ? searchState.topic?.tags || topics.tags
-    : topics.tags.filter(t => t.title.toLocaleLowerCase().search(value.toLocaleLowerCase()) !== -1)
+    : topics.tags.filter((t: { title: string }) => t.title.toLocaleLowerCase().search(value.toLocaleLowerCase()) !== -1)
   /* console.log("tags", tags) */
 
 
@@ -143,14 +144,14 @@ export function MentorSearchList({
 
         {/* All topics */}
         {
-          categories.filter(t => t.id !== searchState.topic?.id).map(topic => 
+          categories.filter((t: { id: any }) => t.id !== searchState.topic?.id).map((topic: CategoryType) => 
             <MentorSearchListItem key={topic.id} 
               {...{topic}}
 
               dataAttrs={toDataAttrs({
                 "selector": "topic",
                 "action": "add",
-                "id": topic.id.toString()
+                "id": topic?.id?.toString() || ""
               })}
             />
           )
@@ -196,9 +197,9 @@ export function MentorSearchList({
         }
 
         {/* Tags of topic */}
-        {tags.filter(tag => tag.id !== searchState.tag?.id)
-          .filter(tag => tag.title)
-          .map(tag => 
+        {tags.filter((tag: TagType) => tag.id !== searchState.tag?.id)
+          .filter((tag: TagType) => tag.title)
+          .map((tag: TagType) => 
             <Tag key={tag.id}
               dataAttrs={toDataAttrs({
                 "selector": "tag",
