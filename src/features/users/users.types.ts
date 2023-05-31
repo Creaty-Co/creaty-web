@@ -24,4 +24,5 @@ export interface IUsersState {
   last_name: string | null
   hasDiscount: boolean
   isVerified: boolean
+  isAuth: boolean
 }

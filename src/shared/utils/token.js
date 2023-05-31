@@ -24,8 +24,7 @@ export const updateTokens = async () => {
 }
 
 
-export const checkAccessTokenExpired = async () => {
-  const tokenExpiredTs = localStorage.getItem("expiresIn")
+export const checkAccessTokenExpired = async (tokenExpiredTs) => {
   if (!tokenExpiredTs) return true
 
   if ((+tokenExpiredTs - 30) * 1000 <= Date.now()) {

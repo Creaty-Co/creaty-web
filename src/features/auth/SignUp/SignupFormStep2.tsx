@@ -21,7 +21,6 @@ export const schema = yup
   .object()
   .shape({
     first_name: yup.string().required("First name is required"),
-    last_name: yup.string().required("Last name is required"),
   })
   .required()
 
@@ -70,7 +69,7 @@ export function SignupFormStep2() {
   const elementContent = (
     <>
       <Field type="input" name="first_name" label="First name*" />
-      <Field type="input" name="last_name" label="Last name*" />
+      <Field type="input" name="last_name" label="Last name" />
     </>
   )
 
@@ -79,7 +78,8 @@ export function SignupFormStep2() {
       className="button button--dark button--biggest button__text"
       type="primary"
       htmlType="submit"
-      loading={isLoading}>
+      loading={isLoading}
+    >
       Continue
     </Button>
   )

@@ -1,11 +1,11 @@
 import { usersApi } from "@features/users/users.api"
 import { createApi } from "@reduxjs/toolkit/query/react"
-import { getFetchBaseQuery } from "@shared/utils"
+import { baseQueryWithReauth } from "@shared/utils"
 
 export const authApi = createApi({
   reducerPath: "authApi",
 
-  baseQuery: getFetchBaseQuery(false),
+  baseQuery: baseQueryWithReauth(false),
 
   endpoints: builder => ({
     signUpEmail: builder.mutation({

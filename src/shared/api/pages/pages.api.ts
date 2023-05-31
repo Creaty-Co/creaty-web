@@ -1,13 +1,13 @@
 import { createApi } from "@reduxjs/toolkit/query/react"
 import { PaginationType } from "@shared/types"
-import { getFetchBaseQuery } from "@shared/utils"
+import { baseQueryWithReauth } from "@shared/utils"
 
 import { PageFAQType, PageLinkSocialType, PageLinkType, PagePersonalType, PageType } from "./pages.types"
 
 export const pagesApi = createApi({
   reducerPath: "pagesApi",
 
-  baseQuery: getFetchBaseQuery(false, "/pages"),
+  baseQuery: baseQueryWithReauth(false, "/pages"),
 
   endpoints: builder => ({
     getPagesMain: builder.query<PageType, void>({

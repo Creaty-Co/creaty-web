@@ -1,12 +1,12 @@
 import { createApi } from "@reduxjs/toolkit/query/react"
-import { getFetchBaseQuery } from "@shared/utils"
+import { baseQueryWithReauth } from "@shared/utils"
 
 import { setAuthUserData } from "./users.slice"
 
 export const usersApi = createApi({
   reducerPath: "usersApi",
 
-  baseQuery: getFetchBaseQuery(true),
+  baseQuery: baseQueryWithReauth(true),
 
   endpoints: builder => ({
     getMe: builder.query({

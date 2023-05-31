@@ -13,6 +13,8 @@ const initialState: IUsersState = {
 
   hasDiscount: false,
   isVerified: false,
+  
+  isAuth: false
 }
 
 export const usersSlice = createSlice({
@@ -28,6 +30,7 @@ export const usersSlice = createSlice({
       state.last_name = last_name || null
       state.hasDiscount = has_discount
       state.isVerified = is_verified
+      state.isAuth = true
     },
 
     signUpStep1: (state, action: PayloadAction<ISignUpFormStep1>) => {
@@ -48,9 +51,12 @@ export default usersSlice.reducer
 export const { signUpStep1, signUpStep2, setAuthUserData } = usersSlice.actions
 
 export const selectUsers = (state: RootState) => state.users
+export const selectIsAuth = createSelector(selectUsers, state => state.isAuth)
 export const selectAuthUsersData = createSelector(selectUsers, state => ({
   email: state.email,
   password: state.password,
   first_name: state.first_name,
   last_name: state.last_name,
+  hasDiscount: state.hasDiscount,
+  isVerified: state.isVerified,
 }))

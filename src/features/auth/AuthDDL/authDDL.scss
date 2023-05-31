@@ -1,0 +1,17 @@
+@import "/src/app/assets/scss/bundle.scss";
+
+.auth-ddl {
+  &__avatar {
+    cursor: pointer;
+    border-radius: 35%;
+
+    border: 2px solid #555863;
+
+    &:hover {
+      border: 2px solid white;
+    }
+  }
+  &__ddl {
+    @include Text2Regular;
+  }
+}

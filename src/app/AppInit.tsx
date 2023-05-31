@@ -27,7 +27,6 @@ export const AppInit = () => {
       getMe(skipToken)
       return
     }
-
     const lSAccessToken = localStorage.getItem("accessToken")
     const lSRefreshToken = localStorage.getItem("refreshToken")
     if (lSAccessToken && lSRefreshToken) {

@@ -1,6 +1,6 @@
 import { history } from "@app/App"
 import { RootState } from "@app/store"
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { parseJwt } from "@shared/utils/token"
 
 import { IAuthState, ITokens } from "./auth.types"
@@ -9,7 +9,6 @@ const initialState: IAuthState = {
   accessToken: null,
   refreshToken: null,
   expAt: null,
-  isAuth: false,
 }
 
 export const authSlice = createSlice({
@@ -21,7 +20,6 @@ export const authSlice = createSlice({
       const { accessToken, refreshToken } = action.payload
       try {
         const JWTBody = parseJwt(accessToken)
-        console.log("JWTBody: ", JWTBody)
         state.expAt = JWTBody.exp
 
         localStorage.setItem("accessToken", accessToken)
@@ -30,9 +28,10 @@ export const authSlice = createSlice({
 
         state.accessToken = accessToken
         state.refreshToken = refreshToken
-        state.isAuth = true
       } catch {
-        state.isAuth = false
+        state.accessToken = null
+        state.refreshToken = null
+        state.expAt = null
       }
     },
 
@@ -49,3 +48,4 @@ export default authSlice.reducer
 export const { logOut, setTokens } = authSlice.actions
 
 export const selectAuth = (state: RootState) => state.auth
+export const selectExpAt = createSelector(selectAuth, state => state.expAt)
