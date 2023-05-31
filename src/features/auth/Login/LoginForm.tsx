@@ -3,7 +3,7 @@ import { useAppDispatch } from "@app/store"
 import { useLoginEmailMutation } from "@features/auth/auth.api"
 import { useLazyGetMeQuery } from "@features/users/users.api"
 import { skipToken } from "@reduxjs/toolkit/dist/query/react"
-import { open, PopupLayout } from "@shared/layout"
+import { close, open, PopupLayout } from "@shared/layout"
 import { Field, Formus } from "@shared/ui"
 import { bem } from "@shared/utils"
 import { Button, notification } from "antd"
@@ -13,7 +13,7 @@ import { FieldValues } from "react-hook-form"
 import * as yup from "yup"
 
 import { setTokens } from "../auth.slice"
-import { ResendPassword } from "../ResetPassword/ResendPassword"
+import { ResendPasswordStep1 } from "../ResendPassword/ResendPasswordStep1"
 import { SignupFormStep1 } from "../SignUp/SignupFormStep1"
 
 export const schema = yup
@@ -33,20 +33,20 @@ export function LoginForm() {
   const [api, contextHolder] = notification.useNotification()
 
   const [getMe] = useLazyGetMeQuery()
-  const [loginEmail, { data, isLoading, error, reset }] = useLoginEmailMutation()
+  const [loginEmail, { data, isLoading, error, reset, isSuccess }] = useLoginEmailMutation()
 
   useEffect(() => {
     if (!error) return
-    api.error({
-      message: "data" in error && (error.data as { detail: string }).detail,
-      placement: "topRight",
-      duration: 10,
-    })
+    const message =
+      (error as any)?.data?.detail ||
+      (error as any)?.data?.error?.detail?.message ||
+      (error as any)?.data?.error?.detail
+    api.error({ message, placement: "topRight", duration: 10 })
     reset()
   }, [error])
 
   useEffect(() => {
-    if (!data) return
+    if (!isSuccess) return
     dispatch(close())
     dispatch(setTokens({ accessToken: data.access, refreshToken: data.refresh }))
     getMe(skipToken)
@@ -55,7 +55,7 @@ export function LoginForm() {
   const handleGoogleLogin = () => history.push(`${process.env.REACT_APP_API_HOST}/users/register/social/google/`)
   const handleEmailLogin = (values: FieldValues) => loginEmail({ email: values.email, password: values.password })
   const handleSignUpRedirect = () => dispatch(open(<SignupFormStep1 />))
-  const handleForgotPasswordRedirect = () => dispatch(open(<ResendPassword />))
+  const handleForgotPasswordRedirect = () => dispatch(open(<ResendPasswordStep1 />))
 
   const elementContent = (
     <>
@@ -82,7 +82,8 @@ export function LoginForm() {
         className="button button--dark button--biggest button__text"
         type="primary"
         htmlType="submit"
-        loading={isLoading}>
+        loading={isLoading}
+      >
         Login
       </Button>
 

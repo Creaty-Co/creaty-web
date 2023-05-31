@@ -11,7 +11,7 @@ export function ResetPassword() {
   const params = useParams<"code">()
 
   useEffect(() => {
-    if (params?.code) dispatch(open(<ResetPasswordForm code={+params.code} />))
+    if (params?.code) dispatch(open(<ResetPasswordForm code={params.code} />))
   }, [])
 
   return <Home />

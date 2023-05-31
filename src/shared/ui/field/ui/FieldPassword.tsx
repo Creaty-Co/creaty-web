@@ -42,7 +42,8 @@ export function FieldPassword({ className, disabled, helper, hints, label, name 
         className,
         "grid grid-cols-1 grid-flow-row auto-rows-auto gap-y-1",
         "relative"
-      )}>
+      )}
+    >
       {label && <span className={cn(getElement("label"), "block text-gray-800")}>{label}</span>}
 
       <div className="relative m-0 border-0">
@@ -60,15 +61,16 @@ export function FieldPassword({ className, disabled, helper, hints, label, name 
             invalid && isDirty ? "border-red focus:border-red" : ""
           )}
           disabled={disabled !== undefined ? disabled : false}
-          
           type={isPasswordVisible ? "text" : "password"}
           autoComplete="new-password"
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
         />
         <button
+          type="button"
           className="absolute inset-y-0 right-6 flex items-center px-4 text-gray-600"
-          onClick={togglePasswordVisibility}>
+          onClick={togglePasswordVisibility}
+        >
           {isPasswordVisible ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -76,7 +78,8 @@ export function FieldPassword({ className, disabled, helper, hints, label, name 
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-5 h-5">
+              className="w-5 h-5"
+            >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -90,7 +93,8 @@ export function FieldPassword({ className, disabled, helper, hints, label, name 
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-5 h-5">
+              className="w-5 h-5"
+            >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"

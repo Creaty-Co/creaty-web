@@ -1,4 +1,3 @@
-import { usersApi } from "@features/users/users.api"
 import { createApi } from "@reduxjs/toolkit/query/react"
 import { baseQueryWithReauth } from "@shared/utils"
 
@@ -18,10 +17,10 @@ export const authApi = createApi({
       query: () => ({ url: "users/token/refresh/", method: "POST" }),
     }),
     resendPassword: builder.mutation({
-      query: body => ({ url: `/users/register/resend/`, method: "POST", body }),
+      query: body => ({ url: `/users/password/reset/`, method: "POST", body }),
     }),
     resetPassword: builder.mutation({
-      query: body => ({ url: `/users/password`, method: "PUT", body }),
+      query: body => ({ url: `/users/password/reset/`, method: "PUT", body }),
     }),
   }),
 })

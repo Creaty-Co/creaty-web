@@ -39,7 +39,7 @@ export const baseQueryWithReauth =
       const { expAt, refreshToken } = (api.getState() as RootState).auth
       let result = await baseQuery(args, api, extraOptions)
       
-      if (result.error && result.error.status === 401) {
+      if (authRequired && result.error && result.error.status === 401) {
         if (!mutex.isLocked()) {
           const release = await mutex.acquire()
           try {

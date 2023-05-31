@@ -5,12 +5,13 @@ import { Field, Formus } from "@shared/ui"
 import { bem } from "@shared/utils"
 import { Button, notification } from "antd"
 import cn from "classnames"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { FieldValues } from "react-hook-form"
 import * as yup from "yup"
 
 import { LoginForm } from "../Login/LoginForm"
 import { SignupFormStep1 } from "../SignUp/SignupFormStep1"
+import { ResendPasswordStep2 } from "./ResendPasswordStep2"
 
 export const schema = yup
   .object()
@@ -23,11 +24,12 @@ const CN = "form"
 const MOD = "resend-password"
 const { getElement, getModifier } = bem(CN)
 
-export function ResendPassword() {
+export function ResendPasswordStep1() {
   const dispatch = useAppDispatch()
+  const [resendedEmail, setResendedEmail] = useState("")
   const [api, contextHolder] = notification.useNotification()
 
-  const [resendPassword, { isLoading, error, reset }] = useResendPasswordMutation()
+  const [resendPassword, { data, isLoading, error, reset, isSuccess }] = useResendPasswordMutation()
 
   useEffect(() => {
     if (!error) return
@@ -36,7 +38,14 @@ export function ResendPassword() {
     reset()
   }, [error])
 
-  const handleResetPassword = (values: FieldValues) => resendPassword({ email: values.email })
+  useEffect(() => {
+    if (isSuccess) dispatch(open(<ResendPasswordStep2 email={resendedEmail} />))
+  }, [data])
+
+  const handleResendPassword = (values: FieldValues) => {
+    resendPassword({ email: values.email })
+    setResendedEmail(values.email)
+  }
   const handleLoginRedirect = () => dispatch(open(<LoginForm />))
   const handleSignUpRedirect = () => dispatch(open(<SignupFormStep1 />))
 
@@ -55,14 +64,14 @@ export function ResendPassword() {
         className="button button--dark button--biggest button__text"
         type="primary"
         htmlType="submit"
-        loading={isLoading}>
+        loading={isLoading}
+      >
         Continue
       </Button>
 
       <span className={cn(getElement("suggestion"))}>
-        <span>Return to </span>
         <em className={cn(getElement("redirection"))} onClick={handleLoginRedirect}>
-          Log in{" "}
+          Return to Log in{" "}
         </em>
         <span>, or if you don't have an account, </span>
 
@@ -80,7 +89,7 @@ export function ResendPassword() {
         elementContent={elementContent}
         elementControl={elementControl}
         schema={schema}
-        onSubmit={handleResetPassword}
+        onSubmit={handleResendPassword}
       />
       {contextHolder}
     </PopupLayout>

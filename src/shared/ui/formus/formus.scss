@@ -37,6 +37,7 @@
 
   &__confirmation {
     @include H3Regular();
+    color: $color-black-90;
   }
 
   &__suggestion {

@@ -51,12 +51,13 @@ const MOD = "reset-password"
 const { getModifier } = bem(CN)
 
 interface IProps {
-  code: number
+  code: string
 }
 
 export function ResetPasswordForm({ code }: IProps) {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+
   const [api, contextHolder] = notification.useNotification()
 
   const [getMe] = useLazyGetMeQuery()
@@ -79,7 +80,7 @@ export function ResetPasswordForm({ code }: IProps) {
     api.success({ message: "Password successfully changed", placement: "topRight", duration: 10 })
   }, [data])
 
-  const handleResetPassword = (values: FieldValues) => resetPassword({ code, password: values.password })
+  const handleResetPassword = (values: FieldValues) => resetPassword({ code, new_password: values.password })
 
   const elementContent = (
     <>
@@ -113,7 +114,8 @@ export function ResetPasswordForm({ code }: IProps) {
       className="button button--dark button--biggest button__text"
       type="primary"
       htmlType="submit"
-      loading={isLoading}>
+      loading={isLoading}
+    >
       Continue
     </Button>
   )
