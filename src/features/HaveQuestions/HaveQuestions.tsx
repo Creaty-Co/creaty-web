@@ -1,4 +1,4 @@
-import "./HaveQuestions.scss"
+import "./haveQuestions.scss"
 
 import { useAppSelector } from "@app/store"
 import { Form } from "@features"
