@@ -1,4 +1,4 @@
-import { RootState, useAppSelector } from "@app/store"
+import { RootState } from "@app/store"
 import { setTokens } from "@features/auth/auth.slice"
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from "@reduxjs/toolkit/query"
 import { fetchBaseQuery } from "@reduxjs/toolkit/query/react"
@@ -26,7 +26,7 @@ export const baseQueryWithReauth =
 
       const baseQuery = fetchBaseQuery({
         baseUrl: API + (url || ""),
-        prepareHeaders: (headers, { getState }) => {
+        prepareHeaders: (headers, { getState }) => { 
           headers.set("Accept-Language", "en")
           if (!authRequired) return headers
           const token = (getState() as RootState).auth.accessToken
