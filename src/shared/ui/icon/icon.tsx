@@ -33,6 +33,7 @@ export type IconName =
   | "digital-design"
   | "art-management"
   | "journalism-writing"
+  | "user-avatar"
   | (string & {})
 
 export interface IIcon extends SVGAttributes<SVGElement> {

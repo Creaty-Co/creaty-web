@@ -10,7 +10,7 @@ import { bem } from "@shared/utils"
 import cn from "classnames"
 import { ReactNode/*, useEffect*/ } from "react"
 import { useTranslation } from "react-i18next"
-import { useNavigate, useParams } from "react-router"
+import { useParams } from "react-router"
 
 import { QAndA } from "./../home/q-and-a" 
 
@@ -19,7 +19,6 @@ const { getElement } = bem(CN)
 
 export function User() {
   useScrollToTop()
-  const navigate = useNavigate()
 
   const { t/*, i18n*/ } = useTranslation("translation", { keyPrefix: "views.mentor" })
   const { t: tRoot } = useTranslation("translation")
@@ -183,7 +182,7 @@ const UserSection = ({
 
 /* Packages */
 const CNPackages = "user-packages"
-const { getElement: getElementPackages, getModifier: getModifierPackages } = bem(CNPackages)
+// const { getElement: getElementPackages, getModifier: getModifierPackages } = bem(CNPackages)
 
 const Packages = () => (
   <div className={cn(CNPackages, "flex flex-col gap-y-5")}>

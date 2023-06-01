@@ -1,12 +1,9 @@
-import "./field.input.scss"
-
 import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/20/solid"
 import { bem } from "@shared/utils"
 import cn from "classnames"
 import { useState } from "react"
-import { FieldValues, useForm, useFormContext, UseFormRegister } from "react-hook-form"
+import { useFormContext } from "react-hook-form"
 
-import { FieldInputType } from "../field.types"
 import { FieldHints } from "./field.hints"
 
 export interface IInputOptions {
@@ -38,8 +35,8 @@ export function FieldInput({
 }: IFieldInput) {
   const [focused, setFocused] = useState(false)
 
-  const { register, getFieldState, getValues, formState: { isDirty: isDirtyForm, isValid: isValidForm, errors: errorsForm } } = useFormContext()
-  const { error, isDirty, isTouched, invalid } = getFieldState(name)
+  const { register, getFieldState, getValues } = useFormContext()
+  const { error, isDirty, invalid } = getFieldState(name)
   const value = getValues(name)
 
   return (
@@ -65,14 +62,6 @@ export function FieldInput({
             "rounded-xl border-2",
             "focus:ring-0 focus:outline-none",
             "disabled:cursor-not-allowed disabled:border-gray-300 disabled:bg-gray-300 disabled:text-gray-500",
-            /*
-            !error && !isTouched && !isDirty
-              ? "border-gray-350 focus:border-gray-500" : "",
-            !error && isTouched
-              ? "border-gray-350 focus:border-gray-500" : "",
-            !error && isDirty
-              ? "border-gray-350 focus:border-gray-500" : "",
-            */
             !isDirty
               ? "border-gray-350 focus:border-gray-500" : "",
             !invalid && isDirty
@@ -82,6 +71,7 @@ export function FieldInput({
           )}
 
           disabled={disabled !== undefined? disabled : false}
+          autoComplete="on"
 
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}

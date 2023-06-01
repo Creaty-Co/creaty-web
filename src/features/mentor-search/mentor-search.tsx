@@ -216,7 +216,7 @@ export function MentorSearch() {
     if (typeof name === "boolean" || !isSelector(name)) return
 
     const values = name === "topic" ? topics.list : topics.tags
-    const value = values.find(value => value.id === +id)
+    const value = values.find((value: { id: number }) => value.id === +id)
 
     if (value) setSearchState(prevState => {
       const to = forceTo === undefined || forceTo === null
@@ -247,7 +247,7 @@ export function MentorSearch() {
 
   function getURLByTagID(ID: number): string {
     const url = ["mentors"]
-    const tag = topics.tags.find(tag => tag.id === ID)
+    const tag = topics.tags.find((tag: { id: number }) => tag.id === ID)
 
     /*
     const tagInCategory = !!searchState.topic?.tags.find(tag => tag.id === ID)
@@ -305,7 +305,7 @@ export function MentorSearch() {
     selector === "tag" && action === "add" && id &&
       dispatch(updateSearch({
         ...searchState,
-        tag: topics.tags.find(tag => tag.id === +id),
+        tag: topics.tags.find((tag: { id: number }) => tag.id === +id),
         focused: false
       })) && navigate(getURLByTagID(+id))
 

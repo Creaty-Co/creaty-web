@@ -1,0 +1,14 @@
+@import "/src/app/assets/scss/bundle.scss";
+
+.sign-up {
+  background-color: $color-gray-10;
+
+  & > .button__text {
+    color: $color-black-100;
+    @include Text2Medium;
+  }
+
+  @include for-size(big-phone-screen) {
+    width: 100%;
+  }
+}

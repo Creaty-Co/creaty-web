@@ -1,5 +1,5 @@
 import { RootState } from "@app/store"
-import { createSelector,createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { createSelector,createSlice } from "@reduxjs/toolkit"
 import { getBrowser, getOrientation, getOS, getTouch } from "@shared/utils"
 
 import { DeviceStateType } from "./device.types"

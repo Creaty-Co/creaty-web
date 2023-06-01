@@ -3,9 +3,9 @@ import "./mentors-slider.scss"
 import { useAppDispatch } from "@app/store"
 import { MentorCard, MentorType } from "@entities"
 import { PopupForm } from "@features"
-import { open } from "@shared/layout/modal"
+import { open } from "@shared/layout"
 import { Button, ButtonIcon, ButtonLink } from "@shared/ui"
-import { bem } from "@shared/utils" 
+import { bem } from "@shared/utils"
 import cn from "classnames"
 import { useEffect, useRef } from "react"
 import { useTranslation } from "react-i18next"
@@ -24,7 +24,7 @@ export function MentorsSlider(props: IMentorsSlider) {
   const innerRef = useRef<HTMLDivElement>(null)
   const prev = () => slideBy(-1)
   const next = () => slideBy(+1)
-  
+
   function slideBy(by: 1 | -1) {
     if (!innerRef.current) return
 
@@ -39,15 +39,15 @@ export function MentorsSlider(props: IMentorsSlider) {
 
     innerRef.current.scrollBy({
       behavior: "smooth",
-      left: scrollInterval * by
+      left: scrollInterval * by,
     })
   }
-  
+
   useEffect(() => {
     if (!innerRef.current) return
     innerRef.current.scrollTo(innerRef.current.scrollWidth / 2 - innerRef.current.offsetWidth / 2, 0)
   }, [])
-  
+
   return (
     <div className={CN}>
       <div className={getElement("header")}>
@@ -61,24 +61,20 @@ export function MentorsSlider(props: IMentorsSlider) {
 
       <div className={getElement("container")}>
         <div className={getElement("inner")} ref={innerRef}>
-          {props.mentors.map((mentor, index) => 
+          {props.mentors.map((mentor, index) => (
             <MentorCard {...mentor} key={mentor.id + "" + index} />
-          )}
+          ))}
         </div>
       </div>
 
       <div className={getElement("help")}>
-        <ButtonLink size="big" color="white" 
-          to="/mentors"
-        >
+        <ButtonLink size="big" color="white" to="/mentors">
           {t("seeAllMentors")}
         </ButtonLink>
 
         <span>{t("or")}</span>
 
-        <Button size="big" outline 
-          onClick={() => dispatch(open(<PopupForm type="choose_mentor" />))}
-        >
+        <Button size="big" outline onClick={() => dispatch(open(<PopupForm type="choose_mentor" />))}>
           {t("getHelp")}
         </Button>
       </div>

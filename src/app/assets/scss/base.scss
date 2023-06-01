@@ -7,7 +7,7 @@
 
 * {
 	box-sizing: border-box;
-	position: relative;
+	position: relative; // who did this has to be beaten 
 	
 	padding: 0;
 	margin: 0;
@@ -68,73 +68,3 @@ ul {
 		transform: rotate(360deg);
 	}
 }
-
-/* Headings */
-
-/*
-h1,
-h2,
-h3,
-h4,
-h5 {
-	margin: unset;
-	white-space: pre-line;
-}
-*/
-
-/*
-h1 {
-	font-size: 1.5rem;
-	font-weight: 700;
-}
-
-h2 {
-	font-size: 1.25rem;
-	font-weight: 600;
-}
-
-h3 {
-	font-size: 1.125rem;
-	font-weight: 600;
-}
-
-h4,
-h5 {
-	font-size: 1rem;
-	font-weight: 600;
-}
-*/
-
-/* Text */
-/*
-p {
-	line-height: 1.25;
-	white-space: pre-line;
-	margin: unset;
-}
-*/
-
-
-
-/* Anchor */
-
-/* UX */
-
-
-/*
-input.cc-base,
-button.cc-base,
-textarea.cc-base {
-	all: unset;
-
-	position: relative;
-	cursor: initial;
-	outline: initial;
-}
-
-textarea {
-	white-space: pre-wrap;
-	line-height: 1.25;
-	overflow-wrap: break-word;
-}
-*/

@@ -10,13 +10,42 @@
     }
   }
 
-  &__notifies {}
+  &__notifies {
+    color: $color-white;
+  }
 
   &__notify {
     @include Text2Regular();
   }
-  
+
   &__notifies-title {
     @include Text2Medium();
+  }
+}
+
+.form {
+  color: $color-black-90;
+  
+  &__agreement {
+    letter-spacing: 0.02em;
+    @include Tags;
+
+    & > em {
+      @include TagsBold;
+    }
+  }
+
+  &__confirmation {
+    @include H3Regular();
+    color: $color-black-90;
+  }
+
+  &__suggestion {
+    @include TagsRegular;
+  }
+
+  &__redirection {
+    cursor: pointer;
+    color: $color-violet;
   }
 }

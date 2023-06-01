@@ -1,6 +1,5 @@
 import "./field.textarea.scss"
 
-import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/20/solid"
 import { bem } from "@shared/utils"
 import cn from "classnames"
 import { useState } from "react"
@@ -8,7 +7,6 @@ import { useFormContext } from "react-hook-form"
 
 import { FieldHints } from "./field.hints"
 
-type FuncHint = (value:string) => string
 export interface IFieldTextarea {
   placeholder?: string
   className?: string
@@ -37,10 +35,8 @@ export function FieldTextarea({
 }: IFieldTextarea) {
   const [focused, setFocused] = useState(false)
 
-  const { register, getFieldState, formState: { 
-    isDirty: isDirtyForm, isValid: isValidForm, errors: errorsForm } 
-  } = useFormContext()
-  const { error, isDirty, isTouched, invalid } = getFieldState(name)
+  const { register, getFieldState } = useFormContext()
+  const { error, isDirty, invalid } = getFieldState(name)
 
   return (
     <label className={cn(

@@ -1,5 +1,3 @@
-import "./field.hints.scss"
-
 import { CheckCircleIcon, CheckIcon, XCircleIcon } from "@heroicons/react/20/solid"
 import { bem } from "@shared/utils"
 import cn from "classnames"

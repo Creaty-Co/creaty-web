@@ -1,18 +1,14 @@
 {
   "overrides": [
     {
-      "files": [
-        "*.js",
-        "*.jsx",
-        "*.ts",
-        "*.tsx"
-      ],
+      "files": ["*.js", "*.jsx", "*.ts", "*.tsx"],
       "options": {
         "arrowParens": "avoid",
-        "bracketSpacing": false,
-        "jsxBracketSameLine": true,
-        "printWidth": 80,
-        "trailingComma": "es5"
+        "bracketSpacing": true,
+        "jsxBracketSameLine": false,
+        "printWidth": 120,
+        "trailingComma": "es5",
+        "semi": false
       }
     },
     {
@@ -27,10 +23,7 @@
       }
     },
     {
-      "files": [
-        "*.scss",
-        "*.css"
-      ],
+      "files": ["*.scss", "*.css"],
       "options": {
         "printWidth": 80
       }
