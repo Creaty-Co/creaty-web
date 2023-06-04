@@ -6,7 +6,7 @@ import { useGetPagePersonalQuery, useGetPagesMainQuery } from "@shared/api"
 import { useScrollToTop } from "@shared/hooks"
 import { BigComment, InfoSection, LoaderCover } from "@shared/ui"
 import { bem } from "@shared/utils"
-import { Modal, notification } from "antd"
+import { Modal } from "antd"
 import cn from "classnames"
 import { useCallback, useState } from "react"
 import { useTranslation } from "react-i18next"
@@ -30,7 +30,6 @@ export function Home() {
   const navigate = useNavigate()
   const params = useParams<"shortcut" | "code">()
 
-  const [api, contextHolder] = notification.useNotification()
   const [passwordCode, setPasswordCode] = useState<undefined | string>(params.code)
 
   const { data } = params.shortcut ? useGetPagePersonalQuery({ shortcut: params.shortcut }) : useGetPagesMainQuery()
@@ -117,10 +116,9 @@ export function Home() {
           maskClosable={false}
           keyboard={false}
         >
-          <ResetPasswordForm code={params.code} closewModal={closewModal} notificationApi={api} />
+          <ResetPasswordForm code={params.code} closewModal={closewModal} />
         </Modal>
       }
-      {contextHolder}
     </>
   )
 }
