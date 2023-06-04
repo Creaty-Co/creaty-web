@@ -2,14 +2,14 @@ import { useAppDispatch } from "@app/store"
 import { useResetPasswordMutation } from "@features/auth/auth.api"
 import { useLazyGetMeQuery } from "@features/users/users.api"
 import { skipToken } from "@reduxjs/toolkit/dist/query/react"
-import { close, PopupLayout } from "@shared/layout"
+import { PopupLayout } from "@shared/layout"
 import { Field, Formus } from "@shared/ui"
 import { bem } from "@shared/utils"
-import { Button, notification } from "antd"
+import { Button } from "antd"
+import { NotificationInstance } from "antd/es/notification/interface"
 import cn from "classnames"
 import { useEffect } from "react"
 import { FieldValues } from "react-hook-form"
-import { useNavigate } from "react-router-dom"
 import * as yup from "yup"
 
 import { setTokens } from "../auth.slice"
@@ -51,33 +51,31 @@ const MOD = "reset-password"
 const { getModifier } = bem(CN)
 
 interface IProps {
-  code: string
+  code?: string
+  notificationApi: NotificationInstance
+  closewModal(): void
 }
 
-export function ResetPasswordForm({ code }: IProps) {
+export function ResetPasswordForm({ code, closewModal, notificationApi }: IProps) {
   const dispatch = useAppDispatch()
-  const navigate = useNavigate()
-
-  const [api, contextHolder] = notification.useNotification()
 
   const [getMe] = useLazyGetMeQuery()
-  const [resetPassword, { isLoading, error, reset, data }] = useResetPasswordMutation()
+  const [resetPassword, { isLoading, error, reset, data, isSuccess, isError }] = useResetPasswordMutation()
 
   useEffect(() => {
-    if (!error) return
+    if (!isError && !error) return
     const message = (error as any)?.data?.error?.detail?.message || (error as any)?.data?.error?.detail
-    api.warning({ message, placement: "topRight", duration: 10 })
+    notificationApi.warning({ message })
     reset()
   }, [error])
 
   useEffect(() => {
-    if (!data) return
+    if (!isSuccess || !data) return
+    notificationApi.success({ message: "Password successfully changed" })
     const { access, refresh } = data
     dispatch(setTokens({ accessToken: access, refreshToken: refresh }))
     getMe(skipToken)
-    dispatch(close())
-    navigate("/")
-    api.success({ message: "Password successfully changed", placement: "topRight", duration: 10 })
+    closewModal()
   }, [data])
 
   const handleResetPassword = (values: FieldValues) => resetPassword({ code, new_password: values.password })
@@ -121,7 +119,7 @@ export function ResetPasswordForm({ code }: IProps) {
   )
 
   return (
-    <PopupLayout title="Reset your password" width="35em">
+    <PopupLayout title="Reset your password" width="35em" unClosable>
       <Formus
         className={cn(getModifier(CN, MOD))}
         elementContent={elementContent}
@@ -129,7 +127,6 @@ export function ResetPasswordForm({ code }: IProps) {
         schema={schema}
         onSubmit={handleResetPassword}
       />
-      {contextHolder}
     </PopupLayout>
   )
 }

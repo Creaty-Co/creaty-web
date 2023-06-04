@@ -17,6 +17,7 @@ export interface IPopupLayout {
   subTitle?: string
   children: ReactNode
 
+  unClosable?: boolean
   controlled?: boolean
   controll?: ReactNode
   onClose?: () => void
@@ -28,12 +29,14 @@ export function PopupLayout(props: IPopupLayout) {
   const handleClose = () => {
     props.onClose?.() || dispatch(close())
   }
-  
+
   return (
     <div className={CN} style={{ width: props.width }}>
-      <div className={getElement("close")}>
-        <ButtonIcon name="cross" size="small" color="white" outline onClick={handleClose} />
-      </div>
+      {!props.unClosable && (
+        <div className={getElement("close")}>
+          <ButtonIcon name="cross" size="small" color="white" outline onClick={handleClose} />
+        </div>
+      )}
 
       <h3 className={cn(getElement("title"), "heading")}>{props.title}</h3>
       {props.subTitle && <h5 className={cn(getElement("sub-title"), "heading")}>{props.subTitle}</h5>}

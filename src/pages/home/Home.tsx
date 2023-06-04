@@ -1,13 +1,16 @@
 import "./home.scss"
 
 import { HaveQuestions, HelpSocial, MentorSearch, MentorSearchTags, MentorsSlider } from "@features"
+import { ResetPasswordForm } from "@features/auth/ResetPassword/ResetPasswordForm"
 import { useGetPagePersonalQuery, useGetPagesMainQuery } from "@shared/api"
 import { useScrollToTop } from "@shared/hooks"
 import { BigComment, InfoSection, LoaderCover } from "@shared/ui"
 import { bem } from "@shared/utils"
+import { Modal, notification } from "antd"
 import cn from "classnames"
+import { useCallback, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { useParams } from "react-router"
+import { useNavigate, useParams } from "react-router"
 
 import { BecomeMentor } from "./become-mentor/become-mentor"
 import { DynamicPrimaryInfo } from "./dynamic-primary-info/dynamic-primary-info"
@@ -24,75 +27,100 @@ export function Home() {
 
   const { t } = useTranslation("translation", { keyPrefix: "views.home" })
 
-  const params = useParams<"shortcut">()
+  const navigate = useNavigate()
+  const params = useParams<"shortcut" | "code">()
+
+  const [api, contextHolder] = notification.useNotification()
+  const [passwordCode, setPasswordCode] = useState<undefined | string>(params.code)
 
   const { data } = params.shortcut ? useGetPagePersonalQuery({ shortcut: params.shortcut }) : useGetPagesMainQuery()
 
-  return (
-    <div className={CN}>
-      {/* Header  */}
-      <div className={getElement("header")}>
-        <DynamicPrimaryInfo firstHeadingShortcut={params.shortcut} />
+  const closewModal = useCallback(() => {
+    navigate("/")
+    setPasswordCode(undefined)
+  }, [])
 
-        <div className={getElement("search")}>
-          <MentorSearch />
+  return (
+    <>
+      <div className={CN}>
+        {/* Header  */}
+        <div className={getElement("header")}>
+          <DynamicPrimaryInfo firstHeadingShortcut={params.shortcut} />
+
+          <div className={getElement("search")}>
+            <MentorSearch />
+          </div>
+
+          {data?.tags && <MentorSearchTags tags={data.tags} />}
+
+          {data == null && <LoaderCover white />}
         </div>
 
-        {data?.tags && <MentorSearchTags tags={data.tags} />}
+        {/* Coomment */}
+        <div className={getElement("comment")}>
+          <BigComment>{t("bigComment")}</BigComment>
+        </div>
 
-        {data == null && <LoaderCover white />}
+        {/* Mentors */}
+        <div className={getElement("slider")}>
+          {data?.mentors && <MentorsSlider mentors={data.mentors} />}
+
+          {data == null && <LoaderCover white />}
+        </div>
+
+        {/* Help */}
+        <div className={getElement("help")}>
+          <InfoSection display="flex" type="2" title={t("help.title")} desc={t("help.desc")}>
+            <HelpSocial />
+          </InfoSection>
+        </div>
+
+        {/* How it works */}
+        <div className={getElement("how-it-works")}>
+          <HowItWorks />
+        </div>
+
+        {/* Helps */}
+        <div className={getElement("helpful-creaty")}>
+          <HelpfulCreaty />
+        </div>
+
+        {/* FAQ */}
+        <div className={getElement("faq")}>
+          <div className={cn(getElement("title"), "heading")}>{t("QAndA.title")}</div>
+
+          <QAndA />
+        </div>
+
+        {/* Form */}
+        <div className={getElement("have-questions")}>
+          <HaveQuestions />
+        </div>
+
+        {/* Become mentros */}
+        <div className={getElement("become-mentor")}>
+          <BecomeMentor />
+        </div>
+
+        {/* Subscribe form */}
+        <div className={getElement("mailing-subscribe")}>
+          <MailingSubscribe />
+        </div>
       </div>
 
-      {/* Coomment */}
-      <div className={getElement("comment")}>
-        <BigComment>{t("bigComment")}</BigComment>
-      </div>
-
-      {/* Mentors */}
-      <div className={getElement("slider")}>
-        {data?.mentors && <MentorsSlider mentors={data.mentors} />}
-
-        {data == null && <LoaderCover white />}
-      </div>
-
-      {/* Help */}
-      <div className={getElement("help")}>
-        <InfoSection display="flex" type="2" title={t("help.title")} desc={t("help.desc")}>
-          <HelpSocial />
-        </InfoSection>
-      </div>
-
-      {/* How it works */}
-      <div className={getElement("how-it-works")}>
-        <HowItWorks />
-      </div>
-
-      {/* Helps */}
-      <div className={getElement("helpful-creaty")}>
-        <HelpfulCreaty />
-      </div>
-
-      {/* FAQ */}
-      <div className={getElement("faq")}>
-        <div className={cn(getElement("title"), "heading")}>{t("QAndA.title")}</div>
-
-        <QAndA />
-      </div>
-
-      {/* Form */}
-      <div className={getElement("have-questions")}>
-        <HaveQuestions />
-      </div>
-
-      {/* Become mentros */}
-      <div className={getElement("become-mentor")}>
-        <BecomeMentor />
-      </div>
-
-      {/* Subscribe form */}
-      <div className={getElement("mailing-subscribe")}>
-        <MailingSubscribe />
-      </div>
-    </div>
+      {
+        <Modal
+          open={!!passwordCode}
+          onCancel={closewModal}
+          footer={null}
+          closable={false}
+          maskClosable={false}
+          keyboard={false}
+        >
+          <ResetPasswordForm code={params.code} closewModal={closewModal} notificationApi={api} />
+        </Modal>
+      }
+      {contextHolder}
+    </>
   )
 }
