@@ -1,5 +1,3 @@
-import "./ResetPasswordModalForm.scss"
-
 import { useAppDispatch } from "@app/store"
 import { useResetPasswordMutation } from "@features/auth/auth.api"
 import { useLazyGetMeQuery } from "@features/users/users.api"

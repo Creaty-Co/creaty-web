@@ -7,7 +7,7 @@ import { PageFAQType, PageLinkSocialType, PageLinkType, PagePersonalType, PageTy
 export const pagesApi = createApi({
   reducerPath: "pagesApi",
 
-  baseQuery: baseQueryWithReauth(false, "/pages"),
+  baseQuery: await baseQueryWithReauth(false, "/pages"),
 
   endpoints: builder => ({
     getPagesMain: builder.query<PageType, void>({

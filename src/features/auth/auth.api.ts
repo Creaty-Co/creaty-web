@@ -4,7 +4,7 @@ import { baseQueryWithReauth } from "@shared/utils"
 export const authApi = createApi({
   reducerPath: "authApi",
 
-  baseQuery: baseQueryWithReauth(false),
+  baseQuery: await baseQueryWithReauth(false),
 
   endpoints: builder => ({
     signUpEmail: builder.mutation({

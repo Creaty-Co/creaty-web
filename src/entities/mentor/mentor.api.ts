@@ -1,4 +1,3 @@
-// useGetMentorsQuery
 import { createApi } from "@reduxjs/toolkit/query/react"
 import { PaginationQueryType, PaginationType } from "@shared/types"
 import { baseQueryWithReauth } from "@shared/utils"
@@ -9,7 +8,7 @@ import { MentorDetailedType, MentorType } from "./mentor.types"
 export const mentorApi = createApi({
   reducerPath: "mentorApi",
 
-  baseQuery: baseQueryWithReauth(false, "/mentors"),
+  baseQuery: await baseQueryWithReauth(false, "/mentors"),
 
   endpoints: builder => ({
     getMentors: builder.query<PaginationType<MentorType>, PaginationQueryType>({

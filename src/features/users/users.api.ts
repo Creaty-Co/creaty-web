@@ -6,7 +6,7 @@ import { setAuthUserData } from "./users.slice"
 export const usersApi = createApi({
   reducerPath: "usersApi",
 
-  baseQuery: baseQueryWithReauth(true),
+  baseQuery: await baseQueryWithReauth(true),
 
   endpoints: builder => ({
     getMe: builder.query({
