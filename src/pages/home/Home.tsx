@@ -1,16 +1,14 @@
 import "./home.scss"
 
 import { HaveQuestions, HelpSocial, MentorSearch, MentorSearchTags, MentorsSlider } from "@features"
-import { ResetPasswordForm } from "@features/auth/ResetPassword/ResetPasswordForm"
+import { ResetPasswordModalForm } from "@features/auth/ResetPasswordModalForm/ResetPasswordModalForm"
 import { useGetPagePersonalQuery, useGetPagesMainQuery } from "@shared/api"
 import { useScrollToTop } from "@shared/hooks"
 import { BigComment, InfoSection, LoaderCover } from "@shared/ui"
 import { bem } from "@shared/utils"
-import { Modal } from "antd"
 import cn from "classnames"
-import { useCallback, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { useNavigate, useParams } from "react-router"
+import { useMatch, useParams } from "react-router"
 
 import { BecomeMentor } from "./become-mentor/become-mentor"
 import { DynamicPrimaryInfo } from "./dynamic-primary-info/dynamic-primary-info"
@@ -27,17 +25,10 @@ export function Home() {
 
   const { t } = useTranslation("translation", { keyPrefix: "views.home" })
 
-  const navigate = useNavigate()
   const params = useParams<"shortcut" | "code">()
-
-  const [passwordCode, setPasswordCode] = useState<undefined | string>(params.code)
+  const showResetPasswordModal = useMatch("reset-password/:code")
 
   const { data } = params.shortcut ? useGetPagePersonalQuery({ shortcut: params.shortcut }) : useGetPagesMainQuery()
-
-  const closewModal = useCallback(() => {
-    navigate("/")
-    setPasswordCode(undefined)
-  }, [])
 
   return (
     <>
@@ -107,18 +98,7 @@ export function Home() {
         </div>
       </div>
 
-      {
-        <Modal
-          open={!!passwordCode}
-          onCancel={closewModal}
-          footer={null}
-          closable={false}
-          maskClosable={false}
-          keyboard={false}
-        >
-          <ResetPasswordForm code={params.code} closewModal={closewModal} />
-        </Modal>
-      }
+      <ResetPasswordModalForm code={showResetPasswordModal ? params.code : undefined} />
     </>
   )
 }

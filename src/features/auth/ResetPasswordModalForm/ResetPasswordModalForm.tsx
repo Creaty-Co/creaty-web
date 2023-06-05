@@ -1,4 +1,4 @@
-import "./resetPasswordForm.scss"
+import "./ResetPasswordModalForm.scss"
 
 import { useAppDispatch } from "@app/store"
 import { useResetPasswordMutation } from "@features/auth/auth.api"
@@ -7,10 +7,11 @@ import { skipToken } from "@reduxjs/toolkit/dist/query/react"
 import { PopupLayout } from "@shared/layout"
 import { Field, Formus } from "@shared/ui"
 import { bem } from "@shared/utils"
-import { Button, notification } from "antd"
+import { Button, Modal, notification } from "antd"
 import cn from "classnames"
-import { useEffect } from "react"
+import { memo, useEffect } from "react"
 import { FieldValues } from "react-hook-form"
+import { useNavigate } from "react-router"
 import * as yup from "yup"
 
 import { setTokens } from "../auth.slice"
@@ -53,16 +54,18 @@ const { getModifier } = bem(CN)
 
 interface IProps {
   code?: string
-  closewModal(): void
 }
 
-export function ResetPasswordForm({ code, closewModal }: IProps) {
+export const ResetPasswordModalForm = memo(function ResetPasswordModalForm({ code }: IProps) {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const [api, contextHolder] = notification.useNotification()
 
   const [getMe] = useLazyGetMeQuery()
   const [resetPassword, { isLoading, error, reset, data, isSuccess, isError }] = useResetPasswordMutation()
+
+  const closeModal = () => navigate("/")
 
   useEffect(() => {
     if (!isError && !error) return
@@ -77,7 +80,7 @@ export function ResetPasswordForm({ code, closewModal }: IProps) {
     const { access, refresh } = data
     dispatch(setTokens({ accessToken: access, refreshToken: refresh }))
     getMe(skipToken)
-    closewModal()
+    closeModal()
   }, [data])
 
   const handleResetPassword = (values: FieldValues) => resetPassword({ code, new_password: values.password })
@@ -121,7 +124,7 @@ export function ResetPasswordForm({ code, closewModal }: IProps) {
   )
 
   return (
-    <>
+    <Modal open={!!code} onCancel={closeModal} footer={null} closable={false} maskClosable={false} keyboard={false}>
       <PopupLayout title="Reset your password" width="35em" unClosable>
         <Formus
           className={cn(getModifier(CN, MOD))}
@@ -132,6 +135,6 @@ export function ResetPasswordForm({ code, closewModal }: IProps) {
         />
       </PopupLayout>
       {contextHolder}
-    </>
+    </Modal>
   )
-}
+})
