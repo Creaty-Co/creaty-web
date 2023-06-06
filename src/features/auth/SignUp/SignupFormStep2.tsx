@@ -42,6 +42,7 @@ export function SignupFormStep2() {
     if (!error || ("status" in error && error?.status !== 409)) return
     api.error({
       message: `There is already registered user with this data`,
+      placement: "topRight",
       duration: 10,
       btn: (
         <Button className="button button--dark button--little button__text" onClick={openLoginModal}>
@@ -84,7 +85,7 @@ export function SignupFormStep2() {
   )
 
   return (
-    <PopupLayout title="Almost done" subTitle="To start, what's your name?">
+    <PopupLayout title="Almost done" subTitle="To start, what's your name?" width="35em">
       <Formus
         className={cn(getModifier(CN, MOD))}
         elementContent={elementContent}

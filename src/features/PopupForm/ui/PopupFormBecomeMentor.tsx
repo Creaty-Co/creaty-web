@@ -7,7 +7,7 @@ export function PopupFormBecomeMentor() {
   const form = useAppSelector(selectContactFormByType("become_mentor"))
 
   const rForm = (
-    <PopupLayout title="Apply to be a mentor">
+    <PopupLayout title="Apply to be a mentor" width="35em">
       <div className="pb-8 font--text-regular">
         <p className="text-violet">We are looking for people:</p>
         <ol style={{ listStyle: "list-outside" }} className="text-black-1000 list-decimal list-outside pl-6 indent-3">
@@ -21,7 +21,7 @@ export function PopupFormBecomeMentor() {
   )
 
   const rThanks = (
-    <PopupLayout title="Verify your email">
+    <PopupLayout title="Verify your email" width="35em">
       <VerifyForm email="yasha.petrunin@gmail.com" />
     </PopupLayout>
   )

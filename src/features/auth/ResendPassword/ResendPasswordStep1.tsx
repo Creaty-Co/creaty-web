@@ -34,7 +34,7 @@ export function ResendPasswordStep1() {
   useEffect(() => {
     if (!error) return
     const message = (error as any)?.data?.error?.detail?.message || (error as any)?.data?.error?.detail
-    api.warning({ message, duration: 10 })
+    api.warning({ message, placement: "topRight", duration: 10 })
     reset()
   }, [error])
 
@@ -83,7 +83,7 @@ export function ResendPasswordStep1() {
   )
 
   return (
-    <PopupLayout title="Resend your password">
+    <PopupLayout title="Resend your password" width="35em">
       <Formus
         className={cn(getModifier(CN, MOD))}
         elementContent={elementContent}

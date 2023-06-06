@@ -1,4 +1,4 @@
-import "./SignUp.scss"
+import "./signUp.scss"
 
 import { useAppDispatch } from "@app/store"
 import { open } from "@shared/layout"
