@@ -15,7 +15,7 @@ export function PopupFormChooseMentor() {
   const form = useAppSelector(selectContactFormByType(FORM_TYPE))
 
   const rForm = (
-    <PopupLayout title={t(`forms.${FORM_TYPE}.title`)} width="35em">
+    <PopupLayout title={t(`forms.${FORM_TYPE}.title`)}>
       <Form type={FORM_TYPE} />
     </PopupLayout>
   )
