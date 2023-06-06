@@ -15,7 +15,7 @@ export function SignupFormStep3() {
   const handleClick = () => dispatch(close())
 
   return (
-    <PopupLayout title="Check your email">
+    <PopupLayout title="Check your email" width="35em">
       <div className={getElement("confirmation")}>
         We've sent you a confirmation to <b>{email}</b>
       </div>

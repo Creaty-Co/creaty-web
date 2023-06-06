@@ -13,7 +13,7 @@ export interface IFormus {
   onSubmit: SubmitHandler<FieldValues>
   schema?: yup.ObjectSchema<any>
 
-  elementContent?: ReactNode
+  elementContent: ReactNode
   elementControl?: ReactNode
   elementAfter?: ReactNode
 }
@@ -40,7 +40,7 @@ export function Formus({
   const refTimeout = useRef<NodeJS.Timeout | null>(null)
 
   const methods = useForm({
-    resolver: schema && yupResolver(schema),
+    resolver: yupResolver(schema),
     mode: "onChange",
     criteriaMode: "all",
   })
@@ -52,16 +52,18 @@ export function Formus({
   const requiredErrors = isValid
     ? []
     : Object.values(errors)
-        .filter(error => error && error.types && "required" in error.types && error.types.required)
-        .map(error => error && error.types && "required" in error.types && error.types.required)
+      .filter(error => error && error.types && "required" in error.types && error.types.required)
+      .map(error => error && error.types && "required" in error.types && error.types.required)
 
   const rErrorsRequeried =
     requiredErrors.length > 0 &&
     requiredErrors.map((error, index) => (
       <div
         key={index}
-        className={cn(getElement("notify"), "grid grid-cols-[auto_1fr] grid-rows-1 justify-start align-baseline gap-2")}
-      >
+        className={cn(
+          getElement("notify"),
+          "grid grid-cols-[auto_1fr] grid-rows-1 justify-start align-baseline gap-2"
+        )}>
         <ExclamationCircleIcon className="h-5 w-5 text-red" /> {error as string}
       </div>
     ))
@@ -87,13 +89,10 @@ export function Formus({
           console.log("data on handleSubmit", data)
           setShowNotifeis(true)
           onSubmit(data)
-        })}
-      >
-        {elementContent && (
-          <div className={cn(getElement("fields"), "grid grid-flow-row grid-cols-1 grid-rows-auto gap-y-3")}>
-            {elementContent}
-          </div>
-        )}
+        })}>
+        <div className={cn(getElement("fields"), "grid grid-flow-row grid-cols-1 grid-rows-auto gap-y-3")}>
+          {elementContent}
+        </div>
 
         {elementControl && (
           <div className={cn(getElement("controll"), "grid grid-flow-row grid-cols-1 grid-rows-auto gap-y-4")}>
@@ -111,8 +110,7 @@ export function Formus({
               "bg-black-main opacity-90 rounded-2xl",
               "grid grid-cols-1 grid-flow-row gap-1 items-start",
               "absolute  left-2/4 -translate-x-1/2  -translate-y-3/4	"
-            )}
-          >
+            )}>
             <div className={cn(getElement("notifies-title"))}>Please fill out all necessary fields:</div>
 
             <div className="grid grid-flow-row">{rErrorsRequeried}</div>

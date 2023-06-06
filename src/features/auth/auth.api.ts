@@ -13,9 +13,6 @@ export const authApi = createApi({
     loginEmail: builder.mutation({
       query: body => ({ url: `/users/token/`, method: "POST", body }),
     }),
-    verifyEmail: builder.mutation({
-      query: body => ({ url: `/users/register/verify/`, method: "POST", body }),
-    }),
     refreshToken: builder.query({
       query: () => ({ url: "users/token/refresh/", method: "POST" }),
     }),
@@ -31,7 +28,6 @@ export const authApi = createApi({
 export const {
   useSignUpEmailMutation,
   useLoginEmailMutation,
-  useVerifyEmailMutation,
   useLazyRefreshTokenQuery,
   useResendPasswordMutation,
   useResetPasswordMutation,

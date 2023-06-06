@@ -19,7 +19,7 @@ import { SignupFormStep1 } from "../SignUp/SignupFormStep1"
 export const schema = yup
   .object()
   .shape({
-    email: yup.string().email("Must be a valid email").required("Email is required"),
+    email: yup.string().required("Email is required"),
     password: yup.string().required("Password is required"),
   })
   .required()
@@ -41,7 +41,7 @@ export function LoginForm() {
       (error as any)?.data?.detail ||
       (error as any)?.data?.error?.detail?.message ||
       (error as any)?.data?.error?.detail
-    api.error({ message, duration: 10 })
+    api.error({ message, placement: "topRight", duration: 10 })
     reset()
   }, [error])
 
@@ -104,7 +104,7 @@ export function LoginForm() {
   )
 
   return (
-    <PopupLayout title="Login">
+    <PopupLayout title="Login" width="35em">
       <Formus
         className={cn(getModifier(CN, MOD))}
         elementContent={elementContent}
