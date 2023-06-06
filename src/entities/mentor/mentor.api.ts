@@ -1,4 +1,3 @@
-// useGetMentorsQuery
 import { createApi } from "@reduxjs/toolkit/query/react"
 import { PaginationQueryType, PaginationType } from "@shared/types"
 import { baseQueryWithReauth } from "@shared/utils"

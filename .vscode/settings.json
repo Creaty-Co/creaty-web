@@ -6,9 +6,8 @@
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "cSpell.words": [
     "Creaty"
-  ],
+  ],  
   "editor.tabSize": 2,
-  "prettier.printWidth": 120,
   "eslint.validate": [
     "javascript",
     "javascriptreact",

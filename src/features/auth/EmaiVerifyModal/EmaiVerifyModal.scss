@@ -1,0 +1,15 @@
+@import "/src/app/assets/scss/bundle.scss";
+
+.email-verify {
+  &__discount-description {
+    @include H4Regular();
+    color: $color-gray-60;
+  }
+  &__discount {
+    color: $color-white;
+  }
+  &__footer {
+    color: $color-gray-80;
+    @include TagsRegular();
+  }
+}
