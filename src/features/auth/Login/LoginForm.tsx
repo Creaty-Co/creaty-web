@@ -19,7 +19,7 @@ import { SignupFormStep1 } from "../SignUp/SignupFormStep1"
 export const schema = yup
   .object()
   .shape({
-    email: yup.string().required("Email is required"),
+    email: yup.string().email("Must be a valid email").required("Email is required"),
     password: yup.string().required("Password is required"),
   })
   .required()
@@ -41,7 +41,7 @@ export function LoginForm() {
       (error as any)?.data?.detail ||
       (error as any)?.data?.error?.detail?.message ||
       (error as any)?.data?.error?.detail
-    api.error({ message })
+    api.error({ message, duration: 10 })
     reset()
   }, [error])
 

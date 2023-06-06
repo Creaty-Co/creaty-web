@@ -22,7 +22,7 @@ export function ResendPasswordStep2({ email }: IProps) {
   useEffect(() => {
     if (!error) return
     const message = (error as any)?.data?.error?.detail?.message || (error as any)?.data?.error?.detail
-    api.warning({ message })
+    api.warning({ message, duration: 10 })
     reset()
   }, [error])
 

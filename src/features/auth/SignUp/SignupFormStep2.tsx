@@ -42,7 +42,6 @@ export function SignupFormStep2() {
     if (!error || ("status" in error && error?.status !== 409)) return
     api.error({
       message: `There is already registered user with this data`,
-      placement: "topRight",
       duration: 10,
       btn: (
         <Button className="button button--dark button--little button__text" onClick={openLoginModal}>

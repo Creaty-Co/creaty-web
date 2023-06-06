@@ -2,7 +2,6 @@ import { categoryApi } from "@entities/category/category.api"
 import { setTokens } from "@features/auth/auth.slice"
 import { useLazyGetMeQuery } from "@features/users/users.api"
 import { skipToken } from "@reduxjs/toolkit/dist/query"
-import { notification } from "antd"
 import { useEffect } from "react"
 import ReactGA from "react-ga4"
 import { useSearchParams } from "react-router-dom"
@@ -16,7 +15,6 @@ export const AppInit = () => {
   const [getMe] = useLazyGetMeQuery()
 
   useEffect(() => {
-    notification.config({ placement: "topRight", duration: 10, rtl: true })
     dispatch(categoryApi.endpoints.getTagsTopics.initiate({ page: 1, page_size: 25 }))
 
     const urlAccessToken = searchParams.get("access")

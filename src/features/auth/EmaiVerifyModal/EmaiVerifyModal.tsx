@@ -37,7 +37,7 @@ export const EmaiVerifyModal = memo(function ResetPasswordModalForm({ code, emai
       (error as any)?.data?.detail ||
       (error as any)?.data?.error?.detail?.message ||
       (error as any)?.data?.error?.detail
-    api.error({ message })
+    api.error({ message, duration: 10 })
     reset()
   }, [error])
 

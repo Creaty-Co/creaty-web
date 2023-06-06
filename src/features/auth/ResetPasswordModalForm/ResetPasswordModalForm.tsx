@@ -68,13 +68,13 @@ export const ResetPasswordModalForm = memo(function ResetPasswordModalForm({ cod
   useEffect(() => {
     if (!isError && !error) return
     const message = (error as any)?.data?.error?.detail?.message || (error as any)?.data?.error?.detail
-    api.warning({ message })
+    api.warning({ message, duration: 10 })
     reset()
   }, [error])
 
   useEffect(() => {
     if (!isSuccess || !data) return
-    api.success({ message: "The password was successfully changed and you were logged in" })
+    api.success({ message: "The password was successfully changed and you were logged in", duration: 10 })
     const { access, refresh } = data
     dispatch(setTokens({ accessToken: access, refreshToken: refresh }))
     getMe(skipToken)
