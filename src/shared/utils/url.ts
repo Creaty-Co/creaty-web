@@ -2,7 +2,7 @@ import { RootState } from "@app/store"
 import { setTokens } from "@features/auth/auth.slice"
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from "@reduxjs/toolkit/query"
 import { fetchBaseQuery } from "@reduxjs/toolkit/query/react"
-import { Mutex} from "async-mutex"
+import { Mutex } from "async-mutex"
 
 const API = process.env.REACT_APP_API_HOST
 const mutex = new Mutex()
@@ -20,12 +20,12 @@ const mutex = new Mutex()
 //   return false
 // }
 
-export const baseQueryWithReauth = async (authRequired: boolean, url?: string): Promise<BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError>> =>
+export const baseQueryWithReauth =
+  (authRequired: boolean, url?: string): BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> =>
   async (args, api, extraOptions) => {
-
     const baseQuery = fetchBaseQuery({
       baseUrl: API + (url || ""),
-      prepareHeaders: (headers, { getState }) => { 
+      prepareHeaders: (headers, { getState }) => {
         headers.set("Accept-Language", "en")
         if (!authRequired) return headers
         const token = (getState() as RootState).auth.accessToken
@@ -38,7 +38,7 @@ export const baseQueryWithReauth = async (authRequired: boolean, url?: string): 
 
     const { expAt, refreshToken } = (api.getState() as RootState).auth
     let result = await baseQuery(args, api, extraOptions)
-      
+
     if (authRequired && result.error && result.error.status === 401) {
       if (!mutex.isLocked()) {
         const release = await mutex.acquire()
