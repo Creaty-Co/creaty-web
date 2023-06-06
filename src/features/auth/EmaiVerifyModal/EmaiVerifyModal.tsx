@@ -18,10 +18,9 @@ const { getElement } = bem(CN)
 
 interface IProps {
   code?: string
-  email?: string
 }
 
-export const EmaiVerifyModal = memo(function ResetPasswordModalForm({ code, email }: IProps) {
+export const EmaiVerifyModal = memo(function ResetPasswordModalForm({ code }: IProps) {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
@@ -29,7 +28,7 @@ export const EmaiVerifyModal = memo(function ResetPasswordModalForm({ code, emai
   const [confirmEmail, { data, isLoading, isSuccess, error, reset }] = useVerifyEmailMutation()
   const [getMe] = useLazyGetMeQuery()
 
-  const handleConfirmEmail = () => confirmEmail({ code, email })
+  const handleConfirmEmail = () => confirmEmail({ code })
 
   useEffect(() => {
     if (!error) return
