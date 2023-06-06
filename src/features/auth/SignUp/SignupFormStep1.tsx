@@ -119,7 +119,7 @@ export function SignupFormStep1() {
   )
 
   return (
-    <PopupLayout title="Sign up to find your perfect mentor" width="35em">
+    <PopupLayout title="Sign up to find your perfect mentor">
       <Formus
         className={cn(getModifier(CN, MOD))}
         elementContent={elementContent}

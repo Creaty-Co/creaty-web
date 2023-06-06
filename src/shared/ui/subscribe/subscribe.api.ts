@@ -4,7 +4,7 @@ import { baseQueryWithReauth } from "@shared/utils"
 export const subscribeApi = createApi({
   reducerPath: "subscribeApi",
 
-  baseQuery: baseQueryWithReauth(false, "/mailings"),
+  baseQuery: await baseQueryWithReauth(false, "/mailings"),
 
   endpoints: builder => ({
     postMailingsSubscribe: builder.mutation<void, { email: string }>({

@@ -85,7 +85,7 @@ export function SignupFormStep2() {
   )
 
   return (
-    <PopupLayout title="Almost done" subTitle="To start, what's your name?" width="35em">
+    <PopupLayout title="Almost done" subTitle="To start, what's your name?">
       <Formus
         className={cn(getModifier(CN, MOD))}
         elementContent={elementContent}

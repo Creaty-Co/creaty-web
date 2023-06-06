@@ -41,7 +41,7 @@ export function LoginForm() {
       (error as any)?.data?.detail ||
       (error as any)?.data?.error?.detail?.message ||
       (error as any)?.data?.error?.detail
-    api.error({ message, placement: "topRight", duration: 10 })
+    api.error({ message })
     reset()
   }, [error])
 
@@ -104,7 +104,7 @@ export function LoginForm() {
   )
 
   return (
-    <PopupLayout title="Login" width="35em">
+    <PopupLayout title="Login">
       <Formus
         className={cn(getModifier(CN, MOD))}
         elementContent={elementContent}

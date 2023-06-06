@@ -123,7 +123,7 @@ export const ResetPasswordModalForm = memo(function ResetPasswordModalForm({ cod
 
   return (
     <Modal open={!!code} onCancel={closeModal} footer={null} closable={false} maskClosable={false} keyboard={false}>
-      <PopupLayout title="Reset your password" width="35em" unClosable>
+      <PopupLayout title="Reset your password" unClosable>
         <Formus
           className={cn(getModifier(CN, MOD))}
           elementContent={elementContent}

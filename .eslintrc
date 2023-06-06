@@ -8,7 +8,8 @@
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -31,16 +32,12 @@
     "default-case": "warn",
     "no-multi-spaces": "error",
     "simple-import-sort/imports": "error",
-    "semi": ["error", "never"],
-    "no-debugger": "warn",
-
-    "indent": [
+    "semi": [
       "error",
-      2,
-      {
-        "SwitchCase": 1
-      }
+      "never"
     ],
+    "no-debugger": "warn",
+    "indent": "off",
     "quotes": [
       "error",
       "double",
@@ -51,12 +48,10 @@
     // OFF
     "react/react-in-jsx-scope": "off",
     "react/no-unescaped-entities": "off",
-
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-empty-interface": "off",
     "@typescript-eslint/ban-types": "off",
     "@typescript-eslint/ban-ts-ignore": "off",
     "@typescript-eslint/ban-ts-comment": "off"
-
   }
 }

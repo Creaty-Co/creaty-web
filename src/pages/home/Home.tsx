@@ -1,6 +1,7 @@
 import "./home.scss"
 
 import { HaveQuestions, HelpSocial, MentorSearch, MentorSearchTags, MentorsSlider } from "@features"
+import { EmaiVerifyModal } from "@features/auth/EmaiVerifyModal/EmaiVerifyModal"
 import { ResetPasswordModalForm } from "@features/auth/ResetPasswordModalForm/ResetPasswordModalForm"
 import { useGetPagePersonalQuery, useGetPagesMainQuery } from "@shared/api"
 import { useScrollToTop } from "@shared/hooks"
@@ -25,8 +26,9 @@ export function Home() {
 
   const { t } = useTranslation("translation", { keyPrefix: "views.home" })
 
-  const params = useParams<"shortcut" | "code">()
+  const params = useParams<"shortcut" | "code" | "email">()
   const showResetPasswordModal = useMatch("reset-password/:code")
+  const showEmaiVerifyModal = useMatch("email-verify/:email/:code")
 
   const { data } = params.shortcut ? useGetPagePersonalQuery({ shortcut: params.shortcut }) : useGetPagesMainQuery()
 
@@ -99,6 +101,10 @@ export function Home() {
       </div>
 
       <ResetPasswordModalForm code={showResetPasswordModal ? params.code : undefined} />
+      <EmaiVerifyModal
+        code={showEmaiVerifyModal ? params.code : undefined}
+        email={showEmaiVerifyModal ? params.email : undefined}
+      />
     </>
   )
 }
