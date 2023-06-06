@@ -33,9 +33,7 @@ function Header({ className }: IHeader) {
   const [expanded, setExpanded] = useState(false)
 
   const dispatch = useAppDispatch()
-  const handleClick = () => {
-    dispatch(updateSearch({ topic: undefined, tag: undefined, focused: false }))
-  }
+  const handleLogoClick = () => dispatch(updateSearch({ topic: undefined, tag: undefined, focused: false }))
 
   useEffect(
     () =>
@@ -52,7 +50,7 @@ function Header({ className }: IHeader) {
         <div aria-label="Home">
           <img src="/static/icons/logo.svg" alt="logo" className={getModifier(getElement("logo"), "mobile")} />
           <img src="/static/images/logo.svg" alt="logo" className={getElement("logo")} />
-          <Link className="ghost" to="/" onClick={handleClick} />
+          <Link className="ghost" to="/" onClick={handleLogoClick} />
         </div>
 
         <Icon

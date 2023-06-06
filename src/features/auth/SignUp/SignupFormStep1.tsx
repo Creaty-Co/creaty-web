@@ -108,10 +108,7 @@ export function SignupFormStep1() {
         <div className="flex-grow border-t border-gray-400"></div>
       </div>
 
-      <Button
-        className="button button--google button--biggest button__text"
-        htmlType="submit"
-        onClick={handleGoogleClick}>
+      <Button className="button button--google button--biggest button__text" onClick={handleGoogleClick}>
         Continue with Google
       </Button>
 
@@ -122,7 +119,7 @@ export function SignupFormStep1() {
   )
 
   return (
-    <PopupLayout title="Sign up to find your perfect mentor" width="35em">
+    <PopupLayout title="Sign up to find your perfect mentor">
       <Formus
         className={cn(getModifier(CN, MOD))}
         elementContent={elementContent}
