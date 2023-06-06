@@ -26,9 +26,9 @@ export function Home() {
 
   const { t } = useTranslation("translation", { keyPrefix: "views.home" })
 
-  const params = useParams<"shortcut" | "code" | "email">()
+  const params = useParams<"shortcut" | "code">()
   const showResetPasswordModal = useMatch("reset-password/:code")
-  const showEmaiVerifyModal = useMatch("email-verify/:email/:code")
+  const showEmaiVerifyModal = useMatch("email-verify/:code")
 
   const { data } = params.shortcut ? useGetPagePersonalQuery({ shortcut: params.shortcut }) : useGetPagesMainQuery()
 
@@ -101,10 +101,7 @@ export function Home() {
       </div>
 
       <ResetPasswordModalForm code={showResetPasswordModal ? params.code : undefined} />
-      <EmaiVerifyModal
-        code={showEmaiVerifyModal ? params.code : undefined}
-        email={showEmaiVerifyModal ? params.email : undefined}
-      />
+      <EmaiVerifyModal code={showEmaiVerifyModal ? params.code : undefined} />
     </>
   )
 }
