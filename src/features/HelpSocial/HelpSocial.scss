@@ -1,0 +1,37 @@
+@import "/src/app/scss/bundle.scss";
+
+.help-social {
+  display: flex;
+  @include gap(20px);
+  @include for-size(big-phone-screen) {
+    @include gap(16px);
+  }
+}
+
+.help-social__text {
+  align-self: center;
+  color: rgba($color-white, 0.6);
+
+  @include Text(12px, 20px);
+  text-align: right;
+  white-space: pre-line;
+
+  @include for-size(big-phone-screen) {
+    display: none;
+  }
+}
+
+.help-social__splitter {
+  width: 2px;
+  margin: 0 4px;
+  background: rgba($color-white, 0.2);
+
+  @include for-size(big-phone-screen) {
+    display: none;
+  }
+}
+
+.help-social__icon {
+  width: 56px;
+  height: 56px;
+}

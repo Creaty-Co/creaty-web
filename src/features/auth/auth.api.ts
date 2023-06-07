@@ -14,7 +14,7 @@ export const authApi = createApi({
       query: body => ({ url: `/users/token/`, method: "POST", body }),
     }),
     verifyEmail: builder.mutation({
-      query: body => ({ url: `/users/register/verify/`, method: "POST", body }),
+      query: body => ({ url: `/users/register/verify/`, method: "PUT", body }),
     }),
     refreshToken: builder.query({
       query: () => ({ url: "users/token/refresh/", method: "POST" }),

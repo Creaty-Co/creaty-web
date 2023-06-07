@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from "@app/store"
 import { selectContactFormByType, submit, usePostFormsIdApplicationsMutation } from "@features/Form"
-import { Button, Field, Formus } from "@shared/ui"
+import { Button, Field, Formus, OuterLink } from "@shared/ui"
 import { bem } from "@shared/utils"
 import cn from "classnames"
 import { FieldValues, SubmitHandler } from "react-hook-form"
@@ -23,8 +23,7 @@ const MOD = "test-meeting"
 const { getElement, getModifier } = bem(CN)
 
 export function FormTestMeeting({ className }: IFormProps) {
-  // const { t } = useTranslation("translation", { keyPrefix: "contactForm.test_meeting" })
-  const { t } = useTranslation("translation", { keyPrefix: "other.test_meeting" })
+  const { t } = useTranslation("translation", { keyPrefix: "other.forms.test_meeting" })
   const form = useAppSelector(selectContactFormByType("test_meeting"))
   const dispatch = useAppDispatch()
 
@@ -54,7 +53,9 @@ export function FormTestMeeting({ className }: IFormProps) {
       </Button>
 
       <div className={cn(getElement("agreement"), "text-gray-800 text-center")}>
-        By clicking on the Get Help, you agree to Creaty Co. <em>Terms of Use and</em> <em>Privacy Policy</em>
+        By on the {t("submitText")}, you agree to Creaty Co.{" "}
+        <OuterLink className="document__link--form" linkHref="user_agreement" translateType="terms" /> and{" "}
+        <OuterLink className="document__link--form" linkHref="privacy_policy" translateType="privacyPolicy" />
       </div>
     </>
   )

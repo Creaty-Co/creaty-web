@@ -1,4 +1,4 @@
-@import "/src/app/assets/scss/bundle.scss";
+@import "/src/app/scss/bundle.scss";
 
 .mentor-search-list {
   z-index: 1;
@@ -11,9 +11,9 @@
   grid-template: 1fr / 520fr 390fr;
 
   max-height: 50vh;
-  height: auto; 
+  height: auto;
   width: 100%;
-  
+
   overflow: auto;
   overflow-x: hidden;
   overflow-y: auto;
@@ -49,13 +49,13 @@
 
     grid-template: none;
     @include gap(8px);
-    
+
     max-height: calc(100dvh - 120px);
     height: auto;
 
     padding: 8px;
   }
-  
+
   &__selected {
     display: grid;
     grid-auto-rows: auto;
@@ -71,7 +71,7 @@
     padding: 16px;
 
     &:not(:only-child) {
-      border-right: 1px solid #D2D6DC;
+      border-right: 1px solid #d2d6dc;
       @include for-size(big-phone-screen) {
         border: 0;
       }
@@ -99,12 +99,12 @@
 
     overflow: auto;
 
-		-ms-overflow-style: none;
-		scrollbar-width: none;
-	
-		&::-webkit-scrollbar {
-			display: none;
-		}
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
     &--hidden {
       visibility: hidden;
@@ -135,7 +135,7 @@
     margin: 0;
 
     overflow: auto;
-    
+
     &--hidden {
       visibility: hidden;
       display: none;
@@ -169,7 +169,7 @@
       display: none;
     }
   }
-  
+
   &__text {
     @include Tags();
   }
@@ -181,7 +181,7 @@
   }
 
   &__separator {
-    background-color: #D2D6DC;
+    background-color: #d2d6dc;
 
     position: relative;
     left: -10px;

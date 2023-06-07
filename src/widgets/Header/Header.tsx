@@ -1,19 +1,17 @@
 import "./header.scss"
 
 import { useAppDispatch, useAppSelector } from "@app/store"
-import { PopupForm } from "@features"
+import { PopupFormBecomeMentor, PopupFormWrapper } from "@features"
 import { AuthDDL } from "@features/auth/AuthDDL/AuthDDL"
 import { updateSearch } from "@features/search"
 import { selectIsAuth } from "@features/users/users.slice"
 import { open } from "@shared/layout"
 import { Button, ButtonLink, Icon } from "@shared/ui"
 import { bem, classMerge } from "@shared/utils"
-import { memo } from "react"
-import { useEffect, useState } from "react"
+import { memo, useEffect, useState } from "react"
 import ReactGA from "react-ga4"
 import { useTranslation } from "react-i18next"
-import { useLocation } from "react-router-dom"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 
 import { Login } from "../../features/auth/Login/Login"
 import { SignUp } from "../../features/auth/SignUp/SignUp"
@@ -66,13 +64,18 @@ function Header({ className }: IHeader) {
             </ButtonLink>
 
             {isAuth ? null : (
-              <Button size="small" onClick={() => dispatch(open(<PopupForm type="become_mentor" />))}>
+              <Button size="small" onClick={() => dispatch(open(<PopupFormBecomeMentor />))}>
                 {t("menu.becomeMentor")}
               </Button>
             )}
           </div>
 
-          <Button outline size="small" color="green" onClick={() => dispatch(open(<PopupForm type="choose_mentor" />))}>
+          <Button
+            outline
+            size="small"
+            color="green"
+            onClick={() => dispatch(open(<PopupFormWrapper formType="choose_mentor" />))}
+          >
             {t("findMentor")}
           </Button>
 

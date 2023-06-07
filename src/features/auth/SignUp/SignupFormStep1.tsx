@@ -3,7 +3,7 @@ import { useAppDispatch } from "@app/store"
 import { signUpStep1 } from "@features/users/users.slice"
 import { ISignUpFormStep1 } from "@features/users/users.types"
 import { open, PopupLayout } from "@shared/layout"
-import { Field, Formus } from "@shared/ui"
+import { Field, Formus, OuterLink } from "@shared/ui"
 import { bem } from "@shared/utils"
 import { Button } from "antd"
 import cn from "classnames"
@@ -113,7 +113,9 @@ export function SignupFormStep1() {
       </Button>
 
       <div className={cn(getElement("agreement"), "text-gray-800 text-center")}>
-        By clicking on the Get Help, you agree to Creaty Co. <em>Terms of Use and</em> <em>Privacy Policy</em>
+        By signing up, you agree to Creaty Co.{" "}
+        <OuterLink className="document__link--form" linkHref="user_agreement" translateType="terms" /> and{" "}
+        <OuterLink className="document__link--form" linkHref="privacy_policy" translateType="privacyPolicy" />
       </div>
     </>
   )

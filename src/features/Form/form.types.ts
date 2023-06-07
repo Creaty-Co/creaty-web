@@ -4,7 +4,7 @@ export interface FormRequestParamsType {
   values: Record<string, string>
 }
 
-export type FormTypes = "become_mentor" | "choose_mentor" | "test_meeting" | "still_questions" | "signup_mentor" 
+export type FormTypes = "choose_mentor" | "test_meeting" | "still_questions" | "signup_mentor"
 
 export interface FormFieldType {
   value?: string | number | boolean
@@ -16,7 +16,7 @@ export interface FormType {
 
   fields: FormFieldType[]
   type: FormTypes
-  
+
   submitted: boolean
 }
 
@@ -26,7 +26,7 @@ export enum FormFieldFieldTypeEmum {
   name = "input",
 }
 
-export interface IFormState extends Record<FormType["type"], FormType> { }
+export interface IFormState extends Record<FormType["type"], FormType> {}
 
 export interface IForm {
   type: FormType["type"]

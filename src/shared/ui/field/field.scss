@@ -1,9 +1,11 @@
-@import "/src/app/assets/scss/bundle.scss";
+@import "/src/app/scss/bundle.scss";
 
 .field {
   @include Text2;
-  
-  &__label, &__input, &__textarea {
-    @include Text2; 
+
+  &__label,
+  &__input,
+  &__textarea {
+    @include Text2;
   }
 }

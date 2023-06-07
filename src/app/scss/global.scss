@@ -1,0 +1,7 @@
+@import "bundle";
+
+// rewrite ant styles
+.ant-modal-content {
+  padding: 0 !important;
+  contain: size !important;
+}

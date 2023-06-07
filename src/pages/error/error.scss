@@ -1,36 +1,36 @@
-@import "/src/app/assets/scss/bundle.scss";
+@import "/src/app/scss/bundle.scss";
 
 .error-view {
-	@include WidthLimit;
+  @include WidthLimit;
 }
 
 .error-view__container {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-	width: 100%;
-	min-height: 50vh;
+  width: 100%;
+  min-height: 50vh;
 }
 
 .error-view__info {
-	display: grid;
-	justify-items: baseline;
-	@include gap(3.5em);
-
+  display: grid;
+  justify-items: baseline;
+  @include gap(3.5em);
 }
 
 .error-view__title {
-	// @include Typography(3.5rem, 700);
-	// line-height: 1.35;
-	max-width: 15ch;
+  // @include Typography(3.5rem, 700);
+  // line-height: 1.35;
+  max-width: 15ch;
 }
 
 .error-view__code {
-	color: #070707;
-	text-shadow: 0px 2px 8px rgba($color-green, 0.1), 0px 8px 30px rgba($color-green, 0.2), 0px 8px 200px rgba($color-green, 0.4);
+  color: #070707;
+  text-shadow: 0px 2px 8px rgba($color-green, 0.1),
+    0px 8px 30px rgba($color-green, 0.2), 0px 8px 200px rgba($color-green, 0.4);
 
-	font-size: 18rem;
-	font-weight: 700;
-	line-height: 0.68;
+  font-size: 18rem;
+  font-weight: 700;
+  line-height: 0.68;
 }

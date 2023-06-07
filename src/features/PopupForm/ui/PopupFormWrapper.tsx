@@ -1,22 +1,21 @@
 import { useAppSelector } from "@app/store"
-import { Form, selectContactFormByType } from "@features/Form"
+import { Form, FormTypes, selectContactFormByType } from "@features/Form"
 import { PopupLayout } from "@shared/layout"
 import { useTranslation } from "react-i18next"
 
 import { PopupFormThanks } from "./PopupFormThanks"
 
-const FORM_TYPE = "choose_mentor"
+interface IProps {
+  formType: FormTypes
+}
 
-export function PopupFormChooseMentor() {
-  /*
-  const { t: tPopup } = useTranslation("translation", { keyPrefix: "popups.popupForm" })
-  */
+export function PopupFormWrapper({ formType }: IProps) {
   const { t } = useTranslation("translation", { keyPrefix: "other" })
-  const form = useAppSelector(selectContactFormByType(FORM_TYPE))
+  const form = useAppSelector(selectContactFormByType(formType))
 
   const rForm = (
-    <PopupLayout title={t(`forms.${FORM_TYPE}.title`)}>
-      <Form type={FORM_TYPE} />
+    <PopupLayout title={t(`forms.${formType}.title`)}>
+      <Form type={formType} />
     </PopupLayout>
   )
 

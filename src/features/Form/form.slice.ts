@@ -1,94 +1,86 @@
 import { RootState } from "@app/store"
-import { createSelector,createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-import { FormType, FormTypes, IFormState } from "./form.types"
+import { FormTypes, IFormState } from "./form.types"
 
 const initialState: IFormState = {
-  "still_questions": {
+  still_questions: {
     id: 4,
     type: "still_questions",
     fields: [
       {
-        "name": "name"
-      }, {
-        "name": "email"
-      }, {
-        "name": "about"
-      }
+        name: "name",
+      },
+      {
+        name: "email",
+      },
+      {
+        name: "about",
+      },
     ],
 
-    submitted: false
-  }, 
+    submitted: false,
+  },
 
-  "test_meeting": {
+  test_meeting: {
     id: 3,
     type: "test_meeting",
     fields: [
       {
-        "name": "name"
-      }, {
-        "name": "email"
-      }, {
-        "name": "about"
-      }
-    ],
-
-    submitted: false
-  }, 
-
-  "become_mentor": {
-    id: 1,
-    type: "become_mentor",
-    fields: [
+        name: "name",
+      },
       {
-        "name": "name"
-      }, {
-        "name": "email"
-      }, {
-        "name": "about"
-      }
+        name: "email",
+      },
+      {
+        name: "about",
+      },
     ],
 
-    submitted: false
-  }, 
-  
-  "choose_mentor": {
+    submitted: false,
+  },
+
+  choose_mentor: {
     id: 2,
     type: "choose_mentor",
     fields: [
       {
-        "name": "name"
-      }, {
-        "name": "email"
-      }, {
-        "name": "about"
-      }
+        name: "name",
+      },
+      {
+        name: "email",
+      },
+      {
+        name: "about",
+      },
     ],
 
-    submitted: false
-  }, 
-  
-  "signup_mentor": {
+    submitted: false,
+  },
+
+  signup_mentor: {
     id: 5,
     type: "signup_mentor",
     fields: [
       {
-        "name": "name"
-      }, {
-        "name": "email"
-      }, {
-        "name": "about"
-      }
+        name: "name",
+      },
+      {
+        name: "email",
+      },
+      {
+        name: "about",
+      },
     ],
 
-    submitted: false
-  }
+    submitted: false,
+  },
 }
 
 export const contactFormSlice = createSlice({
   initialState,
   name: "contactForm",
-  
+
   reducers: {
     submit: (state, action: PayloadAction<{ type: FormTypes }>) => {
       state[action.payload.type].submitted = true
@@ -96,7 +88,7 @@ export const contactFormSlice = createSlice({
 
     reset: (state, action: PayloadAction<{ type: FormTypes }>) => {
       state[action.payload.type].submitted = false
-    }
+    },
   },
 })
 
@@ -104,7 +96,4 @@ export default contactFormSlice.reducer
 export const { submit, reset } = contactFormSlice.actions
 
 export const selectContactForms = (state: RootState) => state.form
-export const selectContactFormByType = (type: FormType["type"]) => createSelector(
-  selectContactForms,
-  (forms) => forms[type]
-)
+export const selectContactFormByType = (type: FormTypes) => createSelector(selectContactForms, forms => forms[type])

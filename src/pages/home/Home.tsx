@@ -11,7 +11,7 @@ import cn from "classnames"
 import { useTranslation } from "react-i18next"
 import { useMatch, useParams } from "react-router"
 
-import { BecomeMentor } from "./become-mentor/become-mentor"
+import { BecomeMentor } from "./BecomeMentor/BecomeMentor"
 import { DynamicPrimaryInfo } from "./dynamic-primary-info/dynamic-primary-info"
 import { HelpfulCreaty } from "./helpful-creaty"
 import { HowItWorks } from "./HowItWorks"

@@ -1,14 +1,18 @@
-import { useAppDispatch, useAppSelector } from "@app/store"
+import { useAppDispatch } from "@app/store"
 import { ChatBubbleBottomCenterIcon } from "@heroicons/react/24/solid"
-import { Button, Field, Formus } from "@shared/ui"
+import { open } from "@shared/layout"
+import { Field, Formus, OuterLink } from "@shared/ui"
 import { bem, isEmail } from "@shared/utils"
+import { Button } from "antd"
 import cn from "classnames"
+import { useEffect } from "react"
 import { FieldValues, SubmitHandler } from "react-hook-form"
 import * as yup from "yup"
 
 import { usePostFormsIdApplicationsMutation } from "../form.api"
-import { selectContactFormByType, submit } from "../form.slice"
 import { IFormProps } from "../form.types"
+import { PopupFormThanks } from "./../../PopupForm/ui/PopupFormThanks"
+import { formIds } from "./utils"
 
 const schema = yup
   .object()
@@ -28,37 +32,36 @@ const schema = yup
 
     url: yup
       .string()
-      .test("linkedin-url", function (value) {
+      .test("url", function (value) {
         if (!value) return this.createError({ path: this.path, message: "no url" })
 
-        const regex = /^(?:http(?:s?):\/\/)?(?:www\.)?linkedin\.[a-z]+\/(?:in\/)(?<username>[A-Za-z0-9]+)\/?$/gi
-        const [result] = value.matchAll(regex)
-
-        return (result && !!result.groups?.username) || this.createError({ path: this.path, message: "no valid url" })
+        const expression = new RegExp(
+          // eslint-disable-next-line no-useless-escape
+          /(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})(\.[a-zA-Z0-9]{2,})?/gi
+        )
+        const result = value.match(expression)
+        return !!result || this.createError({ path: this.path, message: "no valid url" })
       })
-      .required("LinkedIn URL"),
+      .required("URL"),
   })
   .required()
 
 const CN = "form"
 const MOD = "become-mentor"
 const { getElement, getModifier } = bem(CN)
-const FORM_TYPE = "become_mentor"
 
 export function FormBecomeMentor({ className }: IFormProps) {
-  const form = useAppSelector(selectContactFormByType(FORM_TYPE))
   const dispatch = useAppDispatch()
 
-  const [postFormsIdApplications, { isLoading }] = usePostFormsIdApplicationsMutation()
-  const onSubmit: SubmitHandler<FieldValues> = async (values: FieldValues) => {
-    await postFormsIdApplications({
-      id: form.id,
-      path: document.location.pathname,
-      values,
-    })
+  const [postFormsIdApplications, { isLoading, isSuccess }] = usePostFormsIdApplicationsMutation()
 
-    dispatch(submit({ type: FORM_TYPE }))
+  const onSubmit: SubmitHandler<FieldValues> = async (values: FieldValues) => {
+    await postFormsIdApplications({ id: formIds.becomeMentor, path: document.location.pathname, values })
   }
+
+  useEffect(() => {
+    if (isSuccess) dispatch(open(<PopupFormThanks />))
+  }, [isSuccess])
 
   const hintsAbout = {
     max: "Max width is 256 symbols",
@@ -69,7 +72,7 @@ export function FormBecomeMentor({ className }: IFormProps) {
   }
 
   const hintsUrl = {
-    "linkedin-url": "Should be likedin.com/in/username",
+    url: "Should be an url",
   }
 
   const elementContent = (
@@ -90,7 +93,13 @@ export function FormBecomeMentor({ className }: IFormProps) {
 
   const elementControl = (
     <>
-      <Button disabled={isLoading} size="biggest" color="dark" type="submit">
+      <Button
+        className="button button--dark button--biggest button__text"
+        type="primary"
+        htmlType="submit"
+        loading={isLoading}
+        disabled={isLoading}
+      >
         <span className="flex gap-3 flex-row">
           <ChatBubbleBottomCenterIcon className="text-white w-5 h-5" />
           Send application
@@ -98,7 +107,9 @@ export function FormBecomeMentor({ className }: IFormProps) {
       </Button>
 
       <div className={cn(getElement("agreement"), "text-gray-800 text-center")}>
-        By clicking on the Get Help, you agree to Creaty Co. <em>Terms of Use and</em> <em>Privacy Policy</em>
+        By on the Send application, you agree to Creaty Co.{" "}
+        <OuterLink className="document__link--form" linkHref="user_agreement" translateType="terms" /> and{" "}
+        <OuterLink className="document__link--form" linkHref="privacy_policy" translateType="privacyPolicy" />
       </div>
     </>
   )

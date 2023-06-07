@@ -1,13 +1,9 @@
-@import "/src/app/assets/scss/bundle.scss";
+@import "/src/app/scss/bundle.scss";
 
 .formus {
   &__agreement {
     letter-spacing: 0.02em;
     @include Tags;
-
-    & > em {
-      @include TagsBold;
-    }
   }
 
   &__notifies {
@@ -25,14 +21,10 @@
 
 .form {
   color: $color-black-90;
-  
+
   &__agreement {
     letter-spacing: 0.02em;
     @include Tags;
-
-    & > em {
-      @include TagsBold;
-    }
   }
 
   &__confirmation {

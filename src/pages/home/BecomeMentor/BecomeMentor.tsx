@@ -1,9 +1,9 @@
-import "./become-mentor.scss"
+import "./BecomeMentor.scss"
 
 import { useAppDispatch } from "@app/store"
-import { PageLinkType, useGetPagesLinksDocumentsQuery } from "@shared/api"
-import { open,PopupLayout } from "@shared/layout"
-import { Button } from "@shared/ui"
+import { PopupFormBecomeMentor } from "@features"
+import { open } from "@shared/layout"
+import { Button, OuterLink } from "@shared/ui"
 import { bem } from "@shared/utils"
 import cn from "classnames"
 import { useTranslation } from "react-i18next"
@@ -15,13 +15,7 @@ export function BecomeMentor() {
   const dispatch = useAppDispatch()
 
   const { t } = useTranslation("translation", { keyPrefix: "views.home.becomeMentor" })
-  const { data } = useGetPagesLinksDocumentsQuery()
 
-  const links = data?.results.reduce<Record<PageLinkType["type"], PageLinkType>>(
-    (result, next) => ({ ...result, [next.type]: next }),
-    {} as never
-  )
-  const BecomeMentorForm = <PopupLayout title="become_mentor">become_mentor</PopupLayout>
   return (
     <div className="become-mentor">
       <div className={getElement("container")}>
@@ -32,11 +26,13 @@ export function BecomeMentor() {
         </div>
 
         <div className={getElement("bottom")}>
-          <Button size="big" color="dark" onClick={() => dispatch(open(BecomeMentorForm))}>
+          <Button size="big" color="dark" onClick={() => dispatch(open(<PopupFormBecomeMentor />))}>
             {t("button")}
           </Button>
 
-          <div className={getElement("terms")}>{t("terms", { policyLink: links?.privacy_policy.url })}</div>
+          <div className={getElement("terms")}>
+            {t("terms")} <OuterLink linkHref="privacy_policy" translateType="privacyPolicy" />
+          </div>
         </div>
       </div>
 

@@ -1,12 +1,8 @@
-import { useAppSelector } from "@app/store"
-import { Form, selectContactFormByType } from "@features/Form"
-import { VerifyForm } from "@features/VerifyForm/VerifyForm"
+import { FormBecomeMentor } from "@features/Form/ui"
 import { PopupLayout } from "@shared/layout"
 
 export function PopupFormBecomeMentor() {
-  const form = useAppSelector(selectContactFormByType("become_mentor"))
-
-  const rForm = (
+  return (
     <PopupLayout title="Apply to be a mentor">
       <div className="pb-8 font--text-regular">
         <p className="text-violet">We are looking for people:</p>
@@ -16,15 +12,7 @@ export function PopupFormBecomeMentor() {
         </ol>
       </div>
 
-      <Form type="become_mentor" />
+      <FormBecomeMentor />
     </PopupLayout>
   )
-
-  const rThanks = (
-    <PopupLayout title="Verify your email">
-      <VerifyForm email="yasha.petrunin@gmail.com" />
-    </PopupLayout>
-  )
-
-  return <>{form.submitted ? rThanks : rForm}</>
 }

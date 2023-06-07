@@ -1,7 +1,7 @@
-import "./help-social.scss"
+import "./HelpSocial.scss"
 
 import { useGetPagesLinksSocialsQuery } from "@shared/api"
-import { LoaderCover,OuterLink } from "@shared/ui"
+import { LoaderCover, OuterLink } from "@shared/ui"
 import { bem } from "@shared/utils"
 import { useTranslation } from "react-i18next"
 
@@ -16,19 +16,13 @@ export function HelpSocial() {
 
   return (
     <div className={CN}>
-      <div className={getElement("text")}>
-        {t("text")}
-      </div>
+      <div className={getElement("text")}>{t("text")}</div>
       <div className={getElement("splitter")} />
 
       {data.results.map(img => (
         <div key={img.id}>
-          <OuterLink to={img.url} eventLabel="social network">
-            <img 
-              className={getElement("icon")}
-              alt="social network" 
-              src={img.icon} 
-            />
+          <OuterLink to={img.url}>
+            <img className={getElement("icon")} alt="social network" src={img.icon} />
           </OuterLink>
         </div>
       ))}

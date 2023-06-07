@@ -2,7 +2,7 @@ import "./mentors-slider.scss"
 
 import { useAppDispatch } from "@app/store"
 import { MentorCard, MentorType } from "@entities"
-import { PopupForm } from "@features"
+import { PopupFormWrapper } from "@features"
 import { open } from "@shared/layout"
 import { Button, ButtonIcon, ButtonLink } from "@shared/ui"
 import { bem } from "@shared/utils"
@@ -74,7 +74,7 @@ export function MentorsSlider(props: IMentorsSlider) {
 
         <span>{t("or")}</span>
 
-        <Button size="big" outline onClick={() => dispatch(open(<PopupForm type="choose_mentor" />))}>
+        <Button size="big" outline onClick={() => dispatch(open(<PopupFormWrapper formType="choose_mentor" />))}>
           {t("getHelp")}
         </Button>
       </div>

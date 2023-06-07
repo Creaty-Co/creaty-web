@@ -1,9 +1,4 @@
 @import "bundle";
-/*
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-*/
 
 * {
   box-sizing: border-box;
@@ -66,11 +61,4 @@ ul {
   to {
     transform: rotate(360deg);
   }
-}
-
-// rewrite ant styles
-
-.ant-modal-content {
-  padding: 0 !important;
-  contain: size !important;
 }

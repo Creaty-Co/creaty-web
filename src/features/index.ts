@@ -1,5 +1,5 @@
 export * from "./HaveQuestions"
-export * from "./help-social"
+export * from "./HelpSocial/HelpSocial"
 export * from "./Form"
 export * from "./cookies"
 export * from "./PopupForm"
