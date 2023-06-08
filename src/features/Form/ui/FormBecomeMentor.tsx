@@ -87,7 +87,13 @@ export function FormBecomeMentor() {
         placeholder="Tell us about yourself!"
         hints={hints.about}
       />
-      <Field disabled={isLoading} type="input" name="url" label="LinkedIn profile*" hints={hints.url} />
+      <Field
+        disabled={isLoading}
+        type="input"
+        name="url"
+        label="LinkedIn profile or Portfolio link*"
+        hints={hints.url}
+      />
     </>
   )
 
