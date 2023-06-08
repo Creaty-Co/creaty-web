@@ -1,9 +1,17 @@
-import { Button, Field, Formus, OuterLink } from "@shared/ui"
+import { useAppDispatch } from "@app/store"
+import { openModal } from "@shared/layout"
+import { Field, Formus, OuterLink } from "@shared/ui"
 import { bem } from "@shared/utils"
+import { Button } from "antd"
 import cn from "classnames"
+import { useEffect } from "react"
+import { FieldValues, SubmitHandler } from "react-hook-form"
 import * as yup from "yup"
 
-import { IFormProps } from "../form.types"
+import { PopupFormThanks } from "../PopupForm"
+import { usePostFormsIdApplicationsMutation } from "../state/form.api"
+import { IFormProps } from "../state/form.types"
+import { EFormIds } from "../state/utils"
 
 const schema = yup
   .object()
@@ -18,6 +26,19 @@ const MOD = "signup-mentor"
 const { getElement, getModifier } = bem(CN)
 
 export function FormSignupMentor({ className }: IFormProps) {
+  const dispatch = useAppDispatch()
+  const [postFormsIdApplications, { isLoading, isSuccess }] = usePostFormsIdApplicationsMutation()
+  const onSubmit: SubmitHandler<FieldValues> = async (values: FieldValues) => {
+    await postFormsIdApplications({
+      formName: EFormIds.SIGNUP_MENTOR,
+      path: document.location.pathname,
+      values,
+    })
+  }
+  useEffect(() => {
+    if (isSuccess) dispatch(openModal(<PopupFormThanks />))
+  }, [isSuccess])
+
   const elementContent = (
     <>
       <Field type="input" name="fullname" label="Full name" />
@@ -27,7 +48,13 @@ export function FormSignupMentor({ className }: IFormProps) {
 
   const elementControl = (
     <>
-      <Button size="biggest" color="dark" type="submit">
+      <Button
+        className="button button--dark button--biggest button__text"
+        type="primary"
+        htmlType="submit"
+        loading={isLoading}
+        disabled={isLoading}
+      >
         Get Help
       </Button>
 
@@ -45,7 +72,7 @@ export function FormSignupMentor({ className }: IFormProps) {
       elementContent={elementContent}
       elementControl={elementControl}
       schema={schema}
-      onSubmit={() => null}
+      onSubmit={onSubmit}
     />
   )
 }

@@ -1,6 +1,6 @@
 import { useAppDispatch } from "@app/store"
 import { useResendPasswordMutation } from "@features/auth/auth.api"
-import { open, PopupLayout } from "@shared/layout"
+import { openModal, PopupLayout } from "@shared/layout"
 import { Field, Formus } from "@shared/ui"
 import { bem } from "@shared/utils"
 import { Button, notification } from "antd"
@@ -39,15 +39,15 @@ export function ResendPasswordStep1() {
   }, [error])
 
   useEffect(() => {
-    if (isSuccess) dispatch(open(<ResendPasswordStep2 email={resendedEmail} />))
+    if (isSuccess) dispatch(openModal(<ResendPasswordStep2 email={resendedEmail} />))
   }, [data])
 
   const handleResendPassword = (values: FieldValues) => {
     resendPassword({ email: values.email })
     setResendedEmail(values.email)
   }
-  const handleLoginRedirect = () => dispatch(open(<LoginForm />))
-  const handleSignUpRedirect = () => dispatch(open(<SignupFormStep1 />))
+  const handleLoginRedirect = () => dispatch(openModal(<LoginForm />))
+  const handleSignUpRedirect = () => dispatch(openModal(<SignupFormStep1 />))
 
   const elementContent = (
     <>
@@ -65,6 +65,7 @@ export function ResendPasswordStep1() {
         type="primary"
         htmlType="submit"
         loading={isLoading}
+        disabled={isLoading}
       >
         Continue
       </Button>

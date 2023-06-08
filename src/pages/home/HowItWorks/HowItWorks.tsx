@@ -2,7 +2,7 @@ import "./howItWorks.scss"
 
 import { useAppDispatch } from "@app/store"
 import { PopupFormWrapper } from "@features/index"
-import { open } from "@shared/layout"
+import { openModal } from "@shared/layout"
 import { BulletPoint, Button, InfoSection } from "@shared/ui"
 import { bem } from "@shared/utils"
 import cn from "classnames"
@@ -16,7 +16,7 @@ export function HowItWorks() {
   const dispatch = useAppDispatch()
 
   const requestButton = (
-    <button type="button" onClick={() => dispatch(open(<PopupFormWrapper formType="choose_mentor" />))}>
+    <button type="button" onClick={() => dispatch(openModal(<PopupFormWrapper formType="choose_mentor" />))}>
       <em>{t("requestButton")}</em>
     </button>
   )
@@ -50,7 +50,7 @@ export function HowItWorks() {
             className={cn(getElement("button"), getElement("button_free"))}
             size="big"
             color="green"
-            onClick={() => dispatch(open(<PopupFormWrapper formType="test_meeting" />))}
+            onClick={() => dispatch(openModal(<PopupFormWrapper formType="test_meeting" />))}
           >
             {t("button")}
           </Button>

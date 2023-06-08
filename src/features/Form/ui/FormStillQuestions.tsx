@@ -1,13 +1,17 @@
-import { useAppDispatch, useAppSelector } from "@app/store"
-import { Button, Field, Formus, OuterLink } from "@shared/ui"
+import { useAppDispatch } from "@app/store"
+import { openModal } from "@shared/layout"
+import { Field, Formus, OuterLink } from "@shared/ui"
 import { bem, isEmail } from "@shared/utils"
+import { Button } from "antd"
 import cn from "classnames"
+import { useEffect } from "react"
 import { FieldValues, SubmitHandler } from "react-hook-form"
 import * as yup from "yup"
 
-import { usePostFormsIdApplicationsMutation } from "../form.api"
-import { selectContactFormByType, submit } from "../form.slice"
-import { IFormProps } from "../form.types"
+import { PopupFormThanks } from "../PopupForm"
+import { usePostFormsIdApplicationsMutation } from "../state/form.api"
+import { IFormProps } from "../state/form.types"
+import { EFormIds } from "../state/utils"
 
 const schema = yup
   .object()
@@ -23,28 +27,27 @@ const schema = yup
   })
   .required()
 
+const hintsEmail = {
+  email: "Should be like@this.com",
+}
+
 const CN = "formus"
 const MOD = "still-quetion"
 const { getElement, getModifier } = bem(CN)
 
 export function FormStillQuestions({ className }: IFormProps) {
-  const form = useAppSelector(selectContactFormByType("still_questions"))
   const dispatch = useAppDispatch()
-
-  const [postFormsIdApplications, { isLoading }] = usePostFormsIdApplicationsMutation()
+  const [postFormsIdApplications, { isLoading, isSuccess }] = usePostFormsIdApplicationsMutation()
   const onSubmit: SubmitHandler<FieldValues> = async (values: FieldValues) => {
     await postFormsIdApplications({
-      id: form.id,
+      formName: EFormIds.STILL_QUESTIONS,
       path: document.location.pathname,
       values,
     })
-
-    dispatch(submit({ type: "still_questions" }))
   }
-
-  const hintsEmail = {
-    email: "Should be like@this.com",
-  }
+  useEffect(() => {
+    if (isSuccess) dispatch(openModal(<PopupFormThanks />))
+  }, [isSuccess])
 
   const elementContent = (
     <>
@@ -55,7 +58,13 @@ export function FormStillQuestions({ className }: IFormProps) {
 
   const elementControl = (
     <>
-      <Button size="biggest" color="dark" type="submit">
+      <Button
+        className="button button--dark button--biggest button__text"
+        type="primary"
+        htmlType="submit"
+        loading={isLoading}
+        disabled={isLoading}
+      >
         Get Help
       </Button>
 

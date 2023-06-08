@@ -27,10 +27,15 @@ export function OuterLink({ linkHref, to, translateType, children, className }: 
   const { t } = useTranslation("translation", { keyPrefix: "footer" })
   const docsLink = useAppSelector(selectPagesDocumentsLinks)
 
-  if (!linkHref) return null
+  if (!linkHref && !to) return null
 
   return (
-    <a rel="noopener noreferrer" target="_blank" href={to ? to : docsLink?.[linkHref].url || ""} className={className}>
+    <a
+      rel="noopener noreferrer"
+      target="_blank"
+      href={to ? to : linkHref ? docsLink?.[linkHref].url : ""}
+      className={className}
+    >
       {children || t(`links.${[translateType]}`)}
     </a>
   )

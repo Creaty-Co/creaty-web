@@ -1,6 +1,7 @@
 import { useAppDispatch } from "@app/store"
+import { EFormIds, IFormProps } from "@features"
 import { ChatBubbleBottomCenterIcon } from "@heroicons/react/24/solid"
-import { open } from "@shared/layout"
+import { openModal } from "@shared/layout"
 import { Field, Formus, OuterLink } from "@shared/ui"
 import { bem, isEmail } from "@shared/utils"
 import { Button } from "antd"
@@ -9,10 +10,8 @@ import { useEffect } from "react"
 import { FieldValues, SubmitHandler } from "react-hook-form"
 import * as yup from "yup"
 
-import { usePostFormsIdApplicationsMutation } from "../form.api"
-import { IFormProps } from "../form.types"
-import { PopupFormThanks } from "./../../PopupForm/ui/PopupFormThanks"
-import { formIds } from "./utils"
+import { PopupFormThanks } from "../PopupForm"
+import { usePostFormsIdApplicationsMutation } from "../state/form.api"
 
 const schema = yup
   .object()
@@ -46,48 +45,49 @@ const schema = yup
   })
   .required()
 
+const hints = {
+  about: {
+    max: "Max width is 256 symbols",
+  },
+  email: {
+    email: "Should be like@this.com",
+  },
+  url: {
+    url: "Should be an url",
+  },
+}
+
 const CN = "form"
 const MOD = "become-mentor"
 const { getElement, getModifier } = bem(CN)
 
 export function FormBecomeMentor({ className }: IFormProps) {
   const dispatch = useAppDispatch()
-
   const [postFormsIdApplications, { isLoading, isSuccess }] = usePostFormsIdApplicationsMutation()
-
   const onSubmit: SubmitHandler<FieldValues> = async (values: FieldValues) => {
-    await postFormsIdApplications({ id: formIds.becomeMentor, path: document.location.pathname, values })
+    await postFormsIdApplications({
+      formName: EFormIds.BECOME_MENTOR,
+      path: document.location.pathname,
+      values,
+    })
   }
-
   useEffect(() => {
-    if (isSuccess) dispatch(open(<PopupFormThanks />))
+    if (isSuccess) dispatch(openModal(<PopupFormThanks />))
   }, [isSuccess])
-
-  const hintsAbout = {
-    max: "Max width is 256 symbols",
-  }
-
-  const hintsEmail = {
-    email: "Should be like@this.com",
-  }
-
-  const hintsUrl = {
-    url: "Should be an url",
-  }
 
   const elementContent = (
     <>
       <Field disabled={isLoading} type="input" name="name" label="Name*" />
-      <Field disabled={isLoading} type="input" name="email" label="Email*" hints={hintsEmail} />
+      <Field disabled={isLoading} type="input" name="email" label="Email*" hints={hints.email} />
       <Field
         disabled={isLoading}
         type="textarea"
         name="about"
         label="About you"
         placeholder="Tell us about yourself!"
-        hints={hintsAbout}
+        hints={hints.about}
       />
-      <Field disabled={isLoading} type="input" name="url" label="LinkedIn profile*" hints={hintsUrl} />
+      <Field disabled={isLoading} type="input" name="url" label="LinkedIn profile*" hints={hints.url} />
     </>
   )
 

@@ -2,7 +2,7 @@ import "./Footer.scss"
 
 import { useAppDispatch } from "@app/store"
 import { PopupFormBecomeMentor, PopupFormWrapper } from "@features"
-import { open } from "@shared/layout"
+import { openModal } from "@shared/layout"
 import { OuterLink } from "@shared/ui"
 import { bem } from "@shared/utils"
 import cn from "classnames"
@@ -46,7 +46,7 @@ export const Footer: FC<IFooter> = ({ className }) => {
               <button
                 className="document__link"
                 type="button"
-                onClick={() => dispatch(open(<PopupFormBecomeMentor/>))}
+                onClick={() => dispatch(openModal(<PopupFormBecomeMentor />))}
               >
                 {t("links.becomeMentor")}
               </button>
@@ -54,7 +54,7 @@ export const Footer: FC<IFooter> = ({ className }) => {
               <button
                 className="document__link"
                 type="button"
-                onClick={() => dispatch(open(<PopupFormWrapper formType="choose_mentor" />))}
+                onClick={() => dispatch(openModal(<PopupFormWrapper formType="choose_mentor" />))}
               >
                 {t("links.pickMentor")}
               </button>

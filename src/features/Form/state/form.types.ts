@@ -1,5 +1,7 @@
+import { EFormIds } from "./utils"
+
 export interface FormRequestParamsType {
-  id: number
+  formName: keyof typeof EFormIds
   path: string
   values: Record<string, string>
 }

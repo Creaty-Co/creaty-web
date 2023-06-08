@@ -2,7 +2,7 @@ import { history } from "@app/App"
 import { useAppDispatch } from "@app/store"
 import { signUpStep1 } from "@features/users/users.slice"
 import { ISignUpFormStep1 } from "@features/users/users.types"
-import { open, PopupLayout } from "@shared/layout"
+import { openModal, PopupLayout } from "@shared/layout"
 import { Field, Formus, OuterLink } from "@shared/ui"
 import { bem } from "@shared/utils"
 import { Button } from "antd"
@@ -56,11 +56,11 @@ export function SignupFormStep1() {
   const handleSubmit = (values: FieldValues) => {
     const data: ISignUpFormStep1 = { email: values.email, password: values.password }
     dispatch(signUpStep1(data))
-    dispatch(open(<SignupFormStep2 />))
+    dispatch(openModal(<SignupFormStep2 />))
   }
 
   const handleGoogleClick = () => history.push(`${process.env.REACT_APP_API_HOST}/users/register/social/google/`)
-  const handleSignUpRedirect = () => dispatch(open(<LoginForm />))
+  const handleSignUpRedirect = () => dispatch(openModal(<LoginForm />))
 
   const elementContent = (
     <>

@@ -4,7 +4,7 @@ import { useLoginEmailMutation } from "@features/auth/auth.api"
 import { useLazyGetMeQuery } from "@features/users/users.api"
 import { skipToken } from "@reduxjs/toolkit/dist/query/react"
 import { selectPagesDocumentsLinks } from "@shared/api/pages/pages.slice"
-import { close, open, PopupLayout } from "@shared/layout"
+import { closeModal, openModal, PopupLayout } from "@shared/layout"
 import { Field, Formus, OuterLink } from "@shared/ui"
 import { bem } from "@shared/utils"
 import { Button, notification } from "antd"
@@ -50,15 +50,15 @@ export function LoginForm() {
 
   useEffect(() => {
     if (!isSuccess) return
-    dispatch(close())
+    dispatch(closeModal())
     dispatch(setTokens({ accessToken: data.access, refreshToken: data.refresh }))
     getMe(skipToken)
   }, [data])
 
   const handleGoogleLogin = () => history.push(`${process.env.REACT_APP_API_HOST}/users/register/social/google/`)
   const handleEmailLogin = (values: FieldValues) => loginEmail({ email: values.email, password: values.password })
-  const handleSignUpRedirect = () => dispatch(open(<SignupFormStep1 />))
-  const handleForgotPasswordRedirect = () => dispatch(open(<ResendPasswordStep1 />))
+  const handleSignUpRedirect = () => dispatch(openModal(<SignupFormStep1 />))
+  const handleForgotPasswordRedirect = () => dispatch(openModal(<ResendPasswordStep1 />))
 
   const elementContent = (
     <>
@@ -86,6 +86,7 @@ export function LoginForm() {
         type="primary"
         htmlType="submit"
         loading={isLoading}
+        disabled={isLoading}
       >
         Login
       </Button>

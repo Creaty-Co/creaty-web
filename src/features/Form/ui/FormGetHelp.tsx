@@ -1,10 +1,17 @@
+import { useAppDispatch } from "@app/store"
+import { EFormIds, IFormProps } from "@features"
 import { ChatBubbleLeftEllipsisIcon } from "@heroicons/react/24/solid"
-import { Button, Field, Formus, OuterLink } from "@shared/ui"
+import { openModal } from "@shared/layout"
+import { Field, Formus, OuterLink } from "@shared/ui"
 import { bem } from "@shared/utils"
+import { Button } from "antd"
 import cn from "classnames"
+import { useEffect } from "react"
+import { FieldValues, SubmitHandler } from "react-hook-form"
 import * as yup from "yup"
 
-import { IFormProps } from "../form.types"
+import { PopupFormThanks } from "../PopupForm"
+import { usePostFormsIdApplicationsMutation } from "../state/form.api"
 
 const schema = yup
   .object()
@@ -15,10 +22,19 @@ const schema = yup
   .required()
 
 const CN = "form"
-const MOD = "choose-mentor"
+const MOD = "get-help"
 const { getElement, getModifier } = bem(CN)
 
-export function FormChooseMentor({ className }: IFormProps) {
+export function FormGetHelp({ className }: IFormProps) {
+  const dispatch = useAppDispatch()
+  const [postFormsIdApplications, { isLoading, isSuccess }] = usePostFormsIdApplicationsMutation()
+  const onSubmit: SubmitHandler<FieldValues> = async (values: FieldValues) => {
+    await postFormsIdApplications({ formName: EFormIds.GET_HELP, path: document.location.pathname, values })
+  }
+  useEffect(() => {
+    if (isSuccess) dispatch(openModal(<PopupFormThanks />))
+  }, [isSuccess])
+
   const elementContent = (
     <>
       <Field type="input" name="fullname" label="Full name" />
@@ -28,7 +44,13 @@ export function FormChooseMentor({ className }: IFormProps) {
 
   const elementControl = (
     <>
-      <Button size="biggest" color="dark" type="submit">
+      <Button
+        className="button button--dark button--biggest button__text"
+        type="primary"
+        htmlType="submit"
+        loading={isLoading}
+        disabled={isLoading}
+      >
         <span className="flex flex-row gap-3">
           <ChatBubbleLeftEllipsisIcon className="text-white w-5 h-5" />
           Get Help
@@ -49,7 +71,7 @@ export function FormChooseMentor({ className }: IFormProps) {
       elementContent={elementContent}
       elementControl={elementControl}
       schema={schema}
-      onSubmit={() => null}
+      onSubmit={onSubmit}
     />
   )
 }

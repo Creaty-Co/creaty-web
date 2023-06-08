@@ -2,7 +2,7 @@ import "./BecomeMentor.scss"
 
 import { useAppDispatch } from "@app/store"
 import { PopupFormBecomeMentor } from "@features"
-import { open } from "@shared/layout"
+import { openModal } from "@shared/layout"
 import { Button, OuterLink } from "@shared/ui"
 import { bem } from "@shared/utils"
 import cn from "classnames"
@@ -26,7 +26,7 @@ export function BecomeMentor() {
         </div>
 
         <div className={getElement("bottom")}>
-          <Button size="big" color="dark" onClick={() => dispatch(open(<PopupFormBecomeMentor />))}>
+          <Button size="big" color="dark" onClick={() => dispatch(openModal(<PopupFormBecomeMentor />))}>
             {t("button")}
           </Button>
 

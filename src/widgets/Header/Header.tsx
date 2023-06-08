@@ -5,7 +5,7 @@ import { PopupFormBecomeMentor, PopupFormWrapper } from "@features"
 import { AuthDDL } from "@features/auth/AuthDDL/AuthDDL"
 import { updateSearch } from "@features/search"
 import { selectIsAuth } from "@features/users/users.slice"
-import { open } from "@shared/layout"
+import { openModal } from "@shared/layout"
 import { Button, ButtonLink, Icon } from "@shared/ui"
 import { bem, classMerge } from "@shared/utils"
 import { memo, useEffect, useState } from "react"
@@ -64,7 +64,7 @@ function Header({ className }: IHeader) {
             </ButtonLink>
 
             {isAuth ? null : (
-              <Button size="small" onClick={() => dispatch(open(<PopupFormBecomeMentor />))}>
+              <Button size="small" onClick={() => dispatch(openModal(<PopupFormBecomeMentor />))}>
                 {t("menu.becomeMentor")}
               </Button>
             )}
@@ -74,7 +74,7 @@ function Header({ className }: IHeader) {
             outline
             size="small"
             color="green"
-            onClick={() => dispatch(open(<PopupFormWrapper formType="choose_mentor" />))}
+            onClick={() => dispatch(openModal(<PopupFormWrapper formType="choose_mentor" />))}
           >
             {t("findMentor")}
           </Button>

@@ -3,6 +3,7 @@ import { PaginationType } from "@shared/types"
 import { baseQueryWithReauth } from "@shared/utils"
 
 import { FormRequestParamsType, FormType } from "./form.types"
+import { FormIds } from "./utils"
 
 export const FormApi = createApi({
   reducerPath: "formApi",
@@ -15,8 +16,8 @@ export const FormApi = createApi({
     }),
 
     postFormsIdApplications: builder.mutation<FormType, FormRequestParamsType>({
-      query: ({ id, path, ...fields }) => ({
-        url: `/forms/${id}/applications/`,
+      query: ({ formName, path, ...fields }) => ({
+        url: `/forms/${FormIds[formName]}/applications/`,
         method: "POST",
         body: { path, ...fields },
       }),
