@@ -10,7 +10,6 @@ import * as yup from "yup"
 
 import { PopupFormThanks } from "../PopupForm"
 import { usePostFormsIdApplicationsMutation } from "../state/form.api"
-import { IFormProps } from "../state/form.types"
 import { EFormIds } from "../state/utils"
 
 const schema = yup
@@ -35,7 +34,11 @@ const CN = "formus"
 const MOD = "still-quetion"
 const { getElement, getModifier } = bem(CN)
 
-export function FormStillQuestions({ className }: IFormProps) {
+interface IProps {
+  handleSubmit?(): void
+}
+
+export function FormStillQuestions({ handleSubmit }: IProps) {
   const dispatch = useAppDispatch()
   const [postFormsIdApplications, { isLoading, isSuccess }] = usePostFormsIdApplicationsMutation()
   const onSubmit: SubmitHandler<FieldValues> = async (values: FieldValues) => {
@@ -46,7 +49,7 @@ export function FormStillQuestions({ className }: IFormProps) {
     })
   }
   useEffect(() => {
-    if (isSuccess) dispatch(openModal(<PopupFormThanks />))
+    if (isSuccess) handleSubmit ? handleSubmit() : dispatch(openModal(<PopupFormThanks />))
   }, [isSuccess])
 
   const elementContent = (
@@ -78,7 +81,7 @@ export function FormStillQuestions({ className }: IFormProps) {
 
   return (
     <Formus
-      className={cn(getModifier(CN, MOD), className)}
+      className={cn(getModifier(CN, MOD), "form")}
       elementContent={elementContent}
       elementControl={elementControl}
       schema={schema}

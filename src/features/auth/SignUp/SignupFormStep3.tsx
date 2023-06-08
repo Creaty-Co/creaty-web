@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from "@app/store"
 import { selectAuthUsersData } from "@features/users/users.slice"
-import { PopupLayout, closeModal } from "@shared/layout"
+import { closeModal, PopupLayout } from "@shared/layout"
 import { Button } from "@shared/ui"
 import { bem } from "@shared/utils"
 import cn from "classnames"

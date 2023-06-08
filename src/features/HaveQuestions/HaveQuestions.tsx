@@ -1,10 +1,9 @@
 import "./HaveQuestions.scss"
 
-import { useAppSelector } from "@app/store"
-import { selectContactFormByType } from "@features/Form"
 import { FormStillQuestions } from "@features/Form/ui"
 import { bem } from "@shared/utils"
 import cn from "classnames"
+import { useState } from "react"
 import { useTranslation } from "react-i18next"
 
 import { HaveQuestionsAfterSubmit } from "./HaveQuestionsAfterSubmit"
@@ -14,7 +13,7 @@ const { getElement, getModifier } = bem(CN)
 
 export function HaveQuestions() {
   const { t } = useTranslation("translation", { keyPrefix: "components.haveQuestions" })
-  const form = useAppSelector(selectContactFormByType("still_questions"))
+  const [step, setStep] = useState<number>(1)
 
   return (
     <div className={CN}>
@@ -25,9 +24,8 @@ export function HaveQuestions() {
       </div>
 
       <div className={getModifier(getElement("container"), "form")}>
-        {!form.submitted && <FormStillQuestions className={getElement("form")} />}
-
-        {form.submitted && <HaveQuestionsAfterSubmit />}
+        {step === 1 && <FormStillQuestions handleSubmit={() => setStep(2)} />}
+        {step === 2 && <HaveQuestionsAfterSubmit reset={() => setStep(1)} />}
       </div>
     </div>
   )
