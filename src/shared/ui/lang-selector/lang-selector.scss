@@ -1,11 +1,12 @@
-@import "/src/app/assets/scss/bundle.scss";
+@import "/src/app/scss/bundle.scss";
 
-.lang-selector {}
+.lang-selector {
+}
 
 .lang-selector__icon {
-	--icon-size: 1.25em;
+  --icon-size: 1.25em;
 
-	&--up {
-		transform: rotate(180deg);
-	}
+  &--up {
+    transform: rotate(180deg);
+  }
 }

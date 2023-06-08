@@ -1,13 +1,16 @@
-import { useAppDispatch, useAppSelector } from "@app/store"
-import { Button, Field, Formus } from "@shared/ui"
+import { useAppDispatch } from "@app/store"
+import { EFormIds } from "@features"
+import { openModal } from "@shared/layout"
+import { Field, Formus, OuterLink } from "@shared/ui"
 import { bem, isEmail } from "@shared/utils"
+import { Button } from "antd"
 import cn from "classnames"
+import { useEffect } from "react"
 import { FieldValues, SubmitHandler } from "react-hook-form"
 import * as yup from "yup"
 
-import { usePostFormsIdApplicationsMutation } from "../form.api"
-import { selectContactFormByType, submit } from "../form.slice"
-import { IFormProps } from "../form.types"
+import { PopupFormThanks } from "../PopupForm"
+import { usePostFormsIdApplicationsMutation } from "../state/form.api"
 
 const schema = yup
   .object()
@@ -23,28 +26,31 @@ const schema = yup
   })
   .required()
 
+const hintsEmail = {
+  email: "Should be like@this.com",
+}
+
 const CN = "formus"
 const MOD = "still-quetion"
 const { getElement, getModifier } = bem(CN)
 
-export function FormStillQuestions({ className }: IFormProps) {
-  const form = useAppSelector(selectContactFormByType("still_questions"))
-  const dispatch = useAppDispatch()
+interface IProps {
+  handleSubmit?(): void
+}
 
-  const [postFormsIdApplications, { isLoading }] = usePostFormsIdApplicationsMutation()
+export function FormStillQuestions({ handleSubmit }: IProps) {
+  const dispatch = useAppDispatch()
+  const [postFormsIdApplications, { isLoading, isSuccess }] = usePostFormsIdApplicationsMutation()
   const onSubmit: SubmitHandler<FieldValues> = async (values: FieldValues) => {
     await postFormsIdApplications({
-      id: form.id,
+      formName: EFormIds.STILL_QUESTIONS,
       path: document.location.pathname,
       values,
     })
-
-    dispatch(submit({ type: "still_questions" }))
   }
-
-  const hintsEmail = {
-    email: "Should be like@this.com",
-  }
+  useEffect(() => {
+    if (isSuccess) handleSubmit ? handleSubmit() : dispatch(openModal(<PopupFormThanks />))
+  }, [isSuccess])
 
   const elementContent = (
     <>
@@ -55,19 +61,27 @@ export function FormStillQuestions({ className }: IFormProps) {
 
   const elementControl = (
     <>
-      <Button size="biggest" color="dark" type="submit">
+      <Button
+        className="button button--dark button--biggest button__text"
+        type="primary"
+        htmlType="submit"
+        loading={isLoading}
+        disabled={isLoading}
+      >
         Get Help
       </Button>
 
       <div className={cn(getElement("agreement"), "text-gray-800 text-center")}>
-        By clicking on the Get Help, you agree to Creaty Co. <em>Terms of Use</em> and <em>Privacy Policy</em>
+        By on the Get Help, you agree to Creaty Co.{" "}
+        <OuterLink className="document__link--form" linkHref="user_agreement" translateType="terms" /> and{" "}
+        <OuterLink className="document__link--form" linkHref="privacy_policy" translateType="privacyPolicy" />
       </div>
     </>
   )
 
   return (
     <Formus
-      className={cn(getModifier(CN, MOD), className)}
+      className={cn(getModifier(CN, MOD), "form")}
       elementContent={elementContent}
       elementControl={elementControl}
       schema={schema}

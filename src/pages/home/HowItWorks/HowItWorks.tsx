@@ -1,8 +1,8 @@
 import "./howItWorks.scss"
 
 import { useAppDispatch } from "@app/store"
-import { PopupForm } from "@features/PopupForm"
-import { open } from "@shared/layout"
+import { EFormIds, PopupFormWrapper } from "@features"
+import { openModal } from "@shared/layout"
 import { BulletPoint, Button, InfoSection } from "@shared/ui"
 import { bem } from "@shared/utils"
 import cn from "classnames"
@@ -16,7 +16,7 @@ export function HowItWorks() {
   const dispatch = useAppDispatch()
 
   const requestButton = (
-    <button type="button" onClick={() => dispatch(open(<PopupForm type="choose_mentor" />))}>
+    <button type="button" onClick={() => dispatch(openModal(<PopupFormWrapper formType={EFormIds.GET_HELP} />))}>
       <em>{t("requestButton")}</em>
     </button>
   )
@@ -50,7 +50,7 @@ export function HowItWorks() {
             className={cn(getElement("button"), getElement("button_free"))}
             size="big"
             color="green"
-            onClick={() => dispatch(open(<PopupForm type="test_meeting" />))}
+            onClick={() => dispatch(openModal(<PopupFormWrapper formType={EFormIds.TEST_MEETING} />))}
           >
             {t("button")}
           </Button>

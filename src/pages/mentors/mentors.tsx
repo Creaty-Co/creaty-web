@@ -86,32 +86,3 @@ export function Mentors() {
     </div>
   )
 }
-
-/*
-function _Mentors() {
-  useScrollToTop()
-  const { t } = useTranslation("translation", { keyPrefix: "views.mentors" })
-
-  const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch(updateSearch({
-      tag: undefined,
-      topic: undefined
-    }))
-  }, [])
-
-  return (
-    <div className="mentors-view">
-      <div className="mentors-view__container">
-        <div className="mentors-view__header">
-          <div className="mentors-view__title heading">{t("title")}</div>
-          <p className="mentors-view__desc">{t("desc")}</p>
-        </div>
-        <MentorSearch />
-        <MentorCardsContainer />
-      </div>
-      <HaveQuestions />
-    </div>
-  )
-}
-*/

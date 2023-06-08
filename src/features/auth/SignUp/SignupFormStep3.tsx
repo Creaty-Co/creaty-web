@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from "@app/store"
 import { selectAuthUsersData } from "@features/users/users.slice"
-import { close, PopupLayout } from "@shared/layout"
+import { closeModal, PopupLayout } from "@shared/layout"
 import { Button } from "@shared/ui"
 import { bem } from "@shared/utils"
 import cn from "classnames"
@@ -12,7 +12,7 @@ export function SignupFormStep3() {
   const dispatch = useAppDispatch()
   const email = useAppSelector(selectAuthUsersData).email
 
-  const handleClick = () => dispatch(close())
+  const handleClick = () => dispatch(closeModal())
 
   return (
     <PopupLayout title="Check your email">

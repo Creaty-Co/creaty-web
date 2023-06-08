@@ -4,7 +4,7 @@ import { useLazyGetMeQuery } from "@features/users/users.api"
 import { selectAuthUsersData, signUpStep2 } from "@features/users/users.slice"
 import { ISignUpFormStep2 } from "@features/users/users.types"
 import { skipToken } from "@reduxjs/toolkit/dist/query/react"
-import { open, PopupLayout } from "@shared/layout"
+import { openModal, PopupLayout } from "@shared/layout"
 import { Field, Formus } from "@shared/ui"
 import { bem } from "@shared/utils"
 import { Button, notification } from "antd"
@@ -36,7 +36,7 @@ export function SignupFormStep2() {
   const [getMe] = useLazyGetMeQuery()
   const [signUpEmail, { data, error, isLoading, reset }] = useSignUpEmailMutation()
 
-  const openLoginModal = () => dispatch(open(<LoginForm />))
+  const openLoginModal = () => dispatch(openModal(<LoginForm />))
 
   useEffect(() => {
     if (!error || ("status" in error && error?.status !== 409)) return
@@ -54,7 +54,7 @@ export function SignupFormStep2() {
 
   useEffect(() => {
     if (!data) return
-    dispatch(open(<SignupFormStep3 />))
+    dispatch(openModal(<SignupFormStep3 />))
     dispatch(setTokens({ accessToken: data.access, refreshToken: data.refresh }))
     getMe(skipToken)
   }, [data])

@@ -1,66 +1,66 @@
-@import "/src/app/assets/scss/bundle.scss";
+@import "/src/app/scss/bundle.scss";
 
 .cookies {
-	position: fixed;
-	margin: 0 auto;
-	left: 0;
-	right: 0;
-	bottom: 16px;
+  position: fixed;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  bottom: 16px;
 
-	display: flex;
-	align-items: center;
-	@include gap(50px);
+  display: flex;
+  align-items: center;
+  @include gap(50px);
 
-	max-width: 700px;
-	padding: 16px 32px;
-	background: $color-gray-100;
-	border-radius: 32px;
-	animation: 500ms ease-out forwards cookies-show;
-	z-index: 2;
+  max-width: 700px;
+  padding: 16px 32px;
+  background: $color-gray-100;
+  border-radius: 32px;
+  animation: 500ms ease-out forwards cookies-show;
+  z-index: 2;
 
-	&--accept {
-		animation: unset;
-		animation: 500ms ease-out forwards cookies-hide;
-	}
+  &--accept {
+    animation: unset;
+    animation: 500ms ease-out forwards cookies-hide;
+  }
 
-	@keyframes cookies-hide {
-		0% {
-			transform: translateY(0%);
-		}
+  @keyframes cookies-hide {
+    0% {
+      transform: translateY(0%);
+    }
 
-		50% {
-			transform: translateY(-50%);
-		}
+    50% {
+      transform: translateY(-50%);
+    }
 
-		100% {
-			transform: translateY(150%);
-		}
-	}
+    100% {
+      transform: translateY(150%);
+    }
+  }
 
-	@keyframes cookies-show {
-		0% {
-			transform: translateY(150%);
-		}
+  @keyframes cookies-show {
+    0% {
+      transform: translateY(150%);
+    }
 
-		50% {
-			transform: translateY(-50%);
-		}
+    50% {
+      transform: translateY(-50%);
+    }
 
-		100% {
-			transform: translateY(0%);
-		}
-	}
+    100% {
+      transform: translateY(0%);
+    }
+  }
 
-	@include for-size(big-phone-screen) {
-		left: 5vw;
-		right: 5vw;
-		bottom: 2.5vh;
+  @include for-size(big-phone-screen) {
+    left: 5vw;
+    right: 5vw;
+    bottom: 2.5vh;
 
-		display: grid;
-		@include gap(16px);
+    display: grid;
+    @include gap(16px);
 
-		padding: 16px;
-	}
+    padding: 16px;
+  }
 
   &__text {
     color: $color-gray-50;

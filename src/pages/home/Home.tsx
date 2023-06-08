@@ -11,9 +11,9 @@ import cn from "classnames"
 import { useTranslation } from "react-i18next"
 import { useMatch, useParams } from "react-router"
 
-import { BecomeMentor } from "./become-mentor/become-mentor"
+import { BecomeMentor } from "./BecomeMentor/BecomeMentor"
 import { DynamicPrimaryInfo } from "./dynamic-primary-info/dynamic-primary-info"
-import { HelpfulCreaty } from "./helpful-creaty"
+import { HelpfulCreaty } from "./HelpfulCreaty"
 import { HowItWorks } from "./HowItWorks"
 import { MailingSubscribe } from "./mailing-subscribe"
 import { QAndA } from "./q-and-a"
@@ -80,7 +80,6 @@ export function Home() {
         {/* FAQ */}
         <div className={getElement("faq")}>
           <div className={cn(getElement("title"), "heading")}>{t("QAndA.title")}</div>
-
           <QAndA />
         </div>
 

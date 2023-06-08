@@ -1,5 +1,5 @@
 import { useAppDispatch } from "@app/store"
-import { open } from "@shared/layout"
+import { openModal } from "@shared/layout"
 import { Button } from "@shared/ui"
 import { bem } from "@shared/utils"
 
@@ -12,7 +12,7 @@ export function Login() {
   const dispatch = useAppDispatch()
 
   const handleLoginClick = () => {
-    dispatch(open(<LoginForm />))
+    dispatch(openModal(<LoginForm />))
   }
 
   return (

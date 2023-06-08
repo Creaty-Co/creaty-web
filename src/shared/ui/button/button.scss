@@ -1,4 +1,4 @@
-@import "/src/app/assets/scss/bundle.scss";
+@import "/src/app/scss/bundle.scss";
 
 .button {
   $class: &;
@@ -163,7 +163,6 @@
     padding: 24px 16px;
     border-radius: 32px;
     min-height: 72px;
-    
 
     #{$class}__text {
       position: relative;

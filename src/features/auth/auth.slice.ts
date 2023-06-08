@@ -1,6 +1,6 @@
 import { history } from "@app/App"
 import { RootState } from "@app/store"
-import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { parseJwt } from "@shared/utils/token"
 
 import { IAuthState, ITokens } from "./auth.types"
@@ -48,4 +48,3 @@ export default authSlice.reducer
 export const { logOut, setTokens } = authSlice.actions
 
 export const selectAuth = (state: RootState) => state.auth
-export const selectExpAt = createSelector(selectAuth, state => state.expAt)

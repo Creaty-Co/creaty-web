@@ -1,10 +1,11 @@
 import { history } from "@app/App"
-import { useAppDispatch } from "@app/store"
+import { useAppDispatch, useAppSelector } from "@app/store"
 import { useLoginEmailMutation } from "@features/auth/auth.api"
 import { useLazyGetMeQuery } from "@features/users/users.api"
 import { skipToken } from "@reduxjs/toolkit/dist/query/react"
-import { close, open, PopupLayout } from "@shared/layout"
-import { Field, Formus } from "@shared/ui"
+import { selectPagesDocumentsLinks } from "@shared/api/pages/pages.slice"
+import { closeModal, openModal, PopupLayout } from "@shared/layout"
+import { Field, Formus, OuterLink } from "@shared/ui"
 import { bem } from "@shared/utils"
 import { Button, notification } from "antd"
 import cn from "classnames"
@@ -30,6 +31,8 @@ const { getElement, getModifier } = bem(CN)
 
 export function LoginForm() {
   const dispatch = useAppDispatch()
+  const docsLink = useAppSelector(selectPagesDocumentsLinks)
+
   const [api, contextHolder] = notification.useNotification()
 
   const [getMe] = useLazyGetMeQuery()
@@ -47,15 +50,15 @@ export function LoginForm() {
 
   useEffect(() => {
     if (!isSuccess) return
-    dispatch(close())
+    dispatch(closeModal())
     dispatch(setTokens({ accessToken: data.access, refreshToken: data.refresh }))
     getMe(skipToken)
   }, [data])
 
   const handleGoogleLogin = () => history.push(`${process.env.REACT_APP_API_HOST}/users/register/social/google/`)
   const handleEmailLogin = (values: FieldValues) => loginEmail({ email: values.email, password: values.password })
-  const handleSignUpRedirect = () => dispatch(open(<SignupFormStep1 />))
-  const handleForgotPasswordRedirect = () => dispatch(open(<ResendPasswordStep1 />))
+  const handleSignUpRedirect = () => dispatch(openModal(<SignupFormStep1 />))
+  const handleForgotPasswordRedirect = () => dispatch(openModal(<ResendPasswordStep1 />))
 
   const elementContent = (
     <>
@@ -83,6 +86,7 @@ export function LoginForm() {
         type="primary"
         htmlType="submit"
         loading={isLoading}
+        disabled={isLoading}
       >
         Login
       </Button>
@@ -98,7 +102,9 @@ export function LoginForm() {
       </Button>
 
       <div className={cn(getElement("agreement"), "text-gray-800 text-center")}>
-        By clicking on the Get Help, you agree to Creaty Co. <em>Terms of Use and</em> <em>Privacy Policy</em>
+        By clicking on the Login, you agree to Creaty Co.{" "}
+        <OuterLink className="document__link--form" linkHref="user_agreement" translateType="terms" /> and{" "}
+        <OuterLink className="document__link--form" linkHref="privacy_policy" translateType="privacyPolicy" />
       </div>
     </>
   )

@@ -6,7 +6,7 @@ import { bem } from "@shared/utils"
 import cn from "classnames"
 import { ReactNode } from "react"
 
-import { close } from "../index"
+import { closeModal } from "../index"
 
 const CN = "popup-layout"
 const { getElement } = bem(CN)
@@ -29,7 +29,7 @@ export function PopupLayout(props: IPopupLayout) {
   const dispatch = useAppDispatch()
 
   const handleClose = () => {
-    props.onClose?.() || dispatch(close())
+    props.onClose?.() || dispatch(closeModal())
   }
 
   return (

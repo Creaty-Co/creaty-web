@@ -1,7 +1,7 @@
 import "./SignUp.scss"
 
 import { useAppDispatch } from "@app/store"
-import { open } from "@shared/layout"
+import { openModal } from "@shared/layout"
 import { Button } from "@shared/ui"
 import { bem } from "@shared/utils"
 
@@ -13,7 +13,7 @@ const { getElement } = bem(CN)
 export function SignUp() {
   const dispatch = useAppDispatch()
 
-  const handleSignUpClick = () => dispatch(open(<SignupFormStep1 />))
+  const handleSignUpClick = () => dispatch(openModal(<SignupFormStep1 />))
   return (
     <Button size="little" className={getElement()} onClick={handleSignUpClick}>
       Sign up

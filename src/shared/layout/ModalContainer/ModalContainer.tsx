@@ -5,7 +5,7 @@ import { bem, stopPropagation } from "@shared/utils"
 import cn from "classnames"
 import { useCallback, useLayoutEffect, useRef } from "react"
 
-import { close, selectModalContainerActive, selectModalContainerContent } from "./modalContainerSlice"
+import { closeModal, selectModalContainerActive, selectModalContainerContent } from "./modalContainerSlice"
 
 export interface IModalContainer {
   className?: string
@@ -23,7 +23,7 @@ export function ModalContainer({ className }: IModalContainer) {
 
   const handleEscKey = useCallback(
     (event: KeyboardEvent) => {
-      if (event.code === "Escape") dispatch(close())
+      if (event.code === "Escape") dispatch(closeModal())
     },
     [isActive]
   )
@@ -45,7 +45,7 @@ export function ModalContainer({ className }: IModalContainer) {
 
   return (
     <div className={cn(getModifier(CN, isActive && "active"), className)}>
-      <div className={getElement("container")} onClick={stopPropagation(() => dispatch(close()))}>
+      <div className={getElement("container")} onClick={stopPropagation(() => dispatch(closeModal()))}>
         <div className={getElement("inner")}>{elementContent}</div>
       </div>
     </div>

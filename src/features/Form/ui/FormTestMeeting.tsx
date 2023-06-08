@@ -1,13 +1,14 @@
-import { useAppDispatch, useAppSelector } from "@app/store"
-import { selectContactFormByType, submit, usePostFormsIdApplicationsMutation } from "@features/Form"
-import { Button, Field, Formus } from "@shared/ui"
+import { useAppDispatch } from "@app/store"
+import { EFormIds, PopupFormThanks, usePostFormsIdApplicationsMutation } from "@features/Form"
+import { openModal } from "@shared/layout"
+import { Field, Formus, OuterLink } from "@shared/ui"
 import { bem } from "@shared/utils"
+import { Button } from "antd"
 import cn from "classnames"
+import { useEffect } from "react"
 import { FieldValues, SubmitHandler } from "react-hook-form"
 import { useTranslation } from "react-i18next"
 import * as yup from "yup"
-
-import { IFormProps } from "../form.types"
 
 const schema = yup
   .object()
@@ -22,22 +23,21 @@ const CN = "form"
 const MOD = "test-meeting"
 const { getElement, getModifier } = bem(CN)
 
-export function FormTestMeeting({ className }: IFormProps) {
-  // const { t } = useTranslation("translation", { keyPrefix: "contactForm.test_meeting" })
-  const { t } = useTranslation("translation", { keyPrefix: "other.test_meeting" })
-  const form = useAppSelector(selectContactFormByType("test_meeting"))
-  const dispatch = useAppDispatch()
+export function FormTestMeeting() {
+  const { t } = useTranslation("translation", { keyPrefix: "other.forms.test_meeting" })
 
-  const [postFormsIdApplications] = usePostFormsIdApplicationsMutation()
-  const onSubmit: SubmitHandler<FieldValues> = async values => {
+  const dispatch = useAppDispatch()
+  const [postFormsIdApplications, { isLoading, isSuccess }] = usePostFormsIdApplicationsMutation()
+  const onSubmit: SubmitHandler<FieldValues> = async (values: FieldValues) => {
     await postFormsIdApplications({
-      id: form.id,
+      formName: EFormIds.TEST_MEETING,
       path: document.location.pathname,
       values,
     })
-
-    dispatch(submit({ type: "test_meeting" }))
   }
+  useEffect(() => {
+    if (isSuccess) dispatch(openModal(<PopupFormThanks />))
+  }, [isSuccess])
 
   const elementContent = (
     <>
@@ -49,19 +49,27 @@ export function FormTestMeeting({ className }: IFormProps) {
 
   const elementControl = (
     <>
-      <Button size="biggest" color="dark" type="submit">
+      <Button
+        className="button button--dark button--biggest button__text"
+        type="primary"
+        htmlType="submit"
+        loading={isLoading}
+        disabled={isLoading}
+      >
         {t("submitText")}
       </Button>
 
       <div className={cn(getElement("agreement"), "text-gray-800 text-center")}>
-        By clicking on the Get Help, you agree to Creaty Co. <em>Terms of Use and</em> <em>Privacy Policy</em>
+        By on the {t("submitText")}, you agree to Creaty Co.{" "}
+        <OuterLink className="document__link--form" linkHref="user_agreement" translateType="terms" /> and{" "}
+        <OuterLink className="document__link--form" linkHref="privacy_policy" translateType="privacyPolicy" />
       </div>
     </>
   )
 
   return (
     <Formus
-      className={cn(getModifier(CN, MOD), className)}
+      className={getModifier(CN, MOD)}
       elementContent={elementContent}
       elementControl={elementControl}
       schema={schema}

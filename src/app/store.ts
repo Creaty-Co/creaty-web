@@ -3,15 +3,15 @@ import categoryReducer from "@entities/category/category.slice"
 import deviceReducer from "@entities/device/device.slice"
 import { mentorApi } from "@entities/mentor/mentor.api"
 import mentorReducer from "@entities/mentor/mentor.slice"
+import { FormApi } from "@features"
 import { authApi } from "@features/auth/auth.api"
 import authReducer from "@features/auth/auth.slice"
-import { FormApi } from "@features/Form/form.api"
-import formReducer from "@features/Form/form.slice"
 import searchReducer from "@features/search/search.slice"
 import { usersApi } from "@features/users/users.api"
 import usersReducer from "@features/users/users.slice"
-import { AnyAction, combineReducers, configureStore, Reducer } from "@reduxjs/toolkit"
+import { combineReducers, configureStore } from "@reduxjs/toolkit"
 import { pagesApi } from "@shared/api"
+import pagesReducer from "@shared/api/pages/pages.slice"
 import modalReducer from "@shared/layout/ModalContainer/modalContainerSlice"
 import { subscribeApi } from "@shared/ui/subscribe"
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
@@ -31,7 +31,7 @@ const middlewares = [
 
 if (development) middlewares.push(logger)
 
-const combinedReducer = combineReducers({
+const rootReducer = combineReducers({
   [authApi.reducerPath]: authApi.reducer,
   [usersApi.reducerPath]: usersApi.reducer,
   [FormApi.reducerPath]: FormApi.reducer,
@@ -42,7 +42,7 @@ const combinedReducer = combineReducers({
 
   auth: authReducer,
   users: usersReducer,
-  form: formReducer,
+  pages: pagesReducer,
   topics: categoryReducer,
   mentor: mentorReducer,
   device: deviceReducer,
@@ -50,10 +50,10 @@ const combinedReducer = combineReducers({
   modal: modalReducer,
 })
 
-const rootReducer: Reducer = (state: RootState, action: AnyAction) => {
-  if (action.type === "auth/logOut") state = undefined
-  return combinedReducer(state, action)
-}
+// const rootReducer: Reducer = (state: RootState, action: AnyAction) => {
+//   if (action.type === "auth/logOut") state = undefined
+//   return combinedReducer(state, action)
+// }
 
 export const store = configureStore({
   reducer: rootReducer,

@@ -2,6 +2,7 @@ import { categoryApi } from "@entities/category/category.api"
 import { setTokens } from "@features/auth/auth.slice"
 import { useLazyGetMeQuery } from "@features/users/users.api"
 import { skipToken } from "@reduxjs/toolkit/dist/query"
+import { useGetPagesLinksDocumentsQuery } from "@shared/api"
 import { useEffect } from "react"
 import ReactGA from "react-ga4"
 import { useSearchParams } from "react-router-dom"
@@ -13,6 +14,8 @@ export const AppInit = () => {
   const dispatch = useAppDispatch()
   const [searchParams, setSearchParams] = useSearchParams()
   const [getMe] = useLazyGetMeQuery()
+
+  useGetPagesLinksDocumentsQuery()
 
   useEffect(() => {
     dispatch(categoryApi.endpoints.getTagsTopics.initiate({ page: 1, page_size: 25 }))

@@ -1,35 +1,35 @@
-@import "/src/app/assets/scss/bundle.scss";
+@import "/src/app/scss/bundle.scss";
 
 .mentor-cards {
-	display: grid;
-	@include row-gap(50px);
+  display: grid;
+  @include row-gap(50px);
 }
 
 .mentor-cards__container {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(min(100%, 23.75em), 1fr));
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 23.75em), 1fr));
 
-	@include gap(20px);
-	
-	transition: 250ms ease opacity;
-	&--loading {
-		opacity: 0.5;
-		pointer-events: none;
-	}
+  @include gap(20px);
 
-	@include for-size(big-phone-screen) {
-		@include gap(12px);
-	}
+  transition: 250ms ease opacity;
+  &--loading {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  @include for-size(big-phone-screen) {
+    @include gap(12px);
+  }
 }
 
 .mentor-cards__more {
-	&:disabled {
-		background: rgba($color-gray-80, 0.1);
-	}
+  &:disabled {
+    background: rgba($color-gray-80, 0.1);
+  }
 }
 
 .mentor-cards__icon {
-	&--spin {
-		animation: 1s linear reverse infinite spin;
-	}
+  &--spin {
+    animation: 1s linear reverse infinite spin;
+  }
 }

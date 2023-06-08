@@ -1,6 +1,7 @@
 import "antd/dist/reset.css"
-import "./assets/scss/base.scss"
-import "./assets/scss/app.scss"
+import "./scss/base.scss"
+import "./scss/app.scss"
+import "./scss/global.scss"
 
 import { StyleProvider } from "@ant-design/cssinjs"
 import { Cookies } from "@features/cookies"

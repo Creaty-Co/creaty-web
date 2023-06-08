@@ -1,7 +1,6 @@
 import "./cookies.scss"
 
-import { useGetPagesLinksDocumentsQuery } from "@shared/api"
-import { Button,OuterLink } from "@shared/ui"
+import { Button, OuterLink } from "@shared/ui"
 import { bem, classWithModifiers } from "@shared/utils"
 import { useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
@@ -20,31 +19,21 @@ export function Cookies() {
     localStorage.setItem("cookies", "accept")
   }
 
-  const { data } = useGetPagesLinksDocumentsQuery()
-  const cookiePolicy = data?.results.find(l => l.type === "cookie_policy")
-
   return (
     <>
-      {cookiesRef.current !== "accept" && 
-      /* !!payload && !!cookiePolicy && */
+      {cookiesRef.current !== "accept" && (
+        /* !!payload && !!cookiePolicy && */
         <div className={classWithModifiers("cookies", cookies === "accept" && "accept")}>
           <p className="cookies__text">
-            <OuterLink 
-              to={cookiePolicy?.url || ""} 
-              eventLabel="cookiePolicy"
-            >
-              {t("byRules")}
-            </OuterLink>
-            
+            <OuterLink linkHref="cookie_policy">{t("byRules")}</OuterLink>
             {", " + t("desc")}
           </p>
 
-          <Button
-            className={getElement("button")} 
-            onClick={onClick}
-          >{t("button")}</Button>
+          <Button className={getElement("button")} onClick={onClick}>
+            {t("button")}
+          </Button>
         </div>
-      }
+      )}
     </>
   )
 }
