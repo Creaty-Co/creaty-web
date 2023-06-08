@@ -1,7 +1,7 @@
 import "./Footer.scss"
 
 import { useAppDispatch } from "@app/store"
-import { PopupFormBecomeMentor, PopupFormWrapper } from "@features"
+import { EFormIds, PopupFormBecomeMentor, PopupFormWrapper } from "@features"
 import { openModal } from "@shared/layout"
 import { OuterLink } from "@shared/ui"
 import { bem } from "@shared/utils"
@@ -54,7 +54,7 @@ export const Footer: FC<IFooter> = ({ className }) => {
               <button
                 className="document__link"
                 type="button"
-                onClick={() => dispatch(openModal(<PopupFormWrapper formType="choose_mentor" />))}
+                onClick={() => dispatch(openModal(<PopupFormWrapper formType={EFormIds.GET_HELP} />))}
               >
                 {t("links.pickMentor")}
               </button>

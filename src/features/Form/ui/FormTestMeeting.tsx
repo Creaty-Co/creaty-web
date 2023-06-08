@@ -10,8 +10,6 @@ import { FieldValues, SubmitHandler } from "react-hook-form"
 import { useTranslation } from "react-i18next"
 import * as yup from "yup"
 
-import { IFormProps } from "../state/form.types"
-
 const schema = yup
   .object()
   .shape({
@@ -25,7 +23,7 @@ const CN = "form"
 const MOD = "test-meeting"
 const { getElement, getModifier } = bem(CN)
 
-export function FormTestMeeting({ className }: IFormProps) {
+export function FormTestMeeting() {
   const { t } = useTranslation("translation", { keyPrefix: "other.forms.test_meeting" })
 
   const dispatch = useAppDispatch()
@@ -71,7 +69,7 @@ export function FormTestMeeting({ className }: IFormProps) {
 
   return (
     <Formus
-      className={cn(getModifier(CN, MOD), className)}
+      className={getModifier(CN, MOD)}
       elementContent={elementContent}
       elementControl={elementControl}
       schema={schema}

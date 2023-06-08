@@ -1,9 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react"
-import { PaginationType } from "@shared/types"
 import { baseQueryWithReauth } from "@shared/utils"
 
-import { FormRequestParamsType, FormType } from "./form.types"
-import { FormIds } from "./utils"
+import { FormIds, FormRequestParamsType } from "./form.types"
 
 export const FormApi = createApi({
   reducerPath: "formApi",
@@ -11,11 +9,7 @@ export const FormApi = createApi({
   baseQuery: baseQueryWithReauth(false),
 
   endpoints: builder => ({
-    getForms: builder.query<PaginationType<FormType>, void>({
-      query: () => "/forms",
-    }),
-
-    postFormsIdApplications: builder.mutation<FormType, FormRequestParamsType>({
+    postFormsIdApplications: builder.mutation<{}, FormRequestParamsType>({
       query: ({ formName, path, ...fields }) => ({
         url: `/forms/${FormIds[formName]}/applications/`,
         method: "POST",
@@ -25,4 +19,4 @@ export const FormApi = createApi({
   }),
 })
 
-export const { usePostFormsIdApplicationsMutation, useGetFormsQuery } = FormApi
+export const { usePostFormsIdApplicationsMutation } = FormApi

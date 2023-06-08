@@ -2,7 +2,7 @@ import "./MentorsSlider.scss"
 
 import { useAppDispatch } from "@app/store"
 import { MentorCard, MentorType } from "@entities"
-import { PopupFormWrapper } from "@features"
+import { EFormIds, PopupFormWrapper } from "@features"
 import { openModal } from "@shared/layout"
 import { Button, ButtonIcon, ButtonLink } from "@shared/ui"
 import { bem } from "@shared/utils"
@@ -74,7 +74,11 @@ export function MentorsSlider(props: IMentorsSlider) {
 
         <span>{t("or")}</span>
 
-        <Button size="big" outline onClick={() => dispatch(openModal(<PopupFormWrapper formType="choose_mentor" />))}>
+        <Button
+          size="big"
+          outline
+          onClick={() => dispatch(openModal(<PopupFormWrapper formType={EFormIds.GET_HELP} />))}
+        >
           {t("getHelp")}
         </Button>
       </div>

@@ -1,4 +1,5 @@
 import { useAppDispatch } from "@app/store"
+import { EFormIds } from "@features"
 import { openModal } from "@shared/layout"
 import { Field, Formus, OuterLink } from "@shared/ui"
 import { bem } from "@shared/utils"
@@ -10,8 +11,6 @@ import * as yup from "yup"
 
 import { PopupFormThanks } from "../PopupForm"
 import { usePostFormsIdApplicationsMutation } from "../state/form.api"
-import { IFormProps } from "../state/form.types"
-import { EFormIds } from "../state/utils"
 
 const schema = yup
   .object()
@@ -25,7 +24,7 @@ const CN = "form"
 const MOD = "signup-mentor"
 const { getElement, getModifier } = bem(CN)
 
-export function FormSignupMentor({ className }: IFormProps) {
+export function FormSignupMentor() {
   const dispatch = useAppDispatch()
   const [postFormsIdApplications, { isLoading, isSuccess }] = usePostFormsIdApplicationsMutation()
   const onSubmit: SubmitHandler<FieldValues> = async (values: FieldValues) => {
@@ -68,7 +67,7 @@ export function FormSignupMentor({ className }: IFormProps) {
 
   return (
     <Formus
-      className={cn(getModifier(CN, MOD), className)}
+      className={getModifier(CN, MOD)}
       elementContent={elementContent}
       elementControl={elementControl}
       schema={schema}

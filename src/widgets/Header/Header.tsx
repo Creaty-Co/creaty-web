@@ -1,7 +1,7 @@
 import "./header.scss"
 
 import { useAppDispatch, useAppSelector } from "@app/store"
-import { PopupFormBecomeMentor, PopupFormWrapper } from "@features"
+import { EFormIds, PopupFormBecomeMentor, PopupFormWrapper } from "@features"
 import { AuthDDL } from "@features/auth/AuthDDL/AuthDDL"
 import { updateSearch } from "@features/search"
 import { selectIsAuth } from "@features/users/users.slice"
@@ -74,7 +74,7 @@ function Header({ className }: IHeader) {
             outline
             size="small"
             color="green"
-            onClick={() => dispatch(openModal(<PopupFormWrapper formType="choose_mentor" />))}
+            onClick={() => dispatch(openModal(<PopupFormWrapper formType={EFormIds.GET_HELP} />))}
           >
             {t("findMentor")}
           </Button>

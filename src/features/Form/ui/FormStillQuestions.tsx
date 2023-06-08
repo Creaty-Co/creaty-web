@@ -1,4 +1,5 @@
 import { useAppDispatch } from "@app/store"
+import { EFormIds } from "@features"
 import { openModal } from "@shared/layout"
 import { Field, Formus, OuterLink } from "@shared/ui"
 import { bem, isEmail } from "@shared/utils"
@@ -10,7 +11,6 @@ import * as yup from "yup"
 
 import { PopupFormThanks } from "../PopupForm"
 import { usePostFormsIdApplicationsMutation } from "../state/form.api"
-import { EFormIds } from "../state/utils"
 
 const schema = yup
   .object()

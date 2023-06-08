@@ -1,5 +1,5 @@
 import { useAppDispatch } from "@app/store"
-import { EFormIds, IFormProps } from "@features"
+import { EFormIds } from "@features"
 import { ChatBubbleBottomCenterIcon } from "@heroicons/react/24/solid"
 import { openModal } from "@shared/layout"
 import { Field, Formus, OuterLink } from "@shared/ui"
@@ -61,7 +61,7 @@ const CN = "form"
 const MOD = "become-mentor"
 const { getElement, getModifier } = bem(CN)
 
-export function FormBecomeMentor({ className }: IFormProps) {
+export function FormBecomeMentor() {
   const dispatch = useAppDispatch()
   const [postFormsIdApplications, { isLoading, isSuccess }] = usePostFormsIdApplicationsMutation()
   const onSubmit: SubmitHandler<FieldValues> = async (values: FieldValues) => {
@@ -116,7 +116,7 @@ export function FormBecomeMentor({ className }: IFormProps) {
 
   return (
     <Formus
-      className={cn(getModifier(CN, MOD), className)}
+      className={getModifier(CN, MOD)}
       elementContent={elementContent}
       elementControl={elementControl}
       schema={schema}

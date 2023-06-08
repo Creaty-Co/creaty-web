@@ -1,5 +1,5 @@
 import { useAppDispatch } from "@app/store"
-import { EFormIds, IFormProps } from "@features"
+import { EFormIds } from "@features"
 import { ChatBubbleLeftEllipsisIcon } from "@heroicons/react/24/solid"
 import { openModal } from "@shared/layout"
 import { Field, Formus, OuterLink } from "@shared/ui"
@@ -25,7 +25,7 @@ const CN = "form"
 const MOD = "get-help"
 const { getElement, getModifier } = bem(CN)
 
-export function FormGetHelp({ className }: IFormProps) {
+export function FormGetHelp() {
   const dispatch = useAppDispatch()
   const [postFormsIdApplications, { isLoading, isSuccess }] = usePostFormsIdApplicationsMutation()
   const onSubmit: SubmitHandler<FieldValues> = async (values: FieldValues) => {
@@ -67,7 +67,7 @@ export function FormGetHelp({ className }: IFormProps) {
 
   return (
     <Formus
-      className={cn(getModifier(CN, MOD), className)}
+      className={getModifier(CN, MOD)}
       elementContent={elementContent}
       elementControl={elementControl}
       schema={schema}

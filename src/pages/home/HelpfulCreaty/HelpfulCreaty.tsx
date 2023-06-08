@@ -1,7 +1,7 @@
 import "./HelpfulCreaty.scss"
 
 import { useAppDispatch } from "@app/store"
-import { PopupFormWrapper } from "@features"
+import { EFormIds, PopupFormWrapper } from "@features"
 import { openModal } from "@shared/layout"
 import { Button } from "@shared/ui"
 import { bem } from "@shared/utils"
@@ -35,7 +35,7 @@ export function HelpfulCreaty() {
           className={getElement("button")}
           outline
           color="green"
-          onClick={() => dispatch(openModal(<PopupFormWrapper formType="choose_mentor" />))}
+          onClick={() => dispatch(openModal(<PopupFormWrapper formType={EFormIds.GET_HELP} />))}
         >
           {t("button")}
         </Button>

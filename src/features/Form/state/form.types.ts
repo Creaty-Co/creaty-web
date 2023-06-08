@@ -1,42 +1,23 @@
-import { EFormIds } from "./utils"
+export enum EFormIds {
+  BECOME_MENTOR = "BECOME_MENTOR",
+  GET_HELP = "GET_HELP",
+  TEST_MEETING = "TEST_MEETING",
+  STILL_QUESTIONS = "STILL_QUESTIONS",
+  SIGNUP_MENTOR = "SIGNUP_MENTOR",
+}
+
+export const FormIds = {
+  [EFormIds.BECOME_MENTOR]: 1,
+  [EFormIds.GET_HELP]: 2,
+  [EFormIds.TEST_MEETING]: 3,
+  [EFormIds.STILL_QUESTIONS]: 4,
+  [EFormIds.SIGNUP_MENTOR]: 5,
+}
 
 export interface FormRequestParamsType {
-  formName: keyof typeof EFormIds
+  formName: TFormNames
   path: string
   values: Record<string, string>
 }
 
-export type FormTypes = "choose_mentor" | "test_meeting" | "still_questions" | "signup_mentor"
-
-export interface FormFieldType {
-  value?: string | number | boolean
-  name: string
-}
-
-export interface FormType {
-  id: number
-
-  fields: FormFieldType[]
-  type: FormTypes
-
-  submitted: boolean
-}
-
-export enum FormFieldFieldTypeEmum {
-  about = "textarea",
-  email = "input",
-  name = "input",
-}
-
-export interface IFormState extends Record<FormType["type"], FormType> {}
-
-export interface IForm {
-  type: FormType["type"]
-  className?: string
-}
-
-export interface IFormProps {
-  className?: string
-}
-
-export interface IFormFactory extends Record<FormType["type"], React.FC<IFormProps>> {}
+export type TFormNames = keyof typeof EFormIds

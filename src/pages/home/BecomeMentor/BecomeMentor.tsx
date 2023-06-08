@@ -3,7 +3,7 @@ import "./BecomeMentor.scss"
 import { useAppDispatch } from "@app/store"
 import { PopupFormBecomeMentor } from "@features"
 import { openModal } from "@shared/layout"
-import { Button, OuterLink } from "@shared/ui"
+import { Button } from "@shared/ui"
 import { bem } from "@shared/utils"
 import cn from "classnames"
 import { useTranslation } from "react-i18next"
@@ -30,9 +30,7 @@ export function BecomeMentor() {
             {t("button")}
           </Button>
 
-          <div className={getElement("terms")}>
-            {t("terms")} <OuterLink linkHref="privacy_policy" translateType="privacyPolicy" />
-          </div>
+          <div className={getElement("terms")}>{t("terms")}</div>
         </div>
       </div>
 
