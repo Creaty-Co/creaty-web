@@ -54,7 +54,6 @@ export function FormTestMeeting() {
         type="primary"
         htmlType="submit"
         loading={isLoading}
-        disabled={isLoading}
       >
         {t("submitText")}
       </Button>

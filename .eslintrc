@@ -32,6 +32,7 @@
     "default-case": "warn",
     "no-multi-spaces": "error",
     "simple-import-sort/imports": "error",
+    "unused-imports/no-unused-imports-ts": "error",
     "semi": [
       "error",
       "never"

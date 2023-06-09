@@ -66,7 +66,6 @@ export function FormStillQuestions({ handleSubmit }: IProps) {
         type="primary"
         htmlType="submit"
         loading={isLoading}
-        disabled={isLoading}
       >
         Get Help
       </Button>

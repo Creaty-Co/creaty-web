@@ -29,7 +29,7 @@ export function ResendPasswordStep1() {
   const [resendedEmail, setResendedEmail] = useState("")
   const [api, contextHolder] = notification.useNotification()
 
-  const [resendPassword, { data, isLoading, error, reset, isSuccess }] = useResendPasswordMutation()
+  const [resendPassword, { isLoading, error, reset, isSuccess }] = useResendPasswordMutation()
 
   useEffect(() => {
     if (!error) return
@@ -40,7 +40,7 @@ export function ResendPasswordStep1() {
 
   useEffect(() => {
     if (isSuccess) dispatch(openModal(<ResendPasswordStep2 email={resendedEmail} />))
-  }, [data])
+  }, [isSuccess])
 
   const handleResendPassword = (values: FieldValues) => {
     resendPassword({ email: values.email })
@@ -65,7 +65,6 @@ export function ResendPasswordStep1() {
         type="primary"
         htmlType="submit"
         loading={isLoading}
-        disabled={isLoading}
       >
         Continue
       </Button>

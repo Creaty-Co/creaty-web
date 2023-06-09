@@ -1,9 +1,8 @@
 import { history } from "@app/App"
-import { useAppDispatch, useAppSelector } from "@app/store"
+import { useAppDispatch } from "@app/store"
 import { useLoginEmailMutation } from "@features/auth/auth.api"
 import { useLazyGetMeQuery } from "@features/users/users.api"
 import { skipToken } from "@reduxjs/toolkit/dist/query/react"
-import { selectPagesDocumentsLinks } from "@shared/api/pages/pages.slice"
 import { closeModal, openModal, PopupLayout } from "@shared/layout"
 import { Field, Formus, OuterLink } from "@shared/ui"
 import { bem } from "@shared/utils"
@@ -31,7 +30,6 @@ const { getElement, getModifier } = bem(CN)
 
 export function LoginForm() {
   const dispatch = useAppDispatch()
-  const docsLink = useAppSelector(selectPagesDocumentsLinks)
 
   const [api, contextHolder] = notification.useNotification()
 
@@ -86,7 +84,6 @@ export function LoginForm() {
         type="primary"
         htmlType="submit"
         loading={isLoading}
-        disabled={isLoading}
       >
         Login
       </Button>
