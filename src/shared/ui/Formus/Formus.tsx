@@ -1,4 +1,4 @@
-import "./formus.scss"
+import "./Formus.scss"
 
 import { ExclamationCircleIcon } from "@heroicons/react/20/solid"
 import { yupResolver } from "@hookform/resolvers/yup"

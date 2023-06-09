@@ -1,4 +1,4 @@
-import "./mentor-search.scss"
+import "./MentorSearch.scss"
 
 import { useAppDispatch, useAppSelector } from "@app/store"
 import { CategoryType, selectTopics, Tag } from "@entities"
@@ -10,45 +10,43 @@ import { MouseEvent as SMouseEvent, useCallback, useEffect, useLayoutEffect, use
 import { useTranslation } from "react-i18next"
 import { NavLink, useNavigate } from "react-router-dom"
 
-import { MentorSearchList } from "./mentor-search-list"
 import { MentorSearchListItem } from "./mentor-search-list-item"
+import { MentorSearchList } from "./MentorSearchList"
 
-/* Selectors type */ 
+/* Selectors type */
 const SELECTORS = ["topic", "tag"] as const
-type SelectorsTuple = typeof SELECTORS;
-type Selectors = SelectorsTuple[number];
+type SelectorsTuple = typeof SELECTORS
+type Selectors = SelectorsTuple[number]
 const isSelector = (selector: string): selector is Selectors => SELECTORS.includes(selector as Selectors)
 
-/* BEM */ 
+/* BEM */
 const CN = "mentor-search"
 const { getElement, getModifier } = bem(CN)
 
-export function MentorSearch() {  
+export function MentorSearch() {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
   const { t } = useTranslation("translation", { keyPrefix: "views.home.mentorSearch" })
 
-  /* Get data from store */ 
+  /* Get data from store */
   const searchStore = useAppSelector(selectSearch)
-  const isMoblie = useAppSelector(selectIsMobile) 
+  const isMoblie = useAppSelector(selectIsMobile)
   const topics = useAppSelector(selectTopics)
-  
-  /* Local search state */ 
+
+  /* Local search state */
   const [searchState, setSearchState] = useState<ISearchState>({ ...searchStore })
-  useEffect(() => setSearchState({...searchStore}), [searchStore.topic, searchStore.tag])
+  useEffect(() => setSearchState({ ...searchStore }), [searchStore.topic, searchStore.tag])
 
   /* Compare state and store */
-  const pureSearch = 
-    searchState.topic === searchStore.topic && 
-    searchState.tag === searchStore.tag &&
-    searchState.tag !== undefined
+  const pureSearch =
+    searchState.topic === searchStore.topic && searchState.tag === searchStore.tag && searchState.tag !== undefined
 
   /* Searching in topics and tags */
   const [value, setValue] = useState("")
   useEffect(() => setValue(""), [searchState.topic, searchState.tag])
 
-  /* For what??? */ 
+  /* For what??? */
   const selectedRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -63,145 +61,119 @@ export function MentorSearch() {
   const scrolledToRef = useRef<boolean>(searchState.focused)
   const containerRef = useRef<HTMLDivElement>(null)
   useLayoutEffect(focusedScroll, [searchState.focused])
-  
+
   /* Close on Escape */
-  const handleEscKey = useCallback((event: KeyboardEvent) => {
-    if (event.code === "Escape") close() 
-  }, [searchState.focused])
+  const handleEscKey = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.code === "Escape") close()
+    },
+    [searchState.focused]
+  )
   useLayoutEffect(closeOnEscape, [searchState.focused])
 
-  /* Routes */ 
-  const redirectTo = "/mentors" + (
-    (searchState.topic && !searchState.tag && "/" + searchState.topic.shortcut) ||
-    (!searchState.topic && searchState.tag && "/" + searchState.tag.shortcut) || 
-    (searchState.topic && searchState.tag && "/" + searchState.tag.shortcut) || "")
+  /* Routes */
+  const redirectTo =
+    "/mentors" +
+    ((searchState.topic && !searchState.tag && "/" + searchState.topic.shortcut) ||
+      (!searchState.topic && searchState.tag && "/" + searchState.tag.shortcut) ||
+      (searchState.topic && searchState.tag && "/" + searchState.tag.shortcut) ||
+      "")
 
   return (
-    <div ref={containerRef}
-      className={getModifier(CN,
-        searchState.focused && "focused"
-      )}
-
+    <div
+      ref={containerRef}
+      className={getModifier(CN, searchState.focused && "focused")}
       onMouseDownCapture={onMouseDownHandler}
     >
       {/* Cover */}
-      <div 
-        className={getModifier(getElement("cover"), 
-          searchState.focused && "active"
-        )} 
-      />
+      <div className={getModifier(getElement("cover"), searchState.focused && "active")} />
 
       {/* Search */}
-      <div ref={searchContainerRef}
-        className={getElement("container")}
-      >
+      <div ref={searchContainerRef} className={getElement("container")}>
         {/* Close. Mobile */}
-        <div
-          className={getModifier(getElement("wrapper"), "button")}
-          data-action="input/close"
-        >
-          <Icon name="arrow-left"
-            className={getModifier(getElement("button"), "icon")}
-            data-action="input/close"
-          />
+        <div className={getModifier(getElement("wrapper"), "button")} data-action="input/close">
+          <Icon name="arrow-left" className={getModifier(getElement("button"), "icon")} data-action="input/close" />
         </div>
 
-        <label ref={searchLabelRef}
-          className={getModifier(getElement("search"), 
+        <label
+          ref={searchLabelRef}
+          className={getModifier(
+            getElement("search"),
             searchState.focused && "focused",
             !searchState.focused && !!(searchState.tag || searchState.topic) && "filled"
           )}
           data-action="input/focus"
         >
           {/* If selected */}
-          {!searchState.focused && (searchState.topic || searchState.tag) && 
-            <div ref={selectedRef}
-              className={getElement("selected")}
-
-              data-action="input/focus"
-            >
+          {!searchState.focused && (searchState.topic || searchState.tag) && (
+            <div ref={selectedRef} className={getElement("selected")} data-action="input/focus">
               {/* Selected topic in search area */}
-              {searchState.topic &&
+              {searchState.topic && (
                 <MentorSearchListItem
                   topic={searchState.topic}
                   state="selected"
                   type="short"
-
                   dataAttrs={toDataAttrs({
-                    "action": "input/focus" 
+                    action: "input/focus",
                   })}
                 />
-              }
+              )}
 
               {/* Selected tags in search area */}
-              {!searchState.focused && searchState.tag &&
+              {!searchState.focused && searchState.tag && (
                 <Tag
                   dataAttrs={toDataAttrs({
-                    "action": "input/focus" 
+                    action: "input/focus",
                   })}
-                >{searchState.tag}</Tag>
-              }
+                >
+                  {searchState.tag}
+                </Tag>
+              )}
             </div>
-          }
+          )}
 
           {/* Search Input */}
-          {(!(searchState.topic || searchState.tag) || searchState.focused) &&
+          {(!(searchState.topic || searchState.tag) || searchState.focused) && (
             <>
               {/* Searching input */}
-              <input ref={inputRef} type="text"
-                className={getModifier(getElement("input"), 
-                  searchState.focused && "focused"
-                )} 
-
-                placeholder={t("placeholder")} 
-                value={value} 
-                
+              <input
+                ref={inputRef}
+                type="text"
+                className={getModifier(getElement("input"), searchState.focused && "focused")}
+                placeholder={t("placeholder")}
+                value={value}
                 onChange={event => setValue(event.currentTarget.value)}
                 data-action="input/focus"
               />
 
               {/* Clear search field */}
-              {value.length > 0 && 
-                <Icon name="cross" 
-                  className={getElement("icon")}
-                  onClick={() => setValue("")}
-                />
-              }
+              {value.length > 0 && <Icon name="cross" className={getElement("icon")} onClick={() => setValue("")} />}
             </>
-          }
-          
+          )}
+
           {/* Mentros' list */}
-          <MentorSearchList
-            searchState={searchState}
-            pureSearch={pureSearch}
-            topics={topics}
-            value={value}
-          />
+          <MentorSearchList searchState={searchState} pureSearch={pureSearch} topics={topics} value={value} />
 
           {/* Icon dropdown */}
-          <Icon name="chevron"
+          <Icon
+            name="chevron"
             className={getElement("icon")}
             modifiers={[searchState.focused && "up"]}
             data-action="input/focus"
           />
         </label>
 
-        <NavLink to={redirectTo}
-          className={getModifier(getElement("icon"),
-            "search"
-          )}
-          data-action="search"
-        >
-          <Icon name="search" data-action="search"/>
+        <NavLink to={redirectTo} className={getModifier(getElement("icon"), "search")} data-action="search">
+          <Icon name="search" data-action="search" />
         </NavLink>
 
-        <ButtonLink to={redirectTo}
-          className={getElement("button-link")} 
-          color="violet" 
-          size="big" 
-
+        <ButtonLink
+          to={redirectTo}
+          className={getElement("button-link")}
+          color="violet"
+          size="big"
           dataAttrs={toDataAttrs({
-            "action": "search"
+            action: "search",
           })}
         >
           {t("button")}
@@ -210,7 +182,7 @@ export function MentorSearch() {
     </div>
   )
 
-  /* Functions */ 
+  /* Functions */
   function toggle(name: string | boolean, id: number | string | null | undefined, forceTo?: boolean | null): void {
     if (id === null || id === undefined) return
     if (typeof name === "boolean" || !isSelector(name)) return
@@ -218,31 +190,31 @@ export function MentorSearch() {
     const values = name === "topic" ? topics.list : topics.tags
     const value = values.find((value: { id: number }) => value.id === +id)
 
-    if (value) setSearchState(prevState => {
-      const to = forceTo === undefined || forceTo === null
-        ? prevState[name]?.id !== id
-        : forceTo
+    if (value)
+      setSearchState(prevState => {
+        const to = forceTo === undefined || forceTo === null ? prevState[name]?.id !== id : forceTo
 
-      const duoSearch = { [name]: to ? value : undefined }
-      /* Turn off tag connected with topic */ 
-      if (name === "topic" && !to) duoSearch.tag = undefined
+        const duoSearch = { [name]: to ? value : undefined }
+        /* Turn off tag connected with topic */
+        if (name === "topic" && !to) duoSearch.tag = undefined
 
-      /*
+        /*
         If topic was turned on and We have some tag 
         We need to check according tag to topic
       */
-      if (
-        name === "topic" && to && searchState.tag && 
-        !(value as CategoryType).tags.find(tag => tag.id === searchState.tag?.id)
-      ) duoSearch.tag = undefined
+        if (
+          name === "topic" &&
+          to &&
+          searchState.tag &&
+          !(value as CategoryType).tags.find(tag => tag.id === searchState.tag?.id)
+        )
+          duoSearch.tag = undefined
 
-      if (
-        name === "tag" && to && searchState.topic &&
-        !searchState.topic.tags.find(tag => tag.id === value.id)
-      ) duoSearch.topic = undefined
+        if (name === "tag" && to && searchState.topic && !searchState.topic.tags.find(tag => tag.id === value.id))
+          duoSearch.topic = undefined
 
-      return { ...prevState, ...duoSearch }
-    })
+        return { ...prevState, ...duoSearch }
+      })
   }
 
   function getURLByTagID(ID: number): string {
@@ -261,15 +233,16 @@ export function MentorSearch() {
     return "/" + url.join("/")
   }
 
-  function focus() {setSearchState(state => ({ ...state, focused: true }))} 
+  function focus() {
+    setSearchState(state => ({ ...state, focused: true }))
+  }
 
   function close() {
-    if (!searchStore.topic && !searchStore.tag)
-      return setSearchState(state => ({...state, focused: false}))
+    if (!searchStore.topic && !searchStore.tag) return setSearchState(state => ({ ...state, focused: false }))
 
     setSearchState({
       ...searchStore,
-      focused: false
+      focused: false,
     })
   }
 
@@ -281,7 +254,7 @@ export function MentorSearch() {
     // console.log("target: ", event.target)
 
     const getAttr = (name: string) => targetGetAttr(target, name)
-    
+
     const selector = getAttr("selector")
     const action = getAttr("action")
     const id = getAttr("id")
@@ -292,33 +265,39 @@ export function MentorSearch() {
       `id: ${getAttr("id")}\n`
     )
     */
-    
-    /* Control focus and blur */
-    action === "input/focus" && focus() ||
-    action === "input/close" && close()
-    
-    /* Toggle topic and tag */
-    selector && isSelector(selector) && 
-      toggle(selector, id, togglerTransformAction(action))
-    
-    /* Redirect on tag add */
-    selector === "tag" && action === "add" && id &&
-      dispatch(updateSearch({
-        ...searchState,
-        tag: topics.tags.find((tag: { id: number }) => tag.id === +id),
-        focused: false
-      })) && navigate(getURLByTagID(+id))
 
-    action && action === "search" &&
-      dispatch(updateSearch({
-        ...searchState,
-        focused: false
-      }))
+    /* Control focus and blur */
+    ;(action === "input/focus" && focus()) || (action === "input/close" && close())
+
+    /* Toggle topic and tag */
+    selector && isSelector(selector) && toggle(selector, id, togglerTransformAction(action))
+
+    /* Redirect on tag add */
+    selector === "tag" &&
+      action === "add" &&
+      id &&
+      dispatch(
+        updateSearch({
+          ...searchState,
+          tag: topics.tags.find((tag: { id: number }) => tag.id === +id),
+          focused: false,
+        })
+      ) &&
+      navigate(getURLByTagID(+id))
+
+    action &&
+      action === "search" &&
+      dispatch(
+        updateSearch({
+          ...searchState,
+          focused: false,
+        })
+      )
 
     // console.groupEnd()
-  } 
+  }
 
-  /* Side effects */ 
+  /* Side effects */
   /*
     Handle focus and blur events at search input
   */
@@ -331,7 +310,7 @@ export function MentorSearch() {
     if (!searchState.focused || scrolledToRef.current) return
 
     const scrollTo = containerRef.current?.getBoundingClientRect().top || 0
-    const scrollDelay = isMoblie? 6 : 100
+    const scrollDelay = isMoblie ? 6 : 100
 
     scrolledFromRef.current = document.documentElement.scrollTop
     scrolledToRef.current = true
@@ -339,7 +318,7 @@ export function MentorSearch() {
     document.body.style.overflow = "hidden"
     window.scrollTo({
       top: document.documentElement.scrollTop + scrollTo - scrollDelay,
-      behavior: "smooth" 
+      behavior: "smooth",
     })
   }
 
@@ -365,19 +344,15 @@ export function MentorSearch() {
     Handle click away
   */
   function clickAway() {
-    if (!searchState.focused)
-      document.removeEventListener("click", cbClicAway)
-    else
-      document.addEventListener("click", cbClicAway)
-    
+    if (!searchState.focused) document.removeEventListener("click", cbClicAway)
+    else document.addEventListener("click", cbClicAway)
+
     return () => document.removeEventListener("click", cbClicAway)
   }
 
   function listener(event: MouseEvent) {
     const target = event.target as HTMLElement
-    searchContainerRef.current && target.tagName !== "use" &&
-        !searchContainerRef.current.contains(target) &&
-          close()
+    searchContainerRef.current && target.tagName !== "use" && !searchContainerRef.current.contains(target) && close()
   }
 }
 

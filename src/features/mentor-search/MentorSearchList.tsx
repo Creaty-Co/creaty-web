@@ -1,4 +1,4 @@
-import "./mentor-search-list.scss"
+import "./MentorSearchList.scss"
 
 import { RootState, useAppSelector } from "@app/store"
 import { CategoryType, Tag, TagType } from "@entities"
