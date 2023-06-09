@@ -49,7 +49,6 @@ export function FormGetHelp() {
         type="primary"
         htmlType="submit"
         loading={isLoading}
-        disabled={isLoading}
       >
         <span className="flex flex-row gap-3">
           <ChatBubbleLeftEllipsisIcon className="text-white w-5 h-5" />

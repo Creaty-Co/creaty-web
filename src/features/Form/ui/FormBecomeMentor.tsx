@@ -104,7 +104,6 @@ export function FormBecomeMentor() {
         type="primary"
         htmlType="submit"
         loading={isLoading}
-        disabled={isLoading}
       >
         <span className="flex gap-3 flex-row">
           <ChatBubbleBottomCenterIcon className="text-white w-5 h-5" />

@@ -1,5 +1,5 @@
 export * from "./OuterLink/OuterLink"
-export * from "./formus"
+export * from "./Formus/Formus"
 export * from "./field"
 export * from "./button"
 export * from "./icon"
