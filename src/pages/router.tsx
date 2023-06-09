@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router"
 
-import { Home } from "./home"
+import { Home } from "./Home/Home"
 import { Mentors } from "./mentors"
 import { User } from "./user"
 

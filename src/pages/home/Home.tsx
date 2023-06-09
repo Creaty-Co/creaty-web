@@ -1,4 +1,4 @@
-import "./home.scss"
+import "./Home.scss"
 
 import { HaveQuestions, HelpSocial, MentorSearch, MentorSearchTags, MentorsSlider } from "@features"
 import { EmaiVerifyModal } from "@features/auth/EmaiVerifyModal/EmaiVerifyModal"
