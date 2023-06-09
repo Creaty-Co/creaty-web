@@ -1,3 +1,3 @@
 export * from "./router"
-export * from "./home"
+export * from "./Home/Home"
 export * from "./mentors"

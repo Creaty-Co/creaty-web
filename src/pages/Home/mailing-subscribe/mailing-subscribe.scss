@@ -1,0 +1,42 @@
+@import "/src/app/scss/bundle.scss";
+
+.mailing-subscribe__title {
+  @include H3Regular;
+  & > em {
+    color: $color-green;
+  }
+
+  & > strong {
+    @include H3Bold;
+  }
+
+  @include for-size(big-phone-screen) {
+    @include H3Regular(24px, 28px);
+    & > strong {
+      @include H3Bold(24px, 28px);
+    }
+  }
+}
+
+.mailing-subscribe {
+  display: grid;
+  @include row-gap(32px);
+}
+
+.mailing-subscribe__arrow {
+  width: 65%;
+  margin: 0 auto;
+
+  @include for-size(big-phone-screen) {
+    width: 100%;
+    transform: translate(-30%, 0);
+  }
+}
+
+.mailing-subscribe__form {
+  padding-left: 43%;
+
+  @include for-size(big-phone-screen) {
+    padding: 0;
+  }
+}

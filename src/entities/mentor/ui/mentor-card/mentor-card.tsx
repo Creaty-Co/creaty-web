@@ -76,7 +76,7 @@ export function MentorCard({
         </div>
       </div>
 
-      <Link className={CNButton} to={"/user/" + slug}>
+      <Link className={CNButton} to={"/mentor/" + slug}>
         <div className={getElementButton("text")}>
           <em>{Number(price).toPrice(t("lang.code"), price_currency)}</em>
           <span>/</span>

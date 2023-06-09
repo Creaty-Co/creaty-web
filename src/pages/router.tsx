@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router"
 
 import { Home } from "./Home/Home"
+import { Mentor } from "./Mentor/Mentor"
 import { Mentors } from "./mentors"
-import { User } from "./user"
 
 export const Router = () => {
   return (
@@ -13,7 +13,7 @@ export const Router = () => {
         <Route path="email-verify/:code" element={<Home />} />
         <Route path="mentors" element={<Mentors />} />
         <Route path="mentors/:topicOrTag" element={<Mentors />} />
-        <Route path="user/:slug" element={<User />} />
+        <Route path="mentor/:slug" element={<Mentor />} />
       </Route>
     </Routes>
   )

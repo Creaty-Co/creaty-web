@@ -1,0 +1,173 @@
+@import "/src/app/scss/bundle.scss";
+
+.become-mentor__title {
+  color: $color-black-main;
+
+  @include H2Bold;
+
+  @include for-size(big-phone-screen) {
+    @include H2Bold(32px);
+  }
+}
+
+.become-mentor {
+  display: grid;
+  grid-template: 1fr / 700fr 480fr;
+  @include gap(0);
+
+  overflow: hidden;
+
+  padding: 0;
+  margin: 0;
+
+  border-radius: 70px;
+
+  background: $color-green;
+  box-shadow: 0px 2px 8px rgba($color-green, 0.1),
+    0px 8px 30px rgba($color-green, 0.2), 0px 8px 200px rgba($color-green, 0.4);
+
+  @include for-size(big-phone-screen) {
+    grid-template: auto auto / 1fr;
+    grid-template-areas:
+      "images"
+      "container";
+  }
+}
+
+.become-mentor__images {
+  @include for-size(big-phone-screen) {
+    grid-area: images;
+    height: 133vw;
+  }
+
+  position: relative;
+
+  height: 100%;
+  width: 100%;
+
+  overflow: hidden;
+
+  .become-mentor__image {
+    position: absolute;
+    & > img {
+      position: absolute;
+      left: 0;
+      top: 0;
+
+      height: 100%;
+      width: 100%;
+
+      border-radius: 50px;
+      @include for-size(big-phone-screen) {
+        border-radius: 33px;
+      }
+    }
+
+    &--1 {
+      left: 17%;
+      top: 0;
+
+      width: 67%;
+      padding-top: 117%;
+
+      & > img {
+        transform: translate(0, -15.7%);
+      }
+    }
+
+    &--2 {
+      left: 0;
+      top: 0;
+
+      padding-top: 113%;
+      width: 33%;
+
+      & > img {
+        transform: translate(0, 10%);
+
+        @include for-size(big-phone-screen) {
+          transform: translate(8px, 18%);
+        }
+      }
+    }
+
+    &--3 {
+      bottom: 0;
+      right: 0;
+
+      padding-top: 91.6%;
+      width: 50%;
+
+      & > img {
+        left: unset;
+        top: unset;
+
+        bottom: 0;
+        right: 0;
+
+        transform: translate(-8px, -5.5%);
+
+        @include for-size(big-phone-screen) {
+          transform: translate(-8px, 0);
+        }
+      }
+    }
+  }
+}
+
+.become-mentor__container {
+  @include for-size(big-phone-screen) {
+    grid-area: container;
+    padding: 24px 36px 36px;
+  }
+
+  display: grid;
+
+  @include row-gap(56px);
+  @include for-size(big-phone-screen) {
+    @include row-gap(32px);
+  }
+
+  padding: 92px 140px 92px 120px;
+}
+
+.become-mentor__info {
+  display: grid;
+  @include row-gap(24px);
+  @include for-size(big-phone-screen) {
+    @include row-gap(16px);
+  }
+}
+
+.become-mentor__desc {
+  color: $color-black-3;
+  @include H4Regular;
+
+  & > ul {
+    @include gap(0);
+    list-style-type: disc;
+  }
+
+  @include for-size(big-phone-screen) {
+    @include H4Regular(16px, 24px);
+  }
+}
+
+.become-mentor__bottom {
+  display: grid;
+  @include row-gap(1em);
+}
+
+.become-mentor__terms {
+  color: $color-gray-80;
+  @include CaptionRegular;
+
+  & > a {
+    color: inherit;
+    text-decoration: underline;
+  }
+
+  @include Mobile {
+    text-align: center;
+  }
+}
