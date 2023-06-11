@@ -18,11 +18,15 @@ export interface ISignUpFormStep2 {
 
 export interface IUsersState {
   authUserId: string | null
+
   email: string | null
   password: string | null
   first_name: string | null
   last_name: string | null
+
   hasDiscount: boolean
   isVerified: boolean
-  isAuth: boolean
+
+  isAuth: boolean | null
+  isAuthLoading: boolean
 }

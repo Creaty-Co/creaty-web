@@ -5,6 +5,7 @@
   padding: 0 !important;
   contain: size !important;
 }
-:where(.css-dev-only-do-not-override-1siw2ks).ant-btn-primary {
+
+.ant-btn.ant-btn-primary.ant-btn-sm {
   background-color: $color-black-100;
 }

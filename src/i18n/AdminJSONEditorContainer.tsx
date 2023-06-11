@@ -1,15 +1,33 @@
 import "jsoneditor/dist/jsoneditor.min.css"
-import "./ReactJSONEditorContainer.scss"
+import "./AdminJSONEditorContainer.scss"
 
+import { useAppSelector } from "@app/store"
+import { selectIsAuth, selectIsAuthLoading } from "@features/users/users.slice"
 import { Button } from "@shared/ui"
-// import LangSelector from "app/components/UI/LangSelector/LangSelector"
-import { BackendOptions,i18n } from "i18next"
+import i18next, { BackendOptions, i18n } from "i18next"
 import JSONEditor, { JSONEditorOptions } from "jsoneditor"
-import { Component, createRef } from "react"
+import { Component, createRef, useEffect } from "react"
+import { useNavigate } from "react-router"
 
 interface JSONEditorContainerProps {
   i18n: i18n
+  navigate: any
   options?: JSONEditorOptions
+}
+
+function AdminJSONEditorContainer() {
+  const isAuthLoading = useAppSelector(selectIsAuthLoading)
+  const isAuth = useAppSelector(selectIsAuth)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (isAuth === null) return
+    if (!isAuth && !isAuthLoading) navigate("/")
+  }, [isAuth])
+
+  if (!isAuth) return null
+
+  return <ReactJSONEditorContainer i18n={i18next} navigate={navigate} />
 }
 
 class ReactJSONEditorContainer extends Component<JSONEditorContainerProps> {
@@ -21,7 +39,7 @@ class ReactJSONEditorContainer extends Component<JSONEditorContainerProps> {
     onChangeText: this.onChangeJSON.bind(this),
     onEditable() {
       return { field: process.env.NODE_ENV === "development", value: true }
-    }
+    },
   }
   editor: JSONEditor | null = null
   editorContainerRef = createRef<HTMLDivElement>()
@@ -64,19 +82,27 @@ class ReactJSONEditorContainer extends Component<JSONEditorContainerProps> {
 
     this.editor = editor
   }
-  
+
   async putUpdate() {
     const data = this.editor?.get()
     if (data == null) return
 
     const i18n = this.props.i18n
     const put = (i18n.options.backend as BackendOptions).put
-    if (put == null) return
 
+    if (!put) return
 
-    await put(i18n.language, "translation", data)
+    const response = await put(i18n.language, "translation", data)
 
-    alert("Successfully updated")
+    if (response?.message) {
+      alert(
+        `❌ Translation JSON wasn't updated. 
+
+         ❓ Reason: ` + response?.message
+      )
+      return
+    }
+    alert(`✅ Translation JSON was successfully updated`)
   }
 
   onChangeJSON(json: string) {
@@ -89,14 +115,18 @@ class ReactJSONEditorContainer extends Component<JSONEditorContainerProps> {
   render() {
     return (
       <div className="react-json-editor">
-        {/* <LangSelector /> */}
         <div className="react-json-editor__editor" ref={this.editorContainerRef}></div>
         <div className="react-json-editor__toolbar">
-          <Button color="white" onClick={this.putUpdate.bind(this)}>Save</Button>
+          <Button color="white" onClick={this.putUpdate.bind(this)}>
+            Save
+          </Button>
+          <Button color="white" onClick={() => this.props.navigate("/")}>
+            Go to the Home page
+          </Button>
         </div>
       </div>
     )
   }
 }
 
-export default ReactJSONEditorContainer
+export default AdminJSONEditorContainer

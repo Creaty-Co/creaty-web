@@ -13,8 +13,9 @@ const initialState: IUsersState = {
 
   hasDiscount: false,
   isVerified: false,
-  
-  isAuth: false
+
+  isAuth: null,
+  isAuthLoading: false,
 }
 
 export const usersSlice = createSlice({
@@ -44,14 +45,19 @@ export const usersSlice = createSlice({
       state.first_name = first_name
       state.last_name = last_name || null
     },
+    setAuthLoading: (state, action: PayloadAction<boolean>) => {
+      state.isAuthLoading = action.payload
+    },
   },
 })
 
 export default usersSlice.reducer
-export const { signUpStep1, signUpStep2, setAuthUserData } = usersSlice.actions
+export const { signUpStep1, signUpStep2, setAuthUserData, setAuthLoading } = usersSlice.actions
 
 export const selectUsers = (state: RootState) => state.users
 export const selectIsAuth = createSelector(selectUsers, state => state.isAuth)
+export const selectIsAuthLoading = createSelector(selectUsers, state => state.isAuthLoading)
+
 export const selectAuthUsersData = createSelector(selectUsers, state => ({
   email: state.email,
   password: state.password,
