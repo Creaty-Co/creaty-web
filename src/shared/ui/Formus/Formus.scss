@@ -23,6 +23,7 @@
   color: $color-black-90;
 
   &__agreement {
+    line-height: 1;
     letter-spacing: 0.02em;
     @include Tags;
   }

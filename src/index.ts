@@ -1,5 +1,3 @@
-import "./style.scss" 
-
 import App from "@app/App"
 import buffer from "buffer"
 import { createElement } from "react"

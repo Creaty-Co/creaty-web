@@ -1,7 +1,7 @@
 import "./Mentor.scss"
 
 import { useAppSelector } from "@app/store"
-import { Tag, useGetMentorBySlugQuery } from "@entities"
+import { MentorPackageType, Tag, useGetMentorBySlugQuery } from "@entities"
 import { selectPagesDocumentsLinks } from "@shared/api/pages/pages.slice"
 import { useScrollToTop } from "@shared/hooks"
 import { Button, Icon, LoaderCover } from "@shared/ui"
@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next"
 import { useParams } from "react-router"
 
 import { QAndA } from "../home/q-and-a"
-import { Packages } from "./Packages"
+import { PackagesWrapper } from "./Packages/PackagesWrapper"
 import { UserSection } from "./UserSection"
 
 const CN = "user"
@@ -20,14 +20,14 @@ const { getElement } = bem(CN)
 export function Mentor() {
   useScrollToTop()
 
-  const { t /*, i18n*/ } = useTranslation("translation", { keyPrefix: "views.mentor" })
+  const { t } = useTranslation("translation", { keyPrefix: "views.mentor" })
   const { t: tRoot } = useTranslation("translation")
 
   const params = useParams<"slug">()
   if (!params.slug) throw new Error("This component should be used in Route context")
 
-  const { data: user, isLoading } = useGetMentorBySlugQuery(params.slug)
   const docsLink = useAppSelector(selectPagesDocumentsLinks)
+  const { data: user, isLoading } = useGetMentorBySlugQuery(params.slug)
 
   if (isLoading || !user) return <LoaderCover white />
 
@@ -35,7 +35,7 @@ export function Mentor() {
     const packages = document.getElementById("packages")
     packages?.scrollIntoView({ behavior: "smooth", block: "center" })
   }
-
+  const mentorName = `${user.first_name} ${user.last_name}`
   return (
     <div className="user">
       {/* User Card */}
@@ -48,9 +48,7 @@ export function Mentor() {
           <div className="mentor-card__container">
             <div className="mentor-card__info">
               <div className="mentor-card__name">
-                <span>
-                  {user.first_name} {user.last_name}
-                </span>
+                <span>{mentorName}</span>
                 <img src={getEmojiPNG(user.country.flag_unicode)} alt="flag" className="mentor-card__flag" />
               </div>
 
@@ -66,7 +64,7 @@ export function Mentor() {
 
             {user.packages.length > 0 && (
               <div className="mentor-card__discounts">
-                {user.packages.map(pack => (
+                {user.packages.map((pack: MentorPackageType) => (
                   <div className="mentor-card__discount" key={pack.id}>
                     {t("card.discount", {
                       courseCount: pack.lessons_count,
@@ -128,7 +126,13 @@ export function Mentor() {
           <p>{t("info.garantee.desc")}</p>
         </UserSection>
 
-        <Packages />
+        <PackagesWrapper
+          hourPrice={Math.floor(+user.price)}
+          mentorSlug={params.slug}
+          minutsOfTrialMeeting={user.info.trial_meeting}
+          packages={user.packages}
+          mentorName={mentorName}
+        />
 
         <div className={cn(getElement("faq"))}>
           <div className={cn(getElement("title"), "font--h3-bold text-white mt-10 mb-5")}>

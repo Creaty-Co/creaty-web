@@ -8,12 +8,12 @@ import { MentorDetailedType, MentorType } from "./mentor.types"
 export const mentorApi = createApi({
   reducerPath: "mentorApi",
 
-  baseQuery: baseQueryWithReauth(false),
+  baseQuery: baseQueryWithReauth(false, "/mentors"),
 
   endpoints: builder => ({
     getMentors: builder.query<PaginationType<MentorType>, PaginationQueryType>({
       query: ({ page, page_size, tag_set__in }) =>
-        "/mentors/?" +
+        "/?" +
         new URLSearchParams({
           page: page + "",
           page_size: page_size + "",
@@ -31,7 +31,7 @@ export const mentorApi = createApi({
     }),
 
     getMentorBySlug: builder.query<MentorDetailedType, string>({
-      query: slug => `/mentors/${slug}`,
+      query: slug => `/${slug}`,
     }),
 
     bookTrialSession: builder.mutation({

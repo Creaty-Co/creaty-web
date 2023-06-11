@@ -1,3 +1,4 @@
+import "./scss/style.scss"
 import "antd/dist/reset.css"
 import "./scss/base.scss"
 import "./scss/app.scss"
@@ -29,7 +30,7 @@ function App() {
       <ConfigProvider
         theme={{
           token: {
-            colorPrimary: "#000000",
+            colorPrimary: "#070707",
             fontFamily: "Google Sans",
           },
         }}

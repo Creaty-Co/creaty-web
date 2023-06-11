@@ -99,7 +99,7 @@ export function LoginForm() {
       </Button>
 
       <div className={cn(getElement("agreement"), "text-gray-800 text-center")}>
-        By clicking on the Login, you agree to Creaty Co.{" "}
+        By clicking on the Login, you agree to Creaty Co. <br />
         <OuterLink className="document__link--form" linkHref="user_agreement" translateType="terms" /> and{" "}
         <OuterLink className="document__link--form" linkHref="privacy_policy" translateType="privacyPolicy" />
       </div>
