@@ -15,8 +15,8 @@ import { BecomeMentor } from "./BecomeMentor/BecomeMentor"
 import { DynamicPrimaryInfo } from "./DynamicPrimaryInfo/DynamicPrimaryInfo"
 import { HelpfulCreaty } from "./HelpfulCreaty"
 import { HowItWorks } from "./HowItWorks"
-import { MailingSubscribe } from "./mailing-subscribe"
-import { QAndA } from "./q-and-a"
+import { MailingSubscribe } from "./MailingSubscribe/MailingSubscribe"
+import { QAndA } from "./QAndA/QAndA"
 
 const CN = "home-view"
 const { getElement } = bem(CN)

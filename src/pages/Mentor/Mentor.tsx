@@ -2,6 +2,7 @@ import "./Mentor.scss"
 
 import { useAppSelector } from "@app/store"
 import { MentorPackageType, Tag, useGetMentorBySlugQuery } from "@entities"
+import { QAndA } from "@pages/Home/QAndA/QAndA"
 import { selectPagesDocumentsLinks } from "@shared/api/pages/pages.slice"
 import { useScrollToTop } from "@shared/hooks"
 import { Button, Icon, LoaderCover } from "@shared/ui"
@@ -10,7 +11,6 @@ import cn from "classnames"
 import { useTranslation } from "react-i18next"
 import { useParams } from "react-router"
 
-import { QAndA } from "../home/q-and-a"
 import { PackagesWrapper } from "./Packages/PackagesWrapper"
 import { UserSection } from "./UserSection"
 

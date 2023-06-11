@@ -1,4 +1,4 @@
-import "./mailing-subscribe.scss"
+import "./MailingSubscribe.scss"
 
 import { Subscribe } from "@shared/ui"
 import { useTranslation } from "react-i18next"

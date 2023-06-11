@@ -1,4 +1,4 @@
-import "./q-and-a.scss"
+import "./QAndA.scss"
 
 import { useGetPagesFAQsQuery } from "@shared/api"
 import { FAQ, FAQClause, LoaderCover } from "@shared/ui"
