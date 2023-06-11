@@ -40,7 +40,7 @@ export const mentorApi = createApi({
     bookHourlySession: builder.mutation({
       query: body => ({ url: `/bookings/hourly/`, method: "POST", body }),
     }),
-    bookDiscountSession: builder.mutation({
+    bookPackSession: builder.mutation({
       query: body => ({ url: `/bookings/package/`, method: "POST", body }),
     }),
   }),
@@ -51,5 +51,5 @@ export const {
   useGetMentorsQuery,
   useBookTrialSessionMutation,
   useBookHourlySessionMutation,
-  useBookDiscountSessionMutation,
+  useBookPackSessionMutation,
 } = mentorApi
