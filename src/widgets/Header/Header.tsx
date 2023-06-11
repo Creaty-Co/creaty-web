@@ -1,4 +1,4 @@
-import "./header.scss"
+import "./Header.scss"
 
 import { useAppDispatch, useAppSelector } from "@app/store"
 import { EFormIds, PopupFormBecomeMentor, PopupFormWrapper } from "@features"

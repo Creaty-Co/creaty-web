@@ -1,3 +1,7 @@
+import { useAppSelector } from "@app/store"
+import { selectIsAuth, selectIsAuthLoading } from "@features/users/users.slice"
+import AdminJSONEditorContainer from "@i18n/AdminJSONEditorContainer"
+import { Spin } from "antd"
 import { Route, Routes } from "react-router"
 
 import { Home } from "./Home/Home"
@@ -5,6 +9,26 @@ import { Mentor } from "./Mentor/Mentor"
 import { Mentors } from "./mentors"
 
 export const Router = () => {
+  const isAuthLoading = useAppSelector(selectIsAuthLoading)
+  const isAuth = useAppSelector(selectIsAuth)
+
+  if (isAuthLoading && !isAuth)
+    return (
+      <div
+        style={{
+          margin: "50px",
+          height: "300px",
+          padding: "30px 50px",
+          display: "grid",
+          placeItems: "center",
+          backgroundColor: "white",
+          borderRadius: "70px",
+        }}
+      >
+        <Spin size="large" />
+      </div>
+    )
+
   return (
     <Routes>
       <Route path="/">
@@ -14,6 +38,7 @@ export const Router = () => {
         <Route path="mentors" element={<Mentors />} />
         <Route path="mentors/:topicOrTag" element={<Mentors />} />
         <Route path="mentor/:slug" element={<Mentor />} />
+        <Route path="admin" element={<AdminJSONEditorContainer />} />
       </Route>
     </Routes>
   )

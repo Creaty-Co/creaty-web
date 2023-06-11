@@ -1,11 +1,11 @@
 // import { getPagesLocalesLanguageNamespace, putPagesLocalesLanguageNamespace } from "api/actions/pages"
 // import ClientAPI from "api/client"
-import i18next, { BackendOptions } from "i18next"
+import i18next, { BackendOptions, ResourceKey } from "i18next"
 import { initReactI18next } from "react-i18next"
 
-import initExternalResourceBackend from "./external-resource-backend"
+import initExternalResourceBackend from "./initExternalResourceBackend"
+import initReactMarkdownPostProcess from "./initReactMarkdownPostProcess"
 import { LocaleKeys, supportedLocales } from "./locales"
-import initReactMarkdownPostProcess from "./react-markdown-postprocess"
 
 export const localeLocalStorage = localStorage.getItem("lang") as LocaleKeys | null
 export const localeNavigator = window.navigator.language.split("-")[0] as LocaleKeys
@@ -21,7 +21,7 @@ i18next
   .use(initExternalResourceBackend)
   .init<BackendOptions>({
     returnNull: false,
-    
+
     lng: localeCurrent,
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
@@ -31,7 +31,7 @@ i18next
     supportedLngs: supportedLocales,
 
     react: {
-      bindI18n: "react-refresh"
+      bindI18n: "react-refresh",
     },
 
     backend: {
@@ -41,10 +41,47 @@ i18next
 
         return data
       },
-    }
+      async put(language: string, namespace: string, data: ResourceKey) {
+        const lSAccessToken = localStorage.getItem("accessToken")
+
+        const response = await fetch(`${API}/pages/locales/${language}/${namespace}.json/`, {
+          headers: {
+            Authorization: `Bearer ${lSAccessToken}`,
+            "content-type": "application/json",
+          },
+          method: "PUT",
+          body: JSON.stringify(data),
+        })
+
+        if (response.status === 401) {
+          const lSRefreshToken = localStorage.getItem("refreshToken")
+
+          const refreshResult = await fetch(`${API}/users/token/refresh/`, {
+            headers: {
+              "content-type": "application/json",
+            },
+            method: "POST",
+            body: JSON.stringify({ refresh: lSRefreshToken }),
+          })
+
+          const jsonData = await refreshResult.json()
+
+          if (jsonData) {
+            const { access, refresh } = jsonData as { access: string; refresh: string }
+            localStorage.setItem("accessToken", access)
+            localStorage.setItem("refreshToken", refresh)
+            window.location.reload()
+          } else {
+            localStorage.removeItem("accessToken")
+            localStorage.removeItem("refreshToken")
+          }
+        }
+        if (response.status === 204) return null
+        return new Error("Response payload is empty. There is some problem with the request")
+      },
+    },
   })
 
 i18next.on("languageChanged", () => {
   i18next.emit("react-refresh")
 })
-
