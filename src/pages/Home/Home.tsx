@@ -12,7 +12,7 @@ import { useTranslation } from "react-i18next"
 import { useMatch, useParams } from "react-router"
 
 import { BecomeMentor } from "./BecomeMentor/BecomeMentor"
-import { DynamicPrimaryInfo } from "./dynamic-primary-info/dynamic-primary-info"
+import { DynamicPrimaryInfo } from "./DynamicPrimaryInfo/DynamicPrimaryInfo"
 import { HelpfulCreaty } from "./HelpfulCreaty"
 import { HowItWorks } from "./HowItWorks"
 import { MailingSubscribe } from "./mailing-subscribe"

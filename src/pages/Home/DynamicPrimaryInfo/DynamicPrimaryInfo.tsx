@@ -1,4 +1,4 @@
-import "./dynamic-primary-info.scss"
+import "./DynamicPrimaryInfo.scss"
 
 import { useAppSelector } from "@app/store"
 import { selectTopics } from "@entities/category"
