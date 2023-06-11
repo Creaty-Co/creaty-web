@@ -1,4 +1,4 @@
-import "./home.scss"
+import "./Home.scss"
 
 import { HaveQuestions, HelpSocial, MentorSearch, MentorSearchTags, MentorsSlider } from "@features"
 import { EmaiVerifyModal } from "@features/auth/EmaiVerifyModal/EmaiVerifyModal"
@@ -12,11 +12,11 @@ import { useTranslation } from "react-i18next"
 import { useMatch, useParams } from "react-router"
 
 import { BecomeMentor } from "./BecomeMentor/BecomeMentor"
-import { DynamicPrimaryInfo } from "./dynamic-primary-info/dynamic-primary-info"
+import { DynamicPrimaryInfo } from "./DynamicPrimaryInfo/DynamicPrimaryInfo"
 import { HelpfulCreaty } from "./HelpfulCreaty"
 import { HowItWorks } from "./HowItWorks"
-import { MailingSubscribe } from "./mailing-subscribe"
-import { QAndA } from "./q-and-a"
+import { MailingSubscribe } from "./MailingSubscribe/MailingSubscribe"
+import { QAndA } from "./QAndA/QAndA"
 
 const CN = "home-view"
 const { getElement } = bem(CN)

@@ -31,7 +31,7 @@ const middlewares = [
 
 if (development) middlewares.push(logger)
 
-const rootReducer = combineReducers({
+const combinedReducer = combineReducers({
   [authApi.reducerPath]: authApi.reducer,
   [usersApi.reducerPath]: usersApi.reducer,
   [FormApi.reducerPath]: FormApi.reducer,
@@ -50,10 +50,11 @@ const rootReducer = combineReducers({
   modal: modalReducer,
 })
 
-// const rootReducer: Reducer = (state: RootState, action: AnyAction) => {
-//   if (action.type === "auth/logOut") state = undefined
-//   return combinedReducer(state, action)
-// }
+// todo: add not circular typing
+const rootReducer = (state: any, action: any) => {
+  if (action.type === "auth/logOut") state = undefined
+  return combinedReducer(state, action)
+}
 
 export const store = configureStore({
   reducer: rootReducer,

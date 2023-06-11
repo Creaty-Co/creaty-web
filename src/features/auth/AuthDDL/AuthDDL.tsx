@@ -32,7 +32,6 @@ export function AuthDDL() {
     [authUsersData]
   )
   const onClick: MenuProps["onClick"] = ({ key }) => {
-    // if (key === "user") message.info("user profile will be developed soon")
     if (key === "user") return
     if (key === "logOut") dispatch({ type: "auth/logOut" })
   }
