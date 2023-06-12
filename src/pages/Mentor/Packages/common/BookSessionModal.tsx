@@ -69,7 +69,7 @@ export const BookSessionModal = memo(function ResetPasswordModalForm({
     <Modal open={open} footer={null} closable={false} maskClosable={false} keyboard={false}>
       <PopupLayout
         title={
-          <h3 className="font--h3-bold">
+          <h3 className="font--h3-bold popup-layout__title">
             {title} <br />
             <span className="text-violet">{mentorName}</span>
           </h3>

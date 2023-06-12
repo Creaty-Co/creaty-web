@@ -74,7 +74,7 @@ export const EmaiVerifyModal = memo(function ResetPasswordModalForm({ code }: IP
     <Modal open={!!code} footer={null} closable={false} maskClosable={false} keyboard={false}>
       <PopupLayout
         title={
-          <h3 className="font--h3-bold">
+          <h3 className="font--h3-bold popup-layout__title">
             We are glad you joined <br />
             <span className="text-green-300">Creaty.Club</span>
           </h3>
