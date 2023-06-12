@@ -63,11 +63,9 @@ function Header({ className }: IHeader) {
               {t("menu.mentors")}
             </ButtonLink>
 
-            {isAuth ? null : (
-              <Button size="small" onClick={() => dispatch(openModal(<PopupFormBecomeMentor />))}>
-                {t("menu.becomeMentor")}
-              </Button>
-            )}
+            <Button size="small" onClick={() => dispatch(openModal(<PopupFormBecomeMentor />))}>
+              {t("menu.becomeMentor")}
+            </Button>
           </div>
 
           <Button
