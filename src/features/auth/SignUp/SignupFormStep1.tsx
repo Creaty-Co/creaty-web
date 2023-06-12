@@ -70,7 +70,7 @@ export function SignupFormStep1() {
           Log In
         </em>
       </span>
-      <Field type="input" name="email" label="Email address*" />
+      <Field type="input" name="email" label="Email*" />
       <Field
         type="password"
         name="password"

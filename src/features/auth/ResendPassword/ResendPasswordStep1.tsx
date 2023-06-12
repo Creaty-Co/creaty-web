@@ -52,9 +52,9 @@ export function ResendPasswordStep1() {
   const elementContent = (
     <>
       <span className={cn(getElement("suggestion"))}>
-        Enter the email address associated with your account and we'll send you a link to reset your password.{" "}
+        Enter the email associated with your account and we'll send you a link to reset your password.{" "}
       </span>
-      <Field type="input" name="email" label="Email address*" />
+      <Field type="input" name="email" label="Email*" />
     </>
   )
 

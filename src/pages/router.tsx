@@ -26,7 +26,7 @@ export const Router = () => {
           borderRadius: "50px",
         }}
       >
-        <Spin size="large" tip="Loading..." />
+        <Spin size="large" />
       </div>
     )
 

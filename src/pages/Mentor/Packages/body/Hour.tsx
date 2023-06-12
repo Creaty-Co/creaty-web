@@ -7,7 +7,7 @@ import { notification } from "antd"
 import { useEffect, useState } from "react"
 import { FieldValues } from "react-hook-form"
 
-import { BookSessionModal } from "./../common/BookSessionModal"
+import { BookSessionModal } from "../common/BookSessionModalForm"
 
 interface IProps {
   hourPrice: number

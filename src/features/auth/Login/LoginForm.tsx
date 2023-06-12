@@ -66,7 +66,7 @@ export function LoginForm() {
           Sign Up
         </em>
       </span>
-      <Field type="input" name="email" label="Email address*" />
+      <Field type="input" name="email" label="Email*" />
       <Field type="password" name="password" label="Password*" />
 
       <span className={cn(getElement("suggestion"))}>

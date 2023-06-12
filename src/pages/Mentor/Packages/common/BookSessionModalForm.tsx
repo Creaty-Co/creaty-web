@@ -1,9 +1,11 @@
+import { useAppSelector } from "@app/store"
+import { selectAuthUsersData } from "@features/users/users.slice"
 import { PopupLayout } from "@shared/layout"
 import { Field, Formus, OuterLink } from "@shared/ui"
 import { bem } from "@shared/utils"
 import { Button, Modal } from "antd"
 import cn from "classnames"
-import { memo } from "react"
+import { memo, useMemo } from "react"
 import { FieldValues } from "react-hook-form"
 import * as yup from "yup"
 
@@ -38,10 +40,13 @@ export const BookSessionModal = memo(function ResetPasswordModalForm({
   closeModal,
   onSubmit,
 }: IProps) {
+  const { firstName, lastName, email } = useAppSelector(selectAuthUsersData)
+  const name = useMemo(() => (firstName && lastName ? `${firstName} ${lastName}` : undefined), [firstName, lastName])
+
   const elementContent = (
     <>
-      <Field type="input" name="name" label="Name**" />
-      <Field type="input" name="email" label="Email address*" />
+      <Field type="input" name="name" label="Name*" defaultValue={name} />
+      <Field type="input" name="email" label="Email*" defaultValue={email || undefined} />
       <Field type="textarea" name="description" label="How can a mentor help?*" />
     </>
   )
