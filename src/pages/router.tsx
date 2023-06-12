@@ -12,20 +12,21 @@ export const Router = () => {
   const isAuthLoading = useAppSelector(selectIsAuthLoading)
   const isAuth = useAppSelector(selectIsAuth)
 
-  if (isAuthLoading && !isAuth)
+  if (isAuthLoading && isAuth === null)
     return (
       <div
         style={{
-          margin: "50px",
-          height: "300px",
-          padding: "30px 50px",
+          width: "min-content",
+          height: "min-content",
+          margin: "50px auto",
+          padding: "50px",
           display: "grid",
           placeItems: "center",
           backgroundColor: "white",
-          borderRadius: "70px",
+          borderRadius: "50px",
         }}
       >
-        <Spin size="large" />
+        <Spin size="large" tip="Loading..." />
       </div>
     )
 

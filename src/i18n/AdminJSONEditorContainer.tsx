@@ -7,13 +7,7 @@ import { Button } from "@shared/ui"
 import i18next, { BackendOptions, i18n } from "i18next"
 import JSONEditor, { JSONEditorOptions } from "jsoneditor"
 import { Component, createRef, useEffect } from "react"
-import { useNavigate } from "react-router"
-
-interface JSONEditorContainerProps {
-  i18n: i18n
-  navigate: any
-  options?: JSONEditorOptions
-}
+import { NavigateFunction, useNavigate } from "react-router"
 
 function AdminJSONEditorContainer() {
   const isAuthLoading = useAppSelector(selectIsAuthLoading)
@@ -28,6 +22,11 @@ function AdminJSONEditorContainer() {
   if (!isAuth) return null
 
   return <ReactJSONEditorContainer i18n={i18next} navigate={navigate} />
+}
+interface JSONEditorContainerProps {
+  i18n: i18n
+  navigate: NavigateFunction
+  options?: JSONEditorOptions
 }
 
 class ReactJSONEditorContainer extends Component<JSONEditorContainerProps> {
@@ -48,13 +47,6 @@ class ReactJSONEditorContainer extends Component<JSONEditorContainerProps> {
     if (this.editorContainerRef.current === null) return
     this.initEditor(this.editorContainerRef.current)
 
-    const rootElement = document.getElementById("root")
-    if (rootElement === null) {
-      throw new Error("no #root element found")
-    }
-
-    rootElement.style.maxWidth = "75vw"
-
     const i18n = this.props.i18n
     i18n.reloadResources((i18n.options.supportedLngs || []).slice(0, -1), "translation")
     i18n.on("languageChanged", () => {
@@ -62,15 +54,6 @@ class ReactJSONEditorContainer extends Component<JSONEditorContainerProps> {
 
       this.editor?.set(resourceKey)
     })
-  }
-
-  componentWillUnmount() {
-    const rootElement = document.getElementById("root")
-    if (rootElement === null) {
-      throw new Error("no #root element found")
-    }
-
-    rootElement.removeAttribute("style")
   }
 
   initEditor(container: HTMLDivElement) {
