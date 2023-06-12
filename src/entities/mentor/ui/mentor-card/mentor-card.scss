@@ -1,187 +1,189 @@
 @import "/src/app/scss/bundle.scss";
 
 .mentor-card {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-	padding: 8px;
-	background: $color-white;
-	border-radius: 40px;
+  padding: 8px;
+  background: $color-white;
+  border-radius: 40px;
 
-	&--center {
-		text-align: center;
-	}
-	
-	@include for-size(big-phone-screen) {
-		width: 90vw;
-	}
-}
+  &--center {
+    text-align: center;
+  }
 
-.mentor-card__preview {
-	position: relative;
-	
-	overflow: hidden;
-	width: 100%;
+  @include for-size(big-phone-screen) {
+    width: 90vw;
+  }
 
-	border-radius: 32px;
-	padding-top: 78%;
-}
+  &__preview {
+    position: relative;
 
-.mentor-card__image {
-	position: absolute;
-	left: 0;
-	top: 0;
+    overflow: hidden;
+    width: 100%;
 
-	width: 100%;
-	border-radius: inherit;
-	object-fit: cover;
-}
+    border-radius: 32px;
+    padding-top: 78%;
+  }
 
-.mentor-card__info {
-	display: grid;
-	@include row-gap(4px);
-}
+  &__image {
+    position: absolute;
+    left: 0;
+    top: 0;
 
-.mentor-card__container {
-	display: grid;
-	@include row-gap(20px);
-	padding: 20px;
-	
-	@include for-size(big-phone-screen) {
-			@include gap(20px);
-			padding: 24px 16px 36px;
-		}
-}
+    width: 100%;
+    border-radius: inherit;
+    object-fit: cover;
+  }
 
-.mentor-card__name {
-	color: $color-black-main;
-	@include H4Bold;
+  &__info {
+    display: grid;
+    @include row-gap(4px);
+  }
 
-	@include for-size(big-phone-screen) {
-		@include H4Bold(20px);
-	}
-}
+  &__container {
+    display: grid;
+    @include row-gap(20px);
+    padding: 20px;
 
-.mentor-card__flag {
-	position: relative;
-	top: -3px;
+    @include for-size(big-phone-screen) {
+      @include gap(20px);
+      padding: 24px 16px 36px;
+    }
+  }
 
-	height: 1.33em;
-	width: auto;
+  &__name {
+    color: $color-black-main;
+    display: flex;
+    justify-content: center;
+    @include H4Bold;
 
-	margin-left: 0.25em;
-	vertical-align: bottom;
-}
+    @include for-size(big-phone-screen) {
+      @include H4Bold(20px);
+    }
+  }
 
-.mentor-card__job {
-	color: $color-gray-80;
-	@include TextRegular;
-	@include for-size(big-phone-screen) {
-		@include TextRegular(16px);
-	}
+  &__flag {
+    position: relative;
+    top: -3px;
 
-	em {
-		color: $color-black-main;
-		@include TextMedium;
-		@include for-size(big-phone-screen) {
-			@include TextMedium(16px);
-		}
-	}
-}
+    height: 1.33em;
+    width: auto;
 
-.mentor-card__tags {
-	display: flex;
-	flex-wrap: wrap;
-	@include gap(8px);
+    margin-left: 0.25em;
+    vertical-align: bottom;
+  }
 
-	@include for-size(big-phone-screen) {
-		@include gap(8px);
-	}
-}
+  &__job {
+    color: $color-gray-80;
+    @include TextRegular;
+    @include for-size(big-phone-screen) {
+      @include TextRegular(16px);
+    }
 
-.mentor-card__price {
-	color: $color-gray-80;
-	font-size: 1.5rem;
+    em {
+      color: $color-black-main;
+      @include TextMedium;
+      @include for-size(big-phone-screen) {
+        @include TextMedium(16px);
+      }
+    }
+  }
 
-	em {
-		color: $color-black-main;
-		font-weight: bold;
-	}
-}
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    @include gap(8px);
 
-.mentor-card__discounts {
-	display: grid;
-	@include row-gap(0.5em);
-}
+    @include for-size(big-phone-screen) {
+      @include gap(8px);
+    }
+  }
 
-.mentor-card__discount {
-	color: $color-black-main;
-	font-size: 1.125rem;
+  &__price {
+    color: $color-gray-80;
+    font-size: 1.5rem;
 
-	em {
-		color: $color-violet;
-	}
-}
+    em {
+      color: $color-black-main;
+      font-weight: bold;
+    }
+  }
 
-/* Mentor Card Button */
-.mentor-card-button {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+  &__discounts {
+    display: grid;
+    @include row-gap(0.5em);
+  }
 
-	padding: 24px;
-	padding-left: 32px;
+  &__discount {
+    color: $color-black-main;
+    font-size: 1.125rem;
 
-	margin-top: auto;
-	background: $color-gray-10;
-	border-radius: inherit;
-	transition: 200ms ease background-color;
+    em {
+      color: $color-violet;
+    }
+  }
 
-	&:hover {
-		background: $color-green;
-	}
-}
+  /* Mentor Card Button */
+  &-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-.mentor-card-button__text {
-	// Trouble with font layout
-	position: relative;
-	top: 2px;
+    padding: 24px;
+    padding-left: 32px;
 
-	display: flex;
-	@include gap(0.25em);
+    margin-top: auto;
+    background: $color-gray-10;
+    border-radius: inherit;
+    transition: 200ms ease background-color;
 
-	color: $color-black-main;
-	transition: 200ms ease opacity;
+    &:hover {
+      background: $color-green;
+    }
+  }
 
-	@include TextRegular;
+  &-button__text {
+    // Trouble with font layout
+    position: relative;
+    top: 2px;
 
-	.mentor-card-button:hover & {
-		opacity: 0;
-	}
+    display: flex;
+    @include gap(0.25em);
 
-	em {
-			@include TextBold;
-	}
-}
+    color: $color-black-main;
+    transition: 200ms ease opacity;
 
-.mentor-card-button__icon {
-	color: $color-gray-50;
-	transition: 200ms ease color, 200ms ease transform;
+    @include TextRegular;
 
-	.mentor-card-button:hover & {
-		color: $color-black-main;
-		transform: translateX(0.5em);
-	}
-}
+    .mentor-card-button:hover & {
+      opacity: 0;
+    }
 
-.mentor-card-button__hover-text {
-	position: absolute;
-	color: $color-black-main;
-	font-weight: bold;
-	transition: 200ms ease opacity;
+    em {
+      @include TextBold;
+    }
+  }
 
-	&:not(.mentor-card-button:hover &) {
-		opacity: 0;
-		pointer-events: none;
-	}
+  &-button__icon {
+    color: $color-gray-50;
+    transition: 200ms ease color, 200ms ease transform;
+
+    .mentor-card-button:hover & {
+      color: $color-black-main;
+      transform: translateX(0.5em);
+    }
+  }
+
+  &-button__hover-text {
+    position: absolute;
+    color: $color-black-main;
+    font-weight: bold;
+    transition: 200ms ease opacity;
+
+    &:not(.mentor-card-button:hover &) {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
 }

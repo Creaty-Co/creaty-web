@@ -1,9 +1,7 @@
 import "./Mentor.scss"
 
-import { useAppSelector } from "@app/store"
 import { MentorPackageType, Tag, useGetMentorBySlugQuery } from "@entities"
 import { QAndA } from "@pages/Home/QAndA/QAndA"
-import { selectPagesDocumentsLinks } from "@shared/api/pages/pages.slice"
 import { useScrollToTop } from "@shared/hooks"
 import { Button, Icon, LoaderCover } from "@shared/ui"
 import { bem, getEmojiPNG } from "@shared/utils"
@@ -26,7 +24,6 @@ export function Mentor() {
   const params = useParams<"slug">()
   if (!params.slug) throw new Error("This component should be used in Route context")
 
-  const docsLink = useAppSelector(selectPagesDocumentsLinks)
   const { data: user, isLoading } = useGetMentorBySlugQuery(params.slug)
 
   if (isLoading || !user) return <LoaderCover white />
@@ -35,6 +32,7 @@ export function Mentor() {
     const packages = document.getElementById("packages")
     packages?.scrollIntoView({ behavior: "smooth", block: "center" })
   }
+
   const mentorName = `${user.first_name} ${user.last_name}`
   return (
     <div className="user">
@@ -80,8 +78,6 @@ export function Mentor() {
             {t("card.rollIn")}
           </Button>
         </div>
-
-        <div className="user-card__text">{t("card.terms", { policyLink: docsLink?.privacy_policy.url })}</div>
 
         {user.info.trial_meeting && <div className="user-card__notice">{t("card.trial")}</div>}
       </div>
