@@ -18,11 +18,6 @@ export interface IFormus {
   elementAfter?: ReactNode
 }
 
-export interface IFormusHaveQuetions {
-  fullname: string
-  email: string
-}
-
 const CN = "formus"
 const { getElement } = bem(CN)
 

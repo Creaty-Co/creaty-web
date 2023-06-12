@@ -5,6 +5,7 @@ export interface IUserData {
   last_name?: string
   has_discount: boolean
   is_verified: boolean
+  is_staff: boolean
 }
 
 export interface ISignUpFormStep1 {
@@ -12,8 +13,8 @@ export interface ISignUpFormStep1 {
   password: string
 }
 export interface ISignUpFormStep2 {
-  first_name: string
-  last_name?: string
+  firstName: string
+  lastName?: string
 }
 
 export interface IUsersState {
@@ -21,11 +22,12 @@ export interface IUsersState {
 
   email: string | null
   password: string | null
-  first_name: string | null
-  last_name: string | null
+  firstName: string | null
+  lastName: string | null
 
   hasDiscount: boolean
   isVerified: boolean
+  isAdmin: boolean
 
   isAuth: boolean | null
   isAuthLoading: boolean

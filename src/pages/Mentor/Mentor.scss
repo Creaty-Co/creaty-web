@@ -46,8 +46,13 @@
   max-width: 18ch;
   margin: 0 auto;
 
-  // @include Typography(1.5rem, 400, $color-green);
   text-align: center;
+  white-space: pre-line;
+  @include Typography(1.5rem, 400, $color-green);
+
+  & > em {
+    font-weight: 700;
+  }
 }
 
 /* Section */

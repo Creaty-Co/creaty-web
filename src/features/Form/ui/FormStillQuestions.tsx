@@ -1,11 +1,12 @@
-import { useAppDispatch } from "@app/store"
+import { useAppDispatch, useAppSelector } from "@app/store"
 import { EFormIds } from "@features"
+import { selectAuthUsersData } from "@features/users/users.slice"
 import { openModal } from "@shared/layout"
 import { Field, Formus, OuterLink } from "@shared/ui"
 import { bem, isEmail } from "@shared/utils"
 import { Button } from "antd"
 import cn from "classnames"
-import { useEffect } from "react"
+import { useEffect, useMemo } from "react"
 import { FieldValues, SubmitHandler } from "react-hook-form"
 import * as yup from "yup"
 
@@ -15,7 +16,7 @@ import { usePostFormsIdApplicationsMutation } from "../state/form.api"
 const schema = yup
   .object()
   .shape({
-    fullname: yup.string().required("Full Name"),
+    name: yup.string().required("Name"),
     email: yup
       .string()
       .test("email", function (value) {
@@ -41,11 +42,15 @@ interface IProps {
 export function FormStillQuestions({ handleSubmit }: IProps) {
   const dispatch = useAppDispatch()
   const [postFormsIdApplications, { isLoading, isSuccess }] = usePostFormsIdApplicationsMutation()
+
+  const { firstName, lastName, email } = useAppSelector(selectAuthUsersData)
+  const name = useMemo(() => (firstName && lastName ? `${firstName} ${lastName}` : undefined), [firstName, lastName])
+
   const onSubmit: SubmitHandler<FieldValues> = async (values: FieldValues) => {
     await postFormsIdApplications({
       formName: EFormIds.STILL_QUESTIONS,
       path: document.location.pathname,
-      values,
+      ...values,
     })
   }
   useEffect(() => {
@@ -54,8 +59,15 @@ export function FormStillQuestions({ handleSubmit }: IProps) {
 
   const elementContent = (
     <>
-      <Field disabled={isLoading} type="input" name="fullname" label="Full name" />
-      <Field disabled={isLoading} hints={hintsEmail} type="input" name="email" label="Email" />
+      <Field disabled={isLoading} type="input" name="name" label="Name" defaultValue={name} />
+      <Field
+        disabled={isLoading}
+        hints={hintsEmail}
+        type="input"
+        name="email"
+        label="Email"
+        defaultValue={email || undefined}
+      />
     </>
   )
 

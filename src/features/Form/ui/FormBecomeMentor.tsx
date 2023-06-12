@@ -1,12 +1,13 @@
-import { useAppDispatch } from "@app/store"
+import { useAppDispatch, useAppSelector } from "@app/store"
 import { EFormIds } from "@features"
+import { selectAuthUsersData } from "@features/users/users.slice"
 import { ChatBubbleBottomCenterIcon } from "@heroicons/react/24/solid"
 import { openModal } from "@shared/layout"
 import { Field, Formus, OuterLink } from "@shared/ui"
 import { bem, isEmail } from "@shared/utils"
 import { Button } from "antd"
 import cn from "classnames"
-import { useEffect } from "react"
+import { useEffect, useMemo } from "react"
 import { FieldValues, SubmitHandler } from "react-hook-form"
 import * as yup from "yup"
 
@@ -64,11 +65,15 @@ const { getElement, getModifier } = bem(CN)
 export function FormBecomeMentor() {
   const dispatch = useAppDispatch()
   const [postFormsIdApplications, { isLoading, isSuccess }] = usePostFormsIdApplicationsMutation()
+
+  const { firstName, lastName, email } = useAppSelector(selectAuthUsersData)
+  const name = useMemo(() => (firstName && lastName ? `${firstName} ${lastName}` : undefined), [firstName, lastName])
+
   const onSubmit: SubmitHandler<FieldValues> = async (values: FieldValues) => {
     await postFormsIdApplications({
       formName: EFormIds.BECOME_MENTOR,
       path: document.location.pathname,
-      values,
+      ...values,
     })
   }
   useEffect(() => {
@@ -77,8 +82,15 @@ export function FormBecomeMentor() {
 
   const elementContent = (
     <>
-      <Field disabled={isLoading} type="input" name="name" label="Name*" />
-      <Field disabled={isLoading} type="input" name="email" label="Email*" hints={hints.email} />
+      <Field disabled={isLoading} type="input" name="name" label="Name*" defaultValue={name} />
+      <Field
+        disabled={isLoading}
+        type="input"
+        name="email"
+        label="Email*"
+        hints={hints.email}
+        defaultValue={email || undefined}
+      />
       <Field
         disabled={isLoading}
         type="textarea"
