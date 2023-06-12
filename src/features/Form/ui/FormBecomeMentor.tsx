@@ -68,7 +68,7 @@ export function FormBecomeMentor() {
     await postFormsIdApplications({
       formName: EFormIds.BECOME_MENTOR,
       path: document.location.pathname,
-      values,
+      ...values,
     })
   }
   useEffect(() => {

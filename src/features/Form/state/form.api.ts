@@ -10,10 +10,10 @@ export const FormApi = createApi({
 
   endpoints: builder => ({
     postFormsIdApplications: builder.mutation<{}, FormRequestParamsType>({
-      query: ({ formName, path, ...fields }) => ({
+      query: ({ formName, ...fields }) => ({
         url: `/forms/${FormIds[formName]}/applications/`,
         method: "POST",
-        body: { path, ...fields },
+        body: fields,
       }),
     }),
   }),

@@ -16,7 +16,7 @@ import { usePostFormsIdApplicationsMutation } from "../state/form.api"
 const schema = yup
   .object()
   .shape({
-    fullname: yup.string().required(),
+    name: yup.string().required(),
     email: yup.string().email().required(),
   })
   .required()
@@ -29,7 +29,7 @@ export function FormGetHelp() {
   const dispatch = useAppDispatch()
   const [postFormsIdApplications, { isLoading, isSuccess }] = usePostFormsIdApplicationsMutation()
   const onSubmit: SubmitHandler<FieldValues> = async (values: FieldValues) => {
-    await postFormsIdApplications({ formName: EFormIds.GET_HELP, path: document.location.pathname, values })
+    await postFormsIdApplications({ formName: EFormIds.GET_HELP, path: document.location.pathname, ...values })
   }
   useEffect(() => {
     if (isSuccess) dispatch(openModal(<PopupFormThanks />))
@@ -37,7 +37,7 @@ export function FormGetHelp() {
 
   const elementContent = (
     <>
-      <Field type="input" name="fullname" label="Full name" />
+      <Field type="input" name="name" label="Name" />
       <Field type="input" name="email" label="Email" />
     </>
   )

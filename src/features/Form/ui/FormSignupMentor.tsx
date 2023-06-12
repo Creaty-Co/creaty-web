@@ -15,7 +15,7 @@ import { usePostFormsIdApplicationsMutation } from "../state/form.api"
 const schema = yup
   .object()
   .shape({
-    fullname: yup.string().required(),
+    name: yup.string().required(),
     email: yup.string().email().required(),
   })
   .required()
@@ -31,7 +31,7 @@ export function FormSignupMentor() {
     await postFormsIdApplications({
       formName: EFormIds.SIGNUP_MENTOR,
       path: document.location.pathname,
-      values,
+      ...values,
     })
   }
   useEffect(() => {
@@ -40,7 +40,7 @@ export function FormSignupMentor() {
 
   const elementContent = (
     <>
-      <Field type="input" name="fullname" label="Full name" />
+      <Field type="input" name="name" label="Name" />
       <Field type="input" name="email" label="Email" />
     </>
   )

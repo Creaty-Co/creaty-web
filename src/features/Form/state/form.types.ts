@@ -17,7 +17,15 @@ export const FormIds = {
 export interface FormRequestParamsType {
   formName: TFormNames
   path: string
-  values: Record<string, string>
+  name?: string
+  email?: string
+  about?: string
+  url?: string
+
+  telegram?: string
+  facebook?: string
+  whats_app?: string
+  viber?: string
 }
 
 export type TFormNames = keyof typeof EFormIds

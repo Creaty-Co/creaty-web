@@ -15,7 +15,7 @@ import { usePostFormsIdApplicationsMutation } from "../state/form.api"
 const schema = yup
   .object()
   .shape({
-    fullname: yup.string().required("Full Name"),
+    name: yup.string().required("Name"),
     email: yup
       .string()
       .test("email", function (value) {
@@ -45,7 +45,7 @@ export function FormStillQuestions({ handleSubmit }: IProps) {
     await postFormsIdApplications({
       formName: EFormIds.STILL_QUESTIONS,
       path: document.location.pathname,
-      values,
+      ...values,
     })
   }
   useEffect(() => {
@@ -54,7 +54,7 @@ export function FormStillQuestions({ handleSubmit }: IProps) {
 
   const elementContent = (
     <>
-      <Field disabled={isLoading} type="input" name="fullname" label="Full name" />
+      <Field disabled={isLoading} type="input" name="name" label="Name" />
       <Field disabled={isLoading} hints={hintsEmail} type="input" name="email" label="Email" />
     </>
   )

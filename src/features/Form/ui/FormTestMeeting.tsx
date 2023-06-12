@@ -32,7 +32,7 @@ export function FormTestMeeting() {
     await postFormsIdApplications({
       formName: EFormIds.TEST_MEETING,
       path: document.location.pathname,
-      values,
+      ...values,
     })
   }
   useEffect(() => {
@@ -42,7 +42,7 @@ export function FormTestMeeting() {
   const elementContent = (
     <>
       <Field type="input" name="name" label="Name" />
-      <Field type="input" name="email" label="Email address" />
+      <Field type="input" name="email" label="Email" />
       <Field type="textarea" name="about" label="About" />
     </>
   )
