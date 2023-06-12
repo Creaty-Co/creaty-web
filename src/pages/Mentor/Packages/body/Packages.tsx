@@ -70,7 +70,11 @@ export const Packages = ({ hourPrice, mentorName, mentorSlug, packages }: IProps
         <Radio.Group value={packId} onChange={handlePackCahnged}>
           <div className="grid grid-cols-1 px-6 gap-1">
             {packages.map((pack: MentorPackageType, i) => (
-              <div className="p-4 grid grid-cols-[auto_1fr] bg-viol-100 rounded-lg" key={pack.id}>
+              <div
+                className="p-4 grid grid-cols-[auto_1fr] bg-viol-100 rounded-lg cursor-pointer"
+                key={pack.id}
+                onClick={() => setPackId(pack.id)}
+              >
                 <div className="flex gap-3 flex-row items-center">
                   <Radio value={pack.id}>
                     <span className="font--text-bold text-black-900">{pack.lessons_count} sessions</span>
