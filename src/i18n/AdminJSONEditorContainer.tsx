@@ -2,7 +2,7 @@ import "jsoneditor/dist/jsoneditor.min.css"
 import "./AdminJSONEditorContainer.scss"
 
 import { useAppSelector } from "@app/store"
-import { selectIsAuth, selectIsAuthLoading } from "@features/users/users.slice"
+import { selectAuthUsersData, selectIsAuth, selectIsAuthLoading } from "@features/users/users.slice"
 import { Button } from "@shared/ui"
 import i18next, { BackendOptions, i18n } from "i18next"
 import JSONEditor, { JSONEditorOptions } from "jsoneditor"
@@ -12,14 +12,15 @@ import { NavigateFunction, useNavigate } from "react-router"
 function AdminJSONEditorContainer() {
   const isAuthLoading = useAppSelector(selectIsAuthLoading)
   const isAuth = useAppSelector(selectIsAuth)
+  const authUsersData = useAppSelector(selectAuthUsersData)
   const navigate = useNavigate()
 
   useEffect(() => {
     if (isAuth === null) return
-    if (!isAuth && !isAuthLoading) navigate("/")
-  }, [isAuth])
+    if ((!isAuth && !isAuthLoading) || !authUsersData.isAdmin) navigate("/")
+  }, [isAuth, isAuthLoading, authUsersData])
 
-  if (!isAuth) return null
+  if ((!isAuth && !isAuthLoading) || !authUsersData.isAdmin) return null
 
   return <ReactJSONEditorContainer i18n={i18next} navigate={navigate} />
 }

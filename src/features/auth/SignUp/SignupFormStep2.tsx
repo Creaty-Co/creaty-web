@@ -20,7 +20,7 @@ import { SignupFormStep3 } from "./SignupFormStep3"
 export const schema = yup
   .object()
   .shape({
-    first_name: yup.string().required("First name is required"),
+    firstName: yup.string().required("First name is required"),
   })
   .required()
 
@@ -60,15 +60,15 @@ export function SignupFormStep2() {
   }, [data])
 
   const handleSubmit: SubmitHandler<FieldValues> = async (values: FieldValues) => {
-    const data: ISignUpFormStep2 = { first_name: values.first_name, last_name: values.last_name }
-    dispatch(signUpStep2(data))
-    signUpEmail({ ...authData, ...data })
+    const { firstName, lastName } = values as ISignUpFormStep2
+    dispatch(signUpStep2({ firstName, lastName }))
+    signUpEmail({ ...authData, first_name: firstName, last_name: lastName })
   }
 
   const elementContent = (
     <>
-      <Field type="input" name="first_name" label="First name*" />
-      <Field type="input" name="last_name" label="Last name" />
+      <Field type="input" name="firstName" label="First name*" />
+      <Field type="input" name="lastName" label="Last name" />
     </>
   )
 

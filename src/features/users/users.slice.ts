@@ -8,11 +8,12 @@ const initialState: IUsersState = {
 
   email: null,
   password: null,
-  first_name: null,
-  last_name: null,
+  firstName: null,
+  lastName: null,
 
   hasDiscount: false,
   isVerified: false,
+  isAdmin: false,
 
   isAuth: null,
   isAuthLoading: false,
@@ -24,13 +25,14 @@ export const usersSlice = createSlice({
 
   reducers: {
     setAuthUserData: (state, action: PayloadAction<IUserData>) => {
-      const { id, email, first_name, last_name, has_discount, is_verified } = action.payload
+      const { id, email, first_name, last_name, has_discount, is_verified, is_staff } = action.payload
       state.authUserId = id
       state.email = email
-      state.first_name = first_name
-      state.last_name = last_name || null
+      state.firstName = first_name
+      state.lastName = last_name || null
       state.hasDiscount = has_discount
       state.isVerified = is_verified
+      state.isAdmin = is_staff
       state.isAuth = true
     },
 
@@ -41,9 +43,9 @@ export const usersSlice = createSlice({
     },
 
     signUpStep2: (state, action: PayloadAction<ISignUpFormStep2>) => {
-      const { first_name, last_name } = action.payload
-      state.first_name = first_name
-      state.last_name = last_name || null
+      const { firstName, lastName } = action.payload
+      state.firstName = firstName
+      state.lastName = lastName || null
     },
     setAuthLoading: (state, action: PayloadAction<boolean>) => {
       state.isAuthLoading = action.payload
@@ -61,8 +63,9 @@ export const selectIsAuthLoading = createSelector(selectUsers, state => state.is
 export const selectAuthUsersData = createSelector(selectUsers, state => ({
   email: state.email,
   password: state.password,
-  first_name: state.first_name,
-  last_name: state.last_name,
+  firstName: state.firstName,
+  lastName: state.lastName,
   hasDiscount: state.hasDiscount,
   isVerified: state.isVerified,
+  isAdmin: state.isAdmin,
 }))
