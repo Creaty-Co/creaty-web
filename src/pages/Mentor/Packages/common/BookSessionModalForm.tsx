@@ -5,7 +5,7 @@ import { Field, Formus, OuterLink } from "@shared/ui"
 import { bem } from "@shared/utils"
 import { Button, Modal } from "antd"
 import cn from "classnames"
-import { memo, useMemo } from "react"
+import { memo } from "react"
 import { FieldValues } from "react-hook-form"
 import * as yup from "yup"
 
@@ -40,12 +40,11 @@ export const BookSessionModal = memo(function ResetPasswordModalForm({
   closeModal,
   onSubmit,
 }: IProps) {
-  const { firstName, lastName, email } = useAppSelector(selectAuthUsersData)
-  const name = useMemo(() => (firstName && lastName ? `${firstName} ${lastName}` : undefined), [firstName, lastName])
+  const { firstName, email } = useAppSelector(selectAuthUsersData)
 
   const elementContent = (
     <>
-      <Field type="input" name="name" label="Name*" defaultValue={name} />
+      <Field type="input" name="name" label="Name*" defaultValue={firstName} />
       <Field type="input" name="email" label="Email*" defaultValue={email || undefined} />
       <Field type="textarea" name="description" label="How can a mentor help?*" />
     </>

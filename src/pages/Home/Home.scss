@@ -1,93 +1,90 @@
 @import "/src/app/scss/bundle.scss";
 
 .home-view {
-  & > div {
-    // overflow: hidden;
+  &__title {
+    @include H2Bold;
+    @include for-size(big-phone-screen) {
+      @include H2Bold(32px);
+    }
   }
-}
 
-.home-view__title {
-  @include H2Bold;
-  @include for-size(big-phone-screen) {
-    @include H2Bold(32px);
-  }
-}
-
-.home-view__header {
-  display: grid;
-  @include row-gap(0);
-  @include WidthLimit;
-
-  @include Mobile {
+  &__header {
+    display: grid;
     @include row-gap(0);
+    @include WidthLimit;
+
+    @include Mobile {
+      @include row-gap(0);
+    }
   }
-}
 
-.home-view__search {
-  width: 100%;
-  max-width: 61.125em;
-  margin: 80px auto 0;
+  &__search {
+    width: 100%;
+    max-width: 61.125em;
+    margin: 80px auto 0;
 
-  @include for-size(big-phone-screen) {
-    margin-top: 40px;
+    @include for-size(big-phone-screen) {
+      margin-top: 40px;
+    }
   }
-}
 
-.home-view__comment {
-  @include WidthLimit;
-  margin-top: 240px;
-  @include for-size(big-phone-screen) {
+  &__comment {
+    @include WidthLimit;
+    margin-top: 240px;
+    @include for-size(big-phone-screen) {
+      margin-top: 80px;
+    }
+  }
+
+  &__slider {
+    margin-top: 160px;
+    @include for-size(big-phone-screen) {
+      margin-top: 80px;
+    }
+  }
+
+  &__help {
+    @include WidthLimit;
     margin-top: 80px;
+    @include for-size(big-phone-screen) {
+      margin: 80px 30px 0 30px ;
+      margin-top: 40px;
+    }
   }
-}
 
-.home-view__slider {
-  margin-top: 160px;
-  @include for-size(big-phone-screen) {
+  &__helpful-creaty,
+  &__become-mentor,
+  &__how-it-works,
+  &__faq {
+    @include WidthLimit;
+    margin-top: 240px;
+    @include for-size(big-phone-screen) {
+      margin-top: 96px;
+    }
+  }
+
+  &__faq {
+    display: grid;
+    @include row-gap(56px);
+    @include for-size(big-phone-screen) {
+      @include row-gap(32px);
+    }
+  }
+
+  &__have-questions {
+    @include WidthLimit;
     margin-top: 80px;
+    @include for-size(big-phone-screen) {
+      margin-top: 40px;
+    }
   }
-}
 
-.home-view__help {
-  @include WidthLimit;
-  margin-top: 80px;
-  @include for-size(big-phone-screen) {
-    margin-top: 40px;
-  }
-}
+  &__mailing-subscribe {
+    @include WidthLimit;
 
-.home-view__helpful-creaty,
-.home-view__become-mentor,
-.home-view__how-it-works,
-.home-view__faq {
-  @include WidthLimit;
-  margin-top: 240px;
-  @include for-size(big-phone-screen) {
-    margin-top: 96px;
-  }
-}
-
-.home-view__faq {
-  display: grid;
-  @include row-gap(56px);
-  @include for-size(big-phone-screen) {
-    @include row-gap(32px);
-  }
-}
-
-.home-view__have-questions {
-  @include WidthLimit;
-  margin-top: 80px;
-  @include for-size(big-phone-screen) {
-    margin-top: 40px;
-  }
-}
-
-.home-view__mailing-subscribe {
-  @include WidthLimit;
-
-  margin-top: 170px;
-  @include for-size(big-phone-screen) {
-    margin-top: 80px;
+    margin-top: 170px;
+    @include for-size(big-phone-screen) {
+      margin-top: 80px;
+    }
   }
 }

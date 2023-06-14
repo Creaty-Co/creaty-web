@@ -7,10 +7,11 @@
 
   @include WidthLimit;
   margin-top: 120px;
+  padding: 0 30px;
 
-  @include Mobile {
+  @include Tablet {
     display: grid;
-    margin-top: 22vw;
+    justify-items: center;
   }
 
   /* Section */
