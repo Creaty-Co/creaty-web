@@ -6,7 +6,7 @@ import { Field, Formus, OuterLink } from "@shared/ui"
 import { bem } from "@shared/utils"
 import { Button } from "antd"
 import cn from "classnames"
-import { useEffect, useMemo } from "react"
+import { useEffect } from "react"
 import { FieldValues, SubmitHandler } from "react-hook-form"
 import { useTranslation } from "react-i18next"
 import * as yup from "yup"
@@ -27,11 +27,10 @@ const { getElement, getModifier } = bem(CN)
 export function FormTestMeeting() {
   const dispatch = useAppDispatch()
   const { t } = useTranslation("translation", { keyPrefix: "other.forms.test_meeting" })
-  
+
   const [postFormsIdApplications, { isLoading, isSuccess }] = usePostFormsIdApplicationsMutation()
 
-  const { firstName, lastName, email } = useAppSelector(selectAuthUsersData)
-  const name = useMemo(() => (firstName && lastName ? `${firstName} ${lastName}` : undefined), [firstName, lastName])
+  const { firstName, email } = useAppSelector(selectAuthUsersData)
 
   const onSubmit: SubmitHandler<FieldValues> = async (values: FieldValues) => {
     await postFormsIdApplications({
@@ -46,7 +45,7 @@ export function FormTestMeeting() {
 
   const elementContent = (
     <>
-      <Field type="input" name="name" label="Name" defaultValue={name} />
+      <Field type="input" name="name" label="Name" defaultValue={firstName} />
       <Field type="input" name="email" label="Email" defaultValue={email || undefined} />
       <Field type="textarea" name="about" label="About" />
     </>

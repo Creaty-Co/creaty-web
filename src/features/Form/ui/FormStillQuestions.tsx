@@ -6,7 +6,7 @@ import { Field, Formus, OuterLink } from "@shared/ui"
 import { bem, isEmail } from "@shared/utils"
 import { Button } from "antd"
 import cn from "classnames"
-import { useEffect, useMemo } from "react"
+import { useEffect } from "react"
 import { FieldValues, SubmitHandler } from "react-hook-form"
 import * as yup from "yup"
 
@@ -43,8 +43,7 @@ export function FormStillQuestions({ handleSubmit }: IProps) {
   const dispatch = useAppDispatch()
   const [postFormsIdApplications, { isLoading, isSuccess }] = usePostFormsIdApplicationsMutation()
 
-  const { firstName, lastName, email } = useAppSelector(selectAuthUsersData)
-  const name = useMemo(() => (firstName && lastName ? `${firstName} ${lastName}` : undefined), [firstName, lastName])
+  const { firstName, email } = useAppSelector(selectAuthUsersData)
 
   const onSubmit: SubmitHandler<FieldValues> = async (values: FieldValues) => {
     await postFormsIdApplications({
@@ -59,7 +58,7 @@ export function FormStillQuestions({ handleSubmit }: IProps) {
 
   const elementContent = (
     <>
-      <Field disabled={isLoading} type="input" name="name" label="Name" defaultValue={name} />
+      <Field disabled={isLoading} type="input" name="name" label="Name" defaultValue={firstName} />
       <Field
         disabled={isLoading}
         hints={hintsEmail}

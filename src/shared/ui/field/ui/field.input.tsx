@@ -13,7 +13,7 @@ export interface IInputOptions {
 export interface IFieldInput {
   className?: string
   disabled?: boolean
-  defaultValue?: string
+  defaultValue?: string | null
 
   hints?: Record<string, string>
   helper?: string
@@ -62,7 +62,7 @@ export function FieldInput({ className, disabled, defaultValue, helper, hints, l
             !invalid && isDirty ? "border-green-700 focus:border-green-700" : "",
             invalid && isDirty ? "border-red focus:border-red" : ""
           )}
-          disabled={defaultValue ? true : disabled !== undefined ? disabled : false}
+          disabled={disabled !== undefined ? disabled : false}
           autoComplete="on"
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}

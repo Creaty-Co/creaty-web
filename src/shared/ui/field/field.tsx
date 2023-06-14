@@ -15,7 +15,7 @@ export type IFieldComponent = IFieldInput | IFieldTextarea | IFieldPassword
 export interface IField extends IFieldInput, IFieldTextarea, IFieldPassword {
   type: FieldInputType
   name: string
-  defaultValue?: string
+  defaultValue?: string | null
 }
 
 export function Field(props: IField) {
