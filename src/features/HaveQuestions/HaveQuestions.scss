@@ -23,6 +23,12 @@
     border-radius: 60px;
   }
 
+  @include Tablet {
+    @include gap(30px);
+    display: grid;
+    grid-template-columns: auto;
+  }
+
   &__info {
     display: grid;
 

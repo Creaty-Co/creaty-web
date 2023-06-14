@@ -12,10 +12,6 @@
     text-align: center;
   }
 
-  @include for-size(big-phone-screen) {
-    width: 90vw;
-  }
-
   &__preview {
     position: relative;
 

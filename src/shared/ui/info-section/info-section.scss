@@ -45,6 +45,11 @@
     color: $color-gray-80;
     @include TagsRegular;
   }
+
+  @include Tablet {
+    display: grid;
+    grid-template-columns: auto;
+  }
 }
 
 .info-section__header {

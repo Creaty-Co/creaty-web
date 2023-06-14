@@ -3,6 +3,7 @@
 .mentors-view {
   @include WidthLimit;
   margin-top: 120px;
+  padding: 0 30px;
 
   display: grid;
   @include row-gap(160px);
