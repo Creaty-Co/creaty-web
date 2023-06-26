@@ -1,7 +1,6 @@
 import { useAppDispatch, useAppSelector } from "@app/store"
 import { EFormIds } from "@features"
 import { selectAuthUsersData } from "@features/users/users.slice"
-import { ChatBubbleBottomCenterIcon } from "@heroicons/react/24/solid"
 import { openModal } from "@shared/layout"
 import { Field, Formus, OuterLink } from "@shared/ui"
 import { bem, isEmail } from "@shared/utils"
@@ -116,10 +115,7 @@ export function FormBecomeMentor() {
         htmlType="submit"
         loading={isLoading}
       >
-        <span className="flex gap-3 flex-row">
-          <ChatBubbleBottomCenterIcon className="text-white w-5 h-5" />
-          Send application
-        </span>
+        <span className="flex gap-3 flex-row">Send application</span>
       </Button>
 
       <div className={cn(getElement("agreement"), "text-gray-800 text-center")}>

@@ -8,7 +8,6 @@ export const FieldFactory: IFieldFactory = {
   input: FieldInput,
   password: FieldPassword,
   textarea: FieldTextarea,
-  select: FieldInput,
 }
 
 export type IFieldComponent = IFieldInput | IFieldTextarea | IFieldPassword

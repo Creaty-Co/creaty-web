@@ -1,1 +1,1 @@
-export type FieldInputType = "input" | "textarea" | "select" | "password"
+export type FieldInputType = "input" | "textarea" | "password"
