@@ -7,7 +7,8 @@ import { notification } from "antd"
 import { useEffect, useState } from "react"
 import { FieldValues } from "react-hook-form"
 
-import { BookSessionModal } from "../common/BookSessionModalForm"
+import { BookSessionForm } from "./../common/BookSessionForm"
+import { UnclosablePopupWrapper } from "./../common/UnclosablePopupWrapper"
 
 interface IProps {
   mentorSlug: string
@@ -61,15 +62,14 @@ export const Trial = ({ minutsOfTrialMeeting, mentorSlug, mentorName }: IProps) 
         </div>
       ) : null}
 
-      <BookSessionModal
+      <UnclosablePopupWrapper
+        open={openBookModal}
         title="Fill out the form to book your trial session with"
         mentorName={mentorName}
-        submitText="Book FREE session now"
-        open={openBookModal}
-        isLoading={isLoading}
         closeModal={() => setOpenBookModal(false)}
-        onSubmit={handleSubmit}
-      />
+      >
+        <BookSessionForm submitText="Book FREE session now" isLoading={isLoading} onSubmit={handleSubmit} />
+      </UnclosablePopupWrapper>
 
       {contextHolder}
     </>

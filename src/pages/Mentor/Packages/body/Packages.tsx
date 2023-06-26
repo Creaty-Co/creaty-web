@@ -7,7 +7,8 @@ import { notification, Radio, RadioChangeEvent } from "antd"
 import { useEffect, useState } from "react"
 import { FieldValues } from "react-hook-form"
 
-import { BookSessionModal } from "../common/BookSessionModalForm"
+import { BookSessionForm } from "../common/BookSessionForm"
+import { UnclosablePopupWrapper } from "../common/UnclosablePopupWrapper"
 
 interface IProps {
   hourPrice: number
@@ -49,7 +50,8 @@ export const Packages = ({ hourPrice, mentorName, mentorSlug, packages }: IProps
     reset()
   }, [error])
 
-  return packages?.length > 0 ? (
+  if (!packages?.length || packages?.length === 0) return null
+  return (
     <>
       <div className="bg-white rounded-2xl grid grid-rows-[auto_auto] gap-6 py-6">
         <div className="grid grid-cols-[1fr_auto] pl-10 pr-6 items-start gap-4">
@@ -106,17 +108,16 @@ export const Packages = ({ hourPrice, mentorName, mentorSlug, packages }: IProps
           </div>
         </Radio.Group>
       </div>
-      <BookSessionModal
+
+      <UnclosablePopupWrapper
+        open={openBookModal}
         title="Fill out the form to book your session pack with"
         mentorName={mentorName}
-        submitText="Book session pack now"
-        open={openBookModal}
-        isLoading={isLoading}
         closeModal={() => setOpenBookModal(false)}
-        onSubmit={handleSubmit}
-      />
-
+      >
+        <BookSessionForm submitText="Book session pack now" isLoading={isLoading} onSubmit={handleSubmit} />
+      </UnclosablePopupWrapper>
       {contextHolder}
     </>
-  ) : null
+  )
 }

@@ -1,9 +1,8 @@
 import { useAppSelector } from "@app/store"
 import { selectAuthUsersData } from "@features/users/users.slice"
-import { PopupLayout } from "@shared/layout"
 import { Field, Formus, OuterLink } from "@shared/ui"
 import { bem } from "@shared/utils"
-import { Button, Modal } from "antd"
+import { Button } from "antd"
 import cn from "classnames"
 import { memo } from "react"
 import { FieldValues } from "react-hook-form"
@@ -23,23 +22,11 @@ const { getElement } = bem(CN)
 
 interface IProps {
   isLoading: boolean
-  open: boolean
-  title: string
-  mentorName: string
   submitText: string
-  closeModal(): void
   onSubmit(values: FieldValues): void
 }
 
-export const BookSessionModal = memo(function ResetPasswordModalForm({
-  isLoading,
-  open,
-  title,
-  mentorName,
-  submitText,
-  closeModal,
-  onSubmit,
-}: IProps) {
+export const BookSessionForm = memo(function ResetPasswordModalForm({ isLoading, submitText, onSubmit }: IProps) {
   const { firstName, email } = useAppSelector(selectAuthUsersData)
 
   const elementContent = (
@@ -70,26 +57,12 @@ export const BookSessionModal = memo(function ResetPasswordModalForm({
   )
 
   return (
-    <Modal open={open} footer={null} closable={false} maskClosable={false} keyboard={false}>
-      <PopupLayout
-        title={
-          <h3 className="font--h3-bold popup-layout__title">
-            {title} <br />
-            <span className="text-violet">{mentorName}</span>
-          </h3>
-        }
-        onClose={closeModal}
-        shadow
-        unClosable
-      >
-        <Formus
-          className="form"
-          elementControl={elementControl}
-          elementContent={elementContent}
-          schema={schema}
-          onSubmit={onSubmit}
-        />
-      </PopupLayout>
-    </Modal>
+    <Formus
+      className="form"
+      elementControl={elementControl}
+      elementContent={elementContent}
+      schema={schema}
+      onSubmit={onSubmit}
+    />
   )
 })
