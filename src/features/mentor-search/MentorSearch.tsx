@@ -248,23 +248,13 @@ export function MentorSearch() {
 
   /* Handlers */
   function onMouseDownHandler(event: SMouseEvent<HTMLElement>) {
-    // console.group("onMouseDownHandler")
-
     const target = event.target as HTMLElement
-    // console.log("target: ", event.target)
 
     const getAttr = (name: string) => targetGetAttr(target, name)
 
     const selector = getAttr("selector")
     const action = getAttr("action")
     const id = getAttr("id")
-    /*
-    console.log(
-      ` selector: ${selector}\n`,
-      `action: ${action}\n`,
-      `id: ${getAttr("id")}\n`
-    )
-    */
 
     /* Control focus and blur */
     ;(action === "input/focus" && focus()) || (action === "input/close" && close())
@@ -273,28 +263,21 @@ export function MentorSearch() {
     selector && isSelector(selector) && toggle(selector, id, togglerTransformAction(action))
 
     /* Redirect on tag add */
-    selector === "tag" &&
-      action === "add" &&
-      id &&
+    if (selector === "tag" && action === "add" && id) {
       dispatch(
         updateSearch({
           ...searchState,
           tag: topics.tags.find((tag: { id: number }) => tag.id === +id),
           focused: false,
         })
-      ) &&
-      navigate(getURLByTagID(+id))
-
-    action &&
-      action === "search" &&
-      dispatch(
-        updateSearch({
-          ...searchState,
-          focused: false,
-        })
       )
+      navigate(getURLByTagID(+id))
+      close()
+    }
 
-    // console.groupEnd()
+    if (action && action === "search") {
+      dispatch(updateSearch({ ...searchState, focused: false }))
+    }
   }
 
   /* Side effects */

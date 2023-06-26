@@ -6,7 +6,7 @@ import { Route, Routes } from "react-router"
 
 import { Home } from "./Home/Home"
 import { Mentor } from "./Mentor/Mentor"
-import { Mentors } from "./mentors"
+import { Mentors } from "./Mentors"
 
 export const Router = () => {
   const isAuthLoading = useAppSelector(selectIsAuthLoading)

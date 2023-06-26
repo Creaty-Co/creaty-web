@@ -1,4 +1,4 @@
-import "./mentors.scss"
+import "./Mentors.scss"
 
 import { useAppDispatch, useAppSelector } from "@app/store"
 import { selectTopics } from "@entities"
