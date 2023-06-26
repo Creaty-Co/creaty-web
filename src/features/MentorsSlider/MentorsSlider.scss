@@ -10,7 +10,6 @@
 
   &__heading {
     @include H3Bold();
-    white-space: pre-line;
 
     & > em {
       color: $color-green;

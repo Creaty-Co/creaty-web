@@ -36,7 +36,6 @@
 .mentors-view__desc {
   color: $color-gray-50;
   @include TextRegular();
-  white-space: pre-line;
 
   em {
     @include TextMedium();

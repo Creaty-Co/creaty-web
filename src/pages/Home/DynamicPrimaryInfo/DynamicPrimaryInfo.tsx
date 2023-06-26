@@ -86,10 +86,10 @@ export function DynamicPrimaryInfo(props: IDynamicPrimaryInfo) {
 
   return (
     <div className={CN}>
-      <div className={cn(getElement("title"), "heading")}>
+      <h1 className={cn(getElement("title"), "heading")}>
         <em>{dynamicHeading}</em>
         <span>{t("title")}</span>
-      </div>
+      </h1>
 
       <div className={getElement("desc")}>
         {t("desc")}

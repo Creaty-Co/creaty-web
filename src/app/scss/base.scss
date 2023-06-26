@@ -8,6 +8,10 @@
   margin: 0;
 }
 
+#root {
+  white-space: pre-line;
+}
+
 body {
   font: 16px/1 "Google Sans", Arial, sans-serif;
   color: $color-white;
@@ -18,6 +22,10 @@ body {
 
 em {
   font-style: unset;
+}
+
+p {
+  margin-bottom: 0;
 }
 
 a {

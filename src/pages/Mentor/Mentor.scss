@@ -48,7 +48,6 @@
   margin: 0 auto;
 
   text-align: center;
-  white-space: pre-line;
   @include Typography(1.5rem, 400, $color-green);
 
   & > em {

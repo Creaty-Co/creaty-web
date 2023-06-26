@@ -2,7 +2,7 @@ import "./scss/style.scss"
 import "antd/dist/reset.css"
 import "./scss/base.scss"
 import "./scss/app.scss"
-import "./scss/global.scss"
+import "./scss/ant.scss"
 
 import { StyleProvider } from "@ant-design/cssinjs"
 import { Cookies } from "@features/cookies"
