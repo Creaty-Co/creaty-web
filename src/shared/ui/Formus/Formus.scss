@@ -8,6 +8,10 @@
 
   &__notifies {
     color: $color-white;
+    border-radius: 16px;
+    background-color: $color-black-main;
+    box-shadow: 0px 10px 20px 0px $color-gray-70;
+    opacity: 0.9;
   }
 
   &__notify {

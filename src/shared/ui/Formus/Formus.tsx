@@ -67,7 +67,7 @@ export function Formus({
     setShowNotifeis(true)
     refTimeout.current = setTimeout(() => {
       setShowNotifeis(false)
-    }, 5000)
+    }, 50000)
 
     return () => {
       refTimeout.current && clearTimeout(refTimeout.current)
@@ -103,7 +103,7 @@ export function Formus({
             className={cn(
               getElement("notifies"),
               "px-5 py-3 w-max",
-              "bg-black-main opacity-90 rounded-2xl",
+              "bg-black-main opacity-90",
               "grid grid-cols-1 grid-flow-row gap-1 items-start",
               "absolute  left-2/4 -translate-x-1/2  -translate-y-3/4	"
             )}
