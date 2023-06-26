@@ -34,6 +34,7 @@ export const Router = () => {
     <Routes>
       <Route path="/">
         <Route index element={<Home />} />
+        <Route path=":shortcut" element={<Home />} />
         <Route path="reset-password/:code" element={<Home />} />
         <Route path="email-verify/:code" element={<Home />} />
         <Route path="mentors" element={<Mentors />} />
