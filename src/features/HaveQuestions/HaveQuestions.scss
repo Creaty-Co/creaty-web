@@ -52,7 +52,7 @@
 
     @include H4Regular;
     em {
-      white-space: normal;
+      color: $color-black-90;
       @include H4Medium;
       display: block;
     }
