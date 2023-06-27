@@ -1,5 +1,3 @@
-// import { getPagesLocalesLanguageNamespace, putPagesLocalesLanguageNamespace } from "api/actions/pages"
-// import ClientAPI from "api/client"
 import i18next, { BackendOptions, ResourceKey } from "i18next"
 import { initReactI18next } from "react-i18next"
 
@@ -10,7 +8,6 @@ import { LocaleKeys, supportedLocales } from "./locales"
 export const localeLocalStorage = localStorage.getItem("lang") as LocaleKeys | null
 export const localeNavigator = window.navigator.language.split("-")[0] as LocaleKeys
 export const localeFallback: LocaleKeys = "en"
-// export const localeCurrent: LocaleKeys = localeLocalStorage || localeNavigator || localeFallback
 export const localeCurrent: LocaleKeys = localeFallback
 
 const API = process.env.REACT_APP_API_HOST
@@ -44,14 +41,17 @@ i18next
       async put(language: string, namespace: string, data: ResourceKey) {
         const lSAccessToken = localStorage.getItem("accessToken")
 
-        const response = await fetch(`${API}/pages/locales/${language}/${namespace}.json/`, {
-          headers: {
-            Authorization: `Bearer ${lSAccessToken}`,
-            "content-type": "application/json",
-          },
-          method: "PUT",
-          body: JSON.stringify(data),
-        })
+        const updateJson = async () => {
+          return await fetch(`${API}/pages/locales/${language}/${namespace}.json/`, {
+            headers: {
+              Authorization: `Bearer ${lSAccessToken}`,
+              "content-type": "application/json",
+            },
+            method: "PUT",
+            body: JSON.stringify(data),
+          })
+        }
+        const response = await updateJson()
 
         if (response.status === 401) {
           const lSRefreshToken = localStorage.getItem("refreshToken")
@@ -70,7 +70,7 @@ i18next
             const { access, refresh } = jsonData as { access: string; refresh: string }
             localStorage.setItem("accessToken", access)
             localStorage.setItem("refreshToken", refresh)
-            window.location.reload()
+            await updateJson()
           } else {
             localStorage.removeItem("accessToken")
             localStorage.removeItem("refreshToken")
