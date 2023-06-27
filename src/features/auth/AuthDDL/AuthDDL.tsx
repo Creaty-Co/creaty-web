@@ -37,7 +37,12 @@ export function AuthDDL() {
   }
 
   return (
-    <Dropdown menu={{ items, onClick }} placement="bottomRight" overlayClassName={getElement("ddl")}>
+    <Dropdown
+      menu={{ items, onClick }}
+      placement="bottomRight"
+      overlayClassName={getElement("ddl")}
+      trigger={["click"]}
+    >
       <Avatar
         size={48}
         shape="square"
