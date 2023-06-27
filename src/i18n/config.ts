@@ -39,19 +39,19 @@ i18next
         return data
       },
       async put(language: string, namespace: string, data: ResourceKey) {
-        const lSAccessToken = localStorage.getItem("accessToken")
+        const lSAccessToken = localStorage.getItem("accessToken") || ""
 
-        const updateJson = async () => {
+        const updateJson = async (token: string) => {
           return await fetch(`${API}/pages/locales/${language}/${namespace}.json/`, {
             headers: {
-              Authorization: `Bearer ${lSAccessToken}`,
+              Authorization: `Bearer ${token}`,
               "content-type": "application/json",
             },
             method: "PUT",
             body: JSON.stringify(data),
           })
         }
-        const response = await updateJson()
+        const response = await updateJson(lSAccessToken)
 
         if (response.status === 401) {
           const lSRefreshToken = localStorage.getItem("refreshToken")
@@ -70,7 +70,7 @@ i18next
             const { access, refresh } = jsonData as { access: string; refresh: string }
             localStorage.setItem("accessToken", access)
             localStorage.setItem("refreshToken", refresh)
-            await updateJson()
+            await updateJson(access)
           } else {
             localStorage.removeItem("accessToken")
             localStorage.removeItem("refreshToken")
