@@ -6,6 +6,7 @@ import { Button } from "@shared/ui"
 import { notification } from "antd"
 import { useEffect, useState } from "react"
 import { FieldValues } from "react-hook-form"
+import { useTranslation } from "react-i18next"
 
 import { BookSessionForm } from "../common/BookSessionForm"
 import { UnclosablePopupWrapper } from "../common/UnclosablePopupWrapper"
@@ -17,6 +18,7 @@ interface IProps {
 }
 
 export const Hour = ({ hourPrice, mentorName, mentorSlug }: IProps) => {
+  const { t } = useTranslation("translation")
   const dispatch = useAppDispatch()
   const [api, contextHolder] = notification.useNotification()
   const [bookHourlySession, { isLoading, isSuccess, error, reset }] = useBookHourlySessionMutation()
@@ -50,31 +52,30 @@ export const Hour = ({ hourPrice, mentorName, mentorSlug }: IProps) => {
     <>
       <div className="bg-white rounded-2xl grid grid-cols-[1fr_auto] pl-10 pr-6 py-6 items-start gap-4">
         <div className="grid grid-rows-[auto_auto] gap-2">
-          <div className="font--h4-bold text-black-900">
-            Mentoring session with <em className="text-violet">{mentorName}</em>
-          </div>
-          <div className="font--text-regular text-gray-800">
-            1-hour personal mentoring session.
-            <br />
-            No nonsense, just straight-up support and guidance.
-          </div>
+          <div className="font--h4-bold text-black-900">{t("views.mentor.plans.hour.title", { mentorName })}</div>
+          <div className="font--text-regular text-gray-800">{t("views.mentor.plans.hour.desc")}</div>
           <div className="font--text-regular text-black-900 pt-1">
-            <em className="font--text-bold">${hourPrice}</em> / 60 min session
+            <span className="font--text-bold">${hourPrice}</span> / 60 min session
           </div>
         </div>
 
         <Button size="big" type="submit" color="violet" onClick={() => setOpenBookModal(true)}>
-          Book now
+          {t("views.mentor.plans.hour.submitText")}
         </Button>
       </div>
 
       <UnclosablePopupWrapper
         open={openBookModal}
-        title="Fill out the form to book your session with"
+        title={t("other.forms.bookSessionHour.title")}
         mentorName={mentorName}
         closeModal={() => setOpenBookModal(false)}
       >
-        <BookSessionForm submitText="Book session now" isLoading={isLoading} onSubmit={handleSubmit} />
+        <BookSessionForm
+          submitText={t("other.forms.bookSessionHour.submitText")}
+          terms={t("other.forms.bookSessionHour.terms")}
+          isLoading={isLoading}
+          onSubmit={handleSubmit}
+        />
       </UnclosablePopupWrapper>
       {contextHolder}
     </>

@@ -48,8 +48,8 @@ export const UnclosablePopupWrapper = memo(function ResetPasswordModalForm({
           </div>
         </Popconfirm>
         <h3 className="font--h3-bold popup-layout__title">
-          {title} <br />
-          <span className="text-violet">{mentorName}</span>
+          {title}
+          <em>{mentorName}</em>
         </h3>
 
         <div className={getElement("container")}>{children}</div>

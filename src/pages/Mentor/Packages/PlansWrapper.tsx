@@ -15,7 +15,7 @@ interface IProps {
   packages: MentorPackageType[]
 }
 
-export const PackagesWrapper = ({ hourPrice, mentorSlug, mentorName, minutsOfTrialMeeting, packages }: IProps) => (
+export const PlansWrapper = ({ hourPrice, mentorSlug, mentorName, minutsOfTrialMeeting, packages }: IProps) => (
   <div className={cn(CNPackages, "flex flex-col gap-y-5")} id="packages">
     <div className="font--h3-bold text-white mt-10 mb-5">Select your mentoring plan</div>
 

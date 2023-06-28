@@ -26,7 +26,7 @@ const { getElement, getModifier } = bem(CN)
 
 export function FormTestMeeting() {
   const dispatch = useAppDispatch()
-  const { t } = useTranslation("translation", { keyPrefix: "other.forms.test_meeting" })
+  const { t } = useTranslation("translation", { keyPrefix: "other.forms.testMeeting" })
 
   const [postFormsIdApplications, { isLoading, isSuccess }] = usePostFormsIdApplicationsMutation()
 
@@ -63,7 +63,7 @@ export function FormTestMeeting() {
       </Button>
 
       <div className={cn(getElement("agreement"), "text-gray-800 text-center")}>
-        By on the {t("submitText")}, you agree to Creaty Co. <br />
+        By on the {t("terms")}, you agree to Creaty Co. <br />
         <OuterLink className="document__link--form" linkHref="user_agreement" translateType="terms" /> and{" "}
         <OuterLink className="document__link--form" linkHref="privacy_policy" translateType="privacyPolicy" />
       </div>

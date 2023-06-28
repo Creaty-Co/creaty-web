@@ -8,6 +8,7 @@ import { bem } from "@shared/utils"
 import { Button } from "antd"
 import cn from "classnames"
 import { FieldValues } from "react-hook-form"
+import { useTranslation } from "react-i18next"
 import * as yup from "yup"
 
 import { LoginForm } from "../Login/LoginForm"
@@ -51,6 +52,7 @@ const MOD = "signup"
 const { getElement, getModifier } = bem(CN)
 
 export function SignupFormStep1() {
+  const { t } = useTranslation("translation", { keyPrefix: "other.forms.signUpStep1" })
   const dispatch = useAppDispatch()
 
   const handleSubmit = (values: FieldValues) => {
@@ -65,9 +67,9 @@ export function SignupFormStep1() {
   const elementContent = (
     <>
       <span className={cn(getElement("suggestion"))}>
-        Already have an account?{" "}
+        {`${t("header")} `}
         <em className={cn(getElement("redirection"))} onClick={handleSignUpRedirect}>
-          Log In
+          {t("return")}
         </em>
       </span>
       <Field type="input" name="email" label="Email*" />
@@ -99,7 +101,7 @@ export function SignupFormStep1() {
   const elementControl = (
     <>
       <Button className="button button--dark button--biggest button__text" type="primary" htmlType="submit">
-        Continue with email
+        {t("mainButtonText")}
       </Button>
 
       <div className="relative flex py-2 items-center">
@@ -109,11 +111,11 @@ export function SignupFormStep1() {
       </div>
 
       <Button className="button button--google button--biggest button__text" onClick={handleGoogleClick}>
-        Continue with Google
+        {t("googleButtonText")}
       </Button>
 
       <div className={cn(getElement("agreement"), "text-gray-800 text-center")}>
-        By signing up, you agree to Creaty Co. <br />
+        {t("terms")}
         <OuterLink className="document__link--form" linkHref="user_agreement" translateType="terms" /> and{" "}
         <OuterLink className="document__link--form" linkHref="privacy_policy" translateType="privacyPolicy" />
       </div>
@@ -121,7 +123,7 @@ export function SignupFormStep1() {
   )
 
   return (
-    <PopupLayout title="Sign up to find your perfect mentor">
+    <PopupLayout title={t("title")}>
       <Formus
         className={cn(getModifier(CN, MOD))}
         elementContent={elementContent}

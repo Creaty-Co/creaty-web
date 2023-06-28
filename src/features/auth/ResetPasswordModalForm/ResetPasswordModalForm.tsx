@@ -9,6 +9,7 @@ import { Button, Modal, notification } from "antd"
 import cn from "classnames"
 import { memo, useEffect } from "react"
 import { FieldValues } from "react-hook-form"
+import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router"
 import * as yup from "yup"
 
@@ -55,6 +56,7 @@ interface IProps {
 }
 
 export const ResetPasswordModalForm = memo(function ResetPasswordModalForm({ code }: IProps) {
+  const { t } = useTranslation("translation", { keyPrefix: "other.forms.resetPassword" })
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
@@ -74,7 +76,7 @@ export const ResetPasswordModalForm = memo(function ResetPasswordModalForm({ cod
 
   useEffect(() => {
     if (!isSuccess || !data) return
-    api.success({ message: "The password was successfully changed and you were logged in", duration: 10 })
+    api.success({ message: t("successMessage"), duration: 10 })
     const { access, refresh } = data
     dispatch(setTokens({ accessToken: access, refreshToken: refresh }))
     getMe(skipToken)
@@ -117,13 +119,13 @@ export const ResetPasswordModalForm = memo(function ResetPasswordModalForm({ cod
       htmlType="submit"
       loading={isLoading}
     >
-      Continue
+      {t("submitText")}
     </Button>
   )
 
   return (
     <Modal open={!!code} onCancel={closeModal} footer={null} closable={false} maskClosable={false} keyboard={false}>
-      <PopupLayout title="Reset your password" unClosable>
+      <PopupLayout title={t("title")} unClosable>
         <Formus
           className={cn(getModifier(CN, MOD))}
           elementContent={elementContent}

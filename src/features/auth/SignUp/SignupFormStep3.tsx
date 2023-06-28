@@ -5,6 +5,7 @@ import { Button } from "@shared/ui"
 import { bem } from "@shared/utils"
 import { notification } from "antd"
 import { useEffect } from "react"
+import { useTranslation } from "react-i18next"
 
 import { useResendVerifyEmailMutation } from "../auth.api"
 
@@ -12,6 +13,7 @@ const CN = "form"
 const { getElement } = bem(CN)
 
 export function SignupFormStep3() {
+  const { t } = useTranslation("translation", { keyPrefix: "other.forms.signUpStep3" })
   const dispatch = useAppDispatch()
   const email = useAppSelector(selectAuthUsersData).email
   const [api, contextHolder] = notification.useNotification()
@@ -30,24 +32,25 @@ export function SignupFormStep3() {
   }, [isSuccess])
 
   const closeMpdal = () => dispatch(closeModal())
-  const handleResendEmailVerify = () => resendVerifyEmail({ email: email || "doroshenkoradware@gmail.com" })
+  const handleResendEmailVerify = () => resendVerifyEmail({ email: email })
 
   return (
     <PopupLayout title="Check your email">
       <div className="form">
         <div className={getElement("confirmation")}>
-          We've sent you a confirmation to <b>{email}</b>
+          {t("subTitle")}
+          <b>{email}</b>
         </div>
         <div className="grid grid-flow-row grid-cols-1 grid-rows-auto gap-y-4 w-full mt-6 mb-6">
           <Button size="biggest" color="dark" onClick={closeMpdal} pending={isLoading}>
-            Ok
+            {t("submitText")}
           </Button>
         </div>
 
         <span className={getElement("suggestion")}>
-          <span>If you haven't received email in 5 minutes, check your spam or </span>
+          <span>{t("resendText")}</span>
           <em className={getElement("redirection")} onClick={handleResendEmailVerify}>
-            {` resend`}
+            {t("resend")}
           </em>
         </span>
       </div>

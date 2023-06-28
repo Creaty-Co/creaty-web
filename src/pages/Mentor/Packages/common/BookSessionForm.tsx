@@ -23,10 +23,16 @@ const { getElement } = bem(CN)
 interface IProps {
   isLoading: boolean
   submitText: string
+  terms: string
   onSubmit(values: FieldValues): void
 }
 
-export const BookSessionForm = memo(function ResetPasswordModalForm({ isLoading, submitText, onSubmit }: IProps) {
+export const BookSessionForm = memo(function ResetPasswordModalForm({
+  isLoading,
+  submitText,
+  terms,
+  onSubmit,
+}: IProps) {
   const { firstName, email } = useAppSelector(selectAuthUsersData)
 
   const elementContent = (
@@ -49,7 +55,7 @@ export const BookSessionForm = memo(function ResetPasswordModalForm({ isLoading,
       </Button>
 
       <div className={cn(getElement("agreement"), "text-gray-800 text-center")}>
-        By signing up, you agree to Creaty Co. <br />
+        {terms}
         <OuterLink className="document__link--form" linkHref="user_agreement" translateType="terms" /> and{" "}
         <OuterLink className="document__link--form" linkHref="privacy_policy" translateType="privacyPolicy" />
       </div>

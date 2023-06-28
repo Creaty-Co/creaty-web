@@ -162,4 +162,8 @@
 .packages {
   box-shadow: 0px 2px 8px rgba(147, 78, 255, 0.1),
     0px 8px 30px rgba(159, 97, 255, 0.3), 0px 8px 200px rgba(102, 16, 235, 0.7);
+
+  em {
+    color: $color-violet;
+  }
 }

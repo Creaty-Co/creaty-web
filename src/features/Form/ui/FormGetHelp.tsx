@@ -8,6 +8,7 @@ import { Button } from "antd"
 import cn from "classnames"
 import { useEffect } from "react"
 import { FieldValues, SubmitHandler } from "react-hook-form"
+import { useTranslation } from "react-i18next"
 import * as yup from "yup"
 
 import { PopupFormThanks } from "../PopupForm"
@@ -26,6 +27,7 @@ const MOD = "get-help"
 const { getElement, getModifier } = bem(CN)
 
 export function FormGetHelp() {
+  const { t } = useTranslation("translation", { keyPrefix: "other.forms.getHelp" })
   const dispatch = useAppDispatch()
   const [postFormsIdApplications, { isLoading, isSuccess }] = usePostFormsIdApplicationsMutation()
 
@@ -54,11 +56,11 @@ export function FormGetHelp() {
         htmlType="submit"
         loading={isLoading}
       >
-        <span className="flex flex-row gap-3">Get Help</span>
+        <span className="flex flex-row gap-3">{t("submitText")}</span>
       </Button>
 
       <div className={cn(getElement("agreement"), "text-gray-800 text-center")}>
-        By on the Get Help, you agree to Creaty Co. <br />
+        {t("terms")}
         <OuterLink className="document__link--form" linkHref="user_agreement" translateType="terms" /> and{" "}
         <OuterLink className="document__link--form" linkHref="privacy_policy" translateType="privacyPolicy" />
       </div>
