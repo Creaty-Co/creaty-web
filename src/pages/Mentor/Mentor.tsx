@@ -2,7 +2,7 @@ import "./Mentor.scss"
 
 import { MentorPackageType, Tag, useGetMentorBySlugQuery } from "@entities"
 import { QAndA } from "@pages/Home/QAndA/QAndA"
-import { useScrollToTop } from "@shared/hooks"
+import { useScrollToTop } from "@shared/index"
 import { Button, Icon, LoaderCover } from "@shared/ui"
 import { bem, getEmojiPNG } from "@shared/utils"
 import cn from "classnames"

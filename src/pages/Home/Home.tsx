@@ -4,7 +4,7 @@ import { HaveQuestions, HelpSocial, MentorSearch, MentorSearchTags, MentorsSlide
 import { EmaiVerifyModalForm } from "@features/auth/EmaiVerifyModalForm/EmaiVerifyModalForm"
 import { ResetPasswordModalForm } from "@features/auth/ResetPasswordModalForm/ResetPasswordModalForm"
 import { useGetPagePersonalQuery, useGetPagesMainQuery } from "@shared/api"
-import { useScrollToTop } from "@shared/hooks"
+import { useScrollToTop } from "@shared/index"
 import { BigComment, InfoSection, LoaderCover } from "@shared/ui"
 import { bem } from "@shared/utils"
 import cn from "classnames"
