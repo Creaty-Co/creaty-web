@@ -71,4 +71,5 @@ export const selectAuthUsersData = createSelector(selectUsers, state => ({
   hasDiscount: state.hasDiscount,
   isVerified: state.isVerified,
   isAdmin: state.isAdmin,
+  isMentor: state.isMentor,
 }))

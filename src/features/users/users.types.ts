@@ -7,6 +7,7 @@ export interface IUserData {
   is_verified: boolean
   is_staff: boolean
   is_mentor: boolean
+  isAuth?: boolean
 }
 
 export interface ISignUpFormStep1 {

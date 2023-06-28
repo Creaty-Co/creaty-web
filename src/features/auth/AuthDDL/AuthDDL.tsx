@@ -4,7 +4,7 @@ import { history } from "@app/App"
 import { useAppDispatch, useAppSelector } from "@app/store"
 import { selectAuthUsersData, setAuthUserData } from "@features/users/users.slice"
 import { bem } from "@shared/utils"
-import { Avatar, Dropdown, MenuProps } from "antd"
+import { Avatar, Badge, Dropdown, MenuProps } from "antd"
 import { useMemo } from "react"
 
 import { removeTokens } from "../auth.slice"
@@ -62,11 +62,21 @@ export function AuthDDL() {
       overlayClassName={getElement("ddl")}
       trigger={["click"]}
     >
-      <Avatar
-        size={48}
-        shape="square"
-        icon={<img src="/static/icons/user-avatar.svg" alt="user-avatar" className={getElement("avatar")} />}
-      />
+      {authUsersData.isMentor ? (
+        <Badge count={<img src="/static/icons/mentor-badge.svg" alt="user-avatar" className={getElement("avatar")} />}>
+          <Avatar
+            size={48}
+            shape="square"
+            icon={<img src="/static/icons/user-avatar.svg" alt="user-avatar" className={getElement("avatar")} />}
+          />
+        </Badge>
+      ) : (
+        <Avatar
+          size={48}
+          shape="square"
+          icon={<img src="/static/icons/user-avatar.svg" alt="user-avatar" className={getElement("avatar")} />}
+        />
+      )}
     </Dropdown>
   )
 }
