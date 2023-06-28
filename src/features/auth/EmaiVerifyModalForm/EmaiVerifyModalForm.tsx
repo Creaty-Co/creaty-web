@@ -1,4 +1,4 @@
-import "./EmaiVerifyModal.scss"
+import "./EmaiVerifyModalForm.scss"
 
 import { useAppDispatch } from "@app/store"
 import { useVerifyEmailMutation } from "@features/auth/auth.api"
@@ -8,7 +8,9 @@ import { PopupLayout } from "@shared/layout"
 import { Formus } from "@shared/ui"
 import { bem } from "@shared/utils"
 import { Button, Modal, notification } from "antd"
+import cn from "classnames"
 import { memo, useEffect } from "react"
+import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router"
 
 import { setTokens } from "../auth.slice"
@@ -20,7 +22,8 @@ interface IProps {
   code?: string
 }
 
-export const EmaiVerifyModal = memo(function ResetPasswordModalForm({ code }: IProps) {
+export const EmaiVerifyModalForm = memo(function EmaiVerifyModalForm({ code }: IProps) {
+  const { t } = useTranslation("translation", { keyPrefix: "other.forms.emailVerify" })
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
@@ -28,7 +31,11 @@ export const EmaiVerifyModal = memo(function ResetPasswordModalForm({ code }: IP
   const [confirmEmail, { data, isLoading, isSuccess, error, reset }] = useVerifyEmailMutation()
   const [getMe] = useLazyGetMeQuery()
 
-  const handleConfirmEmail = () => confirmEmail({ code })
+  const handleConfirmEmail = () => navigate("/")
+
+  useEffect(() => {
+    if (code) confirmEmail({ code })
+  }, [code])
 
   useEffect(() => {
     if (!error) return
@@ -44,42 +51,31 @@ export const EmaiVerifyModal = memo(function ResetPasswordModalForm({ code }: IP
     if (isSuccess && data) {
       dispatch(setTokens({ accessToken: data.access, refreshToken: data.refresh }))
       getMe(skipToken)
-      navigate("/")
     }
   }, [isSuccess])
 
   const elementContent = (
     <>
-      <span className={getElement("discount-description")}>
-        Meanwhile we want to give you welcome <span className={getElement("discount")}> 10% Discount</span> for your
-        first paid session with mentor
-      </span>
-      <span className={getElement("footer")}>
-        No need for any promo code, our team already knows about your discount status.
-      </span>
+      <span className={getElement("discount-description")}>{t("body")}</span>
+      <span className={getElement("footer")}>{t("tip")}</span>
     </>
   )
 
   const elementControl = (
     <Button
-      className="button button--green button--biggest button__text text-black-900"
+      className={cn("button button--green button--biggest button__text text-black-900", getElement("button"))}
       htmlType="submit"
       loading={isLoading}
     >
-      OK
+      {t("submitText")}
     </Button>
   )
 
   return (
     <Modal open={!!code} footer={null} closable={false} maskClosable={false} keyboard={false}>
       <PopupLayout
-        title={
-          <h3 className="font--h3-bold popup-layout__title">
-            We are glad you joined <br />
-            <span className="text-green-300">Creaty.Club</span>
-          </h3>
-        }
-        subTitle={<h4 className="font--h4-bold">We'll launch fully soon!</h4>}
+        title={<h3 className={cn("font--h3-bold popup-layout__title", getElement("title"))}>{t("title")}</h3>}
+        subTitle={<h4 className="font--h4-bold">{t("header")}</h4>}
         unClosable
         shadow
         black

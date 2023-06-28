@@ -75,17 +75,6 @@
   color: $color-gray-50;
   @include TextRegular;
 
-  ul,
-  p {
-    padding-bottom: 1em;
-  }
-
-  /*
-	*:first-child {
-		text-indent: 0;
-	}
-	*/
-
   *:last-child {
     padding-bottom: 0;
   }
@@ -96,6 +85,7 @@
 
   ul {
     @include gap(0.5em);
+    list-style: disc;
     padding-left: 27px;
   }
 }

@@ -6,8 +6,10 @@ import { Button } from "@shared/ui"
 import { notification, Radio, RadioChangeEvent } from "antd"
 import { useEffect, useState } from "react"
 import { FieldValues } from "react-hook-form"
+import { useTranslation } from "react-i18next"
 
-import { BookSessionModal } from "../common/BookSessionModalForm"
+import { BookSessionForm } from "../common/BookSessionForm"
+import { UnclosablePopupWrapper } from "../common/UnclosablePopupWrapper"
 
 interface IProps {
   hourPrice: number
@@ -17,6 +19,7 @@ interface IProps {
 }
 
 export const Packages = ({ hourPrice, mentorName, mentorSlug, packages }: IProps) => {
+  const { t } = useTranslation("translation")
   const dispatch = useAppDispatch()
   const [api, contextHolder] = notification.useNotification()
 
@@ -49,21 +52,18 @@ export const Packages = ({ hourPrice, mentorName, mentorSlug, packages }: IProps
     reset()
   }, [error])
 
-  return packages?.length > 0 ? (
+  if (!packages?.length || packages?.length === 0) return null
+  return (
     <>
       <div className="bg-white rounded-2xl grid grid-rows-[auto_auto] gap-6 py-6">
         <div className="grid grid-cols-[1fr_auto] pl-10 pr-6 items-start gap-4">
           <div className="grid grid-rows-[auto_auto] gap-2">
-            <div className="font--h4-bold text-black-900">
-              Session packs <em className="text-violet">with discount</em>
-            </div>
-            <div className="font--text-regular text-gray-800">
-              Boost your creative career to new heights with a packs of mentoring sessions and enjoy special prices.
-            </div>
+            <div className="font--h4-bold text-black-900">{t("views.mentor.plans.pack.title")}</div>
+            <div className="font--text-regular text-gray-800">{t("views.mentor.plans.pack.desc")}</div>
           </div>
 
           <Button size="big" type="submit" color="violet" onClick={() => setOpenBookModal(true)}>
-            Book now
+            {t("views.mentor.plans.pack.submitText")}
           </Button>
         </div>
 
@@ -106,17 +106,21 @@ export const Packages = ({ hourPrice, mentorName, mentorSlug, packages }: IProps
           </div>
         </Radio.Group>
       </div>
-      <BookSessionModal
-        title="Fill out the form to book your session pack with"
-        mentorName={mentorName}
-        submitText="Book session pack now"
-        open={openBookModal}
-        isLoading={isLoading}
-        closeModal={() => setOpenBookModal(false)}
-        onSubmit={handleSubmit}
-      />
 
+      <UnclosablePopupWrapper
+        open={openBookModal}
+        title={t("other.forms.bookSessionPackage.title")}
+        mentorName={mentorName}
+        closeModal={() => setOpenBookModal(false)}
+      >
+        <BookSessionForm
+          submitText={t("other.forms.bookSessionPackage.submitText")}
+          terms={t("other.forms.bookSessionPackage.terms")}
+          isLoading={isLoading}
+          onSubmit={handleSubmit}
+        />
+      </UnclosablePopupWrapper>
       {contextHolder}
     </>
-  ) : null
+  )
 }

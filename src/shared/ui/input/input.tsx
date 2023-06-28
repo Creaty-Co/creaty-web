@@ -1,11 +1,10 @@
 import "./input.scss"
 
-import { useClickAway } from "@shared/hooks"
+import { useClickAway } from "@shared/index"
 import { DropDown, Icon } from "@shared/ui"
 import { bem, classMerge, classWithModifiers } from "@shared/utils"
 import _ from "lodash"
 import { ChangeEvent, DetailedHTMLProps, Dispatch, InputHTMLAttributes, useRef, useState } from "react"
-
 
 export interface InputStrainType<V> {
   title: string
@@ -38,15 +37,12 @@ function Input<V>(props: InputProps<V>) {
     <label className={classMerge(CN, props.className)}>
       <input
         {..._.omit(props, "masks", "onMaskSelect", "masksName")}
-        className={getElement("input")} 
-        placeholder={props.placeholder + ((props.required && !props.masks?.length) ? "*" : "")}
-
+        className={getElement("input")}
+        placeholder={props.placeholder + (props.required && !props.masks?.length ? "*" : "")}
         onChange={onChange}
       />
 
-      {props.masks &&
-        <InputMasks masks={props.masks} masksName={props.masksName} onSelect={onMaskSelect} />
-      }
+      {props.masks && <InputMasks masks={props.masks} masksName={props.masksName} onSelect={onMaskSelect} />}
     </label>
   )
 }
@@ -70,23 +66,24 @@ function InputMasks<V>(props: InputMasksProps<V>) {
     setIsExpanded(false)
   }
   useClickAway(parentRef, () => setIsExpanded(false))
-  
+
   return (
     <div className="input-masks" ref={parentRef}>
-      <button className="input-masks__current" type="button" onClick={() => setIsExpanded(!isExpanded)} >
+      <button className="input-masks__current" type="button" onClick={() => setIsExpanded(!isExpanded)}>
         {currentStrain.title}
         <Icon className={classWithModifiers("input-masks__icon", isExpanded && "up")} name="chevron" />
       </button>
       <div className="input-masks__list">
         <DropDown<V> name={props.masksName} expanded={isExpanded} onSelect={onSelect}>
           {props.masks.map((mask, index) => (
-            <option value={String(mask.value)} key={index}>{mask.title}</option>
+            <option value={String(mask.value)} key={index}>
+              {mask.title}
+            </option>
           ))}
         </DropDown>
       </div>
     </div>
   )
 }
-
 
 export default Input

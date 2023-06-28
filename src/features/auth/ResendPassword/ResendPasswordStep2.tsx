@@ -5,6 +5,7 @@ import { bem } from "@shared/utils"
 import { notification } from "antd"
 import cn from "classnames"
 import { useEffect } from "react"
+import { useTranslation } from "react-i18next"
 
 const CN = "form"
 const MOD = "resend-password"
@@ -15,6 +16,7 @@ interface IProps {
 }
 
 export function ResendPasswordStep2({ email }: IProps) {
+  const { t } = useTranslation("translation", { keyPrefix: "other.forms.resendPassword2" })
   const [api, contextHolder] = notification.useNotification()
 
   const [resendPassword, { error, reset }] = useResendPasswordMutation()
@@ -30,17 +32,15 @@ export function ResendPasswordStep2({ email }: IProps) {
 
   const elementContent = (
     <span className={cn(getElement("suggestion"))}>
-      If you haven't received email in 5 minutes, check your spam or
+      {t("sugTitle")}
       <em className={cn(getElement("redirection"))} onClick={handleResendPassword}>
-        {" "}
-        resend
+        {t("resend")}
       </em>
-      .
     </span>
   )
 
   return (
-    <PopupLayout title="Check you email for instructions to reset your password">
+    <PopupLayout title={t("title")}>
       <Formus className={cn(getModifier(CN, MOD))} elementContent={elementContent} onSubmit={handleResendPassword} />
       {contextHolder}
     </PopupLayout>

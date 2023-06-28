@@ -2,14 +2,14 @@ import "./Mentor.scss"
 
 import { MentorPackageType, Tag, useGetMentorBySlugQuery } from "@entities"
 import { QAndA } from "@pages/Home/QAndA/QAndA"
-import { useScrollToTop } from "@shared/hooks"
+import { useScrollToTop } from "@shared/index"
 import { Button, Icon, LoaderCover } from "@shared/ui"
 import { bem, getEmojiPNG } from "@shared/utils"
 import cn from "classnames"
 import { useTranslation } from "react-i18next"
 import { useParams } from "react-router"
 
-import { PackagesWrapper } from "./Packages/PackagesWrapper"
+import { PlansWrapper } from "./Packages/PlansWrapper"
 import { UserSection } from "./UserSection"
 
 const CN = "user"
@@ -122,7 +122,7 @@ export function Mentor() {
           <p>{t("info.garantee.desc")}</p>
         </UserSection>
 
-        <PackagesWrapper
+        <PlansWrapper
           hourPrice={Math.floor(+user.price)}
           mentorSlug={params.slug}
           minutsOfTrialMeeting={user.info.trial_meeting}

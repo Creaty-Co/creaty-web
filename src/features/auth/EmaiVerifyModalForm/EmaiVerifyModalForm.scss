@@ -4,12 +4,23 @@
   &__discount-description {
     @include H4Regular();
     color: $color-gray-60;
-  }
-  &__discount {
-    color: $color-white;
+    em {
+      color: $color-white;
+    }
   }
   &__footer {
     color: $color-gray-80;
     @include TagsRegular();
+  }
+  &__title {
+    color: $color-white;
+    margin-bottom: 24px;
+    
+    em {
+      color: $color-green;
+    }
+  }
+  &__button {
+    margin-bottom: 16px;
   }
 }

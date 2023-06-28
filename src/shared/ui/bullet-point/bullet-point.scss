@@ -38,7 +38,6 @@
 }
 
 .bullet-point__title {
-  white-space: pre-line;
   @include H4Medium;
   @include for-size(big-phone-screen) {
     @include H4Medium(20px, 24px);
@@ -47,7 +46,6 @@
 
 .bullet-point__desc {
   color: $color-gray-50;
-  white-space: pre-line;
   @include Text2Regular;
 
   button {

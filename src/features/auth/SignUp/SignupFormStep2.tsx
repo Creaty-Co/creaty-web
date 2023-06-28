@@ -11,6 +11,7 @@ import { Button, notification } from "antd"
 import cn from "classnames"
 import { useEffect } from "react"
 import { FieldValues, SubmitHandler } from "react-hook-form"
+import { useTranslation } from "react-i18next"
 import * as yup from "yup"
 
 import { setTokens } from "../auth.slice"
@@ -29,6 +30,7 @@ const MOD = "signup"
 const { getModifier } = bem(CN)
 
 export function SignupFormStep2() {
+  const { t } = useTranslation("translation", { keyPrefix: "other.forms.signUpStep2" })
   const dispatch = useAppDispatch()
   const authData = useAppSelector(selectAuthUsersData)
   const [api, contextHolder] = notification.useNotification()
@@ -79,12 +81,12 @@ export function SignupFormStep2() {
       htmlType="submit"
       loading={isLoading}
     >
-      Continue
+      {t("submitText")}
     </Button>
   )
 
   return (
-    <PopupLayout title="Almost done" subTitle="To start, what's your name?">
+    <PopupLayout title={t("title")} subTitle={t("subTitle")}>
       <Formus
         className={cn(getModifier(CN, MOD))}
         elementContent={elementContent}

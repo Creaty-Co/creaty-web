@@ -3,6 +3,11 @@
 .field {
   @include Text2;
 
+  input,
+  textarea {
+    border-radius: 16px;
+  }
+
   &__label,
   &__input,
   &__textarea {

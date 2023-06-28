@@ -7,6 +7,7 @@ import { Button, notification } from "antd"
 import cn from "classnames"
 import { useEffect, useState } from "react"
 import { FieldValues } from "react-hook-form"
+import { useTranslation } from "react-i18next"
 import * as yup from "yup"
 
 import { LoginForm } from "../Login/LoginForm"
@@ -25,6 +26,7 @@ const MOD = "resend-password"
 const { getElement, getModifier } = bem(CN)
 
 export function ResendPasswordStep1() {
+  const { t } = useTranslation("translation", { keyPrefix: "other.forms.resendPassword" })
   const dispatch = useAppDispatch()
   const [resendedEmail, setResendedEmail] = useState("")
   const [api, contextHolder] = notification.useNotification()
@@ -51,9 +53,7 @@ export function ResendPasswordStep1() {
 
   const elementContent = (
     <>
-      <span className={cn(getElement("suggestion"))}>
-        Enter the email associated with your account and we'll send you a link to reset your password.{" "}
-      </span>
+      <span className={cn(getElement("suggestion"))}>{t("header")}</span>
       <Field type="input" name="email" label="Email*" />
     </>
   )
@@ -71,19 +71,19 @@ export function ResendPasswordStep1() {
 
       <span className={cn(getElement("suggestion"))}>
         <em className={cn(getElement("redirection"))} onClick={handleLoginRedirect}>
-          Return to Log in{" "}
+          {t("return")}
         </em>
-        <span>, or if you don't have an account, </span>
+        <span>{t("return2")}</span>
 
         <em className={cn(getElement("redirection"))} onClick={handleSignUpRedirect}>
-          Sign up
+          {t("return3")}
         </em>
       </span>
     </>
   )
 
   return (
-    <PopupLayout title="Resend your password">
+    <PopupLayout title={t("title")}>
       <Formus
         className={cn(getModifier(CN, MOD))}
         elementContent={elementContent}

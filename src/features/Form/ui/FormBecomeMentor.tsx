@@ -1,7 +1,6 @@
 import { useAppDispatch, useAppSelector } from "@app/store"
 import { EFormIds } from "@features"
 import { selectAuthUsersData } from "@features/users/users.slice"
-import { ChatBubbleBottomCenterIcon } from "@heroicons/react/24/solid"
 import { openModal } from "@shared/layout"
 import { Field, Formus, OuterLink } from "@shared/ui"
 import { bem, isEmail } from "@shared/utils"
@@ -9,6 +8,7 @@ import { Button } from "antd"
 import cn from "classnames"
 import { useEffect } from "react"
 import { FieldValues, SubmitHandler } from "react-hook-form"
+import { useTranslation } from "react-i18next"
 import * as yup from "yup"
 
 import { PopupFormThanks } from "../PopupForm"
@@ -63,6 +63,7 @@ const MOD = "become-mentor"
 const { getElement, getModifier } = bem(CN)
 
 export function FormBecomeMentor() {
+  const { t } = useTranslation("translation", { keyPrefix: "other.forms.becomeMentor" })
   const dispatch = useAppDispatch()
   const [postFormsIdApplications, { isLoading, isSuccess }] = usePostFormsIdApplicationsMutation()
 
@@ -98,13 +99,7 @@ export function FormBecomeMentor() {
         placeholder="Tell us about yourself!"
         hints={hints.about}
       />
-      <Field
-        disabled={isLoading}
-        type="input"
-        name="url"
-        label="LinkedIn profile or Portfolio link*"
-        hints={hints.url}
-      />
+      <Field disabled={isLoading} type="input" name="url" label={t("linkText")} hints={hints.url} />
     </>
   )
 
@@ -116,14 +111,11 @@ export function FormBecomeMentor() {
         htmlType="submit"
         loading={isLoading}
       >
-        <span className="flex gap-3 flex-row">
-          <ChatBubbleBottomCenterIcon className="text-white w-5 h-5" />
-          Send application
-        </span>
+        <span className="flex gap-3 flex-row">{t("submitText")}</span>
       </Button>
 
       <div className={cn(getElement("agreement"), "text-gray-800 text-center")}>
-        By on the Send application, you agree to Creaty Co. <br />
+        {t("terms")}
         <OuterLink className="document__link--form" linkHref="user_agreement" translateType="terms" /> and{" "}
         <OuterLink className="document__link--form" linkHref="privacy_policy" translateType="privacyPolicy" />
       </div>

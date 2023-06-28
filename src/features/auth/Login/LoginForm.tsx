@@ -10,6 +10,7 @@ import { Button, notification } from "antd"
 import cn from "classnames"
 import { useEffect } from "react"
 import { FieldValues } from "react-hook-form"
+import { useTranslation } from "react-i18next"
 import * as yup from "yup"
 
 import { setTokens } from "../auth.slice"
@@ -29,6 +30,7 @@ const MOD = "login"
 const { getElement, getModifier } = bem(CN)
 
 export function LoginForm() {
+  const { t } = useTranslation("translation", { keyPrefix: "other.forms.login" })
   const dispatch = useAppDispatch()
 
   const [api, contextHolder] = notification.useNotification()
@@ -60,9 +62,9 @@ export function LoginForm() {
 
   const elementContent = (
     <>
-      <span className={cn(getElement("suggestion"))}>
-        Don't you have an account?{" "}
-        <em className={cn(getElement("redirection"))} onClick={handleSignUpRedirect}>
+      <span className={getElement("suggestion")}>
+        {`${t("header")} `}
+        <em className={getElement("redirection")} onClick={handleSignUpRedirect}>
           Sign Up
         </em>
       </span>
@@ -71,7 +73,7 @@ export function LoginForm() {
 
       <span className={cn(getElement("suggestion"))}>
         <em className={cn(getElement("redirection"))} onClick={handleForgotPasswordRedirect}>
-          Forgot your password?
+          {t("password")}
         </em>
       </span>
     </>
@@ -85,7 +87,7 @@ export function LoginForm() {
         htmlType="submit"
         loading={isLoading}
       >
-        Login
+        {t("mainButtonText")}
       </Button>
 
       <div className="relative flex py-2 items-center">
@@ -95,11 +97,11 @@ export function LoginForm() {
       </div>
 
       <Button className="button button--google button--biggest button__text" onClick={handleGoogleLogin}>
-        Continue with Google
+        {t("googleButtonText")}
       </Button>
 
       <div className={cn(getElement("agreement"), "text-gray-800 text-center")}>
-        By clicking on the Login, you agree to Creaty Co. <br />
+        {t("terms")}
         <OuterLink className="document__link--form" linkHref="user_agreement" translateType="terms" /> and{" "}
         <OuterLink className="document__link--form" linkHref="privacy_policy" translateType="privacyPolicy" />
       </div>
@@ -107,7 +109,7 @@ export function LoginForm() {
   )
 
   return (
-    <PopupLayout title="Login">
+    <PopupLayout title={t("title")}>
       <Formus
         className={cn(getModifier(CN, MOD))}
         elementContent={elementContent}

@@ -190,19 +190,19 @@
         "showMore": "string"
       },
       "forms": {
-        "become_mentor": {
+        "becomeMentor": {
           "title": "string",
           "submitText": "string"
         },
-        "choose_mentor": {
+        "getHelp": {
           "title": "string",
           "submitText": "string"
         },
-        "test_meeting": {
+        "testMeeting": {
           "title": "string",
           "submitText": "string"
         },
-        "still_questions": {
+        "stillQuestions": {
           "title": "string",
           "submitText": "string"
         }

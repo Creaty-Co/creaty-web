@@ -22,13 +22,11 @@
 	}
 
 	line-height: $line-height;
-	white-space: pre-line;
 }
 
 @mixin Typography($size, $weight: null, $emphasizeColor: $color-green) {
 	font-size: $size;
 	font-weight: $weight;
-	white-space: pre-line;
 	line-height: 1.25;
 
 	@if $emphasizeColor !=null {

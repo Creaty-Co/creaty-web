@@ -1,9 +1,9 @@
-import "./mentors.scss"
+import "./Mentors.scss"
 
 import { useAppDispatch, useAppSelector } from "@app/store"
 import { selectTopics } from "@entities"
 import { HaveQuestions, MentorSearch, selectSearch, updateSearch } from "@features"
-import { useScrollToTop } from "@shared/hooks"
+import { useScrollToTop } from "@shared/index"
 import { bem, classMerge } from "@shared/utils"
 import cn from "classnames"
 import { useEffect } from "react"
