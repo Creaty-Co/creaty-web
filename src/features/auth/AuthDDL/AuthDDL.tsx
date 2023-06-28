@@ -1,10 +1,13 @@
 import "./authDDL.scss"
 
+import { history } from "@app/App"
 import { useAppDispatch, useAppSelector } from "@app/store"
-import { selectAuthUsersData } from "@features/users/users.slice"
+import { selectAuthUsersData, setAuthUserData } from "@features/users/users.slice"
 import { bem } from "@shared/utils"
 import { Avatar, Dropdown, MenuProps } from "antd"
 import { useMemo } from "react"
+
+import { removeTokens } from "../auth.slice"
 
 const CN = "auth-ddl"
 const { getElement } = bem(CN)
@@ -33,7 +36,23 @@ export function AuthDDL() {
   )
   const onClick: MenuProps["onClick"] = ({ key }) => {
     if (key === "user") return
-    if (key === "logOut") dispatch({ type: "auth/logOut" })
+    if (key === "logOut") {
+      dispatch(removeTokens())
+      dispatch(
+        setAuthUserData({
+          id: null,
+          email: null,
+          first_name: null,
+          last_name: null,
+          has_discount: false,
+          is_verified: false,
+          is_staff: false,
+          is_mentor: false,
+          isAuth: false,
+        })
+      )
+      history.push("/")
+    }
   }
 
   return (

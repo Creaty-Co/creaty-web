@@ -50,14 +50,8 @@ const combinedReducer = combineReducers({
   modal: modalReducer,
 })
 
-// todo: add not circular typing
-const rootReducer = (state: any, action: any) => {
-  if (action.type === "auth/logOut") state = undefined
-  return combinedReducer(state, action)
-}
-
 export const store = configureStore({
-  reducer: rootReducer,
+  reducer: combinedReducer,
   devTools: development,
 
   middleware: getDefaultMiddleware =>

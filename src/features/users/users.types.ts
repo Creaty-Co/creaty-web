@@ -1,11 +1,12 @@
 export interface IUserData {
-  id: string
-  email: string
-  first_name: string
-  last_name?: string
+  id: string | null
+  email: string | null
+  first_name: string | null
+  last_name?: string | null
   has_discount: boolean
   is_verified: boolean
   is_staff: boolean
+  is_mentor: boolean
 }
 
 export interface ISignUpFormStep1 {
@@ -28,6 +29,7 @@ export interface IUsersState {
   hasDiscount: boolean
   isVerified: boolean
   isAdmin: boolean
+  isMentor: boolean
 
   isAuth: boolean | null
   isAuthLoading: boolean

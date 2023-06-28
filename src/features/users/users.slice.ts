@@ -14,6 +14,7 @@ const initialState: IUsersState = {
   hasDiscount: false,
   isVerified: false,
   isAdmin: false,
+  isMentor: false,
 
   isAuth: null,
   isAuthLoading: false,
@@ -25,7 +26,8 @@ export const usersSlice = createSlice({
 
   reducers: {
     setAuthUserData: (state, action: PayloadAction<IUserData>) => {
-      const { id, email, first_name, last_name, has_discount, is_verified, is_staff } = action.payload
+      const { id, email, first_name, last_name, has_discount, is_verified, is_staff, is_mentor, isAuth } =
+        action.payload
       state.authUserId = id
       state.email = email
       state.firstName = first_name
@@ -33,7 +35,8 @@ export const usersSlice = createSlice({
       state.hasDiscount = has_discount
       state.isVerified = is_verified
       state.isAdmin = is_staff
-      state.isAuth = true
+      state.isMentor = is_mentor
+      state.isAuth = typeof isAuth === "undefined" ? true : isAuth
     },
 
     signUpStep1: (state, action: PayloadAction<ISignUpFormStep1>) => {

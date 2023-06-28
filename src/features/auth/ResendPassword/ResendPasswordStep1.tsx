@@ -26,7 +26,7 @@ const MOD = "resend-password"
 const { getElement, getModifier } = bem(CN)
 
 export function ResendPasswordStep1() {
-  const { t } = useTranslation("translation", { keyPrefix: "other.forms.resendPassword1" })
+  const { t } = useTranslation("translation", { keyPrefix: "other.forms.resendPassword" })
   const dispatch = useAppDispatch()
   const [resendedEmail, setResendedEmail] = useState("")
   const [api, contextHolder] = notification.useNotification()

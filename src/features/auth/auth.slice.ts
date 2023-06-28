@@ -1,4 +1,3 @@
-import { history } from "@app/App"
 import { RootState } from "@app/store"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { parseJwt } from "@shared/utils/token"
@@ -34,17 +33,19 @@ export const authSlice = createSlice({
         state.expAt = null
       }
     },
-
-    logOut: () => {
+    removeTokens: state => {
       localStorage.removeItem("accessToken")
       localStorage.removeItem("refreshToken")
       localStorage.removeItem("expAt")
-      history.push("/")
+
+      state.accessToken = null
+      state.refreshToken = null
+      state.expAt = null
     },
   },
 })
 
 export default authSlice.reducer
-export const { logOut, setTokens } = authSlice.actions
+export const { setTokens, removeTokens } = authSlice.actions
 
 export const selectAuth = (state: RootState) => state.auth
