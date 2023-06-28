@@ -27,7 +27,7 @@ interface IProps {
   onSubmit(values: FieldValues): void
 }
 
-export const BookSessionForm = memo(function ResetPasswordModalForm({
+export const BookSessionForm = memo(function BookSessionForm({
   isLoading,
   submitText,
   terms,

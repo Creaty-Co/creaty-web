@@ -14,7 +14,7 @@ interface IProps {
   closeModal(): void
 }
 
-export const UnclosablePopupWrapper = memo(function ResetPasswordModalForm({
+export const UnclosablePopupWrapper = memo(function UnclosablePopupWrapper({
   open,
   title,
   mentorName,

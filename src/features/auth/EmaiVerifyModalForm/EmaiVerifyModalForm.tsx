@@ -22,7 +22,7 @@ interface IProps {
   code?: string
 }
 
-export const EmaiVerifyModalForm = memo(function ResetPasswordModalForm({ code }: IProps) {
+export const EmaiVerifyModalForm = memo(function EmaiVerifyModalForm({ code }: IProps) {
   const { t } = useTranslation("translation", { keyPrefix: "other.forms.emailVerify" })
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
@@ -34,7 +34,7 @@ export const EmaiVerifyModalForm = memo(function ResetPasswordModalForm({ code }
   const handleConfirmEmail = () => navigate("/")
 
   useEffect(() => {
-    confirmEmail({ code })
+    if (code) confirmEmail({ code })
   }, [code])
 
   useEffect(() => {

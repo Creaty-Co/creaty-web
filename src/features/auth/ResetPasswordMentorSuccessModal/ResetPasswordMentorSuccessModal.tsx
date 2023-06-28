@@ -14,7 +14,7 @@ interface IProps {
   show: boolean
 }
 
-export const ResetPasswordMentorSuccessModal = memo(function ResetPasswordModalForm({ show }: IProps) {
+export const ResetPasswordMentorSuccessModal = memo(function ResetPasswordMentorSuccessModal({ show }: IProps) {
   const { t } = useTranslation("translation", { keyPrefix: "other.forms.resetPasswordMentorSuccess" })
   const navigate = useNavigate()
 
