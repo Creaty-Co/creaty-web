@@ -30,6 +30,7 @@
     line-height: 1;
     letter-spacing: 0.02em;
     @include Tags;
+    white-space: pre-line;
   }
 
   &__confirmation {

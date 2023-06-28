@@ -1,7 +1,9 @@
+import { history } from "@app/App"
 import { useAppDispatch } from "@app/store"
 import { useResetPasswordMutation } from "@features/auth/auth.api"
 import { useLazyGetMeQuery } from "@features/users/users.api"
 import { skipToken } from "@reduxjs/toolkit/dist/query/react"
+import { useQuery } from "@shared/index"
 import { PopupLayout } from "@shared/layout"
 import { Field, Formus } from "@shared/ui"
 import { bem } from "@shared/utils"
@@ -14,6 +16,7 @@ import { useNavigate } from "react-router"
 import * as yup from "yup"
 
 import { setTokens } from "../auth.slice"
+import { OuterLink } from "./../../../shared/ui/OuterLink/OuterLink"
 
 const schema = yup
   .object()
@@ -49,14 +52,18 @@ const schema = yup
 
 const CN = "form"
 const MOD = "reset-password"
-const { getModifier } = bem(CN)
+const { getElement, getModifier } = bem(CN)
 
 interface IProps {
   code?: string
 }
 
 export const ResetPasswordModalForm = memo(function ResetPasswordModalForm({ code }: IProps) {
-  const { t } = useTranslation("translation", { keyPrefix: "other.forms.resetPassword" })
+  const query = useQuery()
+  const first_name = query.get("first_name")
+  const { t } = useTranslation("translation", {
+    keyPrefix: `other.forms.${first_name ? "resetPasswordMentor" : "resetPassword"}`,
+  })
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
@@ -80,10 +87,11 @@ export const ResetPasswordModalForm = memo(function ResetPasswordModalForm({ cod
     const { access, refresh } = data
     dispatch(setTokens({ accessToken: access, refreshToken: refresh }))
     getMe(skipToken)
-    closeModal()
+    first_name ? navigate("/reset-password-mentor-success") : closeModal()
   }, [data])
 
   const handleResetPassword = (values: FieldValues) => resetPassword({ code, new_password: values.password })
+  const handleGoogleClick = () => history.push(`${process.env.REACT_APP_API_HOST}/users/register/social/google/`)
 
   const elementContent = (
     <>
@@ -113,19 +121,44 @@ export const ResetPasswordModalForm = memo(function ResetPasswordModalForm({ cod
   )
 
   const elementControl = (
-    <Button
-      className="button button--dark button--biggest button__text"
-      type="primary"
-      htmlType="submit"
-      loading={isLoading}
-    >
-      {t("submitText")}
-    </Button>
+    <>
+      <Button
+        className="button button--dark button--biggest button__text"
+        type="primary"
+        htmlType="submit"
+        loading={isLoading}
+      >
+        {t("submitText")}
+      </Button>
+      {first_name && (
+        <>
+          <div className="relative flex py-2 items-center">
+            <div className="flex-grow border-t border-gray-400"></div>
+            <span className="flex-shrink mx-4 text-gray-400">Or</span>
+            <div className="flex-grow border-t border-gray-400"></div>
+          </div>
+          <Button className="button button--google button--biggest button__text" onClick={handleGoogleClick}>
+            {t("googleButtonText")}
+          </Button>
+
+          <div className={cn(getElement("agreement"), "text-gray-800 text-center")}>
+            {t("terms")}
+            <OuterLink className="document__link--form" linkHref="user_agreement" translateType="terms" /> and{" "}
+            <OuterLink className="document__link--form" linkHref="privacy_policy" translateType="privacyPolicy" />
+          </div>
+        </>
+      )}
+    </>
   )
 
   return (
     <Modal open={!!code} onCancel={closeModal} footer={null} closable={false} maskClosable={false} keyboard={false}>
-      <PopupLayout title={t("title")} unClosable>
+      <PopupLayout
+        title={
+          <h3 className="font--h3-bold popup-layout__title mb-6 whitespace-pre-line	">{t("title", { first_name })}</h3>
+        }
+        unClosable
+      >
         <Formus
           className={cn(getModifier(CN, MOD))}
           elementContent={elementContent}

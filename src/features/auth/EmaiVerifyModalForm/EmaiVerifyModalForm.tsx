@@ -64,7 +64,7 @@ export const EmaiVerifyModalForm = memo(function ResetPasswordModalForm({ code }
       htmlType="submit"
       loading={isLoading}
     >
-      OK
+      {t("submitText")}
     </Button>
   )
 
