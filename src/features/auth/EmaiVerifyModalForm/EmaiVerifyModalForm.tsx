@@ -31,7 +31,11 @@ export const EmaiVerifyModalForm = memo(function ResetPasswordModalForm({ code }
   const [confirmEmail, { data, isLoading, isSuccess, error, reset }] = useVerifyEmailMutation()
   const [getMe] = useLazyGetMeQuery()
 
-  const handleConfirmEmail = () => confirmEmail({ code })
+  const handleConfirmEmail = () => navigate("/")
+
+  useEffect(() => {
+    confirmEmail({ code })
+  }, [code])
 
   useEffect(() => {
     if (!error) return
@@ -47,7 +51,6 @@ export const EmaiVerifyModalForm = memo(function ResetPasswordModalForm({ code }
     if (isSuccess && data) {
       dispatch(setTokens({ accessToken: data.access, refreshToken: data.refresh }))
       getMe(skipToken)
-      navigate("/")
     }
   }, [isSuccess])
 
