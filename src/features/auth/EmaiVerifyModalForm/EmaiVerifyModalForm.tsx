@@ -1,4 +1,4 @@
-import "./EmaiVerifyModal.scss"
+import "./EmaiVerifyModalForm.scss"
 
 import { useAppDispatch } from "@app/store"
 import { useVerifyEmailMutation } from "@features/auth/auth.api"
@@ -22,7 +22,7 @@ interface IProps {
   code?: string
 }
 
-export const EmaiVerifyModal = memo(function ResetPasswordModalForm({ code }: IProps) {
+export const EmaiVerifyModalForm = memo(function ResetPasswordModalForm({ code }: IProps) {
   const { t } = useTranslation("translation", { keyPrefix: "other.forms.emailVerify" })
   const navigate = useNavigate()
   const dispatch = useAppDispatch()

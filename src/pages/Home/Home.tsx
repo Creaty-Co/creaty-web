@@ -1,7 +1,7 @@
 import "./Home.scss"
 
 import { HaveQuestions, HelpSocial, MentorSearch, MentorSearchTags, MentorsSlider } from "@features"
-import { EmaiVerifyModal } from "@features/auth/EmaiVerifyModal/EmaiVerifyModal"
+import { EmaiVerifyModalForm } from "@features/auth/EmaiVerifyModalForm/EmaiVerifyModalForm"
 import { ResetPasswordModalForm } from "@features/auth/ResetPasswordModalForm/ResetPasswordModalForm"
 import { useGetPagePersonalQuery, useGetPagesMainQuery } from "@shared/api"
 import { useScrollToTop } from "@shared/hooks"
@@ -100,7 +100,7 @@ export function Home() {
       </div>
 
       <ResetPasswordModalForm code={showResetPasswordModal ? params.code : undefined} />
-      <EmaiVerifyModal code={showEmaiVerifyModal ? params.code : undefined} />
+      <EmaiVerifyModalForm code={showEmaiVerifyModal ? params.code : undefined} />
     </>
   )
 }
