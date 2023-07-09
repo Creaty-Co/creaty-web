@@ -6,5 +6,4 @@ export interface ITokens {
 export interface IAuthState {
   accessToken: string | null
   refreshToken: string | null
-  expAt: number | null
 }

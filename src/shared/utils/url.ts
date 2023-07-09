@@ -7,19 +7,6 @@ import { Mutex } from "async-mutex"
 const API = process.env.REACT_APP_API_HOST
 const mutex = new Mutex()
 
-// const checkAccessTokenExpired = async (tokenExpiredTs) => {
-//   if (!tokenExpiredTs) return true
-
-//   if ((+tokenExpiredTs - 30) * 1000 <= Date.now()) {
-//     try {
-//       await updateTokens()
-//     } catch (e) {
-//       return true
-//     }
-//   }
-//   return false
-// }
-
 export const baseQueryWithReauth =
   (authRequired: boolean, url?: string): BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> =>
   async (args, api, extraOptions) => {
@@ -36,7 +23,7 @@ export const baseQueryWithReauth =
 
     await mutex.waitForUnlock()
 
-    const { expAt, refreshToken } = (api.getState() as RootState).auth
+    const { refreshToken } = (api.getState() as RootState).auth
     let result = await baseQuery(args, api, extraOptions)
 
     if (authRequired && result.error && result.error.status === 401) {
