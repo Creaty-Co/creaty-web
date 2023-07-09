@@ -87,7 +87,7 @@ export function MentorCard({
           {t("components.mentorCard.seeProfile")}
         </div>
         
-        <Icon className="icon" name="arrow-right" />
+        <Icon className="icon mentor-card-button__icon mentor-card-button__icon--arrow-right" name="arrow-right" />
       </Link>
     </div>
   )
