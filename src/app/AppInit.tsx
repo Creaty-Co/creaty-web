@@ -1,8 +1,9 @@
 import { categoryApi } from "@entities/category/category.api"
-import { setTokens } from "@features/auth/auth.slice"
+import { removeTokens, setTokens } from "@features/auth/auth.slice"
 import { useLazyGetMeQuery } from "@features/users/users.api"
 import { skipToken } from "@reduxjs/toolkit/dist/query"
 import { useGetPagesLinksDocumentsQuery } from "@shared/api"
+import { parseJwt } from "@shared/utils/token"
 import { useEffect } from "react"
 import ReactGA from "react-ga4"
 import { useSearchParams } from "react-router-dom"
@@ -30,12 +31,20 @@ export const AppInit = () => {
       getMe(skipToken)
       return
     }
+
     const lSAccessToken = localStorage.getItem("accessToken")
     const lSRefreshToken = localStorage.getItem("refreshToken")
     if (lSAccessToken && lSRefreshToken) {
+      const JWTBody = parseJwt(lSRefreshToken)
+
+      const timestampNow = Math.round(Date.now() / 1000)
+
+      if (JWTBody.exp <= timestampNow) {
+        dispatch(removeTokens())
+        return
+      }
       dispatch(setTokens({ accessToken: lSAccessToken, refreshToken: lSRefreshToken }))
       getMe(skipToken)
-      return
     }
   }, [])
 

@@ -56,7 +56,6 @@ export const Trial = ({ minutsOfTrialMeeting, mentorSlug, mentorName }: IProps) 
               {t("views.mentor.plans.trial.title", { minutsOfTrialMeeting })}{" "}
             </div>
             <div className="font--text-regular text-gray-700">
-              {minutsOfTrialMeeting}
               {t("views.mentor.plans.trial.desc", { minutsOfTrialMeeting })}
             </div>
           </div>
