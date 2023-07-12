@@ -40,27 +40,25 @@ export function Mentors() {
     /*
       Topic from URL to search.topic
     */
-    topicFromURL &&
-      !tagFromURL &&
-      ((search.topic && search.topic.id !== topicFromURL.id) || !search.topic) &&
+    if (topicFromURL && !tagFromURL && ((search.topic && search.topic.id !== topicFromURL.id) || !search.topic)) {
       dispatch(updateSearch({ tag: undefined, topic: topicFromURL }))
+    }
 
     /*
       Tag from URL to search.tag
     */
-    tagFromURL &&
-      ((!!search.tag && search.tag.id !== tagFromURL.id) || !search.tag) &&
+    if (tagFromURL && ((!!search.tag && search.tag.id !== tagFromURL.id) || !search.tag)) {
       dispatch(updateSearch({ tag: tagFromURL }))
+    }
 
     /* 
       If tagFromURL isn't part of the topic.tags
       Then set search.topic to undefined
     */
-    tagFromURL &&
-      search.topic &&
-      !search.topic.tags.find((tag: { id: unknown }) => tag.id === tagFromURL.id) &&
+    if (tagFromURL && search.topic && !search.topic.tags.find((tag: { id: unknown }) => tag.id === tagFromURL.id)) {
       dispatch(updateSearch({ topic: undefined }))
-  }, [topics])
+    }
+  }, [topics, tagFromURL, topicFromURL])
 
   return (
     <div className={CN}>

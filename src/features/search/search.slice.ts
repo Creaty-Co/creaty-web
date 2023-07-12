@@ -31,5 +31,5 @@ export default searchSlice.reducer
 export const { updateSearchTopic, updateSearchTag, updateSearch } = searchSlice.actions
 
 export const selectSearch = (state: RootState) => state.search
-export const selectSearchCategory = createSelector(selectSearch, state => state.topic)
-export const selectSearchTag = createSelector(selectSearch, state => state.tag)
+export const selectSearchTopic = createSelector(selectSearch, state => state.topic)
+// export const selectSearchTag = createSelector(selectSearch, state => state.tag)
