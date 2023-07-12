@@ -35,7 +35,7 @@ export function PopupLayout(props: IPopupLayout) {
 
   return (
     <div className={cn(getElement(props.shadow ? "shadow" : ""), getElement(props.black ? "black" : ""), CN)}>
-      {!props.unClosable && !props.onClose && (
+      {!props.unClosable && (
         <div className={getElement("close")}>
           <ButtonIcon name="cross" size="small" color="white" outline onClick={handleClose} />
         </div>

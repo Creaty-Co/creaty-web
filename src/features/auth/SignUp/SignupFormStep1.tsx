@@ -1,3 +1,5 @@
+import "./SignUp.scss"
+
 import { history } from "@app/App"
 import { useAppDispatch } from "@app/store"
 import { signUpStep1 } from "@features/users/users.slice"
@@ -5,13 +7,13 @@ import { ISignUpFormStep1 } from "@features/users/users.types"
 import { openModal, PopupLayout } from "@shared/layout"
 import { Field, Formus, OuterLink } from "@shared/ui"
 import { bem } from "@shared/utils"
-import { Button } from "antd"
+import { Button, Modal } from "antd"
 import cn from "classnames"
 import { FieldValues } from "react-hook-form"
 import { useTranslation } from "react-i18next"
+import { useNavigate } from "react-router"
 import * as yup from "yup"
 
-import { LoginForm } from "../Login/LoginForm"
 import { SignupFormStep2 } from "./SignupFormStep2"
 
 const schema = yup
@@ -51,24 +53,31 @@ const CN = "form"
 const MOD = "signup"
 const { getElement, getModifier } = bem(CN)
 
-export function SignupFormStep1() {
+interface IProps {
+  show: boolean
+}
+
+export function SignupFormStep1({ show }: IProps) {
   const { t } = useTranslation("translation", { keyPrefix: "other.forms.signUpStep1" })
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
+  const closeModal = () => navigate("/")
   const handleSubmit = (values: FieldValues) => {
     const data: ISignUpFormStep1 = { email: values.email, password: values.password }
     dispatch(signUpStep1(data))
     dispatch(openModal(<SignupFormStep2 />))
+    closeModal()
   }
 
   const handleGoogleClick = () => history.push(`${process.env.REACT_APP_API_HOST}/users/register/social/google/`)
-  const handleSignUpRedirect = () => dispatch(openModal(<LoginForm />))
+  const handleLoginRedirect = () => navigate("/login")
 
   const elementContent = (
     <>
       <span className={cn(getElement("suggestion"))}>
         {`${t("header")} `}
-        <em className={cn(getElement("redirection"))} onClick={handleSignUpRedirect}>
+        <em className={cn(getElement("redirection"))} onClick={handleLoginRedirect}>
           {t("return")}
         </em>
       </span>
@@ -123,14 +132,19 @@ export function SignupFormStep1() {
   )
 
   return (
-    <PopupLayout title={t("title")}>
-      <Formus
-        className={cn(getModifier(CN, MOD))}
-        elementContent={elementContent}
-        elementControl={elementControl}
-        schema={schema}
-        onSubmit={handleSubmit}
-      />
-    </PopupLayout>
+    <Modal open={show} onCancel={closeModal} footer={null} closable={false} maskClosable={false} keyboard={false}>
+      <PopupLayout
+        onClose={closeModal}
+        title={<h3 className={cn("font--h3-bold popup-layout__title", getElement("title"))}>{t("title")}</h3>}
+      >
+        <Formus
+          className={cn(getModifier(CN, MOD))}
+          elementContent={elementContent}
+          elementControl={elementControl}
+          schema={schema}
+          onSubmit={handleSubmit}
+        />
+      </PopupLayout>
+    </Modal>
   )
 }

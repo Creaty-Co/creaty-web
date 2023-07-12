@@ -32,7 +32,6 @@ export function MentorSearchList({ searchState, pureSearch, topics, value }: Men
       : topics.list.filter(
           (t: { title: string }) => t.title.toLocaleLowerCase().search(value.toLocaleLowerCase()) !== -1
         )
-  /* console.log("categories", categories) */
 
   const tags =
     value === null || value.length === 0
@@ -40,9 +39,6 @@ export function MentorSearchList({ searchState, pureSearch, topics, value }: Men
       : topics.tags.filter(
           (t: { title: string }) => t.title.toLocaleLowerCase().search(value.toLocaleLowerCase()) !== -1
         )
-  /* console.log("tags", tags) */
-
-  // console.log("NOUNT")
   return (
     <div
       className={getModifier(
@@ -114,7 +110,12 @@ export function MentorSearchList({ searchState, pureSearch, topics, value }: Men
                 })}
               />
 
-              <MentorSearchListItem topic={searchState.topic} type="view-all" className={getElement("item")} />
+              <MentorSearchListItem
+                topic={searchState.topic}
+                type="view-all"
+                dataAttrs={toDataAttrs({ action: "view-all", id: searchState.topic.shortcut.toString() })}
+                className={getElement("item")}
+              />
 
               <div className={getElement("separator")}></div>
             </>

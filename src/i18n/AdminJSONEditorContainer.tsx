@@ -77,7 +77,6 @@ class ReactJSONEditorContainer extends Component<JSONEditorContainerProps> {
     if (!put) return
 
     const response = await put(i18n.language, "translation", data)
-    console.log("response: ", response)
     if (response?.message) {
       alert(
         `❌ Translation JSON wasn't updated. 

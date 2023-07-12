@@ -9,3 +9,7 @@
 .ant-btn.ant-btn-primary.ant-btn-sm {
   background-color: $color-black-main;
 }
+
+.ant-modal-mask {
+  background-color: rgba(0, 0, 0, 0.95) !important;
+}

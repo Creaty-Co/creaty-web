@@ -10,8 +10,6 @@ async function getResourceLanguage(language: string, namespace: string) {
 const initExternalResourceBackend: BackendModule = {
   type: "backend",
   async init() {
-    // console.log(1)
-    // const language = i18next.language
     // const namespace = options.defaultNS || "translation"
   },
   async read(language, namespace, callback) {
@@ -23,7 +21,6 @@ const initExternalResourceBackend: BackendModule = {
           ...resources[language],
           [namespace]: resourceLanguage
         }
-        // resources[language][namespace] = resourceLanguage
       }
 
       const resourceKey = resources[language][namespace]

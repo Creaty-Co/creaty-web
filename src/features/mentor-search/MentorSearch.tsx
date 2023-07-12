@@ -8,7 +8,7 @@ import { ButtonLink, Icon } from "@shared/ui"
 import { bem, targetGetAttr, toDataAttrs, togglerTransformAction } from "@shared/utils"
 import { MouseEvent as SMouseEvent, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { NavLink, useNavigate } from "react-router-dom"
+import { NavLink, useMatch, useNavigate } from "react-router-dom"
 
 import { MentorSearchListItem } from "./mentor-search-list-item"
 import { MentorSearchList } from "./MentorSearchList"
@@ -26,6 +26,7 @@ const { getElement, getModifier } = bem(CN)
 export function MentorSearch() {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const closeSearchByClick = useMatch("mentors/:topicOrTag")
 
   const { t } = useTranslation("translation", { keyPrefix: "views.home.mentorSearch" })
 
@@ -277,6 +278,17 @@ export function MentorSearch() {
 
     if (action && action === "search") {
       dispatch(updateSearch({ ...searchState, focused: false }))
+    }
+    if (action && action === "view-all" && closeSearchByClick) {
+      dispatch(
+        updateSearch({
+          ...searchState,
+          topic: topics.list.find((topic: CategoryType) => topic.shortcut === id),
+          focused: false,
+        })
+      )
+      navigate("/mentors/" + id)
+      close()
     }
   }
 

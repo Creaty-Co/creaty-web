@@ -12,12 +12,12 @@ type MentorSearchListItemType = "regular" | "view-all" | "short"
 
 interface IMentorSearchListItem {
   topic: CategoryType
-  
+
   state?: MentorSearchListItemState
   type?: MentorSearchListItemType
 
-  dataAttrs?: Record<string,string>
-  dataAttrsIcon?: Record<string,string>
+  dataAttrs?: Record<string, string>
+  dataAttrsIcon?: Record<string, string>
 
   className?: string
 }
@@ -25,18 +25,17 @@ interface IMentorSearchListItem {
 const CN = "mentor-search-list-item"
 const { getElement, getModifier } = bem(CN)
 
-export function MentorSearchListItem({ 
+export function MentorSearchListItem({
   topic,
-  
+
   state = "normal",
   type = "regular",
 
   dataAttrsIcon,
   dataAttrs,
-  
-  className
+
+  className,
 }: IMentorSearchListItem) {
-  
   /*
   const isMobile = useSelector<DefaultRootState, boolean | null>(state => selectIsMobile(state.device))
   const handleLinkClick = (event: React.MouseEvent) => {
@@ -44,68 +43,46 @@ export function MentorSearchListItem({
   }
   */
   return (
-    <Link to={"/mentors/" + topic.shortcut}
-      className={cn(
-        getModifier(CN, 
-          "state", `state--${state}`, 
-          "type", `type--${type}`
-        ),
-        className
-      )}
-
+    <Link
+      to={"/mentors/" + topic.shortcut}
+      className={cn(getModifier(CN, "state", `state--${state}`, "type", `type--${type}`), className)}
       {...dataAttrs}
     >
       {/* Topic's icon and title */}
-      {type !== "view-all" && 
+      {type !== "view-all" && (
         <>
           <Icon {...dataAttrs} href={topic.icon} />
-          <span {...dataAttrs} >{topic.title}</span>
+          <span {...dataAttrs}>{topic.title}</span>
         </>
-      }
+      )}
 
       {/* View-all */}
-      {type === "view-all" && 
-        <span {...dataAttrs}>View all mentors in category</span>
-      }
+      {type === "view-all" && <span {...dataAttrs}>View all mentors in category</span>}
 
       {/* In search */}
-      {type === "regular" &&
-        <SwitchIcons 
-          dataAttrsIcon={dataAttrsIcon} 
-          state={state} 
-          id={topic.id} 
-        /> 
-      }
+      {type === "regular" && <SwitchIcons dataAttrsIcon={dataAttrsIcon} state={state} id={topic.id} />}
     </Link>
   )
 }
 
 interface ISwitchIcons {
-  dataAttrsIcon?: Record<string,string> 
+  dataAttrsIcon?: Record<string, string>
   state: MentorSearchListItemState
   id: number
 }
 
 const SwitchIcons = ({
   dataAttrsIcon,
-  state, 
-  // id,
-}: ISwitchIcons) => (
+  state,
+}: // id,
+ISwitchIcons) => (
   <div className={getElement("wrapper")} {...dataAttrsIcon}>
-    <Icon name="chevron"
-      className={getModifier(getElement("icon"),
-        state === "selected" && "hidden"
-      )}
-
+    <Icon
+      name="chevron"
+      className={getModifier(getElement("icon"), state === "selected" && "hidden")}
       {...dataAttrsIcon}
     />
 
-    <Icon name="close"
-      className={getModifier(getElement("icon"),
-        state === "normal" && "hidden"
-      )}
-
-      {...dataAttrsIcon}
-    />
+    <Icon name="close" className={getModifier(getElement("icon"), state === "normal" && "hidden")} {...dataAttrsIcon} />
   </div>
 )

@@ -35,6 +35,8 @@ export const Router = () => {
       <Route path="/">
         <Route index element={<Home />} />
         <Route path=":shortcut" element={<Home />} />
+        <Route path="sign-up" element={<Home />} />
+        <Route path="login" element={<Home />} />
         <Route path="reset-password/:code" element={<Home />} />
         <Route path="reset-password-mentor-success" element={<Home />} />
         <Route path="email-verify/:code" element={<Home />} />

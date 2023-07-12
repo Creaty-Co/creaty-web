@@ -4,6 +4,7 @@ import { PopupFormThanks } from "@features/Form"
 import { openModal } from "@shared/layout"
 import { Button } from "@shared/ui"
 import { notification, Radio, RadioChangeEvent } from "antd"
+import cn from "classnames"
 import { useEffect, useState } from "react"
 import { FieldValues } from "react-hook-form"
 import { useTranslation } from "react-i18next"
@@ -71,7 +72,10 @@ export const Packages = ({ hourPrice, mentorName, mentorSlug, packages }: IProps
           <div className="grid grid-cols-1 px-6 gap-1">
             {packages.map((pack: MentorPackageType, i) => (
               <div
-                className="p-4 grid grid-cols-[auto_1fr] bg-viol-100 rounded-lg cursor-pointer"
+                className={cn(
+                  "p-4 grid grid-cols-[auto_1fr] rounded-lg cursor-pointer hover:bg-viol-100",
+                  packId === pack.id ? "bg-viol-100" : "bg-viol-50"
+                )}
                 key={pack.id}
                 onClick={() => setPackId(pack.id)}
               >
