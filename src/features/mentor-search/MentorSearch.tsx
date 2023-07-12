@@ -280,7 +280,6 @@ export function MentorSearch() {
       dispatch(updateSearch({ ...searchState, focused: false }))
     }
     if (action && action === "view-all" && closeSearchByClick) {
-      console.log("topics: ", topics)
       dispatch(
         updateSearch({
           ...searchState,
