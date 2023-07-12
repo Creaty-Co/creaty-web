@@ -12,10 +12,10 @@ import cn from "classnames"
 import { useEffect } from "react"
 import { FieldValues, SubmitHandler } from "react-hook-form"
 import { useTranslation } from "react-i18next"
+import { useNavigate } from "react-router"
 import * as yup from "yup"
 
 import { setTokens } from "../auth.slice"
-import { LoginForm } from "../Login/LoginForm"
 import { SignupFormStep3 } from "./SignupFormStep3"
 
 export const schema = yup
@@ -32,13 +32,15 @@ const { getModifier } = bem(CN)
 export function SignupFormStep2() {
   const { t } = useTranslation("translation", { keyPrefix: "other.forms.signUpStep2" })
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+
   const authData = useAppSelector(selectAuthUsersData)
   const [api, contextHolder] = notification.useNotification()
 
   const [getMe] = useLazyGetMeQuery()
   const [signUpEmail, { data, error, isLoading, reset }] = useSignUpEmailMutation()
 
-  const openLoginModal = () => dispatch(openModal(<LoginForm />))
+  const openLoginModal = () => navigate("/login")
 
   useEffect(() => {
     if (!error || ("status" in error && error?.status !== 409)) return

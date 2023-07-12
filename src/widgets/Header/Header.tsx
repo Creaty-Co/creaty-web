@@ -11,10 +11,7 @@ import { bem, classMerge } from "@shared/utils"
 import { memo, useEffect, useState } from "react"
 import ReactGA from "react-ga4"
 import { useTranslation } from "react-i18next"
-import { Link, useLocation } from "react-router-dom"
-
-import { Login } from "../../features/auth/Login/Login"
-import { SignUp } from "../../features/auth/SignUp/SignUp"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 
 export interface IHeader {
   className?: string
@@ -25,12 +22,15 @@ const { getElement, getModifier } = bem(CN)
 
 function Header({ className }: IHeader) {
   const location = useLocation()
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   const isAuth = useAppSelector(selectIsAuth)
 
   const { t } = useTranslation("translation", { keyPrefix: "header" })
   const [expanded, setExpanded] = useState(false)
 
-  const dispatch = useAppDispatch()
+  const handleLoginClick = () => navigate("/login")
+  const handleSignUpClick = () => navigate("/sign-up")
   const handleLogoClick = () => dispatch(updateSearch({ topic: undefined, tag: undefined, focused: false }))
 
   useEffect(
@@ -83,8 +83,12 @@ function Header({ className }: IHeader) {
             <>
               <div className={getElement("separator")}></div>
               <div className={getElement("sign-group")}>
-                <Login />
-                <SignUp />
+                <Button size="little" className="login" onClick={handleLoginClick}>
+                  Login
+                </Button>
+                <Button size="little" className="sign-up" onClick={handleSignUpClick}>
+                  Sign up
+                </Button>
               </div>
             </>
           )}

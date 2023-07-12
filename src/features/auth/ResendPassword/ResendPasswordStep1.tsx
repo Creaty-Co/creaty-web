@@ -8,10 +8,9 @@ import cn from "classnames"
 import { useEffect, useState } from "react"
 import { FieldValues } from "react-hook-form"
 import { useTranslation } from "react-i18next"
+import { useNavigate } from "react-router"
 import * as yup from "yup"
 
-import { LoginForm } from "../Login/LoginForm"
-import { SignupFormStep1 } from "../SignUp/SignupFormStep1"
 import { ResendPasswordStep2 } from "./ResendPasswordStep2"
 
 export const schema = yup
@@ -28,6 +27,8 @@ const { getElement, getModifier } = bem(CN)
 export function ResendPasswordStep1() {
   const { t } = useTranslation("translation", { keyPrefix: "other.forms.resendPassword" })
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+
   const [resendedEmail, setResendedEmail] = useState("")
   const [api, contextHolder] = notification.useNotification()
 
@@ -48,8 +49,8 @@ export function ResendPasswordStep1() {
     resendPassword({ email: values.email })
     setResendedEmail(values.email)
   }
-  const handleLoginRedirect = () => dispatch(openModal(<LoginForm />))
-  const handleSignUpRedirect = () => dispatch(openModal(<SignupFormStep1 />))
+  const handleLoginRedirect = () => navigate("/login")
+  const handleSignUpRedirect = () => navigate("/sign-up")
 
   const elementContent = (
     <>

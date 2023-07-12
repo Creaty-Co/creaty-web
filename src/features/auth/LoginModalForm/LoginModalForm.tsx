@@ -3,19 +3,19 @@ import { useAppDispatch } from "@app/store"
 import { useLoginEmailMutation } from "@features/auth/auth.api"
 import { useLazyGetMeQuery } from "@features/users/users.api"
 import { skipToken } from "@reduxjs/toolkit/dist/query/react"
-import { closeModal, openModal, PopupLayout } from "@shared/layout"
+import { openModal, PopupLayout } from "@shared/layout"
 import { Field, Formus, OuterLink } from "@shared/ui"
 import { bem } from "@shared/utils"
-import { Button, notification } from "antd"
+import { Button, Modal, notification } from "antd"
 import cn from "classnames"
 import { useEffect } from "react"
 import { FieldValues } from "react-hook-form"
 import { useTranslation } from "react-i18next"
+import { useNavigate } from "react-router"
 import * as yup from "yup"
 
 import { setTokens } from "../auth.slice"
 import { ResendPasswordStep1 } from "../ResendPassword/ResendPasswordStep1"
-import { SignupFormStep1 } from "../SignUp/SignupFormStep1"
 
 export const schema = yup
   .object()
@@ -29,14 +29,21 @@ const CN = "form"
 const MOD = "login"
 const { getElement, getModifier } = bem(CN)
 
-export function LoginForm() {
+interface IProps {
+  show: boolean
+}
+
+export function LoginModalForm({ show }: IProps) {
   const { t } = useTranslation("translation", { keyPrefix: "other.forms.login" })
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const [api, contextHolder] = notification.useNotification()
 
   const [getMe] = useLazyGetMeQuery()
   const [loginEmail, { data, isLoading, error, reset, isSuccess }] = useLoginEmailMutation()
+
+  const closeModal = () => navigate("/")
 
   useEffect(() => {
     if (!error) return
@@ -50,15 +57,19 @@ export function LoginForm() {
 
   useEffect(() => {
     if (!isSuccess) return
-    dispatch(closeModal())
     dispatch(setTokens({ accessToken: data.access, refreshToken: data.refresh }))
     getMe(skipToken)
+    closeModal()
   }, [data])
 
   const handleGoogleLogin = () => history.push(`${process.env.REACT_APP_API_HOST}/users/register/social/google/`)
   const handleEmailLogin = (values: FieldValues) => loginEmail({ email: values.email, password: values.password })
-  const handleSignUpRedirect = () => dispatch(openModal(<SignupFormStep1 />))
-  const handleForgotPasswordRedirect = () => dispatch(openModal(<ResendPasswordStep1 />))
+  const handleSignUpRedirect = () => navigate("/sign-up")
+
+  const handleForgotPasswordRedirect = () => {
+    dispatch(openModal(<ResendPasswordStep1 />))
+    closeModal()
+  }
 
   const elementContent = (
     <>
@@ -109,15 +120,20 @@ export function LoginForm() {
   )
 
   return (
-    <PopupLayout title={t("title")}>
-      <Formus
-        className={cn(getModifier(CN, MOD))}
-        elementContent={elementContent}
-        elementControl={elementControl}
-        schema={schema}
-        onSubmit={handleEmailLogin}
-      />
+    <Modal open={show} onCancel={closeModal} footer={null} closable={false} maskClosable={false} keyboard={false}>
+      <PopupLayout
+        onClose={closeModal}
+        title={<h3 className={cn("font--h3-bold popup-layout__title", getElement("title"))}>{t("title")}</h3>}
+      >
+        <Formus
+          className={cn(getModifier(CN, MOD))}
+          elementContent={elementContent}
+          elementControl={elementControl}
+          schema={schema}
+          onSubmit={handleEmailLogin}
+        />
+      </PopupLayout>
       {contextHolder}
-    </PopupLayout>
+    </Modal>
   )
 }

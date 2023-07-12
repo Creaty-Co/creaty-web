@@ -2,8 +2,10 @@ import "./Home.scss"
 
 import { HaveQuestions, HelpSocial, MentorSearch, MentorSearchTags, MentorsSlider } from "@features"
 import { EmaiVerifyModalForm } from "@features/auth/EmaiVerifyModalForm/EmaiVerifyModalForm"
+import { LoginModalForm } from "@features/auth/LoginModalForm/LoginModalForm"
 import { ResetPasswordMentorSuccessModal } from "@features/auth/ResetPasswordMentorSuccessModal/ResetPasswordMentorSuccessModal"
 import { ResetPasswordModalForm } from "@features/auth/ResetPasswordModalForm/ResetPasswordModalForm"
+import { SignupFormStep1 } from "@features/auth/SignUp/SignupFormStep1"
 import { useGetPagePersonalQuery, useGetPagesMainQuery } from "@shared/api"
 import { useScrollToTop } from "@shared/index"
 import { BigComment, InfoSection, LoaderCover } from "@shared/ui"
@@ -31,6 +33,8 @@ export function Home() {
   const showResetPasswordModal = useMatch("reset-password/:code")
   const showEmaiVerifyModal = useMatch("email-verify/:code")
   const showResetPasswordMentorSuccessModal = useMatch("reset-password-mentor-success")
+  const showSignUpModal = useMatch("sign-up")
+  const showLoginModal = useMatch("login")
 
   const { data } = params.shortcut ? useGetPagePersonalQuery({ shortcut: params.shortcut }) : useGetPagesMainQuery()
 
@@ -104,6 +108,8 @@ export function Home() {
       <ResetPasswordModalForm code={showResetPasswordModal ? params.code : undefined} />
       <EmaiVerifyModalForm code={showEmaiVerifyModal ? params.code : undefined} />
       <ResetPasswordMentorSuccessModal show={!!showResetPasswordMentorSuccessModal} />
+      <LoginModalForm show={!!showLoginModal} />
+      <SignupFormStep1 show={!!showSignUpModal} />
     </>
   )
 }
