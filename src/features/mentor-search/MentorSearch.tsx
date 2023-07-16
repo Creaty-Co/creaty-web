@@ -258,10 +258,6 @@ export function MentorSearch() {
     const action = getAttr("action")
     const id = getAttr("id")
 
-    console.log("selector: ", selector)
-    console.log("action: ", action)
-    console.log("id: ", id)
-
     /* Control focus and blur */
     ;(action === "input/focus" && focus()) || (action === "input/close" && close())
 
