@@ -11,5 +11,5 @@
 }
 
 .ant-modal-mask {
-  background-color: rgba(0, 0, 0, 0.95) !important;
+  backdrop-filter: blur(10px);
 }

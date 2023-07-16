@@ -23,7 +23,10 @@ export function ResendPasswordStep2({ email }: IProps) {
 
   useEffect(() => {
     if (!error) return
-    const message = (error as any)?.data?.error?.detail?.message || (error as any)?.data?.error?.detail
+    const message =
+      (error as any)?.data?.error?.detail?.email?.[0]?.message ||
+      (error as any)?.data?.error?.detail?.message ||
+      (error as any)?.data?.error?.detail
     api.warning({ message, duration: 10 })
     reset()
   }, [error])
@@ -32,7 +35,7 @@ export function ResendPasswordStep2({ email }: IProps) {
 
   const elementContent = (
     <span className={cn(getElement("suggestion"))}>
-      {t("sugTitle")}
+      {t("subTitle")}
       <em className={cn(getElement("redirection"))} onClick={handleResendPassword}>
         {t("resend")}
       </em>

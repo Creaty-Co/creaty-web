@@ -191,31 +191,32 @@ export function MentorSearch() {
     const values = name === "topic" ? topics.list : topics.tags
     const value = values.find((value: { id: number }) => value.id === +id)
 
-    if (value)
-      setSearchState(prevState => {
-        const to = forceTo === undefined || forceTo === null ? prevState[name]?.id !== id : forceTo
+    if (!value) return
 
-        const duoSearch = { [name]: to ? value : undefined }
-        /* Turn off tag connected with topic */
-        if (name === "topic" && !to) duoSearch.tag = undefined
+    setSearchState(prevState => {
+      const to = forceTo === undefined || forceTo === null ? prevState[name]?.id !== id : forceTo
 
-        /*
+      const duoSearch = { [name]: to ? value : undefined }
+      /* Turn off tag connected with topic */
+      if (name === "topic" && !to) duoSearch.tag = undefined
+
+      /*
         If topic was turned on and We have some tag 
         We need to check according tag to topic
       */
-        if (
-          name === "topic" &&
-          to &&
-          searchState.tag &&
-          !(value as CategoryType).tags.find(tag => tag.id === searchState.tag?.id)
-        )
-          duoSearch.tag = undefined
+      if (
+        name === "topic" &&
+        to &&
+        searchState.tag &&
+        !(value as CategoryType).tags.find(tag => tag.id === searchState.tag?.id)
+      )
+        duoSearch.tag = undefined
 
-        if (name === "tag" && to && searchState.topic && !searchState.topic.tags.find(tag => tag.id === value.id))
-          duoSearch.topic = undefined
+      if (name === "tag" && to && searchState.topic && !searchState.topic.tags.find(tag => tag.id === value.id))
+        duoSearch.topic = undefined
 
-        return { ...prevState, ...duoSearch }
-      })
+      return { ...prevState, ...duoSearch }
+    })
   }
 
   function getURLByTagID(ID: number): string {
