@@ -18,12 +18,8 @@ export const categoryApi = createApi({
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled
-          dispatch(
-            topicsUpdate({
-              list: data.results,
-              tags: data.results.flatMap(topic => topic.tags),
-            })
-          )
+          const tags = [...new Map(data.results.flatMap(topic => topic.tags).map(item => [item["id"], item])).values()]
+          dispatch(topicsUpdate({ list: data.results, tags }))
         } catch (error) {
           throw new Error("network error")
         }
