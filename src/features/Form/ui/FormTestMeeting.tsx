@@ -14,8 +14,8 @@ import * as yup from "yup"
 const schema = yup
   .object()
   .shape({
-    name: yup.string().required(),
-    email: yup.string().email().required(),
+    name: yup.string().required("Name is required"),
+    email: yup.string().email().required("Email is required"),
     about: yup.string(),
   })
   .required()
@@ -45,9 +45,9 @@ export function FormTestMeeting() {
 
   const elementContent = (
     <>
-      <Field type="input" name="name" label="Name" defaultValue={firstName} />
-      <Field type="input" name="email" label="Email" defaultValue={email || undefined} />
-      <Field type="textarea" name="about" label="About" />
+      <Field type="input" name="name" label="Name*" defaultValue={firstName} />
+      <Field type="input" name="email" label="Email*" defaultValue={email || undefined} />
+      <Field type="textarea" name="about" label="How can a mentor help? (You can discuss this later)" />
     </>
   )
 

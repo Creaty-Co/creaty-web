@@ -17,14 +17,14 @@ import { usePostFormsIdApplicationsMutation } from "../state/form.api"
 const schema = yup
   .object()
   .shape({
-    name: yup.string().required("Name"),
+    name: yup.string().required("Name is required"),
 
     email: yup
       .string()
       .test("email", function (value) {
         return (value && isEmail(value)) || this.createError({ path: this.path, message: "invalid email" })
       })
-      .required("Email"),
+      .required("Email is required"),
 
     about: yup.string().max(256, ({ value }) => {
       return `Maximum 300 symbols. Now It's ${value.length}`
@@ -33,7 +33,7 @@ const schema = yup
     url: yup
       .string()
       .test("url", function (value) {
-        if (!value) return this.createError({ path: this.path, message: "no url" })
+        if (!value) return this.createError({ path: this.path, message: "The link isn't an url" })
 
         const expression = new RegExp(
           // eslint-disable-next-line no-useless-escape
@@ -42,7 +42,7 @@ const schema = yup
         const result = value.match(expression)
         return !!result || this.createError({ path: this.path, message: "no valid url" })
       })
-      .required("URL"),
+      .required("URL is required"),
   })
   .required()
 

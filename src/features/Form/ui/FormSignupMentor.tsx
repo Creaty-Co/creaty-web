@@ -17,8 +17,8 @@ import { usePostFormsIdApplicationsMutation } from "../state/form.api"
 const schema = yup
   .object()
   .shape({
-    name: yup.string().required(),
-    email: yup.string().email().required(),
+    name: yup.string().required("Name is required"),
+    email: yup.string().email().required("Email is required"),
   })
   .required()
 
@@ -46,8 +46,8 @@ export function FormSignupMentor() {
 
   const elementContent = (
     <>
-      <Field type="input" name="name" label="Name" defaultValue={firstName} />
-      <Field type="input" name="email" label="Email" defaultValue={email || undefined} />
+      <Field type="input" name="name" label="Name*" defaultValue={firstName} />
+      <Field type="input" name="email" label="Email*" defaultValue={email || undefined} />
     </>
   )
 
