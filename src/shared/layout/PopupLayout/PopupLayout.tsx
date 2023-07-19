@@ -3,7 +3,6 @@ import "./PopupLayout.scss"
 import { useAppDispatch } from "@app/store"
 import { ButtonIcon } from "@shared/ui"
 import { bem } from "@shared/utils"
-import { Popconfirm } from "antd"
 import cn from "classnames"
 import { ReactNode } from "react"
 
@@ -17,7 +16,7 @@ export interface IPopupLayout {
   subTitle?: string | ReactNode
   children: ReactNode
 
-  unClosable?: boolean
+  hideCross?: boolean
   controlled?: boolean
   controll?: ReactNode
 
@@ -35,26 +34,11 @@ export function PopupLayout(props: IPopupLayout) {
 
   return (
     <div className={cn(getElement(props.shadow ? "shadow" : ""), getElement(props.black ? "black" : ""), CN)}>
-      {!props.unClosable && (
+      {!props.hideCross && (
         <div className={getElement("close")}>
           <ButtonIcon name="cross" size="small" color="white" outline onClick={handleClose} />
         </div>
       )}
-      {props.unClosable && props.onClose && (
-        <Popconfirm
-          title="Are you sure you want to stop the booking?"
-          onConfirm={props.onClose}
-          okText="Yes"
-          cancelText="No"
-          placement="bottomRight"
-          okButtonProps={{ type: "primary" }}
-        >
-          <div className={getElement("close")}>
-            <ButtonIcon name="cross" size="small" color="white" outline />
-          </div>
-        </Popconfirm>
-      )}
-
       {typeof props.title === "string" ? (
         <h3 className={cn(getElement("title"), "heading")}>{props.title}</h3>
       ) : (

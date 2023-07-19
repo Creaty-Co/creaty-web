@@ -17,14 +17,14 @@ import { usePostFormsIdApplicationsMutation } from "../state/form.api"
 const schema = yup
   .object()
   .shape({
-    name: yup.string().required("Name"),
+    name: yup.string().required("Name is required"),
     email: yup
       .string()
       .test("email", function (value) {
         const { path, createError } = this
         return (value && isEmail(value)) || createError({ path, message: "invalid email" })
       })
-      .required("Email"),
+      .required("Email is required"),
   })
   .required()
 
@@ -60,13 +60,13 @@ export function FormStillQuestions({ handleSubmit }: IProps) {
 
   const elementContent = (
     <>
-      <Field disabled={isLoading} type="input" name="name" label="Name" defaultValue={firstName} />
+      <Field disabled={isLoading} type="input" name="name" label="Name*" defaultValue={firstName} />
       <Field
         disabled={isLoading}
         hints={hintsEmail}
         type="input"
         name="email"
-        label="Email"
+        label="Email*"
         defaultValue={email || undefined}
       />
     </>

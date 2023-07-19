@@ -7,7 +7,7 @@ import { memo } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router"
 
-const CN = "email-verify"
+const CN = "email-verify-success"
 const { getElement } = bem(CN)
 
 interface IProps {
@@ -36,7 +36,6 @@ export const ResetPasswordMentorSuccessModal = memo(function ResetPasswordMentor
       <PopupLayout
         title={<h3 className={cn("font--h3-bold popup-layout__title", getElement("title"))}>{t("title")}</h3>}
         subTitle={<h4 className="font--h4-bold">{t("header")}</h4>}
-        unClosable
         shadow
         black
       >

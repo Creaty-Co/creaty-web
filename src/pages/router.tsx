@@ -8,6 +8,17 @@ import { Home } from "./Home/Home"
 import { Mentor } from "./Mentor/Mentor"
 import { Mentors } from "./Mentors"
 
+export enum EModalsRoutes {
+  LOGIN = "login",
+  SIGN_UP = "sign-up",
+  RESET_PASSWORD_CODE = "reset-password/:code",
+  RESET_PASSWORD_MENTOR_SUCCESS = "reset-password-mentor-success",
+  EMAIL_VERIFY_CODE = "email-verify/:code",
+  EMAIL_VERIFY_SUCCESS = "email-verify-success",
+}
+
+export const modalsRoutes = Object.values(EModalsRoutes)
+
 export const Router = () => {
   const isAuthLoading = useAppSelector(selectIsAuthLoading)
   const isAuth = useAppSelector(selectIsAuth)
@@ -35,11 +46,9 @@ export const Router = () => {
       <Route path="/">
         <Route index element={<Home />} />
         <Route path=":shortcut" element={<Home />} />
-        <Route path="sign-up" element={<Home />} />
-        <Route path="login" element={<Home />} />
-        <Route path="reset-password/:code" element={<Home />} />
-        <Route path="reset-password-mentor-success" element={<Home />} />
-        <Route path="email-verify/:code" element={<Home />} />
+        {modalsRoutes.map(route => (
+          <Route key={route} path={route} element={<Home />} />
+        ))}
         <Route path="mentors" element={<Mentors />} />
         <Route path="mentors/:topicOrTag" element={<Mentors />} />
         <Route path="mentor/:slug" element={<Mentor />} />

@@ -15,7 +15,7 @@ import { useNavigate } from "react-router"
 import * as yup from "yup"
 
 import { setTokens } from "../auth.slice"
-import { ResendPasswordStep1 } from "../ResendPassword/ResendPasswordStep1"
+import { ResendPasswordStep1 } from "./ResendPassword/ResendPasswordStep1"
 
 export const schema = yup
   .object()

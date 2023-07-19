@@ -15,8 +15,8 @@ import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router"
 import * as yup from "yup"
 
+import { OuterLink } from "../../../shared/ui/OuterLink/OuterLink"
 import { setTokens } from "../auth.slice"
-import { OuterLink } from "./../../../shared/ui/OuterLink/OuterLink"
 
 const schema = yup
   .object()
@@ -154,10 +154,10 @@ export const ResetPasswordModalForm = memo(function ResetPasswordModalForm({ cod
   return (
     <Modal open={!!code} onCancel={closeModal} footer={null} closable={false} maskClosable={false} keyboard={false}>
       <PopupLayout
+        hideCross
         title={
           <h3 className="font--h3-bold popup-layout__title mb-6 whitespace-pre-line	">{t("title", { first_name })}</h3>
         }
-        unClosable
       >
         <Formus
           className={cn(getModifier(CN, MOD))}
