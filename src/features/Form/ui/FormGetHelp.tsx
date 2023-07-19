@@ -45,6 +45,7 @@ export function FormGetHelp() {
     <>
       <Field type="input" name="name" label="Name" defaultValue={firstName} />
       <Field type="input" name="email" label="Email" defaultValue={email || undefined} />
+      <Field type="textarea" name="about" label="How can mentor help?" />
     </>
   )
 
