@@ -43,7 +43,7 @@ export function ResendPasswordStep2({ email }: IProps) {
   )
 
   return (
-    <PopupLayout title={t("title")}>
+    <PopupLayout title={t("title")} hideCross>
       <Formus className={cn(getModifier(CN, MOD))} elementContent={elementContent} onSubmit={handleResendPassword} />
       {contextHolder}
     </PopupLayout>

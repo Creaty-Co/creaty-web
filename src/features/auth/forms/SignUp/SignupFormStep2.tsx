@@ -15,7 +15,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router"
 import * as yup from "yup"
 
-import { setTokens } from "../auth.slice"
+import { setTokens } from "../../auth.slice"
 import { SignupFormStep3 } from "./SignupFormStep3"
 
 export const schema = yup
@@ -88,7 +88,7 @@ export function SignupFormStep2() {
   )
 
   return (
-    <PopupLayout title={t("title")} subTitle={t("subTitle")}>
+    <PopupLayout title={t("title")} subTitle={t("subTitle")} hideCross>
       <Formus
         className={cn(getModifier(CN, MOD))}
         elementContent={elementContent}

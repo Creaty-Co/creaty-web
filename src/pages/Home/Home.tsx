@@ -1,11 +1,12 @@
 import "./Home.scss"
 
 import { HaveQuestions, HelpSocial, MentorSearch, MentorSearchTags, MentorsSlider } from "@features"
-import { EmaiVerifyModalForm } from "@features/auth/EmaiVerifyModalForm/EmaiVerifyModalForm"
-import { LoginModalForm } from "@features/auth/LoginModalForm/LoginModalForm"
-import { ResetPasswordMentorSuccessModal } from "@features/auth/ResetPasswordMentorSuccessModal/ResetPasswordMentorSuccessModal"
-import { ResetPasswordModalForm } from "@features/auth/ResetPasswordModalForm/ResetPasswordModalForm"
-import { SignupFormStep1 } from "@features/auth/SignUp/SignupFormStep1"
+import { EmaiVerifyModalForm } from "@features/auth/forms/emaiVerify/EmaiVerifyModalForm"
+import { EmaiVerifySuccessModal } from "@features/auth/forms/emaiVerify/EmaiVerifySuccessModal"
+import { LoginModalForm } from "@features/auth/forms/LoginModalForm"
+import { ResetPasswordMentorSuccessModal } from "@features/auth/forms/ResetPasswordMentorSuccessModal"
+import { ResetPasswordModalForm } from "@features/auth/forms/ResetPasswordModalForm"
+import { SignupModalFormStep1 } from "@features/auth/forms/SignUp/SignupModalFormStep1"
 import { useGetPagePersonalQuery, useGetPagesMainQuery } from "@shared/api"
 import { useScrollToTop } from "@shared/index"
 import { BigComment, InfoSection, LoaderCover } from "@shared/ui"
@@ -14,6 +15,7 @@ import cn from "classnames"
 import { useTranslation } from "react-i18next"
 import { useMatch, useParams } from "react-router"
 
+import { EModalsRoutes } from ".."
 import { BecomeMentor } from "./BecomeMentor/BecomeMentor"
 import { DynamicPrimaryInfo } from "./DynamicPrimaryInfo/DynamicPrimaryInfo"
 import { HelpfulCreaty } from "./HelpfulCreaty"
@@ -30,11 +32,13 @@ export function Home() {
   const { t } = useTranslation("translation", { keyPrefix: "views.home" })
 
   const params = useParams<"shortcut" | "code">()
-  const showResetPasswordModal = useMatch("reset-password/:code")
-  const showEmaiVerifyModal = useMatch("email-verify/:code")
-  const showResetPasswordMentorSuccessModal = useMatch("reset-password-mentor-success")
-  const showSignUpModal = useMatch("sign-up")
-  const showLoginModal = useMatch("login")
+
+  const showLoginModal = useMatch(EModalsRoutes.LOGIN)
+  const showSignUpModal = useMatch(EModalsRoutes.SIGN_UP)
+  const showResetPasswordModal = useMatch(EModalsRoutes.RESET_PASSWORD_CODE)
+  const showResetPasswordMentorSuccessModal = useMatch(EModalsRoutes.RESET_PASSWORD_MENTOR_SUCCESS)
+  const showEmaiVerifyModal = useMatch(EModalsRoutes.EMAIL_VERIFY_CODE)
+  const showEmaiVerifySuccessModal = useMatch(EModalsRoutes.EMAIL_VERIFY_SUCCESS)
 
   const { data } = params.shortcut ? useGetPagePersonalQuery({ shortcut: params.shortcut }) : useGetPagesMainQuery()
 
@@ -105,11 +109,12 @@ export function Home() {
         </div>
       </div>
 
-      <ResetPasswordModalForm code={showResetPasswordModal ? params.code : undefined} />
-      <EmaiVerifyModalForm code={showEmaiVerifyModal ? params.code : undefined} />
-      <ResetPasswordMentorSuccessModal show={!!showResetPasswordMentorSuccessModal} />
       <LoginModalForm show={!!showLoginModal} />
-      <SignupFormStep1 show={!!showSignUpModal} />
+      <SignupModalFormStep1 show={!!showSignUpModal} />
+      <ResetPasswordModalForm code={showResetPasswordModal ? params.code : undefined} />
+      <ResetPasswordMentorSuccessModal show={!!showResetPasswordMentorSuccessModal} />
+      <EmaiVerifyModalForm code={showEmaiVerifyModal ? params.code : undefined} />
+      <EmaiVerifySuccessModal show={!!showEmaiVerifySuccessModal} />
     </>
   )
 }

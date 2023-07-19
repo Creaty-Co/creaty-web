@@ -57,7 +57,7 @@ interface IProps {
   show: boolean
 }
 
-export function SignupFormStep1({ show }: IProps) {
+export function SignupModalFormStep1({ show }: IProps) {
   const { t } = useTranslation("translation", { keyPrefix: "other.forms.signUpStep1" })
   const dispatch = useAppDispatch()
   const navigate = useNavigate()

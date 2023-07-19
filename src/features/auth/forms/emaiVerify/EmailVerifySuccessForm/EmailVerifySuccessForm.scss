@@ -1,6 +1,6 @@
 @import "/src/app/scss/bundle.scss";
 
-.email-verify {
+.email-verify-success {
   &__discount-description {
     @include H4Regular();
     color: $color-gray-60;

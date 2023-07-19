@@ -7,7 +7,7 @@ import { notification } from "antd"
 import { useEffect } from "react"
 import { useTranslation } from "react-i18next"
 
-import { useResendVerifyEmailMutation } from "../auth.api"
+import { useResendVerifyEmailMutation } from "../../auth.api"
 
 const CN = "form"
 const { getElement } = bem(CN)
@@ -35,7 +35,7 @@ export function SignupFormStep3() {
   const handleResendEmailVerify = () => resendVerifyEmail({ email: email })
 
   return (
-    <PopupLayout title="Check your email">
+    <PopupLayout title="Check your email" hideCross>
       <div className="form">
         <div className={getElement("confirmation")}>
           {t("subTitle")}
