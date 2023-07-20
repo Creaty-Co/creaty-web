@@ -6,13 +6,13 @@ on:
       - 'main'
 
 jobs:
-  ci:
+  build:
     uses: ./.github/workflows/call-build.yml
     secrets: inherit
-  cd:
-    uses: ./.github/workflows/call-deploy_dev.yml
-    needs: [ ci ]
+  deploy:
+    uses: ./.github/workflows/call-deploy.yml
+    needs: [ build ]
   release_draft:
     uses: ./.github/workflows/call-release_draft.yml
     secrets: inherit
-    needs: [ ci ]
+    needs: [ build ]
