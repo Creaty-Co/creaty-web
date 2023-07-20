@@ -1,4 +1,4 @@
-name: "Call: Deploy dev"
+name: "Call: Deploy"
 
 on:
   workflow_call:
@@ -13,10 +13,10 @@ jobs:
     steps:
       - name: Pull images
         run: |
-          cd /home/www/runner/work/creaty-api/creaty-api
+          cd ~/creaty/dev
           docker-compose -f docker/dev/docker-compose.yml pull api
           docker pull ghcr.io/creaty-co/creaty-web/web:latest
       - name: Deploy dev environment
         run: |
-          cd /home/www/runner/work/creaty-api/creaty-api
+          cd ~/creaty/dev
           docker-compose -f docker/dev/docker-compose.yml up --build -d
