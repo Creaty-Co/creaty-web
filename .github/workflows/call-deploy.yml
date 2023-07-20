@@ -7,9 +7,6 @@ on:
 jobs:
   deploy:
     runs-on: [ self-hosted, dev ]
-    environment:
-      name: dev
-      url: 'https://dev.creaty.club'
     steps:
       - name: Pull images
         run: |
