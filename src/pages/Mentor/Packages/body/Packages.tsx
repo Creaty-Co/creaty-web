@@ -20,6 +20,7 @@ interface IProps {
 }
 
 export const Packages = ({ hourPrice, mentorName, mentorSlug, packages }: IProps) => {
+  console.log("packages: ", packages)
   const { t } = useTranslation("translation")
   const dispatch = useAppDispatch()
   const [api, contextHolder] = notification.useNotification()
@@ -93,16 +94,23 @@ export const Packages = ({ hourPrice, mentorName, mentorSlug, packages }: IProps
                 <div className="flex gap-2 flex-row items-center justify-end">
                   <div>
                     <span className="text-black-900 font--text-medium">
-                      ${`${Math.floor(pack.lessons_count * hourPrice - (pack.lessons_count * hourPrice * 5) / 100)} `}
+                      $
+                      {`${Math.floor(
+                        pack.lessons_count * hourPrice - (pack.lessons_count * hourPrice * pack.discount) / 100
+                      )} `}
                     </span>{" "}
                     <span className="text-gray-800 font--text2-regular line-through">
                       ${pack.lessons_count * hourPrice}
                     </span>
                   </div>
-                  <div className="font--text-medium text-white bg-green-700 px-2 py-0.5 rounded-sm">-5%</div>
+                  <div className="font--text-medium text-white bg-green-700 px-2 py-0.5 rounded-sm">
+                    -{pack.discount}%
+                  </div>
                   <div className="text-gray-800 font--text2-regular">
                     you are saving{" "}
-                    <span className="font--text2-bold">${Math.ceil((pack.lessons_count * hourPrice * 5) / 100)}</span>
+                    <span className="font--text2-bold">
+                      ${Math.ceil((pack.lessons_count * hourPrice * pack.discount) / 100)}
+                    </span>
                   </div>
                 </div>
               </div>
