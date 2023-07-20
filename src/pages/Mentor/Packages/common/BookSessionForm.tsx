@@ -13,7 +13,6 @@ const schema = yup
   .shape({
     name: yup.string().required("Name is required"),
     email: yup.string().email("Must be a valid email").required("Email is required"),
-    description: yup.string().required("Description is required"),
   })
   .required()
 
@@ -27,12 +26,7 @@ interface IProps {
   onSubmit(values: FieldValues): void
 }
 
-export const BookSessionForm = memo(function BookSessionForm({
-  isLoading,
-  submitText,
-  terms,
-  onSubmit,
-}: IProps) {
+export const BookSessionForm = memo(function BookSessionForm({ isLoading, submitText, terms, onSubmit }: IProps) {
   const { firstName, email } = useAppSelector(selectAuthUsersData)
 
   const elementContent = (
