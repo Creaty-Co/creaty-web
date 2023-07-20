@@ -11,7 +11,7 @@ on:
         type: boolean
         required: false
         default: true
-      environ:
+      environment:
         type: string
         required: false
         default: 'dev'
@@ -28,7 +28,7 @@ on:
         type: boolean
         required: false
         default: true
-      environ:
+      environment:
         type: string
         required: false
         default: 'dev'
