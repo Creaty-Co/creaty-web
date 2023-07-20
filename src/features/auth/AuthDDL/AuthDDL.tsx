@@ -54,7 +54,13 @@ export function AuthDDL() {
       history.push("/")
     }
   }
-
+  const avatar = (
+    <Avatar
+      size={48}
+      shape="square"
+      icon={<img src="/static/icons/user-avatar.svg" alt="user-avatar" className={getElement("avatar")} />}
+    />
+  )
   return (
     <Dropdown
       menu={{ items, onClick }}
@@ -63,19 +69,11 @@ export function AuthDDL() {
       trigger={["click"]}
     >
       {authUsersData.isMentor ? (
-        <Badge count={<img src="/static/icons/mentor-badge.svg" alt="user-avatar" className={getElement("avatar")} />}>
-          <Avatar
-            size={48}
-            shape="square"
-            icon={<img src="/static/icons/user-avatar.svg" alt="user-avatar" className={getElement("avatar")} />}
-          />
+        <Badge count={<img src="/static/icons/mentor-badge.svg" alt="user-avatar" className={getElement("badge")} />}>
+          {avatar}
         </Badge>
       ) : (
-        <Avatar
-          size={48}
-          shape="square"
-          icon={<img src="/static/icons/user-avatar.svg" alt="user-avatar" className={getElement("avatar")} />}
-        />
+        avatar
       )}
     </Dropdown>
   )
