@@ -9,5 +9,6 @@ jobs:
   ci:
     uses: ./.github/workflows/call-build.yml
     with:
+      environment: dev
       push: false
     secrets: inherit
