@@ -50,7 +50,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - run: |
           repository=${{ github.repository }}
-          echo "REPOSITORY=${repository,,}" >> GITHUB_ENV
+          echo "REPOSITORY=${repository,,}" >> $GITHUB_ENV
       - name: Set variables
         run: |
           variable_keys=(
