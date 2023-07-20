@@ -15,6 +15,9 @@ on:
         type: string
         required: false
         default: 'dev'
+      url:
+        type: string
+        required: false
   workflow_dispatch:
     inputs:
       tag:
@@ -33,6 +36,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-22.04
+    environment:
+      name: ${{ inputs.environment }}
+      url: ${{ inputs.url }}
     steps:
       - uses: actions/checkout@v3.5.2
       - name: Login to container registry
@@ -44,19 +50,36 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - run: |
           repository=${{ github.repository }}
-          echo "REPOSITORY=${repository,,}" >> ${GITHUB_ENV}
-      - name: Set stage env
-        if: ${{ inputs.environ == 'dev' }}
+          echo "REPOSITORY=${repository,,}" >> GITHUB_ENV
+      - name: Set variables
         run: |
-          echo "${{ secrets.DEV_ENV }}" > .env
-      - name: Set stage env
-        if: ${{ inputs.environ == 'stage' }}
+          variable_keys=(
+            "REACT_APP_API_CACHE"
+            "REACT_APP_API_CACHE_TIME"
+            "REACT_APP_API_HOST"
+          )
+          vars_json='${{ toJSON(vars) }}'
+          for key in "${variable_keys[@]}"; do
+            value=$(echo $vars_json | jq -r --arg key "$key" '.[$key]')
+            if [ "$value" != "null" ]; then
+              echo $key=$value >> .env
+            fi
+          done
+      - name: Set secrets
+        env:
+          REACT_APP_API_GA: ${{ secrets.REACT_APP_API_GA }}
         run: |
-          echo "${{ secrets.STAGE_ENV }}" > .env
-      - name: Set prod env
-        if: ${{ inputs.environ == 'prod' }}
-        run: |
-          echo "${{ secrets.PROD_ENV }}" > .env
+          secret_keys=(
+            "REACT_APP_API_GA"
+          )
+          for key in ${secret_keys[@]}; do
+            value=$(echo "${!key}")
+            if [[ -z "$value" ]]; then
+              echo "$key is not defined"
+              exit 1
+            fi
+            echo "$key=$value" >> .env
+          done
       - name: Build and push docker image
         uses: docker/build-push-action@v4.0.0
         with:
