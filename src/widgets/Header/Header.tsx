@@ -64,7 +64,7 @@ function Header({ className }: IHeader) {
               {t("menu.mentors")}
             </ButtonLink>
 
-            {isAuth && !authUsersData.isMentor && (
+            {((isAuth && !authUsersData.isMentor) || !isAuth) && (
               <Button size="small" onClick={() => dispatch(openModal(<PopupFormBecomeMentor />))}>
                 {t("menu.becomeMentor")}
               </Button>
