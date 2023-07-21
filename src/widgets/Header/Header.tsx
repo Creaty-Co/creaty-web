@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "@app/store"
 import { EFormIds, PopupFormBecomeMentor, PopupFormWrapper } from "@features"
 import { AuthDDL } from "@features/auth/AuthDDL/AuthDDL"
 import { updateSearch } from "@features/search"
-import { selectIsAuth } from "@features/users/users.slice"
+import { selectAuthUsersData, selectIsAuth } from "@features/users/users.slice"
 import { openModal } from "@shared/layout"
 import { Button, ButtonLink, Icon } from "@shared/ui"
 import { bem, classMerge } from "@shared/utils"
@@ -25,6 +25,7 @@ function Header({ className }: IHeader) {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const isAuth = useAppSelector(selectIsAuth)
+  const authUsersData = useAppSelector(selectAuthUsersData)
 
   const { t } = useTranslation("translation", { keyPrefix: "header" })
   const [expanded, setExpanded] = useState(false)
@@ -63,9 +64,11 @@ function Header({ className }: IHeader) {
               {t("menu.mentors")}
             </ButtonLink>
 
-            <Button size="small" onClick={() => dispatch(openModal(<PopupFormBecomeMentor />))}>
-              {t("menu.becomeMentor")}
-            </Button>
+            {((isAuth && !authUsersData.isMentor) || !isAuth) && (
+              <Button size="small" onClick={() => dispatch(openModal(<PopupFormBecomeMentor />))}>
+                {t("menu.becomeMentor")}
+              </Button>
+            )}
           </div>
 
           <Button
