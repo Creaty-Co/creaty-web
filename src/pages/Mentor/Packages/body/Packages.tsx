@@ -20,7 +20,6 @@ interface IProps {
 }
 
 export const Packages = ({ hourPrice, mentorName, mentorSlug, packages }: IProps) => {
-  console.log("packages: ", packages)
   const { t } = useTranslation("translation")
   const dispatch = useAppDispatch()
   const [api, contextHolder] = notification.useNotification()
