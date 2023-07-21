@@ -79,9 +79,13 @@ export function Formus({
       <form
         className={cn(CN, className, "grid grid-flow-row grid-cols-1 grid-rows-auto gap-y-6")}
         onSubmit={methods.handleSubmit((data: FieldValues) => {
-          console.log("data on handleSubmit", data)
+          const sanitizedData = Object.keys(data).reduce(
+            (acc, key) => (data[key] ? { ...acc, [key]: data[key] } : acc),
+            {}
+          )
+          console.log("sanitizedData on handleSubmit", sanitizedData)
           setShowNotifeis(true)
-          onSubmit(data)
+          onSubmit(sanitizedData)
         })}
       >
         {elementContent && (

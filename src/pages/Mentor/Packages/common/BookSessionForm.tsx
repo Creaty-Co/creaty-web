@@ -33,7 +33,7 @@ export const BookSessionForm = memo(function BookSessionForm({ isLoading, submit
     <>
       <Field type="input" name="name" label="Name*" defaultValue={firstName} />
       <Field type="input" name="email" label="Email*" defaultValue={email || undefined} />
-      <Field type="textarea" name="description" label="How can a mentor help? (You can discuss this later)*" />
+      <Field type="textarea" name="description" label="How can a mentor help? (You can discuss this later)" />
     </>
   )
 
