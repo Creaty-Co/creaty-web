@@ -1,9 +1,12 @@
 import { PopupLayout } from "@shared/layout"
+import { useTranslation } from "react-i18next"
 
-export const PopupFormThanks = () => (
-  <PopupLayout title="Thanks for request!">
-    <span className="text-black-900 font--h3-regular pb-3">
-      We will contact you within 24 hours to help you find a perfect mentor :)
-    </span>
-  </PopupLayout>
-)
+export const PopupFormThanks = () => {
+  const { t } = useTranslation("translation", { keyPrefix: "other.forms.popupFormThanks" })
+
+  return (
+    <PopupLayout title={t("title")}>
+      <span className="text-black-900 font--h3-regular pb-3">{t("body")}</span>
+    </PopupLayout>
+  )
+}
