@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@app/store"
-import { selectAuthUsersData } from "@features/users/users.slice"
+import { authUserDataS } from "@features/auth/auth.slice"
 import { closeModal, PopupLayout } from "@shared/layout"
 import { Button } from "@shared/ui"
 import { bem } from "@shared/utils"
@@ -15,7 +15,7 @@ const { getElement } = bem(CN)
 export function SignupFormStep3() {
   const { t } = useTranslation("translation", { keyPrefix: "other.forms.signUpStep3" })
   const dispatch = useAppDispatch()
-  const email = useAppSelector(selectAuthUsersData).email
+  const { email } = useAppSelector(authUserDataS)
   const [api, contextHolder] = notification.useNotification()
 
   const [resendVerifyEmail, { isSuccess, isLoading, error, reset }] = useResendVerifyEmailMutation()
@@ -32,7 +32,7 @@ export function SignupFormStep3() {
   }, [isSuccess])
 
   const closeMpdal = () => dispatch(closeModal())
-  const handleResendEmailVerify = () => resendVerifyEmail({ email: email })
+  const handleResendEmailVerify = () => resendVerifyEmail({ email })
 
   return (
     <PopupLayout title="Check your email" hideCross>

@@ -7,8 +7,6 @@ import { FormApi } from "@features"
 import { authApi } from "@features/auth/auth.api"
 import authReducer from "@features/auth/auth.slice"
 import searchReducer from "@features/search/search.slice"
-import { usersApi } from "@features/users/users.api"
-import usersReducer from "@features/users/users.slice"
 import { combineReducers, configureStore } from "@reduxjs/toolkit"
 import { pagesApi } from "@shared/api"
 import pagesReducer from "@shared/api/pages/pages.slice"
@@ -21,7 +19,6 @@ const development = process.env.NODE_ENV === "development"
 
 const middlewares = [
   authApi.middleware,
-  usersApi.middleware,
   FormApi.middleware,
   subscribeApi.middleware,
   categoryApi.middleware,
@@ -33,7 +30,6 @@ if (development) middlewares.push(logger)
 
 const combinedReducer = combineReducers({
   [authApi.reducerPath]: authApi.reducer,
-  [usersApi.reducerPath]: usersApi.reducer,
   [FormApi.reducerPath]: FormApi.reducer,
   [subscribeApi.reducerPath]: subscribeApi.reducer,
   [categoryApi.reducerPath]: categoryApi.reducer,
@@ -41,7 +37,6 @@ const combinedReducer = combineReducers({
   [pagesApi.reducerPath]: pagesApi.reducer,
 
   auth: authReducer,
-  users: usersReducer,
   pages: pagesReducer,
   topics: categoryReducer,
   mentor: mentorReducer,

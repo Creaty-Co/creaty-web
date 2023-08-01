@@ -1,5 +1,5 @@
 import { useAppSelector } from "@app/store"
-import { selectIsAuth, selectIsAuthLoading } from "@features/users/users.slice"
+import { authStartedS } from "@features/auth/auth.slice"
 import AdminJSONEditorContainer from "@i18n/AdminJSONEditorContainer"
 import { Spin } from "antd"
 import { Route, Routes } from "react-router"
@@ -20,10 +20,9 @@ export enum EModalsRoutes {
 export const modalsRoutes = Object.values(EModalsRoutes)
 
 export const Router = () => {
-  const isAuthLoading = useAppSelector(selectIsAuthLoading)
-  const isAuth = useAppSelector(selectIsAuth)
+  const authIsLoading = useAppSelector(authStartedS)
 
-  if (isAuthLoading && isAuth === null)
+  if (authIsLoading)
     return (
       <div
         style={{

@@ -9,12 +9,13 @@ const mutex = new Mutex()
 
 export const baseQueryWithReauth =
   (authRequired: boolean, url?: string): BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> =>
-  async (args, api, extraOptions) => {
+  async (args, api, extraOptions: { auth?: boolean }) => {
+    const authRequest = authRequired || !!extraOptions?.auth
     const baseQuery = fetchBaseQuery({
       baseUrl: API + (url || ""),
       prepareHeaders: (headers, { getState }) => {
         headers.set("Accept-Language", "en")
-        if (!authRequired) return headers
+        if (!authRequest) return headers
         const token = (getState() as RootState).auth.accessToken
         if (token) headers.set("Authorization", `Bearer ${token}`)
         return headers
@@ -26,7 +27,7 @@ export const baseQueryWithReauth =
     const { refreshToken } = (api.getState() as RootState).auth
     let result = await baseQuery(args, api, extraOptions)
 
-    if (authRequired && result.error && result.error.status === 401) {
+    if (authRequest && result.error && result.error.status === 401) {
       if (!mutex.isLocked()) {
         const release = await mutex.acquire()
         try {

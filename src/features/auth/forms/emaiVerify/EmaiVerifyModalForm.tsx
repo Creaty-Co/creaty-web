@@ -1,7 +1,5 @@
 import { useAppDispatch } from "@app/store"
-import { useVerifyEmailMutation } from "@features/auth/auth.api"
-import { useLazyGetMeQuery } from "@features/users/users.api"
-import { skipToken } from "@reduxjs/toolkit/dist/query"
+import { useLazyGetMeQuery, useVerifyEmailMutation } from "@features/auth/auth.api"
 import { Modal, notification } from "antd"
 import { memo, useEffect } from "react"
 
@@ -36,7 +34,7 @@ export const EmaiVerifyModalForm = memo(function EmaiVerifyModalForm({ code }: I
   useEffect(() => {
     if (isSuccess && data) {
       dispatch(setTokens({ accessToken: data.access, refreshToken: data.refresh }))
-      getMe(skipToken)
+      getMe("")
     }
   }, [isSuccess])
 

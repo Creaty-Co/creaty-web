@@ -2,25 +2,18 @@ import "jsoneditor/dist/jsoneditor.min.css"
 import "./AdminJSONEditorContainer.scss"
 
 import { useAppSelector } from "@app/store"
-import { selectAuthUsersData, selectIsAuth, selectIsAuthLoading } from "@features/users/users.slice"
+import { isAdminS } from "@features/auth/auth.slice"
 import { Button } from "@shared/ui"
 import i18next, { BackendOptions, i18n } from "i18next"
-import JSONEditor, { JSONEditorOptions } from "jsoneditor"
-import { Component, createRef, useEffect } from "react"
+import JSONEditor, { JSONEditorMode, JSONEditorOptions } from "jsoneditor"
+import { Component, createRef } from "react"
 import { NavigateFunction, useNavigate } from "react-router"
 
 function AdminJSONEditorContainer() {
-  const isAuthLoading = useAppSelector(selectIsAuthLoading)
-  const isAuth = useAppSelector(selectIsAuth)
-  const authUsersData = useAppSelector(selectAuthUsersData)
+  const isAdmin = useAppSelector(isAdminS)
   const navigate = useNavigate()
 
-  useEffect(() => {
-    if (isAuth === null) return
-    if ((!isAuth && !isAuthLoading) || !authUsersData.isAdmin) navigate("/")
-  }, [isAuth, isAuthLoading, authUsersData])
-
-  if ((!isAuth && !isAuthLoading) || !authUsersData.isAdmin) return null
+  if (!isAdmin) return null
 
   return <ReactJSONEditorContainer i18n={i18next} navigate={navigate} />
 }
@@ -31,14 +24,13 @@ interface JSONEditorContainerProps {
 }
 
 class ReactJSONEditorContainer extends Component<JSONEditorContainerProps> {
-  /**
-   * Default options
-   */
   options: JSONEditorOptions = {
     mode: process.env.NODE_ENV === "development" ? "code" : "tree",
+    modes: ["code", "tree"],
     onChangeText: this.onChangeJSON.bind(this),
+    onModeChange: this.onModeChange.bind(this),
     onEditable() {
-      return { field: process.env.NODE_ENV === "development", value: true }
+      return true
     },
   }
   editor: JSONEditor | null = null
@@ -93,6 +85,10 @@ class ReactJSONEditorContainer extends Component<JSONEditorContainerProps> {
 
     i18n.store.data[i18n.language]["translation"] = JSON.parse(json)
     i18n.emit("react-refresh")
+  }
+
+  onModeChange(mode: JSONEditorMode) {
+    return mode
   }
 
   render() {

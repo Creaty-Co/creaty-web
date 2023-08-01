@@ -9,7 +9,6 @@ import { Cookies } from "@features/cookies"
 import { Router } from "@pages"
 import { ModalContainer } from "@shared/layout"
 import { Footer } from "@shared/ui"
-import { MemoHeader } from "@widgets"
 import { ConfigProvider } from "antd"
 import { createBrowserHistory } from "history"
 import i18next from "i18next"
@@ -18,6 +17,7 @@ import { I18nextProvider } from "react-i18next"
 import { Provider } from "react-redux"
 import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom"
 
+import { Header } from "../components/Header/Header"
 import { AppInit } from "./AppInit"
 import { ErrorBoundary } from "./providers"
 import { store } from "./store"
@@ -44,7 +44,7 @@ function App() {
                   <ErrorBoundary fallback="Error">
                     <AppInit />
 
-                    <MemoHeader />
+                    <Header />
                     <main>
                       <Router />
                     </main>

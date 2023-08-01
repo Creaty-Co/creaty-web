@@ -129,14 +129,15 @@
     }
   }
 
-  &__log-in {
+  .login {
     color: $color-white;
     @include for-size(big-phone-screen) {
       width: 100%;
     }
   }
 
-  &__sign-up {
+  .sign-up,
+  .admin {
     background-color: $color-gray-10;
 
     & > .button__text {
@@ -147,5 +148,8 @@
     @include for-size(big-phone-screen) {
       width: 100%;
     }
+  }
+  .admin {
+    margin: 0 10px;
   }
 }

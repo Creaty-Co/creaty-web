@@ -2,35 +2,35 @@ import "./Header.scss"
 
 import { useAppDispatch, useAppSelector } from "@app/store"
 import { EFormIds, PopupFormBecomeMentor, PopupFormWrapper } from "@features"
-import { AuthDDL } from "@features/auth/AuthDDL/AuthDDL"
+import { authPassedS, isAdminS, isMentorS } from "@features/auth/auth.slice"
 import { updateSearch } from "@features/search"
-import { selectAuthUsersData, selectIsAuth } from "@features/users/users.slice"
 import { openModal } from "@shared/layout"
 import { Button, ButtonLink, Icon } from "@shared/ui"
-import { bem, classMerge } from "@shared/utils"
+import { bem } from "@shared/utils"
 import { memo, useEffect, useState } from "react"
 import ReactGA from "react-ga4"
 import { useTranslation } from "react-i18next"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 
-export interface IHeader {
-  className?: string
-}
+import { AuthDDL } from "./AuthDDL/AuthDDL"
 
 const CN = "header"
 const { getElement, getModifier } = bem(CN)
 
-function Header({ className }: IHeader) {
+export const Header = memo(function Header() {
   const location = useLocation()
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const isAuth = useAppSelector(selectIsAuth)
-  const authUsersData = useAppSelector(selectAuthUsersData)
+
+  const authPassed = useAppSelector(authPassedS)
+  const isAdmin = useAppSelector(isAdminS)
+  const isMentor = useAppSelector(isMentorS)
 
   const { t } = useTranslation("translation", { keyPrefix: "header" })
   const [expanded, setExpanded] = useState(false)
 
   const handleLoginClick = () => navigate("/login")
+  const handleAdminClick = () => navigate("/admin")
   const handleSignUpClick = () => navigate("/sign-up")
   const handleLogoClick = () => dispatch(updateSearch({ topic: undefined, tag: undefined, focused: false }))
 
@@ -44,14 +44,18 @@ function Header({ className }: IHeader) {
   )
 
   return (
-    <header className={classMerge(CN, className)}>
+    <header className={CN}>
       <div className={getElement("container")}>
         <div aria-label="Home">
           <img src="/static/icons/logo.svg" alt="logo" className={getModifier(getElement("logo"), "mobile")} />
           <img src="/static/images/logo.svg" alt="logo" className={getElement("logo")} />
           <Link className="ghost" to="/" onClick={handleLogoClick} />
         </div>
-
+        {isAdmin && (
+          <Button size="little" className="admin" onClick={handleAdminClick}>
+            Go to Admin page
+          </Button>
+        )}
         <Icon
           name={expanded ? "cross" : "menu"}
           className={getElement("trigger")}
@@ -64,7 +68,7 @@ function Header({ className }: IHeader) {
               {t("menu.mentors")}
             </ButtonLink>
 
-            {((isAuth && !authUsersData.isMentor) || !isAuth) && (
+            {(isMentor || !authPassed) && (
               <Button size="small" onClick={() => dispatch(openModal(<PopupFormBecomeMentor />))}>
                 {t("menu.becomeMentor")}
               </Button>
@@ -80,7 +84,7 @@ function Header({ className }: IHeader) {
             {t("findMentor")}
           </Button>
 
-          {isAuth ? (
+          {authPassed ? (
             <AuthDDL />
           ) : (
             <>
@@ -99,6 +103,4 @@ function Header({ className }: IHeader) {
       </div>
     </header>
   )
-}
-
-export const MemoHeader = memo(Header)
+})

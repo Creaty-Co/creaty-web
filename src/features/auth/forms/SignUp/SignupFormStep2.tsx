@@ -1,9 +1,6 @@
 import { useAppDispatch, useAppSelector } from "@app/store"
-import { useSignUpEmailMutation } from "@features/auth/auth.api"
-import { useLazyGetMeQuery } from "@features/users/users.api"
-import { selectAuthUsersData, signUpStep2 } from "@features/users/users.slice"
-import { ISignUpFormStep2 } from "@features/users/users.types"
-import { skipToken } from "@reduxjs/toolkit/dist/query/react"
+import { useLazyGetMeQuery, useSignUpEmailMutation } from "@features/auth/auth.api"
+import { ISignUpFormStep2 } from "@features/auth/auth.types"
 import { openModal, PopupLayout } from "@shared/layout"
 import { Field, Formus } from "@shared/ui"
 import { bem } from "@shared/utils"
@@ -15,7 +12,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router"
 import * as yup from "yup"
 
-import { setTokens } from "../../auth.slice"
+import { authUserDataS, setTokens, signUpStep2 } from "../../auth.slice"
 import { SignupFormStep3 } from "./SignupFormStep3"
 
 export const schema = yup
@@ -34,7 +31,7 @@ export function SignupFormStep2() {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const authData = useAppSelector(selectAuthUsersData)
+  const authData = useAppSelector(authUserDataS)
   const [api, contextHolder] = notification.useNotification()
 
   const [getMe] = useLazyGetMeQuery()
@@ -60,7 +57,7 @@ export function SignupFormStep2() {
     if (!data) return
     dispatch(openModal(<SignupFormStep3 />))
     dispatch(setTokens({ accessToken: data.access, refreshToken: data.refresh }))
-    getMe(skipToken)
+    getMe("")
   }, [data])
 
   const handleSubmit: SubmitHandler<FieldValues> = async (values: FieldValues) => {
