@@ -32,7 +32,7 @@ export const baseQueryWithReauth =
         const release = await mutex.acquire()
         try {
           const refreshResult = await baseQuery(
-            { url: "users/token/refresh/", method: "POST", body: { refresh: refreshToken } },
+            { url: "token/refresh/", method: "POST", body: { refresh: refreshToken } },
             api,
             extraOptions
           )
