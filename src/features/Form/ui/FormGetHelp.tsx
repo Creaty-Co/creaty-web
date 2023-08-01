@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from "@app/store"
 import { EFormIds } from "@features"
-import { selectAuthUsersData } from "@features/users/users.slice"
+import { authUserDataS } from "@features/auth/auth.slice"
 import { openModal } from "@shared/layout"
 import { Field, Formus, OuterLink } from "@shared/ui"
 import { bem } from "@shared/utils"
@@ -31,7 +31,7 @@ export function FormGetHelp() {
   const dispatch = useAppDispatch()
   const [postFormsIdApplications, { isLoading, isSuccess }] = usePostFormsIdApplicationsMutation()
 
-  const { firstName, email } = useAppSelector(selectAuthUsersData)
+  const { firstName, email } = useAppSelector(authUserDataS)
 
   const onSubmit: SubmitHandler<FieldValues> = async (values: FieldValues) => {
     await postFormsIdApplications({ formName: EFormIds.GET_HELP, path: document.location.pathname, ...values })

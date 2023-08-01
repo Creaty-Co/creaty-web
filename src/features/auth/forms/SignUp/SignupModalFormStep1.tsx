@@ -1,9 +1,7 @@
-import "./SignUp.scss"
-
 import { history } from "@app/App"
 import { useAppDispatch } from "@app/store"
-import { signUpStep1 } from "@features/users/users.slice"
-import { ISignUpFormStep1 } from "@features/users/users.types"
+import { signUpStep1 } from "@features/auth/auth.slice"
+import { ISignUpFormStep1 } from "@features/auth/auth.types"
 import { openModal, PopupLayout } from "@shared/layout"
 import { Field, Formus, OuterLink } from "@shared/ui"
 import { bem } from "@shared/utils"

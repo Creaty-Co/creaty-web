@@ -56,7 +56,7 @@ i18next
         if (response.status === 401) {
           const lSRefreshToken = localStorage.getItem("refreshToken")
 
-          const refreshResult = await fetch(`${API}/users/token/refresh/`, {
+          const refreshResult = await fetch(`${API}/token/refresh/`, {
             headers: {
               "content-type": "application/json",
             },

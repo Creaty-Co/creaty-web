@@ -1,5 +1,5 @@
 import { useAppSelector } from "@app/store"
-import { selectAuthUsersData } from "@features/users/users.slice"
+import { authUserDataS } from "@features/auth/auth.slice"
 import { Field, Formus, OuterLink } from "@shared/ui"
 import { bem } from "@shared/utils"
 import { Button } from "antd"
@@ -27,7 +27,7 @@ interface IProps {
 }
 
 export const BookSessionForm = memo(function BookSessionForm({ isLoading, submitText, terms, onSubmit }: IProps) {
-  const { firstName, email } = useAppSelector(selectAuthUsersData)
+  const { firstName, email } = useAppSelector(authUserDataS)
 
   const elementContent = (
     <>

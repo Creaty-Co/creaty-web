@@ -1,8 +1,6 @@
 import { history } from "@app/App"
 import { useAppDispatch } from "@app/store"
-import { useResetPasswordMutation } from "@features/auth/auth.api"
-import { useLazyGetMeQuery } from "@features/users/users.api"
-import { skipToken } from "@reduxjs/toolkit/dist/query/react"
+import { useLazyGetMeQuery, useResetPasswordMutation } from "@features/auth/auth.api"
 import { useQuery } from "@shared/index"
 import { PopupLayout } from "@shared/layout"
 import { Field, Formus } from "@shared/ui"
@@ -86,7 +84,7 @@ export const ResetPasswordModalForm = memo(function ResetPasswordModalForm({ cod
     api.success({ message: t("successMessage"), duration: 10 })
     const { access, refresh } = data
     dispatch(setTokens({ accessToken: access, refreshToken: refresh }))
-    getMe(skipToken)
+    getMe("")
     first_name ? navigate("/reset-password-mentor-success") : closeModal()
   }, [data])
 

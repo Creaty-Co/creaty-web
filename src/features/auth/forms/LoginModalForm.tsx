@@ -1,8 +1,6 @@
 import { history } from "@app/App"
 import { useAppDispatch } from "@app/store"
-import { useLoginEmailMutation } from "@features/auth/auth.api"
-import { useLazyGetMeQuery } from "@features/users/users.api"
-import { skipToken } from "@reduxjs/toolkit/dist/query/react"
+import { useLazyGetMeQuery, useLoginEmailMutation } from "@features/auth/auth.api"
 import { openModal, PopupLayout } from "@shared/layout"
 import { Field, Formus, OuterLink } from "@shared/ui"
 import { bem } from "@shared/utils"
@@ -58,7 +56,7 @@ export function LoginModalForm({ show }: IProps) {
   useEffect(() => {
     if (!isSuccess) return
     dispatch(setTokens({ accessToken: data.access, refreshToken: data.refresh }))
-    getMe(skipToken)
+    getMe("")
     closeModal()
   }, [data])
 
