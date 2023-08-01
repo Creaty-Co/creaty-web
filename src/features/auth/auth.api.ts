@@ -32,7 +32,7 @@ export const authApi = createApi({
       query: body => ({ url: `password/reset/`, method: "PUT", body }),
     }),
     getMe: builder.query({
-      query: () => ({ url: "me/", auth: true }),
+      query: () => ({ url: "me/" }),
       extraOptions: { auth: true },
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
