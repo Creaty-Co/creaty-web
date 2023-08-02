@@ -1,11 +1,12 @@
 @import "/src/app/scss/bundle.scss";
 
 .mentors-slider {
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 
-  @include row-gap(40px);
   @include for-size(big-phone-screen) {
-    @include row-gap(32px);
+    gap: 32px;
   }
 
   &__container {

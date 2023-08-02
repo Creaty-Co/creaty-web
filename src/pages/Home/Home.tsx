@@ -1,6 +1,6 @@
 import "./Home.scss"
 
-import { HaveQuestions, HelpSocial, MentorsSlider } from "@features"
+import { HaveQuestions, HelpSocial, MentorSearch, MentorSearchTags, MentorsSlider } from "@features"
 import { EmaiVerifyModalForm } from "@features/auth/forms/emaiVerify/EmaiVerifyModalForm"
 import { EmaiVerifySuccessModal } from "@features/auth/forms/emaiVerify/EmaiVerifySuccessModal"
 import { LoginModalForm } from "@features/auth/forms/LoginModalForm"
@@ -9,7 +9,7 @@ import { ResetPasswordModalForm } from "@features/auth/forms/ResetPasswordModalF
 import { SignupModalFormStep1 } from "@features/auth/forms/SignUp/SignupModalFormStep1"
 import { useGetPagePersonalQuery, useGetPagesMainQuery } from "@shared/api"
 import { useScrollToTop } from "@shared/index"
-import { InfoSection, LoaderCover } from "@shared/ui"
+import { BigComment, InfoSection, LoaderCover } from "@shared/ui"
 import { bem } from "@shared/utils"
 import cn from "classnames"
 import { useTranslation } from "react-i18next"
@@ -17,6 +17,7 @@ import { useMatch, useParams } from "react-router"
 
 import { EModalsRoutes } from ".."
 import { BecomeMentor } from "./BecomeMentor/BecomeMentor"
+import { DynamicPrimaryInfo } from "./DynamicPrimaryInfo/DynamicPrimaryInfo"
 import { HelpfulCreaty } from "./HelpfulCreaty"
 import { HowItWorks } from "./HowItWorks"
 import { MailingSubscribe } from "./MailingSubscribe/MailingSubscribe"
@@ -45,7 +46,7 @@ export function Home() {
     <>
       <div className={CN}>
         {/* Header  */}
-        {/* <div className={getElement("header")}>
+        <div className={getElement("header")}>
           <DynamicPrimaryInfo firstHeadingShortcut={params.shortcut} />
 
           <div className={getElement("search")}>
@@ -55,12 +56,12 @@ export function Home() {
           {data?.tags && <MentorSearchTags tags={data.tags} />}
 
           {data == null && <LoaderCover white />}
-        </div> */}
+        </div>
 
         {/* Coomment */}
-        {/* <div className={getElement("comment")}>
+        <div className={getElement("comment")}>
           <BigComment>{t("bigComment")}</BigComment>
-        </div> */}
+        </div>
 
         {/* Mentors */}
         <div className={getElement("slider")}>

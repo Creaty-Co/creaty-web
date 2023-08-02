@@ -26,10 +26,6 @@ export function MentorsSlider({ mentors }: IMentorsSlider) {
 
   const slider = useRef<Slider>(null)
   const mentorCardsCount = Math.floor(window.innerWidth / 380)
-  console.group()
-  console.log("mentorCardsCount: ", mentorCardsCount)
-  console.log("mentors.length: ", mentors.length)
-  console.groupEnd()
 
   const prev = () => slider.current?.slickPrev()
   const next = () => slider.current?.slickNext()
@@ -50,14 +46,14 @@ export function MentorsSlider({ mentors }: IMentorsSlider) {
           infinite
           dots={false}
           arrows={false}
-          slidesToScroll={4}
+          slidesToScroll={mentorCardsCount}
           swipeToSlide
           variableWidth
           accessibility
-          autoplay
-          speed={1000}
-          autoplaySpeed={5000}
-          pauseOnHover
+          // autoplay
+          // speed={1000}
+          // autoplaySpeed={5000}
+          // pauseOnHover
           ref={slider}
         >
           {mentors.map(mentor => (
