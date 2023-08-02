@@ -1,4 +1,6 @@
 import "./MentorsSlider.scss"
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
 
 import { useAppDispatch } from "@app/store"
 import { MentorCard, MentorType } from "@entities"
@@ -7,8 +9,9 @@ import { openModal } from "@shared/layout"
 import { Button, ButtonIcon, ButtonLink } from "@shared/ui"
 import { bem } from "@shared/utils"
 import cn from "classnames"
-import { useEffect, useRef } from "react"
+import { useRef } from "react"
 import { useTranslation } from "react-i18next"
+import Slider from "react-slick"
 
 interface IMentorsSlider {
   mentors: MentorType[]
@@ -17,37 +20,19 @@ interface IMentorsSlider {
 const CN = "mentors-slider"
 const { getElement } = bem(CN)
 
-export function MentorsSlider(props: IMentorsSlider) {
+export function MentorsSlider({ mentors }: IMentorsSlider) {
   const { t } = useTranslation("translation", { keyPrefix: "components.mentorsSlider" })
   const dispatch = useAppDispatch()
 
-  const innerRef = useRef<HTMLDivElement>(null)
-  const prev = () => slideBy(-1)
-  const next = () => slideBy(+1)
+  const slider = useRef<Slider>(null)
+  const mentorCardsCount = Math.floor(window.innerWidth / 380)
+  console.group()
+  console.log("mentorCardsCount: ", mentorCardsCount)
+  console.log("mentors.length: ", mentors.length)
+  console.groupEnd()
 
-  function slideBy(by: 1 | -1) {
-    if (!innerRef.current) return
-
-    const firstChild = innerRef.current.children[0]
-    if (!(firstChild instanceof HTMLElement)) return
-
-    const secondChild = innerRef.current.children[1]
-    if (!(secondChild instanceof HTMLElement)) return
-
-    // Calc the "offsetLeft" difference between two elements to account all gaps
-    const scrollInterval = secondChild.offsetLeft - firstChild.offsetLeft
-
-    innerRef.current.scrollBy({
-      behavior: "smooth",
-      left: scrollInterval * by,
-    })
-  }
-
-  useEffect(() => {
-    if (!innerRef.current) return
-    innerRef.current.scrollTo(innerRef.current.scrollWidth / 2 - innerRef.current.offsetWidth / 2, 0)
-  }, [])
-
+  const prev = () => slider.current?.slickPrev()
+  const next = () => slider.current?.slickNext()
   return (
     <div className={CN}>
       <div className={getElement("header")}>
@@ -60,11 +45,25 @@ export function MentorsSlider(props: IMentorsSlider) {
       </div>
 
       <div className={getElement("container")}>
-        <div className={getElement("inner")} ref={innerRef}>
-          {props.mentors.map((mentor, index) => (
-            <MentorCard {...mentor} key={mentor.id + "" + index} />
+        <Slider
+          className="slider variable-width"
+          infinite
+          dots={false}
+          arrows={false}
+          slidesToScroll={4}
+          swipeToSlide
+          variableWidth
+          accessibility
+          autoplay
+          speed={1000}
+          autoplaySpeed={5000}
+          pauseOnHover
+          ref={slider}
+        >
+          {mentors.map(mentor => (
+            <MentorCard {...mentor} key={mentor.id} className="slider-card-wrapper" />
           ))}
-        </div>
+        </Slider>
       </div>
 
       <div className={getElement("help")}>

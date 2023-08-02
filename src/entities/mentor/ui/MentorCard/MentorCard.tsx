@@ -1,4 +1,4 @@
-import "./mentor-card.scss"
+import "./MentorCard.scss"
 
 import { Tag } from "@entities"
 import { Icon } from "@shared/ui"
@@ -10,58 +10,52 @@ import { Link } from "react-router-dom"
 
 import { MentorType } from "../../mentor.types"
 
-export interface IMentorCard extends MentorType {
-  className?: string
-}
-
 const CN = "mentor-card"
 const { getElement } = bem(CN)
 
 const CNButton = CN + "-button"
 const { getElement: getElementButton } = bem(CNButton)
 
+interface MentorCard extends MentorType {
+  className?: string
+}
+
 export function MentorCard({
   className,
-
   first_name,
   last_name,
   avatar,
   slug,
-  
+
   profession,
   company,
   tags,
-  
+
   price_currency,
   country,
-  price
-}: IMentorCard) {
+  price,
+}: MentorCard) {
   const { t } = useTranslation("translation")
 
   return (
     <div className={cn(CN, className)}>
       <div className={getElement("preview")}>
-        <img 
-          src={avatar}
-          alt="mentor's face"
-          className={getElement("image")}
-        />
+        <img src={avatar} alt="mentor's face" className={getElement("image")} />
       </div>
 
       <div className={getElement("container")}>
         <div className={getElement("info")}>
           <div className={getElement("name")}>
-            <span>{first_name} {last_name}</span>
-            
-            <img 
-              src={getEmojiPNG(country.flag_unicode)} 
-              alt="flag"
-              className={getElement("flag")}
-            />
+            <span>
+              {first_name} {last_name}
+            </span>
+
+            <img src={getEmojiPNG(country.flag_unicode)} alt="flag" className={getElement("flag")} />
           </div>
 
           <div className={getElement("job")}>
-            <em>{profession}・</em>{company}
+            <em>{profession}・</em>
+            {company}
           </div>
         </div>
 
@@ -70,9 +64,7 @@ export function MentorCard({
             <Tag key={tag.id}>{tag}</Tag>
           ))}
 
-          {tags.length > 3 && (
-            <Tag noHash>•••</Tag>
-          )}
+          {tags.length > 3 && <Tag noHash>•••</Tag>}
         </div>
       </div>
 
@@ -83,10 +75,8 @@ export function MentorCard({
           <span>{60}min.</span>
         </div>
 
-        <div className={getElementButton("hover-text")}>
-          {t("components.mentorCard.seeProfile")}
-        </div>
-        
+        <div className={getElementButton("hover-text")}>{t("components.mentorCard.seeProfile")}</div>
+
         <Icon className="icon mentor-card-button__icon mentor-card-button__icon--arrow-right" name="arrow-right" />
       </Link>
     </div>

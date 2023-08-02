@@ -8,7 +8,7 @@ import { bem } from "@shared/utils"
 import cn from "classnames"
 import { FC } from "react"
 import { useTranslation } from "react-i18next"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 const CN = "footer"
 const CNContainer = CN + "-container"
@@ -24,15 +24,15 @@ export interface IFooter {
 export const Footer: FC<IFooter> = ({ className }) => {
   const { t } = useTranslation("translation", { keyPrefix: "footer" })
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+  const handleLogoClick = () => navigate("/")
 
   return (
     <footer className={cn(CN, className)}>
       <div className={CNContainer}>
         <div className={CNLinks}>
-          <div>
+          <div onClick={handleLogoClick}>
             <img src="/static/icons/logo.svg" alt="logo" className={getElement("logo")} />
-
-            <Link className="ghost" to="/" />
           </div>
 
           <div className={getElement("container")}>
@@ -76,12 +76,10 @@ export const Footer: FC<IFooter> = ({ className }) => {
           <div className={getElement("social")}>
             <div>
               <img src="/static/icons/facebook.svg" alt="facebook" />
-              <OuterLink className="ghost" />
             </div>
 
             <div>
               <img src="/static/icons/instagram.svg" alt="instagram" />
-              <OuterLink className="ghost" />
             </div>
           </div>
         </div>

@@ -9,15 +9,8 @@
   }
 
   &__container {
-    width: 100%;
-    padding: 1.25em 0;
-    overflow: hidden;
-
-    // @include WidthLimit;
-    // @include Mobile {
-    //   width: 100vw;
-    //   margin: -5vw;
-    // }
+    height: 620px;
+    width: 100vw;
   }
 
   &__heading {
@@ -55,23 +48,6 @@
     &:hover,
     &:active {
       border-color: white;
-    }
-  }
-
-  &__inner {
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: 23.75em;
-    @include gap(1.25em);
-
-    overflow: hidden;
-
-    @include for-size(big-phone-screen) {
-      grid-auto-columns: 90vw;
-      @include gap(3.33vw);
-      overflow: auto;
-
-      padding: 0;
     }
   }
 
