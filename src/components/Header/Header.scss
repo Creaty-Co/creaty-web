@@ -9,7 +9,7 @@
   z-index: 2;
 
   border-bottom: 1px solid rgba($color: $color-gray-10, $alpha: 0.1);
-  padding: 12px 0;
+  padding: 12px 30px;
 
   background: rgba($color-black-main, 0.8);
   backdrop-filter: blur(50px);
@@ -28,6 +28,7 @@
 
   &__logo {
     height: 40px;
+    cursor: pointer;
 
     &--mobile {
       display: none;
@@ -151,5 +152,7 @@
   }
   .admin {
     margin: 0 10px;
+    height: 30px;
+    width: min-content;
   }
 }

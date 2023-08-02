@@ -10,7 +10,7 @@ import { bem } from "@shared/utils"
 import { memo, useEffect, useState } from "react"
 import ReactGA from "react-ga4"
 import { useTranslation } from "react-i18next"
-import { Link, useLocation, useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 
 import { AuthDDL } from "./AuthDDL/AuthDDL"
 
@@ -32,7 +32,10 @@ export const Header = memo(function Header() {
   const handleLoginClick = () => navigate("/login")
   const handleAdminClick = () => navigate("/admin")
   const handleSignUpClick = () => navigate("/sign-up")
-  const handleLogoClick = () => dispatch(updateSearch({ topic: undefined, tag: undefined, focused: false }))
+  const handleLogoClick = () => {
+    dispatch(updateSearch({ topic: undefined, tag: undefined, focused: false }))
+    navigate("/")
+  }
 
   useEffect(
     () =>
@@ -46,14 +49,18 @@ export const Header = memo(function Header() {
   return (
     <header className={CN}>
       <div className={getElement("container")}>
-        <div aria-label="Home">
-          <img src="/static/icons/logo.svg" alt="logo" className={getModifier(getElement("logo"), "mobile")} />
+        <div aria-label="Home" onClick={handleLogoClick}>
+          <img
+            src="/static/icons/logo.svg"
+            alt="logo"
+            className={getModifier(getElement("logo"), "mobile")}
+            onClick={handleLogoClick}
+          />
           <img src="/static/images/logo.svg" alt="logo" className={getElement("logo")} />
-          <Link className="ghost" to="/" onClick={handleLogoClick} />
         </div>
         {isAdmin && (
           <Button size="little" className="admin" onClick={handleAdminClick}>
-            Go to Admin page
+            Admin
           </Button>
         )}
         <Icon
