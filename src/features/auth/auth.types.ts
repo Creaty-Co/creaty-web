@@ -3,11 +3,11 @@ export interface IUserData {
   email: string | null
   first_name: string | null
   last_name?: string | null
+  photo: string | null
   has_discount: boolean
   is_verified: boolean
   is_staff: boolean
   is_mentor: boolean
-  isAuth?: boolean
 }
 
 export interface ISignUpFormStep1 {
@@ -31,6 +31,7 @@ export interface IAuthState {
   password: string | null
   firstName: string | null
   lastName: string | null
+  photo: string | null
 
   hasDiscount: boolean
   isVerified: boolean

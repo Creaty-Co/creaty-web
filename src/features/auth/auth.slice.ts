@@ -9,6 +9,7 @@ const initialState: IAuthState = {
   password: null,
   firstName: null,
   lastName: null,
+  photo: null,
 
   hasDiscount: false,
   isVerified: false,
@@ -33,11 +34,12 @@ export const authSlice = createSlice({
       state.refreshToken = refreshToken
     },
     setAuthUserData: (state, action: PayloadAction<IUserData>) => {
-      const { id, email, first_name, last_name, has_discount, is_verified, is_staff, is_mentor } = action.payload
+      const { id, email, first_name, last_name, has_discount, is_verified, is_staff, is_mentor, photo } = action.payload
       state.authUserId = id
       state.email = email
       state.firstName = first_name
       state.lastName = last_name || null
+      state.photo = photo || null
       state.hasDiscount = has_discount
       state.isVerified = is_verified
       state.isAdmin = is_staff
@@ -81,6 +83,7 @@ export const authUserDataS = createSelector(authS, state => ({
   password: state.password,
   firstName: state.firstName,
   lastName: state.lastName,
+  photo: state.photo,
   hasDiscount: state.hasDiscount,
   isVerified: state.isVerified,
   isAdmin: state.isAdmin,
