@@ -3,8 +3,9 @@ import "./howItWorks.scss"
 import { useAppDispatch } from "@app/store"
 import { EFormIds, PopupFormWrapper } from "@features"
 import { openModal } from "@shared/layout"
-import { BulletPoint, Button, InfoSection } from "@shared/ui"
+import { BulletPoint, InfoSection } from "@shared/ui"
 import { bem } from "@shared/utils"
+import { Button } from "antd"
 import cn from "classnames"
 import { Trans, useTranslation } from "react-i18next"
 
@@ -47,9 +48,7 @@ export function HowItWorks() {
           desc={t("help.desc")}
         >
           <Button
-            className={cn(getElement("button"), getElement("button_free"))}
-            size="big"
-            color="green"
+            className="button button--green button--biggest"
             onClick={() => dispatch(openModal(<PopupFormWrapper formType={EFormIds.TEST_MEETING} />))}
           >
             {t("button")}

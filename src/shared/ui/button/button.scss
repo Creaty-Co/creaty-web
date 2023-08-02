@@ -59,7 +59,6 @@
   &--green {
     --button-color: #{$color-green};
     color: $color-black-main;
-    font-weight: 900;
   }
 
   &--green:not(&--outline) {
@@ -67,7 +66,6 @@
       --button-color: #{rgba($color-green, 0.85)} !important;
     }
     color: $color-black-main;
-    font-weight: 500;
   }
 
   &--violet {
@@ -159,7 +157,7 @@
   }
 
   &--biggest {
-    padding: 24px 16px;
+    padding: 16px 32px;
     border-radius: 32px;
     min-height: 72px;
 
