@@ -12,7 +12,7 @@ const CN = "auth-ddl"
 const { getElement } = bem(CN)
 
 export function AuthDDL() {
-  const authUsersData = useAppSelector(authUserDataS)
+  const authUserData = useAppSelector(authUserDataS)
   const dispatch = useAppDispatch()
 
   const items: MenuProps["items"] = useMemo(
@@ -21,7 +21,7 @@ export function AuthDDL() {
         key: "user",
         label: (
           <>
-            Signed in as <br /> <b> {authUsersData.email}</b>
+            Signed in as <br /> <b> {authUserData.email}</b>
           </>
         ),
       },
@@ -31,7 +31,7 @@ export function AuthDDL() {
         label: "Sign out",
       },
     ],
-    [authUsersData]
+    [authUserData]
   )
   const onClick: MenuProps["onClick"] = ({ key }) => {
     if (key === "user") return
@@ -44,7 +44,13 @@ export function AuthDDL() {
     <Avatar
       size={48}
       shape="square"
-      icon={<img src="/static/icons/user-avatar.svg" alt="user-avatar" className={getElement("avatar")} />}
+      icon={
+        <img
+          src={authUserData.photo ?? "/static/icons/user-avatar.svg"}
+          alt="user-avatar"
+          className={getElement("avatar")}
+        />
+      }
     />
   )
   return (
@@ -54,7 +60,7 @@ export function AuthDDL() {
       overlayClassName={getElement("ddl")}
       trigger={["click"]}
     >
-      {authUsersData.isMentor ? (
+      {authUserData.isMentor ? (
         <Badge count={<img src="/static/icons/mentor-badge.svg" alt="user-avatar" className={getElement("badge")} />}>
           {avatar}
         </Badge>
