@@ -35,10 +35,13 @@
 
   @include for-size(big-phone-screen) {
     display: grid;
-
     padding: 36px;
-
     border-radius: 50px;
+  }
+
+  @include for-size(big-tablet-screen) {
+    display: flex;
+    flex-direction: column;
   }
 
   &__additional {
@@ -46,10 +49,6 @@
     @include TagsRegular;
   }
 
-  @include Tablet {
-    display: grid;
-    grid-template-columns: auto;
-  }
 }
 
 .info-section__header {

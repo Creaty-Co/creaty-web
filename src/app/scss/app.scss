@@ -1,35 +1,35 @@
 @import "bundle";
 
 .icon {
-	$size: var(--icon-size, 16px);
+  $size: var(--icon-size, 16px);
 
-	display: inline-block;
-	width: $size;
-	height: $size;
-	vertical-align: middle;
-	object-fit: contain;
+  display: inline-block;
+  width: $size;
+  height: $size;
+  vertical-align: middle;
+  object-fit: contain;
 }
-
 
 /* Main */
 main {
-	overflow: hidden;
+  overflow: hidden;
+  padding: 0 30px;
 
-	& > div {
-		margin-top: 120px;
+  & > div {
+    margin-top: 120px;
 
-		@include for-size(big-phone-screen) {
-			margin-top: 22vw;
+    @include for-size(big-phone-screen) {
+      margin-top: 22vw;
 
-			&.home-view {
-				margin-top: 11vw;
-			}
-		}
-	}
+      &.home-view {
+        margin-top: 11vw;
+      }
+    }
+  }
 }
 
 main:not(.home-view__slider) {
-	@include Mobile {
-		padding: 0 5vw;
-	}
+  @include Mobile {
+    padding: 0 5vw;
+  }
 }

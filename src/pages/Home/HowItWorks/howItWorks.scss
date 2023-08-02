@@ -43,4 +43,7 @@
   @include for-size(big-phone-screen) {
     @include gap(32px);
   }
+  @include for-size(big-tablet-screen) {
+    @include gap(50px);
+  }
 }

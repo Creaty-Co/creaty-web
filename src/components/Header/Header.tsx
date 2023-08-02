@@ -53,7 +53,7 @@ export const Header = memo(function Header() {
         </div>
         {isAdmin && (
           <Button size="little" className="admin" onClick={handleAdminClick}>
-            Go to Admin page
+            Admin
           </Button>
         )}
         <Icon
