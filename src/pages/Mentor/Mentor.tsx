@@ -3,8 +3,9 @@ import "./Mentor.scss"
 import { MentorPackageType, Tag, useGetMentorBySlugQuery } from "@entities"
 import { QAndA } from "@pages/Home/QAndA/QAndA"
 import { useScrollToTop } from "@shared/index"
-import { Button, Icon, LoaderCover } from "@shared/ui"
+import { Icon, LoaderCover } from "@shared/ui"
 import { bem, getEmojiPNG } from "@shared/utils"
+import { Button } from "antd"
 import cn from "classnames"
 import { useTranslation } from "react-i18next"
 import { useParams } from "react-router"
@@ -74,7 +75,7 @@ export function Mentor() {
             )}
           </div>
 
-          <Button size="big" color="green" className="user-card__button" onClick={scrollToPackages}>
+          <Button className="button button--green button--biggest" onClick={scrollToPackages}>
             {t("card.rollIn")}
           </Button>
         </div>

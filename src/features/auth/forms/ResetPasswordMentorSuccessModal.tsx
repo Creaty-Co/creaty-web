@@ -23,10 +23,7 @@ export const ResetPasswordMentorSuccessModal = memo(function ResetPasswordMentor
   const elementContent = <span className={getElement("footer")}>{t("tip")}</span>
 
   const elementControl = (
-    <Button
-      className={cn("button button--green button--biggest button__text text-black-900", getElement("button"))}
-      htmlType="submit"
-    >
+    <Button className={cn("button button--green button--biggest", getElement("button"))} htmlType="submit">
       {t("submitText")}
     </Button>
   )
@@ -38,6 +35,7 @@ export const ResetPasswordMentorSuccessModal = memo(function ResetPasswordMentor
         subTitle={<h4 className="font--h4-bold">{t("header")}</h4>}
         shadow
         black
+        hideCross
       >
         <Formus elementControl={elementControl} elementContent={elementContent} onSubmit={handleClose} />
       </PopupLayout>

@@ -99,6 +99,8 @@
   &__price {
     color: $color-gray-80;
     font-size: 1.5rem;
+    margin-top: 4px;
+    margin-bottom: -8px;
 
     em {
       color: $color-black-main;
@@ -109,6 +111,7 @@
   &__discounts {
     display: grid;
     @include row-gap(0.5em);
+    margin-bottom: 16px;
   }
 
   &__discount {
@@ -140,7 +143,6 @@
   }
 
   &-button__text {
-    // Trouble with font layout
     position: relative;
     top: 2px;
 
