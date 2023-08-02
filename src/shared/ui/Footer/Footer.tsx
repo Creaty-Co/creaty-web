@@ -1,7 +1,8 @@
 import "./Footer.scss"
 
-import { useAppDispatch } from "@app/store"
+import { useAppDispatch, useAppSelector } from "@app/store"
 import { EFormIds, PopupFormBecomeMentor, PopupFormWrapper } from "@features"
+import { authPassedS, isMentorS } from "@features/auth/auth.slice"
 import { openModal } from "@shared/layout"
 import { OuterLink } from "@shared/ui"
 import { bem } from "@shared/utils"
@@ -25,13 +26,15 @@ export const Footer: FC<IFooter> = ({ className }) => {
   const { t } = useTranslation("translation", { keyPrefix: "footer" })
   const dispatch = useAppDispatch()
 
+  const authPassed = useAppSelector(authPassedS)
+  const isMentor = useAppSelector(isMentorS)
+
   return (
     <footer className={cn(CN, className)}>
       <div className={CNContainer}>
         <div className={CNLinks}>
           <div>
             <img src="/static/icons/logo.svg" alt="logo" className={getElement("logo")} />
-
             <Link className="ghost" to="/" />
           </div>
 
@@ -43,13 +46,15 @@ export const Footer: FC<IFooter> = ({ className }) => {
                 {t("links.mentors")}
               </Link>
 
-              <button
-                className="document__link"
-                type="button"
-                onClick={() => dispatch(openModal(<PopupFormBecomeMentor />))}
-              >
-                {t("links.becomeMentor")}
-              </button>
+              {(isMentor || !authPassed) && (
+                <button
+                  className="document__link"
+                  type="button"
+                  onClick={() => dispatch(openModal(<PopupFormBecomeMentor />))}
+                >
+                  {t("links.becomeMentor")}
+                </button>
+              )}
 
               <button
                 className="document__link"

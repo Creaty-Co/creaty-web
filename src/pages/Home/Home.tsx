@@ -1,6 +1,8 @@
 import "./Home.scss"
 
+import { useAppSelector } from "@app/store"
 import { HaveQuestions, HelpSocial, MentorSearch, MentorSearchTags, MentorsSlider } from "@features"
+import { authPassedS, isMentorS } from "@features/auth/auth.slice"
 import { EmaiVerifyModalForm } from "@features/auth/forms/emaiVerify/EmaiVerifyModalForm"
 import { EmaiVerifySuccessModal } from "@features/auth/forms/emaiVerify/EmaiVerifySuccessModal"
 import { LoginModalForm } from "@features/auth/forms/LoginModalForm"
@@ -28,10 +30,11 @@ const { getElement } = bem(CN)
 
 export function Home() {
   useScrollToTop()
-
   const { t } = useTranslation("translation", { keyPrefix: "views.home" })
-
   const params = useParams<"shortcut" | "code">()
+
+  const authPassed = useAppSelector(authPassedS)
+  const isMentor = useAppSelector(isMentorS)
 
   const showLoginModal = useMatch(EModalsRoutes.LOGIN)
   const showSignUpModal = useMatch(EModalsRoutes.SIGN_UP)
@@ -98,11 +101,11 @@ export function Home() {
           <HaveQuestions />
         </div>
 
-        {/* Become mentros */}
-        <div className={getElement("become-mentor")}>
-          <BecomeMentor />
-        </div>
-
+        {(isMentor || !authPassed) && (
+          <div className={getElement("become-mentor")}>
+            <BecomeMentor />
+          </div>
+        )}
         {/* Subscribe form */}
         <div className={getElement("mailing-subscribe")}>
           <MailingSubscribe />
