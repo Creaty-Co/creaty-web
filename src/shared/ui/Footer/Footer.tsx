@@ -81,11 +81,15 @@ export const Footer: FC<IFooter> = ({ className }) => {
 
           <div className={getElement("social")}>
             <div>
-              <img src="/static/icons/facebook.svg" alt="facebook" />
+              <OuterLink linkHref="facebook">
+                <img src="/static/icons/facebook.svg" alt="facebook" />
+              </OuterLink>
             </div>
 
             <div>
-              <img src="/static/icons/instagram.svg" alt="instagram" />
+              <OuterLink linkHref="instagram">
+                <img src="/static/icons/instagram.svg" alt="instagram" />
+              </OuterLink>
             </div>
           </div>
         </div>
