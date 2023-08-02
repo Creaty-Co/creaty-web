@@ -30,27 +30,34 @@
   @include row-gap(2em);
 
   width: min(100%, 23.75em);
-}
 
-.user-card__button {
-  border-radius: inherit;
-}
+  &_container {
+    display: grid;
+    gap: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
 
-.user-card__text {
-  color: $color-gray-80;
-  font-size: 0.75rem;
-  text-align: center;
-}
+  &__button {
+    border-radius: inherit;
+  }
 
-.user-card__notice {
-  max-width: 18ch;
-  margin: 0 auto;
+  &__text {
+    color: $color-gray-80;
+    font-size: 0.75rem;
+    text-align: center;
+  }
 
-  text-align: center;
-  @include Typography(1.5rem, 400, $color-green);
+  &__notice {
+    max-width: 18ch;
+    margin: 0 auto;
 
-  & > em {
-    font-weight: 700;
+    text-align: center;
+    @include Typography(1.5rem, 400, $color-green);
+
+    & > em {
+      font-weight: 700;
+    }
   }
 }
 
@@ -92,69 +99,64 @@
     @include gap(1em);
     padding: 2em;
   }
-}
 
-.user-section__container {
-}
+  &__title {
+    margin-bottom: 0.5em;
+  }
 
-.user-section__title {
-  margin-bottom: 0.5em;
-}
+  &__content {
+    p {
+      margin: 1em 0;
+      em {
+        font-weight: bold;
+      }
 
-.user-section__content {
-  p {
-    margin: 1em 0;
-    // @include Typography(1.125rem, null, null);
-
-    em {
-      font-weight: bold;
-    }
-
-    a {
-      color: $color-violet;
+      a {
+        color: $color-violet;
+      }
     }
   }
-}
 
-.user-section__tags {
-  display: flex;
-  flex-wrap: wrap;
-  @include gap(0.5em);
-}
-
-.user-section__rows {
-  display: grid;
-  @include row-gap(0.75em);
-  margin-top: 1.5em;
-}
-
-.user-section__entry {
-  display: flex;
-  align-items: center;
-  @include gap(0.5em);
-
-  margin: 0.5em 0;
-  color: $color-gray-50;
-  & em {
-    color: white;
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    @include gap(0.5em);
   }
-  // @include Typography(1.125rem, null, $color-white);
 
-  @include Mobile {
-    align-items: flex-start;
+  &__rows {
+    display: grid;
+    @include row-gap(0.75em);
+    margin-top: 1.5em;
+  }
 
-    span {
-      display: grid;
+  &__entry {
+    display: flex;
+    align-items: center;
+    @include gap(0.5em);
+
+    margin: 0.5em 0;
+    color: $color-gray-50;
+    & em {
+      color: white;
+    }
+    // @include Typography(1.125rem, null, $color-white);
+
+    @include Mobile {
+      align-items: flex-start;
+
+      span {
+        display: grid;
+      }
     }
   }
-}
 
-.user-section__icon {
-  --icon-size: 2em;
-  flex-shrink: 0;
+  &__icon {
+    --icon-size: 2em;
+    flex-shrink: 0;
 
-  @include Mobile {
-    --icon-size: 1.25em;
+    @include Mobile {
+      --icon-size: 1.25em;
+    }
   }
 }
 

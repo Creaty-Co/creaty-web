@@ -31,7 +31,7 @@ export const EmailVerifySuccessForm = memo(function EmailVerifySuccessForm({ isL
 
   const elementControl = (
     <Button
-      className={cn("button button--green button--biggest button__text text-black-900", getElement("button"))}
+      className={cn("button button--green button--biggest", getElement("button"))}
       htmlType="submit"
       loading={!!isLoading}
     >

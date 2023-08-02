@@ -58,17 +58,16 @@
 
   &--green {
     --button-color: #{$color-green};
+    color: $color-black-main;
+    font-weight: 900;
   }
 
   &--green:not(&--outline) {
     &:hover {
       --button-color: #{rgba($color-green, 0.85)} !important;
     }
-
-    .button__text {
-      color: $color-black-main;
-      font-weight: 500;
-    }
+    color: $color-black-main;
+    font-weight: 500;
   }
 
   &--violet {
@@ -170,6 +169,8 @@
 
       @include TextBold;
     }
+
+    @include TextBold;
   }
 
   &:not(&--pending) {
