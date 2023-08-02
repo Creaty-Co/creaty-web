@@ -3,9 +3,10 @@
 .mentor-search {
   margin-top: 0;
   transition: left ease-in 500ms, width ease-in 500ms, margin-top linear 300ms;
+  display: flex;
+  justify-content: center;
 
   &--focused {
-    // margin-top: 100px;
     @include for-size(big-phone-screen) {
       z-index: 2;
       left: -4vw;
@@ -106,6 +107,10 @@
 
       border-radius: 35px;
       padding: 8px;
+    }
+
+    @include for-size(small-tablet-screen) {
+      margin: 0 -30px;
     }
   }
 
@@ -282,8 +287,12 @@
   }
 
   &__tags {
-    margin-top: 15px;
     overflow: hidden;
+    margin-top: 15px;
+
+    @include for-size(hd-screen) {
+      margin: 15px -30px 0 -30px;
+    }
   }
 
   &__shadow {

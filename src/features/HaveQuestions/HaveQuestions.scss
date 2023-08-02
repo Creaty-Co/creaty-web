@@ -32,7 +32,7 @@
   &__info {
     display: grid;
 
-    @include row-gap(24px);
+    @include row-gap(30px);
     @include for-size(big-phone-screen) {
       @include row-gap(16px);
     }

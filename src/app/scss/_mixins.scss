@@ -98,22 +98,22 @@ $tabletMaxWidth: 1000px;
 }
 
 /* New mixins */
-/*
+
 $q-hd-screen: 3451px;
 $high-hd-screen: 2561px;
-$full-hd-screen: 1930px; use this one
-$dell-hd-screen: 1660px;  use this one
-$mac-hd-screen: 1450px;  use this one
-$hd-screen: 1290px;  use this one
+$full-hd-screen: 1930px; 
+$dell-hd-screen: 1660px; 
+$mac-hd-screen: 1450px; 
+$hd-screen: 1290px;  
 
-$big-tablet-screen: 1030px; use this one
-$middle-tablet-screen: 850px; use this one
-$small-tablet-screen: 780px; use this one
+$big-tablet-screen: 1030px;
+$middle-tablet-screen: 850px; 
+$small-tablet-screen: 780px; 
 
-$big-phone-screen: 415px; use this one
-$middle-phone-screen: 376px; use this one
-$small-phone-screen: 321px; use this one
-*/
+$big-phone-screen: 415px; 
+$middle-phone-screen: 376px; 
+$small-phone-screen: 321px; 
+
 
 @mixin for-size($size) {
 	@if $size == full-hd-screen {

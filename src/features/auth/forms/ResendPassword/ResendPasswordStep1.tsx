@@ -1,6 +1,6 @@
 import { useAppDispatch } from "@app/store"
 import { useResendPasswordMutation } from "@features/auth/auth.api"
-import { openModal, PopupLayout } from "@shared/layout"
+import { closeModal, openModal, PopupLayout } from "@shared/layout"
 import { Field, Formus } from "@shared/ui"
 import { bem } from "@shared/utils"
 import { Button, notification } from "antd"
@@ -49,8 +49,16 @@ export function ResendPasswordStep1() {
     resendPassword({ email: values.email })
     setResendedEmail(values.email)
   }
-  const handleLoginRedirect = () => navigate("/login")
-  const handleSignUpRedirect = () => navigate("/sign-up")
+
+  const handleLoginRedirect = () => {
+    dispatch(closeModal())
+    navigate("/login")
+  }
+
+  const handleSignUpRedirect = () => {
+    dispatch(closeModal())
+    navigate("/sign-up")
+  }
 
   const elementContent = (
     <>
