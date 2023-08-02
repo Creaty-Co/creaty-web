@@ -1,5 +1,4 @@
 import { MentorType, TagType } from "@entities"
-import { URLDataBase64 } from "@shared/types"
 
 export interface PageType {
   id: number
@@ -22,12 +21,6 @@ export interface PageLinkType {
 }
 
 export type DocumentsLinksT = Record<PageLinkType["type"], PageLinkType> | null
-
-export interface PageLinkSocialType {
-  id: number
-  icon: URLDataBase64 | string
-  url: string
-}
 
 export interface PageFAQType {
   id: number

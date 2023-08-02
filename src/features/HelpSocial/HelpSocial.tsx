@@ -1,7 +1,6 @@
 import "./HelpSocial.scss"
 
-import { useGetPagesLinksSocialsQuery } from "@shared/api"
-import { LoaderCover, OuterLink } from "@shared/ui"
+import { OuterLink } from "@shared/ui"
 import { bem } from "@shared/utils"
 import { useTranslation } from "react-i18next"
 
@@ -10,22 +9,27 @@ const { getElement } = bem(CN)
 
 export function HelpSocial() {
   const { t } = useTranslation("translation", { keyPrefix: "components.helpSocial" })
-  const { data, isLoading } = useGetPagesLinksSocialsQuery()
-
-  if (!data || isLoading) return <LoaderCover white />
 
   return (
     <div className={CN}>
       <div className={getElement("text")}>{t("text")}</div>
       <div className={getElement("splitter")} />
 
-      {data.results.map(img => (
-        <div key={img.id}>
-          <OuterLink to={img.url}>
-            <img className={getElement("icon")} alt="social network" src={img.icon} />
-          </OuterLink>
-        </div>
-      ))}
+      <div>
+        <OuterLink to="http://m.me/103451835157882/">
+          <img className={getElement("icon")} alt="social network" src="/static/icons/social-facebook-messenger.svg" />
+        </OuterLink>
+      </div>
+      <div>
+        <OuterLink to="https://wa.me/972533231644">
+          <img className={getElement("icon")} alt="social network" src="/static/icons/social-whatsapp-messenger.svg" />
+        </OuterLink>
+      </div>
+      <div>
+        <OuterLink to="https://t.me/CreatyClub">
+          <img className={getElement("icon")} alt="social network" src="/static/icons/social-telegram-messenger.svg" />
+        </OuterLink>
+      </div>
     </div>
   )
 }
