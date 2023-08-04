@@ -3,7 +3,7 @@ export interface IUserData {
   email: string | null
   first_name: string | null
   last_name?: string | null
-  photo: string | null
+  avatar: string | null
   has_discount: boolean
   is_verified: boolean
   is_staff: boolean
@@ -31,7 +31,7 @@ export interface IAuthState {
   password: string | null
   firstName: string | null
   lastName: string | null
-  photo: string | null
+  avatar: string | null
 
   hasDiscount: boolean
   isVerified: boolean

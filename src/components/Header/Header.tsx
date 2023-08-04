@@ -75,7 +75,7 @@ export const Header = memo(function Header() {
               {t("menu.mentors")}
             </ButtonLink>
 
-            {(isMentor || !authPassed) && (
+            {(!isMentor || !authPassed) && (
               <Button size="small" onClick={() => dispatch(openModal(<PopupFormBecomeMentor />))}>
                 {t("menu.becomeMentor")}
               </Button>

@@ -101,7 +101,7 @@ export function Home() {
           <HaveQuestions />
         </div>
 
-        {(isMentor || !authPassed) && (
+        {(!isMentor || !authPassed) && (
           <div className={getElement("become-mentor")}>
             <BecomeMentor />
           </div>
