@@ -38,7 +38,7 @@ export const Packages = ({ hourPrice, mentorName, mentorSlug, packages }: IProps
   useEffect(() => {
     if (isSuccess) {
       dispatch(openModal(<PopupFormThanks />))
-      api.success({ message: "Session successfully booked", duration: 10 })
+      // api.success({ message: "Session successfully booked", duration: 10 })
       setOpenBookModal(false)
     }
   }, [isSuccess])

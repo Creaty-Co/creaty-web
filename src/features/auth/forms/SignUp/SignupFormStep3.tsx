@@ -18,7 +18,15 @@ export function SignupFormStep3() {
   const { email } = useAppSelector(authUserDataS)
   const [api, contextHolder] = notification.useNotification()
 
-  const [resendVerifyEmail, { isSuccess, isLoading, error, reset }] = useResendVerifyEmailMutation()
+  const [
+    resendVerifyEmail,
+    {
+      // isSuccess,
+      isLoading,
+      error,
+      reset,
+    },
+  ] = useResendVerifyEmailMutation()
 
   useEffect(() => {
     if (!error) return
@@ -27,9 +35,9 @@ export function SignupFormStep3() {
     reset()
   }, [error])
 
-  useEffect(() => {
-    if (isSuccess) api.success({ message: "We've sent the confirmation to email again" })
-  }, [isSuccess])
+  // useEffect(() => {
+  //   if (isSuccess) api.success({ message: "We've sent the confirmation to email again" })
+  // }, [isSuccess])
 
   const closeMpdal = () => dispatch(closeModal())
   const handleResendEmailVerify = () => resendVerifyEmail({ email })
