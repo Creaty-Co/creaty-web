@@ -2,7 +2,7 @@ import { createApi } from "@reduxjs/toolkit/query/react"
 import { PaginationType } from "@shared/types"
 import { baseQueryWithReauth } from "@shared/utils"
 
-import { PageFAQType, PageLinkSocialType, PageLinkType, PagePersonalType, PageType } from "./pages.types"
+import { PageFAQType, PageLinkType, PagePersonalType, PageType } from "./pages.types"
 
 export const pagesApi = createApi({
   reducerPath: "pagesApi",

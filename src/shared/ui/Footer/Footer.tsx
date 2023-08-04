@@ -47,7 +47,7 @@ export const Footer: FC<IFooter> = ({ className }) => {
                 {t("links.mentors")}
               </Link>
 
-              {(isMentor || !authPassed) && (
+              {(!isMentor || !authPassed) && (
                 <button
                   className="document__link"
                   type="button"

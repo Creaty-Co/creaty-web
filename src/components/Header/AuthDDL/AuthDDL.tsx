@@ -46,7 +46,7 @@ export function AuthDDL() {
       shape="square"
       icon={
         <img
-          src={authUserData.photo ?? "/static/icons/user-avatar.svg"}
+          src={authUserData.avatar ?? "/static/icons/user-avatar.svg"}
           alt="user-avatar"
           className={getElement("avatar")}
         />
