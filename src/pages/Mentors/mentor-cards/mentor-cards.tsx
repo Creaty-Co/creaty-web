@@ -22,8 +22,8 @@ export function MentorCards(props: IMentorCards) {
   const [pageSize] = useState(15)
   const [results, setResults] = useState<MentorType[]>([])
 
-  const { data, isLoading } = useGetMentorsQuery({page, page_size: pageSize, tag_set__in: tagSet})
-  
+  const { data, isLoading } = useGetMentorsQuery({ page, page_size: pageSize, tag_set__in: tagSet })
+
   /* if (error) return <>useQuery error</> */
   /* useEffect(() => { query() }, [i18n.language]) */
 
@@ -35,7 +35,7 @@ export function MentorCards(props: IMentorCards) {
   useEffect(() => {
     if (isLoading || !data) return
     if (page > 1) return setResults(results => [...new Set([...results, ...data.results])])
-    
+
     setResults(data.results)
   }, [page, isLoading, data])
 
@@ -45,7 +45,7 @@ export function MentorCards(props: IMentorCards) {
     <div className={CN}>
       <div className={getElement("container")}>
         {results.map(mentor => (
-          <MentorCard {...mentor} key={mentor.id} />
+          <MentorCard {...mentor} key={mentor.id} className="slider-card-wrapper" />
         ))}
       </div>
 
