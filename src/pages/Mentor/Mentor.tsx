@@ -16,7 +16,11 @@ import { UserSection } from "./UserSection"
 const CN = "user"
 const { getElement } = bem(CN)
 
-export function Mentor() {
+interface IProps {
+  alignTitleLeft?: boolean
+}
+
+export function Mentor({ alignTitleLeft }: IProps) {
   useScrollToTop()
 
   const { t } = useTranslation("translation", { keyPrefix: "views.mentor" })
