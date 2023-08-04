@@ -22,10 +22,6 @@ export const pagesApi = createApi({
       query: () => "/links/documents",
     }),
 
-    getPagesLinksSocials: builder.query<PaginationType<PageLinkSocialType>, void>({
-      query: () => "/links/socials",
-    }),
-
     getPagesFAQs: builder.query<PaginationType<PageFAQType>, void>({
       query: () => "/faqs",
     }),
@@ -34,7 +30,6 @@ export const pagesApi = createApi({
 
 export const {
   useGetPagesLinksDocumentsQuery,
-  useGetPagesLinksSocialsQuery,
   useGetPagePersonalQuery,
   useGetPagesMainQuery,
   useGetPagesFAQsQuery,
