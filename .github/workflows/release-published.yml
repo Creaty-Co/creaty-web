@@ -6,7 +6,6 @@ on:
 
 jobs:
   build_stage:
-    if: "github.event.release.prerelease"
     uses: ./.github/workflows/call-build.yml
     secrets: inherit
     with:
@@ -20,4 +19,3 @@ jobs:
       tag: ${{ github.ref_name }}
       environment: prod
       url: 'https://creaty.club'
-    needs: [ build_stage ]
