@@ -5,8 +5,15 @@ on:
     types: [ published ]
 
 jobs:
-  build:
-    if: "!github.event.release.prerelease"
+  build_stage:
+    if: "github.event.release.prerelease"
+    uses: ./.github/workflows/call-build.yml
+    secrets: inherit
+    with:
+      tag: pre-${{ github.ref_name }}
+      environment: stage
+      url: 'https://stage.creaty.club'
+  build_prod:
     uses: ./.github/workflows/call-build.yml
     secrets: inherit
     with:
