@@ -20,3 +20,4 @@ jobs:
       tag: ${{ github.ref_name }}
       environment: prod
       url: 'https://creaty.club'
+    needs: [ build_stage ]
