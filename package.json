@@ -7,7 +7,7 @@
     "@hookform/resolvers": "^2.9.11",
     "@reduxjs/toolkit": "^1.9.3",
     "@sentry/react": "^7.43.0",
-    "@sentry/tracing": "^7.43.0",
+    "@sentry/tracing": "^7.62.0",
     "@types/react-slick": "^0.23.10",
     "antd": "^5.5.1",
     "async-mutex": "^0.4.0",
