@@ -95,7 +95,7 @@ export const Footer: FC<IFooter> = ({ className }) => {
         </div>
 
         <div className={CNCopyright}>
-          © {new Date().getFullYear()} Creaty.org — {t("desc")}
+          © {new Date().getFullYear()} {t("desc")}
         </div>
       </div>
     </footer>
