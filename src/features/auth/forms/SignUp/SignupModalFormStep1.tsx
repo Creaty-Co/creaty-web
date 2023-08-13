@@ -130,7 +130,7 @@ export function SignupModalFormStep1({ show }: IProps) {
   )
 
   return (
-    <Modal open={show} onCancel={closeModal} footer={null} closable={false} maskClosable={false} keyboard={false}>
+    <Modal open={show} onCancel={closeModal} footer={null} closable={false} keyboard={false}>
       <PopupLayout
         onClose={closeModal}
         title={<h3 className={cn("font--h3-bold popup-layout__title", getElement("title"))}>{t("title")}</h3>}
