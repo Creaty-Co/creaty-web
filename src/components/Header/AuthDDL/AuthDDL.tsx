@@ -4,6 +4,7 @@ import { history } from "@app/App"
 import { useAppDispatch, useAppSelector } from "@app/store"
 import { bem } from "@shared/utils"
 import { Avatar, Badge, Dropdown, MenuProps } from "antd"
+import cn from "classnames"
 import { useMemo } from "react"
 
 import { authUserDataS, resetAuthState } from "../../../features/auth/auth.slice"
@@ -48,7 +49,7 @@ export function AuthDDL() {
         <img
           src={authUserData.avatar ?? "/static/icons/user-avatar.svg"}
           alt="user-avatar"
-          className={getElement("avatar")}
+          className={cn(getElement("avatar"), authUserData.avatar ? getElement("photo") : "")}
         />
       }
     />
