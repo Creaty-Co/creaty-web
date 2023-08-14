@@ -57,7 +57,7 @@ export function MentorsSlider({ mentors }: IMentorsSlider) {
           ref={slider}
         >
           {mentors.map(mentor => (
-            <MentorCard {...mentor} key={mentor.id} className="slider-card-wrapper" />
+            <MentorCard {...mentor} key={mentor.id} className="slider-card-wrapper" clickable />
           ))}
         </Slider>
       </div>

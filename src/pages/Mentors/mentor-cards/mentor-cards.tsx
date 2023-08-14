@@ -45,7 +45,7 @@ export function MentorCards(props: IMentorCards) {
     <div className={CN}>
       <div className={getElement("container")}>
         {results.map(mentor => (
-          <MentorCard {...mentor} key={mentor.id} className="slider-card-wrapper" />
+          <MentorCard {...mentor} key={mentor.id} className="mentors-card-wrapper" />
         ))}
       </div>
 

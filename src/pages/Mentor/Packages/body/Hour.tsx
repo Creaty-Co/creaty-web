@@ -50,7 +50,7 @@ export const Hour = ({ hourPrice, mentorName, mentorSlug }: IProps) => {
 
   return (
     <>
-      <div className="bg-white rounded-2xl grid grid-cols-[1fr_auto] pl-10 pr-6 py-6 items-start gap-4">
+      <div className="bg-white rounded-2xl grid grid-cols-[1fr_auto] p-8 items-start gap-4 book-row">
         <div className="grid grid-rows-[auto_auto] gap-2">
           <div className="font--h4-bold text-black-900">{t("views.mentor.plans.hour.title", { mentorName })}</div>
           <div className="font--text-regular text-gray-800">{t("views.mentor.plans.hour.desc")}</div>

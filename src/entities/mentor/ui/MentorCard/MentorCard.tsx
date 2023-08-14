@@ -5,8 +5,9 @@ import { Icon } from "@shared/ui"
 import { getEmojiPNG } from "@shared/utils"
 import { bem } from "@shared/utils"
 import cn from "classnames"
+import { useState } from "react"
 import { useTranslation } from "react-i18next"
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 import { MentorType } from "../../mentor.types"
 
@@ -18,6 +19,7 @@ const { getElement: getElementButton } = bem(CNButton)
 
 interface MentorCard extends MentorType {
   className?: string
+  clickable?: boolean
 }
 
 export function MentorCard({
@@ -34,11 +36,23 @@ export function MentorCard({
   price_currency,
   country,
   price,
+  clickable,
 }: MentorCard) {
   const { t } = useTranslation("translation")
+  const navigate = useNavigate()
 
+  const handleClick = () => {
+    navigate("/mentor/" + slug)
+  }
+
+  const [hovered, setHovered] = useState(false)
   return (
-    <div className={cn(CN, className)}>
+    <div
+      className={cn(CN, className, clickable ? "clickable" : "")}
+      onClick={clickable ? handleClick : undefined}
+      onMouseOver={() => (clickable ? setHovered(true) : undefined)}
+      onMouseOut={() => (clickable ? setHovered(false) : undefined)}
+    >
       <div className={getElement("preview")}>
         <img src={avatar} alt="mentor's face" className={getElement("image")} />
       </div>
@@ -52,7 +66,7 @@ export function MentorCard({
 
             <img src={getEmojiPNG(country.flag_unicode)} alt="flag" className={getElement("flag")} />
           </div>
-
+          ´
           <div className={getElement("job")}>
             <em>{profession}・</em>
             {company}
@@ -68,7 +82,7 @@ export function MentorCard({
         </div>
       </div>
 
-      <Link className={CNButton} to={"/mentor/" + slug}>
+      <button className={`${CNButton} ${hovered ? "hover" : ""}`} onClick={handleClick}>
         <div className={getElementButton("text")}>
           <em>{Number(price).toPrice(t("lang.code"), price_currency)}</em>
           <span>/</span>
@@ -77,8 +91,8 @@ export function MentorCard({
 
         <div className={getElementButton("hover-text")}>{t("components.mentorCard.seeProfile")}</div>
 
-        <Icon className="icon mentor-card-button__icon mentor-card-button__icon--arrow-right" name="arrow-right" />
-      </Link>
+        <Icon className="icon mentor-card-button__icon" name="arrow-right" />
+      </button>
     </div>
   )
 }
