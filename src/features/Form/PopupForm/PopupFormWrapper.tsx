@@ -12,8 +12,6 @@ const getTranslationProp = (formType: TFormNames): string => {
   if (formType === EFormIds.GET_HELP) return "getHelp"
   if (formType === EFormIds.TEST_MEETING) return "testMeeting"
   return ""
-  // if (formType === EFormIds.STILL_QUESTIONS) return "stillQuestions"
-  // if (formType === EFormIds.SIGNUP_MENTOR) return "signup_mentor"
 }
 
 export function PopupFormWrapper({ formType }: IProps) {
@@ -22,8 +20,6 @@ export function PopupFormWrapper({ formType }: IProps) {
   const getForm = () => {
     if (formType === EFormIds.GET_HELP) return <FormGetHelp />
     if (formType === EFormIds.TEST_MEETING) return <FormTestMeeting />
-    // if (formType === EFormIds.STILL_QUESTIONS) return <FormStillQuestions />
-    // if (formType === EFormIds.SIGNUP_MENTOR) return <FormSignupMentor />
   }
 
   return <PopupLayout title={t(`${getTranslationProp(formType)}.title`)}>{getForm()}</PopupLayout>

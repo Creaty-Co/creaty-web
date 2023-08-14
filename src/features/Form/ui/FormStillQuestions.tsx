@@ -1,7 +1,6 @@
-import { useAppDispatch, useAppSelector } from "@app/store"
+import { useAppSelector } from "@app/store"
 import { EFormIds } from "@features"
 import { authUserDataS } from "@features/auth/auth.slice"
-import { openModal } from "@shared/layout"
 import { Field, Formus, OuterLink } from "@shared/ui"
 import { bem, isEmail } from "@shared/utils"
 import { Button } from "antd"
@@ -11,7 +10,6 @@ import { FieldValues, SubmitHandler } from "react-hook-form"
 import { useTranslation } from "react-i18next"
 import * as yup from "yup"
 
-import { PopupFormThanks } from "../PopupForm"
 import { usePostFormsIdApplicationsMutation } from "../state/form.api"
 
 const schema = yup
@@ -37,12 +35,11 @@ const MOD = "still-quetion"
 const { getElement, getModifier } = bem(CN)
 
 interface IProps {
-  handleSubmit?(): void
+  handleSubmit(): void
 }
 
 export function FormStillQuestions({ handleSubmit }: IProps) {
   const { t } = useTranslation("translation", { keyPrefix: "other.forms.stillQuestions" })
-  const dispatch = useAppDispatch()
   const [postFormsIdApplications, { isLoading, isSuccess }] = usePostFormsIdApplicationsMutation()
 
   const { firstName, email } = useAppSelector(authUserDataS)
@@ -55,7 +52,7 @@ export function FormStillQuestions({ handleSubmit }: IProps) {
     })
   }
   useEffect(() => {
-    if (isSuccess) handleSubmit ? handleSubmit() : dispatch(openModal(<PopupFormThanks />))
+    if (isSuccess) handleSubmit()
   }, [isSuccess])
 
   const elementContent = (
@@ -69,6 +66,7 @@ export function FormStillQuestions({ handleSubmit }: IProps) {
         label="Email*"
         defaultValue={email || undefined}
       />
+      <Field disabled={isLoading} type={"input"} name="about" label="How can we help?*" />
     </>
   )
 
