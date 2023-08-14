@@ -56,41 +56,39 @@ export const Packages = ({ hourPrice, mentorName, mentorSlug, packages }: IProps
   if (!packages?.length || packages?.length === 0) return null
   return (
     <>
-      <div className="bg-white rounded-2xl grid grid-rows-[auto_auto] gap-6 py-6">
-        <div className="grid grid-cols-[1fr_auto] pl-10 pr-6 items-start gap-4">
-          <div className="grid grid-rows-[auto_auto] gap-2">
-            <div className="font--h4-bold text-black-900">{t("views.mentor.plans.pack.title")}</div>
-            <div className="font--text-regular text-gray-800">{t("views.mentor.plans.pack.desc")}</div>
-          </div>
-
-          <Button size="big" type="submit" color="violet" onClick={() => setOpenBookModal(true)}>
-            {t("views.mentor.plans.pack.submitText")}
-          </Button>
+      <div className="bg-white rounded-2xl packages-wrapper">
+        <div className="grid grid-rows-[auto_auto] gap-2 packages-wrapper__text">
+          <div className="font--h4-bold text-black-900">{t("views.mentor.plans.pack.title")}</div>
+          <div className="font--text-regular text-gray-800">{t("views.mentor.plans.pack.desc")}</div>
         </div>
 
-        <Radio.Group value={packId} onChange={handlePackCahnged}>
-          <div className="grid grid-cols-1 px-6 gap-1">
+        <Button size="big" type="submit" color="violet" onClick={() => setOpenBookModal(true)} className="packages-wrapper__button">
+          {t("views.mentor.plans.pack.submitText")}
+        </Button>
+
+        <Radio.Group value={packId} onChange={handlePackCahnged} className="packages-wrapper__radio">
+          <div className="grid grid-cols-1 gap-1">
             {packages.map((pack: MentorPackageType, i) => (
               <div
                 className={cn(
-                  "p-4 grid grid-cols-[auto_1fr] rounded-lg cursor-pointer hover:bg-viol-100",
+                  "p-4 rounded-lg cursor-pointer hover:bg-viol-100 single-pack",
                   packId === pack.id ? "bg-viol-100" : "bg-viol-50"
                 )}
                 key={pack.id}
                 onClick={() => setPackId(pack.id)}
               >
-                <div className="flex gap-3 flex-row items-center">
+                <div className="flex gap-3 flex-row items-center flex-wrap">
                   <Radio value={pack.id}>
-                    <span className="font--text-bold text-black-900">{pack.lessons_count} sessions</span>
+                    <span className="font--text-bold text-black-900 whitespace-nowrap">{pack.lessons_count} sessions</span>
                   </Radio>
                   {i === 0 && (
-                    <div className="px-1.5 py-1 text-gray-400 bg-black-900 font--tags-regular rounded-sm">
+                    <div className="px-1.5 py-1 text-gray-400 bg-black-900 font--tags-regular rounded-sm flex-wrap whitespace-nowrap">
                       Most common
                     </div>
                   )}
                 </div>
 
-                <div className="flex gap-2 flex-row items-center justify-end">
+                <div className="flex gap-2 flex-row items-center flex-wrap">
                   <div>
                     <span className="text-black-900 font--text-medium">
                       $

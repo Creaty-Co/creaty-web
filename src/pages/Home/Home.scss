@@ -47,7 +47,6 @@
     @include WidthLimit;
     margin-top: 80px;
     @include for-size(big-phone-screen) {
-      margin: 80px 30px 0 30px ;
       margin-top: 40px;
     }
   }

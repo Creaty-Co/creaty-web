@@ -1,3 +1,5 @@
+import "./Packages.scss"
+
 import { MentorPackageType } from "@entities"
 import cn from "classnames"
 

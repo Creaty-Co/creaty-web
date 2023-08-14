@@ -50,7 +50,7 @@ export const Trial = ({ minutsOfTrialMeeting, mentorSlug, mentorName }: IProps) 
   return (
     <>
       {minutsOfTrialMeeting ? (
-        <div className="bg-black-900 rounded-2xl grid grid-cols-[1fr_auto] pl-10 pr-6 pt-6 pb-10 items-start selector gap-4">
+        <div className="bg-black-900 rounded-2xl grid grid-cols-[1fr_auto] p-8 items-start selector gap-4 book-row">
           <div className="grid grid-rows-[auto_auto] gap-2">
             <div className="font--h4-bold text-white">
               {t("views.mentor.plans.trial.title", { minutsOfTrialMeeting })}{" "}
