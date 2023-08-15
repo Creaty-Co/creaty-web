@@ -45,23 +45,22 @@ export function MentorCards(props: IMentorCards) {
     <div className={CN}>
       <div className={getElement("container")}>
         {results.map(mentor => (
-          <MentorCard {...mentor} key={mentor.id} className="mentors-card-wrapper" />
+          <MentorCard {...mentor} key={mentor.id} className="mentors-card-wrapper" clickable />
         ))}
       </div>
 
-      {isLoading && (
-        <LoaderCover absolute white />
-      )}
+      {isLoading && <LoaderCover absolute white />}
 
-      {(page * pageSize) < (data?.count || 0) && (
+      {page * pageSize < (data?.count || 0) && (
         <Button
           className={getElement("more")}
-          outline size="big" disabled={isLoading}
-
+          outline
+          size="big"
+          disabled={isLoading}
           iconLeft={<Icon name="refresh" className={getModifier(getElement("icon"), isLoading && "spin")} />}
           onClick={() => setPage(page + 1)}
         >
-          {t("showMore")} {((page * pageSize) + lastPageSize) === (data?.count || 0) ? lastPageSize : pageSize}
+          {t("showMore")} {page * pageSize + lastPageSize === (data?.count || 0) ? lastPageSize : pageSize}
         </Button>
       )}
     </div>
