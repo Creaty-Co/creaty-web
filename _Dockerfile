@@ -8,7 +8,7 @@ RUN npm i -g serve
 COPY . .
 RUN npm run build
 
-FROM ubuntu:23.04 as web
+FROM ubuntu:23.10 as web
 
 WORKDIR /web
 
