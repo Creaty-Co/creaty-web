@@ -58,6 +58,7 @@ export function FormSignupMentor() {
         type="primary"
         htmlType="submit"
         loading={isLoading}
+        id="formSignupMentor"
       >
         {t("submitText")}
       </Button>

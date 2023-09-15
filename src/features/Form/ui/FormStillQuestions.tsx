@@ -77,6 +77,7 @@ export function FormStillQuestions({ handleSubmit }: IProps) {
         type="primary"
         htmlType="submit"
         loading={isLoading}
+        id="formStillQuestions"
       >
         {t("submitText")}
       </Button>

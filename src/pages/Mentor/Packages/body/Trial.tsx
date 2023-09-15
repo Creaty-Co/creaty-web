@@ -60,7 +60,7 @@ export const Trial = ({ minutsOfTrialMeeting, mentorSlug, mentorName }: IProps) 
             </div>
           </div>
 
-          <Button size="big" type="submit" color="white" onClick={() => setOpenBookModal(true)}>
+          <Button size="big" type="submit" color="white" onClick={() => setOpenBookModal(true)} id="openModalTrialButton">
             {t("views.mentor.plans.trial.submitText")}
           </Button>
         </div>
@@ -77,6 +77,7 @@ export const Trial = ({ minutsOfTrialMeeting, mentorSlug, mentorName }: IProps) 
           terms={t("other.forms.bookSessionTrial.terms")}
           isLoading={isLoading}
           onSubmit={handleSubmit}
+          id="trial"
         />
       </UnclosablePopupWrapper>
 

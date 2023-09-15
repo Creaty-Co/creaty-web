@@ -110,6 +110,7 @@ export function FormBecomeMentor() {
         type="primary"
         htmlType="submit"
         loading={isLoading}
+        id="loginModalForm"
       >
         <span className="flex gap-3 flex-row">{t("submitText")}</span>
       </Button>

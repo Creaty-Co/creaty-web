@@ -56,6 +56,7 @@ export function FormGetHelp() {
         type="primary"
         htmlType="submit"
         loading={isLoading}
+        id="formGetHelp"
       >
         <span className="flex flex-row gap-3">{t("submitText")}</span>
       </Button>

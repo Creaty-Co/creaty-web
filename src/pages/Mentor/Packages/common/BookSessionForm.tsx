@@ -23,10 +23,11 @@ interface IProps {
   isLoading: boolean
   submitText: string
   terms: string
+  id: string
   onSubmit(values: FieldValues): void
 }
 
-export const BookSessionForm = memo(function BookSessionForm({ isLoading, submitText, terms, onSubmit }: IProps) {
+export const BookSessionForm = memo(function BookSessionForm({ isLoading, submitText, terms, id, onSubmit }: IProps) {
   const { firstName, email } = useAppSelector(authUserDataS)
 
   const elementContent = (
@@ -44,6 +45,7 @@ export const BookSessionForm = memo(function BookSessionForm({ isLoading, submit
         type="primary"
         htmlType="submit"
         loading={isLoading}
+        id={`${id}FormSubmitButton`}
       >
         {submitText}
       </Button>

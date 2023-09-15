@@ -79,6 +79,7 @@ export function SignupFormStep2() {
       type="primary"
       htmlType="submit"
       loading={isLoading}
+      id="signupπModalFormSubmitGoogleButton"
     >
       {t("submitText")}
     </Button>

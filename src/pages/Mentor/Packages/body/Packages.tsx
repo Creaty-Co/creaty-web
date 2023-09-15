@@ -62,7 +62,7 @@ export const Packages = ({ hourPrice, mentorName, mentorSlug, packages }: IProps
           <div className="font--text-regular text-gray-800">{t("views.mentor.plans.pack.desc")}</div>
         </div>
 
-        <Button size="big" type="submit" color="violet" onClick={() => setOpenBookModal(true)} className="packages-wrapper__button">
+        <Button size="big" type="submit" color="violet" onClick={() => setOpenBookModal(true)} className="packages-wrapper__button" id={`openModalPackage-${packId}-Button`}>
           {t("views.mentor.plans.pack.submitText")}
         </Button>
 
@@ -127,6 +127,7 @@ export const Packages = ({ hourPrice, mentorName, mentorSlug, packages }: IProps
           terms={t("other.forms.bookSessionPackage.terms")}
           isLoading={isLoading}
           onSubmit={handleSubmit}
+          id="packages"
         />
       </UnclosablePopupWrapper>
       {contextHolder}

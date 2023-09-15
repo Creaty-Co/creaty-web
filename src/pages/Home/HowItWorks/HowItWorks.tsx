@@ -50,6 +50,7 @@ export function HowItWorks() {
           <Button
             className="button button--green button--biggest"
             onClick={() => dispatch(openModal(<PopupFormWrapper formType={EFormIds.TEST_MEETING} />))}
+            id="howItWorksButton"
           >
             {t("button")}
           </Button>

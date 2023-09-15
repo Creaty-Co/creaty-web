@@ -95,6 +95,7 @@ export function LoginModalForm({ show }: IProps) {
         type="primary"
         htmlType="submit"
         loading={isLoading}
+        id="loginModalFormSubmitButton"
       >
         {t("mainButtonText")}
       </Button>
@@ -105,7 +106,7 @@ export function LoginModalForm({ show }: IProps) {
         <div className="flex-grow border-t border-gray-400"></div>
       </div>
 
-      <Button className="button button--google button--biggest button__text" onClick={handleGoogleLogin}>
+      <Button className="button button--google button--biggest button__text" onClick={handleGoogleLogin} id="loginModalFormSubmitGoogleButton">
         {t("googleButtonText")}
       </Button>
 

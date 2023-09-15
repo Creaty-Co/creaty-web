@@ -59,7 +59,7 @@ export const Hour = ({ hourPrice, mentorName, mentorSlug }: IProps) => {
           </div>
         </div>
 
-        <Button size="big" type="submit" color="violet" onClick={() => setOpenBookModal(true)}>
+        <Button size="big" type="submit" color="violet" onClick={() => setOpenBookModal(true)} id="openModalHourButton">
           {t("views.mentor.plans.hour.submitText")}
         </Button>
       </div>
@@ -75,6 +75,7 @@ export const Hour = ({ hourPrice, mentorName, mentorSlug }: IProps) => {
           terms={t("other.forms.bookSessionHour.terms")}
           isLoading={isLoading}
           onSubmit={handleSubmit}
+          id="hour"
         />
       </UnclosablePopupWrapper>
       {contextHolder}

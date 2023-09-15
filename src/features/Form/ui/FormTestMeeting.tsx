@@ -58,6 +58,7 @@ export function FormTestMeeting() {
         type="primary"
         htmlType="submit"
         loading={isLoading}
+        id="formTestMeeting"
       >
         {t("submitText")}
       </Button>
