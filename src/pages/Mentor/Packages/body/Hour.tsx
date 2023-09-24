@@ -34,6 +34,8 @@ export const Hour = ({ hourPrice, mentorName, mentorSlug }: IProps) => {
     if (isSuccess) {
       dispatch(openModal(<PopupFormThanks />))
       // api.success({ message: "Session successfully booked", duration: 10 })
+      // @ts-ignore
+      window.dataLayer.push({"event": `Book hour session with mentor`, "mentorName": mentorName})
       setOpenBookModal(false)
     }
   }, [isSuccess])

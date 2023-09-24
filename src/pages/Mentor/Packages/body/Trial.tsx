@@ -33,6 +33,8 @@ export const Trial = ({ minutsOfTrialMeeting, mentorSlug, mentorName }: IProps) 
     if (isSuccess) {
       dispatch(openModal(<PopupFormThanks />))
       // api.success({ message: "Session successfully booked", duration: 10 })
+      // @ts-ignore
+      window.dataLayer.push({"event": `Book trial session with mentor`, "mentorName": mentorName})
       setOpenBookModal(false)
     }
   }, [isSuccess])
