@@ -55,7 +55,7 @@ export function FormStillQuestions({ handleSubmit }: IProps) {
     if (isSuccess) {
       handleSubmit()
       // @ts-ignore
-      window.dataLayer.push({"event": `Still have questions form success`})
+      window.dataLayer.push({"event": `Still have questions form submit`})
     }
   }, [isSuccess])
 
