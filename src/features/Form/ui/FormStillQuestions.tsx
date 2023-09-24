@@ -52,7 +52,11 @@ export function FormStillQuestions({ handleSubmit }: IProps) {
     })
   }
   useEffect(() => {
-    if (isSuccess) handleSubmit()
+    if (isSuccess) {
+      handleSubmit()
+      // @ts-ignore
+      window.dataLayer.push({"event": `Still have questions form success`})
+    }
   }, [isSuccess])
 
   const elementContent = (

@@ -40,7 +40,11 @@ export function FormTestMeeting() {
     })
   }
   useEffect(() => {
-    if (isSuccess) dispatch(openModal(<PopupFormThanks />))
+    if (isSuccess) {
+      dispatch(openModal(<PopupFormThanks />))
+      // @ts-ignore
+      window.dataLayer.push({"event": `Book trial session with mentor on main page`})
+    }
   }, [isSuccess])
 
   const elementContent = (
