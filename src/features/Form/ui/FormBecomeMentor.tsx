@@ -77,7 +77,11 @@ export function FormBecomeMentor() {
     })
   }
   useEffect(() => {
-    if (isSuccess) dispatch(openModal(<PopupFormThanks />))
+    if (isSuccess) {
+      // @ts-ignore
+      window.dataLayer.push({"event": `Become mentor form submit`})
+      dispatch(openModal(<PopupFormThanks />))
+    }
   }, [isSuccess])
 
   const elementContent = (
