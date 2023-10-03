@@ -38,7 +38,11 @@ export function FormGetHelp() {
   }
 
   useEffect(() => {
-    if (isSuccess) dispatch(openModal(<PopupFormThanks />))
+    if (isSuccess) {
+      // @ts-ignore
+      window.dataLayer.push({"event": `Get help to find a mentor form submit`})
+      dispatch(openModal(<PopupFormThanks />))
+    }
   }, [isSuccess])
 
   const elementContent = (
