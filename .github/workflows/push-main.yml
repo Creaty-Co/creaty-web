@@ -15,6 +15,7 @@ jobs:
   build-envy:
     uses: ./.github/workflows/call-build.yml
     with:
+      tag: envy-0
       environment: envy
       url: 'https://envy.creaty.club'
     secrets: inherit
