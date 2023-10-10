@@ -12,6 +12,12 @@ jobs:
       environment: dev
       url: 'https://dev.creaty.club'
     secrets: inherit
+  build-envy:
+    uses: ./.github/workflows/call-build.yml
+    with:
+      environment: envy
+      url: 'https://envy.creaty.club'
+    secrets: inherit
   deploy:
     uses: ./.github/workflows/call-deploy.yml
     needs: [ build ]
