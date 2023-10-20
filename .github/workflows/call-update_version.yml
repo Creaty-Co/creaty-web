@@ -1,0 +1,48 @@
+name: "Call: update version"
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        type: string
+        required: false
+        default: 'dev'
+      version:
+        type: string
+        required: true
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: string
+        required: false
+        default: 'dev'
+      version:
+        type: string
+        required: true
+
+jobs:
+  update_values:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.1.0
+        with:
+          repository: creaty-co/creaty-root-chart
+          ssh-key: ${{ secrets.CHART_DEPLOY_KEY }}
+          ref: main
+      - name: Update values.yaml
+        # language="shell script"
+        run: |
+          git branch
+          ls
+          sed -i '
+            0,/web_version: .*/s//web_version: ${{ inputs.version }}/
+          ' values/environments/${{ inputs.environment }}.yaml
+      - name: Commit and push changes
+        # language="shell script"
+        run: |
+          git branch
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "Update WEB version to ${{ inputs.version }} in the ${{ inputs.environment }}"
+          git push
