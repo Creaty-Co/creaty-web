@@ -12,7 +12,7 @@ jobs:
       url: 'https://dev.creaty.club'
       tag: ${{ github.sha }}
     secrets: inherit
-  update_version:
+  deploy:
     uses: ./.github/workflows/call-update_version.yml
     with:
       version: ${{ github.sha }}
