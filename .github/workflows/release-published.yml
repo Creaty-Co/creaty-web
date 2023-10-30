@@ -5,6 +5,9 @@ on:
     types: [ published ]
 
 jobs:
+  release_draft:
+    uses: ./.github/workflows/call-release_draft.yml
+    secrets: inherit
   build_stage:
     uses: ./.github/workflows/call-build.yml
     secrets: inherit
