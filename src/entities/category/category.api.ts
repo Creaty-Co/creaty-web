@@ -12,9 +12,7 @@ export const categoryApi = createApi({
 
   endpoints: builder => ({
     getTagsTopics: builder.query<PaginationType<CategoryType>, PaginationQueryType>({
-      query: ({ page, page_size }) =>
-        "/tags/categories?" + new URLSearchParams({ page: page + "", page_size: page_size + "" }).toString(),
-
+      query: () => "/tags/categories?page=1&page_size=25",
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled

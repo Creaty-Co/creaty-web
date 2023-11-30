@@ -16,7 +16,7 @@ export const AppInit = memo(function AppInit() {
   const [getMe] = useLazyGetMeQuery()
 
   useGetPagesLinksDocumentsQuery()
-  useGetTagsTopicsQuery({ page: 1, page_size: 25 })
+  useGetTagsTopicsQuery()
 
   const appInited = useRef<boolean>(false)
 

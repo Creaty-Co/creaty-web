@@ -50,7 +50,8 @@ export function Home() {
       <div className={CN}>
         {/* Header  */}
         <div className={getElement("header")}>
-          <DynamicPrimaryInfo firstHeadingShortcut={params.shortcut} />
+          <DynamicPrimaryInfo firstHeadingShortcut={params.shortcut} /> 
+          {/* modify that */}
 
           <div className={getElement("search")}>
             <MentorSearch />
@@ -61,42 +62,35 @@ export function Home() {
           {data == null && <LoaderCover white />}
         </div>
 
-        {/* Coomment */}
         <div className={getElement("comment")}>
           <BigComment>{t("bigComment")}</BigComment>
         </div>
 
-        {/* Mentors */}
         <div className={getElement("slider")}>
           {data?.mentors && <MentorsSlider mentors={data.mentors} />}
 
           {data == null && <LoaderCover white />}
         </div>
 
-        {/* Help */}
         <div className={getElement("help")}>
           <InfoSection display="flex" type="2" title={t("help.title")} desc={t("help.desc")}>
             <HelpSocial />
           </InfoSection>
         </div>
 
-        {/* How it works */}
         <div className={getElement("how-it-works")}>
           <HowItWorks />
         </div>
 
-        {/* Helps */}
         <div className={getElement("helpful-creaty")}>
           <HelpfulCreaty />
         </div>
 
-        {/* FAQ */}
         <div className={getElement("faq")}>
           <div className={cn(getElement("title"), "heading")}>{t("QAndA.title")}</div>
           <QAndA />
         </div>
 
-        {/* Form */}
         <div className={getElement("have-questions")}>
           <HaveQuestions />
         </div>
