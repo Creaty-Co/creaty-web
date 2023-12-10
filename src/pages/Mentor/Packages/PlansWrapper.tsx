@@ -1,6 +1,6 @@
 import "./Packages.scss"
 
-import { MentorPackageType } from "@entities"
+import { MentorPackageType } from "@entities/mentor"
 import cn from "classnames"
 
 import { Hour } from "./body/Hour"

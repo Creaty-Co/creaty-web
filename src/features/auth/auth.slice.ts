@@ -71,14 +71,14 @@ export default authSlice.reducer
 export const { setTokens, resetAuthState, signUpStep1, signUpStep2, setAuthUserData, setAuthLoading } =
   authSlice.actions
 
-export const authS = (state: RootState) => state.auth
-export const authStartedS = createSelector(authS, state => state.isAuthLoading === true && !state.authUserId)
-export const authPassedS = createSelector(authS, state => state.isAuthLoading === false && !!state.authUserId)
-export const accessToken = createSelector(authS, state => state.accessToken)
-export const isAdminS = createSelector(authS, state => state.isAdmin && authPassedS)
-export const isMentorS = createSelector(authS, state => state.isMentor && authPassedS)
+const authStateS = (state: RootState) => state.auth
+export const authStartedS = createSelector(authStateS, state => state.isAuthLoading === true && !state.authUserId)
+export const authPassedS = createSelector(authStateS, state => state.isAuthLoading === false && !!state.authUserId)
+export const accessToken = createSelector(authStateS, state => state.accessToken)
+export const isAdminS = createSelector(authStateS, state => state.isAdmin && authPassedS)
+export const isMentorS = createSelector(authStateS, state => state.isMentor && authPassedS)
 
-export const authUserDataS = createSelector(authS, state => ({
+export const authUserDataS = createSelector(authStateS, state => ({
   authUserId: state.authUserId,
   email: state.email,
   password: state.password,

@@ -1,4 +1,4 @@
-import { useGetTagsTopicsQuery } from "@entities/category/category.api"
+import { useGetCategoriesQuery } from "@entities/tags/tags.api"
 import { useLazyGetMeQuery } from "@features/auth/auth.api"
 import { resetAuthState, setTokens } from "@features/auth/auth.slice"
 import { useGetPagesLinksDocumentsQuery } from "@shared/api"
@@ -16,7 +16,7 @@ export const AppInit = memo(function AppInit() {
   const [getMe] = useLazyGetMeQuery()
 
   useGetPagesLinksDocumentsQuery()
-  useGetTagsTopicsQuery()
+  useGetCategoriesQuery()
 
   const appInited = useRef<boolean>(false)
 

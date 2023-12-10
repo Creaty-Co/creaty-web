@@ -1,15 +1,16 @@
-import { MentorType, TagType } from "@entities"
+import { MentorType } from "@entities/mentor"
+import { ITag } from "@entities/tag"
 
 export interface PageType {
   id: number
-  tags: TagType[]
+  tags: ITag[]
   mentors: MentorType[]
 }
 
 export interface PagePersonalType {
   id: number
   title: string | null
-  tags: TagType[]
+  tags: ITag[]
   mentors: [] // ??? MentorType[]
 }
 

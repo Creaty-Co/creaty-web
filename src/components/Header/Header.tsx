@@ -3,7 +3,6 @@ import "./Header.scss"
 import { useAppDispatch, useAppSelector } from "@app/store"
 import { EFormIds, PopupFormBecomeMentor, PopupFormWrapper } from "@features"
 import { authPassedS, isAdminS, isMentorS } from "@features/auth/auth.slice"
-import { updateSearch } from "@features/search"
 import { openModal } from "@shared/layout"
 import { Button, ButtonLink, Icon } from "@shared/ui"
 import { bem } from "@shared/utils"
@@ -32,10 +31,7 @@ export const Header = memo(function Header() {
   const handleLoginClick = () => navigate("/login")
   const handleAdminClick = () => navigate("/admin")
   const handleSignUpClick = () => navigate("/sign-up")
-  const handleLogoClick = () => {
-    dispatch(updateSearch({ topic: undefined, tag: undefined, focused: false }))
-    navigate("/")
-  }
+  const handleLogoClick = () => navigate("/")
 
   useEffect(
     () =>

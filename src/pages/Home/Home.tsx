@@ -1,7 +1,7 @@
 import "./Home.scss"
 
 import { useAppSelector } from "@app/store"
-import { HaveQuestions, HelpSocial, MentorSearch, MentorSearchTags, MentorsSlider } from "@features"
+import { HaveQuestions, HelpSocial, MentorsSlider, SearchBar } from "@features"
 import { authPassedS, isMentorS } from "@features/auth/auth.slice"
 import { EmaiVerifyModalForm } from "@features/auth/forms/emaiVerify/EmaiVerifyModalForm"
 import { EmaiVerifySuccessModal } from "@features/auth/forms/emaiVerify/EmaiVerifySuccessModal"
@@ -50,14 +50,14 @@ export function Home() {
       <div className={CN}>
         {/* Header  */}
         <div className={getElement("header")}>
-          <DynamicPrimaryInfo firstHeadingShortcut={params.shortcut} /> 
+          <DynamicPrimaryInfo firstHeadingShortcut={params.shortcut} />
           {/* modify that */}
 
           <div className={getElement("search")}>
-            <MentorSearch />
+            <SearchBar />
           </div>
 
-          {data?.tags && <MentorSearchTags tags={data.tags} />}
+          {/* {data?.tags && <MentorSearchTags tags={data.tags} />} */}
 
           {data == null && <LoaderCover white />}
         </div>

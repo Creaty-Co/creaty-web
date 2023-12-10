@@ -1,11 +1,11 @@
 import "./Mentor.scss"
 
-import { MentorPackageType, Tag, useGetMentorBySlugQuery } from "@entities"
+import { MentorPackageType, useGetMentorBySlugQuery } from "@entities/mentor"
 import { QAndA } from "@pages/Home/QAndA/QAndA"
 import { useScrollToTop } from "@shared/index"
 import { Icon, LoaderCover } from "@shared/ui"
 import { bem, getEmojiPNG } from "@shared/utils"
-import { Button } from "antd"
+import { Button, Tag } from "antd"
 import cn from "classnames"
 import { useTranslation } from "react-i18next"
 import { useParams } from "react-router"
@@ -16,11 +16,7 @@ import { UserSection } from "./UserSection"
 const CN = "user"
 const { getElement } = bem(CN)
 
-interface IProps {
-  alignTitleLeft?: boolean
-}
-
-export function Mentor({ alignTitleLeft }: IProps) {
+export function Mentor() {
   useScrollToTop()
 
   const { t } = useTranslation("translation", { keyPrefix: "views.mentor" })
@@ -113,7 +109,7 @@ export function Mentor({ alignTitleLeft }: IProps) {
 
         <UserSection type="1">
           <div className="user-section__tags">
-            {user.tags.map(tag => (
+            {user.tags.map((tag: any) => (
               <Tag key={tag.id}>{tag}</Tag>
             ))}
           </div>

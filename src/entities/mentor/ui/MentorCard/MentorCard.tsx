@@ -1,6 +1,6 @@
 import "./MentorCard.scss"
 
-import { Tag } from "@entities"
+import { Tag } from "@entities/tag"
 import { Icon } from "@shared/ui"
 import { getEmojiPNG } from "@shared/utils"
 import { bem } from "@shared/utils"

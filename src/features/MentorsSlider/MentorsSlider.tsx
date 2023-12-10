@@ -3,7 +3,7 @@ import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 
 import { useAppDispatch } from "@app/store"
-import { MentorCard, MentorType } from "@entities"
+import { MentorCard, MentorType } from "@entities/mentor"
 import { EFormIds, PopupFormWrapper } from "@features"
 import { openModal } from "@shared/layout"
 import { Button, ButtonIcon, ButtonLink } from "@shared/ui"

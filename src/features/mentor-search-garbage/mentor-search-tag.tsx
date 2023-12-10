@@ -1,11 +1,11 @@
 import "./mentor-search-tag.scss"
 
-import { Tag, TagType } from "@entities"
+import { ITag, Tag } from "@entities/tag"
 import { minFill } from "@shared/utils"
 import { useEffect, useRef, useState } from "react"
 
 interface MentorSearchTagsProps {
-  tags: TagType[]
+  tags: ITag[]
 }
 
 export function MentorSearchTags(props: MentorSearchTagsProps) {
@@ -13,7 +13,7 @@ export function MentorSearchTags(props: MentorSearchTagsProps) {
   const [width, setWidth] = useState<number>()
 
   useEffect(() => {
-    (() => {
+    ;(() => {
       const scrollWidth = innerRef.current?.scrollWidth
       const clientWidth = innerRef.current?.clientWidth
       const offsetWidth = innerRef.current?.offsetWidth
@@ -30,7 +30,7 @@ export function MentorSearchTags(props: MentorSearchTagsProps) {
           <Tag key={index}>{tag}</Tag>
         ))}
       </div>
-      
+
       <div className="mentor-search__shadow mentor-search__shadow--left" />
       <div className="mentor-search__shadow mentor-search__shadow--right" />
     </div>
