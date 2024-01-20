@@ -1,4 +1,4 @@
-import { TagType } from "@entities" 
+import { ITag } from "@entities/tag"
 
 export interface MentorPage {
   id: number | null
@@ -8,7 +8,7 @@ export interface MentorPage {
 
 export interface IMentorState {
   list: MentorType[]
-} 
+}
 
 export interface MentorType {
   id: number
@@ -24,7 +24,7 @@ export interface MentorType {
     id: number
     flag_unicode: string
   }
-  tags: TagType[]
+  tags: ITag[]
   packages: MentorPackageType[]
   pages: MentorPage[]
 }

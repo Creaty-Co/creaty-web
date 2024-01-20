@@ -1,6 +1,6 @@
 import { MouseEventHandler } from "react"
 
-export interface TagType {
+export interface ITag {
   id: number
   shortcut: string
   title: string
@@ -16,7 +16,7 @@ export interface ITagString {
 
 export interface ITagSearch {
   noHash?: undefined
-  children: TagType
+  children: ITag
   onClick?: MouseEventHandler<HTMLElement>
 
   dataAttrs?: Record<string, boolean | string>

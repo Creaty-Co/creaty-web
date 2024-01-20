@@ -1,7 +1,5 @@
 import "./DynamicPrimaryInfo.scss"
 
-import { useAppSelector } from "@app/store"
-import { selectTopics } from "@entities/category"
 import { bem } from "@shared/utils"
 import cn from "classnames"
 import { useEffect, useRef, useState } from "react"
@@ -19,7 +17,8 @@ const CN = "dynamic-primary-info"
 const { getElement } = bem(CN)
 
 export function DynamicPrimaryInfo(props: IDynamicPrimaryInfo) {
-  const topics = useAppSelector(selectTopics)
+  const topics: any = []
+  // const topics = useAppSelector(selectTopics)
   const { t } = useTranslation("translation", { keyPrefix: "views.home.primaryInfo" })
 
   const rejectRef = useRef<Function>()
@@ -62,11 +61,15 @@ export function DynamicPrimaryInfo(props: IDynamicPrimaryInfo) {
   }
 
   useEffect(() => {
-    (async () => {
+    ;(async () => {
       if (topics.list.length === 0) return
       if (props.firstHeadingShortcut) {
-        const topic = topics.list.find((topic: { shortcut: string | undefined }) => topic.shortcut === props.firstHeadingShortcut)
-        const tag = topics.tags.find((tag: { shortcut: string | undefined }) => tag.shortcut === props.firstHeadingShortcut)
+        const topic = topics.list.find(
+          (topic: { shortcut: string | undefined }) => topic.shortcut === props.firstHeadingShortcut
+        )
+        const tag = topics.tags.find(
+          (tag: { shortcut: string | undefined }) => tag.shortcut === props.firstHeadingShortcut
+        )
         const heading = topic?.title || tag?.title
 
         if (heading) {
@@ -91,9 +94,7 @@ export function DynamicPrimaryInfo(props: IDynamicPrimaryInfo) {
         <span>{t("title")}</span>
       </h1>
 
-      <div className={getElement("desc")}>
-        {t("desc")}
-      </div>
+      <div className={getElement("desc")}>{t("desc")}</div>
     </div>
   )
 }

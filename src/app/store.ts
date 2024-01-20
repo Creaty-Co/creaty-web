@@ -1,12 +1,10 @@
-import { categoryApi } from "@entities/category/category.api"
-import categoryReducer from "@entities/category/category.slice"
-import deviceReducer from "@entities/device/device.slice"
 import { mentorApi } from "@entities/mentor/mentor.api"
 import mentorReducer from "@entities/mentor/mentor.slice"
+import { tagsApi } from "@entities/tags/tags.api"
+import tagsReducer from "@entities/tags/tags.slice"
 import { FormApi } from "@features"
 import { authApi } from "@features/auth/auth.api"
 import authReducer from "@features/auth/auth.slice"
-import searchReducer from "@features/search/search.slice"
 import { combineReducers, configureStore } from "@reduxjs/toolkit"
 import { pagesApi } from "@shared/api"
 import pagesReducer from "@shared/api/pages/pages.slice"
@@ -21,7 +19,7 @@ const middlewares = [
   authApi.middleware,
   FormApi.middleware,
   subscribeApi.middleware,
-  categoryApi.middleware,
+  tagsApi.middleware,
   mentorApi.middleware,
   pagesApi.middleware,
 ]
@@ -32,16 +30,14 @@ const combinedReducer = combineReducers({
   [authApi.reducerPath]: authApi.reducer,
   [FormApi.reducerPath]: FormApi.reducer,
   [subscribeApi.reducerPath]: subscribeApi.reducer,
-  [categoryApi.reducerPath]: categoryApi.reducer,
+  [tagsApi.reducerPath]: tagsApi.reducer,
   [mentorApi.reducerPath]: mentorApi.reducer,
   [pagesApi.reducerPath]: pagesApi.reducer,
 
   auth: authReducer,
   pages: pagesReducer,
-  topics: categoryReducer,
+  tags: tagsReducer,
   mentor: mentorReducer,
-  device: deviceReducer,
-  search: searchReducer,
   modal: modalReducer,
 })
 

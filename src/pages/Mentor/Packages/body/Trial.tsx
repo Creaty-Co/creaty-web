@@ -1,5 +1,5 @@
 import { useAppDispatch } from "@app/store"
-import { useBookTrialSessionMutation } from "@entities"
+import { useBookTrialSessionMutation } from "@entities/mentor"
 import { PopupFormThanks } from "@features/Form"
 import { openModal } from "@shared/layout"
 import { Button } from "@shared/ui"
@@ -34,7 +34,7 @@ export const Trial = ({ minutsOfTrialMeeting, mentorSlug, mentorName }: IProps) 
       dispatch(openModal(<PopupFormThanks />))
       // api.success({ message: "Session successfully booked", duration: 10 })
       // @ts-ignore
-      window.dataLayer.push({"event": `Book trial session with mentor`, "mentorName": mentorName})
+      window.dataLayer.push({ event: `Book trial session with mentor`, mentorName: mentorName })
       setOpenBookModal(false)
     }
   }, [isSuccess])
@@ -62,7 +62,13 @@ export const Trial = ({ minutsOfTrialMeeting, mentorSlug, mentorName }: IProps) 
             </div>
           </div>
 
-          <Button size="big" type="submit" color="white" onClick={() => setOpenBookModal(true)} id="openModalTrialButton">
+          <Button
+            size="big"
+            type="submit"
+            color="white"
+            onClick={() => setOpenBookModal(true)}
+            id="openModalTrialButton"
+          >
             {t("views.mentor.plans.trial.submitText")}
           </Button>
         </div>

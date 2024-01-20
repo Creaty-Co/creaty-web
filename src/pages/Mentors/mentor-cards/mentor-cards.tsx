@@ -1,14 +1,16 @@
 import "./mentor-cards.scss"
 
-import { CategoryType, MentorCard, MentorType, TagType, useGetMentorsQuery } from "@entities"
+import { MentorCard, MentorType, useGetMentorsQuery } from "@entities/mentor"
+import { ITag } from "@entities/tag"
+import { ICategory } from "@entities/tags/tags.types"
 import { Button, Icon, LoaderCover } from "@shared/ui"
 import { bem } from "@shared/utils"
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 
 export interface IMentorCards {
-  topic?: CategoryType
-  tag?: TagType
+  topic?: ICategory
+  tag?: ITag
 }
 
 const CN = "mentor-cards"

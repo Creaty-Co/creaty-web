@@ -1,6 +1,6 @@
 import "./mentor-search-list-item.scss"
 
-import { CategoryType } from "@entities"
+import { ICategory } from "@entities/tags/tags.types"
 // import { selectIsMobile } from "@entities/device"
 import { Icon } from "@shared/ui"
 import { bem } from "@shared/utils"
@@ -11,7 +11,7 @@ type MentorSearchListItemState = "normal" | "selected"
 type MentorSearchListItemType = "regular" | "view-all" | "short"
 
 interface IMentorSearchListItem {
-  topic: CategoryType
+  topic: ICategory
 
   state?: MentorSearchListItemState
   type?: MentorSearchListItemType

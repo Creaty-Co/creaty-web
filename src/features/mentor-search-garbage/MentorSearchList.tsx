@@ -1,8 +1,6 @@
 import "./MentorSearchList.scss"
 
-import { RootState } from "@app/store"
-import { CategoryType, Tag, TagType } from "@entities"
-// import { selectIsMobile } from "@entities/device"
+import { ITag, Tag } from "@entities/tag"
 import { Icon, LoaderCover } from "@shared/ui"
 import { bem, toDataAttrs } from "@shared/utils"
 import { useTranslation } from "react-i18next"
@@ -14,8 +12,10 @@ const CN = "mentor-search-list"
 const { getElement, getModifier } = bem(CN)
 
 interface MentorSearchListProps {
-  searchState: RootState["search"]
-  topics: RootState["topics"]
+  searchState: any
+  // searchState: RootState["search"]
+  // topics: RootState["tags"]
+  topics: any
 
   value: string | null
 
@@ -130,7 +130,7 @@ export function MentorSearchList({ searchState, pureSearch, topics, value }: Men
           {/* All topics */}
           {categories
             .filter((t: { id: any }) => t.id !== searchState.topic?.id)
-            .map((topic: CategoryType) => (
+            .map((topic: any) => (
               <MentorSearchListItem
                 key={topic.id}
                 {...{ topic }}
@@ -182,9 +182,9 @@ export function MentorSearchList({ searchState, pureSearch, topics, value }: Men
 
         {/* Tags of topic */}
         {tags
-          .filter((tag: TagType) => tag.id !== searchState.tag?.id)
-          .filter((tag: TagType) => tag.title)
-          .map((tag: TagType) => (
+          .filter((tag: ITag) => tag.id !== searchState.tag?.id)
+          .filter((tag: ITag) => tag.title)
+          .map((tag: ITag) => (
             <Tag
               key={tag.id}
               dataAttrs={toDataAttrs({

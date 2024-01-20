@@ -1,8 +1,6 @@
 import "./Mentors.scss"
 
-import { useAppSelector } from "@app/store"
-import { selectTopics } from "@entities"
-import { HaveQuestions, MentorSearch } from "@features"
+import { HaveQuestions, SearchBar } from "@features"
 import { useScrollToTop } from "@shared/index"
 import { bem, classMerge } from "@shared/utils"
 import cn from "classnames"
@@ -21,17 +19,18 @@ export function Mentors() {
 
   // const dispatch = useAppDispatch()
   // const search = useAppSelector(selectSearch)
-  const topics = useAppSelector(selectTopics)
+  const topics: any = []
+  // const topics = useAppSelector(selectTopics)
   const params = useParams<"topicOrTag">()
 
   // useEffect(() => {
   //   if (!params.topicOrTag) dispatch(updateSearch({ tag: undefined, topic: undefined }))
   // }, [])
 
-  const topicFromURL = topics.list.find(
+  const topicFromURL = topics.find(
     (topic: { shortcut: string | undefined }) => topic.shortcut === params.topicOrTag
   )
-  const tagFromURL = topics.tags.find((tag: { shortcut: string | undefined }) => tag.shortcut === params.topicOrTag)
+  const tagFromURL = topics.find((tag: { shortcut: string | undefined }) => tag.shortcut === params.topicOrTag)
   const pageTitle = tagFromURL?.title || topicFromURL?.title || params.topicOrTag
 
   // useEffect(() => {
@@ -49,7 +48,7 @@ export function Mentors() {
   //     // dispatch(updateSearch({ tag: tagFromURL }))
   //   }
 
-  //   /* 
+  //   /*
   //     If tagFromURL isn't part of the topic.tags
   //     Then set search.topic to undefined
   //   */
@@ -73,15 +72,12 @@ export function Mentors() {
           {!(tagFromURL || topicFromURL) && <div className={cn(getElement("desc"))}>{t("desc")}</div>}
         </div>
 
-        <MentorSearch />
+        <SearchBar />
 
         <MentorCards topic={topicFromURL} tag={tagFromURL} />
       </div>
 
       <HaveQuestions />
     </div>
-
-
-
   )
 }

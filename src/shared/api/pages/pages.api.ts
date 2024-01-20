@@ -10,16 +10,16 @@ export const pagesApi = createApi({
   baseQuery: baseQueryWithReauth(false, "/pages"),
 
   endpoints: builder => ({
-    getPagesMain: builder.query<PageType, void>({
-      query: () => "/main",
+    getPagesLinksDocuments: builder.query<PaginationType<PageLinkType>, void>({
+      query: () => "/links/documents",
     }),
 
     getPagePersonal: builder.query<PagePersonalType, { shortcut: string }>({
       query: ({ shortcut }) => `/personal/${shortcut}`,
     }),
 
-    getPagesLinksDocuments: builder.query<PaginationType<PageLinkType>, void>({
-      query: () => "/links/documents",
+    getPagesMain: builder.query<PageType, void>({
+      query: () => "/main",
     }),
 
     getPagesFAQs: builder.query<PaginationType<PageFAQType>, void>({
@@ -28,9 +28,5 @@ export const pagesApi = createApi({
   }),
 })
 
-export const {
-  useGetPagesLinksDocumentsQuery,
-  useGetPagePersonalQuery,
-  useGetPagesMainQuery,
-  useGetPagesFAQsQuery,
-} = pagesApi
+export const { useGetPagesLinksDocumentsQuery, useGetPagePersonalQuery, useGetPagesMainQuery, useGetPagesFAQsQuery } =
+  pagesApi

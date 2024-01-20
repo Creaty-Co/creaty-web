@@ -1,5 +1,5 @@
 import { useAppDispatch } from "@app/store"
-import { MentorPackageType, useBookPackSessionMutation } from "@entities"
+import { MentorPackageType, useBookPackSessionMutation } from "@entities/mentor"
 import { PopupFormThanks } from "@features/Form"
 import { openModal } from "@shared/layout"
 import { Button } from "@shared/ui"
@@ -40,7 +40,7 @@ export const Packages = ({ hourPrice, mentorName, mentorSlug, packages }: IProps
       dispatch(openModal(<PopupFormThanks />))
       // api.success({ message: "Session successfully booked", duration: 10 })
       // @ts-ignore
-      window.dataLayer.push({"event": `Book package session with mentor`, "mentorName": mentorName, "packId": packId})
+      window.dataLayer.push({ event: `Book package session with mentor`, mentorName: mentorName, packId: packId })
       setOpenBookModal(false)
     }
   }, [isSuccess])
@@ -64,7 +64,14 @@ export const Packages = ({ hourPrice, mentorName, mentorSlug, packages }: IProps
           <div className="font--text-regular text-gray-800">{t("views.mentor.plans.pack.desc")}</div>
         </div>
 
-        <Button size="big" type="submit" color="violet" onClick={() => setOpenBookModal(true)} className="packages-wrapper__button" id={`openModalPackage-${packId}-Button`}>
+        <Button
+          size="big"
+          type="submit"
+          color="violet"
+          onClick={() => setOpenBookModal(true)}
+          className="packages-wrapper__button"
+          id={`openModalPackage-${packId}-Button`}
+        >
           {t("views.mentor.plans.pack.submitText")}
         </Button>
 
@@ -81,7 +88,9 @@ export const Packages = ({ hourPrice, mentorName, mentorSlug, packages }: IProps
               >
                 <div className="flex gap-3 flex-row items-center flex-wrap">
                   <Radio value={pack.id}>
-                    <span className="font--text-bold text-black-900 whitespace-nowrap">{pack.lessons_count} sessions</span>
+                    <span className="font--text-bold text-black-900 whitespace-nowrap">
+                      {pack.lessons_count} sessions
+                    </span>
                   </Radio>
                   {i === 0 && (
                     <div className="px-1.5 py-1 text-gray-400 bg-black-900 font--tags-regular rounded-sm flex-wrap whitespace-nowrap">
