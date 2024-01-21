@@ -27,10 +27,10 @@ export function Mentors() {
   //   if (!params.topicOrTag) dispatch(updateSearch({ tag: undefined, topic: undefined }))
   // }, [])
 
-  const topicFromURL = topics.list.find(
+  const topicFromURL = topics.find(
     (topic: { shortcut: string | undefined }) => topic.shortcut === params.topicOrTag
   )
-  const tagFromURL = topics.tags.find((tag: { shortcut: string | undefined }) => tag.shortcut === params.topicOrTag)
+  const tagFromURL = topics.find((tag: { shortcut: string | undefined }) => tag.shortcut === params.topicOrTag)
   const pageTitle = tagFromURL?.title || topicFromURL?.title || params.topicOrTag
 
   // useEffect(() => {
