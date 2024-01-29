@@ -62,12 +62,12 @@ export function DynamicPrimaryInfo(props: IDynamicPrimaryInfo) {
 
   useEffect(() => {
     ;(async () => {
-      if (topics.list.length === 0) return
+      if (topics.length === 0) return
       if (props.firstHeadingShortcut) {
-        const topic = topics.list.find(
+        const topic = topics.find(
           (topic: { shortcut: string | undefined }) => topic.shortcut === props.firstHeadingShortcut
         )
-        const tag = topics.tags.find(
+        const tag = topics.find(
           (tag: { shortcut: string | undefined }) => tag.shortcut === props.firstHeadingShortcut
         )
         const heading = topic?.title || tag?.title

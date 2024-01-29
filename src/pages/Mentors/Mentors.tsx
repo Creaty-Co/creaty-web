@@ -1,6 +1,6 @@
 import "./Mentors.scss"
 
-import { HaveQuestions, SearchBar } from "@features"
+import { HaveQuestions, Search } from "@features"
 import { useScrollToTop } from "@shared/index"
 import { bem, classMerge } from "@shared/utils"
 import cn from "classnames"
@@ -27,9 +27,7 @@ export function Mentors() {
   //   if (!params.topicOrTag) dispatch(updateSearch({ tag: undefined, topic: undefined }))
   // }, [])
 
-  const topicFromURL = topics.find(
-    (topic: { shortcut: string | undefined }) => topic.shortcut === params.topicOrTag
-  )
+  const topicFromURL = topics.find((topic: { shortcut: string | undefined }) => topic.shortcut === params.topicOrTag)
   const tagFromURL = topics.find((tag: { shortcut: string | undefined }) => tag.shortcut === params.topicOrTag)
   const pageTitle = tagFromURL?.title || topicFromURL?.title || params.topicOrTag
 
@@ -72,7 +70,7 @@ export function Mentors() {
           {!(tagFromURL || topicFromURL) && <div className={cn(getElement("desc"))}>{t("desc")}</div>}
         </div>
 
-        <SearchBar />
+        <Search />
 
         <MentorCards topic={topicFromURL} tag={tagFromURL} />
       </div>

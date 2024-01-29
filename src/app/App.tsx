@@ -4,7 +4,6 @@ import "./scss/base.scss"
 import "./scss/app.scss"
 import "./scss/ant.scss"
 
-import { StyleProvider } from "@ant-design/cssinjs"
 import { Cookies } from "@features/cookies"
 import { Router } from "@pages"
 import { ModalContainer } from "@shared/layout"
@@ -35,31 +34,29 @@ function App() {
           },
         }}
       >
-        <StyleProvider>
-          {/* @ts-ignore */}
-          <HistoryRouter history={history}>
-            <Provider store={store}>
-              <I18nextProvider defaultNS="translation" i18n={i18next}>
-                <Suspense fallback="">
-                  <ErrorBoundary fallback="Error">
-                    <AppInit />
+        {/* @ts-ignore */}
+        <HistoryRouter history={history}>
+          <Provider store={store}>
+            <I18nextProvider defaultNS="translation" i18n={i18next}>
+              <Suspense fallback="">
+                <ErrorBoundary fallback="Error">
+                  <AppInit />
 
-                    <Header />
-                    <main>
-                      <Router />
-                    </main>
+                  <Header />
+                  <main>
+                    <Router />
+                  </main>
 
-                    <Footer />
+                  <Footer />
 
-                    <Cookies />
+                  <Cookies />
 
-                    <ModalContainer />
-                  </ErrorBoundary>
-                </Suspense>
-              </I18nextProvider>
-            </Provider>
-          </HistoryRouter>
-        </StyleProvider>
+                  <ModalContainer />
+                </ErrorBoundary>
+              </Suspense>
+            </I18nextProvider>
+          </Provider>
+        </HistoryRouter>
       </ConfigProvider>
     </StrictMode>
   )
