@@ -12,6 +12,11 @@ $ant-select-padding: 0 32px 0 16px !important;
     border-radius: 50px;
     background: $color-black-90;
     margin-top: 80px;
+
+    &--fullWidth {
+      grid-template: 56px / 1fr 180px;
+      width: 100%;
+    }
   }
 
   &.ant-select {

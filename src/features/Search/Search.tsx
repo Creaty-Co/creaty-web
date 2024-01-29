@@ -5,14 +5,15 @@ import { useGetCategoriesQuery } from "@entities/tags/tags.api"
 import { categoriesS, tagsS } from "@entities/tags/tags.slice"
 import { bem } from "@shared/utils"
 import { Button, Select } from "antd"
+import cn from "classnames"
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { createSearchParams, useNavigate, useSearchParams } from "react-router-dom"
 
 const CN = "search"
-const { getElement } = bem(CN)
+const { getElement, getModifier } = bem(CN)
 
-export function Search() {
+export function Search({ fullWidth }: { fullWidth?: boolean }) {
   const tags = useAppSelector(tagsS)
   const categories = useAppSelector(categoriesS)
   const { t } = useTranslation("translation", { keyPrefix: "views.home.mentorSearch" })
@@ -42,7 +43,7 @@ export function Search() {
   }
 
   return (
-    <div className={getElement("wrapper")}>
+    <div className={cn(getModifier(getElement("wrapper"), fullWidth && "fullWidth"))}>
       <Select
         className={CN}
         loading={isLoading}

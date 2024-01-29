@@ -49,7 +49,6 @@ export const Router = () => {
           <Route key={route} path={route} element={<Home />} />
         ))}
         <Route path="mentors" element={<Mentors />} />
-        <Route path="mentors/:topicOrTag" element={<Mentors />} />
         <Route path="mentor/:slug" element={<Mentor />} />
         <Route path="admin" element={<AdminJSONEditorContainer />} />
       </Route>

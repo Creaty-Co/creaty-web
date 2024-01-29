@@ -70,7 +70,7 @@ export function Mentors() {
           {!(tagFromURL || topicFromURL) && <div className={cn(getElement("desc"))}>{t("desc")}</div>}
         </div>
 
-        <Search />
+        <Search fullWidth/>
 
         <MentorCards topic={topicFromURL} tag={tagFromURL} />
       </div>
