@@ -12,6 +12,13 @@ import cn from "classnames"
 import { FC } from "react"
 import { useTranslation } from "react-i18next"
 import { Link, useNavigate } from "react-router-dom"
+import { authPassedS, isMentorS } from "src/store/auth/auth.slice"
+import { EFormIds } from "src/store/forms/form.types"
+import { openModal } from "src/store/modalContainer.slice"
+import { useAppDispatch, useAppSelector } from "src/store/store"
+
+import { PopupFormBecomeMentor } from "../forms/old/PopupForm/PopupFormBecomeMentor"
+import { PopupFormWrapper } from "../forms/old/PopupForm/PopupFormWrapper"
 
 const CN = "footer"
 const CNContainer = CN + "-container"

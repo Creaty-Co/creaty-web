@@ -6,6 +6,8 @@ import { authStartedS } from "@store/auth/auth.slice"
 import { useAppSelector } from "@store/store"
 import { Spin } from "antd"
 import { Route, Routes } from "react-router"
+import { authStartedS } from "src/store/auth/auth.slice"
+import { useAppSelector } from "src/store/store"
 
 export enum EModalsRoutes {
   LOGIN = "login",

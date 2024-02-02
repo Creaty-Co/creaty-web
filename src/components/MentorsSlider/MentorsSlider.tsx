@@ -15,6 +15,13 @@ import cn from "classnames"
 import { useRef } from "react"
 import { useTranslation } from "react-i18next"
 import Slider from "react-slick"
+import { EFormIds } from "src/store/forms/form.types"
+import { MentorType } from "src/store/mentor/mentor.types"
+import { openModal } from "src/store/modalContainer.slice"
+import { useAppDispatch } from "src/store/store"
+
+import { PopupFormWrapper } from "../forms/old/PopupForm/PopupFormWrapper"
+import { MentorCard } from "../MentorCard/MentorCard"
 
 import { MentorCard } from "../MentorCard/MentorCard"
 

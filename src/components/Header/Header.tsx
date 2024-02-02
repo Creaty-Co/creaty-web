@@ -14,7 +14,13 @@ import { memo, useEffect, useState } from "react"
 import ReactGA from "react-ga4"
 import { useTranslation } from "react-i18next"
 import { useLocation, useNavigate } from "react-router-dom"
+import { authPassedS, isAdminS, isMentorS } from "src/store/auth/auth.slice"
+import { EFormIds } from "src/store/forms/form.types"
+import { openModal } from "src/store/modalContainer.slice"
+import { useAppDispatch, useAppSelector } from "src/store/store"
 
+import { PopupFormBecomeMentor } from "../forms/old/PopupForm/PopupFormBecomeMentor"
+import { PopupFormWrapper } from "../forms/old/PopupForm/PopupFormWrapper"
 import { AuthDDL } from "./AuthDDL/AuthDDL"
 
 const CN = "header"

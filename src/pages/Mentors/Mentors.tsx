@@ -7,6 +7,8 @@ import { bem, classMerge } from "@shared/utils/common"
 import cn from "classnames"
 import { useTranslation } from "react-i18next"
 import { useParams } from "react-router"
+import { HaveQuestions } from "src/components/HaveQuestions/HaveQuestions"
+import { Search } from "src/components/Search/Search"
 
 import { MentorCards } from "./MentorCards/MentorCards"
 

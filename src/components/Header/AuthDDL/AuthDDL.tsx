@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "@store/store"
 import { Avatar, Badge, Dropdown, MenuProps } from "antd"
 import cn from "classnames"
 import { useMemo } from "react"
+import { useAppDispatch, useAppSelector } from "src/store/store"
 
 const CN = "auth-ddl"
 const { getElement } = bem(CN)

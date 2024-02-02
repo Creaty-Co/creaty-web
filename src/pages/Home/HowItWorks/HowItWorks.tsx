@@ -9,6 +9,12 @@ import { useAppDispatch } from "@store/store"
 import { Button } from "antd"
 import cn from "classnames"
 import { Trans, useTranslation } from "react-i18next"
+import { PopupFormWrapper } from "src/components/forms/old/PopupForm/PopupFormWrapper"
+import { EFormIds } from "src/store/forms/form.types"
+import { openModal } from "src/store/modalContainer.slice"
+import { useAppDispatch } from "src/store/store"
+
+import { BulletPoint } from "./BulletPoint/BulletPoint"
 
 import { BulletPoint } from "./BulletPoint/BulletPoint"
 

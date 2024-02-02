@@ -14,6 +14,9 @@ import { memo, useEffect } from "react"
 import { FieldValues } from "react-hook-form"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router"
+import { useLazyGetMeQuery, useResetPasswordMutation } from "src/store/auth/auth.api"
+import { setTokens } from "src/store/auth/auth.slice"
+import { useAppDispatch } from "src/store/store"
 import * as yup from "yup"
 
 const schema = yup

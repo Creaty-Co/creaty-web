@@ -9,6 +9,9 @@ import cn from "classnames"
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { createSearchParams, useNavigate, useSearchParams } from "react-router-dom"
+import { useAppSelector } from "src/store/store"
+import { useGetCategoriesQuery } from "src/store/tags/tags.api"
+import { categoriesS, tagsS } from "src/store/tags/tags.slice"
 
 const CN = "search"
 const { getElement, getModifier } = bem(CN)
