@@ -1,16 +1,18 @@
 import "./Mentor.scss"
 
-import { MentorPackageType, useGetMentorBySlugQuery } from "@entities/mentor"
 import { QAndA } from "@pages/Home/QAndA/QAndA"
-import { useScrollToTop } from "@shared/index"
-import { Icon, LoaderCover } from "@shared/ui"
-import { bem, getEmojiPNG } from "@shared/utils"
+import { useScrollToTop } from "@shared/hooks/useScrollToTop"
+import { Icon } from "@shared/ui/Icon/Icon"
+import { LoaderCover } from "@shared/ui/LoaderCover/LoaderCover"
+import { bem, getEmojiPNG } from "@shared/utils/common"
 import { Button, Tag } from "antd"
 import cn from "classnames"
 import { useTranslation } from "react-i18next"
 import { useParams } from "react-router"
+import { useGetMentorBySlugQuery } from "src/store/mentor/mentor.api"
+import { MentorPackageType } from "src/store/mentor/mentor.types"
 
-import { PlansWrapper } from "./Packages/PlansWrapper"
+import { PackagesWrapper } from "./Packages/PackagesWrapper"
 import { UserSection } from "./UserSection"
 
 const CN = "user"
@@ -37,7 +39,6 @@ export function Mentor() {
   const mentorName = `${user.first_name} ${user.last_name}`
   return (
     <div className="user">
-      {/* User Card */}
       <div className="user-card">
         <div className="mentor-card mentor-card--center">
           <div className="mentor-card__preview">
@@ -58,7 +59,7 @@ export function Mentor() {
             </div>
 
             <div className="mentor-card__price">
-              <em>{Number(user.price).toPrice(tRoot("lang.code"), user.price_currency)}</em> / 60min.
+              <em>{(+user.price).toFixed()}</em> / 60min.
             </div>
 
             {user.packages.length > 0 && (
@@ -83,7 +84,6 @@ export function Mentor() {
         {user.info.trial_meeting && <div className="user-card__notice">{t("card.trial")}</div>}
       </div>
 
-      {/* User Body */}
       <div className="user__sections">
         <UserSection type="3" title={user.info.resume}>
           <div className="user-section__entry">
@@ -123,7 +123,7 @@ export function Mentor() {
           <p>{t("info.garantee.desc")}</p>
         </UserSection>
 
-        <PlansWrapper
+        <PackagesWrapper
           hourPrice={Math.floor(+user.price)}
           mentorSlug={params.slug}
           minutsOfTrialMeeting={user.info.trial_meeting}

@@ -1,8 +1,8 @@
 import "./MailingSubscribe.scss"
 
-import { Subscribe } from "@shared/ui"
 import { useTranslation } from "react-i18next"
 
+import { Subscribe } from "./Subscribe/Subscribe"
 
 export function MailingSubscribe() {
   const { t } = useTranslation("translation", { keyPrefix: "views.home.mailingSubscribe" })

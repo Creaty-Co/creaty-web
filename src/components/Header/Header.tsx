@@ -1,16 +1,20 @@
 import "./Header.scss"
 
-import { useAppDispatch, useAppSelector } from "@app/store"
-import { EFormIds, PopupFormBecomeMentor, PopupFormWrapper } from "@features"
-import { authPassedS, isAdminS, isMentorS } from "@features/auth/auth.slice"
-import { openModal } from "@shared/layout"
-import { Button, ButtonLink, Icon } from "@shared/ui"
-import { bem } from "@shared/utils"
+import { Icon } from "@shared/ui/Icon/Icon"
+import { SharedButton } from "@shared/ui/buttons/SharedButton"
+import { SharedButtonLink } from "@shared/ui/buttons/SharedButtonLink"
+import { bem } from "@shared/utils/common"
 import { memo, useEffect, useState } from "react"
 import ReactGA from "react-ga4"
 import { useTranslation } from "react-i18next"
 import { useLocation, useNavigate } from "react-router-dom"
+import { authPassedS, isAdminS, isMentorS } from "src/store/auth/auth.slice"
+import { EFormIds } from "src/store/forms/form.types"
+import { openModal } from "src/store/modalContainer.slice"
+import { useAppDispatch, useAppSelector } from "src/store/store"
 
+import { PopupFormBecomeMentor } from "../forms/old/PopupForm/PopupFormBecomeMentor"
+import { PopupFormWrapper } from "../forms/old/PopupForm/PopupFormWrapper"
 import { AuthDDL } from "./AuthDDL/AuthDDL"
 
 const CN = "header"
@@ -55,9 +59,9 @@ export const Header = memo(function Header() {
           <img src="/static/images/logo.svg" alt="logo" className={getElement("logo")} />
         </div>
         {isAdmin && (
-          <Button size="little" className="admin" onClick={handleAdminClick}>
+          <SharedButton size="little" className="admin" onClick={handleAdminClick}>
             Admin
-          </Button>
+          </SharedButton>
         )}
         <Icon
           name={expanded ? "cross" : "menu"}
@@ -67,25 +71,25 @@ export const Header = memo(function Header() {
 
         <div className={getModifier(getElement("right"), expanded && "expanded")}>
           <div className={getElement("menu")}>
-            <ButtonLink to="/mentors" size="small">
+            <SharedButtonLink to="/mentors" size="small">
               {t("menu.mentors")}
-            </ButtonLink>
+            </SharedButtonLink>
 
             {(!isMentor || !authPassed) && (
-              <Button size="small" onClick={() => dispatch(openModal(<PopupFormBecomeMentor />))}>
+              <SharedButton size="small" onClick={() => dispatch(openModal(<PopupFormBecomeMentor />))}>
                 {t("menu.becomeMentor")}
-              </Button>
+              </SharedButton>
             )}
           </div>
 
-          <Button
+          <SharedButton
             outline
             size="small"
             color="green"
             onClick={() => dispatch(openModal(<PopupFormWrapper formType={EFormIds.GET_HELP} />))}
           >
             {t("findMentor")}
-          </Button>
+          </SharedButton>
 
           {authPassed ? (
             <AuthDDL />
@@ -93,12 +97,12 @@ export const Header = memo(function Header() {
             <>
               <div className={getElement("separator")}></div>
               <div className={getElement("sign-group")}>
-                <Button size="little" className="login" onClick={handleLoginClick}>
+                <SharedButton size="little" className="login" onClick={handleLoginClick}>
                   Login
-                </Button>
-                <Button size="little" className="sign-up" onClick={handleSignUpClick}>
+                </SharedButton>
+                <SharedButton size="little" className="sign-up" onClick={handleSignUpClick}>
                   Sign up
-                </Button>
+                </SharedButton>
               </div>
             </>
           )}

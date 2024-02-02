@@ -1,8 +1,8 @@
-import { RootState } from "@app/store"
-import { setTokens } from "@features/auth/auth.slice"
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from "@reduxjs/toolkit/query"
 import { fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 import { Mutex } from "async-mutex"
+import { setTokens } from "src/store/auth/auth.slice"
+import { RootState } from "src/store/store"
 
 const API = process.env.REACT_APP_API_HOST
 const mutex = new Mutex()

@@ -1,13 +1,16 @@
-import "./howItWorks.scss"
+import "./HowItWorks.scss"
 
-import { useAppDispatch } from "@app/store"
-import { EFormIds, PopupFormWrapper } from "@features"
-import { openModal } from "@shared/layout"
-import { BulletPoint, InfoSection } from "@shared/ui"
-import { bem } from "@shared/utils"
+import { InfoSection } from "@shared/ui/InfoSection/InfoSection"
+import { bem } from "@shared/utils/common"
 import { Button } from "antd"
 import cn from "classnames"
 import { Trans, useTranslation } from "react-i18next"
+import { PopupFormWrapper } from "src/components/forms/old/PopupForm/PopupFormWrapper"
+import { EFormIds } from "src/store/forms/form.types"
+import { openModal } from "src/store/modalContainer.slice"
+import { useAppDispatch } from "src/store/store"
+
+import { BulletPoint } from "./BulletPoint/BulletPoint"
 
 const CN = "how-it-works"
 const { getElement } = bem(CN)

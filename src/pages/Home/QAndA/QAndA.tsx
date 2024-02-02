@@ -1,8 +1,10 @@
 import "./QAndA.scss"
 
-import { useGetPagesFAQsQuery } from "@shared/api"
-import { FAQ, FAQClause, LoaderCover } from "@shared/ui"
+import { LoaderCover } from "@shared/ui/LoaderCover/LoaderCover"
 import ReactMarkdown from "react-markdown"
+import { useGetPagesFAQsQuery } from "src/store/pages/pages.api"
+
+import { FAQ, FAQClause } from "./FAQClause/FAQClause"
 
 export function QAndA() {
   const { data, isLoading } = useGetPagesFAQsQuery()
@@ -11,11 +13,12 @@ export function QAndA() {
 
   return (
     <FAQ>
-      {data && data.results.map(faq => (
-        <FAQClause summary={faq.question} key={faq.id}>
-          <ReactMarkdown>{faq.answer}</ReactMarkdown>
-        </FAQClause>
-      ))}
+      {data &&
+        data.results.map(faq => (
+          <FAQClause summary={faq.question} key={faq.id}>
+            <ReactMarkdown>{faq.answer}</ReactMarkdown>
+          </FAQClause>
+        ))}
     </FAQ>
   )
 }

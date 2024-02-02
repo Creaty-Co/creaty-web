@@ -1,12 +1,12 @@
 import "./BecomeMentor.scss"
 
-import { useAppDispatch } from "@app/store"
-import { PopupFormBecomeMentor } from "@features"
-import { openModal } from "@shared/layout"
-import { Button } from "@shared/ui"
-import { bem } from "@shared/utils"
+import { SharedButton } from "@shared/ui/buttons/SharedButton"
+import { bem } from "@shared/utils/common"
 import cn from "classnames"
 import { useTranslation } from "react-i18next"
+import { PopupFormBecomeMentor } from "src/components/forms/old/PopupForm/PopupFormBecomeMentor"
+import { openModal } from "src/store/modalContainer.slice"
+import { useAppDispatch } from "src/store/store"
 
 const CN = "become-mentor"
 const { getElement, getModifier } = bem(CN)
@@ -26,9 +26,9 @@ export function BecomeMentor() {
         </div>
 
         <div className={getElement("bottom")}>
-          <Button size="big" color="dark" onClick={() => dispatch(openModal(<PopupFormBecomeMentor />))}>
+          <SharedButton size="big" color="dark" onClick={() => dispatch(openModal(<PopupFormBecomeMentor />))}>
             {t("button")}
-          </Button>
+          </SharedButton>
 
           <div className={getElement("terms")}>{t("terms")}</div>
         </div>

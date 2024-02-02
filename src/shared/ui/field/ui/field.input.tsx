@@ -1,5 +1,5 @@
 import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/20/solid"
-import { bem } from "@shared/utils"
+import { bem } from "@shared/utils/common"
 import cn from "classnames"
 import { useEffect, useState } from "react"
 import { useFormContext } from "react-hook-form"

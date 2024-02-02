@@ -1,4 +1,4 @@
-import { classMerge, classWithModifiers } from "@shared/utils"
+import { classMerge, classWithModifiers } from "@shared/utils/common"
 import { SVGAttributes } from "react"
 
 export type IconName =
@@ -54,12 +54,25 @@ export interface IIcon extends SVGAttributes<SVGElement> {
 export function Icon(props: IIcon) {
   if (props.href) {
     return (
-      <img src={props.href} className={classMerge("icon", props.className && classWithModifiers(props.className, ...props.modifiers || []))} />
+      <img
+        src={props.href}
+        className={classMerge(
+          "icon",
+          props.className && classWithModifiers(props.className, ...(props.modifiers || []))
+        )}
+      />
     )
   }
 
   return (
-    <svg {...props} className={classMerge("icon", props.className && classWithModifiers(classWithModifiers(props.className, props.name), ...props.modifiers || []))}>
+    <svg
+      {...props}
+      className={classMerge(
+        "icon",
+        props.className &&
+          classWithModifiers(classWithModifiers(props.className, props.name), ...(props.modifiers || []))
+      )}
+    >
       <use href={`/static/icons.svg#${props.name}`} />
     </svg>
   )

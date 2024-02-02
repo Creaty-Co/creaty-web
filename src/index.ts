@@ -1,4 +1,4 @@
-import App from "@app/App"
+import { App } from "@app/App"
 import buffer from "buffer"
 import { createElement } from "react"
 import { createRoot } from "react-dom/client"

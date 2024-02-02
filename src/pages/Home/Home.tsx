@@ -1,27 +1,32 @@
 import "./Home.scss"
 
-import { useAppSelector } from "@app/store"
-import { HaveQuestions, HelpSocial, MentorsSlider, Search } from "@features"
-import { authPassedS, isMentorS } from "@features/auth/auth.slice"
-import { EmaiVerifyModalForm } from "@features/auth/forms/emaiVerify/EmaiVerifyModalForm"
-import { EmaiVerifySuccessModal } from "@features/auth/forms/emaiVerify/EmaiVerifySuccessModal"
-import { LoginModalForm } from "@features/auth/forms/LoginModalForm"
-import { ResetPasswordMentorSuccessModal } from "@features/auth/forms/ResetPasswordMentorSuccessModal"
-import { ResetPasswordModalForm } from "@features/auth/forms/ResetPasswordModalForm"
-import { SignupModalFormStep1 } from "@features/auth/forms/SignUp/SignupModalFormStep1"
-import { useGetPagePersonalQuery, useGetPagesMainQuery } from "@shared/api"
-import { useScrollToTop } from "@shared/index"
-import { BigComment, InfoSection, LoaderCover } from "@shared/ui"
-import { bem } from "@shared/utils"
+import { EModalsRoutes } from "@app/router"
+import { useScrollToTop } from "@shared/hooks/useScrollToTop"
+import { InfoSection } from "@shared/ui/InfoSection/InfoSection"
+import { LoaderCover } from "@shared/ui/LoaderCover/LoaderCover"
+import { bem } from "@shared/utils/common"
 import cn from "classnames"
 import { useTranslation } from "react-i18next"
 import { useMatch, useParams } from "react-router"
+import { EmaiVerifyModalForm } from "src/components/forms/emaiVerify/EmaiVerifyModalForm"
+import { EmaiVerifySuccessModal } from "src/components/forms/emaiVerify/EmaiVerifySuccessModal"
+import { LoginModalForm } from "src/components/forms/LoginModalForm"
+import { ResetPasswordMentorSuccessModal } from "src/components/forms/ResetPasswordMentorSuccessModal"
+import { ResetPasswordModalForm } from "src/components/forms/ResetPasswordModalForm"
+import { SignupModalFormStep1 } from "src/components/forms/SignUp/SignupModalFormStep1"
+import { HaveQuestions } from "src/components/HaveQuestions/HaveQuestions"
+import { HelpSocial } from "src/components/HelpSocial/HelpSocial"
+import { MentorsSlider } from "src/components/MentorsSlider/MentorsSlider"
+import { Search } from "src/components/Search/Search"
+import { authPassedS, isMentorS } from "src/store/auth/auth.slice"
+import { useGetPagePersonalQuery, useGetPagesMainQuery } from "src/store/pages/pages.api"
+import { useAppSelector } from "src/store/store"
 
-import { EModalsRoutes } from ".."
 import { BecomeMentor } from "./BecomeMentor/BecomeMentor"
+import { BigComment } from "./BigComment/BigComment"
 import { DynamicPrimaryInfo } from "./DynamicPrimaryInfo/DynamicPrimaryInfo"
-import { HelpfulCreaty } from "./HelpfulCreaty"
-import { HowItWorks } from "./HowItWorks"
+import { HelpfulCreaty } from "./HelpfulCreaty/HelpfulCreaty"
+import { HowItWorks } from "./HowItWorks/HowItWorks"
 import { MailingSubscribe } from "./MailingSubscribe/MailingSubscribe"
 import { QAndA } from "./QAndA/QAndA"
 
@@ -97,7 +102,6 @@ export function Home() {
             <BecomeMentor />
           </div>
         )}
-        {/* Subscribe form */}
         <div className={getElement("mailing-subscribe")}>
           <MailingSubscribe />
         </div>

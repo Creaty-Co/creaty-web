@@ -1,6 +1,6 @@
 import "./DynamicPrimaryInfo.scss"
 
-import { bem } from "@shared/utils"
+import { bem } from "@shared/utils/common"
 import cn from "classnames"
 import { useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
@@ -67,9 +67,7 @@ export function DynamicPrimaryInfo(props: IDynamicPrimaryInfo) {
         const topic = topics.find(
           (topic: { shortcut: string | undefined }) => topic.shortcut === props.firstHeadingShortcut
         )
-        const tag = topics.find(
-          (tag: { shortcut: string | undefined }) => tag.shortcut === props.firstHeadingShortcut
-        )
+        const tag = topics.find((tag: { shortcut: string | undefined }) => tag.shortcut === props.firstHeadingShortcut)
         const heading = topic?.title || tag?.title
 
         if (heading) {

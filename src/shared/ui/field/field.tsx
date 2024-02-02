@@ -1,9 +1,10 @@
 import "./field.scss"
 
-import { FieldInputType } from "./field.types"
 import { FieldInput, FieldPassword, FieldTextarea, IFieldInput, IFieldPassword, IFieldTextarea } from "./ui"
 
-export type IFieldFactory = Record<FieldInputType, Function>
+export type FieldInputType = "input" | "textarea" | "password"
+
+export type IFieldFactory = Record<FieldInputType, any>
 export const FieldFactory: IFieldFactory = {
   input: FieldInput,
   password: FieldPassword,

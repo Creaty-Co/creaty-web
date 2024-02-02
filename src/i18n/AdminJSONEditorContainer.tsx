@@ -1,15 +1,14 @@
 import "jsoneditor/dist/jsoneditor.min.css"
 import "./AdminJSONEditorContainer.scss"
 
-import { useAppSelector } from "@app/store"
-import { isAdminS } from "@features/auth/auth.slice"
-import { Button } from "@shared/ui"
-import i18next, { BackendOptions, i18n } from "i18next"
+import i18next, { i18n } from "i18next"
 import JSONEditor, { JSONEditorMode, JSONEditorOptions } from "jsoneditor"
 import { Component, createRef } from "react"
 import { NavigateFunction, useNavigate } from "react-router"
+import { isAdminS } from "src/store/auth/auth.slice"
+import { useAppSelector } from "src/store/store"
 
-function AdminJSONEditorContainer() {
+export function AdminJSONEditorContainer() {
   const isAdmin = useAppSelector(isAdminS)
   const navigate = useNavigate()
 
@@ -23,7 +22,7 @@ interface JSONEditorContainerProps {
   options?: JSONEditorOptions
 }
 
-class ReactJSONEditorContainer extends Component<JSONEditorContainerProps> {
+export class ReactJSONEditorContainer extends Component<JSONEditorContainerProps> {
   options: JSONEditorOptions = {
     mode: process.env.NODE_ENV === "development" ? "code" : "tree",
     modes: ["code", "tree"],
@@ -107,5 +106,3 @@ class ReactJSONEditorContainer extends Component<JSONEditorContainerProps> {
     )
   }
 }
-
-export default AdminJSONEditorContainer

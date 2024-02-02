@@ -3,7 +3,13 @@ import { initReactI18next } from "react-i18next"
 
 import initExternalResourceBackend from "./initExternalResourceBackend"
 import initReactMarkdownPostProcess from "./initReactMarkdownPostProcess"
-import { LocaleKeys, supportedLocales } from "./locales"
+import { LocaleKeys, supportedLocales } from "./locales/types.ts"
+
+export const supportedLocales = ["en"] as const
+
+export type ExtractArrayType<T> = T extends readonly (infer S)[] ? S : never
+
+export type LocaleKeys = ExtractArrayType<typeof supportedLocales> | "dev"
 
 export const localeLocalStorage = localStorage.getItem("lang") as LocaleKeys | null
 export const localeNavigator = window.navigator.language.split("-")[0] as LocaleKeys

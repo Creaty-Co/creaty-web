@@ -1,13 +1,14 @@
-import { useAppDispatch } from "@app/store"
-import { MentorPackageType, useBookPackSessionMutation } from "@entities/mentor"
-import { PopupFormThanks } from "@features/Form"
-import { openModal } from "@shared/layout"
-import { Button } from "@shared/ui"
+import { SharedButton } from "@shared/ui/buttons/SharedButton"
 import { notification, Radio, RadioChangeEvent } from "antd"
 import cn from "classnames"
 import { useEffect, useState } from "react"
 import { FieldValues } from "react-hook-form"
 import { useTranslation } from "react-i18next"
+import { PopupFormThanks } from "src/components/forms/old/PopupForm/PopupFormThanks"
+import { useBookPackSessionMutation } from "src/store/mentor/mentor.api"
+import { MentorPackageType } from "src/store/mentor/mentor.types"
+import { openModal } from "src/store/modalContainer.slice"
+import { useAppDispatch } from "src/store/store"
 
 import { BookSessionForm } from "../common/BookSessionForm"
 import { UnclosablePopupWrapper } from "../common/UnclosablePopupWrapper"
@@ -64,7 +65,7 @@ export const Packages = ({ hourPrice, mentorName, mentorSlug, packages }: IProps
           <div className="font--text-regular text-gray-800">{t("views.mentor.plans.pack.desc")}</div>
         </div>
 
-        <Button
+        <SharedButton
           size="big"
           type="submit"
           color="violet"
@@ -73,7 +74,7 @@ export const Packages = ({ hourPrice, mentorName, mentorSlug, packages }: IProps
           id={`openModalPackage-${packId}-Button`}
         >
           {t("views.mentor.plans.pack.submitText")}
-        </Button>
+        </SharedButton>
 
         <Radio.Group value={packId} onChange={handlePackCahnged} className="packages-wrapper__radio">
           <div className="grid grid-cols-1 gap-1">
@@ -129,7 +130,8 @@ export const Packages = ({ hourPrice, mentorName, mentorSlug, packages }: IProps
 
       <UnclosablePopupWrapper
         open={openBookModal}
-        title={t("other.forms.bookSessionPackage.title")}
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        title={t("other.forms.bookSessionPackage.title")!}
         mentorName={mentorName}
         closeModal={() => setOpenBookModal(false)}
       >

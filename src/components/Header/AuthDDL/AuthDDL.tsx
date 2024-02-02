@@ -1,13 +1,13 @@
 import "./authDDL.scss"
 
 import { history } from "@app/App"
-import { useAppDispatch, useAppSelector } from "@app/store"
-import { bem } from "@shared/utils"
+import { bem } from "@shared/utils/common"
 import { Avatar, Badge, Dropdown, MenuProps } from "antd"
 import cn from "classnames"
 import { useMemo } from "react"
+import { useAppDispatch, useAppSelector } from "src/store/store"
 
-import { authUserDataS, resetAuthState } from "../../../features/auth/auth.slice"
+import { authUserDataS, resetAuthState } from "../../../store/auth/auth.slice"
 
 const CN = "auth-ddl"
 const { getElement } = bem(CN)

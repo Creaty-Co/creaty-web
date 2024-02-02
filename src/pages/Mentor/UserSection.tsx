@@ -1,7 +1,7 @@
 import "./Mentor.scss"
 
-import { Icon, IconName } from "@shared/ui"
-import { bem } from "@shared/utils"
+import { Icon, IconName } from "@shared/ui/Icon/Icon"
+import { bem } from "@shared/utils/common"
 import cn from "classnames"
 import { ReactNode /*, useEffect*/ } from "react"
 

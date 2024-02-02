@@ -1,4 +1,4 @@
-import i18next, { BackendModule, BackendOptions, Resource } from "i18next"
+import i18next, { BackendModule, Resource } from "i18next"
 
 const resources: Resource = {}
 
@@ -7,7 +7,7 @@ async function getResourceLanguage(language: string, namespace: string) {
   return resourceLanguage
 }
 
-const initExternalResourceBackend: BackendModule = {
+export const initExternalResourceBackend: BackendModule = {
   type: "backend",
   async init() {
     // const namespace = options.defaultNS || "translation"
@@ -19,7 +19,7 @@ const initExternalResourceBackend: BackendModule = {
 
         resources[language] = {
           ...resources[language],
-          [namespace]: resourceLanguage
+          [namespace]: resourceLanguage,
         }
       }
 
@@ -29,7 +29,5 @@ const initExternalResourceBackend: BackendModule = {
     } catch (error) {
       callback(error as never, null)
     }
-  }
+  },
 }
-
-export default initExternalResourceBackend

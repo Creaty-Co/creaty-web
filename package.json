@@ -11,7 +11,6 @@
     "@types/react-slick": "^0.23.10",
     "antd": "^5.13.3",
     "async-mutex": "^0.4.0",
-    "buffer": "^6.0.3",
     "classnames": "^2.3.2",
     "history": "^5.3.0",
     "html-react-parser": "^3.0.12",

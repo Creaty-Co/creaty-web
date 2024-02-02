@@ -11,13 +11,13 @@ import { Link } from "react-router-dom"
 interface ReactPostProcessorModule {
   name: string
   type: "postProcessor"
-  process(value: string, key: string[], options: TOptions, translator: unknown): ReactNode;
+  process(value: string, key: string[], options: TOptions, translator: unknown): ReactNode
 }
 
 /**
- * 
+ *
  * Tries to create `ReactElement`, if text is not `marked`, return as it is.
- * 
+ *
  * @param token - is `marked.Token` from which is created `ReactNode`.
  * @param key - is a `React Element Key` in the case the function is mapped.
  */
@@ -57,7 +57,7 @@ function createChildFromToken(token: marked.Token, key: Key): ReactNode {
   }
 }
 
-const initReactMarkdownPostProcess: ReactPostProcessorModule = {
+export const initReactMarkdownPostProcess: ReactPostProcessorModule = {
   name: "reactMarkdownPostProcess",
   type: "postProcessor",
   process: (value, key) => {
@@ -88,7 +88,5 @@ const initReactMarkdownPostProcess: ReactPostProcessorModule = {
     }
 
     return children
-  }
+  },
 }
-
-export default initReactMarkdownPostProcess

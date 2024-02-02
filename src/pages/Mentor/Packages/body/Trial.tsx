@@ -1,12 +1,12 @@
-import { useAppDispatch } from "@app/store"
-import { useBookTrialSessionMutation } from "@entities/mentor"
-import { PopupFormThanks } from "@features/Form"
-import { openModal } from "@shared/layout"
-import { Button } from "@shared/ui"
+import { SharedButton } from "@shared/ui/buttons/SharedButton"
 import { notification } from "antd"
 import { useEffect, useState } from "react"
 import { FieldValues } from "react-hook-form"
 import { useTranslation } from "react-i18next"
+import { PopupFormThanks } from "src/components/forms/old/PopupForm/PopupFormThanks"
+import { useBookTrialSessionMutation } from "src/store/mentor/mentor.api"
+import { openModal } from "src/store/modalContainer.slice"
+import { useAppDispatch } from "src/store/store"
 
 import { BookSessionForm } from "./../common/BookSessionForm"
 import { UnclosablePopupWrapper } from "./../common/UnclosablePopupWrapper"
@@ -62,7 +62,7 @@ export const Trial = ({ minutsOfTrialMeeting, mentorSlug, mentorName }: IProps) 
             </div>
           </div>
 
-          <Button
+          <SharedButton
             size="big"
             type="submit"
             color="white"
@@ -70,13 +70,14 @@ export const Trial = ({ minutsOfTrialMeeting, mentorSlug, mentorName }: IProps) 
             id="openModalTrialButton"
           >
             {t("views.mentor.plans.trial.submitText")}
-          </Button>
+          </SharedButton>
         </div>
       ) : null}
 
       <UnclosablePopupWrapper
         open={openBookModal}
-        title={t("other.forms.bookSessionTrial.title")}
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        title={t("other.forms.bookSessionTrial.title")!}
         mentorName={mentorName}
         closeModal={() => setOpenBookModal(false)}
       >
