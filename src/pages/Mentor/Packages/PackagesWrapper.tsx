@@ -1,7 +1,7 @@
 import "./PackagesWrapper.scss"
 
+import { MentorPackageType } from "@store/mentor/mentor.types"
 import cn from "classnames"
-import { MentorPackageType } from "src/store/mentor/mentor.types"
 
 import { Hour } from "./body/Hour"
 import { Packages } from "./body/Packages"

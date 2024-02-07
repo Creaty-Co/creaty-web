@@ -1,14 +1,14 @@
 import "./Search.scss"
 
 import { bem } from "@shared/utils/common"
+import { useAppSelector } from "@store/store"
+import { useGetCategoriesQuery } from "@store/tags/tags.api"
+import { categoriesS, tagsS } from "@store/tags/tags.slice"
 import { Button, Select } from "antd"
 import cn from "classnames"
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { createSearchParams, useNavigate, useSearchParams } from "react-router-dom"
-import { useAppSelector } from "src/store/store"
-import { useGetCategoriesQuery } from "src/store/tags/tags.api"
-import { categoriesS, tagsS } from "src/store/tags/tags.slice"
 
 const CN = "search"
 const { getElement, getModifier } = bem(CN)

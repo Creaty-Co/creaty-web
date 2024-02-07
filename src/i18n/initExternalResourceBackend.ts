@@ -1,11 +1,7 @@
-import i18next, { BackendModule, Resource } from "i18next"
+import { BackendModule, Resource } from "i18next"
 
+const API = process.env.REACT_APP_API_HOST
 const resources: Resource = {}
-
-async function getResourceLanguage(language: string, namespace: string) {
-  const resourceLanguage = await (<BackendOptions>i18next.options.backend).get(language, namespace)
-  return resourceLanguage
-}
 
 export const initExternalResourceBackend: BackendModule = {
   type: "backend",
@@ -15,7 +11,8 @@ export const initExternalResourceBackend: BackendModule = {
   async read(language, namespace, callback) {
     try {
       if (!(language in resources)) {
-        const resourceLanguage = await getResourceLanguage(language, namespace)
+        const response = await fetch(`${API}/pages/locales/${language}/${namespace}.json`)
+        const resourceLanguage = await response.json()
 
         resources[language] = {
           ...resources[language],

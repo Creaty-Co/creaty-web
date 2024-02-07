@@ -1,26 +1,26 @@
 import "./Home.scss"
 
 import { EModalsRoutes } from "@app/router"
+import { EmaiVerifyModalForm } from "@components/forms/emaiVerify/EmaiVerifyModalForm"
+import { EmaiVerifySuccessModal } from "@components/forms/emaiVerify/EmaiVerifySuccessModal"
+import { LoginModalForm } from "@components/forms/LoginModalForm"
+import { ResetPasswordMentorSuccessModal } from "@components/forms/ResetPasswordMentorSuccessModal"
+import { ResetPasswordModalForm } from "@components/forms/ResetPasswordModalForm"
+import { SignupModalFormStep1 } from "@components/forms/SignUp/SignupModalFormStep1"
+import { HaveQuestions } from "@components/HaveQuestions/HaveQuestions"
+import { HelpSocial } from "@components/HelpSocial/HelpSocial"
+import { MentorsSlider } from "@components/MentorsSlider/MentorsSlider"
+import { Search } from "@components/Search/Search"
 import { useScrollToTop } from "@shared/hooks/useScrollToTop"
 import { InfoSection } from "@shared/ui/InfoSection/InfoSection"
 import { LoaderCover } from "@shared/ui/LoaderCover/LoaderCover"
 import { bem } from "@shared/utils/common"
+import { authPassedS, isMentorS } from "@store/auth/auth.slice"
+import { useGetPagePersonalQuery, useGetPagesMainQuery } from "@store/pages/pages.api"
+import { useAppSelector } from "@store/store"
 import cn from "classnames"
 import { useTranslation } from "react-i18next"
 import { useMatch, useParams } from "react-router"
-import { EmaiVerifyModalForm } from "src/components/forms/emaiVerify/EmaiVerifyModalForm"
-import { EmaiVerifySuccessModal } from "src/components/forms/emaiVerify/EmaiVerifySuccessModal"
-import { LoginModalForm } from "src/components/forms/LoginModalForm"
-import { ResetPasswordMentorSuccessModal } from "src/components/forms/ResetPasswordMentorSuccessModal"
-import { ResetPasswordModalForm } from "src/components/forms/ResetPasswordModalForm"
-import { SignupModalFormStep1 } from "src/components/forms/SignUp/SignupModalFormStep1"
-import { HaveQuestions } from "src/components/HaveQuestions/HaveQuestions"
-import { HelpSocial } from "src/components/HelpSocial/HelpSocial"
-import { MentorsSlider } from "src/components/MentorsSlider/MentorsSlider"
-import { Search } from "src/components/Search/Search"
-import { authPassedS, isMentorS } from "src/store/auth/auth.slice"
-import { useGetPagePersonalQuery, useGetPagesMainQuery } from "src/store/pages/pages.api"
-import { useAppSelector } from "src/store/store"
 
 import { BecomeMentor } from "./BecomeMentor/BecomeMentor"
 import { BigComment } from "./BigComment/BigComment"
@@ -50,6 +50,7 @@ export function Home() {
 
   const { data } = params.shortcut ? useGetPagePersonalQuery({ shortcut: params.shortcut }) : useGetPagesMainQuery()
 
+  console.log(333333333333333)
   return (
     <>
       <div className={CN}>

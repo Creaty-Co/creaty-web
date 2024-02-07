@@ -1,8 +1,8 @@
+import { useLazyGetMeQuery, useVerifyEmailMutation } from "@store/auth/auth.api"
+import { setTokens } from "@store/auth/auth.slice"
+import { useAppDispatch } from "@store/store"
 import { Modal, notification } from "antd"
 import { memo, useEffect } from "react"
-import { useLazyGetMeQuery, useVerifyEmailMutation } from "src/store/auth/auth.api"
-import { setTokens } from "src/store/auth/auth.slice"
-import { useAppDispatch } from "src/store/store"
 
 import { EmailVerifySuccessForm } from "./EmailVerifySuccessForm/EmailVerifySuccessForm"
 

@@ -1,15 +1,10 @@
 import "./ModalContainer.scss"
 
 import { bem, stopPropagation } from "@shared/utils/common"
+import { closeModal, selectModalContainerActive, selectModalContainerContent } from "@store/modalContainer.slice"
+import { useAppDispatch, useAppSelector } from "@store/store"
 import cn from "classnames"
 import { useCallback, useLayoutEffect, useRef } from "react"
-import { useAppDispatch, useAppSelector } from "src/store/store"
-
-import {
-  closeModal,
-  selectModalContainerActive,
-  selectModalContainerContent,
-} from "../../../store/modalContainer.slice"
 
 // TODO: finish migration to ant d modal. Delete file after
 

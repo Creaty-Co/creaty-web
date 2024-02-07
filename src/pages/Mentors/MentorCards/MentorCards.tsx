@@ -1,16 +1,16 @@
 import "./MentorCards.scss"
 
+import { MentorCard } from "@components/MentorCard/MentorCard"
+import { ITag } from "@components/Tag/Tag.types"
 import { SharedButton } from "@shared/ui/buttons/SharedButton"
 import { Icon } from "@shared/ui/Icon/Icon"
 import { LoaderCover } from "@shared/ui/LoaderCover/LoaderCover"
 import { bem } from "@shared/utils/common"
+import { useGetMentorsQuery } from "@store/mentor/mentor.api"
+import { MentorType } from "@store/mentor/mentor.types"
+import { ICategory } from "@store/tags/tags.types"
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { MentorCard } from "src/components/MentorCard/MentorCard"
-import { ITag } from "src/components/Tag/Tag.types"
-import { useGetMentorsQuery } from "src/store/mentor/mentor.api"
-import { MentorType } from "src/store/mentor/mentor.types"
-import { ICategory } from "src/store/tags/tags.types"
 
 export interface IMentorCards {
   topic?: ICategory

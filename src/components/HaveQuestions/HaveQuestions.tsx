@@ -1,11 +1,11 @@
 import "./HaveQuestions.scss"
 
+import { FormStillQuestions } from "@components/forms/old/Form/FormStillQuestions"
 import { bem } from "@shared/utils/common"
 import cn from "classnames"
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 
-import { FormStillQuestions } from "../forms/old/Form/FormStillQuestions"
 import { HaveQuestionsAfterSubmit } from "./HaveQuestionsAfterSubmit"
 
 const CN = "have-questions"

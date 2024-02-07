@@ -1,13 +1,9 @@
-import { App } from "@app/App"
-import buffer from "buffer"
-import { createElement } from "react"
 import { createRoot } from "react-dom/client"
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-window.Buffer = buffer.Buffer
+import { App } from "./app/App"
 
 const rootElement = document.getElementById("root")
 if (rootElement) {
   const root = createRoot(rootElement)
-  root.render(createElement(App))
+  root.render(App())
 }

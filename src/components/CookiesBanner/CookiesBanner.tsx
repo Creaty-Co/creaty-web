@@ -1,7 +1,7 @@
 import "./CookiesBanner.scss"
 
-import { OuterLink } from "@shared/ui/OuterLink/OuterLink"
 import { SharedButton } from "@shared/ui/buttons/SharedButton"
+import { OuterLink } from "@shared/ui/OuterLink/OuterLink"
 import { bem, classWithModifiers } from "@shared/utils/common"
 import { useRef, useState } from "react"
 import { useTranslation } from "react-i18next"

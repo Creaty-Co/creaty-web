@@ -11,12 +11,12 @@ export default defineConfig(() => {
     plugins: [envCompatible({ prefix: ENV_PREFIX }), react(), eslint()],
     resolve: {
       alias: {
-        "@app": path.resolve(__dirname, "./src/app"),
         "@i18n": path.resolve(__dirname, "./src/i18n"),
         "@pages": path.resolve(__dirname, "./src/pages"),
         "@shared": path.resolve(__dirname, "./src/shared"),
         "@types": path.resolve(__dirname, "./src/shared/types"),
         "@store": path.resolve(__dirname, "./src/store"),
+        "@app": path.resolve(__dirname, "./src/app"),
         "@components": path.resolve(__dirname, "./src/components"),
       },
     },

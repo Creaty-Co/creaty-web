@@ -2,12 +2,12 @@ import "./MentorCard.scss"
 
 import { Icon } from "@shared/ui/Icon/Icon"
 import { bem, getEmojiPNG } from "@shared/utils/common"
+import { MentorType } from "@store/mentor/mentor.types"
 import cn from "classnames"
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 
-import { MentorType } from "../../store/mentor/mentor.types"
 import { Tag } from "../Tag/Tag"
 
 const CN = "mentor-card"
@@ -32,7 +32,7 @@ export function MentorCard({
   company,
   tags,
 
-  price_currency,
+  // price_currency,
   country,
   price,
   clickable,

@@ -1,14 +1,14 @@
 import "./HelpfulCreaty.scss"
 
+import { PopupFormWrapper } from "@components/forms/old/PopupForm/PopupFormWrapper"
 import { SharedButton } from "@shared/ui/buttons/SharedButton"
 import { bem } from "@shared/utils/common"
+import { EFormIds } from "@store/forms/form.types"
+import { openModal } from "@store/modalContainer.slice"
+import { useAppDispatch } from "@store/store"
 import cn from "classnames"
 import { ReactNode } from "react"
 import { useTranslation } from "react-i18next"
-import { PopupFormWrapper } from "src/components/forms/old/PopupForm/PopupFormWrapper"
-import { EFormIds } from "src/store/forms/form.types"
-import { openModal } from "src/store/modalContainer.slice"
-import { useAppDispatch } from "src/store/store"
 
 const CN = "helpful-creaty"
 const { getElement } = bem(CN)

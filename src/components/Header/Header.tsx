@@ -1,26 +1,27 @@
 import "./Header.scss"
 
-import { Icon } from "@shared/ui/Icon/Icon"
+import { PopupFormBecomeMentor } from "@components/forms/old/PopupForm/PopupFormBecomeMentor"
+import { PopupFormWrapper } from "@components/forms/old/PopupForm/PopupFormWrapper"
 import { SharedButton } from "@shared/ui/buttons/SharedButton"
 import { SharedButtonLink } from "@shared/ui/buttons/SharedButtonLink"
+import { Icon } from "@shared/ui/Icon/Icon"
 import { bem } from "@shared/utils/common"
+import { authPassedS, isAdminS, isMentorS } from "@store/auth/auth.slice"
+import { EFormIds } from "@store/forms/form.types"
+import { openModal } from "@store/modalContainer.slice"
+import { useAppDispatch, useAppSelector } from "@store/store"
 import { memo, useEffect, useState } from "react"
 import ReactGA from "react-ga4"
 import { useTranslation } from "react-i18next"
 import { useLocation, useNavigate } from "react-router-dom"
-import { authPassedS, isAdminS, isMentorS } from "src/store/auth/auth.slice"
-import { EFormIds } from "src/store/forms/form.types"
-import { openModal } from "src/store/modalContainer.slice"
-import { useAppDispatch, useAppSelector } from "src/store/store"
 
-import { PopupFormBecomeMentor } from "../forms/old/PopupForm/PopupFormBecomeMentor"
-import { PopupFormWrapper } from "../forms/old/PopupForm/PopupFormWrapper"
 import { AuthDDL } from "./AuthDDL/AuthDDL"
 
 const CN = "header"
 const { getElement, getModifier } = bem(CN)
 
 export const Header = memo(function Header() {
+  console.log(222222222222)
   const location = useLocation()
   const dispatch = useAppDispatch()
   const navigate = useNavigate()

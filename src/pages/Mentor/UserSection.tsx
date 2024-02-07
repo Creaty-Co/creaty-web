@@ -3,7 +3,7 @@ import "./Mentor.scss"
 import { Icon, IconName } from "@shared/ui/Icon/Icon"
 import { bem } from "@shared/utils/common"
 import cn from "classnames"
-import { ReactNode /*, useEffect*/ } from "react"
+import { ReactNode } from "react"
 
 const CN = "user"
 const MODSection = "section"
@@ -12,7 +12,7 @@ const { getElement: getElementSection, getModifier: getModifierSection } = bem(C
 
 interface UserSectionProps {
   type: "1" | "2" | "3"
-  title?: string
+  title?: string | null
   iconName?: IconName
   children: ReactNode
 }

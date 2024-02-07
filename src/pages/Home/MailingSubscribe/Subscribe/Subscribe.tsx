@@ -2,10 +2,9 @@ import "./Subscribe.scss"
 
 import { SharedButton } from "@shared/ui/buttons/SharedButton"
 import { bem } from "@shared/utils/common"
+import { usePostMailingsSubscribeMutation } from "@store/subscribe.api"
 import { ChangeEvent, useState } from "react"
 import { useTranslation } from "react-i18next"
-
-import { usePostMailingsSubscribeMutation } from "../../../../store/subscribe.api"
 
 const CN = "subscribe"
 const { getElement, getModifier } = bem(CN)

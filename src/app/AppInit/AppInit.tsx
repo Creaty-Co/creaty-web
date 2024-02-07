@@ -1,11 +1,11 @@
 import { parseJwt } from "@shared/utils/token"
+import { useLazyGetMeQuery } from "@store/auth/auth.api"
+import { resetAuthState, setTokens } from "@store/auth/auth.slice"
+import { useGetPagesLinksDocumentsQuery } from "@store/pages/pages.api"
+import { useAppDispatch } from "@store/store"
 import { memo, useCallback, useEffect, useRef } from "react"
 import ReactGA from "react-ga4"
 import { useSearchParams } from "react-router-dom"
-import { useLazyGetMeQuery } from "src/store/auth/auth.api"
-import { resetAuthState, setTokens } from "src/store/auth/auth.slice"
-import { useGetPagesLinksDocumentsQuery } from "src/store/pages/pages.api"
-import { useAppDispatch } from "src/store/store"
 
 import { initSentry } from "./initSentry"
 

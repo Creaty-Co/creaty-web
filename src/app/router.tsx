@@ -1,12 +1,11 @@
-import { AdminJSONEditorContainer } from "@i18n/AdminJSONEditorContainer"
+import { AdminJSONEditorContainer } from "@i18n/AdminJSONEditorContainer/AdminJSONEditorContainer"
+import { Home } from "@pages/Home/Home"
+import { Mentor } from "@pages/Mentor/Mentor"
+import { Mentors } from "@pages/Mentors/Mentors"
+import { authStartedS } from "@store/auth/auth.slice"
+import { useAppSelector } from "@store/store"
 import { Spin } from "antd"
 import { Route, Routes } from "react-router"
-import { authStartedS } from "src/store/auth/auth.slice"
-import { useAppSelector } from "src/store/store"
-
-import { Home } from "../pages/Home/Home"
-import { Mentor } from "../pages/Mentor/Mentor"
-import { Mentors } from "../pages/Mentors/Mentors"
 
 export enum EModalsRoutes {
   LOGIN = "login",

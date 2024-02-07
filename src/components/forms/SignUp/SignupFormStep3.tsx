@@ -1,13 +1,13 @@
-import { PopupLayout } from "@shared/ui/PopupLayout/PopupLayout"
 import { SharedButton } from "@shared/ui/buttons/SharedButton"
+import { PopupLayout } from "@shared/ui/PopupLayout/PopupLayout"
 import { bem } from "@shared/utils/common"
+import { useResendVerifyEmailMutation } from "@store/auth/auth.api"
+import { authUserDataS } from "@store/auth/auth.slice"
+import { closeModal } from "@store/modalContainer.slice"
+import { useAppDispatch, useAppSelector } from "@store/store"
 import { notification } from "antd"
 import { useEffect } from "react"
 import { useTranslation } from "react-i18next"
-import { useResendVerifyEmailMutation } from "src/store/auth/auth.api"
-import { authUserDataS } from "src/store/auth/auth.slice"
-import { closeModal } from "src/store/modalContainer.slice"
-import { useAppDispatch, useAppSelector } from "src/store/store"
 
 const CN = "form"
 const { getElement } = bem(CN)

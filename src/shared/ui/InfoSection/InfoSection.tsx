@@ -1,4 +1,4 @@
-import "./info-section.scss"
+import "./InfoSection.scss"
 
 import { bem } from "@shared/utils/common"
 import cn from "classnames"
