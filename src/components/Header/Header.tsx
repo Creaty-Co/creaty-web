@@ -21,7 +21,6 @@ const CN = "header"
 const { getElement, getModifier } = bem(CN)
 
 export const Header = memo(function Header() {
-  console.log(222222222222)
   const location = useLocation()
   const dispatch = useAppDispatch()
   const navigate = useNavigate()

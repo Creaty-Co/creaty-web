@@ -26,6 +26,6 @@
     },
     "baseUrl": "."
   },
-  "include": ["src", "scripts", "src/shared/@types"],
+  "include": ["src", "scripts", "src/shared/@types", "@types/environment.d.ts"],
   "exclude": ["node_modules"]
 }

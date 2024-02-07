@@ -50,7 +50,6 @@ export function Home() {
 
   const { data } = params.shortcut ? useGetPagePersonalQuery({ shortcut: params.shortcut }) : useGetPagesMainQuery()
 
-  console.log(333333333333333)
   return (
     <>
       <div className={CN}>
