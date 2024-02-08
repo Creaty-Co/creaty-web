@@ -87,7 +87,7 @@ export function Search({ fullWidth }: { fullWidth?: boolean }) {
         }}
       />
 
-      <Button className="button button--violet button--big button__text" type="primary">
+      <Button className={cn(getElement("button"), "button button--violet button--big button__text")} type="primary">
         {t("button")}
       </Button>
     </div>
