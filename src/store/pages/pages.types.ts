@@ -1,5 +1,5 @@
-import { MentorType } from "@entities/mentor"
-import { ITag } from "@entities/tag"
+import { ITag } from "@components/Tag/Tag.types"
+import { MentorType } from "@store/mentor/mentor.types"
 
 export interface PageType {
   id: number

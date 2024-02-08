@@ -34,6 +34,7 @@ export function MentorsSlider({ mentors }: IMentorsSlider) {
 
   const prev = () => slider.current?.slickPrev()
   const next = () => slider.current?.slickNext()
+  
   return (
     <div className={CN}>
       <div className={getElement("header")}>

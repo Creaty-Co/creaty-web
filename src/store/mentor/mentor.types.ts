@@ -1,4 +1,4 @@
-import { ITag } from "@entities/tag"
+import { ITag } from "@components/Tag/Tag.types"
 
 export interface MentorPage {
   id: number | null

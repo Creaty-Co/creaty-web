@@ -18,9 +18,7 @@ export function Mentors() {
 
   const { t } = useTranslation("translation", { keyPrefix: "views.mentors" })
 
-  // const search = useAppSelector(selectSearch)
   const topics: any = []
-  // const topics = useAppSelector(selectTopics)
   const params = useParams<"topicOrTag">()
 
   const topicFromURL = topics.find((topic: { shortcut: string | undefined }) => topic.shortcut === params.topicOrTag)
