@@ -1,5 +1,6 @@
 import "./Mentor.scss"
 
+import { ITag } from "@components/Tag/Tag.types"
 import { QAndA } from "@pages/Home/QAndA/QAndA"
 import { useScrollToTop } from "@shared/hooks/useScrollToTop"
 import { Icon } from "@shared/ui/Icon/Icon"
@@ -109,8 +110,8 @@ export function Mentor() {
 
         <UserSection type="1">
           <div className="user-section__tags">
-            {user.tags.map((tag: any) => (
-              <Tag key={tag.id}>{tag}</Tag>
+            {user.tags.map((tag: ITag) => (
+              <Tag key={tag.id}>{tag.title}</Tag>
             ))}
           </div>
         </UserSection>
