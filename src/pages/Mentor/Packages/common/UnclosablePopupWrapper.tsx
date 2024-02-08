@@ -1,5 +1,5 @@
-import { ButtonIcon } from "@shared/ui"
-import { bem } from "@shared/utils"
+import { SharedButtonIcon } from "@shared/ui/buttons/SharedButtonIcon"
+import { bem } from "@shared/utils/common"
 import { Modal, Popconfirm } from "antd"
 import { memo, ReactNode, useState } from "react"
 
@@ -44,7 +44,7 @@ export const UnclosablePopupWrapper = memo(function UnclosablePopupWrapper({
           okButtonProps={{ type: "primary" }}
         >
           <div className={getElement("close")} onClick={handleOpenPopconfirm}>
-            <ButtonIcon name="cross" size="small" color="white" outline />
+            <SharedButtonIcon name="cross" size="small" color="white" outline />
           </div>
         </Popconfirm>
         <h3 className="font--h3-bold popup-layout__title">

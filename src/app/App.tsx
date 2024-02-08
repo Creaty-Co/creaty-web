@@ -4,62 +4,54 @@ import "./scss/base.scss"
 import "./scss/app.scss"
 import "./scss/ant.scss"
 
-import { Cookies } from "@features/cookies"
-import { Router } from "@pages"
-import { ModalContainer } from "@shared/layout"
-import { Footer } from "@shared/ui"
+import { CookiesBanner } from "@components/CookiesBanner/CookiesBanner"
+import { Footer } from "@components/Footer/Footer"
+import { Header } from "@components/Header/Header"
+import { ModalContainer } from "@pages/Home/ModalContainer/ModalContainer"
+import { store } from "@store/store"
 import { ConfigProvider } from "antd"
+import { Footer } from "antd/es/layout/layout"
 import { createBrowserHistory } from "history"
 import i18next from "i18next"
 import { StrictMode, Suspense } from "react"
 import { I18nextProvider } from "react-i18next"
 import { Provider } from "react-redux"
 import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom"
+import { CookiesBanner } from "src/components/CookiesBanner/CookiesBanner"
+import { store } from "src/store/store"
 
-import { Header } from "../components/Header/Header"
-import { AppInit } from "./AppInit"
-import { ErrorBoundary } from "./providers"
-import { store } from "./store"
+import { AppInit } from "./AppInit/AppInit"
+import { ErrorBoundary } from "./ErrorBoundary"
+import { Router } from "./router"
 
 export const history = createBrowserHistory()
 
-function App() {
-  return (
-    <StrictMode>
-      <ConfigProvider
-        theme={{
-          token: {
-            colorPrimary: "#070707",
-            fontFamily: "Google Sans",
-          },
-        }}
-      >
-        {/* @ts-ignore */}
-        <HistoryRouter history={history}>
-          <Provider store={store}>
-            <I18nextProvider defaultNS="translation" i18n={i18next}>
-              <Suspense fallback="">
-                <ErrorBoundary fallback="Error">
-                  <AppInit />
+export const App = () => (
+  <StrictMode>
+    <ConfigProvider theme={{ token: { colorPrimary: "#070707", fontFamily: "Google Sans" } }}>
+      {/* @ts-ignore */}
+      <HistoryRouter history={history}>
+        <Provider store={store}>
+          <I18nextProvider defaultNS="translation" i18n={i18next}>
+            <Suspense fallback="Loading...">
+              <ErrorBoundary fallback="Error">
+                <AppInit />
 
-                  <Header />
-                  <main>
-                    <Router />
-                  </main>
+                <Header />
+                <main>
+                  <Router />
+                </main>
 
-                  <Footer />
+                <Footer />
 
-                  <Cookies />
+                <CookiesBanner />
 
-                  <ModalContainer />
-                </ErrorBoundary>
-              </Suspense>
-            </I18nextProvider>
-          </Provider>
-        </HistoryRouter>
-      </ConfigProvider>
-    </StrictMode>
-  )
-}
-
-export default App
+                <ModalContainer />
+              </ErrorBoundary>
+            </Suspense>
+          </I18nextProvider>
+        </Provider>
+      </HistoryRouter>
+    </ConfigProvider>
+  </StrictMode>
+)

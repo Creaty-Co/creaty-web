@@ -1,12 +1,16 @@
-import { useAppDispatch } from "@app/store"
-import { useBookHourlySessionMutation } from "@entities/mentor"
-import { PopupFormThanks } from "@features/Form"
-import { openModal } from "@shared/layout"
-import { Button } from "@shared/ui"
+import { PopupFormThanks } from "@components/forms/old/PopupForm/PopupFormThanks"
+import { SharedButton } from "@shared/ui/buttons/SharedButton"
+import { useBookHourlySessionMutation } from "@store/mentor/mentor.api"
+import { openModal } from "@store/modalContainer.slice"
+import { useAppDispatch } from "@store/store"
 import { notification } from "antd"
 import { useEffect, useState } from "react"
 import { FieldValues } from "react-hook-form"
 import { useTranslation } from "react-i18next"
+import { PopupFormThanks } from "src/components/forms/old/PopupForm/PopupFormThanks"
+import { useBookHourlySessionMutation } from "src/store/mentor/mentor.api"
+import { openModal } from "src/store/modalContainer.slice"
+import { useAppDispatch } from "src/store/store"
 
 import { BookSessionForm } from "../common/BookSessionForm"
 import { UnclosablePopupWrapper } from "../common/UnclosablePopupWrapper"
@@ -35,7 +39,7 @@ export const Hour = ({ hourPrice, mentorName, mentorSlug }: IProps) => {
       dispatch(openModal(<PopupFormThanks />))
       // api.success({ message: "Session successfully booked", duration: 10 })
       // @ts-ignore
-      window.dataLayer.push({"event": `Book hour session with mentor`, "mentorName": mentorName})
+      window.dataLayer.push({ event: `Book hour session with mentor`, mentorName: mentorName })
       setOpenBookModal(false)
     }
   }, [isSuccess])
@@ -61,14 +65,20 @@ export const Hour = ({ hourPrice, mentorName, mentorSlug }: IProps) => {
           </div>
         </div>
 
-        <Button size="big" type="submit" color="violet" onClick={() => setOpenBookModal(true)} id="openModalHourButton">
+        <SharedButton
+          size="big"
+          type="submit"
+          color="violet"
+          onClick={() => setOpenBookModal(true)}
+          id="openModalHourButton"
+        >
           {t("views.mentor.plans.hour.submitText")}
-        </Button>
+        </SharedButton>
       </div>
-
       <UnclosablePopupWrapper
         open={openBookModal}
-        title={t("other.forms.bookSessionHour.title")}
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        title={t("other.forms.bookSessionHour.title")!}
         mentorName={mentorName}
         closeModal={() => setOpenBookModal(false)}
       >

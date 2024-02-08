@@ -1,8 +1,4 @@
-import "./extensions"
-
-import { URLDataBase64 } from "@shared/types"
-import { Buffer } from "buffer"
-import { cloneElement, SyntheticEvent } from "react"
+import { SyntheticEvent } from "react"
 
 /**
  *
@@ -17,7 +13,10 @@ export function classMerge(...classNames: Array<string | null | undefined>): str
  * Join modifiers with origin class
  * @returns `"origin-class origin-class--modifier"`
  */
-export function classWithModifiers(originClass: string, ...modifiers: Array<string | number | false | null | undefined>): string {
+export function classWithModifiers(
+  originClass: string,
+  ...modifiers: Array<string | number | false | null | undefined>
+): string {
   modifiers = modifiers.filter(Boolean)
   if (!modifiers.length) return originClass
 
@@ -45,7 +44,7 @@ export function classElement(originClass: string, element: string | false | null
  * @returns `function element => classElement(originalClass, element)`
  */
 export function getClassElement(originClass: string): Function {
-  return (element : string | false | null | undefined): string => classElement(originClass, element)
+  return (element: string | false | null | undefined): string => classElement(originClass, element)
 }
 
 /**
@@ -53,93 +52,20 @@ export function getClassElement(originClass: string): Function {
  * @returns `function modifiers => classWithModifiers(classOrigin, ...modifiers)`
  */
 export function getClassWithModifiers(originClass: string): Function {
-  return (...modifiers: Array<string | number | false | null | undefined>): string => classWithModifiers(originClass, ...modifiers)
+  return (...modifiers: Array<string | number | false | null | undefined>): string =>
+    classWithModifiers(originClass, ...modifiers)
 }
 
 /**
  * Generate functions produce elems and modifiers in block
  * @param block: string. CSS class of block
- * @returns { createModifier, createElement } 
+ * @returns { createModifier, createElement }
  */
 export function bem(block: string) {
   const getModifier = classWithModifiers
   const getElement = getClassElement(block)
 
   return { getModifier, getElement }
-}
-
-/**
- * Creates query from given object
- * @returns `state1=6&state2=horse` without `?`
- */
-export function createQuery(queryObject?: Record<string, unknown> | null): string {
-  if (!queryObject || !Object.keys(queryObject).length) return ""
-
-  const queryKeys = Object.keys(queryObject)
-  const queryArray = queryKeys.map(key => {
-    const value = queryObject[key]
-    if (value) {
-      return encodeURIComponent(key) + "=" + encodeURIComponent(String(value))
-    }
-    return ""
-  })
-
-  return queryArray.filter(Boolean).join("&")
-}
-
-
-export function toBase64(value: unknown) {
-  return Buffer.from(JSON.stringify(value)).toString("base64")
-}
-
-export function FileToURLDataBase64(file: File): Promise<URLDataBase64> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader()
-
-    reader.readAsDataURL(file)
-    reader.onload = () => resolve(reader.result as URLDataBase64)
-    reader.onerror = reject
-  })
-}
-
-
-export async function getFileFromURL(url: string) {
-  const fileName = url.slice(url.lastIndexOf("/") + 1)
-
-  const response = await fetch(url)
-  const Uint8Array = (await response.body?.getReader()?.read())?.value
-
-  return new File(Uint8Array ? [Uint8Array] : [], fileName, { type: response.headers.get("content-type") || "image" })
-}
-
-export function getCheckedValues(inputs: RadioNodeList & HTMLInputElement[]) {
-  return [...inputs].filter(input => input.checked).map(input => input.value)
-}
-
-/**
- * Interpolate function for {variable} interpolations in string
- */
-export function interpolate<V = unknown>(value: V, vars: Record<string, string | number>) {
-  if (!value) throw new TypeError("interError: empty value gotten")
-  const varKeys = Object.keys(vars)
-  function interpolate(value: V): V | string {
-    // ------------------------------------------------ Hardcoded :(
-    // eslint-disable-next-line
-    const elementProps = (value as any)?.props
-    if (elementProps?.children) {
-      // eslint-disable-next-line
-      return cloneElement(value as any, elementProps, interpolate(elementProps.children) as any) as any
-    }
-    // ------------------------------------------------
-    if (typeof value === "string") {
-      return varKeys.reduce((result, next) => result.replace(new RegExp(`{${next}}`, "g"), String(vars[next])), value)
-    }
-    return value
-  }
-  if (value instanceof Array) {
-    return value.flatMap(a => a).map(interpolate)
-  }
-  return interpolate(value)
 }
 
 /**
@@ -180,71 +106,6 @@ export function stopPropagation(callback?: Function | null) {
 
     callback?.()
   }
-}
-
-/**
- * Propagates the array, creating minimum fill level of the array by duplicating its items
- * @returns new array
- */
-export function minFill<T>(array: T[], minLevel?: number): T[] {
-  if (array.length === 0) return array
-  if (minLevel == null || array.length >= minLevel) {
-    return array
-  }
-
-  const newArray: T[] = []
-  while (newArray.length < minLevel) {
-    newArray.push(...array)
-  }
-  return newArray
-}
-
-/**
- * Transform string to toggler state
- * 
- */
-export function togglerTransformAction(to?: string | null | undefined): boolean | undefined | null {
-  switch (to) {
-    case "remove": return false
-    case "add": return true
-    default: return undefined
-  }
-}
-
-export function toDataAttrs(dataAttrs: Record<string, string>): Record<string, string> {
-  const reducer = (dataAttrs: Record<string, string>, [key, value]: [string, string]): Record<string, string> => ({...dataAttrs, [toDataAttrName(key)]: value})
-  return Object.entries(dataAttrs).reduce(reducer, {})
-}
-
-export function toDataAttrName(attrName: string): string {
-  const regex = /data-/
-  const dataAttrName = !attrName.match(regex)
-    ? `data-${attrName}` : attrName
-    
-  return dataAttrName
-}
-
-export function targetHasAttr(target: HTMLElement, attrName: string): boolean {
-  attrName = toDataAttrName(attrName)
-
-  return target.hasAttribute(attrName) ||
-    target.parentElement?.hasAttribute(attrName) || 
-    false
-}
-
-export function targetGetAttr(target: HTMLElement, attrName: string): string | null | undefined {
-  attrName = toDataAttrName(attrName)
-
-  const te = (target.tagName === "use"? target.parentElement : target) as HTMLElement
-  const value = te.getAttribute(attrName)
-  
-  return value
-}
-
-export function twPseudo(pseudo: string, ...args: (string|false)[]): string {
-  pseudo = pseudo.replace(":", "") + ":"
-
-  return args.filter(Boolean).map(arg => pseudo + arg).join(" ")
 }
 
 export function getEmojiPNG(hex: string) {

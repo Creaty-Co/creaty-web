@@ -2,7 +2,7 @@ import "./Formus.scss"
 
 import { ExclamationCircleIcon } from "@heroicons/react/20/solid"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { bem } from "@shared/utils"
+import { bem } from "@shared/utils/common"
 import cn from "classnames"
 import { ReactNode, useEffect, useRef, useState } from "react"
 import { FieldValues, FormProvider, SubmitHandler, useForm } from "react-hook-form"

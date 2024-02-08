@@ -1,10 +1,13 @@
 import "./OuterLink.scss"
 
-import { useAppSelector } from "@app/store"
-import { LinksT } from "@shared/api"
-import { selectPagesDocumentsLinks } from "@shared/api/pages/pages.slice"
+import { selectPagesDocumentsLinks } from "@store/pages/pages.slice"
+import { LinksT } from "@store/pages/pages.types"
+import { useAppSelector } from "@store/store"
 import { HTMLAttributes, ReactNode } from "react"
 import { useTranslation } from "react-i18next"
+import { selectPagesDocumentsLinks } from "src/store/pages/pages.slice"
+import { LinksT } from "src/store/pages/pages.types"
+import { useAppSelector } from "src/store/store"
 
 export type TranslateLinkT =
   | "terms"

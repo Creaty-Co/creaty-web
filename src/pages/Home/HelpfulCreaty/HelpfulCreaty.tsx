@@ -1,13 +1,18 @@
 import "./HelpfulCreaty.scss"
 
-import { useAppDispatch } from "@app/store"
-import { EFormIds, PopupFormWrapper } from "@features"
-import { openModal } from "@shared/layout"
-import { Button } from "@shared/ui"
-import { bem } from "@shared/utils"
+import { PopupFormWrapper } from "@components/forms/old/PopupForm/PopupFormWrapper"
+import { SharedButton } from "@shared/ui/buttons/SharedButton"
+import { bem } from "@shared/utils/common"
+import { EFormIds } from "@store/forms/form.types"
+import { openModal } from "@store/modalContainer.slice"
+import { useAppDispatch } from "@store/store"
 import cn from "classnames"
 import { ReactNode } from "react"
 import { useTranslation } from "react-i18next"
+import { PopupFormWrapper } from "src/components/forms/old/PopupForm/PopupFormWrapper"
+import { EFormIds } from "src/store/forms/form.types"
+import { openModal } from "src/store/modalContainer.slice"
+import { useAppDispatch } from "src/store/store"
 
 const CN = "helpful-creaty"
 const { getElement } = bem(CN)
@@ -31,14 +36,14 @@ export function HelpfulCreaty() {
 
         <HelpfulCreatyBlock title={t("blocks.4.title")} desc={t("blocks.4.desc")} flag="blue" />
 
-        <Button
+        <SharedButton
           className={getElement("button")}
           outline
           color="green"
           onClick={() => dispatch(openModal(<PopupFormWrapper formType={EFormIds.GET_HELP} />))}
         >
           {t("button")}
-        </Button>
+        </SharedButton>
       </div>
     </div>
   )
