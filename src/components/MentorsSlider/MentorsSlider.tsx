@@ -34,7 +34,7 @@ export function MentorsSlider({ mentors }: IMentorsSlider) {
 
   const prev = () => slider.current?.slickPrev()
   const next = () => slider.current?.slickNext()
-  
+
   return (
     <div className={CN}>
       <div className={getElement("header")}>
@@ -52,7 +52,8 @@ export function MentorsSlider({ mentors }: IMentorsSlider) {
           infinite
           dots={false}
           arrows={false}
-          slidesToScroll={mentorCardsCount}
+          slidesToShow={mentors.length < mentorCardsCount ? mentors.length : mentorCardsCount}
+          slidesToScroll={mentors.length < mentorCardsCount ? mentors.length : mentorCardsCount}
           swipeToSlide
           variableWidth
           accessibility

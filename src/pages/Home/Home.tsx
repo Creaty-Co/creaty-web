@@ -55,7 +55,7 @@ export function Home() {
       <div className={CN}>
         {/* Header  */}
         <div className={getElement("header")}>
-          <DynamicPrimaryInfo firstHeadingShortcut={params.shortcut} />
+          <DynamicPrimaryInfo urlShortcut={params.shortcut} />
 
           <Search />
 

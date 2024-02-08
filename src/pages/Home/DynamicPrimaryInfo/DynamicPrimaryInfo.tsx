@@ -1,6 +1,10 @@
 import "./DynamicPrimaryInfo.scss"
 
+import { ITag } from "@components/Tag/Tag.types"
 import { bem } from "@shared/utils/common"
+import { useAppSelector } from "@store/store"
+import { categoriesS, tagsS } from "@store/tags/tags.slice"
+import { ICategory } from "@store/tags/tags.types"
 import cn from "classnames"
 import { useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
@@ -10,15 +14,15 @@ const CYCLE_INTERVAL = 5000
 const PERSONAL_PAGE_TIMEOUT = 12000
 
 interface IDynamicPrimaryInfo {
-  firstHeadingShortcut?: string
+  urlShortcut?: string
 }
 
 const CN = "dynamic-primary-info"
 const { getElement } = bem(CN)
 
 export function DynamicPrimaryInfo(props: IDynamicPrimaryInfo) {
-  const topics: any = []
-  // const topics = useAppSelector(selectTopics)
+  const tags = useAppSelector(tagsS)
+  const categories = useAppSelector(categoriesS)
   const { t } = useTranslation("translation", { keyPrefix: "views.home.primaryInfo" })
 
   const rejectRef = useRef<Function>()
@@ -52,23 +56,19 @@ export function DynamicPrimaryInfo(props: IDynamicPrimaryInfo) {
   }
 
   async function runHeadingCycle() {
-    // eslint-disable-next-line no-constant-condition
-    while (true) {
-      for (const topic of topics.list) {
-        await writeEraseHeading(topic.title)
-      }
+    if (!categories) return
+    for (const category of categories) {
+      await writeEraseHeading(category.title)
     }
   }
 
   useEffect(() => {
     ;(async () => {
-      if (topics.length === 0) return
-      if (props.firstHeadingShortcut) {
-        const topic = topics.find(
-          (topic: { shortcut: string | undefined }) => topic.shortcut === props.firstHeadingShortcut
-        )
-        const tag = topics.find((tag: { shortcut: string | undefined }) => tag.shortcut === props.firstHeadingShortcut)
-        const heading = topic?.title || tag?.title
+      if (tags?.length === 0 && categories?.length === 0) return
+      if (props.urlShortcut) {
+        const categoryTitle = categories?.find((category: ICategory) => category.shortcut === props.urlShortcut)?.title
+        const tagTitle = tags?.find((tag: ITag) => tag.shortcut === props.urlShortcut)?.title
+        const heading = categoryTitle || tagTitle
 
         if (heading) {
           await writeHeading(heading)
@@ -83,7 +83,7 @@ export function DynamicPrimaryInfo(props: IDynamicPrimaryInfo) {
       }
     })
     return () => rejectRef.current?.("DynamicPrimaryInfo was unmounted or updated")
-  }, [props.firstHeadingShortcut, topics])
+  }, [props.urlShortcut, categories])
 
   return (
     <div className={CN}>
