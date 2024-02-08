@@ -4,8 +4,9 @@ import { authSlice } from "@store/auth/auth.slice"
 import { ModalContainerSlice } from "@store/modalContainer.slice"
 import { pagesSlice } from "@store/pages/pages.slice"
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
-import logger from "redux-logger"
+import { createLogger } from "redux-logger"
 
+// import logger from "redux-logger"
 import { formApi } from "./forms/form.api"
 import { mentorApi } from "./mentor/mentor.api"
 import { mentorSlice } from "./mentor/mentor.slice"
@@ -15,6 +16,8 @@ import { tagsApi } from "./tags/tags.api"
 import { tagsSlice } from "./tags/tags.slice"
 
 const development = process.env.NODE_ENV === "development"
+
+const logger: any = createLogger()
 
 const middlewares = [
   authApi.middleware,
@@ -52,8 +55,9 @@ export const store = configureStore({
     }).concat(middlewares),
 })
 
-export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
+type AppStore = typeof store.getState
+type AppDispatch = typeof store.dispatch
+export type RootState = ReturnType<AppStore>
 
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
-export const useAppDispatch = () => useDispatch<AppDispatch>()
+export const useAppDispatch: () => AppDispatch = useDispatch

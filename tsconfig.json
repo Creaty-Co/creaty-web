@@ -12,7 +12,7 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
-    "forceConsistentCasingInFileNames": false,
+    "forceConsistentCasingInFileNames": true,
     "module": "ESNext",
     "moduleResolution": "Node",
     "resolveJsonModule": true,
@@ -30,6 +30,6 @@
     },
     "baseUrl": "."
   },
-  "include": ["src", "scripts", "src/shared/@types", "@types/environment.d.ts"],
+  "include": ["src", "scripts", "src/shared/types", "@types/environment.d.ts"],
   "exclude": ["node_modules"]
 }
