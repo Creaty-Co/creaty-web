@@ -1,4 +1,3 @@
-// import { initReactMarkdownPostProcess } from "@i18n/initReactMarkdownPostProcess"
 import { initReactMarkdownPostProcess } from "@i18n/initReactMarkdownPostProcess"
 import i18next from "i18next"
 import Backend from "i18next-http-backend"

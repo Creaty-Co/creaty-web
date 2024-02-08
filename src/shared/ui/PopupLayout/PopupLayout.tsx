@@ -5,8 +5,6 @@ import { closeModal } from "@store/modalContainer.slice"
 import { useAppDispatch } from "@store/store"
 import cn from "classnames"
 import { ReactNode } from "react"
-import { closeModal } from "src/store/modalContainer.slice"
-import { useAppDispatch } from "src/store/store"
 
 import { SharedButtonIcon } from "../buttons/SharedButtonIcon"
 

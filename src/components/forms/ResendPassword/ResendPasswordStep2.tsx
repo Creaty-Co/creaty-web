@@ -6,7 +6,6 @@ import { notification } from "antd"
 import cn from "classnames"
 import { useEffect } from "react"
 import { useTranslation } from "react-i18next"
-import { useResendPasswordMutation } from "src/store/auth/auth.api"
 
 const CN = "form"
 const MOD = "resend-password"

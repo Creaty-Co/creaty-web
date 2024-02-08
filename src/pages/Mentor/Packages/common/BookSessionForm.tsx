@@ -8,8 +8,6 @@ import { Button } from "antd"
 import cn from "classnames"
 import { memo } from "react"
 import { FieldValues } from "react-hook-form"
-import { authUserDataS } from "src/store/auth/auth.slice"
-import { useAppSelector } from "src/store/store"
 import * as yup from "yup"
 
 const schema = yup

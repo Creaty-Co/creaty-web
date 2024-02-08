@@ -11,8 +11,6 @@ import { Button, Tag } from "antd"
 import cn from "classnames"
 import { useTranslation } from "react-i18next"
 import { useParams } from "react-router"
-import { useGetMentorBySlugQuery } from "src/store/mentor/mentor.api"
-import { MentorPackageType } from "src/store/mentor/mentor.types"
 
 import { PackagesWrapper } from "./Packages/PackagesWrapper"
 import { UserSection } from "./UserSection"

@@ -5,7 +5,6 @@ import { closeModal, selectModalContainerActive, selectModalContainerContent } f
 import { useAppDispatch, useAppSelector } from "@store/store"
 import cn from "classnames"
 import { useCallback, useLayoutEffect, useRef } from "react"
-import { useAppDispatch, useAppSelector } from "src/store/store"
 
 // TODO: finish migration to ant d modal. Delete file after
 

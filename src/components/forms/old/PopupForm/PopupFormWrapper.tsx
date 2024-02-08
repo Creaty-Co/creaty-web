@@ -1,7 +1,6 @@
 import { PopupLayout } from "@shared/ui/PopupLayout/PopupLayout"
 import { EFormIds, TFormNames } from "@store/forms/form.types"
 import { useTranslation } from "react-i18next"
-import { EFormIds, TFormNames } from "src/store/forms/form.types"
 
 import { FormGetHelp } from "../Form/FormGetHelp"
 import { FormTestMeeting } from "../Form/FormTestMeeting"

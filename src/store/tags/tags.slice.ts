@@ -1,6 +1,6 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { RootState } from "@store/store"
 
-import { RootState } from "../store"
 import { ITagsState } from "./tags.types"
 
 const initialState: ITagsState = {

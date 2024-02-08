@@ -1,6 +1,6 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { RootState } from "@store/store"
 
-import { RootState } from "../store"
 import { IAuthState, ISignUpFormStep1, ISignUpFormStep2, ITokens, IUserData } from "./auth.types"
 
 const initialState: IAuthState = {

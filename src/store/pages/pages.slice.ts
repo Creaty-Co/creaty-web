@@ -1,6 +1,6 @@
 import { createSelector, createSlice } from "@reduxjs/toolkit"
+import { RootState } from "@store/store"
 
-import { RootState } from "../store"
 import { pagesApi } from "./pages.api"
 import { IPagesState, PageLinkType } from "./pages.types"
 
