@@ -13,7 +13,7 @@ import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 
 export interface IMentorCards {
-  topic?: ICategory
+  category?: ICategory
   tag?: ITag
 }
 
@@ -22,7 +22,7 @@ const { getElement, getModifier } = bem(CN)
 
 export function MentorCards(props: IMentorCards) {
   const { t } = useTranslation("translation", { keyPrefix: "other.pagination" })
-  const tagSet = props.tag ? [props.tag.id] : props.topic?.tags.map(tag => tag.id) || []
+  const tagSet = props.tag ? [props.tag.id] : props.category?.tags.map(tag => tag.id) || []
 
   const [page, setPage] = useState(1)
   const [pageSize] = useState(15)
@@ -33,7 +33,7 @@ export function MentorCards(props: IMentorCards) {
   useEffect(() => {
     setPage(1)
     setResults(data?.results || [])
-  }, [props.topic, props.tag])
+  }, [props.category, props.tag])
 
   useEffect(() => {
     if (isLoading || !data) return

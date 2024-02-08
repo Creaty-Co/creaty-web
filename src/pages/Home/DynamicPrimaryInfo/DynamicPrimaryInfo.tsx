@@ -66,9 +66,9 @@ export function DynamicPrimaryInfo(props: IDynamicPrimaryInfo) {
     ;(async () => {
       if (tags?.length === 0 && categories?.length === 0) return
       if (props.urlShortcut) {
-        const categoryTitle = categories?.find((category: ICategory) => category.shortcut === props.urlShortcut)?.title
-        const tagTitle = tags?.find((tag: ITag) => tag.shortcut === props.urlShortcut)?.title
-        const heading = categoryTitle || tagTitle
+        const category = categories?.find((category: ICategory) => category.shortcut === props.urlShortcut)
+        const tag = tags?.find((tag: ITag) => tag.shortcut === props.urlShortcut)
+        const heading = category?.title || tag?.title
 
         if (heading) {
           await writeHeading(heading)
