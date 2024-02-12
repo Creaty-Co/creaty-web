@@ -111,7 +111,7 @@ export function Mentor() {
         <UserSection type="1">
           <div className="user-section__tags">
             {user.tags.map(tag => (
-              <Tag key={tag.id} {...tag} />
+              <Tag key={tag.id + tag.shortcut} {...tag} />
             ))}
           </div>
         </UserSection>

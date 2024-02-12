@@ -43,7 +43,7 @@ export function TagsLine({ tags }: ITagsLineProps) {
     <div className={getElement("wrapper")} style={{ "--inner-width": width }}>
       <div className={getElement("inner-tags")} ref={innerRef}>
         {minFill(tags, 20).map(tag => (
-          <Tag key={tag.id} {...tag} />
+          <Tag key={tag.id + tag.shortcut} {...tag} />
         ))}
       </div>
 
