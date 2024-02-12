@@ -1,4 +1,4 @@
-import { ITag } from "@components/Tag/Tag.types"
+import { ITag } from "@components/Tag/Tag"
 
 export interface ICategory {
   id: number

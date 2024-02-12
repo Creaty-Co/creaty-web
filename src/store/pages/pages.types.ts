@@ -1,4 +1,4 @@
-import { ITag } from "@components/Tag/Tag.types"
+import { ITag } from "@components/Tag/Tag"
 import { MentorType } from "@store/mentor/mentor.types"
 
 export interface PageType {

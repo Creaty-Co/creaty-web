@@ -2,7 +2,6 @@ import "./Mentors.scss"
 
 import { HaveQuestions } from "@components/HaveQuestions/HaveQuestions"
 import { Search } from "@components/Search/Search"
-import { ITag } from "@components/Tag/Tag.types"
 import { useScrollToTop } from "@shared/hooks/useScrollToTop"
 import { bem, classMerge } from "@shared/utils/common"
 import { useAppSelector } from "@store/store"
@@ -28,7 +27,7 @@ export function Mentors() {
   const urlShortcut = searchParams.get("tag_shortcut")
 
   const category = categories?.find((category: ICategory) => category.shortcut === urlShortcut)
-  const tag = tags?.find((tag: ITag) => tag.shortcut === urlShortcut)
+  const tag = tags?.find(tag => tag.shortcut === urlShortcut)
   const pageTitle = category?.title || tag?.title
 
   return (
