@@ -1,0 +1,70 @@
+@import "/src/app/scss/bundle.scss";
+
+.tags-line {
+  &__wrapper {
+    position: relative;
+    overflow: hidden;
+    margin-top: 15px;
+  }
+  &__shadow {
+    position: absolute;
+    top: 0;
+    width: 5em;
+    height: 33px;
+    background: linear-gradient(90deg, #070707 0%, transparent 100%);
+    &--left {
+      left: 0;
+    }
+    &--right {
+      right: 0;
+      -webkit-transform: rotate(180deg);
+      transform: rotate(180deg);
+    }
+  }
+  &__inner-tags {
+    --sliding-interval: 6.6ms;
+    --sliding-duration: calc(var(--inner-width) * var(--sliding-interval));
+    display: flex;
+    flex-wrap: nowrap;
+    -webkit-animation: sliding linear infinite;
+    animation: sliding linear infinite;
+    -webkit-animation-duration: var(--sliding-duration, 10s);
+    animation-duration: var(--sliding-duration, 10s);
+    &:hover {
+      -webkit-animation-play-state: paused;
+      animation-play-state: paused;
+    }
+  }
+}
+
+@supports (gap: 0.5em) {
+  .tags-line__inner-tags {
+    gap: 0.5em;
+  }
+}
+
+@supports not (gap: 0.5em) {
+  .tags-line__inner-tags > *:not(:first-child) {
+    margin: 0.5em;
+  }
+}
+
+@-webkit-keyframes sliding {
+  0% {
+    margin-left: 0;
+  }
+
+  to {
+    margin-left: calc(var(--inner-width) / 2 * -1px);
+  }
+}
+
+@keyframes sliding {
+  0% {
+    margin-left: 0;
+  }
+
+  to {
+    margin-left: calc(var(--inner-width) / 2 * -1px);
+  }
+}

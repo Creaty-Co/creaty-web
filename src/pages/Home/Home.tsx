@@ -29,6 +29,7 @@ import { HelpfulCreaty } from "./HelpfulCreaty/HelpfulCreaty"
 import { HowItWorks } from "./HowItWorks/HowItWorks"
 import { MailingSubscribe } from "./MailingSubscribe/MailingSubscribe"
 import { QAndA } from "./QAndA/QAndA"
+import { TagsLine } from "./TagsLine/TagsLine"
 
 const CN = "home-view"
 const { getElement } = bem(CN)
@@ -59,7 +60,7 @@ export function Home() {
 
           <Search />
 
-          {/* {data?.tags && <MentorSearchTags tags={data.tags} />} */}
+          {data?.tags && <TagsLine tags={data.tags} />}
 
           {data == null && <LoaderCover white />}
         </div>
