@@ -13,8 +13,6 @@ interface ButtonLinkProps extends ButtonBaseProps {
   disabled?: boolean
   replace?: boolean
   onClick?: MouseEventHandler<HTMLAnchorElement>
-
-  dataAttrs?: Record<string, string>
 }
 
 const CN = "button"
@@ -38,21 +36,10 @@ export function SharedButtonLink(props: ButtonLinkProps) {
       to={props.disabled ? location : props.to}
       onClick={props.onClick}
       end={props.end}
-      {...props.dataAttrs}
     >
-      {props.iconLeft && (
-        <div className={getElement("icon")} {...props.dataAttrs}>
-          {props.iconLeft}
-        </div>
-      )}
-      <div className={getElement("text")} {...props.dataAttrs}>
-        {props.children}
-      </div>
-      {props.iconRight && (
-        <div className={getElement("icon")} {...props.dataAttrs}>
-          {props.iconRight}
-        </div>
-      )}
+      {props.iconLeft && <div className={getElement("icon")}>{props.iconLeft}</div>}
+      <div className={getElement("text")}>{props.children}</div>
+      {props.iconRight && <div className={getElement("icon")}>{props.iconRight}</div>}
     </NavLink>
   )
 }

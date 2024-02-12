@@ -1,4 +1,4 @@
-  @import "/src/app/scss/bundle.scss";
+@import "/src/app/scss/bundle.scss";
 
 .topic-tag {
   flex-shrink: 0;
@@ -20,7 +20,7 @@
     opacity: 0.7;
   }
 
-  &:not(&--no-hash)::before {
+  &:not(.no-hash)::before {
     content: "#";
     color: $color-gray-50;
   }

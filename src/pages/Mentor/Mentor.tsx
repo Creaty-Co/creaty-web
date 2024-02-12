@@ -1,6 +1,6 @@
 import "./Mentor.scss"
 
-import { ITag } from "@components/Tag/Tag.types"
+import { Tag } from "@components/Tag/Tag"
 import { QAndA } from "@pages/Home/QAndA/QAndA"
 import { useScrollToTop } from "@shared/hooks/useScrollToTop"
 import { Icon } from "@shared/ui/Icon/Icon"
@@ -8,7 +8,7 @@ import { LoaderCover } from "@shared/ui/LoaderCover/LoaderCover"
 import { bem, getEmojiPNG } from "@shared/utils/common"
 import { useGetMentorBySlugQuery } from "@store/mentor/mentor.api"
 import { MentorPackageType } from "@store/mentor/mentor.types"
-import { Button, Tag } from "antd"
+import { Button } from "antd"
 import cn from "classnames"
 import { useTranslation } from "react-i18next"
 import { useParams } from "react-router"
@@ -110,8 +110,8 @@ export function Mentor() {
 
         <UserSection type="1">
           <div className="user-section__tags">
-            {user.tags.map((tag: ITag) => (
-              <Tag key={tag.id}>{tag.title}</Tag>
+            {user.tags.map(tag => (
+              <Tag key={tag.id} {...tag} />
             ))}
           </div>
         </UserSection>

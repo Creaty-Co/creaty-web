@@ -1,7 +1,7 @@
 import "./MentorCards.scss"
 
 import { MentorCard } from "@components/MentorCard/MentorCard"
-import { ITag } from "@components/Tag/Tag.types"
+import { ITag } from "@components/Tag/Tag"
 import { SharedButton } from "@shared/ui/buttons/SharedButton"
 import { Icon } from "@shared/ui/Icon/Icon"
 import { LoaderCover } from "@shared/ui/LoaderCover/LoaderCover"

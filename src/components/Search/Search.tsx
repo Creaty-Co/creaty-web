@@ -23,14 +23,10 @@ export function Search({ fullWidth }: { fullWidth?: boolean }) {
   const [open, setOpen] = useState(false)
   const navigate = useNavigate()
 
-  const handleChange = (values: any, options: any) => {
+  const handleChange = (values: any) => {
     const value = values?.slice(-1)?.[0]
-    const option = options?.slice(-1)?.[0]
     const newQuerryParams = new URLSearchParams()
-    if (values.length > 0) {
-      newQuerryParams.set("tag_type", option.tags ? "category" : "tag")
-      newQuerryParams.set("tag_shortcut", value)
-    }
+    if (values.length > 0) newQuerryParams.set("tag_shortcut", value)
     setSearchParams(newQuerryParams)
     setOpen(false)
     if (values.length === 0) return

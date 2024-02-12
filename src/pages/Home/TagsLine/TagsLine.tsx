@@ -1,7 +1,6 @@
 import "./TagsLine.scss"
 
-import { Tag } from "@components/Tag/Tag"
-import { ITag } from "@components/Tag/Tag.types"
+import { ITag, Tag } from "@components/Tag/Tag"
 import { bem } from "@shared/utils/common"
 import cn from "classnames"
 import { useEffect, useRef, useState } from "react"
@@ -43,8 +42,8 @@ export function TagsLine({ tags }: ITagsLineProps) {
   return (
     <div className={getElement("wrapper")} style={{ "--inner-width": width }}>
       <div className={getElement("inner-tags")} ref={innerRef}>
-        {minFill(tags, 20).map((tag, index) => (
-          <Tag key={index}>{tag}</Tag>
+        {minFill(tags, 20).map(tag => (
+          <Tag key={tag.id} {...tag} />
         ))}
       </div>
 

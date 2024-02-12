@@ -1,6 +1,5 @@
 import "./DynamicPrimaryInfo.scss"
 
-import { ITag } from "@components/Tag/Tag.types"
 import { bem } from "@shared/utils/common"
 import { useAppSelector } from "@store/store"
 import { categoriesS, tagsS } from "@store/tags/tags.slice"
@@ -67,7 +66,7 @@ export function DynamicPrimaryInfo(props: IDynamicPrimaryInfo) {
       if (tags?.length === 0 && categories?.length === 0) return
       if (props.urlShortcut) {
         const category = categories?.find((category: ICategory) => category.shortcut === props.urlShortcut)
-        const tag = tags?.find((tag: ITag) => tag.shortcut === props.urlShortcut)
+        const tag = tags?.find(tag => tag.shortcut === props.urlShortcut)
         const heading = category?.title || tag?.title
 
         if (heading) {
