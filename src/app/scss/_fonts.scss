@@ -1,21 +1,3 @@
-/*
-$font_size_dell-hd-screen: 14px;
-$font_size_middle-phone-screen: 12px;
-
-$font_size_q-hd-screen: math.round(math.div($font_size_dell-hd-screen*$q-hd-screen, $dell-hd-screen));
-$font_size_high-hd-screen: math.round(math.div($font_size_dell-hd-screen*$high-hd-screen, $dell-hd-screen));
-$font_size_full-hd-screen: math.round(math.div($font_size_dell-hd-screen*$full-hd-screen, $dell-hd-screen));
-$font_size_mac-hd-screen: math.round(math.div($font_size_dell-hd-screen*$mac-hd-screen, $dell-hd-screen));
-$font_size_ready-hd-screen: math.round(math.div($font_size_dell-hd-screen*$ready-hd-screen, $dell-hd-screen));
-
-$font_size_big-tablet-screen: math.round(math.div($font_size_dell-hd-screen*$big-tablet-screen, $dell-hd-screen));
-$font_size_middle-tablet-screen: math.round(math.div($font_size_dell-hd-screen*$middle-tablet-screen, $dell-hd-screen));
-$font_size_small-tablet-screen: math.round(math.div($font_size_dell-hd-screen*$small-tablet-screen, $dell-hd-screen));
-
-$font_size_big-phone-screen: math.round(math.div($font_size_middle-phone-screen*$big-phone-screen, $middle-phone-screen));
-$font_size_small-phone-screen: math.round(math.div($font_size_middle-phone-screen*$small-phone-screen, $middle-phone-screen));
-*/
-
 @mixin FontFamily($family: "Google Sans") {
     font-family: $family;
 }

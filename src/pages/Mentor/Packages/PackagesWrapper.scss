@@ -1,7 +1,7 @@
 @import "/src/app/scss/bundle.scss";
 
 .book-row {
-  @include for-size(small-tablet-screen) {
+  @include for-size(landscape-tablets) {
     display: flex !important;
     flex-direction: column;
 
@@ -40,7 +40,7 @@
     flex-wrap: wrap;
   }
 
-  @include for-size(small-tablet-screen) {
+  @include for-size(landscape-tablets) {
     &__button {
       grid-row: 3;
       grid-column: 1/3;

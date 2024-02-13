@@ -6,7 +6,7 @@ $ant-select-padding: 0 32px 0 16px !important;
   &__wrapper {
     display: grid;
     justify-self: center;
-    grid-template: 56px / 564px 180px;
+    grid-template: 56px / minmax(250px, 570px) 180px;
     @include gap(12px);
     padding: 32px;
     border-radius: 50px;
@@ -16,6 +16,11 @@ $ant-select-padding: 0 32px 0 16px !important;
     &--fullWidth {
       grid-template: 56px / 1fr 180px;
       width: 100%;
+    }
+
+    @include for-size(phone-horizontal) {
+      grid-template-columns: 1fr;
+      justify-self: auto;
     }
   }
 

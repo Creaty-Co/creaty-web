@@ -108,8 +108,9 @@ $hd-screen: 1290px;
 
 $big-tablet-screen: 1030px;
 $middle-tablet-screen: 850px; 
-$small-tablet-screen: 780px; 
+$landscape-tablets: 780px; 
 
+$phone-horizontal: 600px; 
 $big-phone-screen: 415px; 
 $middle-phone-screen: 376px; 
 $small-phone-screen: 321px; 
@@ -152,8 +153,14 @@ $small-phone-screen: 321px;
 		}
 	}
 
-	@else if $size == small-tablet-screen {
-		@media screen and (max-width: $small-tablet-screen) {
+	@else if $size == landscape-tablets {
+		@media screen and (max-width: $landscape-tablets) {
+			@content;
+		}
+	}
+
+	@else if $size == phone-horizontal {
+		@media screen and (max-width: $phone-horizontal) {
 			@content;
 		}
 	}
