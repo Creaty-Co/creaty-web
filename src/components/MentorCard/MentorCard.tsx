@@ -84,7 +84,7 @@ export function MentorCard({
 
       <button className={`${CNButton} ${hovered ? "hover" : ""}`} onClick={handleClick}>
         <div className={getElementButton("text")}>
-          <em>{(+price).toFixed()}</em> / 60min.
+          <em>${(+price).toFixed()}</em> / 60min.
         </div>
 
         <div className={getElementButton("hover-text")}>{t("components.mentorCard.seeProfile")}</div>

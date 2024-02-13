@@ -60,7 +60,7 @@ export function Mentor() {
             </div>
 
             <div className="mentor-card__price">
-              <em>{(+user.price).toFixed()}</em> / 60min.
+              <em>${(+user.price).toFixed()}</em> / 60min.
             </div>
 
             {user.packages.length > 0 && (
