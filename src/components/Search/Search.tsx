@@ -25,6 +25,10 @@ export function Search({ fullWidth }: { fullWidth?: boolean }) {
   const [open, setOpen] = useState(false)
   const navigate = useNavigate()
 
+  const handleClick = () => {
+    navigate({ pathname: "/mentors", search: createSearchParams(searchParams).toString() })
+  }
+
   const handleChange = (values: any) => {
     const value = values?.slice(-1)?.[0]
     const newQuerryParams = new URLSearchParams()
@@ -84,7 +88,11 @@ export function Search({ fullWidth }: { fullWidth?: boolean }) {
         tagRender={TagRender}
       />
 
-      <Button className={cn(getElement("button"), "button button--violet button--big button__text")} type="primary">
+      <Button
+        className={cn(getElement("button"), "button button--violet button--big button__text")}
+        type="primary"
+        onClick={handleClick}
+      >
         {t("button")}
       </Button>
     </div>
