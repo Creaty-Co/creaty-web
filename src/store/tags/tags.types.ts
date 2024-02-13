@@ -4,10 +4,7 @@ export interface ITag {
   title: string
 }
 
-export interface ICategory {
-  id: number
-  shortcut: string
-  title: string
+export interface ICategory extends ITag {
   icon: string
   tags: ITag[]
 }

@@ -10,6 +10,8 @@ import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { createSearchParams, useNavigate, useSearchParams } from "react-router-dom"
 
+import { TagRender } from "./TagRender"
+
 const CN = "search"
 const { getElement, getModifier } = bem(CN)
 
@@ -69,18 +71,17 @@ export function Search({ fullWidth }: { fullWidth?: boolean }) {
         allowClear
         mode="multiple"
         dropdownAlign={{ offset: [0, 12] }}
-        optionRender={option => {
-          return (
-            <span className={option.data.tags ? getElement("option-category") : getElement("option-tag")}>
-              {option.data.tags ? (
-                <img src={option.data.icon} className={getElement("option-category-icon")} />
-              ) : (
-                <span className={getElement("option-tag-hash")}>#</span>
-              )}
-              {option.label}
-            </span>
-          )
-        }}
+        optionRender={option => (
+          <span className={option.data.tags ? getElement("option-category") : getElement("option-tag")}>
+            {option.data.tags ? (
+              <img src={option.data.icon} className={getElement("option-category-icon")} />
+            ) : (
+              <span className={getElement("option-tag-hash")}>#</span>
+            )}
+            {option.label}
+          </span>
+        )}
+        tagRender={TagRender}
       />
 
       <Button className={cn(getElement("button"), "button button--violet button--big button__text")} type="primary">
