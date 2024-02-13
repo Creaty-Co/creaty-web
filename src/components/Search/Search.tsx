@@ -26,7 +26,7 @@ export function Search({ fullWidth }: { fullWidth?: boolean }) {
   const handleChange = (values: any) => {
     const value = values?.slice(-1)?.[0]
     const newQuerryParams = new URLSearchParams()
-    if (values.length > 0) newQuerryParams.set("tag_shortcut", value)
+    if (values.length > 0) newQuerryParams.set("shortcut", value)
     setSearchParams(newQuerryParams)
     setOpen(false)
     if (values.length === 0) return
@@ -34,7 +34,7 @@ export function Search({ fullWidth }: { fullWidth?: boolean }) {
   }
 
   const getValueFromUrl = (): string[] | undefined => {
-    const urlShortcut = searchParams.get("tag_shortcut")
+    const urlShortcut = searchParams.get("shortcut")
     if (urlShortcut) return [urlShortcut]
   }
 

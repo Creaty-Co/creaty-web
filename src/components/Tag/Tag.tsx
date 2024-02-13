@@ -19,7 +19,7 @@ export function Tag({ shortcut, title, noHash }: Partial<ITagProps>) {
     if (!shortcut || noHash) return
     e.stopPropagation()
     const newQuerryParams = new URLSearchParams()
-    newQuerryParams.set("tag_shortcut", shortcut)
+    newQuerryParams.set("shortcut", shortcut)
     navigate({ pathname: "/mentors", search: createSearchParams(newQuerryParams).toString() })
   }
 

@@ -24,7 +24,7 @@ export function Mentors() {
 
   const { t } = useTranslation("translation", { keyPrefix: "views.mentors" })
 
-  const urlShortcut = searchParams.get("tag_shortcut")
+  const urlShortcut = searchParams.get("shortcut")
 
   const category = categories?.find((category: ICategory) => category.shortcut === urlShortcut)
   const tag = tags?.find(tag => tag.shortcut === urlShortcut)
