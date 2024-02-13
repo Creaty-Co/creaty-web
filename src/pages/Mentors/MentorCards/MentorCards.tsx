@@ -1,14 +1,13 @@
 import "./MentorCards.scss"
 
 import { MentorCard } from "@components/MentorCard/MentorCard"
-import { ITag } from "@components/Tag/Tag"
 import { SharedButton } from "@shared/ui/buttons/SharedButton"
 import { Icon } from "@shared/ui/Icon/Icon"
 import { LoaderCover } from "@shared/ui/LoaderCover/LoaderCover"
 import { bem } from "@shared/utils/common"
 import { useGetMentorsQuery } from "@store/mentor/mentor.api"
-import { MentorType } from "@store/mentor/mentor.types"
-import { ICategory } from "@store/tags/tags.types"
+import { IMentor } from "@store/mentor/mentor.types"
+import { ICategory, ITag } from "@store/tags/tags.types"
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 
@@ -20,26 +19,26 @@ export interface IMentorCards {
 const CN = "mentor-cards"
 const { getElement, getModifier } = bem(CN)
 
-export function MentorCards(props: IMentorCards) {
+export function MentorCards({ tag, category }: IMentorCards) {
   const { t } = useTranslation("translation", { keyPrefix: "other.pagination" })
-  const tagSet = props.tag ? [props.tag.id] : props.category?.tags.map(tag => tag.id) || []
+  const tagSet = tag ? [tag.id] : category?.tags.map(tag => tag.id) || []
 
   const [page, setPage] = useState(1)
   const [pageSize] = useState(15)
-  const [results, setResults] = useState<MentorType[]>([])
+  const [cards, setCards] = useState<IMentor[]>([])
 
   const { data, isLoading } = useGetMentorsQuery({ page, page_size: pageSize, tag_set__in: tagSet })
 
   useEffect(() => {
     setPage(1)
-    setResults(data?.results || [])
-  }, [props.category, props.tag])
+    setCards(data?.results || [])
+  }, [category, tag])
 
   useEffect(() => {
     if (isLoading || !data) return
-    if (page > 1) return setResults(results => [...new Set([...results, ...data.results])])
+    if (page > 1) return setCards(results => [...new Set([...results, ...data.results])])
 
-    setResults(data.results)
+    setCards(data.results)
   }, [page, isLoading, data])
 
   const lastPageSize = (data?.count || 0) % pageSize
@@ -47,7 +46,7 @@ export function MentorCards(props: IMentorCards) {
   return (
     <div className={CN}>
       <div className={getElement("container")}>
-        {results.map(mentor => (
+        {cards.map(mentor => (
           <MentorCard {...mentor} key={mentor.id} className="mentors-card-wrapper" clickable />
         ))}
       </div>

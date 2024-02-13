@@ -1,17 +1,12 @@
 import "./Tag.scss"
 
 import { bem } from "@shared/utils/common"
+import { ITag } from "@store/tags/tags.types"
 import cn from "classnames"
 import { createSearchParams, useNavigate } from "react-router-dom"
 
 const CN = "topic-tag"
 const { getElement } = bem(CN)
-
-export interface ITag {
-  id: number
-  shortcut: string
-  title: string
-}
 
 interface ITagProps extends ITag {
   noHash?: boolean

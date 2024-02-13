@@ -1,7 +1,7 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { RootState } from "@store/store"
 
-import { IMentorState, MentorType } from "./mentor.types"
+import { IMentor, IMentorState } from "./mentor.types"
 
 const initialState: IMentorState = {
   list: [],
@@ -12,11 +12,11 @@ export const mentorSlice = createSlice({
   name: "mentor",
 
   reducers: {
-    mentorUpdate: (state, action: PayloadAction<MentorType[]>) => {
+    mentorUpdate: (state, action: PayloadAction<IMentor[]>) => {
       state.list = action.payload
     },
 
-    mentorsPush: (state, action: PayloadAction<MentorType[]>) => {
+    mentorsPush: (state, action: PayloadAction<IMentor[]>) => {
       state.list = [...state.list, ...action.payload]
     },
   },

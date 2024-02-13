@@ -2,7 +2,7 @@ import "./MentorCard.scss"
 
 import { Icon } from "@shared/ui/Icon/Icon"
 import { bem, getEmojiPNG } from "@shared/utils/common"
-import { MentorType } from "@store/mentor/mentor.types"
+import { IMentor } from "@store/mentor/mentor.types"
 import cn from "classnames"
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
@@ -16,7 +16,7 @@ const { getElement } = bem(CN)
 const CNButton = CN + "-button"
 const { getElement: getElementButton } = bem(CNButton)
 
-interface MentorCard extends MentorType {
+interface MentorCard extends IMentor {
   className?: string
   clickable?: boolean
 }

@@ -1,4 +1,4 @@
-import { ITag } from "@components/Tag/Tag"
+import { ITag } from "@store/tags/tags.types"
 
 export interface MentorPage {
   id: number | null
@@ -7,10 +7,10 @@ export interface MentorPage {
 }
 
 export interface IMentorState {
-  list: MentorType[]
+  list: IMentor[]
 }
 
-export interface MentorType {
+export interface IMentor {
   id: number
   slug: string
   avatar: string
@@ -40,7 +40,7 @@ export interface MentorDetailedLanguages {
   name_native: string
 }
 
-export interface MentorDetailedType extends MentorType {
+export interface IMentorDetailed extends IMentor {
   info: {
     trial_meeting: number | null
     resume: string
@@ -49,26 +49,4 @@ export interface MentorDetailedType extends MentorType {
     languages: MentorDetailedLanguages[]
     city: string
   }
-}
-
-export interface MentorPatchType {
-  info: {
-    trial_meeting: number | null
-    resume: string
-    what_help: string
-    experience: string
-    languages: number[]
-    city: string
-  }
-  avatar: string
-  company: string
-  profession: string
-  first_name: string
-  last_name: string
-  slug: string
-  price: string
-  price_currency: string
-  tag_set: number[]
-  country: number
-  packages: Omit<MentorPackageType, "id">[]
 }

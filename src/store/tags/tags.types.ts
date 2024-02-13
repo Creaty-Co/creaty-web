@@ -1,4 +1,8 @@
-import { ITag } from "@components/Tag/Tag"
+export interface ITag {
+  id: number
+  shortcut: string
+  title: string
+}
 
 export interface ICategory {
   id: number

@@ -8,7 +8,7 @@ import { SharedButtonIcon } from "@shared/ui/buttons/SharedButtonIcon"
 import { SharedButtonLink } from "@shared/ui/buttons/SharedButtonLink"
 import { bem } from "@shared/utils/common"
 import { EFormIds } from "@store/forms/form.types"
-import { MentorType } from "@store/mentor/mentor.types"
+import { IMentor } from "@store/mentor/mentor.types"
 import { openModal } from "@store/modalContainer.slice"
 import { useAppDispatch } from "@store/store"
 import cn from "classnames"
@@ -19,7 +19,7 @@ import Slider from "react-slick"
 import { MentorCard } from "../MentorCard/MentorCard"
 
 interface IMentorsSlider {
-  mentors: MentorType[]
+  mentors: IMentor[]
 }
 
 const CN = "mentors-slider"

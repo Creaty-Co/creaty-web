@@ -3,7 +3,7 @@ import { PaginationQueryType, PaginationType } from "@shared/types/types"
 import { baseQueryWithReauth } from "@shared/utils/url"
 
 import { mentorsPush } from "./mentor.slice"
-import { MentorDetailedType, MentorType } from "./mentor.types"
+import { IMentor, IMentorDetailed } from "./mentor.types"
 
 export const mentorApi = createApi({
   reducerPath: "mentorApi",
@@ -11,7 +11,7 @@ export const mentorApi = createApi({
   baseQuery: baseQueryWithReauth(false),
 
   endpoints: builder => ({
-    getMentors: builder.query<PaginationType<MentorType>, PaginationQueryType>({
+    getMentors: builder.query<PaginationType<IMentor>, PaginationQueryType>({
       query: ({ page, page_size, tag_set__in }) =>
         "/mentors/?" +
         new URLSearchParams({
@@ -30,7 +30,7 @@ export const mentorApi = createApi({
       },
     }),
 
-    getMentorBySlug: builder.query<MentorDetailedType, string>({
+    getMentorBySlug: builder.query<IMentorDetailed, string>({
       query: slug => `/mentors/${slug}`,
     }),
 

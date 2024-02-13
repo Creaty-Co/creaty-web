@@ -1,10 +1,10 @@
-import { ITag } from "@components/Tag/Tag"
-import { MentorType } from "@store/mentor/mentor.types"
+import { IMentor } from "@store/mentor/mentor.types"
+import { ITag } from "@store/tags/tags.types"
 
 export interface PageType {
   id: number
   tags: ITag[]
-  mentors: MentorType[]
+  mentors: IMentor[]
 }
 
 export interface PagePersonalType {
