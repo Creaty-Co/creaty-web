@@ -75,7 +75,7 @@ export function MentorCard({
 
         <div className={getElement("tags")}>
           {tags.slice(0, 2).map(tag => (
-            <Tag key={tag.id + tag.shortcut} {...tag} />
+            <Tag key={tag.id} {...tag} />
           ))}
 
           {tags.length > 3 && <Tag noHash title="•••" />}
