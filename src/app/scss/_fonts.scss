@@ -1,169 +1,239 @@
 @mixin FontFamily($family: "Google Sans") {
-    font-family: $family;
+  font-family: $family;
 }
 
 @mixin FontSize($size, $height: $size) {
-    line-height: $height;
-    font-size: $size;
+  line-height: $height;
+  font-size: $size;
 }
 
 @mixin FontDecoration($weight: 400, $style: normal) {
-    font-weight: $weight;
-    font-style: $style;
+  font-weight: $weight;
+  font-style: $style;
 }
 
 /* Real fonts */
 // H1
 @mixin H1($size: 72px, $height: null, $weight: 400, $style: normal) {
-    @if $height == null { $height: $size }
-    @include FontFamily;
-    @include FontSize($size, $height);
-    @include FontDecoration($weight, $style);
+  @if $height == null {
+    $height: $size;
+  }
+  @include FontFamily;
+  @include FontSize($size, $height);
+  @include FontDecoration($weight, $style);
 }
-@mixin H1Bold($size: 72px, $height: null) { @include H1($size, $height, 700) }
+@mixin H1Bold($size: 72px, $height: null) {
+  @include H1($size, $height, 700);
+}
 
 // H2
 @mixin H2($size: 56px, $height: null, $weight: 400, $style: normal) {
-    @if $height == null {
-        $height: $size * 1.14;
-    }
+  @if $height == null {
+    $height: $size * 1.14;
+  }
 
-    @include FontFamily;
-    @include FontSize($size, $height);
-    @include FontDecoration($weight, $style);
+  @include FontFamily;
+  @include FontSize($size, $height);
+  @include FontDecoration($weight, $style);
 }
-@mixin H2Bold($size: 56px, $height: null) { @include H2($size, $height, 700) }
+@mixin H2Bold($size: 56px, $height: null) {
+  @include H2($size, $height, 700);
+}
 
 // H3
 @mixin H3($size: 32px, $height: null, $weight: 400, $style: normal) {
-    @if $height == null {
-        $height: $size * 1.25;
-    }
-    @include FontFamily;
-    @include FontSize($size, $height);
-    @include FontDecoration($weight, $style);
+  @if $height == null {
+    $height: $size * 1.25;
+  }
+  @include FontFamily;
+  @include FontSize($size, $height);
+  @include FontDecoration($weight, $style);
 }
-@mixin H3Bold($size: 32px, $height: null) { @include H3($size, $height, 700) } 
-@mixin H3Regular($size: 32px, $height: null) { @include H3($size, $height, 400) } 
+@mixin H3Bold($size: 32px, $height: null) {
+  @include H3($size, $height, 700);
+}
+@mixin H3Regular($size: 32px, $height: null) {
+  @include H3($size, $height, 400);
+}
 
 // H4
 @mixin H4($size: 24px, $height: null, $weight: 400, $style: normal) {
-    @if $height == null {
-        $height: $size * 1.33;
-    }
-    @include FontFamily;
-    @include FontSize($size, $height);
-    @include FontDecoration($weight, $style);
+  @if $height == null {
+    $height: $size * 1.33;
+  }
+  @include FontFamily;
+  @include FontSize($size, $height);
+  @include FontDecoration($weight, $style);
 }
-@mixin H4Bold($size: 24px, $height: null) { @include H4($size, $height, 700) }
-@mixin H4Medium($size: 24px, $height: null) { @include H4($size, $height, 500) }
-@mixin H4Regular($size: 24px, $height: null) { @include H4($size, $height, 400) }
+@mixin H4Bold($size: 24px, $height: null) {
+  @include H4($size, $height, 700);
+}
+@mixin H4Medium($size: 24px, $height: null) {
+  @include H4($size, $height, 500);
+}
+@mixin H4Regular($size: 24px, $height: null) {
+  @include H4($size, $height, 400);
+}
 
 // Text
 @mixin Text($size: 18px, $height: null, $weight: 400, $style: normal) {
-    @if $height == null {
-        $height: $size * 1.33;
-    }
-    @include FontFamily;
-    @include FontSize($size, $height);
-    @include FontDecoration($weight, $style);
+  @if $height == null {
+    $height: $size * 1.33;
+  }
+  @include FontFamily;
+  @include FontSize($size, $height);
+  @include FontDecoration($weight, $style);
 }
-@mixin TextBold($size: 18px, $height: null) { @include Text($size, $height, 700) }
-@mixin TextMedium($size: 18px, $height: null) { @include Text($size, $height, 500) }
-@mixin TextRegular($size: 18px, $height: null) { @include Text($size, $height, 400) }
+@mixin TextBold($size: 18px, $height: null) {
+  @include Text($size, $height, 700);
+}
+@mixin TextMedium($size: 18px, $height: null) {
+  @include Text($size, $height, 500);
+}
+@mixin TextRegular($size: 18px, $height: null) {
+  @include Text($size, $height, 400);
+}
 
 // Text 2
 @mixin Text2($size: 16px, $height: null, $weight: 400, $style: normal) {
-    @if $height == null {
-        $height: $size * 1.5;
-    }
-    @include FontFamily;
-    @include FontSize($size, $height);
-    @include FontDecoration($weight, $style);
+  @if $height == null {
+    $height: $size * 1.5;
+  }
+  @include FontFamily;
+  @include FontSize($size, $height);
+  @include FontDecoration($weight, $style);
 }
-@mixin Text2Bold($size: 16px, $height: null) { @include Text2($size, $height, 700) }
-@mixin Text2Medium($size: 16px, $height: null) { @include Text2($size, $height, 500) }
-@mixin Text2Regular($size: 16px, $height: null) { @include Text2($size, $height, 400) }
+@mixin Text2Bold($size: 16px, $height: null) {
+  @include Text2($size, $height, 700);
+}
+@mixin Text2Medium($size: 16px, $height: null) {
+  @include Text2($size, $height, 500);
+}
+@mixin Text2Regular($size: 16px, $height: null) {
+  @include Text2($size, $height, 400);
+}
 
 // Tags
 @mixin Tags($size: 14px, $height: null, $weight: 400, $style: normal) {
-    @if $height ==  null {
-        $height: $size * 1.14;
-    }
-    @include FontFamily;
-    @include FontSize($size, $height);
-    @include FontDecoration($weight, $style);
+  @if $height == null {
+    $height: $size * 1.14;
+  }
+  @include FontFamily;
+  @include FontSize($size, $height);
+  @include FontDecoration($weight, $style);
 
-    letter-spacing: 0.02em;
+  letter-spacing: 0.02em;
 }
-@mixin TagsRegular($size: 14px, $height: null) { @include Tags($size, $height, 400) }
-@mixin TagsBold($size: 14px, $height: null) { @include Tags($size, $height, 700) }
+@mixin TagsRegular($size: 14px, $height: null) {
+  @include Tags($size, $height, 400);
+}
+@mixin TagsBold($size: 14px, $height: null) {
+  @include Tags($size, $height, 700);
+}
 
 // Caption
 @mixin Caption($size: 12px, $height: null, $weight: 400, $style: normal) {
-    @if $height == null {
-        $height: $size * 1.33;
-    }
-    @include FontFamily;
-    @include FontSize($size, $height);
-    @include FontDecoration($weight, $style);
-    
-    letter-spacing: 0.02em;
+  @if $height == null {
+    $height: $size * 1.33;
+  }
+  @include FontFamily;
+  @include FontSize($size, $height);
+  @include FontDecoration($weight, $style);
+
+  letter-spacing: 0.02em;
 }
-@mixin CaptionRegular($size: 12px, $height: null) { @include Caption($size, $height, 400) }
+@mixin CaptionRegular($size: 12px, $height: null) {
+  @include Caption($size, $height, 400);
+}
 
 .font {
-    &--h1 {
-        @include H1();
-        &-bold { @include H1Bold(); }
+  &--h1 {
+    @include H1();
+    &-bold {
+      @include H1Bold();
+    }
+  }
+
+  &--h2 {
+    @include H2();
+    &-bold {
+      @include H2Bold();
+    }
+  }
+
+  &--h3 {
+    @include H3();
+    &-regular {
+      @include H3Regular();
+    }
+    &-bold {
+      @include H3Bold();
     }
 
-    &--h2 {
-        @include H2();
-        &-bold { @include H2Bold(); }
+    @include for-size(big-phone) {
+      @include H3(24px);
+      &-regular {
+        @include H3Regular(24px);
+      }
+      &-bold {
+        @include H3Bold(24px);
+      }
     }
+  }
 
-    &--h3 {
-        @include H3();
-        &-regular { @include H3Regular(); }
-        &-bold { @include H3Bold(); }
-
-        @include for-size(big-phone-screen) {
-            @include H3(24px);
-            &-regular { @include H3Regular(24px); }
-            &-bold { @include H3Bold(24px); }
-        }
+  &--h4 {
+    @include H4();
+    &-bold {
+      @include H4Bold();
     }
-
-    &--h4 {
-        @include H4();
-        &-bold { @include H4Bold(); }
-        &-medium { @include H4Medium(); }
-        &-regular { @include H4Regular(); }
+    &-medium {
+      @include H4Medium();
     }
-
-    &--text {
-        @include Text();
-        &-bold { @include TextBold(); }
-        &-medium { @include TextMedium(); }
-        &-regular { @include TextRegular(); }
+    &-regular {
+      @include H4Regular();
     }
+  }
 
-    &--text2 {
-        @include Text2();
-        &-bold { @include Text2Bold(); }
-        &-medium { @include Text2Medium(); }
-        &-regular { @include Text2Regular(); }
+  &--text {
+    @include Text();
+    &-bold {
+      @include TextBold();
     }
+    &-medium {
+      @include TextMedium();
+    }
+    &-regular {
+      @include TextRegular();
+    }
+  }
 
-    &--tags {
-        @include Tags();
-        &-regular { @include TagsRegular(); }
-        &-bold { @include TagsBold(); }
+  &--text2 {
+    @include Text2();
+    &-bold {
+      @include Text2Bold();
     }
+    &-medium {
+      @include Text2Medium();
+    }
+    &-regular {
+      @include Text2Regular();
+    }
+  }
 
-    &--caption {
-        @include Caption();
-        &-regular { @include CaptionRegular(); }
+  &--tags {
+    @include Tags();
+    &-regular {
+      @include TagsRegular();
     }
+    &-bold {
+      @include TagsBold();
+    }
+  }
+
+  &--caption {
+    @include Caption();
+    &-regular {
+      @include CaptionRegular();
+    }
+  }
 }

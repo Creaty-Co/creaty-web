@@ -3,7 +3,7 @@
 .subscribe {
   display: grid;
   @include row-gap(16px);
-  @include for-size(big-phone-screen) {
+  @include for-size(big-phone) {
     @include row-gap(24px);
   }
 }
@@ -13,7 +13,7 @@
   align-items: flex-end;
   @include gap(16px);
 
-  @include for-size(big-phone-screen) {
+  @include for-size(big-phone) {
     flex-direction: column;
     align-items: stretch;
     @include row-gap(16px);
@@ -78,7 +78,7 @@
 .subscribe__text {
   color: $color-gray-80;
   @include Caption;
-  @include for-size(big-phone-screen) {
+  @include for-size(big-phone) {
     text-align: center;
   }
 }

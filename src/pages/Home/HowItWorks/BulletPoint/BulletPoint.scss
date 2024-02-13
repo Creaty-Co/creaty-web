@@ -39,7 +39,7 @@
 
 .bullet-point__title {
   @include H4Medium;
-  @include for-size(big-phone-screen) {
+  @include for-size(big-phone) {
     @include H4Medium(20px, 24px);
   }
 }

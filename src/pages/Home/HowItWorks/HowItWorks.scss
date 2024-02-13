@@ -4,14 +4,14 @@
   display: grid;
   @include row-gap(56px);
 
-  @include for-size(big-phone-screen) {
+  @include for-size(big-phone) {
     @include row-gap(32px);
   }
 }
 
 .how-it-works__title {
   @include H2Bold;
-  @include for-size(big-phone-screen) {
+  @include for-size(big-phone) {
     @include H2Bold(32px);
   }
 }
@@ -21,7 +21,7 @@
   flex-wrap: wrap;
   @include gap(74px);
 
-  @include for-size(big-phone-screen) {
+  @include for-size(big-phone) {
     display: grid;
     @include gap(32px);
   }
@@ -29,7 +29,7 @@
 
 .how-it-works__help {
   padding-top: 24px;
-  @include for-size(big-phone-screen) {
+  @include for-size(big-phone) {
     padding-top: 28px;
   }
 }
@@ -40,10 +40,10 @@
 
 .how-it-works__free {
   @include gap(150px);
-  @include for-size(big-phone-screen) {
+  @include for-size(big-phone) {
     @include gap(32px);
   }
-  @include for-size(big-tablet-screen) {
+  @include for-size(big-tablet) {
     @include gap(50px);
   }
 }

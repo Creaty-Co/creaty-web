@@ -5,7 +5,7 @@
 
   @include H2Bold;
 
-  @include for-size(big-phone-screen) {
+  @include for-size(big-phone) {
     @include H2Bold(32px);
   }
 }
@@ -26,7 +26,7 @@
   box-shadow: 0px 2px 8px rgba($color-green, 0.1),
     0px 8px 30px rgba($color-green, 0.2), 0px 8px 200px rgba($color-green, 0.4);
 
-  @include for-size(big-phone-screen) {
+  @include for-size(big-phone) {
     grid-template: auto auto / 1fr;
     grid-template-areas:
       "images"
@@ -35,7 +35,7 @@
 }
 
 .become-mentor__images {
-  @include for-size(big-phone-screen) {
+  @include for-size(big-phone) {
     grid-area: images;
     height: 133vw;
   }
@@ -58,7 +58,7 @@
       width: 100%;
 
       border-radius: 50px;
-      @include for-size(big-phone-screen) {
+      @include for-size(big-phone) {
         border-radius: 33px;
       }
     }
@@ -85,7 +85,7 @@
       & > img {
         transform: translate(0, 10%);
 
-        @include for-size(big-phone-screen) {
+        @include for-size(big-phone) {
           transform: translate(8px, 18%);
         }
       }
@@ -107,7 +107,7 @@
 
         transform: translate(-8px, -5.5%);
 
-        @include for-size(big-phone-screen) {
+        @include for-size(big-phone) {
           transform: translate(-8px, 0);
         }
       }
@@ -116,7 +116,7 @@
 }
 
 .become-mentor__container {
-  @include for-size(big-phone-screen) {
+  @include for-size(big-phone) {
     grid-area: container;
     padding: 24px 36px 36px;
   }
@@ -124,7 +124,7 @@
   display: grid;
 
   @include row-gap(56px);
-  @include for-size(big-phone-screen) {
+  @include for-size(big-phone) {
     @include row-gap(32px);
   }
 
@@ -134,7 +134,7 @@
 .become-mentor__info {
   display: grid;
   @include row-gap(24px);
-  @include for-size(big-phone-screen) {
+  @include for-size(big-phone) {
     @include row-gap(16px);
   }
 }
@@ -148,7 +148,7 @@
     list-style-type: disc;
   }
 
-  @include for-size(big-phone-screen) {
+  @include for-size(big-phone) {
     @include H4Regular(16px, 24px);
   }
 }

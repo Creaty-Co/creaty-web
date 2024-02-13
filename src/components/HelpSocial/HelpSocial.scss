@@ -3,7 +3,7 @@
 .help-social {
   display: flex;
   @include gap(20px);
-  @include for-size(big-phone-screen) {
+  @include for-size(big-phone) {
     @include gap(16px);
   }
 }
@@ -15,7 +15,7 @@
   @include Text(12px, 20px);
   text-align: right;
 
-  @include for-size(big-phone-screen) {
+  @include for-size(big-phone) {
     display: none;
   }
 }
@@ -25,7 +25,7 @@
   margin: 0 4px;
   background: rgba($color-white, 0.2);
 
-  @include for-size(big-phone-screen) {
+  @include for-size(big-phone) {
     display: none;
   }
 }

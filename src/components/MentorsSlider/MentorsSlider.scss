@@ -5,7 +5,7 @@
   flex-direction: column;
   gap: 40px;
 
-  @include for-size(big-phone-screen) {
+  @include for-size(big-phone) {
     gap: 32px;
   }
 
@@ -63,7 +63,7 @@
       @include TextRegular;
     }
 
-    @include for-size(big-phone-screen) {
+    @include for-size(big-phone) {
       width: 100%;
 
       display: grid;

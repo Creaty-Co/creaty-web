@@ -17,7 +17,7 @@
     pointer-events: none;
   }
 
-  @include for-size(big-phone-screen) {
+  @include for-size(big-phone) {
     @include gap(12px);
   }
 }

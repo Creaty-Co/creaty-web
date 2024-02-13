@@ -99,56 +99,82 @@ $tabletMaxWidth: 1000px;
 
 /* New mixins */
 
-$q-hd-screen: 3451px;
-$high-hd-screen: 2561px;
-$full-hd-screen: 1930px; 
-$dell-hd-screen: 1660px; 
-$mac-hd-screen: 1450px; 
-$hd-screen: 1290px;  
+// gap utility for backward compatibility (Safari) 
+@mixin gap($gap) {
+	@supports (gap: $gap) {
+		gap: $gap;
+	}
 
-$big-tablet-screen: 1030px;
-$middle-tablet-screen: 850px; 
+	@supports not (gap: $gap) {
+		&>*:not(:first-child) {
+			margin: $gap;
+		}
+	}
+}
+
+// row-gap utility for backward compatibility (Safari) 
+@mixin row-gap($gap) {
+	@supports (row-gap: $gap) {
+		row-gap: $gap;
+	}
+
+	@supports not (row-gap: $gap) {
+		&>*:not(:first-child) {
+			margin-left: $gap;
+		}
+	}
+}
+
+$q-hd: 3451px;
+$high-hd: 2561px;
+$full-hd: 1930px; 
+$dell-hd: 1660px; 
+$mac-hd: 1450px; 
+$hd: 1290px;  
+
+$big-tablet: 1030px;
+$middle-tablet: 850px; 
 $landscape-tablets: 780px; 
 
 $phone-horizontal: 600px; 
-$big-phone-screen: 415px; 
-$middle-phone-screen: 376px; 
-$small-phone-screen: 321px; 
+$big-phone: 415px; 
+$middle-phone: 376px; 
+$small-phone: 321px; 
 
 
 @mixin for-size($size) {
-	@if $size == full-hd-screen {
-		@media screen and (max-width: $full-hd-screen) {
+	@if $size == full-hd {
+		@media screen and (max-width: $full-hd) {
 			@content;
 		}
 	}
 
-	@else if $size == dell-hd-screen {
-		@media screen and (max-width: $dell-hd-screen) {
+	@else if $size == dell-hd {
+		@media screen and (max-width: $dell-hd) {
 			@content;
 		}
 	}
 
-	@else if $size == mac-hd-screen {
-		@media screen and (max-width: $mac-hd-screen) {
+	@else if $size == mac-hd {
+		@media screen and (max-width: $mac-hd) {
 			@content;
 		}
 	}
 
-	@else if $size == hd-screen {
-		@media screen and (max-width: $hd-screen) {
+	@else if $size == hd {
+		@media screen and (max-width: $hd) {
 			@content;
 		}
 	}
 
-	@else if $size == big-tablet-screen {
-		@media screen and (max-width: $big-tablet-screen) {
+	@else if $size == big-tablet {
+		@media screen and (max-width: $big-tablet) {
 			@content;
 		}
 	}
 
-	@else if $size == middle-tablet-screen {
-		@media screen and (max-width: $middle-tablet-screen) {
+	@else if $size == middle-tablet {
+		@media screen and (max-width: $middle-tablet) {
 			@content;
 		}
 	}
@@ -165,20 +191,20 @@ $small-phone-screen: 321px;
 		}
 	}
 
-	@else if $size == big-phone-screen {
-		@media screen and (max-width: $big-phone-screen) {
+	@else if $size == big-phone {
+		@media screen and (max-width: $big-phone) {
 			@content;
 		}
 	}
 
-	@else if $size == middle-phone-screen {
-		@media screen and (max-width: $middle-phone-screen) {
+	@else if $size == middle-phone {
+		@media screen and (max-width: $middle-phone) {
 			@content;
 		}
 	}
 
-	@else if $size == small-phone-screen {
-		@media screen and (max-width: $small-phone-screen) {
+	@else if $size == small-phone {
+		@media screen and (max-width: $small-phone) {
 			@content;
 		}
 	}

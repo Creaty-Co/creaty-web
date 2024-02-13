@@ -27,7 +27,7 @@
     }
   }
 
-  @include for-size(big-phone-screen) {
+  @include for-size(big-phone) {
     border-radius: 40px;
   }
 }
@@ -42,7 +42,7 @@
 
   cursor: pointer;
 
-  @include for-size(big-phone-screen) {
+  @include for-size(big-phone) {
     padding: 36px;
   }
 }
@@ -53,7 +53,7 @@
 
 .faq__title {
   @include H4Regular;
-  @include for-size(big-phone-screen) {
+  @include for-size(big-phone) {
     @include H4Regular(20px);
   }
 }
@@ -66,7 +66,7 @@
 
 .faq__inner {
   padding: 0 40px 40px 64px;
-  @include for-size(big-phone-screen) {
+  @include for-size(big-phone) {
     padding: 0 36px 36px;
   }
 }

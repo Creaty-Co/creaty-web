@@ -14,7 +14,7 @@
   background: rgba($color-black-main, 0.8);
   backdrop-filter: blur(50px);
 
-  @include for-size(big-phone-screen) {
+  @include for-size(big-phone) {
     padding: 8px 7.5vw 8px 5vw;
   }
 
@@ -34,7 +34,7 @@
       display: none;
     }
 
-    @include for-size(big-phone-screen) {
+    @include for-size(big-phone) {
       display: none;
 
       &--mobile {
@@ -114,7 +114,7 @@
     height: 32px;
     width: 3px;
 
-    @include for-size(big-phone-screen) {
+    @include for-size(big-phone) {
       display: none;
     }
   }
@@ -124,7 +124,7 @@
     flex-direction: row;
     @include gap(8px);
 
-    @include for-size(big-phone-screen) {
+    @include for-size(big-phone) {
       width: 100%;
       padding: 0 8px;
     }
@@ -132,7 +132,7 @@
 
   .login {
     color: $color-white;
-    @include for-size(big-phone-screen) {
+    @include for-size(big-phone) {
       width: 100%;
     }
   }
@@ -146,7 +146,7 @@
       @include Text2Medium;
     }
 
-    @include for-size(big-phone-screen) {
+    @include for-size(big-phone) {
       width: 100%;
     }
   }

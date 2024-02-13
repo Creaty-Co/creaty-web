@@ -42,7 +42,7 @@
     @include row-gap(20px);
     padding: 20px;
 
-    @include for-size(big-phone-screen) {
+    @include for-size(big-phone) {
       @include gap(20px);
       padding: 24px 16px 36px;
     }
@@ -54,7 +54,7 @@
     justify-content: center;
     @include H4Bold;
 
-    @include for-size(big-phone-screen) {
+    @include for-size(big-phone) {
       @include H4Bold(20px);
     }
   }
@@ -74,7 +74,7 @@
     color: $color-gray-80;
     @include TextRegular;
 
-    @include for-size(big-phone-screen) {
+    @include for-size(big-phone) {
       @include TextRegular(16px);
     }
 
@@ -82,7 +82,7 @@
       color: $color-black-main;
       @include TextMedium;
 
-      @include for-size(big-phone-screen) {
+      @include for-size(big-phone) {
         @include TextMedium(16px);
       }
     }
@@ -93,7 +93,7 @@
     flex-wrap: wrap;
     @include gap(8px);
 
-    @include for-size(big-phone-screen) {
+    @include for-size(big-phone) {
       @include gap(8px);
     }
   }
@@ -170,7 +170,8 @@
       pointer-events: none;
     }
 
-    &.hover, &:hover {
+    &.hover,
+    &:hover {
       background-color: $color-green;
 
       .mentor-card-button__text {

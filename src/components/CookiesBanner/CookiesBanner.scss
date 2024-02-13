@@ -51,7 +51,7 @@
     }
   }
 
-  @include for-size(big-phone-screen) {
+  @include for-size(big-phone) {
     left: 5vw;
     right: 5vw;
     bottom: 2.5vh;

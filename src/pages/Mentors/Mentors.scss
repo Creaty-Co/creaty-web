@@ -7,7 +7,7 @@
   display: grid;
   @include row-gap(160px);
 
-  @include for-size(big-phone-screen) {
+  @include for-size(big-phone) {
     margin-top: 22vw;
     @include row-gap(80px);
   }
@@ -16,14 +16,14 @@
 .mentors-view__header {
   display: grid;
   @include row-gap(24px);
-  @include for-size(big-phone-screen) {
+  @include for-size(big-phone) {
     @include row-gap(16px);
   }
 }
 
 .mentors-view__title {
   @include H1Bold();
-  @include for-size(big-phone-screen) {
+  @include for-size(big-phone) {
     @include H1Bold(40px, 40px);
   }
 

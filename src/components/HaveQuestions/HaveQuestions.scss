@@ -12,7 +12,7 @@
   grid-template: 1fr / 4fr 3fr;
   @include gap(123px);
 
-  @include for-size(big-phone-screen) {
+  @include for-size(big-phone) {
     display: grid;
     grid-template: auto auto / 1fr;
     @include row-gap(32px);
@@ -33,14 +33,14 @@
     display: grid;
 
     @include row-gap(30px);
-    @include for-size(big-phone-screen) {
+    @include for-size(big-phone) {
       @include row-gap(16px);
     }
   }
 
   &__title {
     @include H2Bold;
-    @include for-size(big-phone-screen) {
+    @include for-size(big-phone) {
       @include H2Bold(32px);
     }
     color: $color-black-main;
@@ -57,7 +57,7 @@
       display: block;
     }
 
-    @include for-size(big-phone-screen) {
+    @include for-size(big-phone) {
       @include H4Regular(16px);
       em {
         @include H4Medium(16px);
@@ -67,7 +67,7 @@
 
   &__container {
     &--form {
-      @include for-size(big-phone-screen) {
+      @include for-size(big-phone) {
         .input-masks {
           .drop-down {
             left: 0;
