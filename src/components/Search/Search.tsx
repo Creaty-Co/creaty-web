@@ -65,7 +65,7 @@ export function Search({ fullWidth }: { fullWidth?: boolean }) {
         onChange={handleChange}
         open={open}
         onDropdownVisibleChange={visible => setOpen(visible)}
-        listHeight={480}
+        listHeight={window.screen.height > 650 ? 480 : 300}
         placement="bottomLeft"
         size="large"
         optionLabelProp="title"
