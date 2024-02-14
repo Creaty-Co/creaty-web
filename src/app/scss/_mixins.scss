@@ -1,211 +1,165 @@
-/* Old Mixins. Need to be deprecated */
-/* Layout */
+$q-hd: 3451px;
+$high-hd: 2561px;
+$full-hd: 1930px;
+$dell-hd: 1660px;
+$mac-hd: 1450px;
+$hd: 1290px;
 
-@mixin WidthLimit {
-	max-width: 1180px;
-	margin: 0 auto;
-}
-
-@mixin Link {
-	text-decoration: underline;
-
-	&:active {
-		text-decoration: none;
-	}
-}
-
-/* Font */
-@mixin Font($size: null, $weight: null, $line-height: 1.35) {
-	font: {
-		size: $size;
-		weight: $weight;
-	}
-
-	line-height: $line-height;
-}
-
-@mixin Typography($size, $weight: null, $emphasizeColor: $color-green) {
-	font-size: $size;
-	font-weight: $weight;
-	line-height: 1.25;
-
-	@if $emphasizeColor !=null {
-		em {
-			color: $emphasizeColor;
-		}
-	}
-
-	@include Mobile() {
-		white-space: normal;
-
-		br {
-			display: none;
-		}
-	}
-}
-
-/* Adaptive */
-
-$mobileMaxWidth: 450px;
+$big-tablet: 1030px;
 $tabletMaxWidth: 1000px;
+$middle-tablet: 850px;
+$landscape-tablets: 780px;
+
+$phone-horizontal: 600px;
+$mobileMaxWidth: 450px;
+$big-phone: 415px;
+$middle-phone: 376px;
+$small-phone: 321px;
 
 @mixin Mobile {
-	@media screen and (max-width: $mobileMaxWidth) {
-		@content;
-	}
+  @media screen and (max-width: $mobileMaxWidth) {
+    @content;
+  }
 }
 
 @mixin Tablet {
-	@media screen and (max-width: $tabletMaxWidth) {
-		@content;
-	}
+  @media screen and (max-width: $tabletMaxWidth) {
+    @content;
+  }
+}
+
+@mixin for-size($size) {
+  @if $size == full-hd {
+    @media screen and (max-width: $full-hd) {
+      @content;
+    }
+  } @else if $size == dell-hd {
+    @media screen and (max-width: $dell-hd) {
+      @content;
+    }
+  } @else if $size == mac-hd {
+    @media screen and (max-width: $mac-hd) {
+      @content;
+    }
+  } @else if $size == hd {
+    @media screen and (max-width: $hd) {
+      @content;
+    }
+  } @else if $size == big-tablet {
+    @media screen and (max-width: $big-tablet) {
+      @content;
+    }
+  } @else if $size == middle-tablet {
+    @media screen and (max-width: $middle-tablet) {
+      @content;
+    }
+  } @else if $size == landscape-tablets {
+    @media screen and (max-width: $landscape-tablets) {
+      @content;
+    }
+  } @else if $size == phone-horizontal {
+    @media screen and (max-width: $phone-horizontal) {
+      @content;
+    }
+  } @else if $size == big-phone {
+    @media screen and (max-width: $big-phone) {
+      @content;
+    }
+  } @else if $size == middle-phone {
+    @media screen and (max-width: $middle-phone) {
+      @content;
+    }
+  } @else if $size == small-phone {
+    @media screen and (max-width: $small-phone) {
+      @content;
+    }
+  }
+}
+
+@mixin WidthLimit {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+@mixin Typography($size, $weight: null, $emphasizeColor: $color-green) {
+  font-size: $size;
+  font-weight: $weight;
+  line-height: 1.25;
+
+  @if $emphasizeColor !=null {
+    em {
+      color: $emphasizeColor;
+    }
+  }
+
+  @include Mobile() {
+    white-space: normal;
+
+    br {
+      display: none;
+    }
+  }
 }
 
 /* Scrollbar */
 
 @mixin Scrollbar($width: 1em, $thumbColor: rebeccapurple, $trackColor: white) {
+  /* Firefox */
+  & {
+    scrollbar-width: thin;
+    scrollbar-color: $thumbColor $trackColor;
+  }
 
-	/* Firefox */
-	& {
-		scrollbar-width: thin;
-		scrollbar-color: $thumbColor $trackColor;
-	}
+  /* Chrome, Edge, and Safari */
+  &::-webkit-scrollbar {
+    width: $width;
+  }
 
-	/* Chrome, Edge, and Safari */
-	&::-webkit-scrollbar {
-		width: $width;
-	}
+  &::-webkit-scrollbar-track {
+    background: $trackColor;
+  }
 
-	&::-webkit-scrollbar-track {
-		background: $trackColor;
-	}
-
-	&::-webkit-scrollbar-thumb {
-		background-color: $thumbColor;
-		border-radius: 0.5em;
-		border: 3px solid $trackColor;
-	}
+  &::-webkit-scrollbar-thumb {
+    background-color: $thumbColor;
+    border-radius: 0.5em;
+    border: 3px solid $trackColor;
+  }
 }
 
 @mixin ScrollbarHidden() {
-	scrollbar-width: none;
-	-ms-overflow-style: none;
-	// overflow: -moz-scrollbars-none;
-	&::-webkit-scrollbar {
-		display: none !important;
-		width: 0 !important
-	}
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  // overflow: -moz-scrollbars-none;
+  &::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+  }
 }
 
 /* New mixins */
 
-// gap utility for backward compatibility (Safari) 
+// gap utility for backward compatibility (Safari)
 @mixin gap($gap) {
-	@supports (gap: $gap) {
-		gap: $gap;
-	}
+  @supports (gap: $gap) {
+    gap: $gap;
+  }
 
-	@supports not (gap: $gap) {
-		&>*:not(:first-child) {
-			margin: $gap;
-		}
-	}
+  @supports not (gap: $gap) {
+    & > *:not(:first-child) {
+      margin: $gap;
+    }
+  }
 }
 
-// row-gap utility for backward compatibility (Safari) 
+// row-gap utility for backward compatibility (Safari)
 @mixin row-gap($gap) {
-	@supports (row-gap: $gap) {
-		row-gap: $gap;
-	}
+  @supports (row-gap: $gap) {
+    row-gap: $gap;
+  }
 
-	@supports not (row-gap: $gap) {
-		&>*:not(:first-child) {
-			margin-left: $gap;
-		}
-	}
-}
-
-$q-hd: 3451px;
-$high-hd: 2561px;
-$full-hd: 1930px; 
-$dell-hd: 1660px; 
-$mac-hd: 1450px; 
-$hd: 1290px;  
-
-$big-tablet: 1030px;
-$middle-tablet: 850px; 
-$landscape-tablets: 780px; 
-
-$phone-horizontal: 600px; 
-$big-phone: 415px; 
-$middle-phone: 376px; 
-$small-phone: 321px; 
-
-
-@mixin for-size($size) {
-	@if $size == full-hd {
-		@media screen and (max-width: $full-hd) {
-			@content;
-		}
-	}
-
-	@else if $size == dell-hd {
-		@media screen and (max-width: $dell-hd) {
-			@content;
-		}
-	}
-
-	@else if $size == mac-hd {
-		@media screen and (max-width: $mac-hd) {
-			@content;
-		}
-	}
-
-	@else if $size == hd {
-		@media screen and (max-width: $hd) {
-			@content;
-		}
-	}
-
-	@else if $size == big-tablet {
-		@media screen and (max-width: $big-tablet) {
-			@content;
-		}
-	}
-
-	@else if $size == middle-tablet {
-		@media screen and (max-width: $middle-tablet) {
-			@content;
-		}
-	}
-
-	@else if $size == landscape-tablets {
-		@media screen and (max-width: $landscape-tablets) {
-			@content;
-		}
-	}
-
-	@else if $size == phone-horizontal {
-		@media screen and (max-width: $phone-horizontal) {
-			@content;
-		}
-	}
-
-	@else if $size == big-phone {
-		@media screen and (max-width: $big-phone) {
-			@content;
-		}
-	}
-
-	@else if $size == middle-phone {
-		@media screen and (max-width: $middle-phone) {
-			@content;
-		}
-	}
-
-	@else if $size == small-phone {
-		@media screen and (max-width: $small-phone) {
-			@content;
-		}
-	}
+  @supports not (row-gap: $gap) {
+    & > *:not(:first-child) {
+      margin-left: $gap;
+    }
+  }
 }

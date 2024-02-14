@@ -53,7 +53,23 @@
     margin: 0 auto;
 
     text-align: center;
-    @include Typography(1.5rem, 400, $color-green);
+
+    @mixin Typography($size, $weight: null, $emphasizeColor: $color-green) {
+      font-size: 1.5rem;
+      font-weight: 400;
+      line-height: 1.25;
+
+      @include Mobile() {
+        white-space: normal;
+        br {
+          display: none;
+        }
+      }
+    }
+
+    em {
+      color: $color-green;
+    }
 
     & > em {
       font-weight: 700;
@@ -139,7 +155,6 @@
     & em {
       color: white;
     }
-    // @include Typography(1.125rem, null, $color-white);
 
     @include Mobile {
       align-items: flex-start;
