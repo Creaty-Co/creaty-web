@@ -6,7 +6,6 @@ import { pagesSlice } from "@store/pages/pages.slice"
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
 import { createLogger } from "redux-logger"
 
-// import logger from "redux-logger"
 import { formApi } from "./forms/form.api"
 import { mentorApi } from "./mentor/mentor.api"
 import { mentorSlice } from "./mentor/mentor.slice"
