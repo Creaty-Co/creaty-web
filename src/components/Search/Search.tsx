@@ -75,14 +75,6 @@ export function Search({ fullWidth }: { fullWidth?: boolean }) {
         ]}
         value={getValueFromUrl()}
         onChange={handleChange}
-        // removeIcon={
-        //   <img
-        //     id="remove-icon"
-        //     style={{ color: "red", backgroundColor: "red" }}
-        //     src="/static/icons/facebook.svg"
-        //     alt="facebook"
-        //   />
-        // }
         open={open}
         onDropdownVisibleChange={handleDropdownVisibleChange}
         listHeight={window.screen.height > 650 ? 480 : 300}
@@ -92,7 +84,6 @@ export function Search({ fullWidth }: { fullWidth?: boolean }) {
         notFoundContent={<span className={getElement("not-found")}>Nothing found...try to change your search</span>}
         fieldNames={{ label: "title", value: "shortcut", groupLabel: "title" }}
         showSearch
-        // allowClear
         mode="multiple"
         dropdownAlign={{ offset: [0, 12], overflow: { adjustY: false } }}
         optionRender={option => (
@@ -106,11 +97,8 @@ export function Search({ fullWidth }: { fullWidth?: boolean }) {
           </span>
         )}
         tagRender={TagRender}
-        // dropdownRender={originNode => (
-        //   <Modal open={open} footer={null} forceRender maskClosable onCancel={() => setOpen(false)}>
-        //     {originNode}
-        //   </Modal>
-        // )}
+        suffixIcon={<img src={`/static/icons/${open ? "arrow-back" : "search"}.svg`} alt="search" />}
+        allowClear={{ clearIcon: <img src="/static/icons/cross.svg" alt="cross" /> }}
       />
 
       <Button

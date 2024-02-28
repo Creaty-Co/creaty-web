@@ -1,6 +1,6 @@
 @import "/src/app/scss/bundle.scss";
 
-$ant-select-padding: 0 32px 0 16px !important;
+$ant-select-padding: 0 16px 0 48px !important;
 
 .search {
   &__wrapper {
@@ -135,5 +135,10 @@ $ant-select-padding: 0 32px 0 16px !important;
 
   &__button {
     height: 100%;
+  }
+
+  .ant-select-arrow {
+    left: 16px !important;
+    opacity: 1 !important;
   }
 }
