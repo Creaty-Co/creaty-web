@@ -6,7 +6,7 @@ import { useGetCategoriesQuery } from "@store/tags/tags.api"
 import { categoriesS, tagsS } from "@store/tags/tags.slice"
 import { Button, Select } from "antd"
 import cn from "classnames"
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { createSearchParams, useNavigate, useSearchParams } from "react-router-dom"
 
@@ -22,6 +22,8 @@ export function Search({ fullWidth }: { fullWidth?: boolean }) {
   const { isLoading } = useGetCategoriesQuery()
 
   const [searchParams, setSearchParams] = useSearchParams()
+  const selectRef = useRef<any>()
+
   const [open, setOpen] = useState(false)
   const navigate = useNavigate()
 
@@ -44,8 +46,18 @@ export function Search({ fullWidth }: { fullWidth?: boolean }) {
     if (urlShortcut) return [urlShortcut]
   }
 
+  const handleDropdownVisibleChange = (visible: boolean) => {
+    setOpen(visible)
+    if (!visible) return
+    window.scroll({
+      top: selectRef.current?.getBoundingClientRect()?.y + window.scrollY - 100,
+      left: 0,
+      behavior: "smooth",
+    })
+  }
+
   return (
-    <div className={cn(getModifier(getElement("wrapper"), fullWidth && "fullWidth"))}>
+    <div className={cn(getModifier(getElement("wrapper"), fullWidth && "fullWidth"))} ref={selectRef}>
       <Select
         className={CN}
         loading={isLoading}
@@ -63,8 +75,16 @@ export function Search({ fullWidth }: { fullWidth?: boolean }) {
         ]}
         value={getValueFromUrl()}
         onChange={handleChange}
+        // removeIcon={
+        //   <img
+        //     id="remove-icon"
+        //     style={{ color: "red", backgroundColor: "red" }}
+        //     src="/static/icons/facebook.svg"
+        //     alt="facebook"
+        //   />
+        // }
         open={open}
-        onDropdownVisibleChange={visible => setOpen(visible)}
+        onDropdownVisibleChange={handleDropdownVisibleChange}
         listHeight={window.screen.height > 650 ? 480 : 300}
         placement="bottomLeft"
         size="large"
@@ -72,9 +92,9 @@ export function Search({ fullWidth }: { fullWidth?: boolean }) {
         notFoundContent={<span className={getElement("not-found")}>Nothing found...try to change your search</span>}
         fieldNames={{ label: "title", value: "shortcut", groupLabel: "title" }}
         showSearch
-        allowClear
+        // allowClear
         mode="multiple"
-        dropdownAlign={{ offset: [0, 12] }}
+        dropdownAlign={{ offset: [0, 12], overflow: { adjustY: false } }}
         optionRender={option => (
           <span className={option.data.tags ? getElement("option-category") : getElement("option-tag")}>
             {option.data.tags ? (
@@ -86,6 +106,11 @@ export function Search({ fullWidth }: { fullWidth?: boolean }) {
           </span>
         )}
         tagRender={TagRender}
+        // dropdownRender={originNode => (
+        //   <Modal open={open} footer={null} forceRender maskClosable onCancel={() => setOpen(false)}>
+        //     {originNode}
+        //   </Modal>
+        // )}
       />
 
       <Button
