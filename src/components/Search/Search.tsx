@@ -69,7 +69,7 @@ export function Search({ fullWidth }: { fullWidth?: boolean }) {
 
   useEffect(() => {
     const root = document.documentElement
-    root.style.setProperty("--ant-select-padding", `0 32px 0 ${showSearchIcon ? "48" : "16"}px`)
+    root.style.setProperty("--ant-select-padding", `0 48px 0 ${showSearchIcon ? "48" : "16"}px`)
   }, [showSearchIcon])
 
   return (
