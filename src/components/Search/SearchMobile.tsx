@@ -66,7 +66,7 @@ export function SearchMobile({ isMentorPage }: ISearchProps) {
     })
   }, [open])
 
-  const showSearchIcon = !(isMentorPage && !open && getValueFromUrl())
+  const showSearchIcon = !open && !getValueFromUrl()
 
   useEffect(() => {
     const root = document.documentElement
