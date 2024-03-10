@@ -11,7 +11,6 @@ $ant-select-padding: 0 16px 0 48px !important;
     padding: 32px;
     border-radius: 50px;
     background: $color-black-90;
-    margin-top: 80px;
 
     &--fullWidth {
       grid-template: 56px / 1fr 180px;
@@ -21,6 +20,10 @@ $ant-select-padding: 0 16px 0 48px !important;
     @include for-size(phone-horizontal) {
       grid-template-columns: 1fr;
       justify-self: auto;
+    }
+
+    @include for-size(big-phone) {
+      padding: 8px;
     }
   }
 
@@ -69,7 +72,7 @@ $ant-select-padding: 0 16px 0 48px !important;
         min-height: 16px;
         margin-bottom: 8px;
         margin-top: 30px;
-        
+
         &:nth-child(n + 2) {
           &::before {
             content: "";

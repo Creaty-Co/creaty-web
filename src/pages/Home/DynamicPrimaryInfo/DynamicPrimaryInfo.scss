@@ -5,6 +5,11 @@
   display: grid;
   grid-gap: 40px;
   text-align: center;
+  margin-bottom: 80px;
+
+  @include for-size(big-phone) {
+    margin-bottom: 40px;
+  }
 
   @include Mobile {
     grid-gap: 6.5vw;
