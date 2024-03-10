@@ -40,10 +40,10 @@ export function Search({ fullWidth }: { fullWidth?: boolean }) {
     navigate({ pathname: "/mentors", search: createSearchParams(searchParams).toString() })
   }
 
-  const handleChange = (values: any) => {
-    const value = values?.slice(-1)?.[0]
+  const handleChange = (values: string[]) => {
+    const newValue = values?.slice(-1)?.[0]
     const newQuerryParams = new URLSearchParams()
-    if (values.length > 0) newQuerryParams.set("shortcut", value)
+    if (values.length > 0) newQuerryParams.set("shortcut", newValue)
     setSearchParams(newQuerryParams)
     setOpen(false)
     if (values.length === 0) return
@@ -111,6 +111,11 @@ export function Search({ fullWidth }: { fullWidth?: boolean }) {
         tagRender={TagRender}
         suffixIcon={<img src={`/static/icons/${open ? "arrow-back" : "search"}.svg`} alt="search" />}
         allowClear={{ clearIcon: <img src="/static/icons/cross.svg" alt="cross" /> }}
+        onInputKeyDown={event => {
+          if (event.key === "Backspace") {
+            return event.stopPropagation()
+          }
+        }}
       />
 
       <Button
