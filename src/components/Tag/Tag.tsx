@@ -11,14 +11,15 @@ const { getElement } = bem(CN)
 interface ITagProps extends ITag {
   noHash?: boolean
   search?: boolean
+  stopPropagation?: boolean
 }
 
-export function Tag({ shortcut, title, noHash, search }: Partial<ITagProps>) {
+export function Tag({ shortcut, title, noHash, search, stopPropagation = true }: Partial<ITagProps>) {
   const navigate = useNavigate()
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     if (!shortcut || noHash) return
-    e.stopPropagation()
+    if (stopPropagation) e.stopPropagation()
     const newQuerryParams = new URLSearchParams()
     newQuerryParams.set("shortcut", shortcut)
     navigate({ pathname: "/mentors", search: createSearchParams(newQuerryParams).toString() })

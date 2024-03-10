@@ -11,5 +11,5 @@ export const TagRender: TagRender = props => {
   const category = categories?.find(tag => tag.shortcut === props.value)
 
   if (category) return <Category {...category} search />
-  return <Tag title={props.label as string} shortcut={props.value} search />
+  return <Tag title={props.label as string} shortcut={props.value} search stopPropagation={false} />
 }
