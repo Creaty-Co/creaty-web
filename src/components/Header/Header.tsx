@@ -100,7 +100,7 @@ export const Header = memo(function Header() {
                 <SharedButton size="little" className="login" onClick={handleLoginClick}>
                   Login
                 </SharedButton>
-                <SharedButton size="little" className="sign-up" onClick={handleSignUpClick}>
+                <SharedButton size="little" className="sign-up" color="white" onClick={handleSignUpClick}>
                   Sign up
                 </SharedButton>
               </div>
