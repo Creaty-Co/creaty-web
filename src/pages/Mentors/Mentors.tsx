@@ -1,7 +1,7 @@
 import "./Mentors.scss"
 
 import { HaveQuestions } from "@components/HaveQuestions/HaveQuestions"
-import { Search } from "@components/Search/Search"
+import { SearchWrapper } from "@components/Search/SearchWrapper"
 import { useScrollToTop } from "@shared/hooks/useScrollToTop"
 import { bem, classMerge } from "@shared/utils/common"
 import { useAppSelector } from "@store/store"
@@ -45,7 +45,7 @@ export function Mentors() {
           {!pageTitle && <div className={cn(getElement("desc"))}>{t("desc")}</div>}
         </div>
 
-        <Search fullWidth />
+        <SearchWrapper isMentorPage />
 
         <MentorCards category={category} tag={tag} />
       </div>

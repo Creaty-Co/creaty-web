@@ -11,7 +11,9 @@ import { useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { createSearchParams, useNavigate, useSearchParams } from "react-router-dom"
 
+import { ISearchProps } from "./SearchWrapper"
 import { TagRender } from "./TagRender"
+
 export interface FlattenOptionData<OptionType> {
   label?: React.ReactNode
   data: OptionType
@@ -24,7 +26,7 @@ export interface FlattenOptionData<OptionType> {
 const CN = "search"
 const { getElement, getModifier } = bem(CN)
 
-export function Search({ fullWidth }: { fullWidth?: boolean }) {
+export function SearchDesktop({ isMentorPage }: ISearchProps) {
   const tags = useAppSelector(tagsS)
   const categories = useAppSelector(categoriesS)
   const { t } = useTranslation("translation", { keyPrefix: "views.home.mentorSearch" })
@@ -33,7 +35,7 @@ export function Search({ fullWidth }: { fullWidth?: boolean }) {
   const [searchParams, setSearchParams] = useSearchParams()
   const selectRef = useRef<any>()
 
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false)
   const navigate = useNavigate()
 
   const handleClick = () => {
@@ -65,7 +67,7 @@ export function Search({ fullWidth }: { fullWidth?: boolean }) {
     })
   }
 
-  const showSearchIcon = !(fullWidth && !open && getValueFromUrl())
+  const showSearchIcon = !(isMentorPage && !open && getValueFromUrl())
 
   useEffect(() => {
     const root = document.documentElement
@@ -76,7 +78,10 @@ export function Search({ fullWidth }: { fullWidth?: boolean }) {
     <>
       {<Spin spinning={open} fullscreen indicator={undefined} />}
 
-      <div className={cn(getModifier(getElement("wrapper"), fullWidth && "fullWidth"))} ref={selectRef}>
+      <div
+        className={cn(getModifier(getElement("wrapper"), isMentorPage && "isMentorPage"), open && "backdrop")}
+        ref={selectRef}
+      >
         <Select
           className={CN}
           loading={isLoading}
@@ -96,7 +101,7 @@ export function Search({ fullWidth }: { fullWidth?: boolean }) {
           onChange={handleChange}
           open={open}
           onDropdownVisibleChange={handleDropdownVisibleChange}
-          listHeight={window.screen.height > 650 ? 480 : 300}
+          listHeight={window.screen.height > 650 ? 480 : window.screen.height - 250}
           placement="bottomLeft"
           size="large"
           optionLabelProp="title"

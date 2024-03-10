@@ -10,7 +10,7 @@
     border-radius: 50px;
     background: $color-black-90;
 
-    &--fullWidth {
+    &--isMentorPage {
       grid-template: 56px / 1fr 180px;
       width: 100%;
     }
@@ -23,11 +23,18 @@
     @include for-size(big-phone) {
       padding: 8px;
     }
-    .ant-select-clear {
-      right: 30px;
-      opacity: 1;
+    &.backdrop {
+      z-index: 1000;
     }
-    z-index: 1000;
+  }
+
+  .ant-select-clear {
+    right: 30px;
+    opacity: 1;
+  }
+
+  &.mobile {
+    width: 100%;
   }
 
   &.ant-select {
@@ -150,5 +157,10 @@
   .ant-select-arrow {
     left: 20px !important;
     opacity: 1 !important;
+  }
+
+  .ant-select-arrow {
+    pointer-events: auto !important;
+    user-select: auto !important;
   }
 }

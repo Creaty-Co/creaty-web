@@ -10,7 +10,7 @@ import { SignupModalFormStep1 } from "@components/forms/SignUp/SignupModalFormSt
 import { HaveQuestions } from "@components/HaveQuestions/HaveQuestions"
 import { HelpSocial } from "@components/HelpSocial/HelpSocial"
 import { MentorsSlider } from "@components/MentorsSlider/MentorsSlider"
-import { Search } from "@components/Search/Search"
+import { SearchWrapper } from "@components/Search/SearchWrapper"
 import { useScrollToTop } from "@shared/hooks/useScrollToTop"
 import { InfoSection } from "@shared/ui/InfoSection/InfoSection"
 import { LoaderCover } from "@shared/ui/LoaderCover/LoaderCover"
@@ -58,7 +58,7 @@ export function Home() {
         <div className={getElement("header")}>
           <DynamicPrimaryInfo urlShortcut={params.shortcut} />
 
-          <Search />
+          <SearchWrapper />
 
           {data?.tags && <TagsLine tags={data.tags} />}
 
