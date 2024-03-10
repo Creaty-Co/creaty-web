@@ -31,6 +31,8 @@
   .ant-select-clear {
     right: 30px;
     opacity: 1;
+    display: grid;
+    place-content: center;
   }
 
   &.mobile {
@@ -155,13 +157,24 @@
   }
 
   .ant-select-arrow {
-    left: 20px !important;
+    left: 0;
     opacity: 1 !important;
+    img {
+      position: relative;
+      left: 8px;
+      pointer-events: auto !important;
+      user-select: auto !important;
+    }
+    & > img[alt="search"] {
+      left: 26px;
+    }
   }
 
-  .ant-select-arrow {
-    pointer-events: auto !important;
-    user-select: auto !important;
+  &__icon {
+    width: 40px;
+    height: 40px;
+    max-width: max-content;
+    padding: 13px;
   }
 }
 .ant-modal-wrap {

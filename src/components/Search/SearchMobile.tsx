@@ -70,7 +70,7 @@ export function SearchMobile({ isMentorPage }: ISearchProps) {
 
   useEffect(() => {
     const root = document.documentElement
-    root.style.setProperty("--ant-select-padding", `0 48px 0 ${showSearchIcon ? "48" : "16"}px`)
+    root.style.setProperty("--ant-select-padding", `0 60px 0 ${showSearchIcon ? "48" : "16"}px`)
   }, [showSearchIcon])
 
   return (
@@ -106,6 +106,7 @@ export function SearchMobile({ isMentorPage }: ISearchProps) {
           allowClear={{
             clearIcon: (
               <img
+                className={getElement("icon")}
                 src="/static/icons/cross.svg"
                 alt="cross"
                 onClick={e => {
@@ -161,6 +162,7 @@ export function SearchMobile({ isMentorPage }: ISearchProps) {
           placement="bottomLeft"
           size="large"
           optionLabelProp="title"
+          autoFocus
           notFoundContent={<span className={getElement("not-found")}>Nothing found...try to change your search</span>}
           fieldNames={{ label: "title", value: "shortcut", groupLabel: "title" }}
           filterOption={(inputValue, option) =>
@@ -183,7 +185,8 @@ export function SearchMobile({ isMentorPage }: ISearchProps) {
           suffixIcon={
             <img
               src="/static/icons/arrow-back.svg"
-              alt="search"
+              alt="arrow-back"
+              className={getElement("icon")}
               onClick={e => {
                 e.stopPropagation()
                 setOpen(false)
@@ -195,6 +198,7 @@ export function SearchMobile({ isMentorPage }: ISearchProps) {
               <img
                 src="/static/icons/cross.svg"
                 alt="cross"
+                className={getElement("icon")}
                 onClick={e => {
                   e.stopPropagation()
                 }}
