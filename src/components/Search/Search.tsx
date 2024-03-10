@@ -7,7 +7,7 @@ import { categoriesS, tagsS } from "@store/tags/tags.slice"
 import { Button, Select } from "antd"
 import cn from "classnames"
 import { RawValueType } from "rc-select/lib/Select"
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { createSearchParams, useNavigate, useSearchParams } from "react-router-dom"
 
@@ -65,6 +65,13 @@ export function Search({ fullWidth }: { fullWidth?: boolean }) {
     })
   }
 
+  const showSearchIcon = !(fullWidth && !open && getValueFromUrl())
+
+  useEffect(() => {
+    const root = document.documentElement
+    root.style.setProperty("--ant-select-padding", `0 32px 0 ${showSearchIcon ? "48" : "16"}px`)
+  }, [showSearchIcon])
+
   return (
     <div className={cn(getModifier(getElement("wrapper"), fullWidth && "fullWidth"))} ref={selectRef}>
       <Select
@@ -109,7 +116,7 @@ export function Search({ fullWidth }: { fullWidth?: boolean }) {
           </span>
         )}
         tagRender={TagRender}
-        suffixIcon={<img src={`/static/icons/${open ? "arrow-back" : "search"}.svg`} alt="search" />}
+        suffixIcon={showSearchIcon && <img src={`/static/icons/${open ? "arrow-back" : "search"}.svg`} alt="search" />}
         allowClear={{ clearIcon: <img src="/static/icons/cross.svg" alt="cross" /> }}
         onInputKeyDown={event => {
           if (event.key === "Backspace") {

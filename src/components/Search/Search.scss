@@ -1,7 +1,5 @@
 @import "/src/app/scss/bundle.scss";
 
-$ant-select-padding: 0 16px 0 48px !important;
-
 .search {
   &__wrapper {
     display: grid;
@@ -35,7 +33,7 @@ $ant-select-padding: 0 16px 0 48px !important;
     height: 56px;
 
     .ant-select-selector {
-      padding: $ant-select-padding;
+      padding: var(--ant-select-padding);
       border-radius: 20px;
       border: none !important;
       outline: none !important;
@@ -47,7 +45,7 @@ $ant-select-padding: 0 16px 0 48px !important;
         transition: outline 0.2s linear !important;
       }
       .ant-select-selection-placeholder {
-        padding: $ant-select-padding;
+        padding: var(--ant-select-padding);
         color: $color-gray-80;
         &:focus-within {
           color: $color-gray-50;
