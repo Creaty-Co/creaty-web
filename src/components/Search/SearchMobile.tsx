@@ -137,7 +137,7 @@ export function SearchMobile({ isMentorPage }: ISearchProps) {
         style={{ top: 16, bottom: 16, left: 0, right: 16 }}
         width={window.screen.width - 32}
         closeIcon={null}
-        focusTriggerAfterClose={false}
+        maskClosable={false}
       >
         <Select
           className={cn(CN, "mobile")}
@@ -157,7 +157,6 @@ export function SearchMobile({ isMentorPage }: ISearchProps) {
           value={getValueFromUrl()}
           onChange={handleChange}
           open
-          autoFocus
           listHeight={window.screen.height > 650 ? 480 : window.screen.height - 250}
           placement="bottomLeft"
           size="large"
