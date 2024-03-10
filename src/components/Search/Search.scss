@@ -25,6 +25,10 @@ $ant-select-padding: 0 16px 0 48px !important;
     @include for-size(big-phone) {
       padding: 8px;
     }
+    .ant-select-clear {
+      right: 30px;
+      opacity: 1;
+    }
   }
 
   &.ant-select {
