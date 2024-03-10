@@ -58,15 +58,19 @@ $ant-select-padding: 0 16px 0 48px !important;
     outline: 3px solid (#{$color-green}80) !important;
     border-radius: 24px;
 
+    .rc-virtual-list-holder-inner {
+      margin-top: -30px;
+    }
+
     .ant-select-item {
       &-group {
         color: $color-gray-80 !important;
         padding: 0 16px;
         min-height: 16px;
         margin-bottom: 8px;
-
-        &[title="Skills"] {
-          margin-top: 30px;
+        margin-top: 30px;
+        
+        &:nth-child(n + 2) {
           &::before {
             content: "";
             position: absolute;

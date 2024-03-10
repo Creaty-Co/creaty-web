@@ -6,11 +6,20 @@ import { useGetCategoriesQuery } from "@store/tags/tags.api"
 import { categoriesS, tagsS } from "@store/tags/tags.slice"
 import { Button, Select } from "antd"
 import cn from "classnames"
+import { RawValueType } from "rc-select/lib/Select"
 import { useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { createSearchParams, useNavigate, useSearchParams } from "react-router-dom"
 
 import { TagRender } from "./TagRender"
+export interface FlattenOptionData<OptionType> {
+  label?: React.ReactNode
+  data: OptionType
+  key: React.Key
+  value?: RawValueType
+  groupOption?: boolean
+  group?: boolean
+}
 
 const CN = "search"
 const { getElement, getModifier } = bem(CN)
@@ -90,7 +99,7 @@ export function Search({ fullWidth }: { fullWidth?: boolean }) {
         mode="multiple"
         dropdownAlign={{ offset: [0, 12], overflow: { adjustY: false } }}
         optionRender={option => (
-          <span className={option.data.tags ? getElement("option-category") : getElement("option-tag")}>
+          <span className={getElement(`option-${option.data.tags ? "category" : "tag"}`)}>
             {option.data.tags ? (
               <img src={option.data.icon} className={getElement("option-category-icon")} />
             ) : (
