@@ -102,7 +102,7 @@ export function SearchMobile({ isMentorPage }: ISearchProps) {
           mode="multiple"
           tagRender={TagRender}
           open={false}
-          suffixIcon={showSearchIcon && <img src={`/static/icons/search.svg`} alt="search" />}
+          suffixIcon={!getValueFromUrl() && <img src={`/static/icons/search.svg`} alt="search" />}
           allowClear={{
             clearIcon: (
               <img
