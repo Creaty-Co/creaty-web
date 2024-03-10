@@ -83,6 +83,9 @@ export function Search({ fullWidth }: { fullWidth?: boolean }) {
         optionLabelProp="title"
         notFoundContent={<span className={getElement("not-found")}>Nothing found...try to change your search</span>}
         fieldNames={{ label: "title", value: "shortcut", groupLabel: "title" }}
+        filterOption={(inputValue, option) =>
+          !!option?.title.replace(/ /g, "").toLowerCase().includes(inputValue.replace(/ /g, "").toLowerCase())
+        }
         showSearch
         mode="multiple"
         dropdownAlign={{ offset: [0, 12], overflow: { adjustY: false } }}
