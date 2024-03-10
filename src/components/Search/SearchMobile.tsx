@@ -38,7 +38,6 @@ export function SearchMobile({ isMentorPage }: ISearchProps) {
   const [open, setOpen] = useState(false)
   const navigate = useNavigate()
 
-  console.log("open: ", open)
   const handleClick = () => {
     navigate({ pathname: "/mentors", search: createSearchParams(searchParams).toString() })
   }
@@ -105,7 +104,15 @@ export function SearchMobile({ isMentorPage }: ISearchProps) {
           open={false}
           suffixIcon={showSearchIcon && <img src={`/static/icons/search.svg`} alt="search" />}
           allowClear={{
-            clearIcon: <img src="/static/icons/cross.svg" alt="cross" />,
+            clearIcon: (
+              <img
+                src="/static/icons/cross.svg"
+                alt="cross"
+                onClick={e => {
+                  e.stopPropagation()
+                }}
+              />
+            ),
           }}
           onClick={e => {
             e.stopPropagation()
@@ -176,15 +183,24 @@ export function SearchMobile({ isMentorPage }: ISearchProps) {
           tagRender={TagRender}
           suffixIcon={
             <img
-              src={`/static/icons/${open ? "arrow-back" : "search"}.svg`}
+              src="/static/icons/arrow-back.svg"
               alt="search"
               onClick={e => {
+                e.stopPropagation()
                 setOpen(false)
               }}
             />
           }
           allowClear={{
-            clearIcon: <img src="/static/icons/cross.svg" alt="cross" />,
+            clearIcon: (
+              <img
+                src="/static/icons/cross.svg"
+                alt="cross"
+                onClick={e => {
+                  e.stopPropagation()
+                }}
+              />
+            ),
           }}
           onInputKeyDown={event => {
             if (event.key === "Backspace") {
