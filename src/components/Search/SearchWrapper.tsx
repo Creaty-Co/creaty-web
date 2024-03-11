@@ -1,7 +1,6 @@
 import "./Search.scss"
 
-import { useAppSelector } from "@store/store"
-import { categoriesS, tagsS } from "@store/tags/tags.slice"
+import { useGetCategoriesQuery } from "@store/tags/tags.api"
 import { Spin } from "antd"
 
 import { SearchDesktop } from "./SearchDesktop"
@@ -12,11 +11,10 @@ export interface ISearchProps {
 }
 
 export function SearchWrapper(props: ISearchProps) {
-  const tags = useAppSelector(tagsS)
-  const categories = useAppSelector(categoriesS)
+  const { isLoading } = useGetCategoriesQuery()
 
   const isMobile = window.innerWidth <= 600
 
-  if (!tags || !categories) return <Spin />
+  if (isLoading) return <Spin />
   return isMobile ? <SearchMobile {...props} /> : <SearchDesktop {...props} />
 }

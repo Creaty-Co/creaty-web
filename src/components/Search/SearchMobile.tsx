@@ -2,7 +2,6 @@ import "./Search.scss"
 
 import { bem } from "@shared/utils/common"
 import { useAppSelector } from "@store/store"
-import { useGetCategoriesQuery } from "@store/tags/tags.api"
 import { categoriesS, tagsS } from "@store/tags/tags.slice"
 import { Button, Modal, Select } from "antd"
 import cn from "classnames"
@@ -30,7 +29,6 @@ export function SearchMobile({ isMentorPage }: ISearchProps) {
   const tags = useAppSelector(tagsS)
   const categories = useAppSelector(categoriesS)
   const { t } = useTranslation("translation", { keyPrefix: "views.home.mentorSearch" })
-  const { isLoading } = useGetCategoriesQuery()
 
   const [searchParams, setSearchParams] = useSearchParams()
   const selectRef = useRef<any>()
@@ -77,7 +75,7 @@ export function SearchMobile({ isMentorPage }: ISearchProps) {
     document.body.style.overscrollBehavior = state ? "none" : "auto"
     document.body.style.position = state ? "fixed" : "static"
   }
-  
+
   useEffect(() => toggleOverflow(open), [open])
 
   return (
@@ -85,7 +83,6 @@ export function SearchMobile({ isMentorPage }: ISearchProps) {
       <div className={cn(getModifier(getElement("wrapper"), isMentorPage && "isMentorPage"))} ref={selectRef}>
         <Select
           className={CN}
-          loading={isLoading}
           placeholder="Select industry or skill"
           options={[
             {
@@ -149,7 +146,6 @@ export function SearchMobile({ isMentorPage }: ISearchProps) {
       >
         <Select
           className={cn(CN, "mobile")}
-          loading={isLoading}
           popupClassName={getElement("popup")}
           placeholder="Select industry or skill"
           options={[

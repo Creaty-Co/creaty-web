@@ -2,7 +2,6 @@ import "./Search.scss"
 
 import { bem } from "@shared/utils/common"
 import { useAppSelector } from "@store/store"
-import { useGetCategoriesQuery } from "@store/tags/tags.api"
 import { categoriesS, tagsS } from "@store/tags/tags.slice"
 import { Button, Select, Spin } from "antd"
 import cn from "classnames"
@@ -30,7 +29,6 @@ export function SearchDesktop({ isMentorPage }: ISearchProps) {
   const tags = useAppSelector(tagsS)
   const categories = useAppSelector(categoriesS)
   const { t } = useTranslation("translation", { keyPrefix: "views.home.mentorSearch" })
-  const { isLoading } = useGetCategoriesQuery()
 
   const [searchParams, setSearchParams] = useSearchParams()
   const selectRef = useRef<any>()
@@ -84,7 +82,6 @@ export function SearchDesktop({ isMentorPage }: ISearchProps) {
       >
         <Select
           className={CN}
-          loading={isLoading}
           popupClassName={getElement("popup")}
           placeholder="Select industry or skill"
           options={[
