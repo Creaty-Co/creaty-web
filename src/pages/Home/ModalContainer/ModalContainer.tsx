@@ -3,19 +3,14 @@ import "./ModalContainer.scss"
 import { bem, stopPropagation } from "@shared/utils/common"
 import { closeModal, selectModalContainerActive, selectModalContainerContent } from "@store/modalContainer.slice"
 import { useAppDispatch, useAppSelector } from "@store/store"
-import cn from "classnames"
 import { useCallback, useLayoutEffect, useRef } from "react"
 
 // TODO: finish migration to ant d modal. Delete file after
 
-export interface IModalContainer {
-  className?: string
-}
-
 const CN = "modal"
 const { getElement, getModifier } = bem(CN)
 
-export function ModalContainer({ className }: IModalContainer) {
+export function ModalContainer() {
   const scrollTopOffsetRef = useRef<number>(0)
   const dispatch = useAppDispatch()
 
@@ -45,7 +40,7 @@ export function ModalContainer({ className }: IModalContainer) {
   }, [isActive])
 
   return (
-    <div className={cn(getModifier(CN, isActive && "active"), className)}>
+    <div className={getModifier(CN, isActive && "active")}>
       <div className={getElement("container")} onClick={stopPropagation(() => dispatch(closeModal()))}>
         <div className={getElement("inner")}>{elementContent}</div>
       </div>

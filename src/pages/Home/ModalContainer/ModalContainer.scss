@@ -1,51 +1,58 @@
 .modal {
-	position: fixed;
-	inset: 0;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
+  position: fixed;
+  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 
+  cursor: pointer;
+  overscroll-behavior: contain;
+  z-index: 2;
 
-	cursor: pointer;
-	overscroll-behavior: contain;
-	z-index: 2;
-
-	&:not(&--active) {
-		pointer-events: none;
-	}
+  &:not(&--active) {
+    pointer-events: none;
+  }
 }
 
 .modal__container {
-	position: absolute;
-	inset: 0;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
+  position: absolute;
+  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 
-	display: grid;
+  padding: 30px;
+  display: grid;
+  place-content: center;
 
-	// overflow: auto;
-	overscroll-behavior: contain;
+  overflow: auto;
+  overscroll-behavior: contain;
 
-	transition: 250ms ease background-color;
+  transition: 250ms ease background-color;
 
-	.modal--active & {
-		background: rgba(black, 0.7);
-		backdrop-filter: blur(40px);
-	}
+  .modal--active & {
+    background: rgba(black, 0.7);
+    backdrop-filter: blur(40px);
+  }
 }
 
 .modal__inner {
-	cursor: initial;
-	overscroll-behavior: contain;
-	margin: auto;
+  cursor: initial;
+  overscroll-behavior: contain;
 
-	transform: translateY(100vh);
-	transition: 250ms ease transform;
+  transform: translateY(100vh);
+  transition: 250ms ease transform;
 
-	.modal--active & {
-		transform: translateY(0%)
-	}
+  .modal--active & {
+    transform: translateY(0%);
+  }
+
+  & .popup-layout {
+    padding: 30px;
+    &__container {
+      padding: 0;
+    }
+  }
 }
