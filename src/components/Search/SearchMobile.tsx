@@ -72,8 +72,8 @@ export function SearchMobile({ isMentorPage }: ISearchProps) {
   }, [getValueFromUrl, open])
 
   const toggleOverflow = (state: boolean) => {
-    if (!state) document.body.classList.remove("height", "100vh")
-    if (state) document.body.classList.add("height", "100vh")
+    if (state) document.body.style.height = "100vh"
+    if (!state) document.body.style.height = "100%"
   }
   useEffect(() => toggleOverflow(open), [open])
 
