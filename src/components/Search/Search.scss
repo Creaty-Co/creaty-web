@@ -75,8 +75,11 @@
     outline: 3px solid (#{$color-green}80) !important;
     border-radius: 24px;
 
-    .rc-virtual-list-holder-inner {
-      margin-top: -30px;
+    .rc-virtual-list {
+      margin-bottom: -30px;
+      &-holder-inner {
+        margin-top: -30px;
+      }
     }
 
     .ant-select-item {
