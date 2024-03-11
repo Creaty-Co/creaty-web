@@ -71,9 +71,11 @@ export function SearchMobile({ isMentorPage }: ISearchProps) {
 
   const toggleOverflow = (state: boolean) => {
     document.documentElement.style.overscrollBehavior = state ? "none" : "auto"
-    document.documentElement.style.position = state ? "fixed" : "static"
     document.body.style.overscrollBehavior = state ? "none" : "auto"
+    document.documentElement.style.position = state ? "fixed" : "static"
     document.body.style.position = state ? "fixed" : "static"
+    document.documentElement.style.overflow = state ? "hidden" : "auto"
+    document.body.style.overflow = state ? "hidden" : "auto"
   }
 
   useEffect(() => toggleOverflow(open), [open])
