@@ -66,12 +66,10 @@ export function SearchMobile({ isMentorPage }: ISearchProps) {
     })
   }, [open])
 
-  const showSearchIcon = !open && !getValueFromUrl()
-
   useEffect(() => {
     const root = document.documentElement
-    root.style.setProperty("--ant-select-padding", `0 60px 0 ${showSearchIcon ? "48" : "16"}px`)
-  }, [showSearchIcon])
+    root.style.setProperty("--ant-select-padding", `0 60px 0 ${getValueFromUrl() && !open ? "16" : "48"}px`)
+  }, [getValueFromUrl, open])
 
   return (
     <>
