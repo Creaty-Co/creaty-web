@@ -31,7 +31,14 @@ export const UnclosablePopupWrapper = memo(function UnclosablePopupWrapper({
   }
 
   return (
-    <Modal open={open} footer={null} closable={false} forceRender onCancel={handleOpenPopconfirm}>
+    <Modal
+      open={open}
+      footer={null}
+      closable={false}
+      forceRender
+      onCancel={handleOpenPopconfirm}
+      style={{ top: window.innerWidth <= 600 ? 16 : undefined }}
+    >
       <div className={CN}>
         <Popconfirm
           title="Are you sure you want to stop the booking?"

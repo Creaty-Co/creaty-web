@@ -9,7 +9,14 @@ interface IProps {
 
 export const EmaiVerifySuccessModal = memo(function EmaiVerifySuccessModal({ show }: IProps) {
   return (
-    <Modal open={show} footer={null} closable={false} maskClosable={false} keyboard={false}>
+    <Modal
+      open={show}
+      footer={null}
+      closable={false}
+      maskClosable={false}
+      keyboard={false}
+      style={{ top: window.innerWidth <= 600 ? 16 : undefined }}
+    >
       <EmailVerifySuccessForm />
     </Modal>
   )

@@ -39,7 +39,14 @@ export const EmaiVerifyModalForm = memo(function EmaiVerifyModalForm({ code }: I
   }, [isSuccess])
 
   return (
-    <Modal open={!!code} footer={null} closable={false} maskClosable={false} keyboard={false}>
+    <Modal
+      open={!!code}
+      footer={null}
+      closable={false}
+      maskClosable={false}
+      keyboard={false}
+      style={{ top: window.innerWidth <= 600 ? 16 : undefined }}
+    >
       <EmailVerifySuccessForm isLoading={isLoading} />
       {contextHolder}
     </Modal>

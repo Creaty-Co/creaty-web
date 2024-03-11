@@ -150,7 +150,15 @@ export const ResetPasswordModalForm = memo(function ResetPasswordModalForm({ cod
   )
 
   return (
-    <Modal open={!!code} onCancel={closeModal} footer={null} closable={false} maskClosable={false} keyboard={false}>
+    <Modal
+      open={!!code}
+      onCancel={closeModal}
+      footer={null}
+      closable={false}
+      maskClosable={false}
+      keyboard={false}
+      style={{ top: window.innerWidth <= 600 ? 16 : undefined }}
+    >
       <PopupLayout
         hideCross
         title={
