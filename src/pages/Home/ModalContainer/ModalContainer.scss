@@ -8,6 +8,7 @@
 
   padding: 20px;
   overflow: hidden;
+  overscroll-behavior: none;
   cursor: pointer;
   z-index: 2;
 
@@ -24,6 +25,7 @@
 .modal__container {
   max-height: calc(100vh - 40px);
   overflow: hidden;
+  overscroll-behavior: none;
 
   transition: 250ms ease background-color;
 }
@@ -31,7 +33,6 @@
 .modal__inner {
   cursor: initial;
   overflow: scroll;
-  overscroll-behavior: none;
   max-height: calc(100vh - 40px);
   display: grid;
   place-content: center;

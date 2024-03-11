@@ -25,7 +25,6 @@
   border-radius: 40px;
 
   overflow: scroll;
-  overscroll-behavior: none;
   @include ScrollbarHidden;
 
   @include Tablet {
