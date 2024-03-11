@@ -34,7 +34,7 @@ export function Mentor() {
 
   const scrollToPackages = () => {
     const packages = document.getElementById("packages")
-    packages?.scrollIntoView({ behavior: "smooth", block: "center" })
+    packages?.scrollIntoView({ behavior: "smooth", block: "start" })
   }
 
   const mentorName = `${user.first_name} ${user.last_name}`
