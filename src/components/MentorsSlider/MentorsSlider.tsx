@@ -30,11 +30,11 @@ export function MentorsSlider({ mentors }: IMentorsSlider) {
   const dispatch = useAppDispatch()
 
   const slider = useRef<Slider>(null)
-  const mentorCardsCount = Math.floor(window.innerWidth / 380)
+  const mentorCardsCount = Math.floor(window.innerWidth / 380) || 1
 
   const prev = () => slider.current?.slickPrev()
   const next = () => slider.current?.slickNext()
-
+  
   return (
     <div className={CN}>
       <div className={getElement("header")}>
