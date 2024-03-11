@@ -94,11 +94,11 @@ export const Header = memo(function Header() {
             <AuthDDL />
           ) : (
             <>
-              <div className={getElement("separator")}></div>
               <div className={getElement("sign-group")}>
                 <SharedButton size="little" className="login" onClick={handleLoginClick}>
                   Login
                 </SharedButton>
+                {expanded && <div className={getElement("separator")} />}
                 <SharedButton size="little" className="sign-up" color="white" onClick={handleSignUpClick}>
                   Sign up
                 </SharedButton>
