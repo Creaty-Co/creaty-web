@@ -32,34 +32,33 @@ export const Header = memo(function Header() {
   const { t } = useTranslation("translation", { keyPrefix: "header" })
   const [expanded, setExpanded] = useState(false)
 
-  const handleRedirect = (path: string) => {
-    navigate(path)
-    setExpanded(false)
-  }
+  const handleLoginClick = () => navigate("/login")
+  const handleAdminClick = () => navigate("/admin")
+  const handleSignUpClick = () => navigate("/sign-up")
+  const handleLogoClick = () => navigate("/")
 
-  useEffect(
-    () =>
-      ReactGA.send({
-        hitType: "pageview",
-        view: location.pathname + location.search + location.hash,
-      }),
-    [location]
-  )
+  useEffect(() => {
+    setExpanded(false)
+    ReactGA.send({
+      hitType: "pageview",
+      view: location.pathname + location.search + location.hash,
+    })
+  }, [location])
 
   return (
     <header className={CN}>
       <div className={getElement("container")}>
-        <div aria-label="Home" onClick={() => handleRedirect("/")}>
+        <div aria-label="Home" onClick={handleLogoClick}>
           <img
             src="/static/icons/logo.svg"
             alt="logo"
             className={getModifier(getElement("logo"), "mobile")}
-            onClick={() => handleRedirect("/")}
+            onClick={handleLogoClick}
           />
           <img src="/static/images/logo.svg" alt="logo" className={getElement("logo")} />
         </div>
         {isAdmin && (
-          <SharedButton size="little" className="admin" onClick={() => handleRedirect("/admin")}>
+          <SharedButton size="little" className="admin" onClick={handleAdminClick}>
             Admin
           </SharedButton>
         )}
@@ -97,15 +96,10 @@ export const Header = memo(function Header() {
             <>
               <div className={getElement("separator")}></div>
               <div className={getElement("sign-group")}>
-                <SharedButton size="little" className="login" onClick={() => handleRedirect("/login")}>
+                <SharedButton size="little" className="login" onClick={handleLoginClick}>
                   Login
                 </SharedButton>
-                <SharedButton
-                  size="little"
-                  className="sign-up"
-                  color="white"
-                  onClick={() => handleRedirect("/sign-up")}
-                >
+                <SharedButton size="little" className="sign-up" color="white" onClick={handleSignUpClick}>
                   Sign up
                 </SharedButton>
               </div>
