@@ -6,7 +6,7 @@ import { categoriesS, tagsS } from "@store/tags/tags.slice"
 import { Button, Modal, Select } from "antd"
 import cn from "classnames"
 import { RawValueType } from "rc-select/lib/Select"
-import { useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { createSearchParams, useNavigate, useSearchParams } from "react-router-dom"
 
@@ -31,6 +31,7 @@ export function SearchMobile({ isMentorPage }: ISearchProps) {
   const { t } = useTranslation("translation", { keyPrefix: "views.home.mentorSearch" })
 
   const [searchParams, setSearchParams] = useSearchParams()
+  const selectWrapperRef = useRef<any>()
   const selectRef = useRef<any>()
 
   const [open, setOpen] = useState(false)
@@ -58,7 +59,7 @@ export function SearchMobile({ isMentorPage }: ISearchProps) {
   useEffect(() => {
     if (!open) return
     window.scroll({
-      top: selectRef.current?.getBoundingClientRect()?.y + window.scrollY - 150,
+      top: selectWrapperRef.current?.getBoundingClientRect()?.y + window.scrollY - 150,
       left: 0,
       behavior: "smooth",
     })
@@ -69,20 +70,20 @@ export function SearchMobile({ isMentorPage }: ISearchProps) {
     root.style.setProperty("--ant-select-padding", `0 60px 0 ${getValueFromUrl() && !open ? "16" : "48"}px`)
   }, [getValueFromUrl, open])
 
-  const toggleOverflow = (state: boolean) => {
-    document.documentElement.style.overscrollBehavior = state ? "none" : "auto"
-    document.body.style.overscrollBehavior = state ? "none" : "auto"
-    document.documentElement.style.position = state ? "fixed" : "static"
-    document.body.style.position = state ? "fixed" : "static"
-    document.documentElement.style.overflow = state ? "hidden" : "auto"
-    document.body.style.overflow = state ? "hidden" : "auto"
-  }
+  const toggleOverflow = useCallback((open: boolean) => {
+    document.documentElement.style.overscrollBehavior = open ? "none" : "auto"
+    document.body.style.overscrollBehavior = open ? "none" : "auto"
+    document.documentElement.style.position = open ? "fixed" : "static"
+    document.body.style.position = open ? "fixed" : "static"
+    document.documentElement.style.overflow = open ? "hidden" : "auto"
+    document.body.style.overflow = open ? "hidden" : "auto"
+  }, [])
 
   useEffect(() => toggleOverflow(open), [open])
 
   return (
     <>
-      <div className={cn(getModifier(getElement("wrapper"), isMentorPage && "isMentorPage"))} ref={selectRef}>
+      <div className={cn(getModifier(getElement("wrapper"), isMentorPage && "isMentorPage"))} ref={selectWrapperRef}>
         <Select
           className={CN}
           placeholder="Select industry or skill"
@@ -145,8 +146,13 @@ export function SearchMobile({ isMentorPage }: ISearchProps) {
         width={window.screen.width - 32}
         closeIcon={null}
         maskClosable={false}
+        focusTriggerAfterClose={false}
+        afterOpenChange={open => {
+          if (open) selectRef.current?.focus()
+        }}
       >
         <Select
+          ref={selectRef}
           className={cn(CN, "mobile")}
           popupClassName={getElement("popup")}
           placeholder="Select industry or skill"
@@ -167,7 +173,6 @@ export function SearchMobile({ isMentorPage }: ISearchProps) {
           placement="bottomLeft"
           size="large"
           optionLabelProp="title"
-          autoFocus
           notFoundContent={<span className={getElement("not-found")}>Nothing found...try to change your search</span>}
           fieldNames={{ label: "title", value: "shortcut", groupLabel: "title" }}
           filterOption={(inputValue, option) =>

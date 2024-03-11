@@ -31,6 +31,7 @@ export function SearchDesktop({ isMentorPage }: ISearchProps) {
   const { t } = useTranslation("translation", { keyPrefix: "views.home.mentorSearch" })
 
   const [searchParams, setSearchParams] = useSearchParams()
+  const selectWrapperRef = useRef<any>()
   const selectRef = useRef<any>()
 
   const [open, setOpen] = useState(false)
@@ -58,8 +59,9 @@ export function SearchDesktop({ isMentorPage }: ISearchProps) {
   const handleDropdownVisibleChange = (visible: boolean) => {
     setOpen(visible)
     if (!visible) return
+    selectRef.current?.focus()
     window.scroll({
-      top: selectRef.current?.getBoundingClientRect()?.y + window.scrollY - 100,
+      top: selectWrapperRef.current?.getBoundingClientRect()?.y + window.scrollY - 100,
       left: 0,
       behavior: "smooth",
     })
@@ -78,9 +80,10 @@ export function SearchDesktop({ isMentorPage }: ISearchProps) {
 
       <div
         className={cn(getModifier(getElement("wrapper"), isMentorPage && "isMentorPage"), open && "backdrop")}
-        ref={selectRef}
+        ref={selectWrapperRef}
       >
         <Select
+          ref={selectRef}
           className={CN}
           popupClassName={getElement("popup")}
           placeholder="Select industry or skill"
