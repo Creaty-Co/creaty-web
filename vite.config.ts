@@ -1,4 +1,5 @@
 import react from "@vitejs/plugin-react"
+import autoprefixer from "autoprefixer"
 import path from "path"
 import { defineConfig } from "vite"
 import envCompatible from "vite-plugin-env-compatible"
@@ -25,6 +26,11 @@ export default defineConfig(() => {
     },
     build: {
       outDir: "build",
+    },
+    css: {
+      postcss: {
+        plugins: [autoprefixer()],
+      },
     },
   }
 })
