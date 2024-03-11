@@ -168,7 +168,7 @@ export function SearchMobile({ isMentorPage }: ISearchProps) {
           }
           showSearch
           mode="multiple"
-          dropdownAlign={{ offset: [0, 12], overflow: { adjustY: false } }}
+          dropdownAlign={{ offset: [0, 12], overflow: { adjustY: false, adjustX: true } }}
           optionRender={option => (
             <span className={getElement(`option-${option.data.tags ? "category" : "tag"}`)}>
               {option.data.tags ? (

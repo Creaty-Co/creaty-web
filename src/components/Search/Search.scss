@@ -22,7 +22,9 @@
 
     @include for-size(big-phone) {
       padding: 8px;
+      border-radius: 32px;
     }
+
     &.backdrop {
       z-index: 1000;
     }
