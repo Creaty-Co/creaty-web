@@ -15,8 +15,13 @@
 }
 
 .ant-modal-body {
-  padding: 10px 30px 30px 30px !important;
+  padding: 0 20px 20px 20px !important;
+  max-height: calc(100vh - 40px) !important;
+  overflow: hidden !important;
 
+  & .popup-layout {
+    max-height: calc(100vh - 40px);
+  }
   &:is(>.select) {
     padding: 0 !important;
   }

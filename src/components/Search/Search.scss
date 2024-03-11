@@ -71,7 +71,7 @@
   }
 
   &__popup {
-    padding: 16px;
+    padding: 16px 16px 0 16px;
     outline: 3px solid (#{$color-green}80) !important;
     border-radius: 24px;
 
@@ -181,7 +181,7 @@
 
   &__modal {
     .ant-modal-body {
-      padding: 0 !important;
+      padding: 3px !important;
     }
   }
 }

@@ -7,7 +7,7 @@
   @include row-gap(8px);
   grid-template: auto 1fr / 1fr;
 
-  max-height: 97vh;
+  max-height: 100%;
   max-width: 480px;
   width: 35em;
 
@@ -16,11 +16,15 @@
   @include for-size(phone-horizontal) {
     padding: 30px 30px 0;
   }
+  
+  @include for-size(big-phone) {
+    padding: 25px 25px 0;
+  }
 
   background: $color-white;
   border-radius: 40px;
 
-  overflow: auto;
+  overflow: scroll;
   @include ScrollbarHidden;
 
   @include Tablet {

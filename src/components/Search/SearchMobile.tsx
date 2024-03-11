@@ -143,7 +143,7 @@ export function SearchMobile({ isMentorPage }: ISearchProps) {
         title={null}
         footer={null}
         open={open}
-        style={{ top: 16, bottom: 16, left: 0, right: 16 }}
+        style={{ top: 16 }}
         width={window.screen.width - 32}
         closeIcon={null}
         maskClosable={false}
@@ -181,7 +181,7 @@ export function SearchMobile({ isMentorPage }: ISearchProps) {
           }
           showSearch
           mode="multiple"
-          dropdownAlign={{ offset: [0, 12], overflow: { adjustY: false, adjustX: true } }}
+          dropdownAlign={{ offset: [0, 12], overflow: { adjustY: false, adjustX: false } }}
           optionRender={option => (
             <span className={getElement(`option-${option.data.tags ? "category" : "tag"}`)}>
               {option.data.tags ? (
