@@ -13,3 +13,11 @@
 .ant-modal-mask {
   backdrop-filter: blur(10px);
 }
+
+.ant-modal-body {
+  padding: 10px 30px 30px 30px !important;
+
+  &:is(>.select) {
+    padding: 0 !important;
+  }
+}

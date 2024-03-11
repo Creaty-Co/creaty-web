@@ -138,6 +138,7 @@ export function SearchMobile({ isMentorPage }: ISearchProps) {
       </div>
 
       <Modal
+        className={getElement("modal")}
         destroyOnClose={true}
         title={null}
         footer={null}

@@ -178,6 +178,12 @@
   &__popup {
     position: fixed;
   }
+
+  &__modal {
+    .ant-modal-body {
+      padding: 0 !important;
+    }
+  }
 }
 .ant-modal-wrap {
   overflow: hidden;
