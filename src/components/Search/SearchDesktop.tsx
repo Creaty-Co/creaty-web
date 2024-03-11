@@ -76,7 +76,7 @@ export function SearchDesktop({ isMentorPage }: ISearchProps) {
 
   return (
     <>
-      {<Spin spinning={open} fullscreen indicator={undefined} />}
+      {<Spin spinning={open} fullscreen indicator={(<></>) as React.ReactElement<HTMLElement>} />}
 
       <div
         className={cn(getModifier(getElement("wrapper"), isMentorPage && "isMentorPage"), open && "backdrop")}
