@@ -32,10 +32,10 @@ export const Header = memo(function Header() {
   const { t } = useTranslation("translation", { keyPrefix: "header" })
   const [expanded, setExpanded] = useState(false)
 
-  const handleLoginClick = () => navigate("/login")
-  const handleAdminClick = () => navigate("/admin")
-  const handleSignUpClick = () => navigate("/sign-up")
-  const handleLogoClick = () => navigate("/")
+  const handleRedirect = (path: string) => {
+    navigate(path)
+    setExpanded(false)
+  }
 
   useEffect(
     () =>
@@ -49,17 +49,17 @@ export const Header = memo(function Header() {
   return (
     <header className={CN}>
       <div className={getElement("container")}>
-        <div aria-label="Home" onClick={handleLogoClick}>
+        <div aria-label="Home" onClick={() => handleRedirect("/")}>
           <img
             src="/static/icons/logo.svg"
             alt="logo"
             className={getModifier(getElement("logo"), "mobile")}
-            onClick={handleLogoClick}
+            onClick={() => handleRedirect("/")}
           />
           <img src="/static/images/logo.svg" alt="logo" className={getElement("logo")} />
         </div>
         {isAdmin && (
-          <SharedButton size="little" className="admin" onClick={handleAdminClick}>
+          <SharedButton size="little" className="admin" onClick={() => handleRedirect("/admin")}>
             Admin
           </SharedButton>
         )}
@@ -97,10 +97,15 @@ export const Header = memo(function Header() {
             <>
               <div className={getElement("separator")}></div>
               <div className={getElement("sign-group")}>
-                <SharedButton size="little" className="login" onClick={handleLoginClick}>
+                <SharedButton size="little" className="login" onClick={() => handleRedirect("/login")}>
                   Login
                 </SharedButton>
-                <SharedButton size="little" className="sign-up" color="white" onClick={handleSignUpClick}>
+                <SharedButton
+                  size="little"
+                  className="sign-up"
+                  color="white"
+                  onClick={() => handleRedirect("/sign-up")}
+                >
                   Sign up
                 </SharedButton>
               </div>
