@@ -71,6 +71,12 @@ export function SearchMobile({ isMentorPage }: ISearchProps) {
     root.style.setProperty("--ant-select-padding", `0 60px 0 ${getValueFromUrl() && !open ? "16" : "48"}px`)
   }, [getValueFromUrl, open])
 
+  const toggleOverflow = (state: boolean) => {
+    if (!state) document.body.classList.remove("height", "100vh")
+    if (state) document.body.classList.add("height", "100vh")
+  }
+  useEffect(() => toggleOverflow(open), [open])
+
   return (
     <>
       <div className={cn(getModifier(getElement("wrapper"), isMentorPage && "isMentorPage"))} ref={selectRef}>
