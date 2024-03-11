@@ -13,6 +13,13 @@
     justify-items: center;
   }
 
+  @include for-size(phone-horizontal) {
+    margin-top: 60px;
+  }
+
+  @include for-size(big-phone) {
+    margin-top: 10px;
+  }
   /* Section */
   &__sections {
     display: grid;

@@ -22,7 +22,6 @@ export const UnclosablePopupWrapper = memo(function UnclosablePopupWrapper({
   closeModal,
 }: IProps) {
   const [openPopconfirm, setOpenPopconfirm] = useState(false)
-
   const handleOpenPopconfirm = () => setOpenPopconfirm(true)
   const handleClosePopconfirm = () => setOpenPopconfirm(false)
   const handleCloseModal = () => {
@@ -46,14 +45,15 @@ export const UnclosablePopupWrapper = memo(function UnclosablePopupWrapper({
           onCancel={handleClosePopconfirm}
           okText="Yes"
           cancelText="No"
-          placement="bottomRight"
+          placement="bottom"
           open={openPopconfirm}
           okButtonProps={{ type: "primary" }}
         >
-          <div className={getElement("close")} onClick={handleOpenPopconfirm}>
-            <SharedButtonIcon name="cross" size="small" color="white" outline />
+          <div className={getElement("close")}>
+            <SharedButtonIcon name="cross" size="small" color="white" outline onClick={handleOpenPopconfirm} />
           </div>
         </Popconfirm>
+
         <h3 className="font--h3-bold popup-layout__title">
           {title}
           <em>{mentorName}</em>

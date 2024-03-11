@@ -35,7 +35,6 @@ export const ResetPasswordMentorSuccessModal = memo(function ResetPasswordMentor
       closable={false}
       maskClosable={false}
       keyboard={false}
-      style={{ top: window.innerWidth <= 600 ? 16 : undefined }}
     >
       <PopupLayout
         title={<h3 className={cn("font--h3-bold popup-layout__title", getElement("title"))}>{t("title")}</h3>}
