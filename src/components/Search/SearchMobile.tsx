@@ -1,12 +1,13 @@
 import "./Search.scss"
 
+import { useToggleOverflow } from "@shared/hooks/useToggleOverflow"
 import { bem } from "@shared/utils/common"
 import { useAppSelector } from "@store/store"
 import { categoriesS, tagsS } from "@store/tags/tags.slice"
 import { Button, Modal, Select } from "antd"
 import cn from "classnames"
 import { RawValueType } from "rc-select/lib/Select"
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { createSearchParams, useNavigate, useSearchParams } from "react-router-dom"
 
@@ -36,6 +37,8 @@ export function SearchMobile({ isMentorPage }: ISearchProps) {
 
   const [open, setOpen] = useState(false)
   const navigate = useNavigate()
+
+  useToggleOverflow(open)
 
   const handleClick = () => {
     navigate({ pathname: "/mentors", search: createSearchParams(searchParams).toString() })
@@ -69,17 +72,6 @@ export function SearchMobile({ isMentorPage }: ISearchProps) {
     const root = document.documentElement
     root.style.setProperty("--ant-select-padding", `0 60px 0 ${getValueFromUrl() && !open ? "16" : "48"}px`)
   }, [getValueFromUrl, open])
-
-  const toggleOverflow = useCallback((open: boolean) => {
-    document.documentElement.style.overscrollBehavior = open ? "none" : ""
-    document.body.style.overscrollBehavior = open ? "none" : ""
-    document.documentElement.style.position = open ? "fixed" : ""
-    document.body.style.position = open ? "fixed" : ""
-    document.documentElement.style.overflow = open ? "hidden" : ""
-    document.body.style.overflow = open ? "hidden" : ""
-  }, [])
-
-  useEffect(() => toggleOverflow(open), [open])
 
   return (
     <>
