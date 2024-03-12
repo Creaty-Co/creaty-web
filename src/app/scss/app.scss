@@ -33,3 +33,10 @@ main:not(.home-view__slider) {
     padding: 0 5vw;
   }
 }
+
+.scroll-disabled {
+  overflow: hidden;
+  position: fixed;
+  touch-action: none;
+  overscroll-behavior: none;
+}

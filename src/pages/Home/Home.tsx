@@ -12,6 +12,7 @@ import { HelpSocial } from "@components/HelpSocial/HelpSocial"
 import { MentorsSlider } from "@components/MentorsSlider/MentorsSlider"
 import { SearchWrapper } from "@components/Search/SearchWrapper"
 import { useScrollToTop } from "@shared/hooks/useScrollToTop"
+import { useToggleOverflow } from "@shared/hooks/useToggleOverflow"
 import { InfoSection } from "@shared/ui/InfoSection/InfoSection"
 import { LoaderCover } from "@shared/ui/LoaderCover/LoaderCover"
 import { bem } from "@shared/utils/common"
@@ -51,6 +52,14 @@ export function Home() {
 
   const { data } = params.shortcut ? useGetPagePersonalQuery({ shortcut: params.shortcut }) : useGetPagesMainQuery()
 
+  useToggleOverflow(
+    !!showLoginModal ||
+      !!showSignUpModal ||
+      !!showResetPasswordModal ||
+      !!showResetPasswordMentorSuccessModal ||
+      !!showEmaiVerifyModal || !!showEmaiVerifySuccessModal
+  )
+  
   return (
     <>
       <div className={CN}>

@@ -1,78 +1,82 @@
 @import "/src/app/scss/bundle.scss";
 
 .popup-layout {
-  position: relative;
+	position: relative;
 
-  display: grid;
-  @include row-gap(8px);
-  grid-template: auto 1fr / 1fr;
+	display: grid;
+	@include row-gap(8px);
+	grid-template: auto 1fr / 1fr;
 
-  max-height: 100%;
-  max-width: 480px;
-  width: 35em;
+	max-height: max-content;
+	max-width: 480px;
+	width: 35em;
 
-  padding: 40px 40px 0;
+	padding: 40px 40px 0;
 
-  @include for-size(phone-horizontal) {
-    padding: 30px 30px 0;
-  }
-  
-  @include for-size(big-phone) {
-    padding: 25px 25px 0;
-  }
+	@include for-size(phone-horizontal) {
+		padding: 30px 30px 0;
+	}
 
-  background: $color-white;
-  border-radius: 40px;
+	@include for-size(big-phone) {
+		padding: 25px 25px 0;
+	}
 
-  overflow: scroll;
-  @include ScrollbarHidden;
+	background: $color-white;
+	border-radius: 40px;
 
-  @include Tablet {
-    width: auto;
-  }
+	@include ScrollbarHidden;
 
-  &__container {
-    padding-bottom: 24px;
-  }
+	@include Tablet {
+		width: auto;
+	}
 
-  &__close {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    z-index: 9;
+	&__container {
+		padding-bottom: 24px;
+	}
 
-    margin-left: auto;
-    & > .button {
-      box-shadow: none;
-      &:hover {
-        box-shadow: none;
-      }
-    }
-  }
+	&__close {
+		position: absolute;
+		top: 20px;
+		right: 20px;
+		z-index: 9;
 
-  &__title {
-    color: $color-black-main;
-    padding-right: 40px;
-    @include H3Bold();
+		@include for-size(big-phone) {
+			top: 16px;
+			right: 16px;
+		}
 
-    em {
-      color: $color-violet;
-    }
-  }
+		margin-left: auto;
+		& > .button {
+			box-shadow: none;
+			&:hover {
+				box-shadow: none;
+			}
+		}
+	}
 
-  &__sub-title {
-    color: $color-black-main;
-    @include Text2();
-  }
+	&__title {
+		color: $color-black-main;
+		padding-right: 40px;
+		@include H3Bold();
 
-  &__shadow {
-    box-shadow: 0px 2px 8px rgba(77, 249, 113, 0.1),
-      0px 8px 30px rgba(77, 249, 113, 0.2),
-      0px 8px 200px rgba(77, 249, 113, 0.4);
-  }
+		em {
+			color: $color-violet;
+		}
+	}
 
-  &__black {
-    background-color: $color-black-90;
-    color: $color-white;
-  }
+	&__sub-title {
+		color: $color-black-main;
+		@include Text2();
+	}
+
+	&__shadow {
+		box-shadow: 0px 2px 8px rgba(77, 249, 113, 0.1),
+			0px 8px 30px rgba(77, 249, 113, 0.2),
+			0px 8px 200px rgba(77, 249, 113, 0.4);
+	}
+
+	&__black {
+		background-color: $color-black-90;
+		color: $color-white;
+	}
 }

@@ -1,3 +1,4 @@
+import { useToggleOverflow } from "@shared/hooks/useToggleOverflow"
 import { SharedButtonIcon } from "@shared/ui/buttons/SharedButtonIcon"
 import { bem } from "@shared/utils/common"
 import { Modal, Popconfirm } from "antd"
@@ -8,7 +9,7 @@ const { getElement } = bem(CN)
 
 interface IProps {
   open: boolean
-  title?: string
+  title?: string | null
   mentorName?: string
   children: ReactNode
   closeModal(): void
@@ -28,6 +29,8 @@ export const UnclosablePopupWrapper = memo(function UnclosablePopupWrapper({
     setOpenPopconfirm(false)
     closeModal()
   }
+
+  useToggleOverflow(open)
 
   return (
     <Modal

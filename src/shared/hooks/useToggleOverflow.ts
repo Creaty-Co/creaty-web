@@ -1,13 +1,21 @@
-import { useCallback, useEffect } from "react"
+import { useCallback, useEffect, useRef } from "react"
 
+const DISABLE_SCROLLING_CLASS = "scroll-disabled"
+// fix scroll body issue behind opened modal for ios
 export function useToggleOverflow(open: boolean) {
+  const scrollPosition = useRef(0)
+
   const toggleOverflow = useCallback((open: boolean) => {
-    document.documentElement.style.overscrollBehavior = open ? "none" : ""
-    document.body.style.overscrollBehavior = open ? "none" : ""
-    document.documentElement.style.position = open ? "fixed" : ""
-    document.body.style.position = open ? "fixed" : ""
-    document.documentElement.style.overflow = open ? "hidden" : ""
-    document.body.style.overflow = open ? "hidden" : ""
+    const body = document.body
+    if (open) {
+      scrollPosition.current = window.scrollY
+      body.classList.add(DISABLE_SCROLLING_CLASS)
+      body.style.top = `-${scrollPosition.current}px`
+    } else {
+      body.classList.remove(DISABLE_SCROLLING_CLASS)
+      body.style.removeProperty("top")
+      window.scrollTo(0, scrollPosition.current)
+    }
   }, [])
 
   useEffect(() => toggleOverflow(open), [open])

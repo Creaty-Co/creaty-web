@@ -130,8 +130,7 @@ export const Packages = ({ hourPrice, mentorName, mentorSlug, packages }: IProps
 
       <UnclosablePopupWrapper
         open={openBookModal}
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        title={t("other.forms.bookSessionPackage.title")!}
+        title={t("other.forms.bookSessionPackage.title")}
         mentorName={mentorName}
         closeModal={() => setOpenBookModal(false)}
       >

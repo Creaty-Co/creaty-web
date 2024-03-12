@@ -15,11 +15,5 @@
 }
 
 .ant-modal-body {
-  padding: 0 20px 20px 20px !important;
-  max-height: calc(100vh - 40px) !important;
-  overflow: hidden !important;
-
-  & .popup-layout {
-    max-height: calc(100vh - 40px);
-  }
-}
+  padding: 20px 20px 40px 20px !important;
+ }
