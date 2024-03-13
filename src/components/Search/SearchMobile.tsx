@@ -38,7 +38,7 @@ export function SearchMobile({ isMentorPage }: ISearchProps) {
   const [open, setOpen] = useState(false)
   const navigate = useNavigate()
 
-  useToggleOverflow(open)
+  useToggleOverflow(open, false)
 
   const handleClick = () => {
     navigate({ pathname: "/mentors", search: createSearchParams(searchParams).toString() })
