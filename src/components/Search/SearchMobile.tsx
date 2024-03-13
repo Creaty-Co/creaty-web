@@ -60,15 +60,6 @@ export function SearchMobile({ isMentorPage }: ISearchProps) {
   }
 
   useEffect(() => {
-    if (!open) return
-    window.scroll({
-      top: selectWrapperRef.current?.getBoundingClientRect()?.y + window.scrollY - 150,
-      left: 0,
-      behavior: "smooth",
-    })
-  }, [open])
-
-  useEffect(() => {
     const root = document.documentElement
     root.style.setProperty("--ant-select-padding", `0 60px 0 ${getValueFromUrl() && !open ? "16" : "48"}px`)
   }, [getValueFromUrl, open])
